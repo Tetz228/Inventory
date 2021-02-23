@@ -1,0 +1,3277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище InventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id_account" />
+          </Key>
+          <Property Name="Id_account" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_employee" Type="int" Nullable="false" />
+          <Property Name="Fk_user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Computers">
+          <Key>
+            <PropertyRef Name="Id_computer" />
+          </Key>
+          <Property Name="Id_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_inventory_number_motherboard" Type="int" Nullable="false" />
+          <Property Name="Fk_inventory_number_graphics_card" Type="int" />
+          <Property Name="Fk_inventory_number_power_supplies" Type="int" Nullable="false" />
+          <Property Name="Ip_address" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+          <Property Name="Fk_status_equipment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id_department" />
+          </Key>
+          <Property Name="Id_department" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dispensing_computers">
+          <Key>
+            <PropertyRef Name="Id_dispensing_computer" />
+          </Key>
+          <Property Name="Id_dispensing_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_dispensing" Type="date" Nullable="false" />
+          <Property Name="Fk_user" Type="int" Nullable="false" />
+          <Property Name="Fk_employee" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Dispensing_peripherals">
+          <Key>
+            <PropertyRef Name="Id_dispensing_peripheral" />
+          </Key>
+          <Property Name="Id_dispensing_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_dispensing" Type="date" Nullable="false" />
+          <Property Name="Fk_user" Type="int" Nullable="false" />
+          <Property Name="Fk_employee" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id_employee" />
+          </Key>
+          <Property Name="Id_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="L_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="F_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="M_name" Type="nvarchar" MaxLength="30" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="Phone_number" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees_in_department">
+          <Key>
+            <PropertyRef Name="Id_employee_in_department" />
+          </Key>
+          <Property Name="Id_employee_in_department" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_department" Type="int" Nullable="false" />
+          <Property Name="Fk_employee" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Graphics_cards">
+          <Key>
+            <PropertyRef Name="Id_graphics_card" />
+          </Key>
+          <Property Name="Id_graphics_card" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Memory_size" Type="float" Nullable="false" />
+          <Property Name="Fk_unit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hdd">
+          <Key>
+            <PropertyRef Name="Id_hdd" />
+          </Key>
+          <Property Name="Id_hdd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
+          <Property Name="Memory_size" Type="float" Nullable="false" />
+          <Property Name="Fk_unit" Type="int" Nullable="false" />
+          <Property Name="Fk_type_hdd" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hdd_in_computers">
+          <Key>
+            <PropertyRef Name="Id_hdd_in_computer" />
+          </Key>
+          <Property Name="Id_hdd_in_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_inventory_number_hdd" Type="int" Nullable="false" />
+          <Property Name="Fk_computer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="History_dispensed_computers">
+          <Key>
+            <PropertyRef Name="Id_history_dispensed_computer" />
+          </Key>
+          <Property Name="Id_history_dispensed_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number_dispensing" Type="int" Nullable="false" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Computer" Type="int" Nullable="false" />
+          <Property Name="CreateAt" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="History_dispensed_peripherals">
+          <Key>
+            <PropertyRef Name="Id_history_dispensed_peripheral" />
+          </Key>
+          <Property Name="Id_history_dispensed_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number_dispensing" Type="int" Nullable="false" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Peripheral" Type="int" Nullable="false" />
+          <Property Name="CreateAt" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_graphics_cards">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_graphics_card" />
+          </Key>
+          <Property Name="Id_inventory_number_graphics_card" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_graphics_card" Type="int" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_hdd">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_hdd" />
+          </Key>
+          <Property Name="Id_inventory_number_hdd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_hdd" Type="int" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_motherboards">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_motherboard" />
+          </Key>
+          <Property Name="Id_inventory_number_motherboard" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_motherboard" Type="int" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_power_supplies">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_power_supplie" />
+          </Key>
+          <Property Name="Id_inventory_number_power_supplie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_power_supplie" Type="int" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_processors">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_processor" />
+          </Key>
+          <Property Name="Id_inventory_number_processor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_processor" Type="int" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_ram">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_ram" />
+          </Key>
+          <Property Name="Id_inventory_number_ram" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_ram" Type="int" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_ssd">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_ssd" />
+          </Key>
+          <Property Name="Id_inventory_number_ssd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_ssd" Type="int" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="List_dispensed_computers">
+          <Key>
+            <PropertyRef Name="Id_list_dispensed_computer" />
+          </Key>
+          <Property Name="Id_list_dispensed_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_number_dispensing" Type="int" Nullable="false" />
+          <Property Name="Fk_computer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="List_dispensed_peripherals">
+          <Key>
+            <PropertyRef Name="Id_list_dispensed_peripheral" />
+          </Key>
+          <Property Name="Id_list_dispensed_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_number_dispensing" Type="int" Nullable="false" />
+          <Property Name="Fk_peripheral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="Id_manufacturer" />
+          </Key>
+          <Property Name="Id_manufacturer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Motherboards">
+          <Key>
+            <PropertyRef Name="Id_motherboard" />
+          </Key>
+          <Property Name="Id_motherboard" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Fk_socket" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Operating_systems">
+          <Key>
+            <PropertyRef Name="Id_operating_system" />
+          </Key>
+          <Property Name="Id_operating_system" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="System_version" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Operating_systems_in_computers">
+          <Key>
+            <PropertyRef Name="Id_operating_systems_in_computers" />
+          </Key>
+          <Property Name="Id_operating_systems_in_computers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_operating_system" Type="int" Nullable="false" />
+          <Property Name="Fk_computer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Peripherals">
+          <Key>
+            <PropertyRef Name="Id_peripheral" />
+          </Key>
+          <Property Name="Id_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_type_peripheral" Type="int" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inventory_number" Type="int" Nullable="false" />
+          <Property Name="Fk_status_equipment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id_post" />
+          </Key>
+          <Property Name="Id_post" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts_employees">
+          <Key>
+            <PropertyRef Name="Id_post_employee" />
+          </Key>
+          <Property Name="Id_post_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_employee" Type="int" Nullable="false" />
+          <Property Name="Fk_post" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Power_supplies">
+          <Key>
+            <PropertyRef Name="Id_power_supplie" />
+          </Key>
+          <Property Name="Id_power_supplie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Power" Type="int" />
+          <Property Name="Fk_unit" Type="int" />
+        </EntityType>
+        <EntityType Name="Processors">
+          <Key>
+            <PropertyRef Name="Id_processor" />
+          </Key>
+          <Property Name="Id_processor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fk_socket" Type="int" Nullable="false" />
+          <Property Name="Amount_cores" Type="int" />
+          <Property Name="Base_frequency" Type="float" />
+          <Property Name="Fk_unit" Type="int" />
+        </EntityType>
+        <EntityType Name="Processors_in_computers">
+          <Key>
+            <PropertyRef Name="Id_processor_in_computer" />
+          </Key>
+          <Property Name="Id_processor_in_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_inventory_number_processor" Type="int" Nullable="false" />
+          <Property Name="Fk_computer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ram">
+          <Key>
+            <PropertyRef Name="Id_ram" />
+          </Key>
+          <Property Name="Id_ram" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fk_type_memory" Type="int" Nullable="false" />
+          <Property Name="Memory_size" Type="float" Nullable="false" />
+          <Property Name="Clock_frequency" Type="float" />
+          <Property Name="Fk_unit" Type="int" />
+        </EntityType>
+        <EntityType Name="Ram_in_computers">
+          <Key>
+            <PropertyRef Name="Id_ram_in_computer" />
+          </Key>
+          <Property Name="Id_ram_in_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_inventory_number_ram" Type="int" Nullable="false" />
+          <Property Name="Fk_computer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id_role" />
+          </Key>
+          <Property Name="Id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles_users">
+          <Key>
+            <PropertyRef Name="Id_role_user" />
+          </Key>
+          <Property Name="Id_role_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_user" Type="int" Nullable="false" />
+          <Property Name="Fk_role" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sockets">
+          <Key>
+            <PropertyRef Name="Id_socket" />
+          </Key>
+          <Property Name="Id_socket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ssd">
+          <Key>
+            <PropertyRef Name="Id_ssd" />
+          </Key>
+          <Property Name="Id_ssd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Fk_type_ssd" Type="int" Nullable="false" />
+          <Property Name="Memory_size" Type="float" Nullable="false" />
+          <Property Name="Fk_unit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ssd_in_computers">
+          <Key>
+            <PropertyRef Name="Id_ssd_in_computer" />
+          </Key>
+          <Property Name="Id_ssd_in_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_inventory_number_ssd" Type="int" Nullable="false" />
+          <Property Name="Fk_computer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statuses_equipment">
+          <Key>
+            <PropertyRef Name="Id_status_equipment" />
+          </Key>
+          <Property Name="Id_status_equipment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Types_hdd">
+          <Key>
+            <PropertyRef Name="Id_type_hdd" />
+          </Key>
+          <Property Name="Id_type_hdd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Types_memory">
+          <Key>
+            <PropertyRef Name="Id_type_memory" />
+          </Key>
+          <Property Name="Id_type_memory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Types_peripherals">
+          <Key>
+            <PropertyRef Name="Id_type_peripheral" />
+          </Key>
+          <Property Name="Id_type_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Types_ssd">
+          <Key>
+            <PropertyRef Name="Id_type_ssd" />
+          </Key>
+          <Property Name="Id_type_ssd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="Id_unit" />
+          </Key>
+          <Property Name="Id_unit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Full_name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Short_name" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accounts_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="Fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
+          <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="0..1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_graphics_cards">
+              <PropertyRef Name="Id_inventory_number_graphics_card" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="Fk_inventory_number_graphics_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_Inventory_numbers_motherboards">
+          <End Role="Inventory_numbers_motherboards" Type="Self.Inventory_numbers_motherboards" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_motherboards">
+              <PropertyRef Name="Id_inventory_number_motherboard" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="Fk_inventory_number_motherboard" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_Inventory_numbers_power_supplies">
+          <End Role="Inventory_numbers_power_supplies" Type="Self.Inventory_numbers_power_supplies" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_power_supplies">
+              <PropertyRef Name="Id_inventory_number_power_supplie" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="Fk_inventory_number_power_supplies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_Statuses_equipment">
+          <End Role="Statuses_equipment" Type="Self.Statuses_equipment" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses_equipment">
+              <PropertyRef Name="Id_status_equipment" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="Fk_status_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispensing_computers_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Dispensing_computers">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispensing_computers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Dispensing_computers">
+              <PropertyRef Name="Fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispensing_peripherals_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Dispensing_peripherals">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispensing_peripherals_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Dispensing_peripherals">
+              <PropertyRef Name="Fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_in_department_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Employees_in_department" Type="Self.Employees_in_department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id_department" />
+            </Principal>
+            <Dependent Role="Employees_in_department">
+              <PropertyRef Name="Fk_department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_in_department_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees_in_department" Type="Self.Employees_in_department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Employees_in_department">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Graphics_cards_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+          <End Role="Graphics_cards" Type="Self.Graphics_cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Graphics_cards">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Graphics_cards_Units">
+          <End Role="Units" Type="Self.Units" Multiplicity="1" />
+          <End Role="Graphics_cards" Type="Self.Graphics_cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Graphics_cards">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Hdd_in_computers" Type="Self.Hdd_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Hdd_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_in_computers_Inventory_numbers_hdd">
+          <End Role="Inventory_numbers_hdd" Type="Self.Inventory_numbers_hdd" Multiplicity="1" />
+          <End Role="Hdd_in_computers" Type="Self.Hdd_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_hdd">
+              <PropertyRef Name="Id_inventory_number_hdd" />
+            </Principal>
+            <Dependent Role="Hdd_in_computers">
+              <PropertyRef Name="Fk_inventory_number_hdd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_Types_hdd">
+          <End Role="Types_hdd" Type="Self.Types_hdd" Multiplicity="1" />
+          <End Role="Hdd" Type="Self.Hdd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_hdd">
+              <PropertyRef Name="Id_type_hdd" />
+            </Principal>
+            <Dependent Role="Hdd">
+              <PropertyRef Name="Fk_type_hdd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_Units">
+          <End Role="Units" Type="Self.Units" Multiplicity="1" />
+          <End Role="Hdd" Type="Self.Hdd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Hdd">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_graphics_cards_Graphics_cards">
+          <End Role="Graphics_cards" Type="Self.Graphics_cards" Multiplicity="1" />
+          <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Graphics_cards">
+              <PropertyRef Name="Id_graphics_card" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_graphics_cards">
+              <PropertyRef Name="Fk_graphics_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_hdd_Hdd">
+          <End Role="Hdd" Type="Self.Hdd" Multiplicity="1" />
+          <End Role="Inventory_numbers_hdd" Type="Self.Inventory_numbers_hdd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hdd">
+              <PropertyRef Name="Id_hdd" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_hdd">
+              <PropertyRef Name="Fk_hdd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_motherboards_Motherboards">
+          <End Role="Motherboards" Type="Self.Motherboards" Multiplicity="1" />
+          <End Role="Inventory_numbers_motherboards" Type="Self.Inventory_numbers_motherboards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Motherboards">
+              <PropertyRef Name="Id_motherboard" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_motherboards">
+              <PropertyRef Name="Fk_motherboard" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_power_supplies_Power_supplies">
+          <End Role="Power_supplies" Type="Self.Power_supplies" Multiplicity="1" />
+          <End Role="Inventory_numbers_power_supplies" Type="Self.Inventory_numbers_power_supplies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Power_supplies">
+              <PropertyRef Name="Id_power_supplie" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_power_supplies">
+              <PropertyRef Name="Fk_power_supplie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_processors_Processors">
+          <End Role="Processors" Type="Self.Processors" Multiplicity="1" />
+          <End Role="Inventory_numbers_processors" Type="Self.Inventory_numbers_processors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processors">
+              <PropertyRef Name="Id_processor" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_processors">
+              <PropertyRef Name="Fk_processor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_ram_Ram">
+          <End Role="Ram" Type="Self.Ram" Multiplicity="1" />
+          <End Role="Inventory_numbers_ram" Type="Self.Inventory_numbers_ram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ram">
+              <PropertyRef Name="Id_ram" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_ram">
+              <PropertyRef Name="Fk_ram" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_ssd_Ssd">
+          <End Role="Ssd" Type="Self.Ssd" Multiplicity="1" />
+          <End Role="Inventory_numbers_ssd" Type="Self.Inventory_numbers_ssd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ssd">
+              <PropertyRef Name="Id_ssd" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_ssd">
+              <PropertyRef Name="Fk_ssd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_dispensed_computers_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="List_dispensed_computers" Type="Self.List_dispensed_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="List_dispensed_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_dispensed_computers_Dispensing_computers">
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="1" />
+          <End Role="List_dispensed_computers" Type="Self.List_dispensed_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispensing_computers">
+              <PropertyRef Name="Id_dispensing_computer" />
+            </Principal>
+            <Dependent Role="List_dispensed_computers">
+              <PropertyRef Name="Fk_number_dispensing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_dispensed_peripherals_Dispensing_peripherals">
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="1" />
+          <End Role="List_dispensed_peripherals" Type="Self.List_dispensed_peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispensing_peripherals">
+              <PropertyRef Name="Id_dispensing_peripheral" />
+            </Principal>
+            <Dependent Role="List_dispensed_peripherals">
+              <PropertyRef Name="Fk_number_dispensing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_dispensed_peripherals_Peripherals">
+          <End Role="Peripherals" Type="Self.Peripherals" Multiplicity="1" />
+          <End Role="List_dispensed_peripherals" Type="Self.List_dispensed_peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peripherals">
+              <PropertyRef Name="Id_peripheral" />
+            </Principal>
+            <Dependent Role="List_dispensed_peripherals">
+              <PropertyRef Name="Fk_peripheral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Motherboards_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+          <End Role="Motherboards" Type="Self.Motherboards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Motherboards">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Motherboards_Sockets">
+          <End Role="Sockets" Type="Self.Sockets" Multiplicity="1" />
+          <End Role="Motherboards" Type="Self.Motherboards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sockets">
+              <PropertyRef Name="Id_socket" />
+            </Principal>
+            <Dependent Role="Motherboards">
+              <PropertyRef Name="Fk_socket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operating_systems_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Operating_systems_in_computers" Type="Self.Operating_systems_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Operating_systems_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operating_systems_in_computers_Operating_systems">
+          <End Role="Operating_systems" Type="Self.Operating_systems" Multiplicity="1" />
+          <End Role="Operating_systems_in_computers" Type="Self.Operating_systems_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operating_systems">
+              <PropertyRef Name="Id_operating_system" />
+            </Principal>
+            <Dependent Role="Operating_systems_in_computers">
+              <PropertyRef Name="Fk_operating_system" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peripherals_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+          <End Role="Peripherals" Type="Self.Peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Peripherals">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peripherals_Statuses_equipment">
+          <End Role="Statuses_equipment" Type="Self.Statuses_equipment" Multiplicity="1" />
+          <End Role="Peripherals" Type="Self.Peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses_equipment">
+              <PropertyRef Name="Id_status_equipment" />
+            </Principal>
+            <Dependent Role="Peripherals">
+              <PropertyRef Name="Fk_status_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peripherals_Types_peripherals">
+          <End Role="Types_peripherals" Type="Self.Types_peripherals" Multiplicity="1" />
+          <End Role="Peripherals" Type="Self.Peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_peripherals">
+              <PropertyRef Name="Id_type_peripheral" />
+            </Principal>
+            <Dependent Role="Peripherals">
+              <PropertyRef Name="Fk_type_peripheral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_employees_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Posts_employees">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_employees_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id_post" />
+            </Principal>
+            <Dependent Role="Posts_employees">
+              <PropertyRef Name="Fk_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Power_supplies_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+          <End Role="Power_supplies" Type="Self.Power_supplies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Power_supplies">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Power_supplies_Units">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Power_supplies" Type="Self.Power_supplies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Power_supplies">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Processors_in_computers" Type="Self.Processors_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Processors_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_in_computers_Inventory_numbers_processors">
+          <End Role="Inventory_numbers_processors" Type="Self.Inventory_numbers_processors" Multiplicity="1" />
+          <End Role="Processors_in_computers" Type="Self.Processors_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_processors">
+              <PropertyRef Name="Id_inventory_number_processor" />
+            </Principal>
+            <Dependent Role="Processors_in_computers">
+              <PropertyRef Name="Fk_inventory_number_processor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+          <End Role="Processors" Type="Self.Processors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Processors">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_Sockets">
+          <End Role="Sockets" Type="Self.Sockets" Multiplicity="1" />
+          <End Role="Processors" Type="Self.Processors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sockets">
+              <PropertyRef Name="Id_socket" />
+            </Principal>
+            <Dependent Role="Processors">
+              <PropertyRef Name="Fk_socket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_Units">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Processors" Type="Self.Processors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Processors">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Ram_in_computers" Type="Self.Ram_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Ram_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_in_computers_Inventory_numbers_ram">
+          <End Role="Inventory_numbers_ram" Type="Self.Inventory_numbers_ram" Multiplicity="1" />
+          <End Role="Ram_in_computers" Type="Self.Ram_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_ram">
+              <PropertyRef Name="Id_inventory_number_ram" />
+            </Principal>
+            <Dependent Role="Ram_in_computers">
+              <PropertyRef Name="Fk_inventory_number_ram" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+          <End Role="Ram" Type="Self.Ram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Ram">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_Types_memory">
+          <End Role="Types_memory" Type="Self.Types_memory" Multiplicity="1" />
+          <End Role="Ram" Type="Self.Ram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_memory">
+              <PropertyRef Name="Id_type_memory" />
+            </Principal>
+            <Dependent Role="Ram">
+              <PropertyRef Name="Fk_type_memory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_Units">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Ram" Type="Self.Ram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Ram">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Roles_users" Type="Self.Roles_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_role" />
+            </Principal>
+            <Dependent Role="Roles_users">
+              <PropertyRef Name="Fk_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_users_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Roles_users" Type="Self.Roles_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Roles_users">
+              <PropertyRef Name="Fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Ssd_in_computers" Type="Self.Ssd_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Ssd_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_in_computers_Inventory_numbers_ssd">
+          <End Role="Inventory_numbers_ssd" Type="Self.Inventory_numbers_ssd" Multiplicity="1" />
+          <End Role="Ssd_in_computers" Type="Self.Ssd_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_ssd">
+              <PropertyRef Name="Id_inventory_number_ssd" />
+            </Principal>
+            <Dependent Role="Ssd_in_computers">
+              <PropertyRef Name="Fk_inventory_number_ssd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+          <End Role="Ssd" Type="Self.Ssd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Ssd">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_Types_ssd">
+          <End Role="Types_ssd" Type="Self.Types_ssd" Multiplicity="1" />
+          <End Role="Ssd" Type="Self.Ssd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_ssd">
+              <PropertyRef Name="Id_type_ssd" />
+            </Principal>
+            <Dependent Role="Ssd">
+              <PropertyRef Name="Fk_type_ssd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_Units">
+          <End Role="Units" Type="Self.Units" Multiplicity="1" />
+          <End Role="Ssd" Type="Self.Ssd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Ssd">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище InventoryModelContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Computers" EntityType="Self.Computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dispensing_computers" EntityType="Self.Dispensing_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dispensing_peripherals" EntityType="Self.Dispensing_peripherals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees_in_department" EntityType="Self.Employees_in_department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Graphics_cards" EntityType="Self.Graphics_cards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hdd" EntityType="Self.Hdd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hdd_in_computers" EntityType="Self.Hdd_in_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History_dispensed_computers" EntityType="Self.History_dispensed_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History_dispensed_peripherals" EntityType="Self.History_dispensed_peripherals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_numbers_graphics_cards" EntityType="Self.Inventory_numbers_graphics_cards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_numbers_hdd" EntityType="Self.Inventory_numbers_hdd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_numbers_motherboards" EntityType="Self.Inventory_numbers_motherboards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_numbers_power_supplies" EntityType="Self.Inventory_numbers_power_supplies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_numbers_processors" EntityType="Self.Inventory_numbers_processors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_numbers_ram" EntityType="Self.Inventory_numbers_ram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_numbers_ssd" EntityType="Self.Inventory_numbers_ssd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="List_dispensed_computers" EntityType="Self.List_dispensed_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="List_dispensed_peripherals" EntityType="Self.List_dispensed_peripherals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Motherboards" EntityType="Self.Motherboards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operating_systems" EntityType="Self.Operating_systems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operating_systems_in_computers" EntityType="Self.Operating_systems_in_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Peripherals" EntityType="Self.Peripherals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts_employees" EntityType="Self.Posts_employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Power_supplies" EntityType="Self.Power_supplies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Processors" EntityType="Self.Processors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Processors_in_computers" EntityType="Self.Processors_in_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ram" EntityType="Self.Ram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ram_in_computers" EntityType="Self.Ram_in_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles_users" EntityType="Self.Roles_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sockets" EntityType="Self.Sockets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ssd" EntityType="Self.Ssd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses_equipment" EntityType="Self.Statuses_equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types_hdd" EntityType="Self.Types_hdd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types_memory" EntityType="Self.Types_memory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types_peripherals" EntityType="Self.Types_peripherals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types_ssd" EntityType="Self.Types_ssd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accounts_Employees" Association="Self.FK_Accounts_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Users" Association="Self.FK_Accounts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_Inventory_numbers_graphics_cards" Association="Self.FK_Computers_Inventory_numbers_graphics_cards">
+            <End Role="Inventory_numbers_graphics_cards" EntitySet="Inventory_numbers_graphics_cards" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_Inventory_numbers_motherboards" Association="Self.FK_Computers_Inventory_numbers_motherboards">
+            <End Role="Inventory_numbers_motherboards" EntitySet="Inventory_numbers_motherboards" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_Inventory_numbers_power_supplies" Association="Self.FK_Computers_Inventory_numbers_power_supplies">
+            <End Role="Inventory_numbers_power_supplies" EntitySet="Inventory_numbers_power_supplies" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_Statuses_equipment" Association="Self.FK_Computers_Statuses_equipment">
+            <End Role="Statuses_equipment" EntitySet="Statuses_equipment" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispensing_computers_Employees" Association="Self.FK_Dispensing_computers_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Dispensing_computers" EntitySet="Dispensing_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispensing_computers_Users" Association="Self.FK_Dispensing_computers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dispensing_computers" EntitySet="Dispensing_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispensing_peripherals_Employees" Association="Self.FK_Dispensing_peripherals_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Dispensing_peripherals" EntitySet="Dispensing_peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispensing_peripherals_Users" Association="Self.FK_Dispensing_peripherals_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dispensing_peripherals" EntitySet="Dispensing_peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_in_department_Departments" Association="Self.FK_Employees_in_department_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees_in_department" EntitySet="Employees_in_department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_in_department_Employees" Association="Self.FK_Employees_in_department_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employees_in_department" EntitySet="Employees_in_department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Graphics_cards_Manufacturers" Association="Self.FK_Graphics_cards_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Graphics_cards" EntitySet="Graphics_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Graphics_cards_Units" Association="Self.FK_Graphics_cards_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Graphics_cards" EntitySet="Graphics_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_in_computers_Computers" Association="Self.FK_Hdd_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Hdd_in_computers" EntitySet="Hdd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_in_computers_Inventory_numbers_hdd" Association="Self.FK_Hdd_in_computers_Inventory_numbers_hdd">
+            <End Role="Inventory_numbers_hdd" EntitySet="Inventory_numbers_hdd" />
+            <End Role="Hdd_in_computers" EntitySet="Hdd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_Types_hdd" Association="Self.FK_Hdd_Types_hdd">
+            <End Role="Types_hdd" EntitySet="Types_hdd" />
+            <End Role="Hdd" EntitySet="Hdd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_Units" Association="Self.FK_Hdd_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Hdd" EntitySet="Hdd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_graphics_cards_Graphics_cards" Association="Self.FK_Inventory_numbers_graphics_cards_Graphics_cards">
+            <End Role="Graphics_cards" EntitySet="Graphics_cards" />
+            <End Role="Inventory_numbers_graphics_cards" EntitySet="Inventory_numbers_graphics_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_hdd_Hdd" Association="Self.FK_Inventory_numbers_hdd_Hdd">
+            <End Role="Hdd" EntitySet="Hdd" />
+            <End Role="Inventory_numbers_hdd" EntitySet="Inventory_numbers_hdd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_motherboards_Motherboards" Association="Self.FK_Inventory_numbers_motherboards_Motherboards">
+            <End Role="Motherboards" EntitySet="Motherboards" />
+            <End Role="Inventory_numbers_motherboards" EntitySet="Inventory_numbers_motherboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_power_supplies_Power_supplies" Association="Self.FK_Inventory_numbers_power_supplies_Power_supplies">
+            <End Role="Power_supplies" EntitySet="Power_supplies" />
+            <End Role="Inventory_numbers_power_supplies" EntitySet="Inventory_numbers_power_supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_processors_Processors" Association="Self.FK_Inventory_numbers_processors_Processors">
+            <End Role="Processors" EntitySet="Processors" />
+            <End Role="Inventory_numbers_processors" EntitySet="Inventory_numbers_processors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_ram_Ram" Association="Self.FK_Inventory_numbers_ram_Ram">
+            <End Role="Ram" EntitySet="Ram" />
+            <End Role="Inventory_numbers_ram" EntitySet="Inventory_numbers_ram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_ssd_Ssd" Association="Self.FK_Inventory_numbers_ssd_Ssd">
+            <End Role="Ssd" EntitySet="Ssd" />
+            <End Role="Inventory_numbers_ssd" EntitySet="Inventory_numbers_ssd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_dispensed_computers_Computers" Association="Self.FK_List_dispensed_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="List_dispensed_computers" EntitySet="List_dispensed_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_dispensed_computers_Dispensing_computers" Association="Self.FK_List_dispensed_computers_Dispensing_computers">
+            <End Role="Dispensing_computers" EntitySet="Dispensing_computers" />
+            <End Role="List_dispensed_computers" EntitySet="List_dispensed_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_dispensed_peripherals_Dispensing_peripherals" Association="Self.FK_List_dispensed_peripherals_Dispensing_peripherals">
+            <End Role="Dispensing_peripherals" EntitySet="Dispensing_peripherals" />
+            <End Role="List_dispensed_peripherals" EntitySet="List_dispensed_peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_dispensed_peripherals_Peripherals" Association="Self.FK_List_dispensed_peripherals_Peripherals">
+            <End Role="Peripherals" EntitySet="Peripherals" />
+            <End Role="List_dispensed_peripherals" EntitySet="List_dispensed_peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Motherboards_Manufacturers" Association="Self.FK_Motherboards_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Motherboards" EntitySet="Motherboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Motherboards_Sockets" Association="Self.FK_Motherboards_Sockets">
+            <End Role="Sockets" EntitySet="Sockets" />
+            <End Role="Motherboards" EntitySet="Motherboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operating_systems_in_computers_Computers" Association="Self.FK_Operating_systems_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Operating_systems_in_computers" EntitySet="Operating_systems_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operating_systems_in_computers_Operating_systems" Association="Self.FK_Operating_systems_in_computers_Operating_systems">
+            <End Role="Operating_systems" EntitySet="Operating_systems" />
+            <End Role="Operating_systems_in_computers" EntitySet="Operating_systems_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peripherals_Manufacturers" Association="Self.FK_Peripherals_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Peripherals" EntitySet="Peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peripherals_Statuses_equipment" Association="Self.FK_Peripherals_Statuses_equipment">
+            <End Role="Statuses_equipment" EntitySet="Statuses_equipment" />
+            <End Role="Peripherals" EntitySet="Peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peripherals_Types_peripherals" Association="Self.FK_Peripherals_Types_peripherals">
+            <End Role="Types_peripherals" EntitySet="Types_peripherals" />
+            <End Role="Peripherals" EntitySet="Peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_employees_Employees" Association="Self.FK_Posts_employees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Posts_employees" EntitySet="Posts_employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_employees_Posts" Association="Self.FK_Posts_employees_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Posts_employees" EntitySet="Posts_employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Power_supplies_Manufacturers" Association="Self.FK_Power_supplies_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Power_supplies" EntitySet="Power_supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Power_supplies_Units" Association="Self.FK_Power_supplies_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Power_supplies" EntitySet="Power_supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_in_computers_Computers" Association="Self.FK_Processors_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Processors_in_computers" EntitySet="Processors_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_in_computers_Inventory_numbers_processors" Association="Self.FK_Processors_in_computers_Inventory_numbers_processors">
+            <End Role="Inventory_numbers_processors" EntitySet="Inventory_numbers_processors" />
+            <End Role="Processors_in_computers" EntitySet="Processors_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_Manufacturers" Association="Self.FK_Processors_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Processors" EntitySet="Processors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_Sockets" Association="Self.FK_Processors_Sockets">
+            <End Role="Sockets" EntitySet="Sockets" />
+            <End Role="Processors" EntitySet="Processors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_Units" Association="Self.FK_Processors_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Processors" EntitySet="Processors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_in_computers_Computers" Association="Self.FK_Ram_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Ram_in_computers" EntitySet="Ram_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_in_computers_Inventory_numbers_ram" Association="Self.FK_Ram_in_computers_Inventory_numbers_ram">
+            <End Role="Inventory_numbers_ram" EntitySet="Inventory_numbers_ram" />
+            <End Role="Ram_in_computers" EntitySet="Ram_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_Manufacturers" Association="Self.FK_Ram_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Ram" EntitySet="Ram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_Types_memory" Association="Self.FK_Ram_Types_memory">
+            <End Role="Types_memory" EntitySet="Types_memory" />
+            <End Role="Ram" EntitySet="Ram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_Units" Association="Self.FK_Ram_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Ram" EntitySet="Ram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_users_Roles" Association="Self.FK_Roles_users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Roles_users" EntitySet="Roles_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_users_Users" Association="Self.FK_Roles_users_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Roles_users" EntitySet="Roles_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_in_computers_Computers" Association="Self.FK_Ssd_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Ssd_in_computers" EntitySet="Ssd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_in_computers_Inventory_numbers_ssd" Association="Self.FK_Ssd_in_computers_Inventory_numbers_ssd">
+            <End Role="Inventory_numbers_ssd" EntitySet="Inventory_numbers_ssd" />
+            <End Role="Ssd_in_computers" EntitySet="Ssd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_Manufacturers" Association="Self.FK_Ssd_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Ssd" EntitySet="Ssd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_Types_ssd" Association="Self.FK_Ssd_Types_ssd">
+            <End Role="Types_ssd" EntitySet="Types_ssd" />
+            <End Role="Ssd" EntitySet="Ssd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_Units" Association="Self.FK_Ssd_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Ssd" EntitySet="Ssd" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id_account" />
+          </Key>
+          <Property Name="Id_account" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_employee" Type="Int32" Nullable="false" />
+          <Property Name="Fk_user" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Accounts_Employees" FromRole="Accounts" ToRole="Employees" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Accounts_Users" FromRole="Accounts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="Id_computer" />
+          </Key>
+          <Property Name="Id_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_inventory_number_motherboard" Type="Int32" Nullable="false" />
+          <Property Name="Fk_inventory_number_graphics_card" Type="Int32" />
+          <Property Name="Fk_inventory_number_power_supplies" Type="Int32" Nullable="false" />
+          <Property Name="Ip_address" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <Property Name="Fk_status_equipment" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inventory_numbers_graphics_cards" Relationship="Self.FK_Computers_Inventory_numbers_graphics_cards" FromRole="Computers" ToRole="Inventory_numbers_graphics_cards" />
+          <NavigationProperty Name="Inventory_numbers_motherboards" Relationship="Self.FK_Computers_Inventory_numbers_motherboards" FromRole="Computers" ToRole="Inventory_numbers_motherboards" />
+          <NavigationProperty Name="Inventory_numbers_power_supplies" Relationship="Self.FK_Computers_Inventory_numbers_power_supplies" FromRole="Computers" ToRole="Inventory_numbers_power_supplies" />
+          <NavigationProperty Name="Statuses_equipment" Relationship="Self.FK_Computers_Statuses_equipment" FromRole="Computers" ToRole="Statuses_equipment" />
+          <NavigationProperty Name="Hdd_in_computers" Relationship="Self.FK_Hdd_in_computers_Computers" FromRole="Computers" ToRole="Hdd_in_computers" />
+          <NavigationProperty Name="List_dispensed_computers" Relationship="Self.FK_List_dispensed_computers_Computers" FromRole="Computers" ToRole="List_dispensed_computers" />
+          <NavigationProperty Name="Operating_systems_in_computers" Relationship="Self.FK_Operating_systems_in_computers_Computers" FromRole="Computers" ToRole="Operating_systems_in_computers" />
+          <NavigationProperty Name="Processors_in_computers" Relationship="Self.FK_Processors_in_computers_Computers" FromRole="Computers" ToRole="Processors_in_computers" />
+          <NavigationProperty Name="Ram_in_computers" Relationship="Self.FK_Ram_in_computers_Computers" FromRole="Computers" ToRole="Ram_in_computers" />
+          <NavigationProperty Name="Ssd_in_computers" Relationship="Self.FK_Ssd_in_computers_Computers" FromRole="Computers" ToRole="Ssd_in_computers" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id_department" />
+          </Key>
+          <Property Name="Id_department" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees_in_department" Relationship="Self.FK_Employees_in_department_Departments" FromRole="Departments" ToRole="Employees_in_department" />
+        </EntityType>
+        <EntityType Name="Dispensing_computers">
+          <Key>
+            <PropertyRef Name="Id_dispensing_computer" />
+          </Key>
+          <Property Name="Id_dispensing_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_dispensing" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fk_user" Type="Int32" Nullable="false" />
+          <Property Name="Fk_employee" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Dispensing_computers_Employees" FromRole="Dispensing_computers" ToRole="Employees" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Dispensing_computers_Users" FromRole="Dispensing_computers" ToRole="Users" />
+          <NavigationProperty Name="List_dispensed_computers" Relationship="Self.FK_List_dispensed_computers_Dispensing_computers" FromRole="Dispensing_computers" ToRole="List_dispensed_computers" />
+        </EntityType>
+        <EntityType Name="Dispensing_peripherals">
+          <Key>
+            <PropertyRef Name="Id_dispensing_peripheral" />
+          </Key>
+          <Property Name="Id_dispensing_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_dispensing" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fk_user" Type="Int32" Nullable="false" />
+          <Property Name="Fk_employee" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Dispensing_peripherals_Employees" FromRole="Dispensing_peripherals" ToRole="Employees" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Dispensing_peripherals_Users" FromRole="Dispensing_peripherals" ToRole="Users" />
+          <NavigationProperty Name="List_dispensed_peripherals" Relationship="Self.FK_List_dispensed_peripherals_Dispensing_peripherals" FromRole="Dispensing_peripherals" ToRole="List_dispensed_peripherals" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id_employee" />
+          </Key>
+          <Property Name="Id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="L_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="F_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="M_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Employees" FromRole="Employees" ToRole="Accounts" />
+          <NavigationProperty Name="Dispensing_computers" Relationship="Self.FK_Dispensing_computers_Employees" FromRole="Employees" ToRole="Dispensing_computers" />
+          <NavigationProperty Name="Dispensing_peripherals" Relationship="Self.FK_Dispensing_peripherals_Employees" FromRole="Employees" ToRole="Dispensing_peripherals" />
+          <NavigationProperty Name="Employees_in_department" Relationship="Self.FK_Employees_in_department_Employees" FromRole="Employees" ToRole="Employees_in_department" />
+          <NavigationProperty Name="Posts_employees" Relationship="Self.FK_Posts_employees_Employees" FromRole="Employees" ToRole="Posts_employees" />
+        </EntityType>
+        <EntityType Name="Employees_in_department">
+          <Key>
+            <PropertyRef Name="Id_employee_in_department" />
+          </Key>
+          <Property Name="Id_employee_in_department" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_department" Type="Int32" Nullable="false" />
+          <Property Name="Fk_employee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Employees_in_department_Departments" FromRole="Employees_in_department" ToRole="Departments" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employees_in_department_Employees" FromRole="Employees_in_department" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Graphics_cards">
+          <Key>
+            <PropertyRef Name="Id_graphics_card" />
+          </Key>
+          <Property Name="Id_graphics_card" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Memory_size" Type="Double" Nullable="false" />
+          <Property Name="Fk_unit" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Graphics_cards_Manufacturers" FromRole="Graphics_cards" ToRole="Manufacturers" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_Graphics_cards_Units" FromRole="Graphics_cards" ToRole="Units" />
+          <NavigationProperty Name="Inventory_numbers_graphics_cards" Relationship="Self.FK_Inventory_numbers_graphics_cards_Graphics_cards" FromRole="Graphics_cards" ToRole="Inventory_numbers_graphics_cards" />
+        </EntityType>
+        <EntityType Name="Hdd">
+          <Key>
+            <PropertyRef Name="Id_hdd" />
+          </Key>
+          <Property Name="Id_hdd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="Memory_size" Type="Double" Nullable="false" />
+          <Property Name="Fk_unit" Type="Int32" Nullable="false" />
+          <Property Name="Fk_type_hdd" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Types_hdd" Relationship="Self.FK_Hdd_Types_hdd" FromRole="Hdd" ToRole="Types_hdd" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_Hdd_Units" FromRole="Hdd" ToRole="Units" />
+          <NavigationProperty Name="Inventory_numbers_hdd" Relationship="Self.FK_Inventory_numbers_hdd_Hdd" FromRole="Hdd" ToRole="Inventory_numbers_hdd" />
+        </EntityType>
+        <EntityType Name="Hdd_in_computers">
+          <Key>
+            <PropertyRef Name="Id_hdd_in_computer" />
+          </Key>
+          <Property Name="Id_hdd_in_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_inventory_number_hdd" Type="Int32" Nullable="false" />
+          <Property Name="Fk_computer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK_Hdd_in_computers_Computers" FromRole="Hdd_in_computers" ToRole="Computers" />
+          <NavigationProperty Name="Inventory_numbers_hdd" Relationship="Self.FK_Hdd_in_computers_Inventory_numbers_hdd" FromRole="Hdd_in_computers" ToRole="Inventory_numbers_hdd" />
+        </EntityType>
+        <EntityType Name="History_dispensed_computers">
+          <Key>
+            <PropertyRef Name="Id_history_dispensed_computer" />
+          </Key>
+          <Property Name="Id_history_dispensed_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number_dispensing" Type="Int32" Nullable="false" />
+          <Property Name="Operation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Computer" Type="Int32" Nullable="false" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="History_dispensed_peripherals">
+          <Key>
+            <PropertyRef Name="Id_history_dispensed_peripheral" />
+          </Key>
+          <Property Name="Id_history_dispensed_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number_dispensing" Type="Int32" Nullable="false" />
+          <Property Name="Operation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Peripheral" Type="Int32" Nullable="false" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_graphics_cards">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_graphics_card" />
+          </Key>
+          <Property Name="Id_inventory_number_graphics_card" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_graphics_card" Type="Int32" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computers" Relationship="Self.FK_Computers_Inventory_numbers_graphics_cards" FromRole="Inventory_numbers_graphics_cards" ToRole="Computers" />
+          <NavigationProperty Name="Graphics_cards" Relationship="Self.FK_Inventory_numbers_graphics_cards_Graphics_cards" FromRole="Inventory_numbers_graphics_cards" ToRole="Graphics_cards" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_hdd">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_hdd" />
+          </Key>
+          <Property Name="Id_inventory_number_hdd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_hdd" Type="Int32" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hdd" Relationship="Self.FK_Inventory_numbers_hdd_Hdd" FromRole="Inventory_numbers_hdd" ToRole="Hdd" />
+          <NavigationProperty Name="Hdd_in_computers" Relationship="Self.FK_Hdd_in_computers_Inventory_numbers_hdd" FromRole="Inventory_numbers_hdd" ToRole="Hdd_in_computers" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_motherboards">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_motherboard" />
+          </Key>
+          <Property Name="Id_inventory_number_motherboard" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_motherboard" Type="Int32" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computers" Relationship="Self.FK_Computers_Inventory_numbers_motherboards" FromRole="Inventory_numbers_motherboards" ToRole="Computers" />
+          <NavigationProperty Name="Motherboard" Relationship="Self.FK_Inventory_numbers_motherboards_Motherboards" FromRole="Inventory_numbers_motherboards" ToRole="Motherboards" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_power_supplies">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_power_supplie" />
+          </Key>
+          <Property Name="Id_inventory_number_power_supplie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_power_supplie" Type="Int32" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computers" Relationship="Self.FK_Computers_Inventory_numbers_power_supplies" FromRole="Inventory_numbers_power_supplies" ToRole="Computers" />
+          <NavigationProperty Name="Power_supplies" Relationship="Self.FK_Inventory_numbers_power_supplies_Power_supplies" FromRole="Inventory_numbers_power_supplies" ToRole="Power_supplies" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_processors">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_processor" />
+          </Key>
+          <Property Name="Id_inventory_number_processor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_processor" Type="Int32" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Processor" Relationship="Self.FK_Inventory_numbers_processors_Processors" FromRole="Inventory_numbers_processors" ToRole="Processors" />
+          <NavigationProperty Name="Processors_in_computers" Relationship="Self.FK_Processors_in_computers_Inventory_numbers_processors" FromRole="Inventory_numbers_processors" ToRole="Processors_in_computers" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_ram">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_ram" />
+          </Key>
+          <Property Name="Id_inventory_number_ram" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_ram" Type="Int32" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ram" Relationship="Self.FK_Inventory_numbers_ram_Ram" FromRole="Inventory_numbers_ram" ToRole="Ram" />
+          <NavigationProperty Name="Ram_in_computers" Relationship="Self.FK_Ram_in_computers_Inventory_numbers_ram" FromRole="Inventory_numbers_ram" ToRole="Ram_in_computers" />
+        </EntityType>
+        <EntityType Name="Inventory_numbers_ssd">
+          <Key>
+            <PropertyRef Name="Id_inventory_number_ssd" />
+          </Key>
+          <Property Name="Id_inventory_number_ssd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_ssd" Type="Int32" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ssd" Relationship="Self.FK_Inventory_numbers_ssd_Ssd" FromRole="Inventory_numbers_ssd" ToRole="Ssd" />
+          <NavigationProperty Name="Ssd_in_computers" Relationship="Self.FK_Ssd_in_computers_Inventory_numbers_ssd" FromRole="Inventory_numbers_ssd" ToRole="Ssd_in_computers" />
+        </EntityType>
+        <EntityType Name="List_dispensed_computers">
+          <Key>
+            <PropertyRef Name="Id_list_dispensed_computer" />
+          </Key>
+          <Property Name="Id_list_dispensed_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_number_dispensing" Type="Int32" Nullable="false" />
+          <Property Name="Fk_computer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK_List_dispensed_computers_Computers" FromRole="List_dispensed_computers" ToRole="Computers" />
+          <NavigationProperty Name="Dispensing_computers" Relationship="Self.FK_List_dispensed_computers_Dispensing_computers" FromRole="List_dispensed_computers" ToRole="Dispensing_computers" />
+        </EntityType>
+        <EntityType Name="List_dispensed_peripherals">
+          <Key>
+            <PropertyRef Name="Id_list_dispensed_peripheral" />
+          </Key>
+          <Property Name="Id_list_dispensed_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_number_dispensing" Type="Int32" Nullable="false" />
+          <Property Name="Fk_peripheral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dispensing_peripherals" Relationship="Self.FK_List_dispensed_peripherals_Dispensing_peripherals" FromRole="List_dispensed_peripherals" ToRole="Dispensing_peripherals" />
+          <NavigationProperty Name="Peripheral" Relationship="Self.FK_List_dispensed_peripherals_Peripherals" FromRole="List_dispensed_peripherals" ToRole="Peripherals" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="Id_manufacturer" />
+          </Key>
+          <Property Name="Id_manufacturer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Graphics_cards" Relationship="Self.FK_Graphics_cards_Manufacturers" FromRole="Manufacturers" ToRole="Graphics_cards" />
+          <NavigationProperty Name="Motherboards" Relationship="Self.FK_Motherboards_Manufacturers" FromRole="Manufacturers" ToRole="Motherboards" />
+          <NavigationProperty Name="Peripherals" Relationship="Self.FK_Peripherals_Manufacturers" FromRole="Manufacturers" ToRole="Peripherals" />
+          <NavigationProperty Name="Power_supplies" Relationship="Self.FK_Power_supplies_Manufacturers" FromRole="Manufacturers" ToRole="Power_supplies" />
+          <NavigationProperty Name="Processors" Relationship="Self.FK_Processors_Manufacturers" FromRole="Manufacturers" ToRole="Processors" />
+          <NavigationProperty Name="Rams" Relationship="Self.FK_Ram_Manufacturers" FromRole="Manufacturers" ToRole="Ram" />
+          <NavigationProperty Name="Ssds" Relationship="Self.FK_Ssd_Manufacturers" FromRole="Manufacturers" ToRole="Ssd" />
+        </EntityType>
+        <EntityType Name="Motherboard">
+          <Key>
+            <PropertyRef Name="Id_motherboard" />
+          </Key>
+          <Property Name="Id_motherboard" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fk_socket" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inventory_numbers_motherboards" Relationship="Self.FK_Inventory_numbers_motherboards_Motherboards" FromRole="Motherboards" ToRole="Inventory_numbers_motherboards" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Motherboards_Manufacturers" FromRole="Motherboards" ToRole="Manufacturers" />
+          <NavigationProperty Name="Socket" Relationship="Self.FK_Motherboards_Sockets" FromRole="Motherboards" ToRole="Sockets" />
+        </EntityType>
+        <EntityType Name="Operating_systems">
+          <Key>
+            <PropertyRef Name="Id_operating_system" />
+          </Key>
+          <Property Name="Id_operating_system" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="System_version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Operating_systems_in_computers" Relationship="Self.FK_Operating_systems_in_computers_Operating_systems" FromRole="Operating_systems" ToRole="Operating_systems_in_computers" />
+        </EntityType>
+        <EntityType Name="Operating_systems_in_computers">
+          <Key>
+            <PropertyRef Name="Id_operating_systems_in_computers" />
+          </Key>
+          <Property Name="Id_operating_systems_in_computers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_operating_system" Type="Int32" Nullable="false" />
+          <Property Name="Fk_computer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK_Operating_systems_in_computers_Computers" FromRole="Operating_systems_in_computers" ToRole="Computers" />
+          <NavigationProperty Name="Operating_systems" Relationship="Self.FK_Operating_systems_in_computers_Operating_systems" FromRole="Operating_systems_in_computers" ToRole="Operating_systems" />
+        </EntityType>
+        <EntityType Name="Peripheral">
+          <Key>
+            <PropertyRef Name="Id_peripheral" />
+          </Key>
+          <Property Name="Id_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_type_peripheral" Type="Int32" Nullable="false" />
+          <Property Name="Fk_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inventory_number" Type="Int32" Nullable="false" />
+          <Property Name="Fk_status_equipment" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="List_dispensed_peripherals" Relationship="Self.FK_List_dispensed_peripherals_Peripherals" FromRole="Peripherals" ToRole="List_dispensed_peripherals" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Peripherals_Manufacturers" FromRole="Peripherals" ToRole="Manufacturers" />
+          <NavigationProperty Name="Statuses_equipment" Relationship="Self.FK_Peripherals_Statuses_equipment" FromRole="Peripherals" ToRole="Statuses_equipment" />
+          <NavigationProperty Name="Types_peripherals" Relationship="Self.FK_Peripherals_Types_peripherals" FromRole="Peripherals" ToRole="Types_peripherals" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id_post" />
+          </Key>
+          <Property Name="Id_post" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Posts_employees" Relationship="Self.FK_Posts_employees_Posts" FromRole="Posts" ToRole="Posts_employees" />
+        </EntityType>
+        <EntityType Name="Posts_employees">
+          <Key>
+            <PropertyRef Name="Id_post_employee" />
+          </Key>
+          <Property Name="Id_post_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_employee" Type="Int32" Nullable="false" />
+          <Property Name="Fk_post" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Posts_employees_Employees" FromRole="Posts_employees" ToRole="Employees" />
+          <NavigationProperty Name="Post" Relationship="Self.FK_Posts_employees_Posts" FromRole="Posts_employees" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Power_supplies">
+          <Key>
+            <PropertyRef Name="Id_power_supplie" />
+          </Key>
+          <Property Name="Id_power_supplie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Power" Type="Int32" />
+          <Property Name="Fk_unit" Type="Int32" />
+          <NavigationProperty Name="Inventory_numbers_power_supplies" Relationship="Self.FK_Inventory_numbers_power_supplies_Power_supplies" FromRole="Power_supplies" ToRole="Inventory_numbers_power_supplies" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Power_supplies_Manufacturers" FromRole="Power_supplies" ToRole="Manufacturers" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_Power_supplies_Units" FromRole="Power_supplies" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Processor">
+          <Key>
+            <PropertyRef Name="Id_processor" />
+          </Key>
+          <Property Name="Id_processor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fk_socket" Type="Int32" Nullable="false" />
+          <Property Name="Amount_cores" Type="Int32" />
+          <Property Name="Base_frequency" Type="Double" />
+          <Property Name="Fk_unit" Type="Int32" />
+          <NavigationProperty Name="Inventory_numbers_processors" Relationship="Self.FK_Inventory_numbers_processors_Processors" FromRole="Processors" ToRole="Inventory_numbers_processors" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Processors_Manufacturers" FromRole="Processors" ToRole="Manufacturers" />
+          <NavigationProperty Name="Socket" Relationship="Self.FK_Processors_Sockets" FromRole="Processors" ToRole="Sockets" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_Processors_Units" FromRole="Processors" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Processors_in_computers">
+          <Key>
+            <PropertyRef Name="Id_processor_in_computer" />
+          </Key>
+          <Property Name="Id_processor_in_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_inventory_number_processor" Type="Int32" Nullable="false" />
+          <Property Name="Fk_computer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK_Processors_in_computers_Computers" FromRole="Processors_in_computers" ToRole="Computers" />
+          <NavigationProperty Name="Inventory_numbers_processors" Relationship="Self.FK_Processors_in_computers_Inventory_numbers_processors" FromRole="Processors_in_computers" ToRole="Inventory_numbers_processors" />
+        </EntityType>
+        <EntityType Name="Ram">
+          <Key>
+            <PropertyRef Name="Id_ram" />
+          </Key>
+          <Property Name="Id_ram" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fk_type_memory" Type="Int32" Nullable="false" />
+          <Property Name="Memory_size" Type="Double" Nullable="false" />
+          <Property Name="Clock_frequency" Type="Double" />
+          <Property Name="Fk_unit" Type="Int32" />
+          <NavigationProperty Name="Inventory_numbers_ram" Relationship="Self.FK_Inventory_numbers_ram_Ram" FromRole="Ram" ToRole="Inventory_numbers_ram" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Ram_Manufacturers" FromRole="Ram" ToRole="Manufacturers" />
+          <NavigationProperty Name="Types_memory" Relationship="Self.FK_Ram_Types_memory" FromRole="Ram" ToRole="Types_memory" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_Ram_Units" FromRole="Ram" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Ram_in_computers">
+          <Key>
+            <PropertyRef Name="Id_ram_in_computer" />
+          </Key>
+          <Property Name="Id_ram_in_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_inventory_number_ram" Type="Int32" Nullable="false" />
+          <Property Name="Fk_computer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK_Ram_in_computers_Computers" FromRole="Ram_in_computers" ToRole="Computers" />
+          <NavigationProperty Name="Inventory_numbers_ram" Relationship="Self.FK_Ram_in_computers_Inventory_numbers_ram" FromRole="Ram_in_computers" ToRole="Inventory_numbers_ram" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_role" />
+          </Key>
+          <Property Name="Id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Roles_users" Relationship="Self.FK_Roles_users_Roles" FromRole="Roles" ToRole="Roles_users" />
+        </EntityType>
+        <EntityType Name="Roles_users">
+          <Key>
+            <PropertyRef Name="Id_role_user" />
+          </Key>
+          <Property Name="Id_role_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_user" Type="Int32" Nullable="false" />
+          <Property Name="Fk_role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Roles_users_Roles" FromRole="Roles_users" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Roles_users_Users" FromRole="Roles_users" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Socket">
+          <Key>
+            <PropertyRef Name="Id_socket" />
+          </Key>
+          <Property Name="Id_socket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Motherboards" Relationship="Self.FK_Motherboards_Sockets" FromRole="Sockets" ToRole="Motherboards" />
+          <NavigationProperty Name="Processors" Relationship="Self.FK_Processors_Sockets" FromRole="Sockets" ToRole="Processors" />
+        </EntityType>
+        <EntityType Name="Ssd">
+          <Key>
+            <PropertyRef Name="Id_ssd" />
+          </Key>
+          <Property Name="Id_ssd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fk_type_ssd" Type="Int32" Nullable="false" />
+          <Property Name="Memory_size" Type="Double" Nullable="false" />
+          <Property Name="Fk_unit" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inventory_numbers_ssd" Relationship="Self.FK_Inventory_numbers_ssd_Ssd" FromRole="Ssd" ToRole="Inventory_numbers_ssd" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Ssd_Manufacturers" FromRole="Ssd" ToRole="Manufacturers" />
+          <NavigationProperty Name="Types_ssd" Relationship="Self.FK_Ssd_Types_ssd" FromRole="Ssd" ToRole="Types_ssd" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_Ssd_Units" FromRole="Ssd" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Ssd_in_computers">
+          <Key>
+            <PropertyRef Name="Id_ssd_in_computer" />
+          </Key>
+          <Property Name="Id_ssd_in_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_inventory_number_ssd" Type="Int32" Nullable="false" />
+          <Property Name="Fk_computer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK_Ssd_in_computers_Computers" FromRole="Ssd_in_computers" ToRole="Computers" />
+          <NavigationProperty Name="Inventory_numbers_ssd" Relationship="Self.FK_Ssd_in_computers_Inventory_numbers_ssd" FromRole="Ssd_in_computers" ToRole="Inventory_numbers_ssd" />
+        </EntityType>
+        <EntityType Name="Statuses_equipment">
+          <Key>
+            <PropertyRef Name="Id_status_equipment" />
+          </Key>
+          <Property Name="Id_status_equipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Computers" Relationship="Self.FK_Computers_Statuses_equipment" FromRole="Statuses_equipment" ToRole="Computers" />
+          <NavigationProperty Name="Peripherals" Relationship="Self.FK_Peripherals_Statuses_equipment" FromRole="Statuses_equipment" ToRole="Peripherals" />
+        </EntityType>
+        <EntityType Name="Types_hdd">
+          <Key>
+            <PropertyRef Name="Id_type_hdd" />
+          </Key>
+          <Property Name="Id_type_hdd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Hdds" Relationship="Self.FK_Hdd_Types_hdd" FromRole="Types_hdd" ToRole="Hdd" />
+        </EntityType>
+        <EntityType Name="Types_memory">
+          <Key>
+            <PropertyRef Name="Id_type_memory" />
+          </Key>
+          <Property Name="Id_type_memory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Rams" Relationship="Self.FK_Ram_Types_memory" FromRole="Types_memory" ToRole="Ram" />
+        </EntityType>
+        <EntityType Name="Types_peripherals">
+          <Key>
+            <PropertyRef Name="Id_type_peripheral" />
+          </Key>
+          <Property Name="Id_type_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Peripherals" Relationship="Self.FK_Peripherals_Types_peripherals" FromRole="Types_peripherals" ToRole="Peripherals" />
+        </EntityType>
+        <EntityType Name="Types_ssd">
+          <Key>
+            <PropertyRef Name="Id_type_ssd" />
+          </Key>
+          <Property Name="Id_type_ssd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ssds" Relationship="Self.FK_Ssd_Types_ssd" FromRole="Types_ssd" ToRole="Ssd" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id_unit" />
+          </Key>
+          <Property Name="Id_unit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Full_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Short_name" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Graphics_cards" Relationship="Self.FK_Graphics_cards_Units" FromRole="Units" ToRole="Graphics_cards" />
+          <NavigationProperty Name="Hdds" Relationship="Self.FK_Hdd_Units" FromRole="Units" ToRole="Hdd" />
+          <NavigationProperty Name="Power_supplies" Relationship="Self.FK_Power_supplies_Units" FromRole="Units" ToRole="Power_supplies" />
+          <NavigationProperty Name="Processors" Relationship="Self.FK_Processors_Units" FromRole="Units" ToRole="Processors" />
+          <NavigationProperty Name="Rams" Relationship="Self.FK_Ram_Units" FromRole="Units" ToRole="Ram" />
+          <NavigationProperty Name="Ssds" Relationship="Self.FK_Ssd_Units" FromRole="Units" ToRole="Ssd" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Users" FromRole="Users" ToRole="Accounts" />
+          <NavigationProperty Name="Dispensing_computers" Relationship="Self.FK_Dispensing_computers_Users" FromRole="Users" ToRole="Dispensing_computers" />
+          <NavigationProperty Name="Dispensing_peripherals" Relationship="Self.FK_Dispensing_peripherals_Users" FromRole="Users" ToRole="Dispensing_peripherals" />
+          <NavigationProperty Name="Roles_users" Relationship="Self.FK_Roles_users_Users" FromRole="Users" ToRole="Roles_users" />
+        </EntityType>
+        <Association Name="FK_Accounts_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="Fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
+          <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="0..1" />
+          <End Role="Computers" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_graphics_cards">
+              <PropertyRef Name="Id_inventory_number_graphics_card" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="Fk_inventory_number_graphics_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_Inventory_numbers_motherboards">
+          <End Role="Inventory_numbers_motherboards" Type="Self.Inventory_numbers_motherboards" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_motherboards">
+              <PropertyRef Name="Id_inventory_number_motherboard" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="Fk_inventory_number_motherboard" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_Inventory_numbers_power_supplies">
+          <End Role="Inventory_numbers_power_supplies" Type="Self.Inventory_numbers_power_supplies" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_power_supplies">
+              <PropertyRef Name="Id_inventory_number_power_supplie" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="Fk_inventory_number_power_supplies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_Statuses_equipment">
+          <End Role="Statuses_equipment" Type="Self.Statuses_equipment" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses_equipment">
+              <PropertyRef Name="Id_status_equipment" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="Fk_status_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Hdd_in_computers" Type="Self.Hdd_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Hdd_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_dispensed_computers_Computers">
+          <End Role="Computers" Type="Self.Computer" Multiplicity="1" />
+          <End Role="List_dispensed_computers" Type="Self.List_dispensed_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="List_dispensed_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operating_systems_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Operating_systems_in_computers" Type="Self.Operating_systems_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Operating_systems_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Processors_in_computers" Type="Self.Processors_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Processors_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Ram_in_computers" Type="Self.Ram_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Ram_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_in_computers_Computers">
+          <End Role="Computers" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Ssd_in_computers" Type="Self.Ssd_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="Id_computer" />
+            </Principal>
+            <Dependent Role="Ssd_in_computers">
+              <PropertyRef Name="Fk_computer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_in_department_Departments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employees_in_department" Type="Self.Employees_in_department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id_department" />
+            </Principal>
+            <Dependent Role="Employees_in_department">
+              <PropertyRef Name="Fk_department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispensing_computers_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Dispensing_computers">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispensing_computers_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Dispensing_computers">
+              <PropertyRef Name="Fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_dispensed_computers_Dispensing_computers">
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="1" />
+          <End Role="List_dispensed_computers" Type="Self.List_dispensed_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispensing_computers">
+              <PropertyRef Name="Id_dispensing_computer" />
+            </Principal>
+            <Dependent Role="List_dispensed_computers">
+              <PropertyRef Name="Fk_number_dispensing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispensing_peripherals_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Dispensing_peripherals">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dispensing_peripherals_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Dispensing_peripherals">
+              <PropertyRef Name="Fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_dispensed_peripherals_Dispensing_peripherals">
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="1" />
+          <End Role="List_dispensed_peripherals" Type="Self.List_dispensed_peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispensing_peripherals">
+              <PropertyRef Name="Id_dispensing_peripheral" />
+            </Principal>
+            <Dependent Role="List_dispensed_peripherals">
+              <PropertyRef Name="Fk_number_dispensing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_in_department_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Employees_in_department" Type="Self.Employees_in_department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Employees_in_department">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_employees_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Posts_employees">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Graphics_cards_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Graphics_cards" Type="Self.Graphics_cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Graphics_cards">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Graphics_cards_Units">
+          <End Role="Units" Type="Self.Unit" Multiplicity="1" />
+          <End Role="Graphics_cards" Type="Self.Graphics_cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Graphics_cards">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_graphics_cards_Graphics_cards">
+          <End Role="Graphics_cards" Type="Self.Graphics_cards" Multiplicity="1" />
+          <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Graphics_cards">
+              <PropertyRef Name="Id_graphics_card" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_graphics_cards">
+              <PropertyRef Name="Fk_graphics_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_Types_hdd">
+          <End Role="Types_hdd" Type="Self.Types_hdd" Multiplicity="1" />
+          <End Role="Hdd" Type="Self.Hdd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_hdd">
+              <PropertyRef Name="Id_type_hdd" />
+            </Principal>
+            <Dependent Role="Hdd">
+              <PropertyRef Name="Fk_type_hdd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_Units">
+          <End Role="Units" Type="Self.Unit" Multiplicity="1" />
+          <End Role="Hdd" Type="Self.Hdd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Hdd">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_hdd_Hdd">
+          <End Role="Hdd" Type="Self.Hdd" Multiplicity="1" />
+          <End Role="Inventory_numbers_hdd" Type="Self.Inventory_numbers_hdd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hdd">
+              <PropertyRef Name="Id_hdd" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_hdd">
+              <PropertyRef Name="Fk_hdd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_in_computers_Inventory_numbers_hdd">
+          <End Role="Inventory_numbers_hdd" Type="Self.Inventory_numbers_hdd" Multiplicity="1" />
+          <End Role="Hdd_in_computers" Type="Self.Hdd_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_hdd">
+              <PropertyRef Name="Id_inventory_number_hdd" />
+            </Principal>
+            <Dependent Role="Hdd_in_computers">
+              <PropertyRef Name="Fk_inventory_number_hdd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_motherboards_Motherboards">
+          <End Role="Motherboards" Type="Self.Motherboard" Multiplicity="1" />
+          <End Role="Inventory_numbers_motherboards" Type="Self.Inventory_numbers_motherboards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Motherboards">
+              <PropertyRef Name="Id_motherboard" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_motherboards">
+              <PropertyRef Name="Fk_motherboard" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_power_supplies_Power_supplies">
+          <End Role="Power_supplies" Type="Self.Power_supplies" Multiplicity="1" />
+          <End Role="Inventory_numbers_power_supplies" Type="Self.Inventory_numbers_power_supplies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Power_supplies">
+              <PropertyRef Name="Id_power_supplie" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_power_supplies">
+              <PropertyRef Name="Fk_power_supplie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_processors_Processors">
+          <End Role="Processors" Type="Self.Processor" Multiplicity="1" />
+          <End Role="Inventory_numbers_processors" Type="Self.Inventory_numbers_processors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processors">
+              <PropertyRef Name="Id_processor" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_processors">
+              <PropertyRef Name="Fk_processor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_in_computers_Inventory_numbers_processors">
+          <End Role="Inventory_numbers_processors" Type="Self.Inventory_numbers_processors" Multiplicity="1" />
+          <End Role="Processors_in_computers" Type="Self.Processors_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_processors">
+              <PropertyRef Name="Id_inventory_number_processor" />
+            </Principal>
+            <Dependent Role="Processors_in_computers">
+              <PropertyRef Name="Fk_inventory_number_processor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_ram_Ram">
+          <End Role="Ram" Type="Self.Ram" Multiplicity="1" />
+          <End Role="Inventory_numbers_ram" Type="Self.Inventory_numbers_ram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ram">
+              <PropertyRef Name="Id_ram" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_ram">
+              <PropertyRef Name="Fk_ram" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_in_computers_Inventory_numbers_ram">
+          <End Role="Inventory_numbers_ram" Type="Self.Inventory_numbers_ram" Multiplicity="1" />
+          <End Role="Ram_in_computers" Type="Self.Ram_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_ram">
+              <PropertyRef Name="Id_inventory_number_ram" />
+            </Principal>
+            <Dependent Role="Ram_in_computers">
+              <PropertyRef Name="Fk_inventory_number_ram" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_numbers_ssd_Ssd">
+          <End Role="Ssd" Type="Self.Ssd" Multiplicity="1" />
+          <End Role="Inventory_numbers_ssd" Type="Self.Inventory_numbers_ssd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ssd">
+              <PropertyRef Name="Id_ssd" />
+            </Principal>
+            <Dependent Role="Inventory_numbers_ssd">
+              <PropertyRef Name="Fk_ssd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_in_computers_Inventory_numbers_ssd">
+          <End Role="Inventory_numbers_ssd" Type="Self.Inventory_numbers_ssd" Multiplicity="1" />
+          <End Role="Ssd_in_computers" Type="Self.Ssd_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_numbers_ssd">
+              <PropertyRef Name="Id_inventory_number_ssd" />
+            </Principal>
+            <Dependent Role="Ssd_in_computers">
+              <PropertyRef Name="Fk_inventory_number_ssd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_dispensed_peripherals_Peripherals">
+          <End Role="Peripherals" Type="Self.Peripheral" Multiplicity="1" />
+          <End Role="List_dispensed_peripherals" Type="Self.List_dispensed_peripherals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peripherals">
+              <PropertyRef Name="Id_peripheral" />
+            </Principal>
+            <Dependent Role="List_dispensed_peripherals">
+              <PropertyRef Name="Fk_peripheral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Motherboards_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Motherboards" Type="Self.Motherboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Motherboards">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peripherals_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Peripherals" Type="Self.Peripheral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Peripherals">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Power_supplies_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Power_supplies" Type="Self.Power_supplies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Power_supplies">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Processors" Type="Self.Processor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Processors">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Ram" Type="Self.Ram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Ram">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Ssd" Type="Self.Ssd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Ssd">
+              <PropertyRef Name="Fk_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Motherboards_Sockets">
+          <End Role="Sockets" Type="Self.Socket" Multiplicity="1" />
+          <End Role="Motherboards" Type="Self.Motherboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sockets">
+              <PropertyRef Name="Id_socket" />
+            </Principal>
+            <Dependent Role="Motherboards">
+              <PropertyRef Name="Fk_socket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operating_systems_in_computers_Operating_systems">
+          <End Role="Operating_systems" Type="Self.Operating_systems" Multiplicity="1" />
+          <End Role="Operating_systems_in_computers" Type="Self.Operating_systems_in_computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operating_systems">
+              <PropertyRef Name="Id_operating_system" />
+            </Principal>
+            <Dependent Role="Operating_systems_in_computers">
+              <PropertyRef Name="Fk_operating_system" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peripherals_Statuses_equipment">
+          <End Role="Statuses_equipment" Type="Self.Statuses_equipment" Multiplicity="1" />
+          <End Role="Peripherals" Type="Self.Peripheral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses_equipment">
+              <PropertyRef Name="Id_status_equipment" />
+            </Principal>
+            <Dependent Role="Peripherals">
+              <PropertyRef Name="Fk_status_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peripherals_Types_peripherals">
+          <End Role="Types_peripherals" Type="Self.Types_peripherals" Multiplicity="1" />
+          <End Role="Peripherals" Type="Self.Peripheral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_peripherals">
+              <PropertyRef Name="Id_type_peripheral" />
+            </Principal>
+            <Dependent Role="Peripherals">
+              <PropertyRef Name="Fk_type_peripheral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_employees_Posts">
+          <End Role="Posts" Type="Self.Post" Multiplicity="1" />
+          <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id_post" />
+            </Principal>
+            <Dependent Role="Posts_employees">
+              <PropertyRef Name="Fk_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Power_supplies_Units">
+          <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Power_supplies" Type="Self.Power_supplies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Power_supplies">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_Sockets">
+          <End Role="Sockets" Type="Self.Socket" Multiplicity="1" />
+          <End Role="Processors" Type="Self.Processor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sockets">
+              <PropertyRef Name="Id_socket" />
+            </Principal>
+            <Dependent Role="Processors">
+              <PropertyRef Name="Fk_socket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Processors_Units">
+          <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Processors" Type="Self.Processor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Processors">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_Types_memory">
+          <End Role="Types_memory" Type="Self.Types_memory" Multiplicity="1" />
+          <End Role="Ram" Type="Self.Ram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_memory">
+              <PropertyRef Name="Id_type_memory" />
+            </Principal>
+            <Dependent Role="Ram">
+              <PropertyRef Name="Fk_type_memory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ram_Units">
+          <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Ram" Type="Self.Ram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Ram">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_users_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Roles_users" Type="Self.Roles_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_role" />
+            </Principal>
+            <Dependent Role="Roles_users">
+              <PropertyRef Name="Fk_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_users_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Roles_users" Type="Self.Roles_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Roles_users">
+              <PropertyRef Name="Fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_Types_ssd">
+          <End Role="Types_ssd" Type="Self.Types_ssd" Multiplicity="1" />
+          <End Role="Ssd" Type="Self.Ssd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_ssd">
+              <PropertyRef Name="Id_type_ssd" />
+            </Principal>
+            <Dependent Role="Ssd">
+              <PropertyRef Name="Fk_type_ssd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ssd_Units">
+          <End Role="Units" Type="Self.Unit" Multiplicity="1" />
+          <End Role="Ssd" Type="Self.Ssd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id_unit" />
+            </Principal>
+            <Dependent Role="Ssd">
+              <PropertyRef Name="Fk_unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Computers" EntityType="Self.Computer" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Dispensing_computers" EntityType="Self.Dispensing_computers" />
+          <EntitySet Name="Dispensing_peripherals" EntityType="Self.Dispensing_peripherals" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Employees_in_department" EntityType="Self.Employees_in_department" />
+          <EntitySet Name="Graphics_cards" EntityType="Self.Graphics_cards" />
+          <EntitySet Name="Hdds" EntityType="Self.Hdd" />
+          <EntitySet Name="Hdd_in_computers" EntityType="Self.Hdd_in_computers" />
+          <EntitySet Name="History_dispensed_computers" EntityType="Self.History_dispensed_computers" />
+          <EntitySet Name="History_dispensed_peripherals" EntityType="Self.History_dispensed_peripherals" />
+          <EntitySet Name="Inventory_numbers_graphics_cards" EntityType="Self.Inventory_numbers_graphics_cards" />
+          <EntitySet Name="Inventory_numbers_hdd" EntityType="Self.Inventory_numbers_hdd" />
+          <EntitySet Name="Inventory_numbers_motherboards" EntityType="Self.Inventory_numbers_motherboards" />
+          <EntitySet Name="Inventory_numbers_power_supplies" EntityType="Self.Inventory_numbers_power_supplies" />
+          <EntitySet Name="Inventory_numbers_processors" EntityType="Self.Inventory_numbers_processors" />
+          <EntitySet Name="Inventory_numbers_ram" EntityType="Self.Inventory_numbers_ram" />
+          <EntitySet Name="Inventory_numbers_ssd" EntityType="Self.Inventory_numbers_ssd" />
+          <EntitySet Name="List_dispensed_computers" EntityType="Self.List_dispensed_computers" />
+          <EntitySet Name="List_dispensed_peripherals" EntityType="Self.List_dispensed_peripherals" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
+          <EntitySet Name="Motherboards" EntityType="Self.Motherboard" />
+          <EntitySet Name="Operating_systems" EntityType="Self.Operating_systems" />
+          <EntitySet Name="Operating_systems_in_computers" EntityType="Self.Operating_systems_in_computers" />
+          <EntitySet Name="Peripherals" EntityType="Self.Peripheral" />
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <EntitySet Name="Posts_employees" EntityType="Self.Posts_employees" />
+          <EntitySet Name="Power_supplies" EntityType="Self.Power_supplies" />
+          <EntitySet Name="Processors" EntityType="Self.Processor" />
+          <EntitySet Name="Processors_in_computers" EntityType="Self.Processors_in_computers" />
+          <EntitySet Name="Rams" EntityType="Self.Ram" />
+          <EntitySet Name="Ram_in_computers" EntityType="Self.Ram_in_computers" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Roles_users" EntityType="Self.Roles_users" />
+          <EntitySet Name="Sockets" EntityType="Self.Socket" />
+          <EntitySet Name="Ssds" EntityType="Self.Ssd" />
+          <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" />
+          <EntitySet Name="Statuses_equipment" EntityType="Self.Statuses_equipment" />
+          <EntitySet Name="Types_hdd" EntityType="Self.Types_hdd" />
+          <EntitySet Name="Types_memory" EntityType="Self.Types_memory" />
+          <EntitySet Name="Types_peripherals" EntityType="Self.Types_peripherals" />
+          <EntitySet Name="Types_ssd" EntityType="Self.Types_ssd" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Accounts_Employees" Association="Self.FK_Accounts_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Users" Association="Self.FK_Accounts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_Inventory_numbers_graphics_cards" Association="Self.FK_Computers_Inventory_numbers_graphics_cards">
+            <End Role="Inventory_numbers_graphics_cards" EntitySet="Inventory_numbers_graphics_cards" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_Inventory_numbers_motherboards" Association="Self.FK_Computers_Inventory_numbers_motherboards">
+            <End Role="Inventory_numbers_motherboards" EntitySet="Inventory_numbers_motherboards" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_Inventory_numbers_power_supplies" Association="Self.FK_Computers_Inventory_numbers_power_supplies">
+            <End Role="Inventory_numbers_power_supplies" EntitySet="Inventory_numbers_power_supplies" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_Statuses_equipment" Association="Self.FK_Computers_Statuses_equipment">
+            <End Role="Statuses_equipment" EntitySet="Statuses_equipment" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_in_computers_Computers" Association="Self.FK_Hdd_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Hdd_in_computers" EntitySet="Hdd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_dispensed_computers_Computers" Association="Self.FK_List_dispensed_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="List_dispensed_computers" EntitySet="List_dispensed_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operating_systems_in_computers_Computers" Association="Self.FK_Operating_systems_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Operating_systems_in_computers" EntitySet="Operating_systems_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_in_computers_Computers" Association="Self.FK_Processors_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Processors_in_computers" EntitySet="Processors_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_in_computers_Computers" Association="Self.FK_Ram_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Ram_in_computers" EntitySet="Ram_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_in_computers_Computers" Association="Self.FK_Ssd_in_computers_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Ssd_in_computers" EntitySet="Ssd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_in_department_Departments" Association="Self.FK_Employees_in_department_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees_in_department" EntitySet="Employees_in_department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispensing_computers_Employees" Association="Self.FK_Dispensing_computers_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Dispensing_computers" EntitySet="Dispensing_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispensing_computers_Users" Association="Self.FK_Dispensing_computers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dispensing_computers" EntitySet="Dispensing_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_dispensed_computers_Dispensing_computers" Association="Self.FK_List_dispensed_computers_Dispensing_computers">
+            <End Role="Dispensing_computers" EntitySet="Dispensing_computers" />
+            <End Role="List_dispensed_computers" EntitySet="List_dispensed_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispensing_peripherals_Employees" Association="Self.FK_Dispensing_peripherals_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Dispensing_peripherals" EntitySet="Dispensing_peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dispensing_peripherals_Users" Association="Self.FK_Dispensing_peripherals_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Dispensing_peripherals" EntitySet="Dispensing_peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_dispensed_peripherals_Dispensing_peripherals" Association="Self.FK_List_dispensed_peripherals_Dispensing_peripherals">
+            <End Role="Dispensing_peripherals" EntitySet="Dispensing_peripherals" />
+            <End Role="List_dispensed_peripherals" EntitySet="List_dispensed_peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_in_department_Employees" Association="Self.FK_Employees_in_department_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employees_in_department" EntitySet="Employees_in_department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_employees_Employees" Association="Self.FK_Posts_employees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Posts_employees" EntitySet="Posts_employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Graphics_cards_Manufacturers" Association="Self.FK_Graphics_cards_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Graphics_cards" EntitySet="Graphics_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Graphics_cards_Units" Association="Self.FK_Graphics_cards_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Graphics_cards" EntitySet="Graphics_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_graphics_cards_Graphics_cards" Association="Self.FK_Inventory_numbers_graphics_cards_Graphics_cards">
+            <End Role="Graphics_cards" EntitySet="Graphics_cards" />
+            <End Role="Inventory_numbers_graphics_cards" EntitySet="Inventory_numbers_graphics_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_Types_hdd" Association="Self.FK_Hdd_Types_hdd">
+            <End Role="Types_hdd" EntitySet="Types_hdd" />
+            <End Role="Hdd" EntitySet="Hdds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_Units" Association="Self.FK_Hdd_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Hdd" EntitySet="Hdds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_hdd_Hdd" Association="Self.FK_Inventory_numbers_hdd_Hdd">
+            <End Role="Hdd" EntitySet="Hdds" />
+            <End Role="Inventory_numbers_hdd" EntitySet="Inventory_numbers_hdd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_in_computers_Inventory_numbers_hdd" Association="Self.FK_Hdd_in_computers_Inventory_numbers_hdd">
+            <End Role="Inventory_numbers_hdd" EntitySet="Inventory_numbers_hdd" />
+            <End Role="Hdd_in_computers" EntitySet="Hdd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_motherboards_Motherboards" Association="Self.FK_Inventory_numbers_motherboards_Motherboards">
+            <End Role="Motherboards" EntitySet="Motherboards" />
+            <End Role="Inventory_numbers_motherboards" EntitySet="Inventory_numbers_motherboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_power_supplies_Power_supplies" Association="Self.FK_Inventory_numbers_power_supplies_Power_supplies">
+            <End Role="Power_supplies" EntitySet="Power_supplies" />
+            <End Role="Inventory_numbers_power_supplies" EntitySet="Inventory_numbers_power_supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_processors_Processors" Association="Self.FK_Inventory_numbers_processors_Processors">
+            <End Role="Processors" EntitySet="Processors" />
+            <End Role="Inventory_numbers_processors" EntitySet="Inventory_numbers_processors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_in_computers_Inventory_numbers_processors" Association="Self.FK_Processors_in_computers_Inventory_numbers_processors">
+            <End Role="Inventory_numbers_processors" EntitySet="Inventory_numbers_processors" />
+            <End Role="Processors_in_computers" EntitySet="Processors_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_ram_Ram" Association="Self.FK_Inventory_numbers_ram_Ram">
+            <End Role="Ram" EntitySet="Rams" />
+            <End Role="Inventory_numbers_ram" EntitySet="Inventory_numbers_ram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_in_computers_Inventory_numbers_ram" Association="Self.FK_Ram_in_computers_Inventory_numbers_ram">
+            <End Role="Inventory_numbers_ram" EntitySet="Inventory_numbers_ram" />
+            <End Role="Ram_in_computers" EntitySet="Ram_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_numbers_ssd_Ssd" Association="Self.FK_Inventory_numbers_ssd_Ssd">
+            <End Role="Ssd" EntitySet="Ssds" />
+            <End Role="Inventory_numbers_ssd" EntitySet="Inventory_numbers_ssd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_in_computers_Inventory_numbers_ssd" Association="Self.FK_Ssd_in_computers_Inventory_numbers_ssd">
+            <End Role="Inventory_numbers_ssd" EntitySet="Inventory_numbers_ssd" />
+            <End Role="Ssd_in_computers" EntitySet="Ssd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_dispensed_peripherals_Peripherals" Association="Self.FK_List_dispensed_peripherals_Peripherals">
+            <End Role="Peripherals" EntitySet="Peripherals" />
+            <End Role="List_dispensed_peripherals" EntitySet="List_dispensed_peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Motherboards_Manufacturers" Association="Self.FK_Motherboards_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Motherboards" EntitySet="Motherboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peripherals_Manufacturers" Association="Self.FK_Peripherals_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Peripherals" EntitySet="Peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Power_supplies_Manufacturers" Association="Self.FK_Power_supplies_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Power_supplies" EntitySet="Power_supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_Manufacturers" Association="Self.FK_Processors_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Processors" EntitySet="Processors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_Manufacturers" Association="Self.FK_Ram_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Ram" EntitySet="Rams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_Manufacturers" Association="Self.FK_Ssd_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Ssd" EntitySet="Ssds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Motherboards_Sockets" Association="Self.FK_Motherboards_Sockets">
+            <End Role="Sockets" EntitySet="Sockets" />
+            <End Role="Motherboards" EntitySet="Motherboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operating_systems_in_computers_Operating_systems" Association="Self.FK_Operating_systems_in_computers_Operating_systems">
+            <End Role="Operating_systems" EntitySet="Operating_systems" />
+            <End Role="Operating_systems_in_computers" EntitySet="Operating_systems_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peripherals_Statuses_equipment" Association="Self.FK_Peripherals_Statuses_equipment">
+            <End Role="Statuses_equipment" EntitySet="Statuses_equipment" />
+            <End Role="Peripherals" EntitySet="Peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peripherals_Types_peripherals" Association="Self.FK_Peripherals_Types_peripherals">
+            <End Role="Types_peripherals" EntitySet="Types_peripherals" />
+            <End Role="Peripherals" EntitySet="Peripherals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_employees_Posts" Association="Self.FK_Posts_employees_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Posts_employees" EntitySet="Posts_employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Power_supplies_Units" Association="Self.FK_Power_supplies_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Power_supplies" EntitySet="Power_supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_Sockets" Association="Self.FK_Processors_Sockets">
+            <End Role="Sockets" EntitySet="Sockets" />
+            <End Role="Processors" EntitySet="Processors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Processors_Units" Association="Self.FK_Processors_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Processors" EntitySet="Processors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_Types_memory" Association="Self.FK_Ram_Types_memory">
+            <End Role="Types_memory" EntitySet="Types_memory" />
+            <End Role="Ram" EntitySet="Rams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ram_Units" Association="Self.FK_Ram_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Ram" EntitySet="Rams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_users_Roles" Association="Self.FK_Roles_users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Roles_users" EntitySet="Roles_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_users_Users" Association="Self.FK_Roles_users_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Roles_users" EntitySet="Roles_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_Types_ssd" Association="Self.FK_Ssd_Types_ssd">
+            <End Role="Types_ssd" EntitySet="Types_ssd" />
+            <End Role="Ssd" EntitySet="Ssds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ssd_Units" Association="Self.FK_Ssd_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Ssd" EntitySet="Ssds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище InventoryModelContainer" CdmEntityContainer="InventoryEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="InventoryModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="Id_account" ColumnName="Id_account" />
+                <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
+                <ScalarProperty Name="Fk_user" ColumnName="Fk_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Computers">
+            <EntityTypeMapping TypeName="InventoryModel.Computer">
+              <MappingFragment StoreEntitySet="Computers">
+                <ScalarProperty Name="Id_computer" ColumnName="Id_computer" />
+                <ScalarProperty Name="Fk_inventory_number_motherboard" ColumnName="Fk_inventory_number_motherboard" />
+                <ScalarProperty Name="Fk_inventory_number_graphics_card" ColumnName="Fk_inventory_number_graphics_card" />
+                <ScalarProperty Name="Fk_inventory_number_power_supplies" ColumnName="Fk_inventory_number_power_supplies" />
+                <ScalarProperty Name="Ip_address" ColumnName="Ip_address" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+                <ScalarProperty Name="Fk_status_equipment" ColumnName="Fk_status_equipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="InventoryModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id_department" ColumnName="Id_department" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dispensing_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Dispensing_computers">
+              <MappingFragment StoreEntitySet="Dispensing_computers">
+                <ScalarProperty Name="Id_dispensing_computer" ColumnName="Id_dispensing_computer" />
+                <ScalarProperty Name="Date_dispensing" ColumnName="Date_dispensing" />
+                <ScalarProperty Name="Fk_user" ColumnName="Fk_user" />
+                <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dispensing_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.Dispensing_peripherals">
+              <MappingFragment StoreEntitySet="Dispensing_peripherals">
+                <ScalarProperty Name="Id_dispensing_peripheral" ColumnName="Id_dispensing_peripheral" />
+                <ScalarProperty Name="Date_dispensing" ColumnName="Date_dispensing" />
+                <ScalarProperty Name="Fk_user" ColumnName="Fk_user" />
+                <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="InventoryModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
+                <ScalarProperty Name="L_name" ColumnName="L_name" />
+                <ScalarProperty Name="F_name" ColumnName="F_name" />
+                <ScalarProperty Name="M_name" ColumnName="M_name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone_number" ColumnName="Phone_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees_in_department">
+            <EntityTypeMapping TypeName="InventoryModel.Employees_in_department">
+              <MappingFragment StoreEntitySet="Employees_in_department">
+                <ScalarProperty Name="Id_employee_in_department" ColumnName="Id_employee_in_department" />
+                <ScalarProperty Name="Fk_department" ColumnName="Fk_department" />
+                <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Graphics_cards">
+            <EntityTypeMapping TypeName="InventoryModel.Graphics_cards">
+              <MappingFragment StoreEntitySet="Graphics_cards">
+                <ScalarProperty Name="Id_graphics_card" ColumnName="Id_graphics_card" />
+                <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Memory_size" ColumnName="Memory_size" />
+                <ScalarProperty Name="Fk_unit" ColumnName="Fk_unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hdds">
+            <EntityTypeMapping TypeName="InventoryModel.Hdd">
+              <MappingFragment StoreEntitySet="Hdd">
+                <ScalarProperty Name="Id_hdd" ColumnName="Id_hdd" />
+                <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
+                <ScalarProperty Name="Memory_size" ColumnName="Memory_size" />
+                <ScalarProperty Name="Fk_unit" ColumnName="Fk_unit" />
+                <ScalarProperty Name="Fk_type_hdd" ColumnName="Fk_type_hdd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hdd_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Hdd_in_computers">
+              <MappingFragment StoreEntitySet="Hdd_in_computers">
+                <ScalarProperty Name="Id_hdd_in_computer" ColumnName="Id_hdd_in_computer" />
+                <ScalarProperty Name="Fk_inventory_number_hdd" ColumnName="Fk_inventory_number_hdd" />
+                <ScalarProperty Name="Fk_computer" ColumnName="Fk_computer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History_dispensed_computers">
+            <EntityTypeMapping TypeName="InventoryModel.History_dispensed_computers">
+              <MappingFragment StoreEntitySet="History_dispensed_computers">
+                <ScalarProperty Name="Id_history_dispensed_computer" ColumnName="Id_history_dispensed_computer" />
+                <ScalarProperty Name="Number_dispensing" ColumnName="Number_dispensing" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="Computer" ColumnName="Computer" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History_dispensed_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.History_dispensed_peripherals">
+              <MappingFragment StoreEntitySet="History_dispensed_peripherals">
+                <ScalarProperty Name="Id_history_dispensed_peripheral" ColumnName="Id_history_dispensed_peripheral" />
+                <ScalarProperty Name="Number_dispensing" ColumnName="Number_dispensing" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="Peripheral" ColumnName="Peripheral" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_numbers_graphics_cards">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_graphics_cards">
+              <MappingFragment StoreEntitySet="Inventory_numbers_graphics_cards">
+                <ScalarProperty Name="Id_inventory_number_graphics_card" ColumnName="Id_inventory_number_graphics_card" />
+                <ScalarProperty Name="Fk_graphics_card" ColumnName="Fk_graphics_card" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_numbers_hdd">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_hdd">
+              <MappingFragment StoreEntitySet="Inventory_numbers_hdd">
+                <ScalarProperty Name="Id_inventory_number_hdd" ColumnName="Id_inventory_number_hdd" />
+                <ScalarProperty Name="Fk_hdd" ColumnName="Fk_hdd" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_numbers_motherboards">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_motherboards">
+              <MappingFragment StoreEntitySet="Inventory_numbers_motherboards">
+                <ScalarProperty Name="Id_inventory_number_motherboard" ColumnName="Id_inventory_number_motherboard" />
+                <ScalarProperty Name="Fk_motherboard" ColumnName="Fk_motherboard" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_numbers_power_supplies">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_power_supplies">
+              <MappingFragment StoreEntitySet="Inventory_numbers_power_supplies">
+                <ScalarProperty Name="Id_inventory_number_power_supplie" ColumnName="Id_inventory_number_power_supplie" />
+                <ScalarProperty Name="Fk_power_supplie" ColumnName="Fk_power_supplie" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_numbers_processors">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_processors">
+              <MappingFragment StoreEntitySet="Inventory_numbers_processors">
+                <ScalarProperty Name="Id_inventory_number_processor" ColumnName="Id_inventory_number_processor" />
+                <ScalarProperty Name="Fk_processor" ColumnName="Fk_processor" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_numbers_ram">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_ram">
+              <MappingFragment StoreEntitySet="Inventory_numbers_ram">
+                <ScalarProperty Name="Id_inventory_number_ram" ColumnName="Id_inventory_number_ram" />
+                <ScalarProperty Name="Fk_ram" ColumnName="Fk_ram" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_numbers_ssd">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_ssd">
+              <MappingFragment StoreEntitySet="Inventory_numbers_ssd">
+                <ScalarProperty Name="Id_inventory_number_ssd" ColumnName="Id_inventory_number_ssd" />
+                <ScalarProperty Name="Fk_ssd" ColumnName="Fk_ssd" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="List_dispensed_computers">
+            <EntityTypeMapping TypeName="InventoryModel.List_dispensed_computers">
+              <MappingFragment StoreEntitySet="List_dispensed_computers">
+                <ScalarProperty Name="Id_list_dispensed_computer" ColumnName="Id_list_dispensed_computer" />
+                <ScalarProperty Name="Fk_number_dispensing" ColumnName="Fk_number_dispensing" />
+                <ScalarProperty Name="Fk_computer" ColumnName="Fk_computer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="List_dispensed_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.List_dispensed_peripherals">
+              <MappingFragment StoreEntitySet="List_dispensed_peripherals">
+                <ScalarProperty Name="Id_list_dispensed_peripheral" ColumnName="Id_list_dispensed_peripheral" />
+                <ScalarProperty Name="Fk_number_dispensing" ColumnName="Fk_number_dispensing" />
+                <ScalarProperty Name="Fk_peripheral" ColumnName="Fk_peripheral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="InventoryModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturers">
+                <ScalarProperty Name="Id_manufacturer" ColumnName="Id_manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Motherboards">
+            <EntityTypeMapping TypeName="InventoryModel.Motherboard">
+              <MappingFragment StoreEntitySet="Motherboards">
+                <ScalarProperty Name="Id_motherboard" ColumnName="Id_motherboard" />
+                <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Fk_socket" ColumnName="Fk_socket" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operating_systems">
+            <EntityTypeMapping TypeName="InventoryModel.Operating_systems">
+              <MappingFragment StoreEntitySet="Operating_systems">
+                <ScalarProperty Name="Id_operating_system" ColumnName="Id_operating_system" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="System_version" ColumnName="System_version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operating_systems_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Operating_systems_in_computers">
+              <MappingFragment StoreEntitySet="Operating_systems_in_computers">
+                <ScalarProperty Name="Id_operating_systems_in_computers" ColumnName="Id_operating_systems_in_computers" />
+                <ScalarProperty Name="Fk_operating_system" ColumnName="Fk_operating_system" />
+                <ScalarProperty Name="Fk_computer" ColumnName="Fk_computer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.Peripheral">
+              <MappingFragment StoreEntitySet="Peripherals">
+                <ScalarProperty Name="Id_peripheral" ColumnName="Id_peripheral" />
+                <ScalarProperty Name="Fk_type_peripheral" ColumnName="Fk_type_peripheral" />
+                <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+                <ScalarProperty Name="Fk_status_equipment" ColumnName="Fk_status_equipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="InventoryModel.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="Id_post" ColumnName="Id_post" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts_employees">
+            <EntityTypeMapping TypeName="InventoryModel.Posts_employees">
+              <MappingFragment StoreEntitySet="Posts_employees">
+                <ScalarProperty Name="Id_post_employee" ColumnName="Id_post_employee" />
+                <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
+                <ScalarProperty Name="Fk_post" ColumnName="Fk_post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Power_supplies">
+            <EntityTypeMapping TypeName="InventoryModel.Power_supplies">
+              <MappingFragment StoreEntitySet="Power_supplies">
+                <ScalarProperty Name="Id_power_supplie" ColumnName="Id_power_supplie" />
+                <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="Fk_unit" ColumnName="Fk_unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Processors">
+            <EntityTypeMapping TypeName="InventoryModel.Processor">
+              <MappingFragment StoreEntitySet="Processors">
+                <ScalarProperty Name="Id_processor" ColumnName="Id_processor" />
+                <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Fk_socket" ColumnName="Fk_socket" />
+                <ScalarProperty Name="Amount_cores" ColumnName="Amount_cores" />
+                <ScalarProperty Name="Base_frequency" ColumnName="Base_frequency" />
+                <ScalarProperty Name="Fk_unit" ColumnName="Fk_unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Processors_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Processors_in_computers">
+              <MappingFragment StoreEntitySet="Processors_in_computers">
+                <ScalarProperty Name="Id_processor_in_computer" ColumnName="Id_processor_in_computer" />
+                <ScalarProperty Name="Fk_inventory_number_processor" ColumnName="Fk_inventory_number_processor" />
+                <ScalarProperty Name="Fk_computer" ColumnName="Fk_computer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rams">
+            <EntityTypeMapping TypeName="InventoryModel.Ram">
+              <MappingFragment StoreEntitySet="Ram">
+                <ScalarProperty Name="Id_ram" ColumnName="Id_ram" />
+                <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Fk_type_memory" ColumnName="Fk_type_memory" />
+                <ScalarProperty Name="Memory_size" ColumnName="Memory_size" />
+                <ScalarProperty Name="Clock_frequency" ColumnName="Clock_frequency" />
+                <ScalarProperty Name="Fk_unit" ColumnName="Fk_unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ram_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Ram_in_computers">
+              <MappingFragment StoreEntitySet="Ram_in_computers">
+                <ScalarProperty Name="Id_ram_in_computer" ColumnName="Id_ram_in_computer" />
+                <ScalarProperty Name="Fk_inventory_number_ram" ColumnName="Fk_inventory_number_ram" />
+                <ScalarProperty Name="Fk_computer" ColumnName="Fk_computer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="InventoryModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id_role" ColumnName="Id_role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles_users">
+            <EntityTypeMapping TypeName="InventoryModel.Roles_users">
+              <MappingFragment StoreEntitySet="Roles_users">
+                <ScalarProperty Name="Id_role_user" ColumnName="Id_role_user" />
+                <ScalarProperty Name="Fk_user" ColumnName="Fk_user" />
+                <ScalarProperty Name="Fk_role" ColumnName="Fk_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sockets">
+            <EntityTypeMapping TypeName="InventoryModel.Socket">
+              <MappingFragment StoreEntitySet="Sockets">
+                <ScalarProperty Name="Id_socket" ColumnName="Id_socket" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ssds">
+            <EntityTypeMapping TypeName="InventoryModel.Ssd">
+              <MappingFragment StoreEntitySet="Ssd">
+                <ScalarProperty Name="Id_ssd" ColumnName="Id_ssd" />
+                <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Fk_type_ssd" ColumnName="Fk_type_ssd" />
+                <ScalarProperty Name="Memory_size" ColumnName="Memory_size" />
+                <ScalarProperty Name="Fk_unit" ColumnName="Fk_unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ssd_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Ssd_in_computers">
+              <MappingFragment StoreEntitySet="Ssd_in_computers">
+                <ScalarProperty Name="Id_ssd_in_computer" ColumnName="Id_ssd_in_computer" />
+                <ScalarProperty Name="Fk_inventory_number_ssd" ColumnName="Fk_inventory_number_ssd" />
+                <ScalarProperty Name="Fk_computer" ColumnName="Fk_computer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses_equipment">
+            <EntityTypeMapping TypeName="InventoryModel.Statuses_equipment">
+              <MappingFragment StoreEntitySet="Statuses_equipment">
+                <ScalarProperty Name="Id_status_equipment" ColumnName="Id_status_equipment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types_hdd">
+            <EntityTypeMapping TypeName="InventoryModel.Types_hdd">
+              <MappingFragment StoreEntitySet="Types_hdd">
+                <ScalarProperty Name="Id_type_hdd" ColumnName="Id_type_hdd" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types_memory">
+            <EntityTypeMapping TypeName="InventoryModel.Types_memory">
+              <MappingFragment StoreEntitySet="Types_memory">
+                <ScalarProperty Name="Id_type_memory" ColumnName="Id_type_memory" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.Types_peripherals">
+              <MappingFragment StoreEntitySet="Types_peripherals">
+                <ScalarProperty Name="Id_type_peripheral" ColumnName="Id_type_peripheral" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types_ssd">
+            <EntityTypeMapping TypeName="InventoryModel.Types_ssd">
+              <MappingFragment StoreEntitySet="Types_ssd">
+                <ScalarProperty Name="Id_type_ssd" ColumnName="Id_type_ssd" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="InventoryModel.Unit">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="Id_unit" ColumnName="Id_unit" />
+                <ScalarProperty Name="Full_name" ColumnName="Full_name" />
+                <ScalarProperty Name="Short_name" ColumnName="Short_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="InventoryModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
