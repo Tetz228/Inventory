@@ -12,13 +12,12 @@ namespace Inventory.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class List_dispensed_peripherals
+    public partial class sysdiagram
     {
-        public int Id_list_dispensed_peripheral { get; set; }
-        public int Fk_number_dispensing { get; set; }
-        public int Fk_inventory_number_peripheral { get; set; }
-    
-        public virtual Dispensing_peripherals Dispensing_peripherals { get; set; }
-        public virtual Inventory_numbers_peripherals Inventory_numbers_peripherals { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

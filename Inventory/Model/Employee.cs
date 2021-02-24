@@ -20,7 +20,7 @@ namespace Inventory.Model
             this.Accounts = new HashSet<Account>();
             this.Dispensing_computers = new HashSet<Dispensing_computers>();
             this.Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
-            this.Employees_in_department = new HashSet<Employees_in_department>();
+            this.Employees_in_departments = new HashSet<Employees_in_departments>();
             this.Posts_employees = new HashSet<Posts_employees>();
         }
     
@@ -38,7 +38,7 @@ namespace Inventory.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_peripherals> Dispensing_peripherals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees_in_department> Employees_in_department { get; set; }
+        public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Posts_employees> Posts_employees { get; set; }
     }

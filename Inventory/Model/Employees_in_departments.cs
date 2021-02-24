@@ -12,13 +12,13 @@ namespace Inventory.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class List_dispensed_peripherals
+    public partial class Employees_in_departments
     {
-        public int Id_list_dispensed_peripheral { get; set; }
-        public int Fk_number_dispensing { get; set; }
-        public int Fk_inventory_number_peripheral { get; set; }
+        public int Id_employee_in_department { get; set; }
+        public int Fk_department { get; set; }
+        public int Fk_employee { get; set; }
     
-        public virtual Dispensing_peripherals Dispensing_peripherals { get; set; }
-        public virtual Inventory_numbers_peripherals Inventory_numbers_peripherals { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

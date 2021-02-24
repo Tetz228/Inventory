@@ -17,13 +17,13 @@ namespace Inventory.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            this.Employees_in_department = new HashSet<Employees_in_department>();
+            this.Employees_in_departments = new HashSet<Employees_in_departments>();
         }
     
         public int Id_department { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees_in_department> Employees_in_department { get; set; }
+        public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
     }
 }

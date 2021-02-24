@@ -17,20 +17,17 @@ namespace Inventory.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Peripheral()
         {
-            this.List_dispensed_peripherals = new HashSet<List_dispensed_peripherals>();
+            this.Inventory_numbers_peripherals = new HashSet<Inventory_numbers_peripherals>();
         }
     
         public int Id_peripheral { get; set; }
         public int Fk_type_peripheral { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
-        public int Inventory_number { get; set; }
-        public int Fk_status_equipment { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<List_dispensed_peripherals> List_dispensed_peripherals { get; set; }
+        public virtual ICollection<Inventory_numbers_peripherals> Inventory_numbers_peripherals { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
-        public virtual Statuses_equipment Statuses_equipment { get; set; }
         public virtual Types_peripherals Types_peripherals { get; set; }
     }
 }

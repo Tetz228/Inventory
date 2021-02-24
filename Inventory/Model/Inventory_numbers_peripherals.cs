@@ -12,24 +12,22 @@ namespace Inventory.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Hdd
+    public partial class Inventory_numbers_peripherals
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Hdd()
+        public Inventory_numbers_peripherals()
         {
-            this.Inventory_numbers_hdd = new HashSet<Inventory_numbers_hdd>();
+            this.List_dispensed_peripherals = new HashSet<List_dispensed_peripherals>();
         }
     
-        public int Id_hdd { get; set; }
-        public int Fk_manufacturer { get; set; }
-        public string Name { get; set; }
-        public double Memory_size { get; set; }
-        public int Fk_unit { get; set; }
-        public int Fk_type_hdd { get; set; }
+        public int Id_inventory_number_peripheral { get; set; }
+        public int Fk_peripheral { get; set; }
+        public int Inventory_number { get; set; }
+        public int Fk_status_peripheral { get; set; }
     
-        public virtual Types_hdd Types_hdd { get; set; }
-        public virtual Unit Unit { get; set; }
+        public virtual Peripheral Peripheral { get; set; }
+        public virtual Statuses_peripherals Statuses_peripherals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventory_numbers_hdd> Inventory_numbers_hdd { get; set; }
+        public virtual ICollection<List_dispensed_peripherals> List_dispensed_peripherals { get; set; }
     }
 }

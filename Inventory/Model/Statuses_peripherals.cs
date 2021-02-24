@@ -12,21 +12,18 @@ namespace Inventory.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Statuses_equipment
+    public partial class Statuses_peripherals
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Statuses_equipment()
+        public Statuses_peripherals()
         {
-            this.Computers = new HashSet<Computer>();
-            this.Peripherals = new HashSet<Peripheral>();
+            this.Inventory_numbers_peripherals = new HashSet<Inventory_numbers_peripherals>();
         }
     
-        public int Id_status_equipment { get; set; }
+        public int Id_status_peripheral { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Computer> Computers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Peripheral> Peripherals { get; set; }
+        public virtual ICollection<Inventory_numbers_peripherals> Inventory_numbers_peripherals { get; set; }
     }
 }

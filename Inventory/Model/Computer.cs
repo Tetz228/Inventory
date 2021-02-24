@@ -31,12 +31,12 @@ namespace Inventory.Model
         public int Fk_inventory_number_power_supplies { get; set; }
         public string Ip_address { get; set; }
         public int Inventory_number { get; set; }
-        public int Fk_status_equipment { get; set; }
+        public int Fk_status_computer { get; set; }
     
         public virtual Inventory_numbers_graphics_cards Inventory_numbers_graphics_cards { get; set; }
         public virtual Inventory_numbers_motherboards Inventory_numbers_motherboards { get; set; }
         public virtual Inventory_numbers_power_supplies Inventory_numbers_power_supplies { get; set; }
-        public virtual Statuses_equipment Statuses_equipment { get; set; }
+        public virtual Statuses_computers Statuses_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hdd_in_computers> Hdd_in_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

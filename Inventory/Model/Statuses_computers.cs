@@ -12,13 +12,18 @@ namespace Inventory.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Employees_in_department
+    public partial class Statuses_computers
     {
-        public int Id_employee_in_department { get; set; }
-        public int Fk_department { get; set; }
-        public int Fk_employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Statuses_computers()
+        {
+            this.Computers = new HashSet<Computer>();
+        }
     
-        public virtual Department Department { get; set; }
-        public virtual Employee Employee { get; set; }
+        public int Id_status_computer { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Computer> Computers { get; set; }
     }
 }
