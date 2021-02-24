@@ -4,6 +4,7 @@
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>preview</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9D09B79A-0B68-41BA-A215-F2C3D3270E75}</ProjectGuid>
@@ -60,6 +61,9 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=3.3.2.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.3.3.2\lib\net40\PropertyChanged.dll</HintPath>
     </Reference>
@@ -74,6 +78,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -254,8 +259,8 @@
     <Compile Include="Pages\ComputersPage.xaml.cs">
       <DependentUpon>ComputersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DepartamentsPage.xaml.cs">
-      <DependentUpon>DepartamentsPage.xaml</DependentUpon>
+    <Compile Include="Pages\DepartmentsPage.xaml.cs">
+      <DependentUpon>DepartmentsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
@@ -266,13 +271,26 @@
     <Compile Include="Pages\TablesEmployeesPage.xaml.cs">
       <DependentUpon>TablesEmployeesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DepartmentAddViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentEditViewModel.cs" />
+    <Compile Include="View\DepartmentAddWindow.xaml.cs">
+      <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DepartmentEditWindow.xaml.cs">
+      <DependentUpon>DepartmentEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\TablesEmployeesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Page Include="DataDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\ComputersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DepartamentsPage.xaml">
+    <Page Include="Pages\DepartmentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,6 +303,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TablesEmployeesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DepartmentAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DepartmentEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
