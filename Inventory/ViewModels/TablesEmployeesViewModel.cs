@@ -14,28 +14,19 @@
     {
         public Page CurrentPage { get; set; }
 
-        public DepartamentsPage DepartamentsPage { get; set; }
+        public DepartmentsPage DepartmentsPage { get; set; }
         public EmployeesPage EmployeesPage { get; set; }
         public PostsPage PostsPage { get; set; }
 
-        public ICommand SelectTableDepartament => new DelegateCommand(() =>
-        {
-            CurrentPage = DepartamentsPage;
-        });
+        public ICommand SelectTableDepartament => new DelegateCommand(() => CurrentPage = DepartmentsPage);
 
-        public ICommand SelectTableEmployee => new DelegateCommand(() =>
-        {
-            CurrentPage = EmployeesPage;
-        });
+        public ICommand SelectTableEmployee => new DelegateCommand(() => CurrentPage = EmployeesPage);
 
-        public ICommand SelectTablePost => new DelegateCommand(() =>
-        {
-            CurrentPage = PostsPage;
-        });
+        public ICommand SelectTablePost => new DelegateCommand(() => CurrentPage = PostsPage);
 
         public TablesEmployeesViewModel()
         {
-            DepartamentsPage = new DepartamentsPage();
+            DepartmentsPage = new DepartmentsPage();
             EmployeesPage = new EmployeesPage();
             PostsPage = new PostsPage();
         }
