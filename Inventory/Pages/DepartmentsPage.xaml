@@ -1,0 +1,76 @@
+﻿<Page
+    x:Class="Inventory.Pages.DepartmentsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:Inventory.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Inventory.ViewModels"
+    Title="DepartamentsPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:DepartmentViewModel />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="0,0,1,0" />
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="5,0,0,5" />
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Margin" Value="3,0,0,2" />
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="FontSize" Value="13.5" />
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" MinHeight="40" />
+        </Grid.RowDefinitions>
+
+        <DataGrid
+            Grid.Row="0"
+            ItemsSource="{Binding Departments}"
+            SelectedItem="{Binding SelectDepartment}"
+            Style="{StaticResource DataGrid}">
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" />
+                <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}" />
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Название" />
+            </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding DataGridMouseLeftButtonDown}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Style="{StaticResource StackPanel}">
+            <Button
+                Command="{Binding AddDepartment}"
+                Content="Добавить"
+                Style="{StaticResource Buttons}" />
+            <Button
+                Command="{Binding EditDepartment}"
+                Content="Изменить"
+                Style="{StaticResource Buttons}" />
+            <Button
+                Command="{Binding DeleteDepartment}"
+                Content="Удалить"
+                Style="{StaticResource Buttons}" />
+        </StackPanel>
+
+    </Grid>
+</Page>
