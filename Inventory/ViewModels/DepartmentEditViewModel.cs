@@ -2,7 +2,6 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using System;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
@@ -11,34 +10,29 @@
     {
         public Department Department { get; set; }
 
-        public string NameDepartment { get; set; }
+        public string DepartmentName { get; set; }
 
-        public Action CloseWindow { get; set; }
-
-        public DepartmentEditViewModel(Department department, Action closeWindow)
+        public DepartmentEditViewModel(Department department)
         {
             Department = department;
-            NameDepartment = Department.Name;
-            CloseWindow = closeWindow;
+            DepartmentName = department.Name;
         }
 
-        public ICommand Edit => new DelegateCommand(() =>
+        public ICommand Edit => new DelegateCommand<Window>(editWindow =>
         {
             using var db = new InventoryEntities();
-
-            var findDepartment = db.Departments.FirstOrDefault(department => department.Id_department == Department.Id_department);
+            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == Department.Id_department);
 
             if (findDepartment == null)
-                MessageBox.Show("Объект не найдет в базе данных", "Ошибка при изменении отдела", MessageBoxButton.OK);
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении отдела", MessageBoxButton.OK,MessageBoxImage.Error);
             else
             {
-                findDepartment.Name = NameDepartment;
+                findDepartment.Name = DepartmentName;
                 db.SaveChanges();
             }
+            editWindow.Close();
+        }, _ => !string.IsNullOrWhiteSpace(DepartmentName));
 
-            CloseWindow();
-        }, () => !string.IsNullOrWhiteSpace(NameDepartment));
-
-        public ICommand Cancel => new DelegateCommand(() => CloseWindow());
+        public ICommand Cancel => new DelegateCommand<Window>(editWindow => editWindow.Close());
     }
 }
