@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels
+﻿namespace Inventory.ViewModels
 {
-    using System.Collections.ObjectModel;
-    using System.Windows.Input;
-
     using DevExpress.Mvvm;
-
     using Inventory.Model;
-    using Inventory.View;
+    using System.Collections.ObjectModel;
+    using System.Windows;
+    using System.Windows.Input;
+    using System.Linq;
 
-    class DepartmentViewModel:BindableBase
+    using Inventory.View.Edit;
+
+    internal class DepartmentViewModel : BindableBase
     {
+        #region Свойства
         public ObservableCollection<Department> Departments { get; set; }
 
         public Department SelectDepartment { get; set; }
+        #endregion
 
         public DepartmentViewModel()
         {
@@ -26,37 +23,44 @@ namespace Inventory.ViewModels
             Departments = new ObservableCollection<Department>(db.Departments.ToList());
         }
 
-        public ICommand DataGridMouseLeftButtonDown => new DelegateCommand(() =>
-        {
-            SelectDepartment = null;
-        });
+        #region Команды
+        public ICommand DataGridMouseLeftButtonDown => new DelegateCommand(() => SelectDepartment = null);
 
         public ICommand AddDepartment => new DelegateCommand(() =>
         {
             using var db = new InventoryEntities();
-
-            var addDepartmentWindow = new DepartmentAddWindow();
-            addDepartmentWindow.DataContext = new DepartmentAddViewModel(addDepartmentWindow.Close);
-            addDepartmentWindow.ShowDialog();
-
-            Departments = new ObservableCollection<Department>(db.Departments.ToList());
         });
 
         public ICommand EditDepartment => new DelegateCommand(() =>
         {
             using var db = new InventoryEntities();
 
-            var editDepartmentWindow = new DepartmentEditWindow();
-            editDepartmentWindow.DataContext = new DepartmentEditViewModel(SelectDepartment, editDepartmentWindow.Close);
+            var editDepartmentWindow = new DepartmentEditWindow
+            {
+                DataContext = new DepartmentEditViewModel(SelectDepartment)
+            };
             editDepartmentWindow.ShowDialog();
-
-            Departments = new ObservableCollection<Department>(db.Departments.ToList());
         }, () => SelectDepartment != null);
 
         public ICommand DeleteDepartment => new DelegateCommand(() =>
         {
             using var db = new InventoryEntities();
-            
+            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == SelectDepartment.Id_department);
+
+            if (findDepartment == null)
+            {
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            db.Departments.Remove(findDepartment);
+            db.SaveChanges();
+
+            foreach (var department in Departments.Where(department => department.Id_department == SelectDepartment.Id_department))
+            {
+                Departments.Remove(department);
+                break;
+            }
         }, () => SelectDepartment != null);
+        #endregion
     }
 }
