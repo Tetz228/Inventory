@@ -2,18 +2,18 @@
     x:Class="Inventory.Pages.PostsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Inventory.Pages"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Inventory.ViewModels"
-    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     Title="PostsPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Page.DataContext>
-        <viewModels:DepartmentViewModel />
+        <viewModels:PostViewModel />
     </Page.DataContext>
 
     <Page.Resources>
@@ -22,13 +22,13 @@
             <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="BorderThickness" Value="0,0,1,0" />
             <Setter Property="FontFamily" Value="Verdana" />
-            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontSize" Value="17" />
             <Setter Property="Margin" Value="5,0,0,5" />
         </Style>
         <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
             <Setter Property="Margin" Value="3,0,0,2" />
             <Setter Property="FontFamily" Value="Verdana" />
-            <Setter Property="FontSize" Value="13.5" />
+            <Setter Property="FontSize" Value="15" />
         </Style>
     </Page.Resources>
 
@@ -41,8 +41,8 @@
 
         <DataGrid
             Grid.Row="1"
-            ItemsSource="{Binding Departments}"
-            SelectedItem="{Binding SelectDepartment}"
+            ItemsSource="{Binding Posts}"
+            SelectedItem="{Binding SelectPost}"
             Style="{StaticResource DataGrid}">
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" />
@@ -55,33 +55,46 @@
                 <b:EventTrigger EventName="MouseLeftButtonDown">
                     <b:InvokeCommandAction Command="{Binding DataGridMouseLeftButtonDown}" />
                 </b:EventTrigger>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding EditPost}" CommandParameter="{Binding SelectPost}" />
+                </b:EventTrigger>
             </b:Interaction.Triggers>
         </DataGrid>
 
         <StackPanel Grid.Row="0" Style="{StaticResource StackPanel}">
-            <Button
-                Command="{Binding AddDepartment}"
-                Style="{StaticResource Buttons}">
+            <Button Command="{Binding AddPost}" Style="{StaticResource Buttons}">
                 <ContentControl>
-                    <materialDesign:PackIcon Kind="Add" Foreground="Green" Height="24" Width="40"  />
+                    <materialDesign:PackIcon
+                        Width="40"
+                        Height="24"
+                        Foreground="Green"
+                        Kind="Add" />
                 </ContentControl>
             </Button>
 
             <Button
-                Command="{Binding EditDepartment}"
-                CommandParameter="{Binding SelectDepartment}"
+                Command="{Binding EditPost}"
+                CommandParameter="{Binding SelectPost}"
                 Style="{StaticResource Buttons}">
                 <ContentControl>
-                    <materialDesign:PackIcon Kind="Edit" Foreground="#FFFFC500" Height="24" Width="40"  />
+                    <materialDesign:PackIcon
+                        Width="40"
+                        Height="24"
+                        Foreground="#FFFFC500"
+                        Kind="Edit" />
                 </ContentControl>
             </Button>
 
             <Button
-                Command="{Binding DeleteDepartment}"
-                CommandParameter="{Binding SelectDepartment}"
+                Command="{Binding DeletePost}"
+                CommandParameter="{Binding SelectPost}"
                 Style="{StaticResource Buttons}">
                 <ContentControl>
-                    <materialDesign:PackIcon Kind="Delete" Foreground="Red" Height="24" Width="40"  />
+                    <materialDesign:PackIcon
+                        Width="40"
+                        Height="24"
+                        Foreground="Red"
+                        Kind="Delete" />
                 </ContentControl>
             </Button>
         </StackPanel>
