@@ -7,6 +7,7 @@
     using System.Windows.Input;
     using System.Linq;
 
+    using Inventory.View.Add;
     using Inventory.View.Edit;
 
     internal class DepartmentViewModel : BindableBase
@@ -29,38 +30,47 @@
         public ICommand AddDepartment => new DelegateCommand(() =>
         {
             using var db = new InventoryEntities();
+            var addDepartmentWindow = new DepartmentAddWindow();
+            var addDepartmentViewModel = new DepartmentAddViewModel();
+
+            addDepartmentWindow.DataContext = addDepartmentViewModel;
+            addDepartmentWindow.ShowDialog();
+
+            Departments = new ObservableCollection<Department>(db.Departments.ToList());
         });
 
-        public ICommand EditDepartment => new DelegateCommand(() =>
+        public ICommand EditDepartment => new DelegateCommand<Department>((depart) =>
         {
             using var db = new InventoryEntities();
-
-            var editDepartmentWindow = new DepartmentEditWindow
+            var editDepartmentWindow = new DepartmentEditWindow();
+            var editDepartmentViewModel = new DepartmentEditViewModel
             {
-                DataContext = new DepartmentEditViewModel(SelectDepartment)
+                Department = depart
             };
-            editDepartmentWindow.ShowDialog();
-        }, () => SelectDepartment != null);
 
-        public ICommand DeleteDepartment => new DelegateCommand(() =>
+            editDepartmentWindow.DataContext = editDepartmentViewModel;
+            editDepartmentWindow.ShowDialog();
+
+            Departments = new ObservableCollection<Department>(db.Departments.ToList());
+        }, (depart) => depart != null);
+
+        public ICommand DeleteDepartment => new DelegateCommand<Department>((depart) =>
         {
             using var db = new InventoryEntities();
-            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == SelectDepartment.Id_department);
+            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == depart.Id_department);
 
             if (findDepartment == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
+                Departments = new ObservableCollection<Department>(db.Departments.ToList());
                 return;
             }
+
             db.Departments.Remove(findDepartment);
             db.SaveChanges();
 
-            foreach (var department in Departments.Where(department => department.Id_department == SelectDepartment.Id_department))
-            {
-                Departments.Remove(department);
-                break;
-            }
-        }, () => SelectDepartment != null);
+            Departments.Remove(depart);
+        }, (depart) => depart != null);
         #endregion
     }
 }
