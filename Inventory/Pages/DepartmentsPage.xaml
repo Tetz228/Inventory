@@ -36,12 +36,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
             <RowDefinition Height="Auto" MinHeight="40" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <DataGrid
-            Grid.Row="0"
+            Grid.Row="1"
             ItemsSource="{Binding Departments}"
             SelectedItem="{Binding SelectDepartment}"
             Style="{StaticResource DataGrid}">
@@ -59,19 +59,30 @@
             </i:Interaction.Triggers>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Style="{StaticResource StackPanel}">
+        <StackPanel Grid.Row="0" Style="{StaticResource StackPanel}">
             <Button
                 Command="{Binding AddDepartment}"
-                Content="Добавить"
-                Style="{StaticResource Buttons}" />
+                Style="{StaticResource Buttons}">
+                <ContentControl>
+                    <materialDesign:PackIcon Kind="Add" Foreground="Green" Height="24" Width="40"  />
+                </ContentControl>
+            </Button>
             <Button
                 Command="{Binding EditDepartment}"
-                Content="Изменить"
-                Style="{StaticResource Buttons}" />
+                CommandParameter="{Binding SelectDepartment}"
+                Style="{StaticResource Buttons}">
+                <ContentControl>
+                    <materialDesign:PackIcon Kind="Edit" Foreground="#FFFFC500" Height="24" Width="40"  />
+                </ContentControl>
+            </Button>
             <Button
                 Command="{Binding DeleteDepartment}"
-                Content="Удалить"
-                Style="{StaticResource Buttons}" />
+                CommandParameter="{Binding SelectDepartment}"
+                Style="{StaticResource Buttons}">
+                <ContentControl>
+                    <materialDesign:PackIcon Kind="Delete" Foreground="Red" Height="24" Width="40"  />
+                </ContentControl>
+            </Button>
         </StackPanel>
 
     </Grid>
