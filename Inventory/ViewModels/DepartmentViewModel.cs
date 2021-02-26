@@ -7,8 +7,10 @@
     using Inventory.ViewModels.Add;
     using Inventory.ViewModels.Edit;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Data;
     using System.Windows.Input;
 
     internal class DepartmentViewModel : BindableBase
@@ -17,11 +19,32 @@
         {
             using var db = new InventoryEntities();
             Departments = new ObservableCollection<Department>(db.Departments.ToList());
+            DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
         }
 
         #region Свойства
         public ObservableCollection<Department> Departments { get; set; }
 
+        public ICollectionView DepartmentsCollection { get; set; }
+
+        private string _searchDepartment;
+
+        public string SearchDepartment
+        {
+            get => _searchDepartment;
+            set
+            {
+                _searchDepartment = value;
+                DepartmentsCollection.Filter = obj =>
+                {
+                    if (obj is Department department)
+                        return department.Name.ToLower().Contains(SearchDepartment.ToLower());
+
+                    return false;
+                };
+                DepartmentsCollection.Refresh();
+            }
+        }
         public Department SelectDepartment { get; set; }
         #endregion
 
@@ -38,6 +61,7 @@
             addDepartmentWindow.ShowDialog();
 
             Departments = new ObservableCollection<Department>(db.Departments.ToList());
+            DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
         });
 
         public ICommand EditDepartment => new DelegateCommand<Department>((depart) =>
@@ -53,6 +77,7 @@
             editDepartmentWindow.ShowDialog();
 
             Departments = new ObservableCollection<Department>(db.Departments.ToList());
+            DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
         }, (depart) => depart != null);
 
         public ICommand DeleteDepartment => new DelegateCommand<Department>((depart) =>
