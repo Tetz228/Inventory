@@ -1,24 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels
+﻿namespace Inventory.ViewModels
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using System.Windows;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    public class DepartmentAddViewModel:BindableBase
+    public class DepartmentAddViewModel : BindableBase
     {
-        public Action CloseWindow { get; set; }
+        public string DepartmentName { get; set; }
 
-        public DepartmentAddViewModel(Action closeWindow)
+        public ICommand Add => new DelegateCommand<Window>(editWindow =>
         {
-            CloseWindow = closeWindow;
-        }
+            using var db = new InventoryEntities();
 
-        public ICommand Cancel => new DelegateCommand(() => CloseWindow());
+            var department = new Department
+            {
+                Name = DepartmentName
+            };
+
+            db.Departments.Add(department);
+            db.SaveChanges();
+
+            editWindow.Close();
+        }, _ => !string.IsNullOrWhiteSpace(DepartmentName));
+
+        public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
     }
 }
