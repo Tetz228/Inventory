@@ -10,14 +10,6 @@
     {
         public Department Department { get; set; }
 
-        public string DepartmentName { get; set; }
-
-        public DepartmentEditViewModel(Department department)
-        {
-            Department = department;
-            DepartmentName = department.Name;
-        }
-
         public ICommand Edit => new DelegateCommand<Window>(editWindow =>
         {
             using var db = new InventoryEntities();
@@ -27,11 +19,11 @@
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении отдела", MessageBoxButton.OK,MessageBoxImage.Error);
             else
             {
-                findDepartment.Name = DepartmentName;
+                findDepartment.Name = Department.Name;
                 db.SaveChanges();
             }
             editWindow.Close();
-        }, _ => !string.IsNullOrWhiteSpace(DepartmentName));
+        }, _ => !string.IsNullOrWhiteSpace(Department.Name));
 
         public ICommand Cancel => new DelegateCommand<Window>(editWindow => editWindow.Close());
     }

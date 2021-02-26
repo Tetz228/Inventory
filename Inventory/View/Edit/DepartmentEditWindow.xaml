@@ -44,7 +44,7 @@
                 Padding="3"
                 MaxLength="100"
                 Style="{StaticResource TextBoxs}"
-                Text="{Binding DepartmentName, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding Department.Name, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
         <StackPanel
