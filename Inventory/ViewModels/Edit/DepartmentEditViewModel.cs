@@ -1,10 +1,12 @@
-﻿namespace Inventory.ViewModels
+﻿namespace Inventory.ViewModels.Edit
 {
-    using DevExpress.Mvvm;
-    using Inventory.Model;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
+
+    using DevExpress.Mvvm;
+
+    using Inventory.Model;
 
     public class DepartmentEditViewModel : BindableBase
     {

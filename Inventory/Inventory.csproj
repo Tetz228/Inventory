@@ -280,8 +280,8 @@
     <Compile Include="Pages\TablesEmployeesPage.xaml.cs">
       <DependentUpon>TablesEmployeesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\DepartmentAddViewModel.cs" />
-    <Compile Include="ViewModels\DepartmentEditViewModel.cs" />
+    <Compile Include="ViewModels\Add\DepartmentAddViewModel.cs" />
+    <Compile Include="ViewModels\Edit\DepartmentEditViewModel.cs" />
     <Compile Include="View\Add\DepartmentAddWindow.xaml.cs">
       <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
     </Compile>

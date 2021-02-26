@@ -54,7 +54,7 @@
             Style="{StaticResource StackPanel}">
             <Button
                 HorizontalAlignment="Left"
-                Command="{Binding Edit, Mode=OneWay}"
+                Command="{Binding Edit}"
                 CommandParameter="{Binding ElementName=EditWindow}"
                 Content="Изменить"
                 Style="{StaticResource Buttons}" />

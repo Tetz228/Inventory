@@ -9,6 +9,8 @@
 
     using Inventory.View.Add;
     using Inventory.View.Edit;
+    using Inventory.ViewModels.Add;
+    using Inventory.ViewModels.Edit;
 
     internal class DepartmentViewModel : BindableBase
     {

@@ -1,9 +1,11 @@
-﻿namespace Inventory.ViewModels
+﻿namespace Inventory.ViewModels.Add
 {
-    using DevExpress.Mvvm;
-    using Inventory.Model;
     using System.Windows;
     using System.Windows.Input;
+
+    using DevExpress.Mvvm;
+
+    using Inventory.Model;
 
     public class DepartmentAddViewModel : BindableBase
     {
