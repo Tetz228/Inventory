@@ -2,29 +2,28 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using System.Collections.ObjectModel;
-    using System.Windows;
-    using System.Windows.Input;
-    using System.Linq;
-
     using Inventory.View.Add;
     using Inventory.View.Edit;
     using Inventory.ViewModels.Add;
     using Inventory.ViewModels.Edit;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Input;
 
     internal class DepartmentViewModel : BindableBase
     {
-        #region Свойства
-        public ObservableCollection<Department> Departments { get; set; }
-
-        public Department SelectDepartment { get; set; }
-        #endregion
-
         public DepartmentViewModel()
         {
             using var db = new InventoryEntities();
             Departments = new ObservableCollection<Department>(db.Departments.ToList());
         }
+
+        #region Свойства
+        public ObservableCollection<Department> Departments { get; set; }
+
+        public Department SelectDepartment { get; set; }
+        #endregion
 
         #region Команды
         public ICommand DataGridMouseLeftButtonDown => new DelegateCommand(() => SelectDepartment = null);

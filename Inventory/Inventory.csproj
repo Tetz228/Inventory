@@ -282,8 +282,13 @@
     </Compile>
     <Compile Include="ViewModels\Add\DepartmentAddViewModel.cs" />
     <Compile Include="ViewModels\Edit\DepartmentEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\PostEditViewModel.cs" />
+    <Compile Include="ViewModels\PostViewModel.cs" />
     <Compile Include="View\Add\DepartmentAddWindow.xaml.cs">
       <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\PostAddWindow.xaml.cs">
+      <DependentUpon>PostAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
@@ -322,11 +327,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Add\PostAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AuthorizationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Edit\DepartmentEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\PostEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -337,6 +350,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\Edit\PostEditWindow.xaml.cs">
+      <DependentUpon>PostEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -373,6 +389,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="ViewModels\Add\PostAddViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
