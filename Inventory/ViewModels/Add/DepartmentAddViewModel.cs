@@ -11,7 +11,7 @@
     {
         public string DepartmentName { get; set; }
 
-        public ICommand Add => new DelegateCommand<Window>(editWindow =>
+        public ICommand Add => new DelegateCommand<Window>(addWindow =>
         {
             using var db = new InventoryEntities();
 
@@ -23,7 +23,7 @@
             db.Departments.Add(department);
             db.SaveChanges();
 
-            editWindow.Close();
+            addWindow.Close();
         }, _ => !string.IsNullOrWhiteSpace(DepartmentName));
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
