@@ -9,22 +9,46 @@ namespace Inventory.ViewModels
     using Inventory.ViewModels.Add;
     using Inventory.ViewModels.Edit;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Windows;
+    using System.Windows.Data;
     using System.Windows.Input;
 
     public class PostViewModel : BindableBase
     {
-        #region Свойства
-        public ObservableCollection<Post> Posts { get; set; }
-
-        public Post SelectPost { get; set; }
-        #endregion
-
         public PostViewModel()
         {
             using var db = new InventoryEntities();
             Posts = new ObservableCollection<Post>(db.Posts.ToList());
+            PostsCollection = CollectionViewSource.GetDefaultView(Posts);
         }
+
+        #region Свойства
+        public ObservableCollection<Post> Posts { get; private set; }
+
+        private ICollectionView PostsCollection { get; }
+
+        public Post SelectPost { get; set; }
+
+        private string _searchPost;
+
+        public string SearchPost
+        {
+            get => _searchPost;
+            set
+            {
+                _searchPost = value;
+                PostsCollection.Filter = obj =>
+                {
+                    if (obj is Post post)
+                        return post.Name.ToLower().Contains(SearchPost.ToLower());
+
+                    return false;
+                };
+                PostsCollection.Refresh();
+            }
+        }
+        #endregion
 
         #region Команды
         public ICommand DataGridMouseLeftButtonDown => new DelegateCommand(() => SelectPost = null);

@@ -7,21 +7,24 @@
 
     public class MainViewModel : BindableBase
     {
-        public TablesEmployeesPage Emloyees { get; }
-        public ComputersPage Computers { get; }
-
-        public Page CurrentPage { get; set; }
-
         public MainViewModel()
         {
-            Emloyees = new TablesEmployeesPage();
+            CurrentPage = Employees = new TablesEmployeesPage();
             Computers = new ComputersPage();
-
-            CurrentPage = Emloyees;
         }
 
+        #region Свойства
+        private TablesEmployeesPage Employees { get; }
+
+        private ComputersPage Computers { get; }
+
+        public Page CurrentPage { get; private set; }
+        #endregion
+
+        #region Команды
         public ICommand OpenPageComputers => new DelegateCommand(() => CurrentPage = Computers);
 
-        public ICommand OpenPageEmloyees => new DelegateCommand(() => CurrentPage = Emloyees);
+        public ICommand OpenPageEmployees => new DelegateCommand(() => CurrentPage = Employees);
+        #endregion
     }
 }

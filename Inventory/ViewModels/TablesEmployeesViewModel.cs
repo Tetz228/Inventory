@@ -1,34 +1,35 @@
 ﻿namespace Inventory.ViewModels
 {
-    using System;
-
     using DevExpress.Mvvm;
-    using System.Collections.ObjectModel;
-    using System.Windows;
+    using Inventory.Pages;
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    using Inventory.Pages;
-
-    class TablesEmployeesViewModel : BindableBase
+    internal class TablesEmployeesViewModel : BindableBase
     {
-        public Page CurrentPage { get; set; }
-
-        public DepartmentsPage DepartmentsPage { get; set; }
-        public EmployeesPage EmployeesPage { get; set; }
-        public PostsPage PostsPage { get; set; }
-
-        public ICommand SelectTableDepartament => new DelegateCommand(() => CurrentPage = DepartmentsPage);
-
-        public ICommand SelectTableEmployee => new DelegateCommand(() => CurrentPage = EmployeesPage);
-
-        public ICommand SelectTablePost => new DelegateCommand(() => CurrentPage = PostsPage);
-
         public TablesEmployeesViewModel()
         {
             DepartmentsPage = new DepartmentsPage();
             EmployeesPage = new EmployeesPage();
             PostsPage = new PostsPage();
         }
+
+        #region Свойства
+        public Page CurrentPage { get; private set; }
+
+        private DepartmentsPage DepartmentsPage { get; }
+
+        private EmployeesPage EmployeesPage { get; }
+
+        private PostsPage PostsPage { get; }
+        #endregion
+
+        #region Команды
+        public ICommand SelectTablesDepartments => new DelegateCommand(() => CurrentPage = DepartmentsPage);
+
+        public ICommand SelectTablesEmployees => new DelegateCommand(() => CurrentPage = EmployeesPage);
+
+        public ICommand SelectTablesPosts => new DelegateCommand(() => CurrentPage = PostsPage);
+        #endregion
     }
 }

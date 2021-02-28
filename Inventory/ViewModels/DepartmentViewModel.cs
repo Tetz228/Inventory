@@ -23,9 +23,9 @@
         }
 
         #region Свойства
-        public ObservableCollection<Department> Departments { get; set; }
+        public ObservableCollection<Department> Departments { get; private set; }
 
-        public ICollectionView DepartmentsCollection { get; set; }
+        private ICollectionView DepartmentsCollection { get; set; }
 
         private string _searchDepartment;
 
@@ -45,6 +45,7 @@
                 DepartmentsCollection.Refresh();
             }
         }
+
         public Department SelectDepartment { get; set; }
         #endregion
 
