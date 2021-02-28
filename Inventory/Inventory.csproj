@@ -19,6 +19,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +53,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Inventory.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Mvvm, Version=20.2.0.0, Culture=neutral, PublicKeyToken=382ad28f6ae31f30, processorArchitecture=MSIL">
@@ -107,160 +125,160 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Account.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Computer.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Department.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Dispensing_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Dispensing_peripherals.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Employee.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Employees_in_departments.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Graphics_cards.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Hdd.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Hdd_in_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\History_dispensed_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\History_dispensed_peripherals.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Inventory.Context.cs">
+    <Compile Include="Model\InventoryModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Inventory.Context.tt</DependentUpon>
+      <DependentUpon>InventoryModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Inventory.cs">
+    <Compile Include="Model\InventoryModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Inventory.Designer.cs">
+    <Compile Include="Model\InventoryModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Inventory.edmx</DependentUpon>
+      <DependentUpon>InventoryModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_graphics_cards.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_hdd.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_motherboards.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_peripherals.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_power_supplies.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_processors.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_ram.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_ssd.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\List_dispensed_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\List_dispensed_peripherals.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Manufacturer.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Motherboard.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Operating_systems.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Operating_systems_in_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Peripheral.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Post.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Posts_employees.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Power_supplies.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Processor.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Processors_in_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Ram.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Ram_in_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Role.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Roles_users.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Socket.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Ssd.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Ssd_in_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Statuses_computers.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Statuses_peripherals.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_hdd.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_memory.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_peripherals.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_ssd.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Unit.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tables\Computers\ComputersPage.xaml.cs">
       <DependentUpon>ComputersPage.xaml</DependentUpon>
@@ -375,12 +393,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\Inventory.edmx">
+    <None Include="App.config" />
+    <EntityDeploy Include="Model\InventoryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Inventory.Designer.cs</LastGenOutput>
+      <LastGenOutput>InventoryModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\Inventory.edmx.diagram">
-      <DependentUpon>Inventory.edmx</DependentUpon>
+    <None Include="Model\InventoryModel.edmx.diagram">
+      <DependentUpon>InventoryModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -390,22 +409,31 @@
     <Compile Include="ViewModels\Add\Tables\Employees\PostAddViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Model\Inventory.Context.tt">
+    <Content Include="Model\InventoryModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Inventory.Context.cs</LastGenOutput>
-      <DependentUpon>Inventory.edmx</DependentUpon>
+      <DependentUpon>InventoryModel.edmx</DependentUpon>
+      <LastGenOutput>InventoryModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\Inventory.tt">
+    <Content Include="Model\InventoryModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Inventory.edmx</DependentUpon>
-      <LastGenOutput>Inventory.cs</LastGenOutput>
+      <DependentUpon>InventoryModel.edmx</DependentUpon>
+      <LastGenOutput>InventoryModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

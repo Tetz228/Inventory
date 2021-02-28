@@ -5,15 +5,16 @@
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:employees="clr-namespace:Inventory.ViewModels.Tables.Employees"
-    xmlns:local="clr-namespace:Inventory.Pages"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:Inventory.ViewModels"
     Title="PostsPage"
-    d:DataContext="{d:DesignInstance Type=employees:PostViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <employees:PostViewModel />
+    </Page.DataContext>
 
     <Page.Resources>
         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
@@ -49,7 +50,7 @@
                 <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}" />
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Название" />
+                <DataGridTextColumn Binding="{Binding Name}" Header="Наименование" />
             </DataGrid.Columns>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseLeftButtonDown">
