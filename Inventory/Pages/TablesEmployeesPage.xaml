@@ -29,23 +29,25 @@
                 Padding="4"
                 Background="#FF3CA7BF"
                 BorderThickness="0"
-                Command="{Binding SelectTableEmployee}"
+                Command="{Binding SelectTablesEmployees}"
                 Content="Сотрудники"
                 Style="{StaticResource Buttons}" />
+
             <Button
                 Margin="5"
                 Padding="4"
                 Background="#FF3CA7BF"
                 BorderThickness="0"
-                Command="{Binding SelectTableDepartament}"
+                Command="{Binding SelectTablesDepartments}"
                 Content="Отделы"
                 Style="{StaticResource Buttons}" />
+
             <Button
                 Margin="5"
                 Padding="4"
                 Background="#FF3CA7BF"
                 BorderThickness="0"
-                Command="{Binding SelectTablePost}"
+                Command="{Binding SelectTablesPosts}"
                 Content="Должности"
                 Style="{StaticResource Buttons}" />
         </StackPanel>
