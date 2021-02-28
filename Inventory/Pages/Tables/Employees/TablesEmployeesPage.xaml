@@ -9,13 +9,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Inventory.ViewModels"
     Title="TablesEmployeesPage"
+    d:DataContext="{d:DesignInstance Type=employees:TablesEmployeesViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-
-    <Page.DataContext>
-        <employees:TablesEmployeesViewModel />
-    </Page.DataContext>
 
     <Grid>
 

@@ -10,12 +10,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Inventory.ViewModels"
     Title="PostsPage"
+    d:DataContext="{d:DesignInstance Type=employees:PostViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Page.DataContext>
-        <employees:PostViewModel />
-    </Page.DataContext>
 
     <Page.Resources>
         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
