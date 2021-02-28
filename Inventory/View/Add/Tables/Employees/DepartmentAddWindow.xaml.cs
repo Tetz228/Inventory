@@ -1,4 +1,4 @@
-﻿namespace Inventory.View.Add
+﻿namespace Inventory.View.Add.Tables.Employees
 {
     public partial class DepartmentAddWindow
     {

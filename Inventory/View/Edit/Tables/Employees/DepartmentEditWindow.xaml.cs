@@ -1,4 +1,4 @@
-﻿namespace Inventory.View.Edit
+﻿namespace Inventory.View.Edit.Tables.Employees
 {
     public partial class DepartmentEditWindow
     {

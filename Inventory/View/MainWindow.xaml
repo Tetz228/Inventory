@@ -11,6 +11,8 @@
     Title="Главное окно"
     Width="880"
     Height="450"
+    MinHeight="450"
+    MinWidth="880"
     mc:Ignorable="d">
 
     <Window.DataContext>

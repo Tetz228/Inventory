@@ -262,69 +262,70 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ComputersPage.xaml.cs">
+    <Compile Include="Pages\Tables\Computers\ComputersPage.xaml.cs">
       <DependentUpon>ComputersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DepartmentsPage.xaml.cs">
+    <Compile Include="Pages\Tables\Employees\DepartmentsPage.xaml.cs">
       <DependentUpon>DepartmentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EmployeesPage.xaml.cs">
+    <Compile Include="Pages\Tables\Employees\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PostsPage.xaml.cs">
+    <Compile Include="Pages\Tables\Employees\PostsPage.xaml.cs">
       <DependentUpon>PostsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TablesEmployeesPage.xaml.cs">
+    <Compile Include="Pages\Tables\Employees\TablesEmployeesPage.xaml.cs">
       <DependentUpon>TablesEmployeesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Add\DepartmentAddViewModel.cs" />
-    <Compile Include="ViewModels\Edit\DepartmentEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\PostEditViewModel.cs" />
-    <Compile Include="ViewModels\PostViewModel.cs" />
-    <Compile Include="View\Add\DepartmentAddWindow.xaml.cs">
+    <Compile Include="ViewModels\Add\Tables\Employees\DepartmentAddViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\PostViewModel.cs" />
+    <Compile Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml.cs">
       <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\PostAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Employees\PostAddWindow.xaml.cs">
       <DependentUpon>PostAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\DepartmentEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml.cs">
       <DependentUpon>DepartmentEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\DepartmentViewModel.cs" />
-    <Compile Include="ViewModels\TablesEmployeesViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\DepartmentViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\TablesEmployeesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="DataDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ComputersPage.xaml">
+    <Page Include="Pages\Tables\Computers\ComputersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DepartmentsPage.xaml">
+    <Page Include="Pages\Tables\Employees\DepartmentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EmployeesPage.xaml">
+    <Page Include="Pages\Tables\Employees\EmployeesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PostsPage.xaml">
+    <Page Include="Pages\Tables\Employees\PostsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TablesEmployeesPage.xaml">
+    <Page Include="Pages\Tables\Employees\TablesEmployeesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Add\DepartmentAddWindow.xaml">
+    <Page Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Add\PostAddWindow.xaml">
+    <Page Include="View\Add\Tables\Employees\PostAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -332,11 +333,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\DepartmentEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\PostEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Employees\PostEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -348,7 +349,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\Edit\PostEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Employees\PostEditWindow.xaml.cs">
       <DependentUpon>PostEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
@@ -386,7 +387,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="ViewModels\Add\PostAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Employees\PostAddViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

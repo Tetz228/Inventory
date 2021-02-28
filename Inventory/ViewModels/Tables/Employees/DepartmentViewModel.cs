@@ -1,17 +1,23 @@
-﻿namespace Inventory.ViewModels
+﻿namespace Inventory.ViewModels.Tables.Employees
 {
-    using DevExpress.Mvvm;
-    using Inventory.Model;
-    using Inventory.View.Add;
-    using Inventory.View.Edit;
-    using Inventory.ViewModels.Add;
-    using Inventory.ViewModels.Edit;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
+
+    using DevExpress.Mvvm;
+
+    using Inventory.Model;
+    using Inventory.View.Add;
+    using Inventory.View.Add.Tables.Employees;
+    using Inventory.View.Edit;
+    using Inventory.View.Edit.Tables.Employees;
+    using Inventory.ViewModels.Add;
+    using Inventory.ViewModels.Add.Tables.Employees;
+    using Inventory.ViewModels.Edit;
+    using Inventory.ViewModels.Edit.Tables.Employees;
 
     internal class DepartmentViewModel : BindableBase
     {

@@ -5,6 +5,9 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using Inventory.Pages.Tables.Computers;
+    using Inventory.Pages.Tables.Employees;
+
     public class MainViewModel : BindableBase
     {
         public MainViewModel()

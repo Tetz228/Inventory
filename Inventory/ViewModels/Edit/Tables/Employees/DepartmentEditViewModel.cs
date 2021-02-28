@@ -1,4 +1,4 @@
-﻿namespace Inventory.ViewModels.Edit
+﻿namespace Inventory.ViewModels.Edit.Tables.Employees
 {
     using System.Linq;
     using System.Windows;

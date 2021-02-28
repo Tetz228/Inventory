@@ -1,9 +1,12 @@
-﻿namespace Inventory.ViewModels
+﻿namespace Inventory.ViewModels.Tables.Employees
 {
-    using DevExpress.Mvvm;
-    using Inventory.Pages;
     using System.Windows.Controls;
     using System.Windows.Input;
+
+    using DevExpress.Mvvm;
+
+    using Inventory.Pages;
+    using Inventory.Pages.Tables.Employees;
 
     internal class TablesEmployeesViewModel : BindableBase
     {

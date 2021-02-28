@@ -1,4 +1,4 @@
-﻿namespace Inventory.ViewModels.Add
+﻿namespace Inventory.ViewModels.Add.Tables.Employees
 {
     using System.Windows;
     using System.Windows.Input;
