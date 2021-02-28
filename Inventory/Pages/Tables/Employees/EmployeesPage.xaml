@@ -16,8 +16,6 @@
         <employees:EmployeesViewModel />
     </Page.DataContext>
 
-
-
     <Page.Resources>
         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Background" Value="White" />
@@ -28,11 +26,11 @@
             <Setter Property="Margin" Value="5,0,0,5" />
         </Style>
 
-        <DataTemplate x:Key="EmpTemplate">
+        <DataTemplate x:Key="EmployeesTemplate">
             <ListBox ItemsSource="{Binding}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Employees}" />
+                        <TextBlock Text="{Binding Post.Name}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -57,7 +55,6 @@
         </Grid.RowDefinitions>
 
         <DataGrid
-            Name="DataGrid1"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -81,13 +78,7 @@
                 <DataGridTemplateColumn Header="Должность">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ListBox ItemsSource="{Binding Employees}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Posts_employees.Count}" />
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                            <ContentPresenter Content="{Binding Posts_employees}" ContentTemplate="{StaticResource ResourceKey=EmployeesTemplate}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -100,14 +91,7 @@
                     <b:InvokeCommandAction Command="{Binding EditEmployee}" CommandParameter="{Binding SelectEmployee}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
-
         </DataGrid>
-
-        <ListBox
-            Grid.Row="1"
-            Grid.Column="1"
-            
-            ItemsSource="{Binding SelectEmployee.Posts_employees}" />
 
         <StackPanel
             Grid.Row="0"

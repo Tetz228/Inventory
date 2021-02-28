@@ -14,10 +14,10 @@ namespace Inventory.ViewModels.Tables.Employees
         public EmployeesViewModel()
         {
             using var db = new InventoryEntities();
-            Employees = db.Employees.Include(employeePost => employeePost.Posts_employees
+            Employees = new ObservableCollection<Employee> (db.Employees.Include(employeePost => employeePost.Posts_employees
                                                                        .Select(post => post.Post))
                                                                        .Include(empDepart => empDepart.Employees_in_departments
-                                                                       .Select(depart => depart.Department)).ToList();
+                                                                       .Select(depart => depart.Department)));
 
             //EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
         }
@@ -25,11 +25,7 @@ namespace Inventory.ViewModels.Tables.Employees
         #region Свойства
         //public ObservableCollection<Employee> Employees { get; private set; }
 
-
-
-
-
-        public IList<Employee> Employees { get; set; }
+        public ObservableCollection<Employee> Employees { get; set; }
 
         private string _searchEmployee;
 
