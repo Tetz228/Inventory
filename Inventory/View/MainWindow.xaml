@@ -3,11 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
     xmlns:local="clr-namespace:Inventory"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Inventory.ViewModels"
-    xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     Title="Главное окно"
     Width="880"
     Height="450"
@@ -17,14 +17,13 @@
         <viewModels:MainViewModel />
     </Window.DataContext>
 
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" 
-              Style="{StaticResource Menu}">
+        <Menu Grid.Row="0" Style="{StaticResource Menu}">
             <MenuItem Header="Файл">
                 <MenuItem Header="Выйти" />
                 <MenuItem />
@@ -33,11 +32,8 @@
             </MenuItem>
             <MenuItem Header="Выдачи компьютеров" />
             <MenuItem Header="Выдачи периферии" />
-            <MenuItem Command="{Binding OpenPageEmloyees}" 
-                      Header="Сотрудники" />
-            <MenuItem Command="{Binding OpenPageComputers}" 
-                      Header="Компьютеры">
-            </MenuItem>
+            <MenuItem Command="{Binding OpenPageEmployees}" Header="Сотрудники" />
+            <MenuItem Command="{Binding OpenPageComputers}" Header="Компьютеры" />
             <MenuItem Header="Периферия" />
         </Menu>
 

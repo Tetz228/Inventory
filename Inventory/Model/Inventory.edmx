@@ -362,16 +362,6 @@
           <Property Name="Id_status_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Types_hdd">
           <Key>
             <PropertyRef Name="Id_type_hdd" />
@@ -1154,7 +1144,6 @@
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statuses_computers" EntityType="Self.Statuses_computers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statuses_peripherals" EntityType="Self.Statuses_peripherals" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_hdd" EntityType="Self.Types_hdd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_memory" EntityType="Self.Types_memory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_peripherals" EntityType="Self.Types_peripherals" Schema="dbo" store:Type="Tables" />
@@ -1857,16 +1846,6 @@
           <Property Name="Id_status_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inventory_numbers_peripherals" Relationship="Self.FK_Inventory_numbers_peripherals_Statuses_peripherals" FromRole="Statuses_peripherals" ToRole="Inventory_numbers_peripherals" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Types_hdd">
           <Key>
@@ -2664,7 +2643,6 @@
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" />
           <EntitySet Name="Statuses_computers" EntityType="Self.Statuses_computers" />
           <EntitySet Name="Statuses_peripherals" EntityType="Self.Statuses_peripherals" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Types_hdd" EntityType="Self.Types_hdd" />
           <EntitySet Name="Types_memory" EntityType="Self.Types_memory" />
           <EntitySet Name="Types_peripherals" EntityType="Self.Types_peripherals" />
@@ -3305,17 +3283,6 @@
               <MappingFragment StoreEntitySet="Statuses_peripherals">
                 <ScalarProperty Name="Id_status_peripheral" ColumnName="Id_status_peripheral" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="InventoryModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

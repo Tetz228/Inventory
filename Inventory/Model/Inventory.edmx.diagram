@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4c8d728c34374476ad14afb565862c17" Name="Diagram1">
+      <Diagram DiagramId="df8b76ea06bc480b814aab1a97df04b7" Name="Diagram1">
         <EntityTypeShape EntityType="InventoryModel.Account" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Computer" Width="1.5" PointX="10.5" PointY="26.375" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Department" Width="1.5" PointX="9" PointY="34.625" IsExpanded="true" />
@@ -46,7 +46,6 @@
         <EntityTypeShape EntityType="InventoryModel.Ssd_in_computers" Width="1.5" PointX="15.5" PointY="24.25" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Statuses_computers" Width="1.5" PointX="8.25" PointY="30.625" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Statuses_peripherals" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Types_hdd" Width="1.5" PointX="6" PointY="37.625" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Types_memory" Width="1.5" PointX="3.75" PointY="34.125" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Types_peripherals" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
