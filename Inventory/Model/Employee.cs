@@ -9,18 +9,9 @@
 
 namespace Inventory.Model
 {
+    using System;
     using System.Collections.Generic;
-
-    using DevExpress.Mvvm;
-    using Inventory.Model;
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Data.Entity;
-    using System.Windows.Data;
-    using System.Windows.Documents;
-    using System.Windows.Input;
-    using System.Linq;
-
+    
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -39,7 +30,7 @@ namespace Inventory.Model
         public string M_name { get; set; }
         public string Email { get; set; }
         public string Phone_number { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
