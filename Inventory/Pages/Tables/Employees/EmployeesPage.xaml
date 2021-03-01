@@ -200,9 +200,18 @@
                         </ContentControl>
                     </MenuItem.Header>
                     <StackPanel>
-                        <RadioButton IsChecked="{Binding IsCheckedLFM}">По ФИО</RadioButton>
-                        <RadioButton>По должностям</RadioButton>
-                        <RadioButton>По отделам</RadioButton>
+                        <RadioButton
+                            Command="{Binding ClickCommand}"
+                            GroupName="Filter"
+                            IsChecked="True">
+                            По ФИО
+                        </RadioButton>
+                    </StackPanel>
+                    <StackPanel>
+                        <RadioButton Command="{Binding ClickCommand1}" GroupName="Filter">По должностям</RadioButton>
+                    </StackPanel>
+                    <StackPanel>
+                        <RadioButton Command="{Binding ClickCommand2}" GroupName="Filter">По отделам</RadioButton>
                     </StackPanel>
                 </MenuItem>
             </Menu>
