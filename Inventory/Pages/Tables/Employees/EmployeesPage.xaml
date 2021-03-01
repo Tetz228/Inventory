@@ -16,8 +16,6 @@
         <employees:EmployeesViewModel />
     </Page.DataContext>
 
-
-
     <Page.Resources>
         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Background" Value="White" />
@@ -27,17 +25,24 @@
             <Setter Property="FontSize" Value="16" />
             <Setter Property="Margin" Value="5,0,0,5" />
         </Style>
-
-        <DataTemplate x:Key="EmpTemplate">
+        <DataTemplate x:Key="PostEmployeesTemplate">
             <ListBox ItemsSource="{Binding}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Employees}" />
+                        <TextBlock Text="{Binding Post.Name}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </DataTemplate>
-
+        <DataTemplate x:Key="EmployeesInDepartmentsTemplate">
+            <ListBox ItemsSource="{Binding}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Department.Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DataTemplate>
         <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
             <Setter Property="Margin" Value="3,0,0,2" />
             <Setter Property="FontFamily" Value="Verdana" />
@@ -57,7 +62,6 @@
         </Grid.RowDefinitions>
 
         <DataGrid
-            Name="DataGrid1"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -78,16 +82,17 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn Header="Должность">
+                <DataGridTemplateColumn Header="Должности">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ListBox ItemsSource="{Binding Employees}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Posts_employees.Count}" />
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                            <ContentPresenter Content="{Binding Posts_employees}" ContentTemplate="{StaticResource ResourceKey=PostEmployeesTemplate}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Отделы">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Content="{Binding Employees_in_departments}" ContentTemplate="{StaticResource ResourceKey=EmployeesInDepartmentsTemplate}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -100,15 +105,9 @@
                     <b:InvokeCommandAction Command="{Binding EditEmployee}" CommandParameter="{Binding SelectEmployee}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
-
         </DataGrid>
 
-        <ListBox
-            Grid.Row="1"
-            Grid.Column="1"
-            
-            ItemsSource="{Binding SelectEmployee.Posts_employees}" />
-
+        
         <StackPanel
             Grid.Row="0"
             Grid.Column="0"
