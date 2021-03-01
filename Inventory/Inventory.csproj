@@ -79,39 +79,19 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.4.0.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=5.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.5.0.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
-    </Reference>
-    <Reference Include="PropertyChanged, Version=3.3.2.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyChanged.Fody.3.3.2\lib\net40\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -125,160 +105,163 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Account.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Computer.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Department.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Dispensing_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Dispensing_peripherals.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Employee.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Employees_in_departments.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Graphics_cards.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Hdd.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Hdd_in_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\History_dispensed_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\History_dispensed_peripherals.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\InventoryModel.Context.cs">
+    <Compile Include="Model\InventoryModelWork.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.Context.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\InventoryModel.cs">
+    <Compile Include="Model\InventoryModelWork.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\InventoryModel.Designer.cs">
+    <Compile Include="Model\InventoryModelWork.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
+      <DependentUpon>InventoryModelWork.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_graphics_cards.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_hdd.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_motherboards.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_peripherals.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_power_supplies.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_processors.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_ram.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_ssd.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\List_dispensed_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\List_dispensed_peripherals.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Manufacturer.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Motherboard.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Operating_systems.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Operating_systems_in_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Peripheral.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Post.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Posts_employees.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Power_supplies.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Processor.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Processors_in_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Ram.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Ram_in_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Role.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Roles_users.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Socket.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Ssd.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Ssd_in_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Statuses_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Statuses_peripherals.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_hdd.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_memory.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_peripherals.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_ssd.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Unit.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
+      <DependentUpon>InventoryModelWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tables\Computers\ComputersPage.xaml.cs">
       <DependentUpon>ComputersPage.xaml</DependentUpon>
@@ -394,12 +377,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
-    <EntityDeploy Include="Model\InventoryModel.edmx">
+    <EntityDeploy Include="Model\InventoryModelWork.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>InventoryModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>InventoryModelWork.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\InventoryModel.edmx.diagram">
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
+    <None Include="Model\InventoryModelWork.edmx.diagram">
+      <DependentUpon>InventoryModelWork.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -425,15 +408,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Model\InventoryModel.Context.tt">
+    <Content Include="Model\InventoryModelWork.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
-      <LastGenOutput>InventoryModel.Context.cs</LastGenOutput>
+      <DependentUpon>InventoryModelWork.edmx</DependentUpon>
+      <LastGenOutput>InventoryModelWork.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\InventoryModel.tt">
+    <Content Include="Model\InventoryModelWork.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
-      <LastGenOutput>InventoryModel.cs</LastGenOutput>
+      <DependentUpon>InventoryModelWork.edmx</DependentUpon>
+      <LastGenOutput>InventoryModelWork.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

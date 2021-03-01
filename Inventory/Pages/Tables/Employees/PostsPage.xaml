@@ -17,19 +17,9 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="BorderThickness" Value="0,0,1,0" />
+        <Style BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="FontFamily" Value="Verdana" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Margin" Value="5,0,0,5" />
-        </Style>
-
-        <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Margin" Value="3,0,0,2" />
-            <Setter Property="FontFamily" Value="Verdana" />
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="15" />
         </Style>
     </Page.Resources>
 
@@ -40,27 +30,47 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <DataGrid
+        <ListView
             Grid.Row="1"
             ItemsSource="{Binding Posts}"
-            SelectedItem="{Binding SelectPost}"
-            Style="{StaticResource DataGrid}">
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" />
-                <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}" />
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Наименование" />
-            </DataGrid.Columns>
+            SelectedItem="{Binding SelectPost}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Name}"
+                        Header="Наименование"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="FontFamily" Value="Verdana" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding AddPost}" Header="Добавить" />
+                    <MenuItem
+                        Command="{Binding EditPost}"
+                        CommandParameter="{Binding SelectPost}"
+                        Header="Изменить" />
+                    <MenuItem
+                        Command="{Binding DeletePost}"
+                        CommandParameter="{Binding SelectPost}"
+                        Header="Удалить" />
+                </ContextMenu>
+            </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseLeftButtonDown">
-                    <b:InvokeCommandAction Command="{Binding DataGridMouseLeftButtonDown}" />
+                    <b:InvokeCommandAction Command="{Binding ListViewMouseLeftButtonDown}" />
                 </b:EventTrigger>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditPost}" CommandParameter="{Binding SelectPost}" />
+                    <b:InvokeCommandAction Command="{Binding EditPost}" CommandParameter="{Binding SelectEmployee}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
-        </DataGrid>
+        </ListView>
 
         <StackPanel Grid.Row="0" Style="{StaticResource StackPanel}">
 
