@@ -4,9 +4,10 @@ namespace Inventory.ViewModels.Tables.Employees
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Data.Entity;
+    using System.Windows.Data;
     using System.Windows.Input;
 
     public class EmployeesViewModel : BindableBase
@@ -17,13 +18,20 @@ namespace Inventory.ViewModels.Tables.Employees
             Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
                                                                        .Select(post => post.Post))
                                                                        .Include(empDepart => empDepart.Employees_in_departments
-                                                                       .Select(depart => depart.Department)));
+                                                                       .Select(depart => depart.Department))
+                                                                       .Include(account => account.Accounts
+                                                                       .Select(role => role.User.Roles_users)));
 
-            //EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
+            EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
         }
+
+        public bool IsCheckedLFM { get; set; } = true;
+        public bool IsCheckedPost { get; set; }
 
         #region Свойства
         public ObservableCollection<Employee> Employees { get; private set; }
+
+        private ICollectionView EmployeesCollection { get; }
 
         private string _searchEmployee;
 
@@ -32,32 +40,36 @@ namespace Inventory.ViewModels.Tables.Employees
             get => _searchEmployee;
             set
             {
-                //_searchEmployee = value;
-                //EmployeesCollection.Filter = obj =>
-                //{
-                //    if (obj is Employee department)
-                //        return department.Name.ToLower().Contains(SearchEmployee.ToLower());
 
-                //    return false;
-                //};
-                //EmployeesCollection.Refresh();
+                _searchEmployee = value;
+                EmployeesCollection.Filter = obj =>
+                {
+                    if (obj is Employee employee)
+                    {
+                        if (IsCheckedLFM)
+                        {
+                            return (employee.L_name + " " + employee.F_name + " " + employee.M_name).ToLower().Contains(SearchEmployee.ToLower());
+                        }
+
+                        if (IsCheckedPost)
+                        {
+                            
+                        }
+                    }
+
+
+                    return false;
+                };
+                EmployeesCollection.Refresh();
             }
         }
 
-        private Employee _selectEmployee;
-        
-        public Employee SelectEmployee
-        {
-            get => _selectEmployee;
-            set
-            {
-                _selectEmployee = value;
-            }
-        }
+        public Employee SelectEmployee { get; set; }
+
         #endregion
 
         #region Команды
-        public ICommand DataGridMouseLeftButtonDown => new DelegateCommand(() => SelectEmployee = null);
+        public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectEmployee = null);
 
         public ICommand AddEmployee => new DelegateCommand(() =>
         {
