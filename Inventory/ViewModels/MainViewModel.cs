@@ -1,7 +1,7 @@
 ﻿namespace Inventory.ViewModels
 {
     using DevExpress.Mvvm;
-    using Inventory.Pages;
+
     using System.Windows.Controls;
     using System.Windows.Input;
 

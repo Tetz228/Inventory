@@ -10,13 +10,9 @@
     using DevExpress.Mvvm;
 
     using Inventory.Model;
-    using Inventory.View.Add;
     using Inventory.View.Add.Tables.Employees;
-    using Inventory.View.Edit;
     using Inventory.View.Edit.Tables.Employees;
-    using Inventory.ViewModels.Add;
     using Inventory.ViewModels.Add.Tables.Employees;
-    using Inventory.ViewModels.Edit;
     using Inventory.ViewModels.Edit.Tables.Employees;
 
     internal class DepartmentViewModel : BindableBase
@@ -56,7 +52,7 @@
         #endregion
 
         #region Команды
-        public ICommand DataGridMouseLeftButtonDown => new DelegateCommand(() => SelectDepartment = null);
+        public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectDepartment = null);
 
         public ICommand AddDepartment => new DelegateCommand(() =>
         {
