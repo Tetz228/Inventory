@@ -25,8 +25,7 @@ namespace Inventory.ViewModels.Tables.Employees
             EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
         }
 
-        public bool IsCheckedLFM { get; set; } = true;
-        public bool IsCheckedPost { get; set; }
+        public string FilterSearch { get; set; } = "По ФИО";
 
         #region Свойства
         public ObservableCollection<Employee> Employees { get; private set; }
@@ -40,24 +39,25 @@ namespace Inventory.ViewModels.Tables.Employees
             get => _searchEmployee;
             set
             {
-
                 _searchEmployee = value;
                 EmployeesCollection.Filter = obj =>
                 {
                     if (obj is Employee employee)
-                    {
-                        if (IsCheckedLFM)
+                        switch (FilterSearch)
                         {
-                            return (employee.L_name + " " + employee.F_name + " " + employee.M_name).ToLower().Contains(SearchEmployee.ToLower());
+                            case "По должностям":
+                                foreach (var postsEmployees in employee.Posts_employees)
+                                    if (postsEmployees.Post.Name.ToLower().Contains(SearchEmployee.ToLower()))
+                                        return postsEmployees.Post.Name.ToLower().Contains(SearchEmployee.ToLower());
+                                break;
+                            case "По отделам":
+                                foreach (var employeesInDepartments in employee.Employees_in_departments)
+                                    if (employeesInDepartments.Department.Name.ToLower().Contains(SearchEmployee.ToLower()))
+                                        return employeesInDepartments.Department.Name.ToLower().Contains(SearchEmployee.ToLower());
+                                break;
+                            case "По ФИО":
+                                return (employee.L_name + " " + employee.F_name + " " + employee.M_name).ToLower().Contains(SearchEmployee.ToLower());
                         }
-
-                        if (IsCheckedPost)
-                        {
-                            
-                        }
-                    }
-
-
                     return false;
                 };
                 EmployeesCollection.Refresh();
@@ -70,6 +70,12 @@ namespace Inventory.ViewModels.Tables.Employees
 
         #region Команды
         public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectEmployee = null);
+
+        public ICommand ClickCommand => new DelegateCommand(() => FilterSearch = "По ФИО");
+
+        public ICommand ClickCommand1 => new DelegateCommand(() => FilterSearch = "По должностям");
+
+        public ICommand ClickCommand2 => new DelegateCommand(() => FilterSearch = "По отделам");
 
         public ICommand AddEmployee => new DelegateCommand(() =>
         {

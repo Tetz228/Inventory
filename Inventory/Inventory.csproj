@@ -279,12 +279,17 @@
       <DependentUpon>TablesEmployeesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Add\Tables\Employees\DepartmentAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Employees\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\PostViewModel.cs" />
     <Compile Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml.cs">
       <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Employees\EmployeeAddWindow.xaml.cs">
+      <DependentUpon>EmployeeAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\Employees\PostAddWindow.xaml.cs">
       <DependentUpon>PostAddWindow.xaml</DependentUpon>
@@ -326,6 +331,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Add\Tables\Employees\EmployeeAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Add\Tables\Employees\PostAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -335,6 +344,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Employees\EmployeeEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -349,6 +362,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Employees\EmployeeEditWindow.xaml.cs">
+      <DependentUpon>EmployeeEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Employees\PostEditWindow.xaml.cs">
       <DependentUpon>PostEditWindow.xaml</DependentUpon>
