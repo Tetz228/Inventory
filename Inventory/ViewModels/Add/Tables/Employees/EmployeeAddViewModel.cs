@@ -18,7 +18,9 @@
 
         public string Email { get; set; }
 
-        public static ObservableCollection<Posts_employees> PostsEmployees { get; set; } = new();
+        public ObservableCollection<Posts_employees> PostsEmployees { get; set; } = new();
+
+        public ObservableCollection<Employees_in_departments> EmployeesInDepartments { get; set; } = new();
         #endregion
 
         public ICommand AddEmployee => new DelegateCommand(() =>
@@ -31,10 +33,16 @@
 
         public ICommand AddPost => new DelegateCommand(() =>
         {
-            int g = 1;
             PostsEmployees.Add(new Posts_employees());
         });
 
         public ICommand DeletePost => new DelegateCommand<Posts_employees>((postEmp) => PostsEmployees.Remove(postEmp));
+
+        public ICommand AddDepartment => new DelegateCommand(() =>
+        {
+            EmployeesInDepartments.Add(new Employees_in_departments());
+        });
+
+        public ICommand DeleteDepartment => new DelegateCommand<Employees_in_departments>((employeesInDepartments) => EmployeesInDepartments.Remove(employeesInDepartments));
     }
 }
