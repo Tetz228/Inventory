@@ -23,6 +23,7 @@
         public ObservableCollection<Employees_in_departments> EmployeesInDepartments { get; set; } = new();
         #endregion
 
+        #region Команды
         public ICommand AddEmployee => new DelegateCommand(() =>
         {
             foreach (var postsEmployee in PostsEmployees)
@@ -31,18 +32,19 @@
             }
         });
 
-        public ICommand AddPost => new DelegateCommand(() =>
+        public ICommand AddPostInCollection => new DelegateCommand(() =>
         {
             PostsEmployees.Add(new Posts_employees());
         });
 
-        public ICommand DeletePost => new DelegateCommand<Posts_employees>((postEmp) => PostsEmployees.Remove(postEmp));
+        public ICommand DeletePostFromCollection => new DelegateCommand<Posts_employees>((postEmp) => PostsEmployees.Remove(postEmp));
 
-        public ICommand AddDepartment => new DelegateCommand(() =>
+        public ICommand AddDepartmentInCollection => new DelegateCommand(() =>
         {
             EmployeesInDepartments.Add(new Employees_in_departments());
         });
 
-        public ICommand DeleteDepartment => new DelegateCommand<Employees_in_departments>((employeesInDepartments) => EmployeesInDepartments.Remove(employeesInDepartments));
+        public ICommand DeleteDepartmentFromCollection => new DelegateCommand<Employees_in_departments>((empInDepart) => EmployeesInDepartments.Remove(empInDepart));
+        #endregion
     }
 }
