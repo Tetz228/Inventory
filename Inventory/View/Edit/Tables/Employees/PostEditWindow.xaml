@@ -39,7 +39,7 @@
             <TextBox
                 Padding="3"
                 MaxLength="100"
-                Style="{StaticResource TextBoxs}"
+                Style="{StaticResource BaseTextBox}"
                 Text="{Binding Post.Name, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
@@ -53,7 +53,7 @@
                 Command="{Binding Edit}"
                 CommandParameter="{Binding ElementName=EditPostWindow}"
                 Content="Изменить"
-                Style="{StaticResource Buttons}" />
+                Style="{StaticResource BaseButton}" />
         </StackPanel>
 
         <StackPanel
@@ -65,7 +65,7 @@
                 Command="{Binding Cancel}"
                 CommandParameter="{Binding ElementName=EditPostWindow}"
                 Content="Отмена"
-                Style="{StaticResource Buttons}" />
+                Style="{StaticResource BaseButton}" />
         </StackPanel>
 
     </Grid>

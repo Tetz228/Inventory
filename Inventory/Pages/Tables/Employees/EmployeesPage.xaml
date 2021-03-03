@@ -178,7 +178,7 @@
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Style="{StaticResource TextBoxs}"
+                Style="{StaticResource BaseTextBox}"
                 Text="{Binding SearchEmployee, UpdateSourceTrigger=PropertyChanged}" />
 
             <Menu

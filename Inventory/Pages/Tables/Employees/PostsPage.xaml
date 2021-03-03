@@ -74,7 +74,7 @@
 
         <StackPanel Grid.Row="0" Style="{StaticResource StackPanel}">
 
-            <Button Command="{Binding AddPost}" Style="{StaticResource Buttons}">
+            <Button Command="{Binding AddPost}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -87,7 +87,7 @@
             <Button
                 Command="{Binding EditPost}"
                 CommandParameter="{Binding SelectPost}"
-                Style="{StaticResource Buttons}">
+                Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -100,7 +100,7 @@
             <Button
                 Command="{Binding DeletePost}"
                 CommandParameter="{Binding SelectPost}"
-                Style="{StaticResource Buttons}">
+                Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -130,7 +130,7 @@
                 Margin="0,0,10,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Style="{StaticResource TextBoxs}"
+                Style="{StaticResource BaseTextBox}"
                 Text="{Binding SearchPost, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>

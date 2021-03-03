@@ -83,7 +83,7 @@
             Grid.ColumnSpan="2"
             Style="{StaticResource StackPanel}">
 
-            <Button Command="{Binding AddDepartment}" Style="{StaticResource Buttons}">
+            <Button Command="{Binding AddDepartment}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -96,7 +96,7 @@
             <Button
                 Command="{Binding EditDepartment}"
                 CommandParameter="{Binding SelectDepartment}"
-                Style="{StaticResource Buttons}">
+                Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -109,7 +109,7 @@
             <Button
                 Command="{Binding DeleteDepartment}"
                 CommandParameter="{Binding SelectDepartment}"
-                Style="{StaticResource Buttons}">
+                Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -139,7 +139,7 @@
                 Margin="0,0,10,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Style="{StaticResource TextBoxs}"
+                Style="{StaticResource BaseTextBox}"
                 Text="{Binding SearchDepartment, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
