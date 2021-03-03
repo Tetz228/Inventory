@@ -9,11 +9,18 @@
 
 namespace Inventory.Model
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class Posts_employees
     {
+        public List<Post> CollectionPosts { get; set; }
+
+        public Posts_employees()
+        {
+            using var db = new InventoryEntities();
+            CollectionPosts = new List<Post>(db.Posts);
+        }
+
         public int Id_post_employee { get; set; }
         public int Fk_employee { get; set; }
         public int Fk_post { get; set; }
