@@ -122,7 +122,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Style="{StaticResource BaseStackPanel}">
-            <Button Command="{Binding AddEmployee}" Style="{StaticResource Buttons}">
+            <Button Command="{Binding AddEmployee}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -135,7 +135,7 @@
             <Button
                 Command="{Binding EditEmployee}"
                 CommandParameter="{Binding SelectEmployee}"
-                Style="{StaticResource Buttons}">
+                Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -148,7 +148,7 @@
             <Button
                 Command="{Binding DeleteEmployee}"
                 CommandParameter="{Binding SelectEmployee}"
-                Style="{StaticResource Buttons}">
+                Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
