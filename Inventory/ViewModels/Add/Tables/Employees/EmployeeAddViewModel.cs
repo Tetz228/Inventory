@@ -1,40 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Add.Tables.Employees
+﻿namespace Inventory.ViewModels.Add.Tables.Employees
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
     using System.Collections.ObjectModel;
-    using System.Windows;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-
-    public class EmployeeAddViewModel:BindableBase
+    public class EmployeeAddViewModel : BindableBase
     {
-        public Employee Employee { get; set; }
-        public static ObservableCollection<Post> Posts { get; set; }
-        public static ObservableCollection<Post> AddPosts { get; set; }
+        #region Свойства
+        public string LastName { get; set; }
 
-        public string KeyWord { get; set; }
+        public string FirstName { get; set; }
 
-        public EmployeeAddViewModel()
+        public string MiddleName { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Email { get; set; }
+
+        public static ObservableCollection<Posts_employees> PostsEmployees { get; set; } = new();
+        #endregion
+
+        public ICommand AddEmployee => new DelegateCommand(() =>
         {
-            var db = new InventoryEntities();
-            Posts = new ObservableCollection<Post>(db.Posts);
-            Employee = new Employee();
-        }
-
-        public ICommand AddCommand => new DelegateCommand(()=>
-        {
-            Employee.Posts_employees1.Add(new Posts_employees());
+            foreach (var postsEmployee in PostsEmployees)
+            {
+                int fk = postsEmployee.Fk_post;
+            }
         });
 
-        public string Value { get; set; }
+        public ICommand AddPost => new DelegateCommand(() =>
+        {
+            int g = 1;
+            PostsEmployees.Add(new Posts_employees());
+        });
+
+        public ICommand DeletePost => new DelegateCommand<Posts_employees>((postEmp) => PostsEmployees.Remove(postEmp));
     }
 }
