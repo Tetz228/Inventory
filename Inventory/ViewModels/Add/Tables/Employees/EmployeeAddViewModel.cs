@@ -3,6 +3,7 @@
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System.Collections.ObjectModel;
+    using System.Windows;
     using System.Windows.Input;
 
     public class EmployeeAddViewModel : BindableBase
@@ -24,25 +25,40 @@
         #endregion
 
         #region Команды
-        public ICommand AddEmployee => new DelegateCommand(() =>
+        public ICommand AddEmployee => new DelegateCommand( ()=>
         {
-            foreach (var postsEmployee in PostsEmployees)
+            using var db = new InventoryEntities();
+
+            var employee = new Employee
             {
-                int fk = postsEmployee.Fk_post;
-            }
+                L_name = LastName,
+                F_name = FirstName,
+                M_name = MiddleName,
+                Phone_number = PhoneNumber,
+                Email = this.Email
+            };
+
+            db.Employees.Add(employee);
+            db.SaveChanges();
+
+            foreach (var post in PostsEmployees)
+                post.Fk_employee = employee.Id_employee;
+
+            db.Posts_employees.AddRange(PostsEmployees);
+            db.SaveChanges();
+
+            foreach (var department in EmployeesInDepartments)
+                department.Fk_employee = employee.Id_employee;
+
+            db.Employees_in_departments.AddRange(EmployeesInDepartments);
+            db.SaveChanges();
         });
 
-        public ICommand AddPostInCollection => new DelegateCommand(() =>
-        {
-            PostsEmployees.Add(new Posts_employees());
-        });
+        public ICommand AddPostInCollection => new DelegateCommand(() => PostsEmployees.Add(new Posts_employees()));
 
         public ICommand DeletePostFromCollection => new DelegateCommand<Posts_employees>((postEmp) => PostsEmployees.Remove(postEmp));
 
-        public ICommand AddDepartmentInCollection => new DelegateCommand(() =>
-        {
-            EmployeesInDepartments.Add(new Employees_in_departments());
-        });
+        public ICommand AddDepartmentInCollection => new DelegateCommand(() => EmployeesInDepartments.Add(new Employees_in_departments()));
 
         public ICommand DeleteDepartmentFromCollection => new DelegateCommand<Employees_in_departments>((empInDepart) => EmployeesInDepartments.Remove(empInDepart));
         #endregion
