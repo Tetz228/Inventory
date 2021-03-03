@@ -10,8 +10,10 @@
     xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
     Title="EmployeeAddWindow"
     Width="500"
-    Height="647"
+    Height="475"
+    ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
+    WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
     <Window.DataContext>
@@ -26,11 +28,10 @@
                     Margin="10"
                     Style="{StaticResource BaseText}"
                     Text="Новый сотрудник"
-                    TextAlignment="Center"
-                    TextWrapping="Wrap" />
+                    TextAlignment="Center" />
 
                 <Grid>
-                    <Border Background="LightGoldenrodYellow" CornerRadius="5">
+                    <Border Background="#FFAEAEAE" CornerRadius="5">
                         <Border.OpacityMask>
                             <VisualBrush>
                                 <VisualBrush.Visual>
@@ -45,6 +46,7 @@
                         </Border.OpacityMask>
 
                         <StackPanel Width="455" HorizontalAlignment="Center">
+                            <!--  Фамилия  -->
                             <UniformGrid Columns="2">
                                 <TextBlock
                                     Margin="10"
@@ -56,10 +58,10 @@
                                     Margin="10"
                                     VerticalAlignment="Center"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding VideoInfo.Channel, UpdateSourceTrigger=PropertyChanged}"
-                                    TextWrapping="Wrap" />
+                                    Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
+                            <!--  Имя  -->
                             <UniformGrid Columns="2">
                                 <TextBlock
                                     Margin="10"
@@ -73,10 +75,10 @@
                                     AcceptsReturn="True"
                                     AcceptsTab="True"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding VideoInfo.Descrition, UpdateSourceTrigger=PropertyChanged}"
-                                    TextWrapping="Wrap" />
+                                    Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
+                            <!--  Отчество  -->
                             <UniformGrid Columns="2">
                                 <TextBlock
                                     Margin="10"
@@ -88,10 +90,10 @@
                                     Margin="10"
                                     VerticalAlignment="Center"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding VideoInfo.Tematic, UpdateSourceTrigger=PropertyChanged}"
-                                    TextWrapping="Wrap" />
+                                    Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
+                            <!--  Номер телефона  -->
                             <UniformGrid Columns="2">
                                 <TextBlock
                                     Margin="10"
@@ -103,10 +105,10 @@
                                     Margin="10"
                                     VerticalAlignment="Center"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding VideoInfo.Tematic, UpdateSourceTrigger=PropertyChanged}"
-                                    TextWrapping="Wrap" />
+                                    Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
+                            <!--  Email  -->
                             <UniformGrid Columns="2">
                                 <TextBlock
                                     Margin="10"
@@ -118,10 +120,10 @@
                                     Margin="10"
                                     VerticalAlignment="Center"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding VideoInfo.Tematic, UpdateSourceTrigger=PropertyChanged}"
-                                    TextWrapping="Wrap" />
+                                    Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
+                            <!--  Должности  -->
                             <UniformGrid Columns="2">
                                 <TextBlock
                                     Margin="10"
@@ -130,43 +132,7 @@
                                     Text="Должности: " />
 
                                 <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding Employee.Posts_employees1}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="4*" />
-                                                        <ColumnDefinition Width="1*" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <ComboBox DisplayMemberPath="{Binding Post.Name}" ItemsSource="{Binding}" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-
-                                    <Button
-                                        Margin="3"
-                                        Command="{Binding AddCommand}"
-                                        Content="Добавить"
-                                        Style="{StaticResource BaseButton}" />
-                                    <Button
-                                        Margin="3"
-                                        Command="{Binding}"
-                                        Content="Удалить"
-                                        Style="{StaticResource BaseButton}" />
-                                </StackPanel>
-
-                            </UniformGrid>
-
-                            <UniformGrid Columns="2">
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource BaseText}"
-                                    Text="Отделы: " />
-
-                                <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding VideoInfo.KeyWords}">
+                                    <ItemsControl ItemsSource="{Binding PostsEmployees}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid>
@@ -175,25 +141,20 @@
                                                         <ColumnDefinition Width="1*" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <toolkit:AutoCompleteBox
-                                                        Margin="3"
-                                                        BorderThickness="0"
-                                                        FilterMode="Contains"
-                                                        FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
-                                                        ItemsSource="{Binding Source={StaticResource DataBase}, Path=KeyWords}"
-                                                        Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                        TextBlock.TextAlignment="Center">
-                                                        <toolkit:AutoCompleteBox.TextBoxStyle>
-                                                            <Style BasedOn="{StaticResource BaseTextBox}" TargetType="TextBox">
-                                                                <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}" />
-                                                            </Style>
-                                                        </toolkit:AutoCompleteBox.TextBoxStyle>
-                                                    </toolkit:AutoCompleteBox>
+                                                    <ComboBox
+                                                        Width="156"
+                                                        MaxWidth="156"
+                                                        Margin="5"
+                                                        DisplayMemberPath="Name"
+                                                        ItemsSource="{Binding CollectionPosts}"
+                                                        SelectedValue="{Binding Fk_post}"
+                                                        SelectedValuePath="Id_post"
+                                                        Style="{StaticResource BaseComboBox}" />
 
                                                     <Button
                                                         Grid.Column="1"
                                                         Margin="3"
-                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteKeyWord}"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeletePost}"
                                                         CommandParameter="{Binding}"
                                                         Content="Х"
                                                         Style="{StaticResource BaseButton}" />
@@ -204,7 +165,55 @@
 
                                     <Button
                                         Margin="3"
-                                        Command="{Binding AddKeyWord}"
+                                        Command="{Binding AddPost}"
+                                        Content="Добавить"
+                                        Style="{StaticResource BaseButton}" />
+                                </StackPanel>
+                            </UniformGrid>
+
+                            <!--  Отделы  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock
+                                    Margin="10"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource BaseText}"
+                                    Text="Отделы: " />
+
+                                <StackPanel Margin="10">
+                                    <ItemsControl ItemsSource="{Binding EmployeesInDepartments}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="1*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ComboBox
+                                                        Width="156"
+                                                        MaxWidth="156"
+                                                        Margin="5"
+                                                        DisplayMemberPath="Name"
+                                                        ItemsSource="{Binding CollectionDepartments}"
+                                                        SelectedValue="{Binding Fk_department}"
+                                                        SelectedValuePath="Id_department"
+                                                        Style="{StaticResource BaseComboBox}" />
+
+                                                    <Button
+                                                        Grid.Column="1"
+                                                        Margin="3"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteDepartment}"
+                                                        CommandParameter="{Binding}"
+                                                        Content="Х"
+                                                        Style="{StaticResource BaseButton}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Button
+                                        Margin="3"
+                                        Command="{Binding AddDepartment}"
                                         Content="Добавить"
                                         Style="{StaticResource BaseButton}" />
                                 </StackPanel>
@@ -214,16 +223,15 @@
 
                 </Grid>
 
-
+                <!--  Добавить нового сотрудника  -->
                 <Button
-                    Width="150"
-                    Margin="5"
+                    Width="250"
+                    Margin="5,10,5,5"
                     HorizontalAlignment="Center"
-                    Command="{Binding Save}"
+                    Command="{Binding AddEmployee}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-                    Content="Сохранить"
+                    Content="Добавить нового сотрудника"
                     Style="{StaticResource BaseButton}" />
-
             </StackPanel>
         </ScrollViewer>
 
