@@ -8,10 +8,10 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+    Name="AddEmployeeWindow"
     Title="Добавить нового сотрудника"
-    Name="AddWindow"
     Width="500"
-    Height="475"
+    Height="465"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -58,6 +58,7 @@
                                 <TextBox
                                     Margin="10"
                                     VerticalAlignment="Center"
+                                    MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
@@ -73,8 +74,7 @@
                                 <TextBox
                                     Margin="10"
                                     VerticalAlignment="Center"
-                                    AcceptsReturn="True"
-                                    AcceptsTab="True"
+                                    MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
@@ -90,6 +90,7 @@
                                 <TextBox
                                     Margin="10"
                                     VerticalAlignment="Center"
+                                    MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
@@ -105,6 +106,7 @@
                                 <TextBox
                                     Margin="10"
                                     VerticalAlignment="Center"
+                                    MaxLength="20"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
@@ -120,6 +122,7 @@
                                 <TextBox
                                     Margin="10"
                                     VerticalAlignment="Center"
+                                    MaxLength="70"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
@@ -224,15 +227,27 @@
 
                 </Grid>
 
-                <!--  Добавить нового сотрудника  -->
-                <Button
-                    Width="250"
-                    Margin="5,10,5,5"
-                    HorizontalAlignment="Center"
-                    Command="{Binding AddEmployee}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-                    Content="Добавить нового сотрудника"
-                    Style="{StaticResource BaseButton}" />
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <!--  Добавить нового сотрудника  -->
+                    <Button
+                        Margin="5,10,5,5"
+                        HorizontalAlignment="Center"
+                        Command="{Binding AddEmployee}"
+                        CommandParameter="{Binding ElementName=AddEmployeeWindow}"
+                        Content="Добавить нового сотрудника"
+                        Style="{StaticResource BaseButton}" />
+
+                    <!--  Отмена  -->
+                    <Button
+                        Margin="5,10,5,5"
+                        HorizontalAlignment="Right"
+                        Command="{Binding Cancel}"
+                        CommandParameter="{Binding ElementName=AddEmployeeWindow}"
+                        Content="Отмена"
+                        Style="{StaticResource BaseButton}" />
+                </StackPanel>
+
+
             </StackPanel>
         </ScrollViewer>
 
