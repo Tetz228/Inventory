@@ -9,9 +9,8 @@
 
 namespace Inventory.Model
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class Post
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

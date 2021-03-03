@@ -42,8 +42,5 @@ namespace Inventory.Model
         public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Posts_employees> Posts_employees { get; set; }
-
-        public virtual ObservableCollection<Posts_employees> Posts_employees1 { get; set; } =
-            new ObservableCollection<Posts_employees>();
     }
 }
