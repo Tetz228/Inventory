@@ -67,7 +67,7 @@
         <Setter Property="TextWrapping" Value="NoWrap" />
     </Style>
 
- <Style x:Key="BaseText" TargetType="{x:Type TextBlock}">
+    <Style x:Key="BaseText" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="Verdana" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="FontWeight" Value="Light" />
@@ -84,47 +84,14 @@
 
     <Style x:Key="BaseTextBox" TargetType="TextBox">
         <Setter Property="FontFamily" Value="Verdana" />
-        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="Height" Value="23" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="white" />
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="CaretBrush" Value="Black" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
 
-                        <Grid Margin="5">
-
-                            <TextBlock
-                                x:Name="hint"
-                                VerticalAlignment="Center"
-                                Background="Transparent"
-                                FontSize="{TemplateBinding FontSize}"
-                                Foreground="Gray"
-                                IsHitTestVisible="False"
-                                Text="{TemplateBinding Tag}"
-                                TextAlignment="{TemplateBinding TextAlignment}"
-                                Visibility="Collapsed" />
-                        </Grid>
-                    </Border>
-
-                    <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Text" Value="" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="hint" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
-
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style x:Key="BaseStackPanel" TargetType="StackPanel">
