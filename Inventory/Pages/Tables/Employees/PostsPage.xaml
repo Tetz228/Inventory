@@ -72,7 +72,7 @@
             </b:Interaction.Triggers>
         </ListView>
 
-        <StackPanel Grid.Row="0" Style="{StaticResource StackPanel}">
+        <StackPanel Grid.Row="0" Style="{StaticResource BaseStackPanel}">
 
             <Button Command="{Binding AddPost}" Style="{StaticResource BaseButton}">
                 <ContentControl>
@@ -115,13 +115,13 @@
             Grid.Row="0"
             Grid.Column="1"
             HorizontalAlignment="Right"
-            Style="{StaticResource StackPanel}">
+            Style="{StaticResource BaseStackPanel}">
 
             <TextBlock
                 Margin="5"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Style="{StaticResource TextBlocks}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Поиск:" />
 
             <TextBox

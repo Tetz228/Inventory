@@ -22,7 +22,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" Style="{StaticResource Menu}">
+        <Menu Grid.Row="0" Style="{StaticResource BaseMenu}">
             <MenuItem Header="Файл">
                 <MenuItem Header="Выйти" />
                 <MenuItem />

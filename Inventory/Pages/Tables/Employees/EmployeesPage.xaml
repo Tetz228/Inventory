@@ -121,7 +121,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Style="{StaticResource StackPanel}">
+            Style="{StaticResource BaseStackPanel}">
             <Button Command="{Binding AddEmployee}" Style="{StaticResource Buttons}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -164,12 +164,12 @@
             Grid.Column="1"
             Width="414"
             HorizontalAlignment="Right"
-            Style="{StaticResource StackPanel}">
+            Style="{StaticResource BaseStackPanel}">
             <TextBlock
                 Margin="5"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Style="{StaticResource TextBlocks}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Поиск:" />
 
             <TextBox
