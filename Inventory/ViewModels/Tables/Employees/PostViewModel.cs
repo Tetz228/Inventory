@@ -58,9 +58,7 @@
         {
             using var db = new InventoryEntities();
             var addPostWindow = new PostAddWindow();
-            var addPostViewModel = new PostAddViewModel();
 
-            addPostWindow.DataContext = addPostViewModel;
             addPostWindow.ShowDialog();
 
             Posts = new ObservableCollection<Post>(db.Posts.ToList());
