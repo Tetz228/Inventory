@@ -14,6 +14,14 @@ namespace Inventory.Model
     
     public partial class Employees_in_departments
     {
+        public List<Department> CollectionDepartments { get; set; }
+
+        public Employees_in_departments()
+        {
+            using var db = new InventoryEntities();
+            CollectionDepartments = new List<Department>(db.Departments);
+        }
+
         public int Id_employee_in_department { get; set; }
         public int Fk_department { get; set; }
         public int Fk_employee { get; set; }
