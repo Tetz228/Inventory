@@ -57,9 +57,6 @@
         {
             using var db = new InventoryEntities();
             var addDepartmentWindow = new DepartmentAddWindow();
-            var addDepartmentViewModel = new DepartmentAddViewModel();
-
-            addDepartmentWindow.DataContext = addDepartmentViewModel;
             addDepartmentWindow.ShowDialog();
 
             Departments = new ObservableCollection<Department>(db.Departments.ToList());
