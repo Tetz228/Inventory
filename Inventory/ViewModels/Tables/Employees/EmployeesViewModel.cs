@@ -7,6 +7,7 @@ namespace Inventory.ViewModels.Tables.Employees
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
+    using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -57,6 +58,10 @@ namespace Inventory.ViewModels.Tables.Employees
                                 break;
                             case "По ФИО":
                                 return (employee.L_name + " " + employee.F_name + " " + employee.M_name).ToLower().Contains(SearchEmployee.ToLower());
+                            case "По почте":
+                                return employee.Email.ToLower().Contains(SearchEmployee.ToLower());
+                            case "По номеру телефона":
+                                return employee.Phone_number.ToLower().Contains(SearchEmployee.ToLower());
                         }
                     return false;
                 };
@@ -71,12 +76,19 @@ namespace Inventory.ViewModels.Tables.Employees
         #region Команды
         public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectEmployee = null);
 
-        public ICommand ClickCommand => new DelegateCommand(() => FilterSearch = "По ФИО");
+        #region Фильтры поиска
+        public ICommand SearchByFLM => new DelegateCommand(() => FilterSearch = "По ФИО");
 
-        public ICommand ClickCommand1 => new DelegateCommand(() => FilterSearch = "По должностям");
+        public ICommand SearchByEmails => new DelegateCommand(() => FilterSearch = "По почте");
 
-        public ICommand ClickCommand2 => new DelegateCommand(() => FilterSearch = "По отделам");
+        public ICommand SearchByPhoneNumbers => new DelegateCommand(() => FilterSearch = "По номеру телефона");
 
+        public ICommand SearchByPosts => new DelegateCommand(() => FilterSearch = "По должностям");
+
+        public ICommand SearchByDepartments => new DelegateCommand(() => FilterSearch = "По отделам");
+        #endregion
+
+        #region Действия
         public ICommand AddEmployee => new DelegateCommand(() =>
         {
             //using var db = new InventoryEntities();
@@ -108,6 +120,10 @@ namespace Inventory.ViewModels.Tables.Employees
 
         public ICommand DeleteEmployee => new DelegateCommand<Employee>((employee) =>
         {
+            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить {employee.L_name} {employee.F_name} {employee.M_name}?",
+                "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                return;
+
             //using var db = new InventoryEntities();
             //var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == employee.Id_department);
 
@@ -122,7 +138,19 @@ namespace Inventory.ViewModels.Tables.Employees
             //db.SaveChanges();
 
             //Employees.Remove(employee);
+
+            try
+            {
+               
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                MessageBox.Show(@"Невозможно удалить сотрудника, так как он\она связан\а с другими сущностями!",
+                    "Ошибка при удалении сотрудника", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }, (employee) => employee != null);
+        #endregion
         #endregion
     }
 }
