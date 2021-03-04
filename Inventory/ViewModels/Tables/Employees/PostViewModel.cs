@@ -81,6 +81,10 @@
 
         public ICommand DeletePost => new DelegateCommand<Post>((allottedPost) =>
         {
+            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить {allottedPost.Name}?",
+                "Удаление должности", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                return;
+
             using var db = new InventoryEntities();
             var findPost = db.Posts.SingleOrDefault(post => post.Id_post == allottedPost.Id_post);
 
@@ -91,10 +95,19 @@
                 return;
             }
 
-            db.Posts.Remove(findPost);
-            db.SaveChanges();
+            try
+            {
+                db.Posts.Remove(findPost);
+                db.SaveChanges();
 
-            Posts.Remove(allottedPost);
+                Posts.Remove(allottedPost);
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                MessageBox.Show("Невозможно удалить должность, так как она связана с другими сущностями!",
+                    "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }, (allottedPost) => allottedPost != null);
         #endregion
     }
