@@ -1,19 +1,18 @@
 ﻿namespace Inventory.ViewModels.Tables.Employees
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Employees;
+    using Inventory.View.Edit.Tables.Employees;
+    using Inventory.ViewModels.Add.Tables.Employees;
+    using Inventory.ViewModels.Edit.Tables.Employees;
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Employees;
-    using Inventory.View.Edit.Tables.Employees;
-    using Inventory.ViewModels.Add.Tables.Employees;
-    using Inventory.ViewModels.Edit.Tables.Employees;
 
     internal class DepartmentViewModel : BindableBase
     {
@@ -85,6 +84,10 @@
 
         public ICommand DeleteDepartment => new DelegateCommand<Department>((depart) =>
         {
+            if (MessageBoxResult.Yes != MessageBox.Show("Вы действительно хотите удалить выделенную строку?",
+                "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                return;
+
             using var db = new InventoryEntities();
             var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == depart.Id_department);
 
@@ -95,10 +98,18 @@
                 return;
             }
 
-            db.Departments.Remove(findDepartment);
-            db.SaveChanges();
+            try
+            {
+                db.Departments.Remove(findDepartment);
+                db.SaveChanges();
 
-            Departments.Remove(depart);
+                Departments.Remove(depart);
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                MessageBox.Show("Невозможно удалить отдел, так как он связан с другими сущностями!",
+                    "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }, (depart) => depart != null);
         #endregion
     }
