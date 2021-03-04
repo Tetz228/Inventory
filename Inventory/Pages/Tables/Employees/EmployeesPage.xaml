@@ -22,6 +22,7 @@
             <Setter Property="FontSize" Value="15" />
         </Style>
 
+        <!--  Шаблон для отображения нескольких должностей  -->
         <DataTemplate x:Key="PostEmployeesTemplate">
             <ItemsControl ItemsSource="{Binding}">
                 <ItemsControl.ItemTemplate>
@@ -32,6 +33,7 @@
             </ItemsControl>
         </DataTemplate>
 
+        <!--  Шаблон для отображения нескольких отделов  -->
         <DataTemplate x:Key="EmployeesInDepartmentsTemplate">
             <ItemsControl ItemsSource="{Binding}">
                 <ItemsControl.ItemTemplate>
@@ -71,6 +73,14 @@
                             </MultiBinding>
                         </GridViewColumn.DisplayMemberBinding>
                     </GridViewColumn>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Email}"
+                        Header="Почта"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Phone_number}"
+                        Header="Номер телефона"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn Header="Должности">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -117,6 +127,7 @@
             </b:Interaction.Triggers>
         </ListView>
 
+        <!--  Кнопки действия  -->
         <StackPanel
             Grid.Row="0"
             Grid.Column="0"
@@ -127,7 +138,7 @@
                     <materialDesign:PackIcon
                         Width="20"
                         Height="20"
-                        Foreground="Green"
+                        Foreground="Lime"
                         Kind="Add" />
                 </ContentControl>
             </Button>
@@ -140,7 +151,7 @@
                     <materialDesign:PackIcon
                         Width="20"
                         Height="20"
-                        Foreground="#FFFFC500"
+                        Foreground="#FFFFD239"
                         Kind="Edit" />
                 </ContentControl>
             </Button>
@@ -159,6 +170,7 @@
             </Button>
         </StackPanel>
 
+        <!--  Поиск  -->
         <StackPanel
             Grid.Row="0"
             Grid.Column="1"
@@ -174,13 +186,14 @@
 
             <TextBox
                 Width="300"
-                Height="23"
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
+                BorderThickness="1"
                 Style="{StaticResource BaseTextBox}"
                 Text="{Binding SearchEmployee, UpdateSourceTrigger=PropertyChanged}" />
 
+            <!--  Фильтры  -->
             <Menu
                 Width="49"
                 Height="30"
@@ -190,6 +203,7 @@
                     Width="30"
                     Height="30"
                     HorizontalAlignment="Left">
+
                     <MenuItem.Header>
                         <ContentControl HorizontalAlignment="Left">
                             <materialDesign:PackIcon
@@ -199,19 +213,41 @@
                                 Kind="DotsVertical" />
                         </ContentControl>
                     </MenuItem.Header>
+
                     <StackPanel>
                         <RadioButton
-                            Command="{Binding ClickCommand}"
+                            Command="{Binding SearchByFLM}"
+                            Content="По ФИО"
                             GroupName="Filter"
-                            IsChecked="True">
-                            По ФИО
-                        </RadioButton>
+                            IsChecked="True" />
                     </StackPanel>
+
                     <StackPanel>
-                        <RadioButton Command="{Binding ClickCommand1}" GroupName="Filter">По должностям</RadioButton>
+                        <RadioButton
+                            Command="{Binding SearchByEmails}"
+                            Content="По почте"
+                            GroupName="Filter" />
                     </StackPanel>
+
                     <StackPanel>
-                        <RadioButton Command="{Binding ClickCommand2}" GroupName="Filter">По отделам</RadioButton>
+                        <RadioButton
+                            Command="{Binding SearchByPhoneNumbers}"
+                            Content="По номеру телефона"
+                            GroupName="Filter" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <RadioButton
+                            Command="{Binding SearchByPosts}"
+                            Content="По должностям"
+                            GroupName="Filter" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <RadioButton
+                            Command="{Binding SearchByDepartments}"
+                            Content="По отделам"
+                            GroupName="Filter" />
                     </StackPanel>
                 </MenuItem>
             </Menu>
