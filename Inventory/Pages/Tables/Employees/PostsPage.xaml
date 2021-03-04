@@ -67,7 +67,7 @@
                     <b:InvokeCommandAction Command="{Binding ListViewMouseLeftButtonDown}" />
                 </b:EventTrigger>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditPost}" CommandParameter="{Binding SelectEmployee}" />
+                    <b:InvokeCommandAction Command="{Binding EditPost}" CommandParameter="{Binding SelectPost}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
