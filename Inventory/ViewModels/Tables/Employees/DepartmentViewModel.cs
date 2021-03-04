@@ -84,7 +84,7 @@
 
         public ICommand DeleteDepartment => new DelegateCommand<Department>((depart) =>
         {
-            if (MessageBoxResult.Yes != MessageBox.Show("Вы действительно хотите удалить выделенную строку?",
+            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить {depart.Name}?",
                 "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question))
                 return;
 
