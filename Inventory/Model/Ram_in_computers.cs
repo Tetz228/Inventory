@@ -11,8 +11,10 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Ram_in_computers
+
+    using DevExpress.Mvvm;
+
+    public partial class Ram_in_computers : BindableBase
     {
         public int Id_ram_in_computer { get; set; }
         public int Fk_inventory_number_ram { get; set; }

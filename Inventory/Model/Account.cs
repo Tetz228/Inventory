@@ -11,8 +11,10 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Account
+
+    using DevExpress.Mvvm;
+
+    public partial class Account : BindableBase
     {
         public int Id_account { get; set; }
         public int Fk_employee { get; set; }

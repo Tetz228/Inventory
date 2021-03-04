@@ -11,8 +11,10 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Roles_users
+
+    using DevExpress.Mvvm;
+
+    public partial class Roles_users : BindableBase
     {
         public int Id_role_user { get; set; }
         public int Fk_user { get; set; }

@@ -11,8 +11,10 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Employees_in_departments
+
+    using DevExpress.Mvvm;
+
+    public partial class Employees_in_departments : BindableBase
     {
         public List<Department> CollectionDepartments { get; set; }
 

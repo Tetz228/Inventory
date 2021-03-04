@@ -11,8 +11,10 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Inventory_numbers_peripherals
+
+    using DevExpress.Mvvm;
+
+    public partial class Inventory_numbers_peripherals : BindableBase
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inventory_numbers_peripherals()

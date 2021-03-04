@@ -11,7 +11,9 @@ namespace Inventory.Model
 {
     using System.Collections.Generic;
 
-    public partial class Posts_employees
+    using DevExpress.Mvvm;
+
+    public partial class Posts_employees:BindableBase
     {
         public List<Post> CollectionPosts { get; set; }
 

@@ -13,7 +13,9 @@ namespace Inventory.Model
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public partial class Employee
+    using DevExpress.Mvvm;
+
+    public partial class Employee : BindableBase
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()

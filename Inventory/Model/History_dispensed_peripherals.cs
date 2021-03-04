@@ -11,8 +11,10 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class History_dispensed_peripherals
+
+    using DevExpress.Mvvm;
+
+    public partial class History_dispensed_peripherals : BindableBase
     {
         public int Id_history_dispensed_peripheral { get; set; }
         public int Number_dispensing { get; set; }

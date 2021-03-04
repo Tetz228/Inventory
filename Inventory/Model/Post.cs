@@ -11,7 +11,9 @@ namespace Inventory.Model
 {
     using System.Collections.Generic;
 
-    public partial class Post
+    using DevExpress.Mvvm;
+
+    public partial class Post : BindableBase
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Post()
