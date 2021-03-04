@@ -5,6 +5,8 @@ namespace Inventory.ViewModels.Tables.Employees
     using DevExpress.Mvvm;
     using Inventory.Model;
     using Inventory.View.Add.Tables.Employees;
+    using Inventory.View.Edit.Tables.Employees;
+    using Inventory.ViewModels.Edit.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
@@ -106,18 +108,32 @@ namespace Inventory.ViewModels.Tables.Employees
 
         public ICommand EditEmployee => new DelegateCommand<Employee>((employee) =>
         {
-            //using var db = new InventoryEntities();
-            //var editDepartmentWindow = new DepartmentEditWindow();
-            //var editDepartmentViewModel = new DepartmentEditViewModel
-            //{
-            //    Department = depart
-            //};
+            using var db = new InventoryEntities();
 
-            //editDepartmentWindow.DataContext = editDepartmentViewModel;
-            //editDepartmentWindow.ShowDialog();
+            var editEmployeeViewModel = new EmployeeEditViewModel
+            {
+                LastName = employee.L_name,
+                FirstName = employee.F_name,
+                MiddleName = employee.M_name,
+                PhoneNumber = employee.Phone_number,
+                Email = employee.Email,
+                PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees.ToList()),
+                EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments.ToList())
+            };
 
-            //Employees = new ObservableCollection<Department>(db.Departments.ToList());
-            //EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
+            var editEmployeeWindow = new EmployeeEditWindow();
+
+            editEmployeeWindow.DataContext = editEmployeeViewModel;
+            editEmployeeWindow.ShowDialog();
+
+            Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
+                    .Select(post => post.Post))
+                .Include(empDepart => empDepart.Employees_in_departments
+                    .Select(depart => depart.Department))
+                .Include(account => account.Accounts
+                    .Select(role => role.User.Roles_users)));
+            EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
+
         }, (employee) => employee != null);
 
         public ICommand DeleteEmployee => new DelegateCommand<Employee>((employee) =>
