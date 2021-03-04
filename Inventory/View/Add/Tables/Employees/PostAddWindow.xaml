@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="AddPostWindow"
-    Title="Добавить должность"
-    Width="300"
-    Height="163"
+    Title="Добавить новую должность"
+    Width="500"
+    Height="180"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -19,58 +19,69 @@
     </Window.DataContext>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" MinHeight="20" />
-        </Grid.RowDefinitions>
+        <StackPanel Margin="010">
 
-        <StackPanel
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Width="250"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Vertical"
-            Style="{StaticResource BaseStackPanel}">
             <TextBlock
-                Padding="3"
-                Style="{StaticResource BaseTextBlock}"
-                Text="Название должности:" />
-            <TextBox
-                Padding="3"
-                MaxLength="100"
-                Style="{StaticResource BaseTextBox}"
-                Text="{Binding PostName, UpdateSourceTrigger=PropertyChanged}" />
-        </StackPanel>
+                Margin="10"
+                Style="{StaticResource BaseText}"
+                Text="Новая должность"
+                TextAlignment="Center" />
 
-        <StackPanel
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Style="{StaticResource BaseStackPanel}">
-            <Button
-                HorizontalAlignment="Left"
-                Command="{Binding Add, Mode=OneWay}"
-                CommandParameter="{Binding ElementName=AddPostWindow}"
-                Content="Добавить"
-                Style="{StaticResource BaseButton}" />
-        </StackPanel>
+            <Grid>
+                <Border Background="#FFAEAEAE" CornerRadius="5">
+                    <Border.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border
+                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Background="Black"
+                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    SnapsToDevicePixels="True" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Border.OpacityMask>
 
-        <StackPanel
-            Grid.Row="1"
-            Grid.Column="1"
-            HorizontalAlignment="Right"
-            Style="{StaticResource BaseStackPanel}">
-            <Button
-                Command="{Binding Cancel}"
-                CommandParameter="{Binding ElementName=AddPostWindow}"
-                Content="Отмена"
-                Style="{StaticResource BaseButton}" />
+                    <StackPanel Width="455" HorizontalAlignment="Center">
+                        <!--  Наименование должности  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource BaseText}"
+                                Text="Наименование должности: " />
+
+                            <TextBox
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                MaxLength="100"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding PostName, UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <!--  Добавить новую должность  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding Add}"
+                    CommandParameter="{Binding ElementName=AddPostWindow}"
+                    Content="Добавить новую должность"
+                    Style="{StaticResource BaseButton}" />
+
+                <!--  Отмена  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Right"
+                    Command="{Binding Cancel}"
+                    CommandParameter="{Binding ElementName=AddPostWindow}"
+                    Content="Отмена"
+                    Style="{StaticResource BaseButton}" />
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </Window>
