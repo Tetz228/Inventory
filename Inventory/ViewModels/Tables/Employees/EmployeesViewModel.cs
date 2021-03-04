@@ -33,35 +33,33 @@ namespace Inventory.ViewModels.Tables.Employees
 
         private ICollectionView EmployeesCollection { get; }
 
-        private string _searchEmployee;
+        private string _search;
 
-        public string SearchEmployee
+        public string Search
         {
-            get => _searchEmployee;
+            get => _search;
             set
             {
-                _searchEmployee = value;
+                _search = value;
                 EmployeesCollection.Filter = obj =>
                 {
                     if (obj is Employee employee)
                         switch (FilterSearch)
                         {
                             case "По должностям":
-                                foreach (var postsEmployees in employee.Posts_employees)
-                                    if (postsEmployees.Post.Name.ToLower().Contains(SearchEmployee.ToLower()))
-                                        return postsEmployees.Post.Name.ToLower().Contains(SearchEmployee.ToLower());
+                                foreach (var postsEmployees in employee.Posts_employees.Where(postsEmployees => postsEmployees.Post.Name.ToLower().Contains(Search.ToLower())))
+                                    return postsEmployees.Post.Name.ToLower().Contains(Search.ToLower());
                                 break;
                             case "По отделам":
-                                foreach (var employeesInDepartments in employee.Employees_in_departments)
-                                    if (employeesInDepartments.Department.Name.ToLower().Contains(SearchEmployee.ToLower()))
-                                        return employeesInDepartments.Department.Name.ToLower().Contains(SearchEmployee.ToLower());
+                                foreach (var employeesInDepartments in employee.Employees_in_departments.Where(employeesInDepartments => employeesInDepartments.Department.Name.ToLower().Contains(Search.ToLower())))
+                                    return employeesInDepartments.Department.Name.ToLower().Contains(Search.ToLower());
                                 break;
                             case "По ФИО":
-                                return (employee.L_name + " " + employee.F_name + " " + employee.M_name).ToLower().Contains(SearchEmployee.ToLower());
+                                return (employee.L_name + " " + employee.F_name + " " + employee.M_name).ToLower().Contains(Search.ToLower());
                             case "По почте":
-                                return employee.Email.ToLower().Contains(SearchEmployee.ToLower());
+                                return employee.Email.ToLower().Contains(Search.ToLower());
                             case "По номеру телефона":
-                                return employee.Phone_number.ToLower().Contains(SearchEmployee.ToLower());
+                                return employee.Phone_number.ToLower().Contains(Search.ToLower());
                         }
                     return false;
                 };
@@ -77,7 +75,7 @@ namespace Inventory.ViewModels.Tables.Employees
         public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectEmployee = null);
 
         #region Фильтры поиска
-        public ICommand SearchByFLM => new DelegateCommand(() => FilterSearch = "По ФИО");
+        public ICommand SearchByFlm => new DelegateCommand(() => FilterSearch = "По ФИО");
 
         public ICommand SearchByEmails => new DelegateCommand(() => FilterSearch = "По почте");
 

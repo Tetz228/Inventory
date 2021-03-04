@@ -191,7 +191,7 @@
                 VerticalAlignment="Center"
                 BorderThickness="1"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding SearchEmployee, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" />
 
             <!--  Фильтры  -->
             <Menu
@@ -216,7 +216,7 @@
 
                     <StackPanel>
                         <RadioButton
-                            Command="{Binding SearchByFLM}"
+                            Command="{Binding SearchByFlm}"
                             Content="По ФИО"
                             GroupName="Filter"
                             IsChecked="True" />
