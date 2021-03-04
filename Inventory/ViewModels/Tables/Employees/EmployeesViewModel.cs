@@ -29,7 +29,7 @@ namespace Inventory.ViewModels.Tables.Employees
             EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
         }
 
-        public string FilterSearch { get; set; } = "По ФИО";
+        private string FilterSearch { get; set; } = "По ФИО";
 
         #region Свойства
         public ObservableCollection<Employee> Employees { get; private set; }
@@ -112,18 +112,14 @@ namespace Inventory.ViewModels.Tables.Employees
 
             var editEmployeeViewModel = new EmployeeEditViewModel
             {
-                LastName = employee.L_name,
-                FirstName = employee.F_name,
-                MiddleName = employee.M_name,
-                PhoneNumber = employee.Phone_number,
-                Email = employee.Email,
-                PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees.ToList()),
-                EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments.ToList())
+                Employee = employee
             };
 
-            var editEmployeeWindow = new EmployeeEditWindow();
+            var editEmployeeWindow = new EmployeeEditWindow
+            {
+                DataContext = editEmployeeViewModel
+            };
 
-            editEmployeeWindow.DataContext = editEmployeeViewModel;
             editEmployeeWindow.ShowDialog();
 
             Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
