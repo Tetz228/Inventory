@@ -13,41 +13,27 @@
 
     public class EmployeeEditViewModel : BindableBase
     {
-        #region Свойства
-        public string LastName { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string MiddleName { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        public string Email { get; set; }
-
-        public ObservableCollection<Posts_employees> PostsEmployees { get; set; }
-
-        public ObservableCollection<Employees_in_departments> EmployeesInDepartments { get; set; }
-        #endregion
+        public Employee Employee { get; set; }
 
         #region Методы валидации данных
         private bool IsValidation()
         {
-            if (string.IsNullOrWhiteSpace(LastName))
+            if (string.IsNullOrWhiteSpace(Employee.L_name))
                 return false;
 
-            if (string.IsNullOrWhiteSpace(FirstName))
+            if (string.IsNullOrWhiteSpace(Employee.F_name))
                 return false;
 
-            if (string.IsNullOrWhiteSpace(PhoneNumber))
+            if (string.IsNullOrWhiteSpace(Employee.Phone_number))
                 return false;
 
-            if (!IsValidEmail(Email))
+            if (!IsValidEmail(Employee.Email))
                 return false;
 
-            if (PostsEmployees.Count == 0)
+            if (Employee.Posts_employees.Count == 0)
                 return false;
 
-            if (EmployeesInDepartments.Count == 0)
+            if (Employee.Employees_in_departments.Count == 0)
                 return false;
 
             return true;
@@ -98,33 +84,27 @@
         public ICommand EditEmployee => new DelegateCommand<Window>(empEditWindow =>
         {
             using var db = new InventoryEntities();
+            var findEmployee = db.Employees.SingleOrDefault(emp => emp.Id_employee == Employee.Id_employee);
 
-            PostsEmployees.Add(new Posts_employees());
-           
+            if (findEmployee == null)
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении должности", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                findEmployee.Name = Post.Name;
+                db.SaveChanges();
+            }
 
-            //var employee = new Employee
-            //{
-            //    L_name = LastName,
-            //    F_name = FirstName,
-            //    M_name = MiddleName,
-            //    Phone_number = PhoneNumber,
-            //    Email = this.Email
-            //};
+            foreach (var post in PostsEmployees)
+                post.Fk_employee = employee.Id_employee;
 
-            //db.Employees.Add(employee);
-            //db.SaveChanges();
+            db.Posts_employees.AddRange(PostsEmployees);
+            db.SaveChanges();
 
-            //foreach (var post in PostsEmployees)
-            //    post.Fk_employee = employee.Id_employee;
+            foreach (var department in EmployeesInDepartments)
+                department.Fk_employee = employee.Id_employee;
 
-            //db.Posts_employees.AddRange(PostsEmployees);
-            //db.SaveChanges();
-
-            //foreach (var department in EmployeesInDepartments)
-            //    department.Fk_employee = employee.Id_employee;
-
-            //db.Employees_in_departments.AddRange(EmployeesInDepartments);
-            //db.SaveChanges();
+            db.Employees_in_departments.AddRange(EmployeesInDepartments);
+            db.SaveChanges();
 
             empEditWindow.Close();
 
@@ -133,7 +113,7 @@
         public ICommand Cancel => new DelegateCommand<Window>(empEditWindow =>
         {
             PostsEmployees.Add(new Posts_employees());
-            empEditWindow.Close(); 
+            //empEditWindow.Close(); 
 
         });
 
