@@ -4,6 +4,7 @@ namespace Inventory.ViewModels.Tables.Employees
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.View.Add.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
@@ -31,7 +32,7 @@ namespace Inventory.ViewModels.Tables.Employees
         #region Свойства
         public ObservableCollection<Employee> Employees { get; private set; }
 
-        private ICollectionView EmployeesCollection { get; }
+        private ICollectionView EmployeesCollection { get; set; }
 
         private string _search;
 
@@ -89,15 +90,18 @@ namespace Inventory.ViewModels.Tables.Employees
         #region Действия
         public ICommand AddEmployee => new DelegateCommand(() =>
         {
-            //using var db = new InventoryEntities();
-            //var addDepartmentWindow = new DepartmentAddWindow();
-            //var addDepartmentViewModel = new DepartmentAddViewModel();
+            using var db = new InventoryEntities();
 
-            //addDepartmentWindow.DataContext = addDepartmentViewModel;
-            //addDepartmentWindow.ShowDialog();
+            var addEmployeeWindow = new EmployeeAddWindow();
+            addEmployeeWindow.ShowDialog();
 
-            //Employees = new ObservableCollection<Department>(db.Employees.ToList());
-            //EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
+            Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
+                                                                       .Select(post => post.Post))
+                                                                       .Include(empDepart => empDepart.Employees_in_departments
+                                                                       .Select(depart => depart.Department))
+                                                                       .Include(account => account.Accounts
+                                                                       .Select(role => role.User.Roles_users)));
+            EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
         });
 
         public ICommand EditEmployee => new DelegateCommand<Employee>((employee) =>
@@ -139,7 +143,7 @@ namespace Inventory.ViewModels.Tables.Employees
 
             try
             {
-               
+
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException)
             {
