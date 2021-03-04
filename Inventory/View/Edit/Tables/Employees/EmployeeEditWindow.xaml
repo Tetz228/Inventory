@@ -144,7 +144,15 @@
                                                         <ColumnDefinition Width="1*" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    
+                                                    <ComboBox
+                                                        Width="156"
+                                                        MaxWidth="156"
+                                                        Margin="5"
+                                                        DisplayMemberPath="Name"
+                                                        ItemsSource="{Binding CollectionPosts}"
+                                                        SelectedValue="{Binding Fk_post}"
+                                                        SelectedValuePath="Id_post"
+                                                        Style="{StaticResource BaseComboBox}" />
 
                                                     <Button
                                                         Grid.Column="1"
