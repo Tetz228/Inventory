@@ -3,6 +3,7 @@
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Data.Entity;
     using System.Globalization;
@@ -13,7 +14,24 @@
 
     public class EmployeeEditViewModel : BindableBase
     {
+        #region Свойства
         public Employee Employee { get; set; }
+
+        public ObservableCollection<Posts_employees> PostsEmployees { get; set; }
+
+        public ObservableCollection<Employees_in_departments> EmployeesInDepartments { get; set; }
+
+        public List<Post> CollectionPosts { get; set; }
+
+        public List<Department> CollectionDepartments { get; set; }
+        #endregion
+
+        public EmployeeEditViewModel()
+        {
+            using var db = new InventoryEntities();
+            CollectionPosts = new List<Post>(db.Posts);
+            CollectionDepartments = new List<Department>(db.Departments);
+        }
 
         #region Методы валидации данных
         private bool IsValidation()
@@ -83,28 +101,28 @@
         #region Команды
         public ICommand EditEmployee => new DelegateCommand<Window>(empEditWindow =>
         {
-            using var db = new InventoryEntities();
-            var findEmployee = db.Employees.SingleOrDefault(emp => emp.Id_employee == Employee.Id_employee);
+            //using var db = new InventoryEntities();
+            //var findEmployee = db.Employees.SingleOrDefault(emp => emp.Id_employee == Employee.Id_employee);
 
-            if (findEmployee == null)
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении должности", MessageBoxButton.OK, MessageBoxImage.Error);
-            else
-            {
-                findEmployee.Name = Post.Name;
-                db.SaveChanges();
-            }
+            //if (findEmployee == null)
+            //    MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении должности", MessageBoxButton.OK, MessageBoxImage.Error);
+            //else
+            //{
+            //    findEmployee.Name = Post.Name;
+            //    db.SaveChanges();
+            //}
 
-            foreach (var post in PostsEmployees)
-                post.Fk_employee = employee.Id_employee;
+            //foreach (var post in PostsEmployees)
+            //    post.Fk_employee = employee.Id_employee;
 
-            db.Posts_employees.AddRange(PostsEmployees);
-            db.SaveChanges();
+            //db.Posts_employees.AddRange(PostsEmployees);
+            //db.SaveChanges();
 
-            foreach (var department in EmployeesInDepartments)
-                department.Fk_employee = employee.Id_employee;
+            //foreach (var department in EmployeesInDepartments)
+            //    department.Fk_employee = employee.Id_employee;
 
-            db.Employees_in_departments.AddRange(EmployeesInDepartments);
-            db.SaveChanges();
+            //db.Employees_in_departments.AddRange(EmployeesInDepartments);
+            //db.SaveChanges();
 
             empEditWindow.Close();
 
@@ -112,9 +130,7 @@
 
         public ICommand Cancel => new DelegateCommand<Window>(empEditWindow =>
         {
-            PostsEmployees.Add(new Posts_employees());
             //empEditWindow.Close(); 
-
         });
 
         public ICommand AddPostInCollection => new DelegateCommand(() => PostsEmployees.Add(new Posts_employees()));
