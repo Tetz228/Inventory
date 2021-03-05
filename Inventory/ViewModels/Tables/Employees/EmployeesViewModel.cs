@@ -112,7 +112,9 @@ namespace Inventory.ViewModels.Tables.Employees
 
             var editEmployeeViewModel = new EmployeeEditViewModel
             {
-                Employee = employee
+                Employee = employee,
+                PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees),
+                EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments)
             };
 
             var editEmployeeWindow = new EmployeeEditWindow
