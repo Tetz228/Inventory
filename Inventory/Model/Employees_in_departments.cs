@@ -16,12 +16,9 @@ namespace Inventory.Model
 
     public partial class Employees_in_departments : BindableBase
     {
-        public List<Department> CollectionDepartments { get; set; }
-
         public Employees_in_departments()
         {
             using var db = new InventoryEntities();
-            CollectionDepartments = new List<Department>(db.Departments);
         }
 
         public int Id_employee_in_department { get; set; }
