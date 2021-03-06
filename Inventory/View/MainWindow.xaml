@@ -10,6 +10,7 @@
     Height="450"
     MinWidth="880"
     MinHeight="450"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
     <Window.DataContext>
