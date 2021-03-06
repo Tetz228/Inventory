@@ -41,6 +41,11 @@
 
         public string Error { get => null; }
 
+        private bool Validation()
+        {
+            return ErrorCollection.Any(item => item.Value == null);
+        }
+
         public string PostName
         {
             get => GetValue<string>();
@@ -51,22 +56,9 @@
             }
         }
 
-        private bool Validation()
-        {
-            return ErrorCollection.Any(item => item.Value == null);
-        }
-
         public ICommand Add => new DelegateCommand<Window>(addWindow =>
         {
-            using var db = new InventoryEntities();
-
-            var post = new Post
-            {
-                Name = PostName
-            };
-
-            db.Posts.Add(post);
-            db.SaveChanges();
+            Post.AddPost(PostName);
 
             addWindow.Close();
         }, _ => Validation());

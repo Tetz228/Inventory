@@ -10,6 +10,7 @@
 namespace Inventory.Model
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     using DevExpress.Mvvm;
 
@@ -23,8 +24,21 @@ namespace Inventory.Model
     
         public int Id_post { get; set; }
         public string Name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Posts_employees> Posts_employees { get; set; }
+
+        public static void AddPost(string name)
+        {
+            using var db = new InventoryEntities();
+
+            var post = new Post
+            {
+                Name = name
+            };
+
+            db.Posts.Add(post);
+            db.SaveChanges();
+        }
     }
 }
