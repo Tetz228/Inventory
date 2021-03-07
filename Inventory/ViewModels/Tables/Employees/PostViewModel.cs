@@ -51,7 +51,6 @@
 
         public ICommand AddPost => new DelegateCommand(() =>
         {
-            using var db = new InventoryEntities();
             var addPostWindow = new PostAddWindow();
 
             addPostWindow.ShowDialog();
@@ -59,7 +58,6 @@
 
         public ICommand EditPost => new DelegateCommand<Post>(post =>
         {
-            using var db = new InventoryEntities();
             var editPostWindow = new PostEditWindow();
             var editPostViewModel = new PostEditViewModel(post);
 
