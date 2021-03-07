@@ -1,5 +1,7 @@
 namespace Inventory.Model
 {
+    using DevExpress.Mvvm;
+    using Inventory.ViewModels.Tables.Employees;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Entity.Infrastructure;
@@ -7,21 +9,53 @@ namespace Inventory.Model
     using System.Threading.Tasks;
     using System.Windows;
 
-    using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Employees;
-
-    public partial class Post : BindableBase, IEditableObject
+    public partial class Post : BindableBase, IEditableObject, IDataErrorInfo
     {
         public Post()
         {
-            this.PostsEmployees = new HashSet<Posts_employees>();
+            this.Posts_employees = new HashSet<Posts_employees>();
         }
 
         #region Свойства
-        public int IdPost { get; set; }
+        public int Id_post { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Posts_employees> PostsEmployees { get; set; }
+        public virtual ICollection<Posts_employees> Posts_employees { get; set; }
+        #endregion
+
+        #region Валидация
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new();
+
+        public string this[string name]
+        {
+            get
+            {
+                string result = null;
+
+                switch (name)
+                {
+                    case "Name":
+                        if (string.IsNullOrWhiteSpace(Name))
+                            result = "Поле не должно быть пустым";
+                        else if (Name.Length < 2)
+                            result = "Поле должно содержать минимум 2 символа";
+                        break;
+                }
+
+                if (ErrorCollection.ContainsKey(name))
+                    ErrorCollection[name] = result;
+                else if (result != null)
+                    ErrorCollection.Add(name, result);
+
+                RaisePropertyChanged(nameof(ErrorCollection));
+
+                return result;
+            }
+        }
+
+        public string Error { get => null; }
+
+        public bool Validation() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
         #region Методы взаимодействия с информацией
@@ -45,7 +79,7 @@ namespace Inventory.Model
         public static Task<bool> EditPost(Post post)
         {
             using var db = new InventoryEntities();
-            var findPost = db.Posts.SingleOrDefault(p => p.IdPost == post.IdPost);
+            var findPost = db.Posts.SingleOrDefault(p => p.Id_post == post.Id_post);
 
             if (findPost == null)
             {
@@ -66,12 +100,12 @@ namespace Inventory.Model
                 return Task.FromResult(false);
 
             using var db = new InventoryEntities();
-            var findPost = db.Posts.SingleOrDefault(post => post.IdPost == selectPost.IdPost);
+            var findPost = db.Posts.SingleOrDefault(post => post.Id_post == selectPost.Id_post);
 
             if (findPost == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
-                return Task.FromResult(false); 
+                return Task.FromResult(false);
             }
 
             try
@@ -92,13 +126,14 @@ namespace Inventory.Model
         }
         #endregion
 
+        #region Откат изменений
         private Post _selectPost;
 
         public void BeginEdit()
         {
             _selectPost = new Post
             {
-                IdPost = this.IdPost,
+                Id_post = this.Id_post,
                 Name = this.Name,
             };
         }
@@ -110,11 +145,12 @@ namespace Inventory.Model
 
         public void CancelEdit()
         {
-            if (_selectPost == null) 
+            if (_selectPost == null)
                 return;
 
-            IdPost = _selectPost.IdPost;
+            Id_post = _selectPost.Id_post;
             Name = _selectPost.Name;
         }
+        #endregion
     }
 }
