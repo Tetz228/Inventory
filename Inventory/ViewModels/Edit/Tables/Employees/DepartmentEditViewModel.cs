@@ -1,32 +1,35 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Employees
 {
-    using System.Linq;
+    using DevExpress.Mvvm;
+    using Inventory.Model;
     using System.Windows;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-
     public class DepartmentEditViewModel : BindableBase
     {
-        public Department Department { get; set; }
-
-        public ICommand Edit => new DelegateCommand<Window>(editWindow =>
+        public DepartmentEditViewModel(Department department)
         {
-            using var db = new InventoryEntities();
-            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == Department.Id_department);
+            Department = department;
+            Department.BeginEdit();
+        }
 
-            if (findDepartment == null)
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении отдела", MessageBoxButton.OK,MessageBoxImage.Error);
-            else
-            {
-                findDepartment.Name = Department.Name;
-                db.SaveChanges();
-            }
+        public Department Department { get; }
+
+        #region Команды
+        public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
+        {
+            Department.EndEdit();
+            Edit();
             editWindow.Close();
-        }, _ => !string.IsNullOrWhiteSpace(Department.Name));
+        }, _ => Department.Validation());
 
-        public ICommand Cancel => new DelegateCommand<Window>(editWindow => editWindow.Close());
+        public ICommand Cancel => new DelegateCommand<Window>(editWindow =>
+        {
+            Department.CancelEdit();
+            editWindow.Close();
+        });
+        #endregion
+
+        private async void Edit() => await Department.EditDepartment(Department);
     }
 }
