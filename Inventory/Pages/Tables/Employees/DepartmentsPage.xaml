@@ -126,9 +126,7 @@
             HorizontalAlignment="Right"
             Style="{StaticResource BaseStackPanel}">
 
-            <Button
-                Command="{Binding RefreshList}"
-                Style="{StaticResource BaseButton}">
+            <Button Command="{Binding RefreshList}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"

@@ -22,7 +22,7 @@
             Add();
 
             addWindow.Close();
-        }, _ => Department.Validation());
+        }, _ => Department.IsValidationProperties());
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

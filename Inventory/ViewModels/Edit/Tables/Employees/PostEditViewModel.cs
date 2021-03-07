@@ -23,7 +23,7 @@
             Post.EndEdit();
             Edit();
             editWindow.Close();
-        }, _ => Post.Validation());
+        }, _ => Post.IsValidationProperties());
 
         public ICommand Cancel => new DelegateCommand<Window>(editWindow =>
         {

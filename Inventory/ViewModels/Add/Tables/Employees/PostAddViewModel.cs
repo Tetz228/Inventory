@@ -20,7 +20,7 @@ namespace Inventory.ViewModels.Add.Tables.Employees
             Add();
 
             addWindow.Close();
-        }, _ => Post.Validation());
+        }, _ => Post.IsValidationProperties());
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
