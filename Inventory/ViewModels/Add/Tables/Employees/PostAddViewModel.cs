@@ -10,6 +10,7 @@
 
     public class PostAddViewModel : BindableBase, IDataErrorInfo
     {
+        #region Свойства
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
 
         public string this[string name]
@@ -41,36 +42,27 @@
 
         public string Error { get => null; }
 
-        public string PostName
+        public string PostName { get; set; }
+        #endregion
+
+        #region Команды
+        public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            get => GetValue<string>();
-            set
-            {
-                SetValue(value);
-                RaisePropertyChanged(nameof(PostName));
-            }
-        }
-
-        private bool Validation()
-        {
-            return ErrorCollection.Any(item => item.Value == null);
-        }
-
-        public ICommand Add => new DelegateCommand<Window>(addWindow =>
-        {
-            using var db = new InventoryEntities();
-
-            var post = new Post
-            {
-                Name = PostName
-            };
-
-            db.Posts.Add(post);
-            db.SaveChanges();
+            Add();
 
             addWindow.Close();
         }, _ => Validation());
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
+        #endregion
+
+        #region Методы
+        private bool Validation() => ErrorCollection.Any(item => item.Value == null);
+
+        private async void Add()
+        {
+            await Post.AddPost(PostName);
+        }
+        #endregion
     }
 }
