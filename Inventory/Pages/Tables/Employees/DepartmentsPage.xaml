@@ -37,7 +37,7 @@
         <ListView
             Grid.Row="1"
             Grid.ColumnSpan="2"
-            ItemsSource="{Binding Departments}"
+            ItemsSource="{Binding Departments, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectDepartment}">
             <ListView.View>
                 <GridView>
