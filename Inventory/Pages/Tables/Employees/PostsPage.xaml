@@ -32,12 +32,12 @@
 
         <ListView
             Grid.Row="1"
-            ItemsSource="{Binding Posts}"
+            ItemsSource="{Binding Posts, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectPost}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        DisplayMemberBinding="{Binding Name}"
+                        DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Наименование"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                 </GridView>

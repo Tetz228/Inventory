@@ -71,7 +71,7 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
-                    Command="{Binding Add}"
+                    Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddPostWindow}"
                     Content="Добавить новую должность"
                     Style="{StaticResource BaseButton}" />
