@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:employees="clr-namespace:Inventory.ViewModels.Edit.Tables.Employees"
+    xmlns:model="clr-namespace:Inventory.Model"
     x:Name="EditPostWindow"
     Title="Изменить информацию об должности"
     Width="500"
@@ -51,7 +52,8 @@
                                 VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding Post.Name, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding Post.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding  Post.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}"/>
                         </UniformGrid>
                     </StackPanel>
                 </Border>
