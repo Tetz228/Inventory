@@ -56,8 +56,8 @@
                                 VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding PostName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding ErrorCollection[PostName], UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding Post.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Post.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}">
                                 
                             </TextBox>
 
