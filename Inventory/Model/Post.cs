@@ -55,7 +55,7 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        public bool Validation() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
         #region Методы взаимодействия с информацией

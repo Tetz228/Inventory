@@ -1,6 +1,5 @@
 namespace Inventory.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Entity.Infrastructure;
@@ -18,11 +17,13 @@ namespace Inventory.Model
         {
             this.Employees_in_departments = new HashSet<Employees_in_departments>();
         }
-    
+
+        #region Свойства
         public int Id_department { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
+        #endregion
 
         #region Валидация
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
@@ -56,7 +57,7 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        public bool Validation() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
         #region Методы взаимодействия с информацией
