@@ -21,7 +21,7 @@
             Department.EndEdit();
             Edit();
             editWindow.Close();
-        }, _ => Department.Validation());
+        }, _ => Department.IsValidationProperties());
 
         public ICommand Cancel => new DelegateCommand<Window>(editWindow =>
         {
