@@ -1,4 +1,4 @@
-﻿namespace Inventory.ViewModels.Add.Tables.Employees
+namespace Inventory.ViewModels.Add.Tables.Employees
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
@@ -49,7 +49,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Add();
-
+            
             addWindow.Close();
         }, _ => Validation());
 
