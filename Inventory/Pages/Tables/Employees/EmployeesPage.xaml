@@ -170,13 +170,25 @@
             </Button>
         </StackPanel>
 
-        <!--  Поиск  -->
+        <!--  Поиск и обновление  -->
         <StackPanel
             Grid.Row="0"
             Grid.Column="1"
-            Width="414"
+            Width="460"
             HorizontalAlignment="Right"
             Style="{StaticResource BaseStackPanel}">
+            <Button
+                Command="{Binding DeleteEmployee}"
+                CommandParameter="{Binding SelectEmployee}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="White"
+                        Kind="Refresh" />
+                </ContentControl>
+            </Button>
             <TextBlock
                 Margin="5"
                 HorizontalAlignment="Right"

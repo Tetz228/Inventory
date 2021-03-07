@@ -67,7 +67,10 @@
         }, (depart) => depart != null);
 
         public ICommand DeleteDepartment => new DelegateCommand<Department>(Delete, (selectDepart) => selectDepart != null);
+        public ICommand RefreshList => new DelegateCommand(Refresh);
         #endregion
+
+        private async void Refresh() => await Department.Refresh();
 
         private async void Delete(Department department) => await Department.DeleteDepartment(department);
     }

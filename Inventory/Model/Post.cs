@@ -124,6 +124,17 @@ namespace Inventory.Model
 
             return Task.FromResult(true);
         }
+        
+        public static Task<bool> Refresh()
+        {
+            PostViewModel.Posts.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Posts)
+                PostViewModel.Posts.Add(item);
+
+            return Task.FromResult(true);
+        }
         #endregion
 
         #region Откат изменений

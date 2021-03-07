@@ -125,6 +125,17 @@ namespace Inventory.Model
 
             return Task.FromResult(true);
         }
+
+        public static Task<bool> Refresh()
+        {
+            DepartmentViewModel.Departments.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Departments)
+                DepartmentViewModel.Departments.Add(item);
+
+            return Task.FromResult(true);
+        }
         #endregion
 
         #region Откат изменений
