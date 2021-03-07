@@ -51,7 +51,8 @@
                                 VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding Department.Name, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding Department.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Department.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>
@@ -63,7 +64,7 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
-                    Command="{Binding Edit}"
+                    Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditDepartmentWindow}"
                     Content="Изменить информацию об отделе"
                     Style="{StaticResource BaseButton}" />

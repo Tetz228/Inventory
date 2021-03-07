@@ -55,7 +55,8 @@
                                 VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding DepartmentName, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding Department.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Department.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>
@@ -67,7 +68,7 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
-                    Command="{Binding Add}"
+                    Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddDepartmentWindow}"
                     Content="Добавить новый отдел"
                     Style="{StaticResource BaseButton}" />
