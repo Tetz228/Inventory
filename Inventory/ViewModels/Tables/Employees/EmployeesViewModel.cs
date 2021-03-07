@@ -32,7 +32,7 @@ namespace Inventory.ViewModels.Tables.Employees
         private string FilterSearch { get; set; } = "По ФИО";
 
         #region Свойства
-        public ObservableCollection<Employee> Employees { get; private set; }
+        public static ObservableCollection<Employee> Employees { get; private set; }
 
         private ICollectionView EmployeesCollection { get; set; }
 
@@ -92,18 +92,9 @@ namespace Inventory.ViewModels.Tables.Employees
         #region Действия
         public ICommand AddEmployee => new DelegateCommand(() =>
         {
-            using var db = new InventoryEntities();
-
             var addEmployeeWindow = new EmployeeAddWindow();
-            addEmployeeWindow.ShowDialog();
 
-            Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
-                                                                       .Select(post => post.Post))
-                                                                       .Include(empDepart => empDepart.Employees_in_departments
-                                                                       .Select(depart => depart.Department))
-                                                                       .Include(account => account.Accounts
-                                                                       .Select(role => role.User.Roles_users)));
-            EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
+            addEmployeeWindow.ShowDialog();
         });
 
         public ICommand EditEmployee => new DelegateCommand<Employee>((employee) =>
@@ -123,14 +114,6 @@ namespace Inventory.ViewModels.Tables.Employees
             };
 
             editEmployeeWindow.ShowDialog();
-
-            Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
-                    .Select(post => post.Post))
-                .Include(empDepart => empDepart.Employees_in_departments
-                    .Select(depart => depart.Department))
-                .Include(account => account.Accounts
-                    .Select(role => role.User.Roles_users)));
-            EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
 
         }, (employee) => employee != null);
 
