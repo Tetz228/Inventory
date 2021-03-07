@@ -101,36 +101,14 @@
         #region Команды
         public ICommand EditEmployee => new DelegateCommand<Window>(empEditWindow =>
         {
-            //using var db = new InventoryEntities();
-            //var findEmployee = db.Employees.SingleOrDefault(emp => emp.Id_employee == Employee.Id_employee);
-
-            //if (findEmployee == null)
-            //    MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении должности", MessageBoxButton.OK, MessageBoxImage.Error);
-            //else
-            //{
-            //    findEmployee.Name = Post.Name;
-            //    db.SaveChanges();
-            //}
-
-            //foreach (var post in PostsEmployees)
-            //    post.Fk_employee = employee.Id_employee;
-
-            //db.Posts_employees.AddRange(PostsEmployees);
-            //db.SaveChanges();
-
-            //foreach (var department in EmployeesInDepartments)
-            //    department.Fk_employee = employee.Id_employee;
-
-            //db.Employees_in_departments.AddRange(EmployeesInDepartments);
-            //db.SaveChanges();
-
+            
             empEditWindow.Close();
 
         }, _ => IsValidation());
 
         public ICommand Cancel => new DelegateCommand<Window>(empEditWindow =>
         {
-            //empEditWindow.Close(); 
+            
         });
 
         public ICommand AddPostInCollection => new DelegateCommand(() => PostsEmployees.Add(new Posts_employees()));
