@@ -18,16 +18,14 @@ namespace Inventory.ViewModels.Add.Tables.Employees
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Add();
-            
+
             addWindow.Close();
         }, _ => Post.Validation());
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
 
-        private async void Add()
-        {
-            await Post.AddPost(Post.Name);
-        }
+        private async void Add() => await Post.AddPost(Post.Name);
+
     }
 }

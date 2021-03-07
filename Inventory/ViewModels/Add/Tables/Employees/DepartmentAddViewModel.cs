@@ -9,23 +9,24 @@
 
     public class DepartmentAddViewModel : BindableBase
     {
-        public string DepartmentName { get; set; }
-
-        public ICommand Add => new DelegateCommand<Window>(addWindow =>
+        public DepartmentAddViewModel()
         {
-            using var db = new InventoryEntities();
+            Department = new Department();
+        }
 
-            var department = new Department
-            {
-                Name = DepartmentName
-            };
+        public Department Department { get; }
 
-            db.Departments.Add(department);
-            db.SaveChanges();
+        #region Команды
+        public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
+        {
+            Add();
 
             addWindow.Close();
-        }, _ => !string.IsNullOrWhiteSpace(DepartmentName));
+        }, _ => Department.Validation());
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
+        #endregion
+
+        private async void Add() => await Department.AddDepartment(Department.Name);
     }
 }
