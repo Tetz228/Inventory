@@ -3,7 +3,6 @@
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System.ComponentModel;
-    using System.Linq;
     using System.Windows;
     using System.Windows.Input;
 
@@ -18,7 +17,6 @@
 
         public Employee Employee { get; set; }
 
-        /// <summary>Событие после закрытия окна</summary>
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             Employee.PostsEmployees.Clear();
