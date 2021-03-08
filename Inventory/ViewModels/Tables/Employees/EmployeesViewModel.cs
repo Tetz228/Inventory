@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Inventory.ViewModels.Tables.Employees
+﻿namespace Inventory.ViewModels.Tables.Employees
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
@@ -10,7 +8,7 @@ namespace Inventory.ViewModels.Tables.Employees
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
-    using System.Windows;
+    using System.Linq;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -71,7 +69,6 @@ namespace Inventory.ViewModels.Tables.Employees
         }
 
         public Employee SelectEmployee { get; set; }
-
         #endregion
 
         #region Команды
@@ -97,59 +94,32 @@ namespace Inventory.ViewModels.Tables.Employees
             addEmployeeWindow.ShowDialog();
         });
 
-        public ICommand EditEmployee => new DelegateCommand<Employee>((employee) =>
+        public ICommand EditEmployee => new DelegateCommand<Employee>(employee =>
         {
             using var db = new InventoryEntities();
 
-            var editEmployeeViewModel = new EmployeeEditViewModel
-            {
-                Employee = employee,
-                PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees),
-                EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments)
-            };
+            var editEmployeeViewModel = new EmployeeEditViewModel(employee);
+            Employee.EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments);
+            Employee.PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees);
 
             var editEmployeeWindow = new EmployeeEditWindow
             {
                 DataContext = editEmployeeViewModel
             };
 
+            editEmployeeWindow.Closing += editEmployeeViewModel.OnWindowClosing;
             editEmployeeWindow.ShowDialog();
 
-        }, (employee) => employee != null);
+        }, employee => employee != null);
 
-        public ICommand DeleteEmployee => new DelegateCommand<Employee>((employee) =>
-        {
-            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить {employee.L_name} {employee.F_name} {employee.M_name}?",
-                "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return;
+        public ICommand DeleteEmployee => new DelegateCommand<Employee>(Delete, selectEmployee => selectEmployee != null);
 
-            //using var db = new InventoryEntities();
-            //var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == employee.Id_department);
-
-            //if (findDepartment == null)
-            //{
-            //    MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    Employees = new ObservableCollection<Department>(db.Departments.ToList());
-            //    return;
-            //}
-
-            //db.Departments.Remove(findDepartment);
-            //db.SaveChanges();
-
-            //Employees.Remove(employee);
-
-            try
-            {
-
-            }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException)
-            {
-                MessageBox.Show(@"Невозможно удалить сотрудника, так как он\она связан\а с другими сущностями!",
-                    "Ошибка при удалении сотрудника", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-        }, (employee) => employee != null);
+        public ICommand RefreshList => new DelegateCommand(Refresh);
         #endregion
         #endregion
+
+        private async void Delete(Employee employee) => await Employee.DeleteEmployee(employee);
+
+        private async void Refresh() => await Employee.Refresh();
     }
 }
