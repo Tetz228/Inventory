@@ -12,6 +12,7 @@ namespace Inventory.Model
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+    using System.Windows;
 
     public partial class Employee : BindableBase, IEditableObject, IDataErrorInfo
     {
@@ -25,6 +26,7 @@ namespace Inventory.Model
             this.Posts_employees = new HashSet<Posts_employees>();
         }
 
+        #region Свойства
         public int Id_employee { get; set; }
         public string L_name { get; set; }
         public string F_name { get; set; }
@@ -46,6 +48,7 @@ namespace Inventory.Model
         public static ObservableCollection<Posts_employees> PostsEmployees { get; set; } = new();
 
         public static ObservableCollection<Employees_in_departments> EmployeesInDepartments { get; set; } = new();
+        #endregion
 
         #region Валидация
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
@@ -63,24 +66,43 @@ namespace Inventory.Model
                             result = "Поле не должно быть пустым";
                         else if (L_name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
+                        else
+                            result = "";
                         break;
                     case "F_name":
                         if (string.IsNullOrWhiteSpace(F_name))
                             result = "Поле не должно быть пустым";
                         else if (F_name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
+                        else
+                            result = "";
+                        break;
+                    case "M_name":
+                        if (!string.IsNullOrWhiteSpace(M_name))
+                        {
+                            if (M_name.Length < 2)
+                                result = "Поле должно содержать минимум 2 символа";
+                            else
+                                result = "";
+                        }
+                        else
+                            result = "";
                         break;
                     case "Email":
                         if (string.IsNullOrWhiteSpace(Email))
                             result = "Поле не должно быть пустым";
                         else if (!IsValidationEmail(Email))
                             result = "Некорректная почта";
+                        else
+                            result = "";
                         break;
                     case "Phone_number":
                         if (string.IsNullOrWhiteSpace(Phone_number))
                             result = "Поле не должно быть пустым";
                         else if (Phone_number.Length < 10)
                             result = "Поле должно содержать минимум 10 символа";
+                        else
+                            result = "";
                         break;
                 }
 
@@ -97,7 +119,7 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        private static bool IsValidationEmail(string email)
+        private bool IsValidationEmail(string email)
         {
             try
             {
@@ -134,7 +156,7 @@ namespace Inventory.Model
             }
         }
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null || ErrorCollection.All(item => item.Value == ""));
 
         public bool IsValidationCollections()
         {
@@ -145,7 +167,7 @@ namespace Inventory.Model
         }
         #endregion
 
-        #region Методы взаимодействия с информацией
+        #region Методы обработки информации
         public static Task<bool> AddEmployee(Employee employee)
         {
             using var db = new InventoryEntities();
@@ -174,6 +196,7 @@ namespace Inventory.Model
             db.Employees_in_departments.AddRange(EmployeesInDepartments);
             db.SaveChanges();
 
+            //Для отображения должностей и отделов, которые только что были добавлены, в таблице
             emp.Employees_in_departments = new List<Employees_in_departments>(db.Employees_in_departments.Include(dep => dep.Department).Where(empDep => empDep.Fk_employee == emp.Id_employee));
             emp.Posts_employees = new List<Posts_employees>(db.Posts_employees.Include(post => post.Post).Where(postEmp => postEmp.Fk_employee == emp.Id_employee));
 
@@ -182,53 +205,138 @@ namespace Inventory.Model
             return Task.FromResult(true);
         }
 
-        public static Task<bool> EditEmployee(Employee employee)
+        public static Task<bool> EditEmployee(Employee selectEmployee)
         {
-            //using var db = new InventoryEntities();
-            //var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == post.Id_department);
+            using var db = new InventoryEntities();
+            var findEmployee = db.Employees.Include(employeePost => employeePost.Posts_employees
+                                           .Select(post => post.Post))
+                                           .Include(empDepart => empDepart.Employees_in_departments
+                                           .Select(depart => depart.Department))
+                                           .Include(account => account.Accounts
+                                           .Select(role => role.User.Roles_users))
+                                           .SingleOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
 
-            //if (findDepartment == null)
-            //{
-            //    MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении отдела",
-            //        MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return Task.FromResult(false);
-            //}
+            if (findEmployee == null)
+            {
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении сотрудника",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                Refresh();
+                return Task.FromResult(false);
+            }
 
-            //findDepartment.Name = post.Name;
-            //db.SaveChanges();
+            findEmployee.L_name = selectEmployee.L_name;
+            findEmployee.F_name = selectEmployee.F_name;
+            findEmployee.M_name = selectEmployee.M_name;
+            findEmployee.Phone_number = selectEmployee.Phone_number;
+            findEmployee.Email = selectEmployee.Email;
+
+            db.SaveChanges();
+
+            AddInCollections(db, findEmployee.Id_employee);
+
+            Refresh();
+
             return Task.FromResult(true);
         }
 
-        public static Task<bool> DeleteEmployee(Employee employee)
+        private static void AddInCollections(InventoryEntities db, int idEmployee)
         {
-            //if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectDepartment.Name}?",
-            //    "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question))
-            //    return Task.FromResult(false);
+            foreach (var post in PostsEmployees)
+            {
+                if (post.Id_post_employee == 0)
+                {
+                    post.Fk_employee = idEmployee;
+                    db.Posts_employees.Add(post);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var postEmployee = db.Posts_employees.Where(postEmp => postEmp.Id_post_employee == post.Id_post_employee).ToList();
+                    foreach (var item in postEmployee)
+                    {
+                        item.Fk_post = post.Fk_post;
+                        db.SaveChanges();
+                    }
+                }
+            }
 
-            //using var db = new InventoryEntities();
-            //var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == selectDepartment.Id_department);
+            foreach (var department in EmployeesInDepartments)
+            {
+                if (department.Id_employee_in_department == 0)
+                {
+                    department.Fk_employee = idEmployee;
+                    db.Employees_in_departments.Add(department);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var employeesInDepartments = db.Employees_in_departments.Where(empDepart => empDepart.Id_employee_in_department == department.Id_employee_in_department).ToList();
+                    foreach (var item in employeesInDepartments)
+                    {
+                        item.Fk_department = department.Fk_department;
+                        db.SaveChanges();
+                    }
+                }
+            }
+        }
 
-            //if (findDepartment == null)
-            //{
-            //    MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return Task.FromResult(false);
-            //}
+        public static Task<bool> DeleteEmployee(Employee selectEmployee)
+        {
+            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name}?",
+                "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                return Task.FromResult(false);
 
-            //try
-            //{
-            //    db.Departments.Remove(findDepartment);
-            //    db.SaveChanges();
+            using var db = new InventoryEntities();
+            var findEmployee = db.Employees.SingleOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
 
-            //    DepartmentViewModel.Departments.Remove(selectDepartment);
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    MessageBox.Show("Невозможно удалить отдел, так как он связан с другими сущностями!",
-            //        "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return Task.FromResult(false);
-            //}
+            if (findEmployee == null)
+            {
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении сотрудника", MessageBoxButton.OK, MessageBoxImage.Error);
+                Refresh();
+                return Task.FromResult(false);
+            }
+
+            db.Employees.Remove(findEmployee);
+            db.SaveChanges();
+
+            EmployeesViewModel.Employees.Remove(selectEmployee);
 
             return Task.FromResult(true);
+        }
+
+        public static void DeletePostFromCollection(Posts_employees selectPostEmp)
+        {
+            if (selectPostEmp.Id_post_employee != 0)
+            {
+                using var db = new InventoryEntities();
+                var findPostEmployee = db.Posts_employees.SingleOrDefault(postEmployee =>
+                    postEmployee.Id_post_employee == selectPostEmp.Id_post_employee);
+
+                if (findPostEmployee != null)
+                {
+                    db.Posts_employees.Remove(findPostEmployee);
+                    db.SaveChanges();
+                }
+            }
+
+            PostsEmployees.Remove(selectPostEmp);
+        }
+
+        public static void DeleteDepartmentFromCollection(Employees_in_departments selectEmpInDepart)
+        {
+            if (selectEmpInDepart.Id_employee_in_department != 0)
+            {
+                using var db = new InventoryEntities();
+                var findEmpDepart = db.Employees_in_departments.SingleOrDefault(inDepartments => inDepartments.Id_employee_in_department == selectEmpInDepart.Id_employee_in_department);
+
+                if (findEmpDepart != null)
+                {
+                    db.Employees_in_departments.Remove(findEmpDepart);
+                    db.SaveChanges();
+                }
+            }
+
+            EmployeesInDepartments.Remove(selectEmpInDepart);
         }
 
         public static Task<bool> Refresh()
@@ -236,28 +344,33 @@ namespace Inventory.Model
             EmployeesViewModel.Employees.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Employees)
+            foreach (var item in db.Employees.Include(employeePost => employeePost.Posts_employees
+                                                     .Select(post => post.Post))
+                                                     .Include(empDepart => empDepart.Employees_in_departments
+                                                     .Select(depart => depart.Department))
+                                                     .Include(account => account.Accounts
+                                                     .Select(role => role.User.Roles_users)))
+            {
                 EmployeesViewModel.Employees.Add(item);
+            }
 
             return Task.FromResult(true);
         }
         #endregion
 
-        #region Откат изменений
+        #region Откат изменений в случаи нажатия отмены
         private Employee _selectEmployee;
 
         public void BeginEdit()
         {
-            _selectEmployee = new Employee()
+            _selectEmployee = new Employee
             {
                 Id_employee = this.Id_employee,
                 L_name = this.L_name,
                 F_name = this.F_name,
                 M_name = this.M_name,
-                Email = this.Email,
                 Phone_number = this.Phone_number,
-                Posts_employees = this.Posts_employees,
-                Employees_in_departments = this.Employees_in_departments
+                Email = this.Email
             };
         }
 
@@ -271,8 +384,12 @@ namespace Inventory.Model
             if (_selectEmployee == null)
                 return;
 
-            //Id_department = _selectEmployee.Id_department;
-            //Name = _selectEmployee.Name;
+            Id_employee = _selectEmployee.Id_employee;
+            L_name = _selectEmployee.L_name;
+            F_name = _selectEmployee.F_name;
+            M_name = _selectEmployee.M_name;
+            Phone_number = _selectEmployee.Phone_number;
+            Email = _selectEmployee.Email;
         }
         #endregion
     }
