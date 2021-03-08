@@ -178,7 +178,7 @@
             HorizontalAlignment="Right"
             Style="{StaticResource BaseStackPanel}">
             <Button
-                Command="{Binding DeleteEmployee}"
+                Command="{Binding RefreshList}"
                 CommandParameter="{Binding SelectEmployee}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
