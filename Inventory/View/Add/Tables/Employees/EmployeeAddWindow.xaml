@@ -90,14 +90,9 @@
                                     VerticalAlignment="Center"
                                     MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Employee.M_name, UpdateSourceTrigger=PropertyChanged}" />
-                                <CheckBox
-                                    Height="19"
-                                    Margin="238,-30,-227,0"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Center"
-                                    Content="Нет отчества"
-                                    Style="{StaticResource BaseCheckBox}" />
+                                    Text="{Binding Employee.M_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Employee.ErrorCollection[M_name], UpdateSourceTrigger=PropertyChanged}" />
+
                             </UniformGrid>
 
                             <!--  Номер телефона  -->
