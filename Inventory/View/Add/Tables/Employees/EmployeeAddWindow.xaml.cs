@@ -10,6 +10,7 @@
             InitializeComponent();
 
             var employeeAddViewModel = new EmployeeAddViewModel();
+
             DataContext = employeeAddViewModel;
             Closing += employeeAddViewModel.OnWindowClosing;
         }
