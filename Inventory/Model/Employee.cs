@@ -168,7 +168,7 @@ namespace Inventory.Model
         #endregion
 
         #region Методы обработки информации
-        public static Task<bool> AddEmployee(Employee employee)
+        public static void AddEmployee(Employee employee)
         {
             using var db = new InventoryEntities();
 
@@ -201,11 +201,9 @@ namespace Inventory.Model
             emp.Posts_employees = new List<Posts_employees>(db.Posts_employees.Include(post => post.Post).Where(postEmp => postEmp.Fk_employee == emp.Id_employee));
 
             EmployeesViewModel.Employees.Add(emp);
-
-            return Task.FromResult(true);
         }
 
-        public static Task<bool> EditEmployee(Employee selectEmployee)
+        public static void EditEmployee(Employee selectEmployee)
         {
             using var db = new InventoryEntities();
             var findEmployee = db.Employees.Include(employeePost => employeePost.Posts_employees
@@ -221,7 +219,7 @@ namespace Inventory.Model
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении сотрудника",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Refresh();
-                return Task.FromResult(false);
+                return;
             }
 
             findEmployee.L_name = selectEmployee.L_name;
@@ -235,8 +233,6 @@ namespace Inventory.Model
             AddInCollections(db, findEmployee.Id_employee);
 
             Refresh();
-
-            return Task.FromResult(true);
         }
 
         private static void AddInCollections(InventoryEntities db, int idEmployee)
@@ -280,11 +276,11 @@ namespace Inventory.Model
             }
         }
 
-        public static Task<bool> DeleteEmployee(Employee selectEmployee)
+        public static void DeleteEmployee(Employee selectEmployee)
         {
             if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name}?",
                 "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return Task.FromResult(false);
+                return;
 
             using var db = new InventoryEntities();
             var findEmployee = db.Employees.SingleOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
@@ -293,15 +289,13 @@ namespace Inventory.Model
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении сотрудника", MessageBoxButton.OK, MessageBoxImage.Error);
                 Refresh();
-                return Task.FromResult(false);
+                return;
             }
 
             db.Employees.Remove(findEmployee);
             db.SaveChanges();
 
             EmployeesViewModel.Employees.Remove(selectEmployee);
-
-            return Task.FromResult(true);
         }
 
         public static void DeletePostFromCollection(Posts_employees selectPostEmp)
@@ -339,7 +333,7 @@ namespace Inventory.Model
             EmployeesInDepartments.Remove(selectEmpInDepart);
         }
 
-        public static Task<bool> Refresh()
+        public static void Refresh()
         {
             EmployeesViewModel.Employees.Clear();
             using var db = new InventoryEntities();
@@ -353,8 +347,6 @@ namespace Inventory.Model
             {
                 EmployeesViewModel.Employees.Add(item);
             }
-
-            return Task.FromResult(true);
         }
         #endregion
 

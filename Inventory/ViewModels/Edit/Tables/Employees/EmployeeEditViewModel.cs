@@ -1,8 +1,11 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Employees
 {
+    using System;
+
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System.ComponentModel;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
 
@@ -26,7 +29,7 @@
         public ICommand EditEmployee => new DelegateCommand<Window>(empEditWindow =>
         {
             Employee.EndEdit();
-            Edit();
+            Employee.EditEmployee(Employee);
             empEditWindow.Close();
         }, _ => Employee.IsValidationCollections() && Employee.IsValidationProperties());
 
@@ -44,7 +47,5 @@
 
         public ICommand DeleteDepartmentFromCollection => new DelegateCommand<Employees_in_departments>(Employee.DeleteDepartmentFromCollection);
         #endregion
-
-        private async void Edit() => await Employee.EditEmployee(Employee);
     }
 }

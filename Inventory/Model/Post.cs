@@ -94,11 +94,11 @@ namespace Inventory.Model
             return Task.FromResult(true);
         }
 
-        public static Task<bool> DeletePost(Post selectPost)
+        public static void DeletePost(Post selectPost)
         {
             if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectPost.Name}?",
                 "Удаление должности", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return Task.FromResult(false);
+                return;
 
             using var db = new InventoryEntities();
             var findPost = db.Posts.SingleOrDefault(post => post.Id_post == selectPost.Id_post);
@@ -107,7 +107,7 @@ namespace Inventory.Model
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
                 Refresh();
-                return Task.FromResult(false);
+                return;
             }
 
             try
@@ -121,21 +121,16 @@ namespace Inventory.Model
             {
                 MessageBox.Show("Невозможно удалить должность, так как она связана с другими сущностями!",
                     "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
-                return Task.FromResult(false);
             }
-
-            return Task.FromResult(true);
         }
         
-        public static Task<bool> Refresh()
+        public static void Refresh()
         {
             PostViewModel.Posts.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Posts)
                 PostViewModel.Posts.Add(item);
-
-            return Task.FromResult(true);
         }
         #endregion
 

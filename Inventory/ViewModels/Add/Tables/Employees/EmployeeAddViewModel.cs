@@ -26,11 +26,9 @@
         #region Команды
         public ICommand AddEmployee => new DelegateCommand<Window>(empAddWindow =>
         {
-            Add();
+            Employee.AddEmployee(Employee);
             empAddWindow.Close();
         }, _ => Employee.IsValidationCollections() && Employee.IsValidationProperties());
-
-        private async void Add() => await Employee.AddEmployee(Employee);
 
         public ICommand Cancel => new DelegateCommand<Window>(empAddWindow => empAddWindow.Close());
 

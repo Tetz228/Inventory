@@ -9,6 +9,7 @@
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -112,14 +113,10 @@
 
         }, employee => employee != null);
 
-        public ICommand DeleteEmployee => new DelegateCommand<Employee>(Delete, selectEmployee => selectEmployee != null);
+        public ICommand DeleteEmployee => new DelegateCommand<Employee>(Employee.DeleteEmployee, selectEmployee => selectEmployee != null);
 
-        public ICommand RefreshList => new DelegateCommand(Refresh);
+        public ICommand RefreshList => new DelegateCommand(Employee.Refresh);
         #endregion
         #endregion
-
-        private async void Delete(Employee employee) => await Employee.DeleteEmployee(employee);
-
-        private async void Refresh() => await Employee.Refresh();
     }
 }

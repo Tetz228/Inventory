@@ -66,13 +66,9 @@
 
         }, post => post != null);
 
-        public ICommand DeletePost => new DelegateCommand<Post>(Delete, selectPost => selectPost != null);
+        public ICommand DeletePost => new DelegateCommand<Post>(Post.DeletePost, selectPost => selectPost != null);
 
-        public ICommand RefreshList => new DelegateCommand(Refresh);
+        public ICommand RefreshList => new DelegateCommand(Post.Refresh);
         #endregion
-
-        private async void Refresh() => await Post.Refresh();
-
-        private async void Delete(Post post) => await Post.DeletePost(post);
     }
 }

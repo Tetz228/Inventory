@@ -96,11 +96,11 @@ namespace Inventory.Model
             return Task.FromResult(true);
         }
 
-        public static Task<bool> DeleteDepartment(Department selectDepartment)
+        public static void DeleteDepartment(Department selectDepartment)
         {
             if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectDepartment.Name}?",
                 "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return Task.FromResult(false);
+                return;
 
             using var db = new InventoryEntities();
             var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == selectDepartment.Id_department);
@@ -109,7 +109,7 @@ namespace Inventory.Model
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
                 Refresh();
-                return Task.FromResult(false);
+                return;
             }
 
             try
@@ -123,21 +123,16 @@ namespace Inventory.Model
             {
                 MessageBox.Show("Невозможно удалить отдел, так как он связан с другими сущностями!",
                     "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
-                return Task.FromResult(false);
             }
-
-            return Task.FromResult(true);
         }
 
-        public static Task<bool> Refresh()
+        public static void Refresh()
         {
             DepartmentViewModel.Departments.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Departments)
                 DepartmentViewModel.Departments.Add(item);
-
-            return Task.FromResult(true);
         }
         #endregion
 
