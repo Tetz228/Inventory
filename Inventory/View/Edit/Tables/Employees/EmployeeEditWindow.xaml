@@ -52,7 +52,8 @@
                                     VerticalAlignment="Center"
                                     MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Employee.L_name, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Employee.L_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Employee.ErrorCollection[L_name], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Имя  -->
@@ -68,7 +69,8 @@
                                     VerticalAlignment="Center"
                                     MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Employee.F_name, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Employee.F_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Employee.ErrorCollection[F_name], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Отчество  -->
@@ -84,7 +86,8 @@
                                     VerticalAlignment="Center"
                                     MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Employee.M_name, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Employee.M_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Employee.ErrorCollection[M_name], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Номер телефона  -->
@@ -100,7 +103,8 @@
                                     VerticalAlignment="Center"
                                     MaxLength="20"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Employee.Phone_number, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Employee.Phone_number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Employee.ErrorCollection[Phone_number], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Email  -->
@@ -116,7 +120,8 @@
                                     VerticalAlignment="Center"
                                     MaxLength="70"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Employee.Email, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Employee.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Employee.ErrorCollection[Email], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Должности  -->
@@ -128,7 +133,7 @@
                                     Text="Должности: " />
 
                                 <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding PostsEmployees}">
+                                    <ItemsControl ItemsSource="{Binding Employee.PostsEmployees}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid>
@@ -142,7 +147,7 @@
                                                         MaxWidth="156"
                                                         Margin="5"
                                                         DisplayMemberPath="Name"
-                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.CollectionPosts}"
+                                                        ItemsSource="{Binding CollectionPosts}"
                                                         SelectedValue="{Binding Fk_post}"
                                                         SelectedValuePath="Id_post"
                                                         Style="{StaticResource BaseComboBox}" />
@@ -176,7 +181,7 @@
                                     Text="Отделы: " />
 
                                 <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding EmployeesInDepartments}">
+                                    <ItemsControl ItemsSource="{Binding Employee.EmployeesInDepartments}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid>
@@ -190,7 +195,7 @@
                                                         MaxWidth="156"
                                                         Margin="5"
                                                         DisplayMemberPath="Name"
-                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.CollectionDepartments}"
+                                                        ItemsSource="{Binding CollectionDepartments}"
                                                         SelectedValue="{Binding Fk_department}"
                                                         SelectedValuePath="Id_department"
                                                         Style="{StaticResource BaseComboBox}" />
