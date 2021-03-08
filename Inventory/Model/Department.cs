@@ -60,7 +60,7 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        #region Методы взаимодействия с информацией
+        #region Методы обработки информации
         public static Task<bool> AddDepartment(string name)
         {
             using var db = new InventoryEntities();
@@ -87,6 +87,7 @@ namespace Inventory.Model
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении отдела",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+                Refresh();
                 return Task.FromResult(false);
             }
 
@@ -107,6 +108,7 @@ namespace Inventory.Model
             if (findDepartment == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
+                Refresh();
                 return Task.FromResult(false);
             }
 
