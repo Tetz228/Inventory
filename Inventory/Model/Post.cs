@@ -65,6 +65,10 @@ namespace Inventory.Model
 
         #endregion
 
+        #region Метод поиска
+        public static bool Search(Post post, string postsFilter) => post.Name.ToLower().Contains(postsFilter.ToLower());
+        #endregion
+
         #region Методы обработки информации
         public static Task<bool> AddPost(string name)
         {

@@ -14,7 +14,6 @@ namespace Inventory.Model
 
     public partial class Employee : BindableBase, IEditableObject, IDataErrorInfo
     {
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
             this.Accounts = new HashSet<Account>();
@@ -32,15 +31,10 @@ namespace Inventory.Model
         public string Email { get; set; }
         public string Phone_number { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_computers> Dispensing_computers { get; set; }
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_peripherals> Dispensing_peripherals { get; set; }
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Posts_employees> Posts_employees { get; set; }
 
         public static ObservableCollection<Posts_employees> PostsEmployees { get; set; } = new();
@@ -115,6 +109,20 @@ namespace Inventory.Model
 
             return PostsEmployees.All(item => item.Fk_post != 0) && EmployeesInDepartments.All(item => item.Fk_department != 0);
         }
+        #endregion
+
+        #region Методы поиска
+
+        public static bool Search(Employee employee, string employeesFilter)
+        {
+            return employee.L_name.ToLower().Contains(employeesFilter.ToLower()) || employee.F_name.ToLower().Contains(employeesFilter.ToLower()) ||
+                   employee.Email.ToLower().Contains(employeesFilter.ToLower()) || employee.Phone_number.ToLower().Contains(employeesFilter.ToLower()) ||
+                   ContainsCollectionPostsEmployees(employee, employeesFilter.ToLower()) || ContainsCollectionEmployeesInDepartments(employee, employeesFilter.ToLower());
+        }
+
+        public static bool ContainsCollectionPostsEmployees(Employee employee, string employeesFilter) => employee.Posts_employees.Select(postsEmployees => postsEmployees.Post.Name.ToLower().Contains(employeesFilter)).FirstOrDefault();
+
+        public static bool ContainsCollectionEmployeesInDepartments(Employee employee, string employeesFilter) => employee.Employees_in_departments.Select(employeesInDepartments => employeesInDepartments.Department.Name.ToLower().Contains(employeesFilter)).FirstOrDefault();
         #endregion
 
         #region Методы обработки информации

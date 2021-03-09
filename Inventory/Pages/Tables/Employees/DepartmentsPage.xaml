@@ -37,7 +37,8 @@
         <ListView
             Grid.Row="1"
             Grid.ColumnSpan="2"
-            ItemsSource="{Binding Departments, UpdateSourceTrigger=PropertyChanged}"
+            GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
+            ItemsSource="{Binding DepartmentsCollection, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectDepartment}">
             <ListView.View>
                 <GridView>
@@ -150,7 +151,7 @@
                 VerticalAlignment="Center"
                 BorderThickness="1"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding SearchDepartment, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding DepartmentsFilter, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </Page>

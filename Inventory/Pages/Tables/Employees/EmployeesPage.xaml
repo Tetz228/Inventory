@@ -60,8 +60,8 @@
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            GridViewColumnHeader.Click="{DXEvent Handler='Initialize(@sender, @args)'}"
-            ItemsSource="{Binding Employees}"
+            GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
+            ItemsSource="{Binding EmployeesCollection}"
             SelectedItem="{Binding SelectEmployee}">
             <ListView.View>
                 <GridView>

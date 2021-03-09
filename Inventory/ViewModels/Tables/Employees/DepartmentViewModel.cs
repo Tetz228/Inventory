@@ -7,6 +7,8 @@
     using Inventory.ViewModels.Edit.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -17,25 +19,26 @@
             using var db = new InventoryEntities();
             Departments = new ObservableCollection<Department>(db.Departments);
             DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
+            DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
         public static ObservableCollection<Department> Departments { get; set; }
 
-        private ICollectionView DepartmentsCollection { get; set; }
+        public ICollectionView DepartmentsCollection { get; set; }
 
-        private string _searchDepartment;
+        private string _departmentsFilter;
 
-        public string SearchDepartment
+        public string DepartmentsFilter
         {
-            get => _searchDepartment;
+            get => _departmentsFilter;
             set
             {
-                _searchDepartment = value;
+                _departmentsFilter = value;
                 DepartmentsCollection.Filter = obj =>
                 {
                     if (obj is Department department)
-                        return department.Name.ToLower().Contains(SearchDepartment.ToLower());
+                        return Department.Search(department, DepartmentsFilter);
 
                     return false;
                 };
@@ -45,6 +48,34 @@
 
         public Department SelectDepartment { get; set; }
         #endregion
+
+        /// <summary>Событие при клике на заголовок в View</summary>
+        public void Sort(object sender, RoutedEventArgs args)
+        {
+            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
+                return;
+
+            switch (columnHeader.Content.ToString())
+            {
+                case "Наименование":
+                {
+                    if (DepartmentsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
+                    {
+                        DepartmentsCollection.SortDescriptions.Clear();
+                        DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Descending));
+                    }
+                    else
+                    {
+                        DepartmentsCollection.SortDescriptions.Clear();
+                        DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Ascending));
+                    }
+
+                    DepartmentsCollection.Refresh();
+
+                    break;
+                }
+            }
+        }
 
         #region Команды
         public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectDepartment = null);

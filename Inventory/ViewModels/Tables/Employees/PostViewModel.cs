@@ -7,6 +7,8 @@
     using Inventory.ViewModels.Edit.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -17,27 +19,28 @@
             using var db = new InventoryEntities();
             Posts = new ObservableCollection<Post>(db.Posts);
             PostsCollection = CollectionViewSource.GetDefaultView(Posts);
+            PostsCollection.SortDescriptions.Add(new SortDescription(nameof(Post.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Post> Posts { get; set; } = new();
+        public static ObservableCollection<Post> Posts { get; set; }
 
-        private ICollectionView PostsCollection { get; }
+        public ICollectionView PostsCollection { get; }
 
         public Post SelectPost { get; set; }
 
-        private string _searchPost;
+        private string _postsFilter = string.Empty;
 
-        public string SearchPost
+        public string PostsFilter
         {
-            get => _searchPost;
+            get => _postsFilter;
             set
             {
-                _searchPost = value;
+                _postsFilter = value;
                 PostsCollection.Filter = obj =>
                 {
                     if (obj is Post post)
-                        return post.Name.ToLower().Contains(SearchPost.ToLower());
+                        return Post.Search(post, PostsFilter);
 
                     return false;
                 };
@@ -45,6 +48,34 @@
             }
         }
         #endregion
+
+        /// <summary>Событие при клике на заголовок в View</summary>
+        public void Sort(object sender, RoutedEventArgs args)
+        {
+            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
+                return;
+
+            switch (columnHeader.Content.ToString())
+            {
+                case "Наименование":
+                    {
+                        if (PostsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
+                        {
+                            PostsCollection.SortDescriptions.Clear();
+                            PostsCollection.SortDescriptions.Add(new SortDescription(nameof(Post.Name), ListSortDirection.Descending));
+                        }
+                        else
+                        {
+                            PostsCollection.SortDescriptions.Clear();
+                            PostsCollection.SortDescriptions.Add(new SortDescription(nameof(Post.Name), ListSortDirection.Ascending));
+                        }
+
+                        PostsCollection.Refresh();
+
+                        break;
+                    }
+            }
+        }
 
         #region Команды
         public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectPost = null);
