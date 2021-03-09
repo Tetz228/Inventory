@@ -51,7 +51,7 @@
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Post.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding  Post.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}"/>
+                                ToolTip="{Binding Post.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>
