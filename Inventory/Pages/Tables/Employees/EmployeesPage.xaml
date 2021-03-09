@@ -175,7 +175,6 @@
         <StackPanel
             Grid.Row="0"
             Grid.Column="1"
-            Width="460"
             HorizontalAlignment="Right"
             Style="{StaticResource BaseStackPanel}">
             <Button
@@ -205,65 +204,6 @@
                 BorderThickness="1"
                 Style="{StaticResource BaseTextBox}"
                 Text="{Binding EmployeesFilter, UpdateSourceTrigger=PropertyChanged}" />
-
-            <!--  Фильтры  -->
-            <Menu
-                Width="49"
-                Height="30"
-                HorizontalAlignment="Left"
-                Background="White">
-                <MenuItem
-                    Width="30"
-                    Height="30"
-                    HorizontalAlignment="Left">
-
-                    <MenuItem.Header>
-                        <ContentControl HorizontalAlignment="Left">
-                            <materialDesign:PackIcon
-                                Width="25"
-                                Height="25"
-                                Foreground="Black"
-                                Kind="DotsVertical" />
-                        </ContentControl>
-                    </MenuItem.Header>
-
-                    <StackPanel>
-                        <RadioButton
-                            Command="{Binding SearchByFlm}"
-                            Content="По ФИО"
-                            GroupName="Filter"
-                            IsChecked="True" />
-                    </StackPanel>
-
-                    <StackPanel>
-                        <RadioButton
-                            Command="{Binding SearchByEmails}"
-                            Content="По почте"
-                            GroupName="Filter" />
-                    </StackPanel>
-
-                    <StackPanel>
-                        <RadioButton
-                            Command="{Binding SearchByPhoneNumbers}"
-                            Content="По номеру телефона"
-                            GroupName="Filter" />
-                    </StackPanel>
-
-                    <StackPanel>
-                        <RadioButton
-                            Command="{Binding SearchByPosts}"
-                            Content="По должностям"
-                            GroupName="Filter" />
-                    </StackPanel>
-
-                    <StackPanel>
-                        <RadioButton
-                            Command="{Binding SearchByDepartments}"
-                            Content="По отделам"
-                            GroupName="Filter" />
-                    </StackPanel>
-                </MenuItem>
-            </Menu>
         </StackPanel>
     </Grid>
 </Page>
