@@ -9,7 +9,8 @@
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Linq;
-    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -26,66 +27,54 @@
                                                                        .Select(role => role.User.Roles_users)));
 
             EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
+
+            EmployeesCollection.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Employee.Posts_employees)));
+            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Ascending));
         }
 
-        private string FilterSearch { get; set; } = "По ФИО";
+        private string _employeesFilter = string.Empty;
 
-        #region Свойства
-        public static ObservableCollection<Employee> Employees { get; private set; }
-
-        private ICollectionView EmployeesCollection { get; set; }
-
-        private string _search;
-
-        public string Search
+        public string EmployeesFilter
         {
-            get => _search;
+            get
+            {
+                return _employeesFilter;
+            }
             set
             {
-                _search = value;
+                _employeesFilter = value;
                 EmployeesCollection.Filter = obj =>
                 {
                     if (obj is Employee employee)
-                        switch (FilterSearch)
-                        {
-                            case "По должностям":
-                                foreach (var postsEmployees in employee.Posts_employees.Where(postsEmployees => postsEmployees.Post.Name.ToLower().Contains(Search.ToLower())))
-                                    return postsEmployees.Post.Name.ToLower().Contains(Search.ToLower());
-                                break;
-                            case "По отделам":
-                                foreach (var employeesInDepartments in employee.Employees_in_departments.Where(employeesInDepartments => employeesInDepartments.Department.Name.ToLower().Contains(Search.ToLower())))
-                                    return employeesInDepartments.Department.Name.ToLower().Contains(Search.ToLower());
-                                break;
-                            case "По ФИО":
-                                return (employee.L_name + " " + employee.F_name + " " + employee.M_name).ToLower().Contains(Search.ToLower());
-                            case "По почте":
-                                return employee.Email.ToLower().Contains(Search.ToLower());
-                            case "По номеру телефона":
-                                return employee.Phone_number.ToLower().Contains(Search.ToLower());
-                        }
+                    {
+                        return employee.L_name.Contains(EmployeesFilter) || employee.F_name.Contains(EmployeesFilter) ||
+                               employee.Email.Contains(EmployeesFilter) || employee.Phone_number.Contains(EmployeesFilter) ||
+                               ContainsCollectionPostsEmployees(employee) || ContainsCollectionEmployeesInDepartments(employee);
+                    }
+
                     return false;
                 };
                 EmployeesCollection.Refresh();
             }
         }
 
+        #region Свойства
+        public static ObservableCollection<Employee> Employees { get; set; }
+
+        private ICollectionView EmployeesCollection { get; set; }
+
+        private bool ContainsCollectionPostsEmployees(Employee employee) => employee.Posts_employees.Select(postsEmployees => postsEmployees.Post.Name.Contains(EmployeesFilter)).FirstOrDefault();
+
+        private bool ContainsCollectionEmployeesInDepartments(Employee employee) => employee.Employees_in_departments.Select(employeesInDepartments => employeesInDepartments.Department.Name.Contains(EmployeesFilter)).FirstOrDefault();
+
+        private string _search;
+
+        
         public Employee SelectEmployee { get; set; }
         #endregion
 
         #region Команды
         public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectEmployee = null);
-
-        #region Фильтры поиска
-        public ICommand SearchByFlm => new DelegateCommand(() => FilterSearch = "По ФИО");
-
-        public ICommand SearchByEmails => new DelegateCommand(() => FilterSearch = "По почте");
-
-        public ICommand SearchByPhoneNumbers => new DelegateCommand(() => FilterSearch = "По номеру телефона");
-
-        public ICommand SearchByPosts => new DelegateCommand(() => FilterSearch = "По должностям");
-
-        public ICommand SearchByDepartments => new DelegateCommand(() => FilterSearch = "По отделам");
-        #endregion
 
         #region Действия
         public ICommand AddEmployee => new DelegateCommand(() =>
@@ -94,6 +83,16 @@
 
             addEmployeeWindow.ShowDialog();
         });
+
+        /// <summary>Событие при клике на заголовок в View</summary>
+        public void Initialize(object sender, RoutedEventArgs args)
+        {
+            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
+                return;
+
+            if (columnHeader.Content.ToString() == "ФИО")
+                Employees = new ObservableCollection<Employee>(Employees.OrderBy(lname => lname.L_name));
+        }
 
         public ICommand EditEmployee => new DelegateCommand<Employee>(employee =>
         {
