@@ -2,18 +2,15 @@ namespace Inventory.Model
 {
     using DevExpress.Mvvm;
     using Inventory.ViewModels.Tables.Employees;
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Data.Entity;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
     using System.Windows;
-    using System.Net.Mail;
 
     public partial class Employee : BindableBase, IEditableObject, IDataErrorInfo
     {
@@ -105,64 +102,9 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        private bool IsValidationEmail(string email)
-        {
-            try
-            {
-                var address = new MailAddress(email);
-                return address.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-            //try
-            //{
-            //    email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
-            //        RegexOptions.None, TimeSpan.FromMilliseconds(200));
+        private bool IsValidationEmail(string email) => new EmailAddressAttribute().IsValid(email);
 
-            //    string DomainMapper(Match match)
-            //    {
-            //        var idn = new IdnMapping();
-
-            //        string domainName = idn.GetAscii(match.Groups[2].Value);
-
-            //        return match.Groups[1].Value + domainName;
-            //    }
-            //}
-            //catch (RegexMatchTimeoutException)
-            //{
-            //    return false;
-            //}
-            //catch (ArgumentException)
-            //{
-            //    return false;
-            //}
-
-            //try
-            //{
-            //    return Regex.IsMatch(email,
-            //        @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-            //        RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-            //}
-            //catch (RegexMatchTimeoutException)
-            //{
-            //    return false;
-            //}
-        }
-
-        private bool IsValidationPhoneNumber(string phoneNumber)
-        {
-            try
-            {
-                return Regex.IsMatch(phoneNumber,
-                    @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$");
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                return false;
-            }
-        }
+        private bool IsValidationPhoneNumber(string phoneNumber) => Regex.IsMatch(phoneNumber, @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$");
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
 
