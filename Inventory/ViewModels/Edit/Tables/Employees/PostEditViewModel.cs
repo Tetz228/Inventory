@@ -1,5 +1,7 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Employees
 {
+    using System.ComponentModel.DataAnnotations;
+
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System.Windows;
