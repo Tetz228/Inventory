@@ -60,6 +60,7 @@
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
+            GridViewColumnHeader.Click="{DXEvent Handler='Initialize(@sender, @args)'}"
             ItemsSource="{Binding Employees}"
             SelectedItem="{Binding SelectEmployee}">
             <ListView.View>
@@ -203,7 +204,7 @@
                 VerticalAlignment="Center"
                 BorderThickness="1"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding EmployeesFilter, UpdateSourceTrigger=PropertyChanged}" />
 
             <!--  Фильтры  -->
             <Menu
