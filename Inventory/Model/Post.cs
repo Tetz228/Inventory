@@ -1,13 +1,18 @@
 namespace Inventory.Model
 {
+    using System;
+
     using DevExpress.Mvvm;
     using Inventory.ViewModels.Tables.Employees;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Windows.Documents;
 
     public partial class Post : BindableBase, IEditableObject, IDataErrorInfo
     {
@@ -24,6 +29,9 @@ namespace Inventory.Model
         #endregion
 
         #region Валидация
+
+
+        #region Старая валидация
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
 
         public string this[string name]
@@ -42,10 +50,7 @@ namespace Inventory.Model
                         break;
                 }
 
-                if (ErrorCollection.ContainsKey(name))
-                    ErrorCollection[name] = result;
-                else if (result != null)
-                    ErrorCollection.Add(name, result);
+                ErrorCollection[name] = result;
 
                 RaisePropertyChanged(nameof(ErrorCollection));
 
@@ -56,6 +61,8 @@ namespace Inventory.Model
         public string Error { get => null; }
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
+        #endregion
+
         #endregion
 
         #region Методы обработки информации
@@ -123,7 +130,7 @@ namespace Inventory.Model
                     "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        
+
         public static void Refresh()
         {
             PostViewModel.Posts.Clear();

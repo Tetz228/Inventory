@@ -13,6 +13,7 @@ namespace Inventory.Model
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Net.Mail;
 
     public partial class Employee : BindableBase, IEditableObject, IDataErrorInfo
     {
@@ -66,50 +67,35 @@ namespace Inventory.Model
                             result = "Поле не должно быть пустым";
                         else if (L_name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
-                        else
-                            result = "";
                         break;
                     case "F_name":
                         if (string.IsNullOrWhiteSpace(F_name))
                             result = "Поле не должно быть пустым";
                         else if (F_name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
-                        else
-                            result = "";
                         break;
                     case "M_name":
                         if (!string.IsNullOrWhiteSpace(M_name))
-                        {
                             if (M_name.Length < 2)
                                 result = "Поле должно содержать минимум 2 символа";
-                            else
-                                result = "";
-                        }
-                        else
-                            result = "";
                         break;
                     case "Email":
                         if (string.IsNullOrWhiteSpace(Email))
                             result = "Поле не должно быть пустым";
                         else if (!IsValidationEmail(Email))
                             result = "Некорректная почта";
-                        else
-                            result = "";
                         break;
                     case "Phone_number":
                         if (string.IsNullOrWhiteSpace(Phone_number))
                             result = "Поле не должно быть пустым";
-                        else if (Phone_number.Length < 10)
-                            result = "Поле должно содержать минимум 10 символа";
-                        else
-                            result = "";
+                        else if (Phone_number.Length < 5)
+                            result = "Поле должно содержать минимум 5 символа";
+                        else if (!IsValidationPhoneNumber(Phone_number))
+                            result = "Некорректный номер";
                         break;
                 }
 
-                if (ErrorCollection.ContainsKey(name))
-                    ErrorCollection[name] = result;
-                else if (result != null)
-                    ErrorCollection.Add(name, result);
+                ErrorCollection[name] = result;
 
                 RaisePropertyChanged(nameof(ErrorCollection));
 
@@ -123,32 +109,54 @@ namespace Inventory.Model
         {
             try
             {
-                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
-                    RegexOptions.None, TimeSpan.FromMilliseconds(200));
-
-                string DomainMapper(Match match)
-                {
-                    var idn = new IdnMapping();
-
-                    string domainName = idn.GetAscii(match.Groups[2].Value);
-
-                    return match.Groups[1].Value + domainName;
-                }
+                var address = new MailAddress(email);
+                return address.Address == email;
             }
-            catch (RegexMatchTimeoutException)
+            catch
             {
                 return false;
             }
-            catch (ArgumentException)
-            {
-                return false;
-            }
+            //try
+            //{
+            //    email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+            //        RegexOptions.None, TimeSpan.FromMilliseconds(200));
 
+            //    string DomainMapper(Match match)
+            //    {
+            //        var idn = new IdnMapping();
+
+            //        string domainName = idn.GetAscii(match.Groups[2].Value);
+
+            //        return match.Groups[1].Value + domainName;
+            //    }
+            //}
+            //catch (RegexMatchTimeoutException)
+            //{
+            //    return false;
+            //}
+            //catch (ArgumentException)
+            //{
+            //    return false;
+            //}
+
+            //try
+            //{
+            //    return Regex.IsMatch(email,
+            //        @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+            //        RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            //}
+            //catch (RegexMatchTimeoutException)
+            //{
+            //    return false;
+            //}
+        }
+
+        private bool IsValidationPhoneNumber(string phoneNumber)
+        {
             try
             {
-                return Regex.IsMatch(email,
-                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                return Regex.IsMatch(phoneNumber,
+                    @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$");
             }
             catch (RegexMatchTimeoutException)
             {
@@ -156,7 +164,7 @@ namespace Inventory.Model
             }
         }
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null || ErrorCollection.All(item => item.Value == ""));
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
 
         public bool IsValidationCollections()
         {

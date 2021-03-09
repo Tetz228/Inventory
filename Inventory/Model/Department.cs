@@ -1,15 +1,13 @@
 namespace Inventory.Model
 {
+    using DevExpress.Mvvm;
+    using Inventory.ViewModels.Tables.Employees;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.ViewModels.Tables.Employees;
 
     public partial class Department : BindableBase, IEditableObject, IDataErrorInfo
     {
@@ -21,7 +19,7 @@ namespace Inventory.Model
         #region Свойства
         public int Id_department { get; set; }
         public string Name { get; set; }
-    
+
         public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
         #endregion
 
@@ -44,10 +42,7 @@ namespace Inventory.Model
                         break;
                 }
 
-                if (ErrorCollection.ContainsKey(name))
-                    ErrorCollection[name] = result;
-                else if (result != null)
-                    ErrorCollection.Add(name, result);
+                ErrorCollection[name] = result;
 
                 RaisePropertyChanged(nameof(ErrorCollection));
 
