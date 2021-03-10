@@ -14,6 +14,8 @@
             DepartmentsPage = new DepartmentsPage();
             EmployeesPage = new EmployeesPage();
             PostsPage = new PostsPage();
+            AccountsPage = new AccountsPage();
+            RolesPage = new RolesPage();
         }
 
         #region Свойства
@@ -24,6 +26,10 @@
         private EmployeesPage EmployeesPage { get; }
 
         private PostsPage PostsPage { get; }
+
+        private AccountsPage AccountsPage { get; }
+
+        private RolesPage RolesPage { get; }
         #endregion
 
         #region Команды
@@ -32,6 +38,10 @@
         public ICommand SelectTablesEmployees => new DelegateCommand(() => CurrentPage = EmployeesPage);
 
         public ICommand SelectTablesPosts => new DelegateCommand(() => CurrentPage = PostsPage);
+
+        public ICommand SelectTablesAccounts => new DelegateCommand(() => CurrentPage = AccountsPage);
+
+        public ICommand SelectTablesRoles => new DelegateCommand(() => CurrentPage = RolesPage);
         #endregion
     }
 }
