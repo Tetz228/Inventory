@@ -25,10 +25,10 @@
 
         <Menu Grid.Row="0" Style="{StaticResource BaseMenu}">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выйти" />
-                <MenuItem />
-                <MenuItem />
-                <MenuItem />
+                <MenuItem Header="Заглушка" />
+                <MenuItem Header="Заглушка" />
+                <MenuItem Header="Сменить пользователя" />
+                <MenuItem Command="{Binding Exit}" Header="Выход" />
             </MenuItem>
             <MenuItem Header="Выдачи компьютеров" />
             <MenuItem Header="Выдачи периферии" />
@@ -41,6 +41,5 @@
             Grid.Row="1"
             Content="{Binding CurrentPage}"
             NavigationUIVisibility="Hidden" />
-
     </Grid>
 </Window>

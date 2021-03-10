@@ -25,8 +25,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="121*" />
+            <ColumnDefinition Width="279*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -36,6 +36,7 @@
 
         <ListView
             Grid.Row="1"
+            Grid.Column="0"
             Grid.ColumnSpan="2"
             GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
             ItemsSource="{Binding DepartmentsCollection, UpdateSourceTrigger=PropertyChanged}"
@@ -78,6 +79,7 @@
             </i:Interaction.Triggers>
         </ListView>
 
+        <!--  Кнопки действия  -->
         <StackPanel
             Grid.Row="0"
             Grid.Column="0"
@@ -121,6 +123,7 @@
             </Button>
         </StackPanel>
 
+        <!--  Поиск и обновление  -->
         <StackPanel
             Grid.Row="0"
             Grid.Column="1"
@@ -146,7 +149,7 @@
 
             <TextBox
                 Width="300"
-                Margin="0,0,10,0"
+                Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 BorderThickness="1"

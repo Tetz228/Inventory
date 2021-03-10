@@ -16,39 +16,26 @@
     </Page.DataContext>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="30" />
+            <RowDefinition />
+            <RowDefinition Height="416*" />
+        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="29*" />
-            <ColumnDefinition Width="171*" />
-        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Style="{StaticResource BaseTableStackPanel}" />
 
-        <ListBox>
-            <ListBoxItem Content="Сотрудники">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="Selected">
-                        <b:InvokeCommandAction Command="{Binding SelectTablesEmployees}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-            </ListBoxItem>
+        <Menu Grid.Row="1" Style="{StaticResource BaseMenu}">
+            <MenuItem Command="{Binding SelectTablesEmployees}" Header="Сотрудники" />
+            <MenuItem Command="{Binding SelectTablesPosts}" Header="Должности" />
+            <MenuItem Command="{Binding SelectTablesDepartments}" Header="Отделы" />
+            <MenuItem Command="{Binding SelectTablesAccounts}" Header="Учетные записи" />
+            <MenuItem Command="{Binding SelectTablesRoles}" Header="Роли" />
+        </Menu>
 
-            <ListBoxItem Content="Должности">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="Selected">
-                        <b:InvokeCommandAction Command="{Binding SelectTablesPosts}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-            </ListBoxItem>
+        <StackPanel Grid.Row="2" Style="{StaticResource BaseTableStackPanel}" />
 
-            <ListBoxItem Content="Отделы">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="Selected">
-                        <b:InvokeCommandAction Command="{Binding SelectTablesDepartments}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-            </ListBoxItem>
-        </ListBox>
-
-        <Frame Grid.Column="1" Content="{Binding CurrentPage}" />
+        <Frame Grid.Row="3" Content="{Binding CurrentPage}" />
 
     </Grid>
 
