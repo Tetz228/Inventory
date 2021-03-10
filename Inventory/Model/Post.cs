@@ -96,7 +96,7 @@ namespace Inventory.Model
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении должности",
                     MessageBoxButton.OK, MessageBoxImage.Error);
-                Refresh();
+                RefreshCollection();
                 return Task.FromResult(false);
             }
 
@@ -117,7 +117,7 @@ namespace Inventory.Model
             if (findPost == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
-                Refresh();
+                RefreshCollection();
                 return;
             }
 
@@ -135,7 +135,7 @@ namespace Inventory.Model
             }
         }
 
-        public static void Refresh()
+        public static void RefreshCollection()
         {
             PostViewModel.Posts.Clear();
             using var db = new InventoryEntities();

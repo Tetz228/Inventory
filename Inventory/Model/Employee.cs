@@ -176,7 +176,7 @@ namespace Inventory.Model
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении сотрудника",
                     MessageBoxButton.OK, MessageBoxImage.Error);
-                Refresh();
+                RefreshCollection();
                 return;
             }
 
@@ -190,7 +190,7 @@ namespace Inventory.Model
 
             AddInCollections(db, findEmployee.Id_employee);
 
-            Refresh();
+            RefreshCollection();
         }
 
         private static void AddInCollections(InventoryEntities db, int idEmployee)
@@ -246,7 +246,7 @@ namespace Inventory.Model
             if (findEmployee == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении сотрудника", MessageBoxButton.OK, MessageBoxImage.Error);
-                Refresh();
+                RefreshCollection();
                 return;
             }
 
@@ -291,7 +291,7 @@ namespace Inventory.Model
             EmployeesInDepartments.Remove(selectEmpInDepart);
         }
 
-        public static void Refresh()
+        public static void RefreshCollection()
         {
             EmployeesViewModel.Employees.Clear();
             using var db = new InventoryEntities();

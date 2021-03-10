@@ -60,7 +60,7 @@ namespace Inventory.Model
         #endregion
 
         #region Методы обработки информации
-        public static Task<bool> AddDepartment(string name)
+        public static void AddDepartment(string name)
         {
             using var db = new InventoryEntities();
 
@@ -73,26 +73,23 @@ namespace Inventory.Model
             db.SaveChanges();
 
             DepartmentViewModel.Departments.Add(department);
-
-            return Task.FromResult(true);
         }
 
-        public static Task<bool> EditDepartment(Department post)
+        public static void EditDepartment(Department selectDepartment)
         {
             using var db = new InventoryEntities();
-            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == post.Id_department);
+            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == selectDepartment.Id_department);
 
             if (findDepartment == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении отдела",
                     MessageBoxButton.OK, MessageBoxImage.Error);
-                Refresh();
-                return Task.FromResult(false);
+                RefreshCollection();
+                return;
             }
 
-            findDepartment.Name = post.Name;
+            findDepartment.Name = selectDepartment.Name;
             db.SaveChanges();
-            return Task.FromResult(true);
         }
 
         public static void DeleteDepartment(Department selectDepartment)
@@ -107,7 +104,7 @@ namespace Inventory.Model
             if (findDepartment == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
-                Refresh();
+                RefreshCollection();
                 return;
             }
 
@@ -125,7 +122,7 @@ namespace Inventory.Model
             }
         }
 
-        public static void Refresh()
+        public static void RefreshCollection()
         {
             DepartmentViewModel.Departments.Clear();
             using var db = new InventoryEntities();
