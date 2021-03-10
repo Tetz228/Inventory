@@ -19,7 +19,7 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             Department.EndEdit();
-            Edit();
+            Department.EditDepartment(Department);
             editWindow.Close();
         }, _ => Department.IsValidationProperties());
 
@@ -29,7 +29,5 @@
             editWindow.Close();
         });
         #endregion
-
-        private async void Edit() => await Department.EditDepartment(Department);
     }
 }

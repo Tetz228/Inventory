@@ -272,6 +272,9 @@
     <Compile Include="Pages\Tables\Computers\ComputersPage.xaml.cs">
       <DependentUpon>ComputersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Tables\Employees\AccountsPage.xaml.cs">
+      <DependentUpon>AccountsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Tables\Employees\DepartmentsPage.xaml.cs">
       <DependentUpon>DepartmentsPage.xaml</DependentUpon>
     </Compile>
@@ -281,6 +284,9 @@
     <Compile Include="Pages\Tables\Employees\PostsPage.xaml.cs">
       <DependentUpon>PostsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Tables\Employees\RolesPage.xaml.cs">
+      <DependentUpon>RolesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Tables\Employees\TablesEmployeesPage.xaml.cs">
       <DependentUpon>TablesEmployeesPage.xaml</DependentUpon>
     </Compile>
@@ -289,8 +295,10 @@
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\AccountsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\PostViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\RolesViewModel.cs" />
     <Compile Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml.cs">
       <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
     </Compile>
@@ -317,6 +325,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Tables\Employees\AccountsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Tables\Employees\DepartmentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Tables\Employees\PostsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Tables\Employees\RolesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

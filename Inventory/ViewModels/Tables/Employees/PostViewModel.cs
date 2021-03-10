@@ -99,7 +99,7 @@
 
         public ICommand DeletePost => new DelegateCommand<Post>(Post.DeletePost, selectPost => selectPost != null);
 
-        public ICommand RefreshList => new DelegateCommand(Post.Refresh);
+        public ICommand RefreshList => new DelegateCommand(Post.RefreshCollection);
         #endregion
     }
 }

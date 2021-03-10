@@ -185,7 +185,7 @@
 
         public ICommand DeleteEmployee => new DelegateCommand<Employee>(Employee.DeleteEmployee, selectEmployee => selectEmployee != null);
 
-        public ICommand RefreshList => new DelegateCommand(Employee.Refresh);
+        public ICommand RefreshList => new DelegateCommand(Employee.RefreshCollection);
         #endregion
     }
 }

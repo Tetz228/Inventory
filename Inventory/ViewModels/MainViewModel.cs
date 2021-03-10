@@ -1,5 +1,7 @@
 ﻿namespace Inventory.ViewModels
 {
+    using System.Windows;
+
     using DevExpress.Mvvm;
 
     using System.Windows.Controls;
@@ -26,6 +28,8 @@
 
         #region Команды
         public ICommand OpenPageComputers => new DelegateCommand(() => CurrentPage = Computers);
+
+        public ICommand Exit => new DelegateCommand(() => Application.Current.Shutdown());
 
         public ICommand OpenPageEmployees => new DelegateCommand(() => CurrentPage = Employees);
         #endregion

@@ -87,19 +87,19 @@
             addDepartmentWindow.ShowDialog();
         });
 
-        public ICommand EditDepartment => new DelegateCommand<Department>((depart) =>
+        public ICommand EditDepartment => new DelegateCommand<Department>(department =>
         {
             var editDepartmentWindow = new DepartmentEditWindow();
-            var editDepartmentViewModel = new DepartmentEditViewModel(depart);
+            var editDepartmentViewModel = new DepartmentEditViewModel(department);
 
             editDepartmentWindow.DataContext = editDepartmentViewModel;
             editDepartmentWindow.ShowDialog();
 
-        }, (depart) => depart != null);
+        }, depart => depart != null);
 
-        public ICommand DeleteDepartment => new DelegateCommand<Department>(Department.DeleteDepartment, (selectDepart) => selectDepart != null);
+        public ICommand DeleteDepartment => new DelegateCommand<Department>(Department.DeleteDepartment, selectDepartment => selectDepartment != null);
 
-        public ICommand RefreshList => new DelegateCommand(Department.Refresh);
+        public ICommand RefreshList => new DelegateCommand(Department.RefreshCollection);
         #endregion
     }
 }

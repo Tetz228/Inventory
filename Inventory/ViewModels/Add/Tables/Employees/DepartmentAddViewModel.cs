@@ -19,14 +19,12 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Add();
+            Department.AddDepartment(Department.Name);
 
             addWindow.Close();
         }, _ => Department.IsValidationProperties());
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
-
-        private async void Add() => await Department.AddDepartment(Department.Name);
     }
 }
