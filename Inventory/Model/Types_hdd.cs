@@ -11,10 +11,8 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-
-    using DevExpress.Mvvm;
-
-    public partial class Types_hdd : BindableBase
+    
+    public partial class Types_hdd
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Types_hdd()

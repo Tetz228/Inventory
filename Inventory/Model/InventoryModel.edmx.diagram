@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c71a176b67ac448c92885e13299f8518" Name="Diagram1">
+        <EntityTypeShape EntityType="InventoryModel.Computer" Width="1.5" PointX="10.5" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Department" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Dispensing_computers" Width="1.5" PointX="10.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Dispensing_peripherals" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Employee" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Employees_in_departments" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Graphics_cards" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Hdd" Width="1.5" PointX="8.25" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Hdd_in_computers" Width="1.5" PointX="12.75" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.History_dispensed_computers" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.History_dispensed_peripherals" Width="1.5" PointX="2.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Inventory_numbers_graphics_cards" Width="1.5" PointX="5.25" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Inventory_numbers_hdd" Width="1.5" PointX="10.5" PointY="37.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Inventory_numbers_motherboards" Width="1.5" PointX="8.25" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Inventory_numbers_peripherals" Width="1.5" PointX="8.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Inventory_numbers_power_supplies" Width="1.5" PointX="5.25" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Inventory_numbers_processors" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Inventory_numbers_ram" Width="1.5" PointX="8.25" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Inventory_numbers_ssd" Width="1.5" PointX="11.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.List_dispensed_computers" Width="1.5" PointX="12.75" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.List_dispensed_peripherals" Width="1.5" PointX="10.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Manufacturer" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Motherboard" Width="1.5" PointX="6" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Operating_systems" Width="1.5" PointX="10.5" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Operating_systems_in_computers" Width="1.5" PointX="12.75" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Peripheral" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Post" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Posts_employees" Width="1.5" PointX="11.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Power_supplies" Width="1.5" PointX="3" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Processor" Width="1.5" PointX="6" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Processors_in_computers" Width="1.5" PointX="13.75" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Ram" Width="1.5" PointX="6" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Ram_in_computers" Width="1.5" PointX="15.75" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Socket" Width="1.5" PointX="3.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Ssd" Width="1.5" PointX="9" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Ssd_in_computers" Width="1.5" PointX="15.5" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Statuses_computers" Width="1.5" PointX="8.25" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Statuses_peripherals" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Types_hdd" Width="1.5" PointX="6" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Types_memory" Width="1.5" PointX="3.75" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Types_peripherals" Width="1.5" PointX="0.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Types_ssd" Width="1.5" PointX="6.75" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Unit" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.User" Width="1.5" PointX="6" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="InventoryModel.FK_Computers_Inventory_numbers_graphics_cards" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Computers_Inventory_numbers_motherboards" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Computers_Inventory_numbers_power_supplies" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Computers_Statuses_computers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Hdd_in_computers_Computers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_List_dispensed_computers_Computers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Operating_systems_in_computers_Computers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Processors_in_computers_Computers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ram_in_computers_Computers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ssd_in_computers_Computers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Employees_in_department_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Dispensing_computers_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Dispensing_computers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_List_dispensed_computers_Dispensing_computers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Dispensing_peripherals_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Dispensing_peripherals_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_List_dispensed_peripherals_Dispensing_peripherals" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Employees_in_department_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Posts_employees_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Users_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Graphics_cards_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Graphics_cards_Units" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_graphics_cards_Graphics_cards" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Hdd_Types_hdd" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Hdd_Units" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_hdd_Hdd" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Hdd_in_computers_Inventory_numbers_hdd" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_motherboards_Motherboards" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_peripherals_Peripherals" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_peripherals_Statuses_peripherals" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_List_dispensed_peripherals_Inventory_numbers_peripherals" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_power_supplies_Power_supplies" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_processors_Processors" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Processors_in_computers_Inventory_numbers_processors" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_ram_Ram" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ram_in_computers_Inventory_numbers_ram" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_ssd_Ssd" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ssd_in_computers_Inventory_numbers_ssd" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Motherboards_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Peripherals_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Power_supplies_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Processors_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ram_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ssd_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Motherboards_Sockets" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Operating_systems_in_computers_Operating_systems" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Peripherals_Types_peripherals" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Posts_employees_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Power_supplies_Units" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Processors_Sockets" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Processors_Units" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ram_Types_memory" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ram_Units" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ssd_Types_ssd" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Ssd_Units" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

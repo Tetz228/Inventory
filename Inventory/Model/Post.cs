@@ -1,21 +1,19 @@
 namespace Inventory.Model
 {
-    using System;
-
     using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Employees;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
-    using System.Windows.Documents;
+
+    using Inventory.ViewModels.Tables.Employees;
 
     public partial class Post : BindableBase, IEditableObject, IDataErrorInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Post()
         {
             this.Posts_employees = new HashSet<Posts_employees>();
@@ -25,13 +23,12 @@ namespace Inventory.Model
         public int Id_post { get; set; }
         public string Name { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Posts_employees> Posts_employees { get; set; }
+
         #endregion
 
         #region Валидация
-
-
-        #region Старая валидация
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
 
         public string this[string name]
@@ -61,8 +58,6 @@ namespace Inventory.Model
         public string Error { get => null; }
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
-        #endregion
-
         #endregion
 
         #region Метод поиска
@@ -171,5 +166,6 @@ namespace Inventory.Model
             Name = _selectPost.Name;
         }
         #endregion
+
     }
 }

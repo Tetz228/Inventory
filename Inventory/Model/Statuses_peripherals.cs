@@ -11,10 +11,8 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-
-    using DevExpress.Mvvm;
-
-    public partial class Statuses_peripherals : BindableBase
+    
+    public partial class Statuses_peripherals
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Statuses_peripherals()

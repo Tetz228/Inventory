@@ -11,10 +11,8 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-
-    using DevExpress.Mvvm;
-
-    public partial class Unit : BindableBase
+    
+    public partial class Unit
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Unit()

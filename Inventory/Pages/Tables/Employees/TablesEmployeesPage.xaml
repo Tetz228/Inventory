@@ -29,8 +29,7 @@
             <MenuItem Command="{Binding SelectTablesEmployees}" Header="Сотрудники" />
             <MenuItem Command="{Binding SelectTablesPosts}" Header="Должности" />
             <MenuItem Command="{Binding SelectTablesDepartments}" Header="Отделы" />
-            <MenuItem Command="{Binding SelectTablesAccounts}" Header="Учетные записи" />
-            <MenuItem Command="{Binding SelectTablesRoles}" Header="Роли" />
+            <MenuItem Command="{Binding SelectTablesUsers}" Header="Пользователи" />
         </Menu>
 
         <StackPanel Grid.Row="2" Style="{StaticResource BaseTableStackPanel}" />

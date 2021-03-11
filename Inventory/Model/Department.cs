@@ -2,15 +2,17 @@ namespace Inventory.Model
 {
     using DevExpress.Mvvm;
     using Inventory.ViewModels.Tables.Employees;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Entity.Infrastructure;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Windows;
 
-    public partial class Department : BindableBase, IEditableObject, IDataErrorInfo
+    public partial class Department: BindableBase, IEditableObject, IDataErrorInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
             this.Employees_in_departments = new HashSet<Employees_in_departments>();
@@ -19,7 +21,8 @@ namespace Inventory.Model
         #region Свойства
         public int Id_department { get; set; }
         public string Name { get; set; }
-
+    
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
         #endregion
 

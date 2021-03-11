@@ -11,10 +11,8 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-
-    using DevExpress.Mvvm;
-
-    public partial class Ssd_in_computers : BindableBase
+    
+    public partial class Ssd_in_computers
     {
         public int Id_ssd_in_computer { get; set; }
         public int Fk_inventory_number_ssd { get; set; }

@@ -25,7 +25,6 @@ namespace Inventory.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Computer> Computers { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Dispensing_computers> Dispensing_computers { get; set; }
@@ -59,8 +58,6 @@ namespace Inventory.Model
         public virtual DbSet<Processors_in_computers> Processors_in_computers { get; set; }
         public virtual DbSet<Ram> Rams { get; set; }
         public virtual DbSet<Ram_in_computers> Ram_in_computers { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Roles_users> Roles_users { get; set; }
         public virtual DbSet<Socket> Sockets { get; set; }
         public virtual DbSet<Ssd> Ssds { get; set; }
         public virtual DbSet<Ssd_in_computers> Ssd_in_computers { get; set; }

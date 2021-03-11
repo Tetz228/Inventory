@@ -11,10 +11,8 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-
-    using DevExpress.Mvvm;
-
-    public partial class Processors_in_computers : BindableBase
+    
+    public partial class Processors_in_computers
     {
         public int Id_processor_in_computer { get; set; }
         public int Fk_inventory_number_processor { get; set; }

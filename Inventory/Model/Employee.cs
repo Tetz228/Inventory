@@ -12,15 +12,16 @@ namespace Inventory.Model
     using System.Text.RegularExpressions;
     using System.Windows;
 
-    public partial class Employee : BindableBase, IEditableObject, IDataErrorInfo
+    public partial class Employee: BindableBase, IEditableObject, IDataErrorInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.Accounts = new HashSet<Account>();
             this.Dispensing_computers = new HashSet<Dispensing_computers>();
             this.Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
             this.Employees_in_departments = new HashSet<Employees_in_departments>();
             this.Posts_employees = new HashSet<Posts_employees>();
+            this.Users = new HashSet<User>();
         }
 
         #region Свойства
@@ -30,12 +31,17 @@ namespace Inventory.Model
         public string M_name { get; set; }
         public string Email { get; set; }
         public string Phone_number { get; set; }
-
-        public virtual ICollection<Account> Accounts { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_computers> Dispensing_computers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_peripherals> Dispensing_peripherals { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Posts_employees> Posts_employees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
 
         public static ObservableCollection<Posts_employees> PostsEmployees { get; set; } = new();
 
@@ -168,8 +174,6 @@ namespace Inventory.Model
                                            .Select(post => post.Post))
                                            .Include(empDepart => empDepart.Employees_in_departments
                                            .Select(depart => depart.Department))
-                                           .Include(account => account.Accounts
-                                           .Select(role => role.User.Roles_users))
                                            .SingleOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
 
             if (findEmployee == null)
@@ -299,9 +303,7 @@ namespace Inventory.Model
             foreach (var item in db.Employees.Include(employeePost => employeePost.Posts_employees
                                                      .Select(post => post.Post))
                                                      .Include(empDepart => empDepart.Employees_in_departments
-                                                     .Select(depart => depart.Department))
-                                                     .Include(account => account.Accounts
-                                                     .Select(role => role.User.Roles_users)))
+                                                     .Select(depart => depart.Department)))
             {
                 EmployeesViewModel.Employees.Add(item);
             }

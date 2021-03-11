@@ -11,31 +11,25 @@ namespace Inventory.Model
 {
     using System;
     using System.Collections.Generic;
-
-    using DevExpress.Mvvm;
-
-    public partial class User : BindableBase
+    
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Accounts = new HashSet<Account>();
             this.Dispensing_computers = new HashSet<Dispensing_computers>();
             this.Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
-            this.Roles_users = new HashSet<Roles_users>();
         }
     
         public int Id_user { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public int Fk_employee { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_computers> Dispensing_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_peripherals> Dispensing_peripherals { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Roles_users> Roles_users { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

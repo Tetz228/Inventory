@@ -22,9 +22,7 @@
             Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
                                                                        .Select(post => post.Post))
                                                                        .Include(empDepart => empDepart.Employees_in_departments
-                                                                       .Select(depart => depart.Department))
-                                                                       .Include(account => account.Accounts
-                                                                       .Select(role => role.User.Roles_users)));
+                                                                       .Select(depart => depart.Department)));
 
             EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
             EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Ascending));

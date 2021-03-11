@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Inventory.Pages.Tables.Employees
 {
     /// <summary>
-    /// Логика взаимодействия для AccountsPage.xaml
+    /// Логика взаимодействия для UsersPage.xaml
     /// </summary>
-    public partial class AccountsPage : Page
+    public partial class UsersPage : Page
     {
-        public AccountsPage()
+        public UsersPage()
         {
             InitializeComponent();
         }

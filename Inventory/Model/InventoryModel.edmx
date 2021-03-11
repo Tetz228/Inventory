@@ -4,15 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище InventoryModel1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Accounts">
-          <Key>
-            <PropertyRef Name="Id_account" />
-          </Key>
-          <Property Name="Id_account" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Fk_employee" Type="int" Nullable="false" />
-          <Property Name="Fk_user" Type="int" Nullable="false" />
-        </EntityType>
+      <Schema Namespace="Хранилище InventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Computers">
           <Key>
             <PropertyRef Name="Id_computer" />
@@ -307,21 +299,6 @@
           <Property Name="Fk_inventory_number_ram" Type="int" Nullable="false" />
           <Property Name="Fk_computer" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Roles">
-          <Key>
-            <PropertyRef Name="Id_role" />
-          </Key>
-          <Property Name="Id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Roles_users">
-          <Key>
-            <PropertyRef Name="Id_role_user" />
-          </Key>
-          <Property Name="Id_role_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Fk_user" Type="int" Nullable="false" />
-          <Property Name="Fk_role" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Sockets">
           <Key>
             <PropertyRef Name="Id_socket" />
@@ -415,31 +392,8 @@
           <Property Name="Id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Fk_employee" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Accounts_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="Id_employee" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="Fk_employee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Accounts_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id_user" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="Fk_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
           <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="0..1" />
           <End Role="Computers" Type="Self.Computers" Multiplicity="*" />
@@ -1028,30 +982,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Roles_users_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Roles_users" Type="Self.Roles_users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="Id_role" />
-            </Principal>
-            <Dependent Role="Roles_users">
-              <PropertyRef Name="Fk_role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Roles_users_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Roles_users" Type="Self.Roles_users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id_user" />
-            </Principal>
-            <Dependent Role="Roles_users">
-              <PropertyRef Name="Fk_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ssd_in_computers_Computers">
           <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
           <End Role="Ssd_in_computers" Type="Self.Ssd_in_computers" Multiplicity="*" />
@@ -1112,8 +1042,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище InventoryModel1Container">
-          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+        <Association Name="FK_Users_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище InventoryModelContainer">
           <EntitySet Name="Computers" EntityType="Self.Computers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dispensing_computers" EntityType="Self.Dispensing_computers" Schema="dbo" store:Type="Tables" />
@@ -1147,8 +1088,6 @@
           <EntitySet Name="Processors_in_computers" EntityType="Self.Processors_in_computers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ram" EntityType="Self.Ram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ram_in_computers" EntityType="Self.Ram_in_computers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Roles_users" EntityType="Self.Roles_users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sockets" EntityType="Self.Sockets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ssd" EntityType="Self.Ssd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" Schema="dbo" store:Type="Tables" />
@@ -1161,14 +1100,6 @@
           <EntitySet Name="Types_ssd" EntityType="Self.Types_ssd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Accounts_Employees" Association="Self.FK_Accounts_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Accounts_Users" Association="Self.FK_Accounts_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Computers_Inventory_numbers_graphics_cards" Association="Self.FK_Computers_Inventory_numbers_graphics_cards">
             <End Role="Inventory_numbers_graphics_cards" EntitySet="Inventory_numbers_graphics_cards" />
             <End Role="Computers" EntitySet="Computers" />
@@ -1365,14 +1296,6 @@
             <End Role="Units" EntitySet="Units" />
             <End Role="Ram" EntitySet="Ram" />
           </AssociationSet>
-          <AssociationSet Name="FK_Roles_users_Roles" Association="Self.FK_Roles_users_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Roles_users" EntitySet="Roles_users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Roles_users_Users" Association="Self.FK_Roles_users_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Roles_users" EntitySet="Roles_users" />
-          </AssociationSet>
           <AssociationSet Name="FK_Ssd_in_computers_Computers" Association="Self.FK_Ssd_in_computers_Computers">
             <End Role="Computers" EntitySet="Computers" />
             <End Role="Ssd_in_computers" EntitySet="Ssd_in_computers" />
@@ -1393,22 +1316,16 @@
             <End Role="Units" EntitySet="Units" />
             <End Role="Ssd" EntitySet="Ssd" />
           </AssociationSet>
+          <AssociationSet Name="FK_Users_Employees" Association="Self.FK_Users_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="InventoryModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Account">
-          <Key>
-            <PropertyRef Name="Id_account" />
-          </Key>
-          <Property Name="Id_account" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fk_employee" Type="Int32" Nullable="false" />
-          <Property Name="Fk_user" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Accounts_Employees" FromRole="Accounts" ToRole="Employees" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Accounts_Users" FromRole="Accounts" ToRole="Users" />
-        </EntityType>
+      <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Computer">
           <Key>
             <PropertyRef Name="Id_computer" />
@@ -1475,11 +1392,11 @@
           <Property Name="M_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Employees" FromRole="Employees" ToRole="Accounts" />
           <NavigationProperty Name="Dispensing_computers" Relationship="Self.FK_Dispensing_computers_Employees" FromRole="Employees" ToRole="Dispensing_computers" />
           <NavigationProperty Name="Dispensing_peripherals" Relationship="Self.FK_Dispensing_peripherals_Employees" FromRole="Employees" ToRole="Dispensing_peripherals" />
           <NavigationProperty Name="Employees_in_departments" Relationship="Self.FK_Employees_in_department_Employees" FromRole="Employees" ToRole="Employees_in_departments" />
           <NavigationProperty Name="Posts_employees" Relationship="Self.FK_Posts_employees_Employees" FromRole="Employees" ToRole="Posts_employees" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Employees" FromRole="Employees" ToRole="Users" />
         </EntityType>
         <EntityType Name="Employees_in_departments">
           <Key>
@@ -1790,24 +1707,6 @@
           <NavigationProperty Name="Computer" Relationship="Self.FK_Ram_in_computers_Computers" FromRole="Ram_in_computers" ToRole="Computers" />
           <NavigationProperty Name="Inventory_numbers_ram" Relationship="Self.FK_Ram_in_computers_Inventory_numbers_ram" FromRole="Ram_in_computers" ToRole="Inventory_numbers_ram" />
         </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="Id_role" />
-          </Key>
-          <Property Name="Id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Roles_users" Relationship="Self.FK_Roles_users_Roles" FromRole="Roles" ToRole="Roles_users" />
-        </EntityType>
-        <EntityType Name="Roles_users">
-          <Key>
-            <PropertyRef Name="Id_role_user" />
-          </Key>
-          <Property Name="Id_role_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fk_user" Type="Int32" Nullable="false" />
-          <Property Name="Fk_role" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_Roles_users_Roles" FromRole="Roles_users" ToRole="Roles" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Roles_users_Users" FromRole="Roles_users" ToRole="Users" />
-        </EntityType>
         <EntityType Name="Socket">
           <Key>
             <PropertyRef Name="Id_socket" />
@@ -1921,35 +1820,11 @@
           <Property Name="Id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Login" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Users" FromRole="Users" ToRole="Accounts" />
+          <Property Name="Fk_employee" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Dispensing_computers" Relationship="Self.FK_Dispensing_computers_Users" FromRole="Users" ToRole="Dispensing_computers" />
           <NavigationProperty Name="Dispensing_peripherals" Relationship="Self.FK_Dispensing_peripherals_Users" FromRole="Users" ToRole="Dispensing_peripherals" />
-          <NavigationProperty Name="Roles_users" Relationship="Self.FK_Roles_users_Users" FromRole="Users" ToRole="Roles_users" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Users_Employees" FromRole="Users" ToRole="Employees" />
         </EntityType>
-        <Association Name="FK_Accounts_Employees">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="Id_employee" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="Fk_employee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Accounts_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id_user" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="Fk_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
           <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="0..1" />
           <End Role="Computers" Type="Self.Computer" Multiplicity="*" />
@@ -2174,6 +2049,18 @@
               <PropertyRef Name="Id_employee" />
             </Principal>
             <Dependent Role="Posts_employees">
+              <PropertyRef Name="Fk_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_employee" />
+            </Principal>
+            <Dependent Role="Users">
               <PropertyRef Name="Fk_employee" />
             </Dependent>
           </ReferentialConstraint>
@@ -2574,30 +2461,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Roles_users_Roles">
-          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
-          <End Role="Roles_users" Type="Self.Roles_users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="Id_role" />
-            </Principal>
-            <Dependent Role="Roles_users">
-              <PropertyRef Name="Fk_role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Roles_users_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Roles_users" Type="Self.Roles_users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id_user" />
-            </Principal>
-            <Dependent Role="Roles_users">
-              <PropertyRef Name="Fk_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ssd_Types_ssd">
           <End Role="Types_ssd" Type="Self.Types_ssd" Multiplicity="1" />
           <End Role="Ssd" Type="Self.Ssd" Multiplicity="*" />
@@ -2623,7 +2486,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Computers" EntityType="Self.Computer" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Dispensing_computers" EntityType="Self.Dispensing_computers" />
@@ -2657,8 +2519,6 @@
           <EntitySet Name="Processors_in_computers" EntityType="Self.Processors_in_computers" />
           <EntitySet Name="Rams" EntityType="Self.Ram" />
           <EntitySet Name="Ram_in_computers" EntityType="Self.Ram_in_computers" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="Roles_users" EntityType="Self.Roles_users" />
           <EntitySet Name="Sockets" EntityType="Self.Socket" />
           <EntitySet Name="Ssds" EntityType="Self.Ssd" />
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" />
@@ -2671,14 +2531,6 @@
           <EntitySet Name="Types_ssd" EntityType="Self.Types_ssd" />
           <EntitySet Name="Units" EntityType="Self.Unit" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_Accounts_Employees" Association="Self.FK_Accounts_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Accounts_Users" Association="Self.FK_Accounts_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Computers_Inventory_numbers_graphics_cards" Association="Self.FK_Computers_Inventory_numbers_graphics_cards">
             <End Role="Inventory_numbers_graphics_cards" EntitySet="Inventory_numbers_graphics_cards" />
             <End Role="Computers" EntitySet="Computers" />
@@ -2754,6 +2606,10 @@
           <AssociationSet Name="FK_Posts_employees_Employees" Association="Self.FK_Posts_employees_Employees">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Posts_employees" EntitySet="Posts_employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Employees" Association="Self.FK_Users_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_Graphics_cards_Manufacturers" Association="Self.FK_Graphics_cards_Manufacturers">
             <End Role="Manufacturers" EntitySet="Manufacturers" />
@@ -2887,14 +2743,6 @@
             <End Role="Units" EntitySet="Units" />
             <End Role="Ram" EntitySet="Rams" />
           </AssociationSet>
-          <AssociationSet Name="FK_Roles_users_Roles" Association="Self.FK_Roles_users_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Roles_users" EntitySet="Roles_users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Roles_users_Users" Association="Self.FK_Roles_users_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Roles_users" EntitySet="Roles_users" />
-          </AssociationSet>
           <AssociationSet Name="FK_Ssd_Types_ssd" Association="Self.FK_Ssd_Types_ssd">
             <End Role="Types_ssd" EntitySet="Types_ssd" />
             <End Role="Ssd" EntitySet="Ssds" />
@@ -2909,18 +2757,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище InventoryModel1Container" CdmEntityContainer="InventoryEntities">
-          <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="InventoryModel1.Account">
-              <MappingFragment StoreEntitySet="Accounts">
-                <ScalarProperty Name="Id_account" ColumnName="Id_account" />
-                <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
-                <ScalarProperty Name="Fk_user" ColumnName="Fk_user" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="Хранилище InventoryModelContainer" CdmEntityContainer="InventoryEntities">
           <EntitySetMapping Name="Computers">
-            <EntityTypeMapping TypeName="InventoryModel1.Computer">
+            <EntityTypeMapping TypeName="InventoryModel.Computer">
               <MappingFragment StoreEntitySet="Computers">
                 <ScalarProperty Name="Id_computer" ColumnName="Id_computer" />
                 <ScalarProperty Name="Fk_inventory_number_motherboard" ColumnName="Fk_inventory_number_motherboard" />
@@ -2933,7 +2772,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="InventoryModel1.Department">
+            <EntityTypeMapping TypeName="InventoryModel.Department">
               <MappingFragment StoreEntitySet="Departments">
                 <ScalarProperty Name="Id_department" ColumnName="Id_department" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -2941,7 +2780,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dispensing_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.Dispensing_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Dispensing_computers">
               <MappingFragment StoreEntitySet="Dispensing_computers">
                 <ScalarProperty Name="Id_dispensing_computer" ColumnName="Id_dispensing_computer" />
                 <ScalarProperty Name="Date_dispensing" ColumnName="Date_dispensing" />
@@ -2952,7 +2791,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dispensing_peripherals">
-            <EntityTypeMapping TypeName="InventoryModel1.Dispensing_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.Dispensing_peripherals">
               <MappingFragment StoreEntitySet="Dispensing_peripherals">
                 <ScalarProperty Name="Id_dispensing_peripheral" ColumnName="Id_dispensing_peripheral" />
                 <ScalarProperty Name="Date_dispensing" ColumnName="Date_dispensing" />
@@ -2963,7 +2802,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="InventoryModel1.Employee">
+            <EntityTypeMapping TypeName="InventoryModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
                 <ScalarProperty Name="L_name" ColumnName="L_name" />
@@ -2975,7 +2814,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees_in_departments">
-            <EntityTypeMapping TypeName="InventoryModel1.Employees_in_departments">
+            <EntityTypeMapping TypeName="InventoryModel.Employees_in_departments">
               <MappingFragment StoreEntitySet="Employees_in_departments">
                 <ScalarProperty Name="Id_employee_in_department" ColumnName="Id_employee_in_department" />
                 <ScalarProperty Name="Fk_department" ColumnName="Fk_department" />
@@ -2984,7 +2823,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Graphics_cards">
-            <EntityTypeMapping TypeName="InventoryModel1.Graphics_cards">
+            <EntityTypeMapping TypeName="InventoryModel.Graphics_cards">
               <MappingFragment StoreEntitySet="Graphics_cards">
                 <ScalarProperty Name="Id_graphics_card" ColumnName="Id_graphics_card" />
                 <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
@@ -2995,7 +2834,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Hdds">
-            <EntityTypeMapping TypeName="InventoryModel1.Hdd">
+            <EntityTypeMapping TypeName="InventoryModel.Hdd">
               <MappingFragment StoreEntitySet="Hdd">
                 <ScalarProperty Name="Id_hdd" ColumnName="Id_hdd" />
                 <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
@@ -3007,7 +2846,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Hdd_in_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.Hdd_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Hdd_in_computers">
               <MappingFragment StoreEntitySet="Hdd_in_computers">
                 <ScalarProperty Name="Id_hdd_in_computer" ColumnName="Id_hdd_in_computer" />
                 <ScalarProperty Name="Fk_inventory_number_hdd" ColumnName="Fk_inventory_number_hdd" />
@@ -3016,7 +2855,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="History_dispensed_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.History_dispensed_computers">
+            <EntityTypeMapping TypeName="InventoryModel.History_dispensed_computers">
               <MappingFragment StoreEntitySet="History_dispensed_computers">
                 <ScalarProperty Name="Id_history_dispensed_computer" ColumnName="Id_history_dispensed_computer" />
                 <ScalarProperty Name="Number_dispensing" ColumnName="Number_dispensing" />
@@ -3027,7 +2866,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="History_dispensed_peripherals">
-            <EntityTypeMapping TypeName="InventoryModel1.History_dispensed_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.History_dispensed_peripherals">
               <MappingFragment StoreEntitySet="History_dispensed_peripherals">
                 <ScalarProperty Name="Id_history_dispensed_peripheral" ColumnName="Id_history_dispensed_peripheral" />
                 <ScalarProperty Name="Number_dispensing" ColumnName="Number_dispensing" />
@@ -3038,7 +2877,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_numbers_graphics_cards">
-            <EntityTypeMapping TypeName="InventoryModel1.Inventory_numbers_graphics_cards">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_graphics_cards">
               <MappingFragment StoreEntitySet="Inventory_numbers_graphics_cards">
                 <ScalarProperty Name="Id_inventory_number_graphics_card" ColumnName="Id_inventory_number_graphics_card" />
                 <ScalarProperty Name="Fk_graphics_card" ColumnName="Fk_graphics_card" />
@@ -3047,7 +2886,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_numbers_hdd">
-            <EntityTypeMapping TypeName="InventoryModel1.Inventory_numbers_hdd">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_hdd">
               <MappingFragment StoreEntitySet="Inventory_numbers_hdd">
                 <ScalarProperty Name="Id_inventory_number_hdd" ColumnName="Id_inventory_number_hdd" />
                 <ScalarProperty Name="Fk_hdd" ColumnName="Fk_hdd" />
@@ -3056,7 +2895,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_numbers_motherboards">
-            <EntityTypeMapping TypeName="InventoryModel1.Inventory_numbers_motherboards">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_motherboards">
               <MappingFragment StoreEntitySet="Inventory_numbers_motherboards">
                 <ScalarProperty Name="Id_inventory_number_motherboard" ColumnName="Id_inventory_number_motherboard" />
                 <ScalarProperty Name="Fk_motherboard" ColumnName="Fk_motherboard" />
@@ -3065,7 +2904,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_numbers_peripherals">
-            <EntityTypeMapping TypeName="InventoryModel1.Inventory_numbers_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_peripherals">
               <MappingFragment StoreEntitySet="Inventory_numbers_peripherals">
                 <ScalarProperty Name="Id_inventory_number_peripheral" ColumnName="Id_inventory_number_peripheral" />
                 <ScalarProperty Name="Fk_peripheral" ColumnName="Fk_peripheral" />
@@ -3075,7 +2914,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_numbers_power_supplies">
-            <EntityTypeMapping TypeName="InventoryModel1.Inventory_numbers_power_supplies">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_power_supplies">
               <MappingFragment StoreEntitySet="Inventory_numbers_power_supplies">
                 <ScalarProperty Name="Id_inventory_number_power_supplie" ColumnName="Id_inventory_number_power_supplie" />
                 <ScalarProperty Name="Fk_power_supplie" ColumnName="Fk_power_supplie" />
@@ -3084,7 +2923,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_numbers_processors">
-            <EntityTypeMapping TypeName="InventoryModel1.Inventory_numbers_processors">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_processors">
               <MappingFragment StoreEntitySet="Inventory_numbers_processors">
                 <ScalarProperty Name="Id_inventory_number_processor" ColumnName="Id_inventory_number_processor" />
                 <ScalarProperty Name="Fk_processor" ColumnName="Fk_processor" />
@@ -3093,7 +2932,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_numbers_ram">
-            <EntityTypeMapping TypeName="InventoryModel1.Inventory_numbers_ram">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_ram">
               <MappingFragment StoreEntitySet="Inventory_numbers_ram">
                 <ScalarProperty Name="Id_inventory_number_ram" ColumnName="Id_inventory_number_ram" />
                 <ScalarProperty Name="Fk_ram" ColumnName="Fk_ram" />
@@ -3102,7 +2941,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_numbers_ssd">
-            <EntityTypeMapping TypeName="InventoryModel1.Inventory_numbers_ssd">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_numbers_ssd">
               <MappingFragment StoreEntitySet="Inventory_numbers_ssd">
                 <ScalarProperty Name="Id_inventory_number_ssd" ColumnName="Id_inventory_number_ssd" />
                 <ScalarProperty Name="Fk_ssd" ColumnName="Fk_ssd" />
@@ -3111,7 +2950,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="List_dispensed_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.List_dispensed_computers">
+            <EntityTypeMapping TypeName="InventoryModel.List_dispensed_computers">
               <MappingFragment StoreEntitySet="List_dispensed_computers">
                 <ScalarProperty Name="Id_list_dispensed_computer" ColumnName="Id_list_dispensed_computer" />
                 <ScalarProperty Name="Fk_number_dispensing" ColumnName="Fk_number_dispensing" />
@@ -3120,7 +2959,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="List_dispensed_peripherals">
-            <EntityTypeMapping TypeName="InventoryModel1.List_dispensed_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.List_dispensed_peripherals">
               <MappingFragment StoreEntitySet="List_dispensed_peripherals">
                 <ScalarProperty Name="Id_list_dispensed_peripheral" ColumnName="Id_list_dispensed_peripheral" />
                 <ScalarProperty Name="Fk_number_dispensing" ColumnName="Fk_number_dispensing" />
@@ -3129,7 +2968,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Manufacturers">
-            <EntityTypeMapping TypeName="InventoryModel1.Manufacturer">
+            <EntityTypeMapping TypeName="InventoryModel.Manufacturer">
               <MappingFragment StoreEntitySet="Manufacturers">
                 <ScalarProperty Name="Id_manufacturer" ColumnName="Id_manufacturer" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3137,7 +2976,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Motherboards">
-            <EntityTypeMapping TypeName="InventoryModel1.Motherboard">
+            <EntityTypeMapping TypeName="InventoryModel.Motherboard">
               <MappingFragment StoreEntitySet="Motherboards">
                 <ScalarProperty Name="Id_motherboard" ColumnName="Id_motherboard" />
                 <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
@@ -3147,7 +2986,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Operating_systems">
-            <EntityTypeMapping TypeName="InventoryModel1.Operating_systems">
+            <EntityTypeMapping TypeName="InventoryModel.Operating_systems">
               <MappingFragment StoreEntitySet="Operating_systems">
                 <ScalarProperty Name="Id_operating_system" ColumnName="Id_operating_system" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3156,7 +2995,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Operating_systems_in_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.Operating_systems_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Operating_systems_in_computers">
               <MappingFragment StoreEntitySet="Operating_systems_in_computers">
                 <ScalarProperty Name="Id_operating_systems_in_computers" ColumnName="Id_operating_systems_in_computers" />
                 <ScalarProperty Name="Fk_operating_system" ColumnName="Fk_operating_system" />
@@ -3165,7 +3004,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Peripherals">
-            <EntityTypeMapping TypeName="InventoryModel1.Peripheral">
+            <EntityTypeMapping TypeName="InventoryModel.Peripheral">
               <MappingFragment StoreEntitySet="Peripherals">
                 <ScalarProperty Name="Id_peripheral" ColumnName="Id_peripheral" />
                 <ScalarProperty Name="Fk_type_peripheral" ColumnName="Fk_type_peripheral" />
@@ -3175,7 +3014,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="InventoryModel1.Post">
+            <EntityTypeMapping TypeName="InventoryModel.Post">
               <MappingFragment StoreEntitySet="Posts">
                 <ScalarProperty Name="Id_post" ColumnName="Id_post" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3183,7 +3022,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Posts_employees">
-            <EntityTypeMapping TypeName="InventoryModel1.Posts_employees">
+            <EntityTypeMapping TypeName="InventoryModel.Posts_employees">
               <MappingFragment StoreEntitySet="Posts_employees">
                 <ScalarProperty Name="Id_post_employee" ColumnName="Id_post_employee" />
                 <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
@@ -3192,7 +3031,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Power_supplies">
-            <EntityTypeMapping TypeName="InventoryModel1.Power_supplies">
+            <EntityTypeMapping TypeName="InventoryModel.Power_supplies">
               <MappingFragment StoreEntitySet="Power_supplies">
                 <ScalarProperty Name="Id_power_supplie" ColumnName="Id_power_supplie" />
                 <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
@@ -3203,7 +3042,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Processors">
-            <EntityTypeMapping TypeName="InventoryModel1.Processor">
+            <EntityTypeMapping TypeName="InventoryModel.Processor">
               <MappingFragment StoreEntitySet="Processors">
                 <ScalarProperty Name="Id_processor" ColumnName="Id_processor" />
                 <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
@@ -3216,7 +3055,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Processors_in_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.Processors_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Processors_in_computers">
               <MappingFragment StoreEntitySet="Processors_in_computers">
                 <ScalarProperty Name="Id_processor_in_computer" ColumnName="Id_processor_in_computer" />
                 <ScalarProperty Name="Fk_inventory_number_processor" ColumnName="Fk_inventory_number_processor" />
@@ -3225,7 +3064,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rams">
-            <EntityTypeMapping TypeName="InventoryModel1.Ram">
+            <EntityTypeMapping TypeName="InventoryModel.Ram">
               <MappingFragment StoreEntitySet="Ram">
                 <ScalarProperty Name="Id_ram" ColumnName="Id_ram" />
                 <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
@@ -3238,7 +3077,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ram_in_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.Ram_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Ram_in_computers">
               <MappingFragment StoreEntitySet="Ram_in_computers">
                 <ScalarProperty Name="Id_ram_in_computer" ColumnName="Id_ram_in_computer" />
                 <ScalarProperty Name="Fk_inventory_number_ram" ColumnName="Fk_inventory_number_ram" />
@@ -3246,25 +3085,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="InventoryModel1.Role">
-              <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="Id_role" ColumnName="Id_role" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Roles_users">
-            <EntityTypeMapping TypeName="InventoryModel1.Roles_users">
-              <MappingFragment StoreEntitySet="Roles_users">
-                <ScalarProperty Name="Id_role_user" ColumnName="Id_role_user" />
-                <ScalarProperty Name="Fk_user" ColumnName="Fk_user" />
-                <ScalarProperty Name="Fk_role" ColumnName="Fk_role" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sockets">
-            <EntityTypeMapping TypeName="InventoryModel1.Socket">
+            <EntityTypeMapping TypeName="InventoryModel.Socket">
               <MappingFragment StoreEntitySet="Sockets">
                 <ScalarProperty Name="Id_socket" ColumnName="Id_socket" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3272,7 +3094,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ssds">
-            <EntityTypeMapping TypeName="InventoryModel1.Ssd">
+            <EntityTypeMapping TypeName="InventoryModel.Ssd">
               <MappingFragment StoreEntitySet="Ssd">
                 <ScalarProperty Name="Id_ssd" ColumnName="Id_ssd" />
                 <ScalarProperty Name="Fk_manufacturer" ColumnName="Fk_manufacturer" />
@@ -3284,7 +3106,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ssd_in_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.Ssd_in_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Ssd_in_computers">
               <MappingFragment StoreEntitySet="Ssd_in_computers">
                 <ScalarProperty Name="Id_ssd_in_computer" ColumnName="Id_ssd_in_computer" />
                 <ScalarProperty Name="Fk_inventory_number_ssd" ColumnName="Fk_inventory_number_ssd" />
@@ -3293,7 +3115,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Statuses_computers">
-            <EntityTypeMapping TypeName="InventoryModel1.Statuses_computers">
+            <EntityTypeMapping TypeName="InventoryModel.Statuses_computers">
               <MappingFragment StoreEntitySet="Statuses_computers">
                 <ScalarProperty Name="Id_status_computer" ColumnName="Id_status_computer" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3301,7 +3123,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Statuses_peripherals">
-            <EntityTypeMapping TypeName="InventoryModel1.Statuses_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.Statuses_peripherals">
               <MappingFragment StoreEntitySet="Statuses_peripherals">
                 <ScalarProperty Name="Id_status_peripheral" ColumnName="Id_status_peripheral" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3309,7 +3131,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="InventoryModel1.sysdiagram">
+            <EntityTypeMapping TypeName="InventoryModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -3320,7 +3142,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Types_hdd">
-            <EntityTypeMapping TypeName="InventoryModel1.Types_hdd">
+            <EntityTypeMapping TypeName="InventoryModel.Types_hdd">
               <MappingFragment StoreEntitySet="Types_hdd">
                 <ScalarProperty Name="Id_type_hdd" ColumnName="Id_type_hdd" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3328,7 +3150,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Types_memory">
-            <EntityTypeMapping TypeName="InventoryModel1.Types_memory">
+            <EntityTypeMapping TypeName="InventoryModel.Types_memory">
               <MappingFragment StoreEntitySet="Types_memory">
                 <ScalarProperty Name="Id_type_memory" ColumnName="Id_type_memory" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3336,7 +3158,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Types_peripherals">
-            <EntityTypeMapping TypeName="InventoryModel1.Types_peripherals">
+            <EntityTypeMapping TypeName="InventoryModel.Types_peripherals">
               <MappingFragment StoreEntitySet="Types_peripherals">
                 <ScalarProperty Name="Id_type_peripheral" ColumnName="Id_type_peripheral" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3344,7 +3166,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Types_ssd">
-            <EntityTypeMapping TypeName="InventoryModel1.Types_ssd">
+            <EntityTypeMapping TypeName="InventoryModel.Types_ssd">
               <MappingFragment StoreEntitySet="Types_ssd">
                 <ScalarProperty Name="Id_type_ssd" ColumnName="Id_type_ssd" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3352,7 +3174,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Units">
-            <EntityTypeMapping TypeName="InventoryModel1.Unit">
+            <EntityTypeMapping TypeName="InventoryModel.Unit">
               <MappingFragment StoreEntitySet="Units">
                 <ScalarProperty Name="Id_unit" ColumnName="Id_unit" />
                 <ScalarProperty Name="Full_name" ColumnName="Full_name" />
@@ -3361,11 +3183,12 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="InventoryModel1.User">
+            <EntityTypeMapping TypeName="InventoryModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id_user" ColumnName="Id_user" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
