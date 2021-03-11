@@ -69,7 +69,16 @@
         <Setter Property="Background" Value="white" />
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="CaretBrush" Value="Black" />
+    </Style>
 
+    <Style x:Key="BasePasswordBox" TargetType="PasswordBox">
+        <Setter Property="FontFamily" Value="Verdana" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Height" Value="23" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="white" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="CaretBrush" Value="Black" />
     </Style>
 
     <Style x:Key="BaseStackPanel" TargetType="StackPanel">
