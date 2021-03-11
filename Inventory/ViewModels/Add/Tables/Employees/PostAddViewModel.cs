@@ -17,14 +17,11 @@ namespace Inventory.ViewModels.Add.Tables.Employees
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Add();
-
+            Post.AddPost(Post.Name);
             addWindow.Close();
         }, _ => Post.IsValidationProperties());
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
-
-        private async void Add() => await Post.AddPost(Post.Name);
     }
 }

@@ -23,7 +23,7 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             Post.EndEdit();
-            Edit();
+            Post.EditPost(Post);
             editWindow.Close();
         }, _ => Post.IsValidationProperties());
 
@@ -33,7 +33,5 @@
             editWindow.Close();
         });
         #endregion
-
-        private async void Edit() => await Post.EditPost(Post);
     }
 }

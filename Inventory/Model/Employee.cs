@@ -7,12 +7,11 @@ namespace Inventory.Model
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Data.Entity;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Windows;
 
-    public partial class Employee: BindableBase, IEditableObject, IDataErrorInfo
+    public partial class Employee : BindableBase, IEditableObject, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
@@ -31,7 +30,7 @@ namespace Inventory.Model
         public string M_name { get; set; }
         public string Email { get; set; }
         public string Phone_number { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_computers> Dispensing_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -148,17 +147,8 @@ namespace Inventory.Model
             db.Employees.Add(emp);
             db.SaveChanges();
 
-            foreach (var post in PostsEmployees)
-                post.Fk_employee = emp.Id_employee;
-
-            db.Posts_employees.AddRange(PostsEmployees);
-            db.SaveChanges();
-
-            foreach (var department in EmployeesInDepartments)
-                department.Fk_employee = emp.Id_employee;
-
-            db.Employees_in_departments.AddRange(EmployeesInDepartments);
-            db.SaveChanges();
+            Model.Posts_employees.AddPostEmployee(db, emp.Id_employee);
+            Model.Employees_in_departments.AddEmployeeInDepartment(db, emp.Id_employee);
 
             //Для отображения должностей и отделов, которые только что были добавлены, в таблице
             emp.Employees_in_departments = new List<Employees_in_departments>(db.Employees_in_departments.Include(dep => dep.Department).Where(empDep => empDep.Fk_employee == emp.Id_employee));
@@ -192,50 +182,10 @@ namespace Inventory.Model
 
             db.SaveChanges();
 
-            AddInCollections(db, findEmployee.Id_employee);
+            Model.Posts_employees.EditPostEmployee(db, findEmployee.Id_employee);
+            Model.Employees_in_departments.EditEmployeeInDepartment(db, findEmployee.Id_employee);
 
             RefreshCollection();
-        }
-
-        private static void AddInCollections(InventoryEntities db, int idEmployee)
-        {
-            foreach (var post in PostsEmployees)
-            {
-                if (post.Id_post_employee == 0)
-                {
-                    post.Fk_employee = idEmployee;
-                    db.Posts_employees.Add(post);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    var postEmployee = db.Posts_employees.Where(postEmp => postEmp.Id_post_employee == post.Id_post_employee).ToList();
-                    foreach (var item in postEmployee)
-                    {
-                        item.Fk_post = post.Fk_post;
-                        db.SaveChanges();
-                    }
-                }
-            }
-
-            foreach (var department in EmployeesInDepartments)
-            {
-                if (department.Id_employee_in_department == 0)
-                {
-                    department.Fk_employee = idEmployee;
-                    db.Employees_in_departments.Add(department);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    var employeesInDepartments = db.Employees_in_departments.Where(empDepart => empDepart.Id_employee_in_department == department.Id_employee_in_department).ToList();
-                    foreach (var item in employeesInDepartments)
-                    {
-                        item.Fk_department = department.Fk_department;
-                        db.SaveChanges();
-                    }
-                }
-            }
         }
 
         public static void DeleteEmployee(Employee selectEmployee)
@@ -258,41 +208,6 @@ namespace Inventory.Model
             db.SaveChanges();
 
             EmployeesViewModel.Employees.Remove(selectEmployee);
-        }
-
-        public static void DeletePostFromCollection(Posts_employees selectPostEmp)
-        {
-            if (selectPostEmp.Id_post_employee != 0)
-            {
-                using var db = new InventoryEntities();
-                var findPostEmployee = db.Posts_employees.SingleOrDefault(postEmployee =>
-                    postEmployee.Id_post_employee == selectPostEmp.Id_post_employee);
-
-                if (findPostEmployee != null)
-                {
-                    db.Posts_employees.Remove(findPostEmployee);
-                    db.SaveChanges();
-                }
-            }
-
-            PostsEmployees.Remove(selectPostEmp);
-        }
-
-        public static void DeleteDepartmentFromCollection(Employees_in_departments selectEmpInDepart)
-        {
-            if (selectEmpInDepart.Id_employee_in_department != 0)
-            {
-                using var db = new InventoryEntities();
-                var findEmpDepart = db.Employees_in_departments.SingleOrDefault(inDepartments => inDepartments.Id_employee_in_department == selectEmpInDepart.Id_employee_in_department);
-
-                if (findEmpDepart != null)
-                {
-                    db.Employees_in_departments.Remove(findEmpDepart);
-                    db.SaveChanges();
-                }
-            }
-
-            EmployeesInDepartments.Remove(selectEmpInDepart);
         }
 
         public static void RefreshCollection()

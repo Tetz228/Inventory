@@ -25,7 +25,6 @@ namespace Inventory.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Posts_employees> Posts_employees { get; set; }
-
         #endregion
 
         #region Валидация
@@ -65,7 +64,7 @@ namespace Inventory.Model
         #endregion
 
         #region Методы обработки информации
-        public static Task<bool> AddPost(string name)
+        public static void AddPost(string name)
         {
             using var db = new InventoryEntities();
 
@@ -78,11 +77,9 @@ namespace Inventory.Model
             db.SaveChanges();
 
             PostViewModel.Posts.Add(post);
-
-            return Task.FromResult(true);
         }
 
-        public static Task<bool> EditPost(Post post)
+        public static void EditPost(Post post)
         {
             using var db = new InventoryEntities();
             var findPost = db.Posts.SingleOrDefault(p => p.Id_post == post.Id_post);
@@ -92,12 +89,12 @@ namespace Inventory.Model
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении должности",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
-                return Task.FromResult(false);
+                return;
             }
 
             findPost.Name = post.Name;
             db.SaveChanges();
-            return Task.FromResult(true);
+            return;
         }
 
         public static void DeletePost(Post selectPost)
@@ -166,6 +163,5 @@ namespace Inventory.Model
             Name = _selectPost.Name;
         }
         #endregion
-
     }
 }

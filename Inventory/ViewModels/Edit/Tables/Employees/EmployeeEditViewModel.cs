@@ -46,7 +46,7 @@
             if (MessageBoxResult.Yes != MessageBox.Show("Вы действительно хотите удалить должность сотрудника? Удаленную должность будет невозможно восстановить.",
                 "Удаление заданной должности", MessageBoxButton.YesNo, MessageBoxImage.Question))
                 return;
-            Employee.DeletePostFromCollection(selectPostEmp);
+            Posts_employees.DeletePostEmployee(selectPostEmp);
         });
 
         public ICommand DeleteDepartmentFromCollection => new DelegateCommand<Employees_in_departments>(selectEmpInDepart =>
@@ -54,7 +54,7 @@
             if (MessageBoxResult.Yes != MessageBox.Show("Вы действительно хотите удалить отдел сотрудника? Удаленный отдел будет невозможно восстановить.",
                 "Удаление заданного отдела", MessageBoxButton.YesNo, MessageBoxImage.Question))
                 return;
-            Employee.DeleteDepartmentFromCollection(selectEmpInDepart);
+            Employees_in_departments.DeleteEmployeeDepartment(selectEmpInDepart);
         });
         #endregion
     }
