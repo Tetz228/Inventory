@@ -1,0 +1,118 @@
+﻿<Window
+    x:Class="Inventory.View.Add.Tables.Employees.UserAddWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:employees="clr-namespace:Inventory.ViewModels.Add.Tables.Employees"
+    xmlns:local="clr-namespace:Inventory.View.Add.Tables.Employees"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="AddUserWindow"
+    Title="Добавить нового пользователя"
+    Width="500"
+    Height="270"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ThreeDBorderWindow"
+    mc:Ignorable="d">
+
+    <Window.DataContext>
+        <employees:UserAddViewModel />
+    </Window.DataContext>
+
+    <Grid>
+
+        <StackPanel Margin="010">
+
+            <TextBlock
+                Margin="10"
+                Style="{StaticResource BaseText}"
+                Text="Новый пользователь"
+                TextAlignment="Center" />
+
+            <Grid>
+                <Border Background="#FFAEAEAE" CornerRadius="5">
+                    <Border.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border
+                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Background="Black"
+                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    SnapsToDevicePixels="True" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Border.OpacityMask>
+
+                    <StackPanel Width="455" HorizontalAlignment="Center">
+                        <!--  Логин  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource BaseText}"
+                                Text="Логин: " />
+
+                            <TextBox
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                MaxLength="30"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding User.Login, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding User.ErrorCollection[Login], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Пароль  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource BaseText}"
+                                Text="Пароль: " />
+
+                            <PasswordBox
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                MaxLength="30"
+                                Password="{Binding User.Password}"
+                                Style="{StaticResource BasePasswordBox}"
+                                ToolTip="{Binding User.ErrorCollection[Password], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Сотрудник  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource BaseText}"
+                                Text="Сотрудник: " />
+
+                            <ComboBox Margin="10" />
+
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <!--  Добавить нового пользователя  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding AddEmployee}"
+                    CommandParameter="{Binding ElementName=AddUserWindow}"
+                    Content="Добавить нового пользователя"
+                    Style="{StaticResource BaseButton}" />
+
+                <!--  Отмена  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Right"
+                    Command="{Binding Cancel}"
+                    CommandParameter="{Binding ElementName=AddUserWindow}"
+                    Content="Отмена"
+                    Style="{StaticResource BaseButton}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
