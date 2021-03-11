@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище InventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище InventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Computers">
           <Key>
             <PropertyRef Name="Id_computer" />
@@ -391,8 +391,9 @@
           </Key>
           <Property Name="Id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="Fk_employee" Type="int" Nullable="false" />
+          <Property Name="Salt" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
           <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="0..1" />
@@ -1321,8 +1322,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1819,11 +1819,12 @@
           </Key>
           <Property Name="Id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Login" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Fk_employee" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Dispensing_computers" Relationship="Self.FK_Dispensing_computers_Users" FromRole="Users" ToRole="Dispensing_computers" />
           <NavigationProperty Name="Dispensing_peripherals" Relationship="Self.FK_Dispensing_peripherals_Users" FromRole="Users" ToRole="Dispensing_peripherals" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Users_Employees" FromRole="Users" ToRole="Employees" />
+          <Property Name="Salt" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
           <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="0..1" />
@@ -3185,6 +3186,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="InventoryModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="Id_user" ColumnName="Id_user" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
