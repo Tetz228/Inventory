@@ -12,9 +12,9 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    public class PostViewModel : BindableBase
+    public class PostsViewModel : BindableBase
     {
-        public PostViewModel()
+        public PostsViewModel()
         {
             using var db = new InventoryEntities();
             Posts = new ObservableCollection<Post>(db.Posts);

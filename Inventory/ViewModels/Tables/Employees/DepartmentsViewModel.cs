@@ -12,9 +12,9 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    internal class DepartmentViewModel : BindableBase
+    internal class DepartmentsViewModel : BindableBase
     {
-        public DepartmentViewModel()
+        public DepartmentsViewModel()
         {
             using var db = new InventoryEntities();
             Departments = new ObservableCollection<Department>(db.Departments);

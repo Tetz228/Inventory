@@ -75,7 +75,7 @@ namespace Inventory.Model
             db.Departments.Add(department);
             db.SaveChanges();
 
-            DepartmentViewModel.Departments.Add(department);
+            DepartmentsViewModel.Departments.Add(department);
         }
 
         public static void EditDepartment(Department selectDepartment)
@@ -116,7 +116,7 @@ namespace Inventory.Model
                 db.Departments.Remove(findDepartment);
                 db.SaveChanges();
 
-                DepartmentViewModel.Departments.Remove(selectDepartment);
+                DepartmentsViewModel.Departments.Remove(selectDepartment);
             }
             catch (DbUpdateException)
             {
@@ -127,11 +127,11 @@ namespace Inventory.Model
 
         public static void RefreshCollection()
         {
-            DepartmentViewModel.Departments.Clear();
+            DepartmentsViewModel.Departments.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Departments)
-                DepartmentViewModel.Departments.Add(item);
+                DepartmentsViewModel.Departments.Add(item);
         }
         #endregion
 

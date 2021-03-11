@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <employees:PostViewModel />
+        <employees:PostsViewModel />
     </Page.DataContext>
 
     <Page.Resources>

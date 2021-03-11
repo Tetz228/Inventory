@@ -76,7 +76,7 @@ namespace Inventory.Model
             db.Posts.Add(post);
             db.SaveChanges();
 
-            PostViewModel.Posts.Add(post);
+            PostsViewModel.Posts.Add(post);
         }
 
         public static void EditPost(Post post)
@@ -118,7 +118,7 @@ namespace Inventory.Model
                 db.Posts.Remove(findPost);
                 db.SaveChanges();
 
-                PostViewModel.Posts.Remove(selectPost);
+                PostsViewModel.Posts.Remove(selectPost);
             }
             catch (DbUpdateException)
             {
@@ -129,11 +129,11 @@ namespace Inventory.Model
 
         public static void RefreshCollection()
         {
-            PostViewModel.Posts.Clear();
+            PostsViewModel.Posts.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Posts)
-                PostViewModel.Posts.Add(item);
+                PostsViewModel.Posts.Add(item);
         }
         #endregion
 

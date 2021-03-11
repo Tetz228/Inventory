@@ -280,11 +280,13 @@
     </Compile>
     <Compile Include="ViewModels\Add\Tables\Employees\DepartmentAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\EmployeeAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Employees\UserAddViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Employees\PostViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\PostsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\UsersViewModel.cs" />
     <Compile Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml.cs">
       <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
     </Compile>
@@ -294,13 +296,16 @@
     <Compile Include="View\Add\Tables\Employees\PostAddWindow.xaml.cs">
       <DependentUpon>PostAddWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Add\Tables\Employees\UserAddWindow.xaml.cs">
+      <DependentUpon>UserAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml.cs">
       <DependentUpon>DepartmentEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Tables\Employees\DepartmentViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\TablesEmployeesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="DataDictionary.xaml">
@@ -340,6 +345,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Add\Tables\Employees\PostAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Employees\UserAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
