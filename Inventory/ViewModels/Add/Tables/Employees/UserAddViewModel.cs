@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Add.Tables.Employees
+﻿namespace Inventory.ViewModels.Add.Tables.Employees
 {
+    using System;
+    using System.Runtime.InteropServices;
+
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using System.Security;
+    using System.Security.Cryptography;
     using System.Windows;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
+    using BCrypt.Net;
 
     public class UserAddViewModel : BindableBase
     {
@@ -22,12 +21,34 @@ namespace Inventory.ViewModels.Add.Tables.Employees
 
         public User User { get; }
 
+        public SecureString SecurePassword { private get; set; }
+
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            User.AddUser(User);
+            BAD_ConvertToUnsecureString(SecurePassword);
+            //User.AddUser(User);
+
+
+
             addWindow.Close();
-        }, _ => User.IsValidationProperties());
+
+        }, _ => true);
+
+        public static string BAD_ConvertToUnsecureString(SecureString securePassword)
+        {
+            IntPtr unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(securePassword);
+
+            var password = Marshal.PtrToStringUni(unmanagedString);
+
+            Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
+
+            string salt = BCrypt.GenerateSalt(7);
+            var h =BCrypt.HashPassword(password, salt);
+            
+
+            return password;
+        }
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

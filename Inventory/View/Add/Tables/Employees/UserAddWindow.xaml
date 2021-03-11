@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:employees="clr-namespace:Inventory.ViewModels.Add.Tables.Employees"
-    xmlns:local="clr-namespace:Inventory.View.Add.Tables.Employees"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="AddUserWindow"
     Title="Добавить нового пользователя"
@@ -71,10 +70,11 @@
                                 Text="Пароль: " />
 
                             <PasswordBox
+                                x:Name="PasswordBox"
                                 Margin="10"
                                 VerticalAlignment="Center"
                                 MaxLength="30"
-                                Password="{Binding User.Password}"
+                                PasswordChanged="PasswordBox_OnPasswordChanged"
                                 Style="{StaticResource BasePasswordBox}"
                                 ToolTip="{Binding User.ErrorCollection[Password], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
@@ -99,7 +99,7 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
-                    Command="{Binding AddEmployee}"
+                    Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddUserWindow}"
                     Content="Добавить нового пользователя"
                     Style="{StaticResource BaseButton}" />
