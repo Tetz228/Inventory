@@ -25,11 +25,5 @@ namespace Inventory.View.Add.Tables.Employees
         {
             InitializeComponent();
         }
-
-        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext != null)
-            { ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword; }
-        }
     }
 }
