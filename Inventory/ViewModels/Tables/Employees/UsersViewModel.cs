@@ -32,8 +32,6 @@
 
         public ICollectionView UsersCollection { get; }
 
-        public User SelectUser { get; set; }
-
         private string _usersFilter = string.Empty;
 
         public string UsersFilter
@@ -123,7 +121,6 @@
         }
 
         #region Команды
-        public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectUser = null);
 
         public ICommand AddUser => new DelegateCommand(() =>
         {
@@ -131,14 +128,6 @@
 
             addUserWindow.ShowDialog();
         });
-
-        public ICommand EditUser => new DelegateCommand<User>(user =>
-        {
-           
-
-        }, user => user != null);
-
-        public ICommand DeleteUser => new DelegateCommand<User>(User.DeleteUser, selectUser => selectUser != null);
 
         public ICommand RefreshList => new DelegateCommand(User.RefreshCollection);
         #endregion
