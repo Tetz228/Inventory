@@ -2,8 +2,6 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.View.Edit.Tables.Employees;
-    using Inventory.ViewModels.Edit.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
@@ -13,8 +11,6 @@
     using System.Windows.Input;
 
     using Inventory.View.Add.Tables.Employees;
-
-    using MaterialDesignThemes.Wpf;
 
     public class UsersViewModel : BindableBase
     {

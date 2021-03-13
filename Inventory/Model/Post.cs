@@ -100,7 +100,6 @@ namespace Inventory.Model
 
             findPost.Name = post.Name;
             db.SaveChanges();
-            return;
         }
 
         public static void DeletePost(Post selectPost)

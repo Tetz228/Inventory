@@ -14,7 +14,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel Margin="010">
+        <StackPanel Margin="10">
             <TextBlock
                 Margin="10"
                 Style="{StaticResource BaseText}"
@@ -65,7 +65,7 @@
                     HorizontalAlignment="Center"
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditPostWindow}"
-                    Content="Изменить информацию об должности"
+                    Content="Изменить информацию о должности"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отмена  -->

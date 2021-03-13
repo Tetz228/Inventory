@@ -11,8 +11,8 @@
     {
         public TablesEmployeesViewModel()
         {
+            CurrentPage = EmployeesPage = new EmployeesPage();
             DepartmentsPage = new DepartmentsPage();
-            EmployeesPage = new EmployeesPage();
             PostsPage = new PostsPage();
             UsersPage = new UsersPage();
         }
