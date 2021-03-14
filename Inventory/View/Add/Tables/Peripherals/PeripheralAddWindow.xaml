@@ -1,0 +1,110 @@
+﻿<Window
+    x:Class="Inventory.View.Add.Tables.Peripherals.PeripheralAddWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:peripherals="clr-namespace:Inventory.ViewModels.Add.Tables.Peripherals"
+    x:Name="AddPeripheralWindow"
+    Title="Добавить новую периферию"
+    Width="500"
+    Height="260"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ThreeDBorderWindow"
+    mc:Ignorable="d">
+
+    <Window.DataContext>
+        <peripherals:PeripheralAddViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock
+                Style="{StaticResource BaseText}"
+                Text="Новая периферия"
+                TextAlignment="Center" />
+
+            <Grid>
+                <Border Background="#FFAEAEAE" CornerRadius="5">
+                    <Border.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border
+                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Background="Black"
+                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    SnapsToDevicePixels="True" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Border.OpacityMask>
+
+                    <StackPanel Width="455" HorizontalAlignment="Center">
+                        <!--  Тип периферии  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Тип периферии: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding TypesPeripherals}"
+                                SelectedValue="{Binding Peripheral.Fk_type_peripheral}"
+                                SelectedValuePath="Id_type_peripheral"
+                                Style="{StaticResource BaseComboBox}" />
+
+                        </UniformGrid>
+
+                        <!--  Наименование периферии  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование периферии: " />
+
+                            <TextBox
+                                MaxLength="100"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding Peripheral.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Peripheral.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Производитель  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Manufacturers}"
+                                SelectedValue="{Binding Peripheral.Fk_manufacturer}"
+                                SelectedValuePath="Id_manufacturer"
+                                Style="{StaticResource BaseComboBox}" />
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <!--  Добавить новую периферию  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding AddCommand}"
+                    CommandParameter="{Binding ElementName=AddPeripheralWindow}"
+                    Content="Добавить новую периферию"
+                    Style="{StaticResource BaseButton}" />
+
+                <!--  Отменить  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Right"
+                    Command="{Binding Cancel}"
+                    CommandParameter="{Binding ElementName=AddPeripheralWindow}"
+                    Style="{StaticResource BaseButton}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -10,7 +10,7 @@
     {
         public TablesPeripheralsViewModel()
         {
-            PeripheralsPage = new PeripheralsPage();
+            CurrentPage = PeripheralsPage = new PeripheralsPage();
             TypesPeripheralsPage = new TypesPeripheralsPage();
             ManufacturersPage = new ManufacturersPage();
         }
