@@ -15,9 +15,9 @@
             Employee.EmployeesInDepartments.Add(new Employees_in_departments());
         }
 
-        public Employee Employee { get; set; }
+        public Employee Employee { get; }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e)
+        public void OnWindowClosing(object sender, CancelEventArgs args)
         {
             Employee.PostsEmployees.Clear();
             Employee.EmployeesInDepartments.Clear();

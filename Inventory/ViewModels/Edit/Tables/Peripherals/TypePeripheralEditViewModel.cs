@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 
@@ -13,9 +14,9 @@
             TypePeripheral.BeginEdit();
         }
 
-        #region Свойства
         public Types_peripherals TypePeripheral { get; }
-        #endregion
+
+        public void OnWindowClosing(object sender, CancelEventArgs e) => TypePeripheral.CancelEdit();
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>

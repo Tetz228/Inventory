@@ -3,10 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Inventory.View.Edit.Tables"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="EditManufacturerWindow"
-    Title="Изменить информацию о производителе"
+    Title="Изменить производителя"
     Width="550"
     Height="180"
     ResizeMode="CanMinimize"
@@ -17,7 +16,6 @@
     <Grid>
         <StackPanel Margin="10">
             <TextBlock
-                Margin="10"
                 Style="{StaticResource BaseText}"
                 Text="Изменить производителя"
                 TextAlignment="Center" />
@@ -40,15 +38,9 @@
                     <StackPanel HorizontalAlignment="Center">
                         <!--  Наименование производителя  -->
                         <UniformGrid Columns="2">
-                            <TextBlock
-                                Margin="10"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource BaseText}"
-                                Text="Наименование производителя: " />
+                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование производителя: " />
 
                             <TextBox
-                                Margin="10"
-                                VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Manufacturer.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -56,7 +48,6 @@
                         </UniformGrid>
                     </StackPanel>
                 </Border>
-
             </Grid>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -69,16 +60,14 @@
                     Content="Изменить информацию о производителе"
                     Style="{StaticResource BaseButton}" />
 
-                <!--  Отмена  -->
+                <!--  Отменить  -->
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding Cancel}"
                     CommandParameter="{Binding ElementName=EditManufacturerWindow}"
-                    Content="Отмена"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
-
         </StackPanel>
     </Grid>
 </Window>

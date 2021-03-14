@@ -17,6 +17,7 @@
         public PostsViewModel()
         {
             using var db = new InventoryEntities();
+
             Posts = new ObservableCollection<Post>(db.Posts);
             PostsCollection = CollectionViewSource.GetDefaultView(Posts);
             PostsCollection.SortDescriptions.Add(new SortDescription(nameof(Post.Name), ListSortDirection.Ascending));
@@ -49,7 +50,7 @@
         }
         #endregion
 
-        /// <summary>Событие при клике на заголовок в View</summary>
+        #region События
         public void Sort(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
@@ -69,21 +70,19 @@
                             PostsCollection.SortDescriptions.Clear();
                             PostsCollection.SortDescriptions.Add(new SortDescription(nameof(Post.Name), ListSortDirection.Ascending));
                         }
-
                         PostsCollection.Refresh();
-
                         break;
                     }
             }
         }
 
-        #region Команды
-        public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectPost = null);
+        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectPost = null;
+        #endregion
 
+        #region Команды
         public ICommand AddPost => new DelegateCommand(() =>
         {
             var addPostWindow = new PostAddWindow();
-
             addPostWindow.ShowDialog();
         });
 
@@ -91,8 +90,8 @@
         {
             var editPostWindow = new PostEditWindow();
             var editPostViewModel = new PostEditViewModel(post);
-
             editPostWindow.DataContext = editPostViewModel;
+            editPostWindow.Closing += editPostViewModel.OnWindowClosing;
             editPostWindow.ShowDialog();
 
         }, post => post != null);

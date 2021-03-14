@@ -17,6 +17,7 @@
         public DepartmentsViewModel()
         {
             using var db = new InventoryEntities();
+
             Departments = new ObservableCollection<Department>(db.Departments);
             DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
             DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Ascending));
@@ -25,7 +26,7 @@
         #region Свойства
         public static ObservableCollection<Department> Departments { get; set; }
 
-        public ICollectionView DepartmentsCollection { get; set; }
+        public ICollectionView DepartmentsCollection { get; }
 
         private string _departmentsFilter;
 
@@ -49,7 +50,7 @@
         public Department SelectDepartment { get; set; }
         #endregion
 
-        /// <summary>Событие при клике на заголовок в View</summary>
+        #region События
         public void Sort(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
@@ -58,32 +59,30 @@
             switch (columnHeader.Content.ToString())
             {
                 case "Наименование":
-                {
-                    if (DepartmentsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
                     {
-                        DepartmentsCollection.SortDescriptions.Clear();
-                        DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Descending));
+                        if (DepartmentsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
+                        {
+                            DepartmentsCollection.SortDescriptions.Clear();
+                            DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Descending));
+                        }
+                        else
+                        {
+                            DepartmentsCollection.SortDescriptions.Clear();
+                            DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Ascending));
+                        }
+                        DepartmentsCollection.Refresh();
+                        break;
                     }
-                    else
-                    {
-                        DepartmentsCollection.SortDescriptions.Clear();
-                        DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Ascending));
-                    }
-
-                    DepartmentsCollection.Refresh();
-
-                    break;
-                }
             }
         }
 
-        #region Команды
-        public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectDepartment = null);
+        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectDepartment = null;
+        #endregion
 
+        #region Команды
         public ICommand AddDepartment => new DelegateCommand(() =>
         {
             var addDepartmentWindow = new DepartmentAddWindow();
-
             addDepartmentWindow.ShowDialog();
         });
 
@@ -91,10 +90,9 @@
         {
             var editDepartmentWindow = new DepartmentEditWindow();
             var editDepartmentViewModel = new DepartmentEditViewModel(department);
-
             editDepartmentWindow.DataContext = editDepartmentViewModel;
+            editDepartmentWindow.Closing += editDepartmentViewModel.OnWindowClosing;
             editDepartmentWindow.ShowDialog();
-
         }, depart => depart != null);
 
         public ICommand DeleteDepartment => new DelegateCommand<Department>(Department.DeleteDepartment, selectDepartment => selectDepartment != null);

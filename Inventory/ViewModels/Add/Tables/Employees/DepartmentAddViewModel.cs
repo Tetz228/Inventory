@@ -1,11 +1,9 @@
 ﻿namespace Inventory.ViewModels.Add.Tables.Employees
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
 
     public class DepartmentAddViewModel : BindableBase
     {
@@ -20,7 +18,6 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Department.AddDepartment(Department.Name);
-
             addWindow.Close();
         }, _ => Department.IsValidationProperties());
 

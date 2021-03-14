@@ -10,16 +10,13 @@ namespace Inventory.Model
 
     public partial class Types_peripherals : BindableBase, IEditableObject, IDataErrorInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Types_peripherals()
         {
             this.Peripherals = new HashSet<Peripheral>();
         }
-    
+
         public int Id_type_peripheral { get; set; }
         public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Peripheral> Peripherals { get; set; }
 
         #region Валидация

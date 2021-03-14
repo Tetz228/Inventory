@@ -20,9 +20,7 @@
 
     <Grid>
         <StackPanel Margin="010">
-
             <TextBlock
-                Margin="10"
                 Style="{StaticResource BaseText}"
                 Text="Новая должность"
                 TextAlignment="Center" />
@@ -45,15 +43,9 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Наименование должности  -->
                         <UniformGrid Columns="2">
-                            <TextBlock
-                                Margin="10"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource BaseText}"
-                                Text="Наименование должности: " />
+                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование должности: " />
 
                             <TextBox
-                                Margin="10"
-                                VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Post.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -74,13 +66,12 @@
                     Content="Добавить новую должность"
                     Style="{StaticResource BaseButton}" />
 
-                <!--  Отмена  -->
+                <!--  Отменить  -->
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding Cancel}"
                     CommandParameter="{Binding ElementName=AddPostWindow}"
-                    Content="Отмена"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
 

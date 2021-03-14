@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="EditPostWindow"
-    Title="Изменить информацию об должности"
+    Title="Изменить должность"
     Width="500"
     Height="180"
     ResizeMode="CanMinimize"
@@ -16,7 +16,6 @@
     <Grid>
         <StackPanel Margin="10">
             <TextBlock
-                Margin="10"
                 Style="{StaticResource BaseText}"
                 Text="Изменить должность"
                 TextAlignment="Center" />
@@ -39,15 +38,9 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Наименование должности  -->
                         <UniformGrid Columns="2">
-                            <TextBlock
-                                Margin="10"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource BaseText}"
-                                Text="Наименование должности: " />
+                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование должности: " />
 
                             <TextBox
-                                Margin="10"
-                                VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Post.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -55,7 +48,6 @@
                         </UniformGrid>
                     </StackPanel>
                 </Border>
-
             </Grid>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -68,16 +60,14 @@
                     Content="Изменить информацию о должности"
                     Style="{StaticResource BaseButton}" />
 
-                <!--  Отмена  -->
+                <!--  Отменить  -->
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding Cancel}"
                     CommandParameter="{Binding ElementName=EditPostWindow}"
-                    Content="Отмена"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
-
         </StackPanel>
     </Grid>
 </Window>

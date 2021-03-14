@@ -51,7 +51,7 @@
         }
         #endregion
 
-        /// <summary>Событие при клике на заголовок в View</summary>
+        #region События
         public void Sort(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
@@ -71,21 +71,18 @@
                         ManufacturersCollection.SortDescriptions.Clear();
                         ManufacturersCollection.SortDescriptions.Add(new SortDescription(nameof(Manufacturer.Name), ListSortDirection.Ascending));
                     }
-
                     ManufacturersCollection.Refresh();
-
                     break;
                 }
             }
         }
+        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectManufacturer = null;
+        #endregion
 
         #region Команды
-        public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectManufacturer = null);
-
         public ICommand AddManufacturer => new DelegateCommand(() =>
         {
             var addManufacturerWindow = new ManufacturerAddWindow();
-
             addManufacturerWindow.ShowDialog();
         });
 
@@ -93,11 +90,10 @@
         {
             var editWindow = new ManufacturerEditWindow();
             var editViewModel = new ManufacturerEditViewModel(manufacturer);
-
             editWindow.DataContext = editViewModel;
+            editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();
-
-        }, post => post != null);
+        }, manufacturer => manufacturer != null);
 
         public ICommand DeleteManufacturer => new DelegateCommand<Manufacturer>(Manufacturer.DeleteManufacturer, selectManufacturer => selectManufacturer != null);
 

@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 
@@ -13,9 +14,9 @@
             Manufacturer.BeginEdit();
         }
 
-        #region Свойства
         public Manufacturer Manufacturer { get; }
-        #endregion
+
+        public void OnWindowClosing(object sender, CancelEventArgs e) => Manufacturer.CancelEdit();
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>

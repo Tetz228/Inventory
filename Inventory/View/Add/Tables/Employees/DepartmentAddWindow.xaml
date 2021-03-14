@@ -21,7 +21,6 @@
     <Grid>
         <StackPanel Margin="010">
             <TextBlock
-                Margin="10"
                 Style="{StaticResource BaseText}"
                 Text="Новый отдел"
                 TextAlignment="Center" />
@@ -44,15 +43,9 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Наименование отдела  -->
                         <UniformGrid Columns="2">
-                            <TextBlock
-                                Margin="10"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource BaseText}"
-                                Text="Наименование отдела: " />
+                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование отдела: " />
 
                             <TextBox
-                                Margin="10"
-                                VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Department.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -60,7 +53,6 @@
                         </UniformGrid>
                     </StackPanel>
                 </Border>
-
             </Grid>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -73,16 +65,14 @@
                     Content="Добавить новый отдел"
                     Style="{StaticResource BaseButton}" />
 
-                <!--  Отмена  -->
+                <!--  Отменить  -->
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding Cancel}"
                     CommandParameter="{Binding ElementName=AddDepartmentWindow}"
-                    Content="Отмена"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
-
         </StackPanel>
     </Grid>
 </Window>

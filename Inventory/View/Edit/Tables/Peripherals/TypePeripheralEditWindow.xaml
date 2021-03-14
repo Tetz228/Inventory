@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Peripherals"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="EditPostWindow"
     Title="Изменить тип периферии"
@@ -17,9 +16,8 @@
     <Grid>
         <StackPanel Margin="10">
             <TextBlock
-                Margin="10"
                 Style="{StaticResource BaseText}"
-                Text="Изменить тип"
+                Text="Изменить тип периферии"
                 TextAlignment="Center" />
 
             <Grid>
@@ -40,15 +38,9 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Наименование тип  -->
                         <UniformGrid Columns="2">
-                            <TextBlock
-                                Margin="10"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource BaseText}"
-                                Text="Наименование типа: " />
+                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование типа: " />
 
                             <TextBox
-                                Margin="10"
-                                VerticalAlignment="Center"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding TypePeripheral.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -66,19 +58,17 @@
                     HorizontalAlignment="Center"
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditPostWindow}"
-                    Content="Изменить информацию о типе"
+                    Content="Изменить информацию о типе периферии"
                     Style="{StaticResource BaseButton}" />
 
-                <!--  Отмена  -->
+                <!--  Отменить  -->
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding Cancel}"
                     CommandParameter="{Binding ElementName=EditPostWindow}"
-                    Content="Отмена"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
-
         </StackPanel>
     </Grid>
 </Window>

@@ -16,31 +16,29 @@
             Employees = new ObservableCollection<Employee>(db.Employees);
         }
 
+        #region Свойства
         public User User { get; }
 
-        public ObservableCollection<Employee> Employees { get; set; }
+        public ObservableCollection<Employee> Employees { get; }
+        #endregion
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             User.AddUser(User);
-
             addWindow.Close();
-
         }, _ => User.IsValidationProperties() && User.ValidPassword() && User.Fk_employee != 0 && User.EqualsPasswords());
 
         public ICommand PasswordChanged => new DelegateCommand<PasswordBox>(passwordBox =>
         {
             if (passwordBox != null)
                 User.Password = passwordBox.Password;
-
         }, _ => true);
 
         public ICommand PasswordChangedRepeated => new DelegateCommand<PasswordBox>(passwordBox =>
         {
             if (passwordBox != null)
                 User.PasswordRepeated = passwordBox.Password;
-
         }, _ => true);
 
         public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());

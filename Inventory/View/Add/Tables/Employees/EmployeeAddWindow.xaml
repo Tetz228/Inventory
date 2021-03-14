@@ -4,29 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:employees="clr-namespace:Inventory.ViewModels.Add.Tables.Employees"
-    xmlns:local="clr-namespace:Inventory.View.Add.Tables.Employees"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
     Name="AddEmployeeWindow"
     Title="Добавить нового сотрудника"
     Width="500"
     Height="465"
+    Closing="{DXEvent Handler='OnWindowClosing(@sender, @args)'}"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
+    <Window.DataContext>
+        <employees:EmployeeAddViewModel />
+    </Window.DataContext>
+
     <Grid>
         <ScrollViewer>
-            <StackPanel Margin="010">
-
+            <StackPanel Margin="10">
                 <TextBlock
-                    Margin="10"
                     Style="{StaticResource BaseText}"
                     Text="Новый сотрудник"
                     TextAlignment="Center" />
-
                 <Grid>
                     <Border Background="#FFAEAEAE" CornerRadius="5">
                         <Border.OpacityMask>
@@ -45,16 +44,9 @@
                         <StackPanel Width="455" HorizontalAlignment="Center">
                             <!--  Фамилия  -->
                             <UniformGrid Columns="2">
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource BaseText}"
-                                    Text="Фамилия: " />
+                                <TextBlock Style="{StaticResource BaseText}" Text="Фамилия: " />
 
                                 <TextBox
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Employee.L_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{Binding Employee.ErrorCollection[L_name], UpdateSourceTrigger=PropertyChanged}" />
@@ -62,16 +54,9 @@
 
                             <!--  Имя  -->
                             <UniformGrid Columns="2">
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource BaseText}"
-                                    Text="Имя: " />
+                                <TextBlock Style="{StaticResource BaseText}" Text="Имя: " />
 
                                 <TextBox
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Employee.F_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{Binding Employee.ErrorCollection[F_name], UpdateSourceTrigger=PropertyChanged}" />
@@ -79,33 +64,19 @@
 
                             <!--  Отчество  -->
                             <UniformGrid Columns="2">
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource BaseText}"
-                                    Text="Отчество: " />
+                                <TextBlock Style="{StaticResource BaseText}" Text="Отчество: " />
 
                                 <TextBox
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    MaxLength="30"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Employee.M_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{Binding Employee.ErrorCollection[M_name], UpdateSourceTrigger=PropertyChanged}" />
-
                             </UniformGrid>
 
                             <!--  Номер телефона  -->
                             <UniformGrid Columns="2">
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource BaseText}"
-                                    Text="Номер телефона: " />
+                                <TextBlock Style="{StaticResource BaseText}" Text="Номер телефона: " />
 
                                 <TextBox
-                                    Margin="10"
-                                    VerticalAlignment="Center"
                                     MaxLength="20"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Employee.Phone_number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -114,15 +85,9 @@
 
                             <!--  Email  -->
                             <UniformGrid Columns="2">
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource BaseText}"
-                                    Text="Email: " />
+                                <TextBlock Style="{StaticResource BaseText}" Text="Email: " />
 
                                 <TextBox
-                                    Margin="10"
-                                    VerticalAlignment="Center"
                                     MaxLength="70"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Employee.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -131,11 +96,7 @@
 
                             <!--  Должности  -->
                             <UniformGrid Columns="2">
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource BaseText}"
-                                    Text="Должности: " />
+                                <TextBlock Style="{StaticResource BaseText}" Text="Должности: " />
 
                                 <StackPanel Margin="10">
                                     <ItemsControl ItemsSource="{Binding Employee.PostsEmployees}">
@@ -150,13 +111,13 @@
                                                     <ComboBox
                                                         Width="156"
                                                         MaxWidth="156"
-                                                        Margin="5"
                                                         DisplayMemberPath="Name"
                                                         ItemsSource="{Binding CollectionPosts}"
                                                         SelectedValue="{Binding Fk_post}"
                                                         SelectedValuePath="Id_post"
                                                         Style="{StaticResource BaseComboBox}" />
 
+                                                    <!--  Удалить должность  -->
                                                     <Button
                                                         Grid.Column="1"
                                                         Margin="3"
@@ -169,6 +130,7 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
 
+                                    <!--  Добавить должность  -->
                                     <Button
                                         Margin="3"
                                         Command="{Binding AddPostInCollection}"
@@ -179,11 +141,7 @@
 
                             <!--  Отделы  -->
                             <UniformGrid Columns="2">
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource BaseText}"
-                                    Text="Отделы: " />
+                                <TextBlock Style="{StaticResource BaseText}" Text="Отделы: " />
 
                                 <StackPanel Margin="10">
                                     <ItemsControl ItemsSource="{Binding Employee.EmployeesInDepartments}">
@@ -198,13 +156,13 @@
                                                     <ComboBox
                                                         Width="156"
                                                         MaxWidth="156"
-                                                        Margin="5"
                                                         DisplayMemberPath="Name"
                                                         ItemsSource="{Binding CollectionDepartments}"
                                                         SelectedValue="{Binding Fk_department}"
                                                         SelectedValuePath="Id_department"
                                                         Style="{StaticResource BaseComboBox}" />
 
+                                                    <!--  Удалить отдел  -->
                                                     <Button
                                                         Grid.Column="1"
                                                         Margin="3"
@@ -217,6 +175,7 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
 
+                                    <!--  Добавить отдел  -->
                                     <Button
                                         Margin="3"
                                         Command="{Binding AddDepartmentInCollection}"
@@ -226,7 +185,6 @@
                             </UniformGrid>
                         </StackPanel>
                     </Border>
-
                 </Grid>
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -239,20 +197,15 @@
                         Content="Добавить нового сотрудника"
                         Style="{StaticResource BaseButton}" />
 
-                    <!--  Отмена  -->
+                    <!--  Отменить  -->
                     <Button
                         Margin="5,10,5,5"
                         HorizontalAlignment="Right"
                         Command="{Binding Cancel}"
                         CommandParameter="{Binding ElementName=AddEmployeeWindow}"
-                        Content="Отмена"
                         Style="{StaticResource BaseButton}" />
                 </StackPanel>
-
-
             </StackPanel>
         </ScrollViewer>
-
     </Grid>
-
 </Window>

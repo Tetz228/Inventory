@@ -1,5 +1,10 @@
 ﻿namespace Inventory.ViewModels.Tables.Peripherals
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Peripherals;
+    using Inventory.View.Edit.Tables.Peripherals;
+    using Inventory.ViewModels.Edit.Tables.Peripherals;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
@@ -7,21 +12,12 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables;
-    using Inventory.View.Add.Tables.Peripherals;
-    using Inventory.View.Edit.Tables;
-    using Inventory.View.Edit.Tables.Peripherals;
-    using Inventory.ViewModels.Edit;
-    using Inventory.ViewModels.Edit.Tables.Peripherals;
-
     public class TypesPeripheralsViewModel : BindableBase
     {
         public TypesPeripheralsViewModel()
         {
             using var db = new InventoryEntities();
+
             TypesPeripherals = new ObservableCollection<Types_peripherals>(db.Types_peripherals);
             TypesPeripheralsCollection = CollectionViewSource.GetDefaultView(TypesPeripherals);
             TypesPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Ascending));
@@ -54,7 +50,7 @@
         }
         #endregion
 
-        /// <summary>Событие при клике на заголовок в View</summary>
+        #region События
         public void Sort(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
@@ -81,10 +77,10 @@
                     }
             }
         }
+        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectTypePeripheral = null;
+        #endregion
 
         #region Команды
-        public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectTypePeripheral = null);
-
         public ICommand AddTypePeripheral => new DelegateCommand(() =>
         {
             var addTypePeripheralWindow = new TypePeripheralAddWindow();
@@ -95,8 +91,8 @@
         {
             var editWindow = new TypePeripheralEditWindow();
             var editViewModel = new TypePeripheralEditViewModel(typePeripheral);
-
             editWindow.DataContext = editViewModel;
+            editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();
 
         }, typePeripheral => typePeripheral != null);

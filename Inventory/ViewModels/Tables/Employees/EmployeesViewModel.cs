@@ -55,7 +55,7 @@
         }
         #endregion
 
-        /// <summary>Событие при клике на заголовок в View</summary>
+        #region События
         public void Sort(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
@@ -64,102 +64,60 @@
             switch (columnHeader.Content.ToString())
             {
                 case "ФИО":
+                {
+                    if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
                     {
-                        if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            EmployeesCollection.SortDescriptions.Clear();
-                            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            EmployeesCollection.SortDescriptions.Clear();
-                            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Ascending));
-                        }
-
-                        EmployeesCollection.Refresh();
-
-                        break;
+                        EmployeesCollection.SortDescriptions.Clear();
+                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Descending));
                     }
+                    else
+                    {
+                        EmployeesCollection.SortDescriptions.Clear();
+                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Ascending));
+                    }
+                    EmployeesCollection.Refresh();
+                    break;
+                }
                 case "Почта":
+                {
+                    if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
                     {
-                        if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            EmployeesCollection.SortDescriptions.Clear();
-                            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Email), ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            EmployeesCollection.SortDescriptions.Clear();
-                            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Email), ListSortDirection.Ascending));
-                        }
-
-                        EmployeesCollection.Refresh();
-
-                        break;
+                        EmployeesCollection.SortDescriptions.Clear();
+                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Email), ListSortDirection.Descending));
                     }
+                    else
+                    {
+                        EmployeesCollection.SortDescriptions.Clear();
+                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Email), ListSortDirection.Ascending));
+                    }
+                    EmployeesCollection.Refresh();
+                    break;
+                }
                 case "Номер телефона":
+                {
+                    if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
                     {
-                        if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            EmployeesCollection.SortDescriptions.Clear();
-                            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Phone_number), ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            EmployeesCollection.SortDescriptions.Clear();
-                            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Phone_number), ListSortDirection.Ascending));
-                        }
-
-                        EmployeesCollection.Refresh();
-
-                        break;
+                        EmployeesCollection.SortDescriptions.Clear();
+                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Phone_number), ListSortDirection.Descending));
                     }
-                #region Работает криво
-                //case "Должности":
-                //    {
-                //        if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                //        {
-                //            EmployeesCollection.SortDescriptions.Clear();
-                //            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Posts_employees), ListSortDirection.Descending));
-                //        }
-                //        else
-                //        {
-                //            EmployeesCollection.SortDescriptions.Clear();
-                //            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Posts_employees), ListSortDirection.Ascending));
-                //        }
-
-                //        EmployeesCollection.Refresh();
-
-                //        break;
-                //    }
-                //case "Отделы":
-                //    {
-                //        if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                //        {
-                //            EmployeesCollection.SortDescriptions.Clear();
-                //            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Employees_in_departments), ListSortDirection.Descending));
-                //        }
-                //        else
-                //        {
-                //            EmployeesCollection.SortDescriptions.Clear();
-                //            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Employees_in_departments), ListSortDirection.Ascending));
-                //        }
-
-                //        EmployeesCollection.Refresh();
-                //        break;
-                //    }
-
-                    #endregion
+                    else
+                    {
+                        EmployeesCollection.SortDescriptions.Clear();
+                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Phone_number), ListSortDirection.Ascending));
+                    }
+                    EmployeesCollection.Refresh();
+                    break;
+                }
             }
         }
 
-        #region Команды
-        public ICommand ListViewMouseLeftButtonDown => new DelegateCommand(() => SelectEmployee = null);
+        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectEmployee = null;
+        #endregion
 
+        #region Команды
         public ICommand AddEmployee => new DelegateCommand(() =>
         {
             var addEmployeeWindow = new EmployeeAddWindow();
-
             addEmployeeWindow.ShowDialog();
         });
 
@@ -171,11 +129,8 @@
             Employee.EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments);
             Employee.PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees);
 
-            var editEmployeeWindow = new EmployeeEditWindow
-            {
-                DataContext = editEmployeeViewModel
-            };
-
+            var editEmployeeWindow = new EmployeeEditWindow();
+            editEmployeeWindow.DataContext = editEmployeeViewModel;
             editEmployeeWindow.Closing += editEmployeeViewModel.OnWindowClosing;
             editEmployeeWindow.ShowDialog();
 
