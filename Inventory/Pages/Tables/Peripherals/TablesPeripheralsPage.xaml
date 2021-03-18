@@ -26,6 +26,8 @@
         <StackPanel Grid.Row="0" Style="{StaticResource BaseTableStackPanel}" />
 
         <Menu Grid.Row="1" Style="{StaticResource BaseMenu}">
+            <MenuItem Command="{Binding SelectInventoryPeripheralsPage}" Header="Инвентаризация периферии" />
+            <MenuItem Command="{Binding SelectTablesTypesPeripherals}" Header="Статусы периферии" />
             <MenuItem Command="{Binding SelectTablesPeripherals}" Header="Периферия" />
             <MenuItem Command="{Binding SelectTablesTypesPeripherals}" Header="Типы периферии" />
             <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Производители" />
