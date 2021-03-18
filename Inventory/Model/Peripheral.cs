@@ -58,7 +58,9 @@ namespace Inventory.Model
         #endregion
 
         #region Метод поиска
-        public static bool Search(Peripheral peripheral, string peripheralFilter) => peripheral.Name.ToLower().Contains(peripheralFilter.ToLower()) || peripheral.Types_peripherals.Name.ToLower().Contains(peripheralFilter.ToLower()) || peripheral.Manufacturer.Name.ToLower().Contains(peripheralFilter.ToLower());
+        public static bool Search(Peripheral peripheral, string peripheralFilter) => peripheral.Name.ToLower().Contains(peripheralFilter.ToLower())
+            || peripheral.Types_peripherals.Name.ToLower().Contains(peripheralFilter.ToLower())
+            || peripheral.Manufacturer.Name.ToLower().Contains(peripheralFilter.ToLower());
         #endregion
 
         #region Методы обработки информации

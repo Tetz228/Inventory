@@ -52,7 +52,7 @@
                                 VerticalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding TypesPeripherals}"
-                                SelectedValue="{Binding Peripheral.Fk_type_peripheral}"
+                                SelectedValue="{Binding Peripheral.Fk_type_peripheral, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_type_peripheral"
                                 Style="{StaticResource BaseComboBox}" />
 
@@ -79,7 +79,7 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding Manufacturers}"
-                                SelectedValue="{Binding Peripheral.Fk_manufacturer}"
+                                SelectedValue="{Binding Peripheral.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
                                 Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>

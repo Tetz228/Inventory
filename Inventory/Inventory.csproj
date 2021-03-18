@@ -295,6 +295,9 @@
     <Compile Include="Pages\Tables\Peripherals\PeripheralsPage.xaml.cs">
       <DependentUpon>PeripheralsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml.cs">
+      <DependentUpon>StatusesPeripheralsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Tables\Peripherals\TablesPeripheralsPage.xaml.cs">
       <DependentUpon>TablesPeripheralsPage.xaml</DependentUpon>
     </Compile>
@@ -305,18 +308,21 @@
     <Compile Include="ViewModels\Add\Tables\Employees\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\UserAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\PeripheralAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Peripherals\StatusPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\TypePeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Edit\ManufacturerEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\PeripheralEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\PostsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\UsersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\InventoryPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\PeripheralsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Peripherals\StatusesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TablesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TypesPeripheralsViewModel.cs" />
     <Compile Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml.cs">
@@ -327,6 +333,9 @@
     </Compile>
     <Compile Include="View\Add\Tables\Employees\PostAddWindow.xaml.cs">
       <DependentUpon>PostAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml.cs">
+      <DependentUpon>StatusPeripheralAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\Employees\UserAddWindow.xaml.cs">
       <DependentUpon>UserAddWindow.xaml</DependentUpon>
@@ -389,6 +398,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Tables\Peripherals\TablesPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -406,6 +419,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Add\Tables\Employees\PostAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -449,6 +466,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Edit\Tables\Peripherals\StatusPeripheralEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Edit\Tables\Peripherals\TypePeripheralEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -472,6 +493,9 @@
     </Compile>
     <Compile Include="View\Edit\Tables\Peripherals\PeripheralEditWindow.xaml.cs">
       <DependentUpon>PeripheralEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Peripherals\StatusPeripheralEditWindow.xaml.cs">
+      <DependentUpon>StatusPeripheralEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Peripherals\TypePeripheralEditWindow.xaml.cs">
       <DependentUpon>TypePeripheralEditWindow.xaml</DependentUpon>

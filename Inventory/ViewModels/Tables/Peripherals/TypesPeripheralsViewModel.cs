@@ -70,9 +70,7 @@
                             TypesPeripheralsCollection.SortDescriptions.Clear();
                             TypesPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Ascending));
                         }
-
                         TypesPeripheralsCollection.Refresh();
-
                         break;
                     }
             }
