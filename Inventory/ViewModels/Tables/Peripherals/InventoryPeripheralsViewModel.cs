@@ -88,7 +88,7 @@
                         else
                         {
                             InventoryNumbersPeripheralsCollection.SortDescriptions.Clear();
-                            InventoryNumbersPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Inventory_numbers_peripherals.Peripheral.Types_peripherals.Name), ListSortDirection.Ascending));
+                            InventoryNumbersPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Ascending));
                         }
                         InventoryNumbersPeripheralsCollection.Refresh();
                         break;
