@@ -289,6 +289,9 @@
     <Compile Include="Pages\Tables\ManufacturersPage.xaml.cs">
       <DependentUpon>ManufacturersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml.cs">
+      <DependentUpon>InventoryPeripheralsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Tables\Peripherals\PeripheralsPage.xaml.cs">
       <DependentUpon>PeripheralsPage.xaml</DependentUpon>
     </Compile>
@@ -312,6 +315,7 @@
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\PostsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\UsersViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Peripherals\InventoryPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\PeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TablesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TypesPeripheralsViewModel.cs" />
@@ -374,6 +378,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Tables\ManufacturersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
