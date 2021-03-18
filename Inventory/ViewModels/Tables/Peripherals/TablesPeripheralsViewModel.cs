@@ -14,11 +14,14 @@
             TypesPeripheralsPage = new TypesPeripheralsPage();
             ManufacturersPage = new ManufacturersPage();
             InventoryPeripheralsPage = new InventoryPeripheralsPage();
+            StatusesPeripheralsPage = new StatusesPeripheralsPage();
         }
 
 
         #region Свойства
         public Page CurrentPage { get; private set; }
+
+        private StatusesPeripheralsPage StatusesPeripheralsPage { get; }
 
         private PeripheralsPage PeripheralsPage { get; }
 
@@ -33,6 +36,8 @@
         public ICommand SelectInventoryPeripheralsPage => new DelegateCommand(() => CurrentPage = InventoryPeripheralsPage);
 
         public ICommand SelectTablesPeripherals => new DelegateCommand(() => CurrentPage = PeripheralsPage);
+
+        public ICommand SelectStatusesPeripherals => new DelegateCommand(() => CurrentPage = StatusesPeripheralsPage);
 
         public ICommand SelectTablesTypesPeripherals => new DelegateCommand(() => CurrentPage = TypesPeripheralsPage);
 
