@@ -268,8 +268,8 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Computers\ComputersPage.xaml.cs">
-      <DependentUpon>ComputersPage.xaml</DependentUpon>
+    <Compile Include="Pages\Tables\Computers\TablesComputersPage.xaml.cs">
+      <DependentUpon>TablesComputersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tables\Employees\DepartmentsPage.xaml.cs">
       <DependentUpon>DepartmentsPage.xaml</DependentUpon>
@@ -319,6 +319,7 @@
     <Compile Include="ViewModels\Edit\Tables\Peripherals\PeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\TablesComputesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\PostsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\UsersViewModel.cs" />
@@ -367,7 +368,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Tables\Computers\ComputersPage.xaml">
+    <Page Include="Pages\Tables\Computers\TablesComputersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

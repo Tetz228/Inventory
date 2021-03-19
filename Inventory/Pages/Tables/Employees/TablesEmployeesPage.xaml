@@ -36,5 +36,4 @@
 
         <Frame Grid.Row="3" Content="{Binding CurrentPage}" />
     </Grid>
-
 </Page>
