@@ -16,7 +16,7 @@
         public MainViewModel()
         {
             CurrentPage = Peripherals = new TablesPeripheralsPage();
-            Computers = new ComputersPage();
+            TablesComputers = new TablesComputersPage();
             Employees = new TablesEmployeesPage();
         }
 
@@ -25,13 +25,13 @@
 
         private TablesPeripheralsPage Peripherals { get; }
 
-        private ComputersPage Computers { get; }
+        private TablesComputersPage TablesComputers { get; }
 
         public Page CurrentPage { get; private set; }
         #endregion
 
         #region Команды
-        public ICommand OpenPageComputers => new DelegateCommand(() => CurrentPage = Computers);
+        public ICommand OpenPageComputers => new DelegateCommand(() => CurrentPage = TablesComputers);
 
         public ICommand OpenPagePeripherals => new DelegateCommand(() => CurrentPage = Peripherals);
 
