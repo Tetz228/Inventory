@@ -11,7 +11,6 @@ namespace Inventory.Model
 
     public partial class Inventory_numbers_peripherals : BindableBase, IEditableObject, IDataErrorInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inventory_numbers_peripherals()
         {
             this.List_dispensed_peripherals = new HashSet<List_dispensed_peripherals>();
@@ -20,11 +19,11 @@ namespace Inventory.Model
         public int Id_inventory_number_peripheral { get; set; }
         public int Fk_peripheral { get; set; }
         public int Inventory_number { get; set; }
+        public string Inventory_numberString { get; set; }
         public int Fk_status_peripheral { get; set; }
 
         public virtual Peripheral Peripheral { get; set; }
         public virtual Statuses_peripherals Statuses_peripherals { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<List_dispensed_peripherals> List_dispensed_peripherals { get; set; }
 
         #region Валидация
@@ -38,9 +37,28 @@ namespace Inventory.Model
 
                 switch (name)
                 {
-                    case "Inventory_number":
-                        if (string.IsNullOrWhiteSpace(Inventory_number.ToString()))
-                            result = "Поле не должно быть пустым";
+                    case "Inventory_numberString":
+                        if (!int.TryParse(Inventory_numberString, out int parseResult))
+                            result = "Поле должно содержать только цифры";
+                        else
+                        {
+                            if (int.Parse(Inventory_numberString) <= 0)
+                                result = "Поле должно содержать число больше нуля";
+                            else
+                            {
+                                if (_selectInventoryNumberPeripheral == null)
+                                {
+                                    if (IsUniqueInventoryNumber())
+                                        result = "Номер должен быть уникальным";
+                                }
+                                else
+                                {
+                                    if (_selectInventoryNumberPeripheral.Inventory_number != int.Parse(Inventory_numberString))
+                                        if (IsUniqueInventoryNumber())
+                                            result = "Номер должен быть уникальным";
+                                }
+                            }
+                        }
                         break;
                 }
 
@@ -53,6 +71,29 @@ namespace Inventory.Model
         }
 
         public string Error { get => null; }
+
+        public bool IsUniqueInventoryNumber()
+        {
+            Inventory_number = int.Parse(Inventory_numberString);
+
+            using var db = new InventoryEntities();
+            var isUniqueNumber = db.Inventory_numbers_peripherals.FirstOrDefault(number => number.Inventory_number == Inventory_number);
+
+            return isUniqueNumber != null;
+        }
+
+        public static int MaxInventoryNumber()
+        {
+            using var db = new InventoryEntities();
+            var isEmpty = db.Inventory_numbers_peripherals.FirstOrDefault();
+
+            if (isEmpty == null)
+                return 1;
+
+            var isUniqueNumber = db.Inventory_numbers_peripherals.Max(number => number.Inventory_number);
+
+            return ++isUniqueNumber;
+        }
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null) && Fk_peripheral != 0 && Fk_status_peripheral != 0;
         #endregion
@@ -74,19 +115,19 @@ namespace Inventory.Model
             {
                 Fk_peripheral = inventoryNumber.Fk_peripheral,
                 Fk_status_peripheral = inventoryNumber.Fk_status_peripheral,
-                Inventory_number = inventoryNumber.Inventory_number
+                Inventory_number = inventoryNumber.Inventory_number = int.Parse(inventoryNumber.Inventory_numberString)
             };
 
             db.Inventory_numbers_peripherals.Add(newInventoryNumberPeripheral);
             db.SaveChanges();
 
-            newInventoryNumberPeripheral.Statuses_peripherals = db.Statuses_peripherals.SingleOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == newInventoryNumberPeripheral.Fk_status_peripheral);
-            newInventoryNumberPeripheral.Peripheral = db.Peripherals.SingleOrDefault(peripheral => peripheral.Id_peripheral == newInventoryNumberPeripheral.Fk_peripheral);
+            newInventoryNumberPeripheral.Statuses_peripherals = db.Statuses_peripherals.FirstOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == newInventoryNumberPeripheral.Fk_status_peripheral);
+            newInventoryNumberPeripheral.Peripheral = db.Peripherals.FirstOrDefault(peripheral => peripheral.Id_peripheral == newInventoryNumberPeripheral.Fk_peripheral);
 
             if (newInventoryNumberPeripheral.Peripheral != null)
             {
-                newInventoryNumberPeripheral.Peripheral.Manufacturer = db.Manufacturers.SingleOrDefault(manufacturer => manufacturer.Id_manufacturer == newInventoryNumberPeripheral.Peripheral.Fk_manufacturer);
-                newInventoryNumberPeripheral.Peripheral.Types_peripherals = db.Types_peripherals.SingleOrDefault(typePeripheral => typePeripheral.Id_type_peripheral == newInventoryNumberPeripheral.Peripheral.Fk_type_peripheral);
+                newInventoryNumberPeripheral.Peripheral.Manufacturer = db.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id_manufacturer == newInventoryNumberPeripheral.Peripheral.Fk_manufacturer);
+                newInventoryNumberPeripheral.Peripheral.Types_peripherals = db.Types_peripherals.FirstOrDefault(typePeripheral => typePeripheral.Id_type_peripheral == newInventoryNumberPeripheral.Peripheral.Fk_type_peripheral);
             }
 
             InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Add(newInventoryNumberPeripheral);
@@ -95,7 +136,7 @@ namespace Inventory.Model
         public static void EditInventoryNumber(Inventory_numbers_peripherals selectInventoryNumber)
         {
             using var db = new InventoryEntities();
-            var findInventoryNumber = db.Inventory_numbers_peripherals.SingleOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
+            var findInventoryNumber = db.Inventory_numbers_peripherals.FirstOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
 
             if (findInventoryNumber == null)
             {
@@ -107,7 +148,7 @@ namespace Inventory.Model
 
             findInventoryNumber.Fk_peripheral = selectInventoryNumber.Fk_peripheral;
             findInventoryNumber.Fk_status_peripheral = selectInventoryNumber.Fk_status_peripheral;
-            findInventoryNumber.Inventory_number = selectInventoryNumber.Inventory_number;
+            findInventoryNumber.Inventory_number = int.Parse(selectInventoryNumber.Inventory_numberString);
 
             db.SaveChanges();
 
@@ -121,7 +162,7 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findInventoryNumber = db.Inventory_numbers_peripherals.SingleOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
+            var findInventoryNumber = db.Inventory_numbers_peripherals.FirstOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
 
             if (findInventoryNumber == null)
             {
