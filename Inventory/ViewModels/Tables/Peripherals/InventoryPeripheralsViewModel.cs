@@ -13,7 +13,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    class InventoryPeripheralsViewModel : BindableBase
+    internal class InventoryPeripheralsViewModel : BindableBase
     {
         public InventoryPeripheralsViewModel()
         {
@@ -45,8 +45,8 @@
                 _inventoryNumbersPeripheralsFilter = value;
                 InventoryNumbersPeripheralsCollection.Filter = obj =>
                 {
-                    if (obj is Peripheral peripheral)
-                        return Peripheral.Search(peripheral, InventoryNumbersPeripheralsFilter);
+                    if (obj is Inventory_numbers_peripherals inventoryNumberPeripheral)
+                        return Inventory_numbers_peripherals.Search(inventoryNumberPeripheral, InventoryNumbersPeripheralsFilter);
 
                     return false;
                 };
@@ -136,10 +136,10 @@
             addWindow.ShowDialog();
         });
 
-        public ICommand EditInventoryNumberPeripheral => new DelegateCommand<Peripheral>(peripheral =>
+        public ICommand EditInventoryNumberPeripheral => new DelegateCommand<Inventory_numbers_peripherals>(inventoryNumberPeripheral =>
         {
-            var editWindow = new PeripheralEditWindow();
-            var editViewModel = new PeripheralEditViewModel(peripheral);
+            var editWindow = new InventoryPeripheralEditWindow();
+            var editViewModel = new InventoryPeripheralEditViewModel(inventoryNumberPeripheral);
             editWindow.DataContext = editViewModel;
             editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();

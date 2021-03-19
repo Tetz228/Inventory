@@ -1,0 +1,107 @@
+﻿<Window
+    x:Class="Inventory.View.Edit.Tables.Peripherals.InventoryPeripheralEditWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Peripherals"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:peripherals="clr-namespace:Inventory.ViewModels.Edit.Tables.Peripherals"
+    x:Name="EditInventoryPeripheralWindow"
+    Title="Изменить инвенторный номер для периферии"
+    Width="500"
+    Height="260"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ThreeDBorderWindow"
+    mc:Ignorable="d">
+
+
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock
+                Style="{StaticResource BaseText}"
+                Text="Изменить инвенторный номер"
+                TextAlignment="Center" />
+
+            <Grid>
+                <Border Background="#FFAEAEAE" CornerRadius="5">
+                    <Border.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border
+                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Background="Black"
+                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    SnapsToDevicePixels="True" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Border.OpacityMask>
+
+                    <StackPanel Width="455" HorizontalAlignment="Center">
+                        <!--  Инвенторный номер  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Инвенторный номер: " />
+
+                            <TextBox
+                                MaxLength="100"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding InventoryNumberPeripheral.Inventory_numberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Inventory_numberString], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Периферия  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Периферия: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Peripherals}"
+                                SelectedValue="{Binding InventoryNumberPeripheral.Fk_peripheral, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_peripheral"
+                                Style="{StaticResource BaseComboBox}" />
+                        </UniformGrid>
+
+                        <!--  Статус  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Статус: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding StatusesPeripherals}"
+                                SelectedValue="{Binding InventoryNumberPeripheral.Fk_status_peripheral, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_status_peripheral"
+                                Style="{StaticResource BaseComboBox}" />
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <!--  Изменить инвенторный номер  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding ElementName=EditInventoryPeripheralWindow}"
+                    Content="Изменить инвенторный номер"
+                    Style="{StaticResource BaseButton}" />
+
+                <!--  Отменить  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Right"
+                    Command="{Binding Cancel}"
+                    CommandParameter="{Binding ElementName=EditInventoryPeripheralWindow}"
+                    Style="{StaticResource BaseButton}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
