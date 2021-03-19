@@ -33,7 +33,7 @@
 
         public ICollectionView InventoryNumbersPeripheralsCollection { get; }
 
-        public Peripheral SelectInventoryNumberPeripheral { get; set; }
+        public Inventory_numbers_peripherals SelectInventoryNumberPeripheral { get; set; }
 
         private string _inventoryNumbersPeripheralsFilter = string.Empty;
 
@@ -132,7 +132,7 @@
         #region Команды
         public ICommand AddInventoryNumberPeripheral => new DelegateCommand(() =>
         {
-            var addWindow = new PeripheralAddWindow();
+            var addWindow = new InventoryPeripheralAddWindow();
             addWindow.ShowDialog();
         });
 
@@ -145,9 +145,9 @@
             editWindow.ShowDialog();
         }, peripheral => peripheral != null);
 
-        public ICommand DeleteInventoryNumberPeripheral => new DelegateCommand<Peripheral>(Peripheral.DeletePeripheral, selectPeripheral => selectPeripheral != null);
+        public ICommand DeleteInventoryNumberPeripheral => new DelegateCommand<Inventory_numbers_peripherals>(Inventory_numbers_peripherals.DeleteInventoryNumberPeripheral, selectInventoryNumberPeripheral => selectInventoryNumberPeripheral != null);
 
-        public ICommand RefreshList => new DelegateCommand(Peripheral.RefreshCollection);
+        public ICommand RefreshList => new DelegateCommand(Inventory_numbers_peripherals.RefreshCollection);
         #endregion
     }
 }
