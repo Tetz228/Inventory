@@ -74,7 +74,7 @@ namespace Inventory.Model
         public static void EditDepartment(Department selectDepartment)
         {
             using var db = new InventoryEntities();
-            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == selectDepartment.Id_department);
+            var findDepartment = db.Departments.FirstOrDefault(department => department.Id_department == selectDepartment.Id_department);
 
             if (findDepartment == null)
             {
@@ -95,7 +95,7 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findDepartment = db.Departments.SingleOrDefault(department => department.Id_department == selectDepartment.Id_department);
+            var findDepartment = db.Departments.FirstOrDefault(department => department.Id_department == selectDepartment.Id_department);
 
             if (findDepartment == null)
             {

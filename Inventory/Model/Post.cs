@@ -75,7 +75,7 @@ namespace Inventory.Model
         public static void EditPost(Post post)
         {
             using var db = new InventoryEntities();
-            var findPost = db.Posts.SingleOrDefault(p => p.Id_post == post.Id_post);
+            var findPost = db.Posts.FirstOrDefault(p => p.Id_post == post.Id_post);
 
             if (findPost == null)
             {
@@ -96,7 +96,7 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findPost = db.Posts.SingleOrDefault(post => post.Id_post == selectPost.Id_post);
+            var findPost = db.Posts.FirstOrDefault(post => post.Id_post == selectPost.Id_post);
 
             if (findPost == null)
             {

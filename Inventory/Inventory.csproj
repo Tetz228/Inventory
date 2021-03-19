@@ -268,6 +268,9 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Tables\Computers\SoketsPage.xaml.cs">
+      <DependentUpon>SoketsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Tables\Computers\TablesComputersPage.xaml.cs">
       <DependentUpon>TablesComputersPage.xaml</DependentUpon>
     </Compile>
@@ -306,12 +309,15 @@
     </Compile>
     <Compile Include="ViewModels\Add\Tables\Employees\DepartmentAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\EmployeeAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Employees\PostAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\UserAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\InventoryPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\PeripheralAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\SocketAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\StatusPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\TypePeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Edit\ManufacturerEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\SocketEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
@@ -320,14 +326,17 @@
     <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TablesComputesViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\PostsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Employees\TablesEmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\UsersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\InventoryPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\PeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\StatusesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TablesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TypesPeripheralsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\SocketsViewModel.cs" />
     <Compile Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml.cs">
       <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
     </Compile>
@@ -337,20 +346,23 @@
     <Compile Include="View\Add\Tables\Employees\PostAddWindow.xaml.cs">
       <DependentUpon>PostAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Peripherals\InventoryPeripheralAddWindow.xaml.cs">
-      <DependentUpon>InventoryPeripheralAddWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml.cs">
-      <DependentUpon>StatusPeripheralAddWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Add\Tables\Employees\UserAddWindow.xaml.cs">
       <DependentUpon>UserAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\ManufacturerAddWindow.xaml.cs">
       <DependentUpon>ManufacturerAddWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Add\Tables\Peripherals\InventoryPeripheralAddWindow.xaml.cs">
+      <DependentUpon>InventoryPeripheralAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Add\Tables\Peripherals\PeripheralAddWindow.xaml.cs">
       <DependentUpon>PeripheralAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Computers\SocketAddWindow.xaml.cs">
+      <DependentUpon>SocketAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml.cs">
+      <DependentUpon>StatusPeripheralAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\Peripherals\TypePeripheralAddWindow.xaml.cs">
       <DependentUpon>TypePeripheralAddWindow.xaml</DependentUpon>
@@ -358,15 +370,14 @@
     <Compile Include="View\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml.cs">
-      <DependentUpon>DepartmentEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\Tables\Employees\DepartmentsViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Employees\TablesEmployeesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="DataDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Tables\Computers\SoketsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Tables\Computers\TablesComputersPage.xaml">
       <SubType>Designer</SubType>
@@ -374,23 +385,23 @@
     </Page>
     <Page Include="Pages\Tables\Employees\DepartmentsPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\Employees\EmployeesPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\Employees\PostsPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\Employees\TablesEmployeesPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\Employees\UsersPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\ManufacturersPage.xaml">
       <SubType>Designer</SubType>
@@ -398,75 +409,83 @@
     </Page>
     <Page Include="Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\Peripherals\PeripheralsPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\Peripherals\TablesPeripheralsPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\Tables\Peripherals\TypesPeripheralsPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Add\Tables\Employees\EmployeeAddWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Add\Tables\Employees\PostAddWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Add\Tables\Peripherals\InventoryPeripheralAddWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Add\Tables\Employees\UserAddWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Add\Tables\ManufacturerAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Add\Tables\Peripherals\InventoryPeripheralAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
     <Page Include="View\Add\Tables\Peripherals\PeripheralAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\SocketAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
     <Page Include="View\Add\Tables\Peripherals\TypePeripheralAddWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\AuthorizationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\SocketEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Employees\EmployeeEditWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Employees\PostEditWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Edit\Tables\ManufacturerEditWindow.xaml">
       <SubType>Designer</SubType>
@@ -474,19 +493,19 @@
     </Page>
     <Page Include="View\Edit\Tables\Peripherals\InventoryPeripheralEditWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Peripherals\PeripheralEditWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Peripherals\StatusPeripheralEditWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Peripherals\TypePeripheralEditWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -495,6 +514,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\SocketEditWindow.xaml.cs">
+      <DependentUpon>SocketEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml.cs">
+      <DependentUpon>DepartmentEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Employees\EmployeeEditWindow.xaml.cs">
       <DependentUpon>EmployeeEditWindow.xaml</DependentUpon>
@@ -507,6 +532,7 @@
     </Compile>
     <Compile Include="View\Edit\Tables\Peripherals\InventoryPeripheralEditWindow.xaml.cs">
       <DependentUpon>InventoryPeripheralEditWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\Edit\Tables\Peripherals\PeripheralEditWindow.xaml.cs">
       <DependentUpon>PeripheralEditWindow.xaml</DependentUpon>
@@ -553,7 +579,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="ViewModels\Add\Tables\Employees\PostAddViewModel.cs" />
     <Compile Include="ViewModels\Tables\ManufacturersViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\ManufacturerAddViewModel.cs" />
   </ItemGroup>

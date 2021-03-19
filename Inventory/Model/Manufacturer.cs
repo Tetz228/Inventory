@@ -87,7 +87,7 @@ namespace Inventory.Model
         public static void EditManufacturer(Manufacturer manufacturer)
         {
             using var db = new InventoryEntities();
-            var findManufacturer = db.Manufacturers.SingleOrDefault(manufact => manufact.Id_manufacturer == manufacturer.Id_manufacturer);
+            var findManufacturer = db.Manufacturers.FirstOrDefault(manufact => manufact.Id_manufacturer == manufacturer.Id_manufacturer);
 
             if (findManufacturer == null)
             {
@@ -108,7 +108,7 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findManufacturer = db.Manufacturers.SingleOrDefault(manufacturer => manufacturer.Id_manufacturer == selectManufacturer.Id_manufacturer);
+            var findManufacturer = db.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id_manufacturer == selectManufacturer.Id_manufacturer);
 
             if (findManufacturer == null)
             {

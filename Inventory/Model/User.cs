@@ -90,7 +90,7 @@ namespace Inventory.Model
         #region Методы обработки информации
         public static void AddUser(User user)
         {
-            (string salt, string hash) = User.GenerateSaltAndHashingPassword(user.Password);
+            (string salt, string hash) = GenerateSaltAndHashingPassword(user.Password);
 
             user.Salt = salt;
             user.Password = hash;
@@ -105,7 +105,7 @@ namespace Inventory.Model
                 Salt = user.Salt
             };
 
-            newUser.Employee = db.Employees.SingleOrDefault(emp => emp.Id_employee == newUser.Fk_employee);
+            newUser.Employee = db.Employees.FirstOrDefault(emp => emp.Id_employee == newUser.Fk_employee);
             db.Users.Add(newUser);
             db.SaveChanges();
 

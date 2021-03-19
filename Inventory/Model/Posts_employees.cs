@@ -66,7 +66,7 @@ namespace Inventory.Model
             if (selectPostEmp.Id_post_employee != 0)
             {
                 using var db = new InventoryEntities();
-                var findPostEmployee = db.Posts_employees.SingleOrDefault(postEmployee =>
+                var findPostEmployee = db.Posts_employees.FirstOrDefault(postEmployee =>
                     postEmployee.Id_post_employee == selectPostEmp.Id_post_employee);
 
                 if (findPostEmployee != null)

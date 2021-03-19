@@ -79,7 +79,7 @@ namespace Inventory.Model
         public static void EditStatusPeripheral(Statuses_peripherals statusPeripheral)
         {
             using var db = new InventoryEntities();
-            var findStatusPeripheral = db.Statuses_peripherals.SingleOrDefault(status => status.Id_status_peripheral == statusPeripheral.Id_status_peripheral);
+            var findStatusPeripheral = db.Statuses_peripherals.FirstOrDefault(status => status.Id_status_peripheral == statusPeripheral.Id_status_peripheral);
 
             if (findStatusPeripheral == null)
             {
@@ -100,7 +100,7 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findStatusPeripheral = db.Statuses_peripherals.SingleOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == selectStatusPeripheral.Id_status_peripheral);
+            var findStatusPeripheral = db.Statuses_peripherals.FirstOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == selectStatusPeripheral.Id_status_peripheral);
 
             if (findStatusPeripheral == null)
             {

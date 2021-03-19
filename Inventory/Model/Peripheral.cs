@@ -78,8 +78,8 @@ namespace Inventory.Model
             db.Peripherals.Add(newPeripheral);
             db.SaveChanges();
 
-            newPeripheral.Manufacturer = db.Manufacturers.SingleOrDefault(manufacturer => manufacturer.Id_manufacturer == newPeripheral.Fk_manufacturer);
-            newPeripheral.Types_peripherals = db.Types_peripherals.SingleOrDefault(typesPeripherals => typesPeripherals.Id_type_peripheral == newPeripheral.Fk_type_peripheral);
+            newPeripheral.Manufacturer = db.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id_manufacturer == newPeripheral.Fk_manufacturer);
+            newPeripheral.Types_peripherals = db.Types_peripherals.FirstOrDefault(typesPeripherals => typesPeripherals.Id_type_peripheral == newPeripheral.Fk_type_peripheral);
 
             PeripheralsViewModel.Peripherals.Add(newPeripheral);
         }
@@ -87,7 +87,7 @@ namespace Inventory.Model
         public static void EditPeripheral(Peripheral selectPeripheral)
         {
             using var db = new InventoryEntities();
-            var findPeripheral = db.Peripherals.SingleOrDefault(peripheral => peripheral.Id_peripheral == selectPeripheral.Id_peripheral);
+            var findPeripheral = db.Peripherals.FirstOrDefault(peripheral => peripheral.Id_peripheral == selectPeripheral.Id_peripheral);
 
             if (findPeripheral == null)
             {
@@ -113,7 +113,7 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findPeripheral = db.Peripherals.SingleOrDefault(peripheral => peripheral.Id_peripheral == selectPeripheral.Id_peripheral);
+            var findPeripheral = db.Peripherals.FirstOrDefault(peripheral => peripheral.Id_peripheral == selectPeripheral.Id_peripheral);
 
             if (findPeripheral == null)
             {

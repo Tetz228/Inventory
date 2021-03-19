@@ -156,7 +156,7 @@ namespace Inventory.Model
                                            .Select(post => post.Post))
                                            .Include(empDepart => empDepart.Employees_in_departments
                                            .Select(depart => depart.Department))
-                                           .SingleOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
+                                           .FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
 
             if (findEmployee == null)
             {
@@ -187,7 +187,7 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findEmployee = db.Employees.SingleOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
+            var findEmployee = db.Employees.FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
 
             if (findEmployee == null)
             {
