@@ -4,6 +4,7 @@ namespace Inventory.Model
     using Inventory.ViewModels.Tables.Peripherals;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Windows;
@@ -37,11 +38,9 @@ namespace Inventory.Model
 
                 switch (name)
                 {
-                    case "Name":
+                    case "Inventory_number":
                         if (string.IsNullOrWhiteSpace(Inventory_number.ToString()))
                             result = "Поле не должно быть пустым";
-                        else if (Inventory_number.ToString().Length <= 1)
-                            result = "Поле должно содержать минимум 1 символа";
                         break;
                 }
 
@@ -81,8 +80,14 @@ namespace Inventory.Model
             db.Inventory_numbers_peripherals.Add(newInventoryNumberPeripheral);
             db.SaveChanges();
 
-            //newInventoryNumberPeripheral.Statuses_peripherals = db.Statuses_peripherals.SingleOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == newInventoryNumberPeripheral.Fk_status_peripheral);
-            //newInventoryNumberPeripheral.Peripheral = db.Peripherals.SingleOrDefault(typesPeripherals => typesPeripherals.Id_type_peripheral == newInventoryNumberPeripheral.Fk_type_peripheral);
+            newInventoryNumberPeripheral.Statuses_peripherals = db.Statuses_peripherals.SingleOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == newInventoryNumberPeripheral.Fk_status_peripheral);
+            newInventoryNumberPeripheral.Peripheral = db.Peripherals.SingleOrDefault(peripheral => peripheral.Id_peripheral == newInventoryNumberPeripheral.Fk_peripheral);
+
+            if (newInventoryNumberPeripheral.Peripheral != null)
+            {
+                newInventoryNumberPeripheral.Peripheral.Manufacturer = db.Manufacturers.SingleOrDefault(manufacturer => manufacturer.Id_manufacturer == newInventoryNumberPeripheral.Peripheral.Fk_manufacturer);
+                newInventoryNumberPeripheral.Peripheral.Types_peripherals = db.Types_peripherals.SingleOrDefault(typePeripheral => typePeripheral.Id_type_peripheral == newInventoryNumberPeripheral.Peripheral.Fk_type_peripheral);
+            }
 
             InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Add(newInventoryNumberPeripheral);
         }
@@ -109,74 +114,80 @@ namespace Inventory.Model
             RefreshCollection();
         }
 
-        public static void DeletePeripheral(Inventory_numbers_peripherals selectInventoryNumber)
+        public static void DeleteInventoryNumberPeripheral(Inventory_numbers_peripherals selectInventoryNumber)
         {
-            //if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryNumber.Name}?",
-            //    "Удаление периферии", MessageBoxButton.YesNo, MessageBoxImage.Question))
-            //    return;
+            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryNumber.Inventory_number}, {selectInventoryNumber.Peripheral.Name}?",
+                "Удаление инвентарного номера периферии", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                return;
 
-            //using var db = new InventoryEntities();
-            //var findPeripheral = db.Peripherals.SingleOrDefault(peripheral => peripheral.Id_peripheral == selectInventoryNumber.Id_peripheral);
+            using var db = new InventoryEntities();
+            var findInventoryNumber = db.Inventory_numbers_peripherals.SingleOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
 
-            //if (findPeripheral == null)
-            //{
-            //    MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении периферии", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    RefreshCollection();
-            //    return;
-            //}
+            if (findInventoryNumber == null)
+            {
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при инвентарного номера периферии", MessageBoxButton.OK, MessageBoxImage.Error);
+                RefreshCollection();
+                return;
+            }
 
-            //try
-            //{
-            //    db.Peripherals.Remove(findPeripheral);
-            //    db.SaveChanges();
+            try
+            {
+                db.Inventory_numbers_peripherals.Remove(findInventoryNumber);
+                db.SaveChanges();
 
-            //    PeripheralsViewModel.Peripherals.Remove(selectInventoryNumber);
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    MessageBox.Show("Невозможно удалить тип периферии, так как он связана с другими сущностями!",
-            //        "Ошибка при удалении периферии", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
+                InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Remove(selectInventoryNumber);
+            }
+            catch (DbUpdateException)
+            {
+                MessageBox.Show("Невозможно удалить инвентарный номер периферии, так как он связана с другими сущностями!",
+                    "Ошибка при удалении инвентарного номера периферии", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public static void RefreshCollection()
         {
-            //InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Clear();
-            //using var db = new InventoryEntities();
+            InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Clear();
+            using var db = new InventoryEntities();
 
-            //foreach (var item in db.Inventory_numbers_peripherals.Include(manufacturer => manufacturer.Manufacturer).Include(typePeripheral => typePeripheral.Types_peripherals))
-            //    InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Add(item);
+            foreach (var item in db.Inventory_numbers_peripherals
+                                                                                        .Include(status => status.Statuses_peripherals)
+                                                                                        .Include(peripheral => peripheral.Peripheral)
+                                                                                        .Include(manufacturer => manufacturer.Peripheral.Manufacturer)
+                                                                                        .Include(typePeripheral => typePeripheral.Peripheral.Types_peripherals))
+            {
+                InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Add(item);
+            }
         }
         #endregion
 
         #region Откат изменений
-        private Inventory_numbers_peripherals _selectPeripheral;
+        private Inventory_numbers_peripherals _selectInventoryNumberPeripheral;
 
         public void BeginEdit()
         {
-            _selectPeripheral = new Inventory_numbers_peripherals()
+            _selectInventoryNumberPeripheral = new Inventory_numbers_peripherals()
             {
-                //Id_peripheral = this.Id_peripheral,
-                //Fk_manufacturer = this.Fk_manufacturer,
-                //Fk_type_peripheral = this.Fk_type_peripheral,
-                //Name = this.Name
+                Id_inventory_number_peripheral = this.Id_inventory_number_peripheral,
+                Inventory_number = this.Inventory_number,
+                Fk_status_peripheral = this.Fk_status_peripheral,
+                Fk_peripheral = this.Fk_peripheral
             };
         }
 
         public void EndEdit()
         {
-            _selectPeripheral = null;
+            _selectInventoryNumberPeripheral = null;
         }
 
         public void CancelEdit()
         {
-            if (_selectPeripheral == null)
+            if (_selectInventoryNumberPeripheral == null)
                 return;
 
-            //Id_peripheral = _selectPeripheral.Id_peripheral;
-            //Fk_manufacturer = _selectPeripheral.Fk_manufacturer;
-            //Fk_type_peripheral = _selectPeripheral.Fk_type_peripheral;
-            //Name = _selectPeripheral.Name;
+            Id_inventory_number_peripheral = _selectInventoryNumberPeripheral.Id_inventory_number_peripheral;
+            Inventory_number = _selectInventoryNumberPeripheral.Inventory_number;
+            Fk_status_peripheral = _selectInventoryNumberPeripheral.Fk_status_peripheral;
+            Fk_peripheral = _selectInventoryNumberPeripheral.Fk_peripheral;
         }
         #endregion
     }
