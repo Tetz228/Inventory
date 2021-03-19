@@ -1,22 +1,19 @@
 ﻿namespace Inventory.ViewModels
 {
-    using System.Windows;
-
     using DevExpress.Mvvm;
-
-    using System.Windows.Controls;
-    using System.Windows.Input;
-
     using Inventory.Pages.Tables.Computers;
     using Inventory.Pages.Tables.Employees;
     using Inventory.Pages.Tables.Peripherals;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
 
     public class MainViewModel : BindableBase
     {
         public MainViewModel()
         {
-            CurrentPage = Peripherals = new TablesPeripheralsPage();
-            TablesComputers = new TablesComputersPage();
+            Peripherals = new TablesPeripheralsPage();
+            CurrentPage = Computers = new TablesComputersPage();
             Employees = new TablesEmployeesPage();
         }
 
@@ -25,13 +22,13 @@
 
         private TablesPeripheralsPage Peripherals { get; }
 
-        private TablesComputersPage TablesComputers { get; }
+        private TablesComputersPage Computers { get; }
 
         public Page CurrentPage { get; private set; }
         #endregion
 
         #region Команды
-        public ICommand OpenPageComputers => new DelegateCommand(() => CurrentPage = TablesComputers);
+        public ICommand OpenPageComputers => new DelegateCommand(() => CurrentPage = Computers);
 
         public ICommand OpenPagePeripherals => new DelegateCommand(() => CurrentPage = Peripherals);
 
