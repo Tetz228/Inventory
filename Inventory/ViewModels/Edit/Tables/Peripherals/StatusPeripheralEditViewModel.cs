@@ -6,7 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    class StatusPeripheralEditViewModel : BindableBase
+    internal class StatusPeripheralEditViewModel : BindableBase
     {
         public StatusPeripheralEditViewModel(Statuses_peripherals statusPeripheral)
         {

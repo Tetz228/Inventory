@@ -6,7 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    class InventoryPeripheralAddViewModel : BindableBase
+    internal class InventoryPeripheralAddViewModel : BindableBase
     {
         public InventoryPeripheralAddViewModel()
         {
@@ -15,6 +15,7 @@
             InventoryNumberPeripheral = new Inventory_numbers_peripherals();
             Peripherals = new ObservableCollection<Peripheral>(db.Peripherals);
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
+            InventoryNumberPeripheral.Inventory_numberString = Inventory_numbers_peripherals.MaxInventoryNumber().ToString();
         }
 
         public Inventory_numbers_peripherals InventoryNumberPeripheral { get; }

@@ -23,7 +23,7 @@
         <StackPanel Margin="10">
             <TextBlock
                 Style="{StaticResource BaseText}"
-                Text="Новая инвенторный номер"
+                Text="Новый инвенторный номер"
                 TextAlignment="Center" />
 
             <Grid>
@@ -42,6 +42,17 @@
                     </Border.OpacityMask>
 
                     <StackPanel Width="455" HorizontalAlignment="Center">
+                        <!--  Инвенторный номер  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Инвенторный номер: " />
+
+                            <TextBox
+                                MaxLength="100"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding InventoryNumberPeripheral.Inventory_numberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Inventory_numberString], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
                         <!--  Периферия  -->
                         <UniformGrid Columns="2">
                             <TextBlock Style="{StaticResource BaseText}" Text="Периферия: " />
@@ -56,17 +67,6 @@
                                 SelectedValue="{Binding InventoryNumberPeripheral.Fk_peripheral, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_peripheral"
                                 Style="{StaticResource BaseComboBox}" />
-                        </UniformGrid>
-
-                        <!--  Инвенторный номер  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Инвенторный номер: " />
-
-                            <TextBox
-                                MaxLength="100"
-                                Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryNumberPeripheral.Inventory_number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Статус  -->

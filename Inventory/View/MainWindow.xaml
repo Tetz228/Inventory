@@ -34,7 +34,7 @@
             <MenuItem Header="Выдачи периферии" />
             <MenuItem Command="{Binding OpenPageEmployees}" Header="Сотрудники" />
             <MenuItem Command="{Binding OpenPageComputers}" Header="Компьютеры" />
-            <MenuItem Command="{Binding OpenPagePeripherals}" Header="Периферия" />
+            <MenuItem Command="{Binding OpenPagePeripherals}" Header="Периферии" />
         </Menu>
 
         <Frame

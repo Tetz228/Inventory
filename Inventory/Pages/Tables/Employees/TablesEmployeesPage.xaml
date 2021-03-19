@@ -26,10 +26,10 @@
         <StackPanel Grid.Row="0" Style="{StaticResource BaseTableStackPanel}" />
 
         <Menu Grid.Row="1" Style="{StaticResource BaseMenu}">
+            <MenuItem Command="{Binding SelectTablesUsers}" Header="Пользователи" />
             <MenuItem Command="{Binding SelectTablesEmployees}" Header="Сотрудники" />
             <MenuItem Command="{Binding SelectTablesPosts}" Header="Должности" />
             <MenuItem Command="{Binding SelectTablesDepartments}" Header="Отделы" />
-            <MenuItem Command="{Binding SelectTablesUsers}" Header="Пользователи" />
         </Menu>
 
         <StackPanel Grid.Row="2" Style="{StaticResource BaseTableStackPanel}" />

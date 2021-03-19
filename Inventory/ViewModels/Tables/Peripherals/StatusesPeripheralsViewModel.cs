@@ -12,7 +12,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    class StatusesPeripheralsViewModel : BindableBase
+    internal class StatusesPeripheralsViewModel : BindableBase
     {
         public StatusesPeripheralsViewModel()
         {

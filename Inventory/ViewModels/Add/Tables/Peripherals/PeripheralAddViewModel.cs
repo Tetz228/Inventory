@@ -7,7 +7,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    class PeripheralAddViewModel : BindableBase
+    internal class PeripheralAddViewModel : BindableBase
     {
         public PeripheralAddViewModel()
         {

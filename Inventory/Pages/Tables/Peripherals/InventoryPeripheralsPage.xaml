@@ -45,7 +45,7 @@
                 <GridView>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Inventory_number, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Инвентарный номер периферии"
+                        Header="Инвентарный номер"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Peripheral.Types_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"

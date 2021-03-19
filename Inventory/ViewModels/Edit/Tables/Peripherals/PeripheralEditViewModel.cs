@@ -7,7 +7,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    class PeripheralEditViewModel : BindableBase
+    internal class PeripheralEditViewModel : BindableBase
     {
         public PeripheralEditViewModel(Peripheral peripheral)
         {

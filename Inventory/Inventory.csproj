@@ -315,6 +315,7 @@
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Peripherals\InventoryPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\PeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
@@ -470,6 +471,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Edit\Tables\Peripherals\InventoryPeripheralEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Edit\Tables\Peripherals\PeripheralEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -498,6 +503,9 @@
     </Compile>
     <Compile Include="View\Edit\Tables\ManufacturerEditWindow.xaml.cs">
       <DependentUpon>ManufacturerEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Peripherals\InventoryPeripheralEditWindow.xaml.cs">
+      <DependentUpon>InventoryPeripheralEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Peripherals\PeripheralEditWindow.xaml.cs">
       <DependentUpon>PeripheralEditWindow.xaml</DependentUpon>
