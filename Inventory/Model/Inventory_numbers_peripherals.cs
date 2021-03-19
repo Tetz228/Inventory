@@ -19,7 +19,7 @@ namespace Inventory.Model
         public int Id_inventory_number_peripheral { get; set; }
         public int Fk_peripheral { get; set; }
         public int Inventory_number { get; set; }
-        public string Inventory_numberString { get; set; }
+        public string StringInventoryNumber { get; set; }
         public int Fk_status_peripheral { get; set; }
 
         public virtual Peripheral Peripheral { get; set; }
@@ -38,11 +38,11 @@ namespace Inventory.Model
                 switch (name)
                 {
                     case "Inventory_numberString":
-                        if (!int.TryParse(Inventory_numberString, out int parseResult))
+                        if (!int.TryParse(StringInventoryNumber, out int parseResult))
                             result = "Поле должно содержать только цифры";
                         else
                         {
-                            if (int.Parse(Inventory_numberString) <= 0)
+                            if (int.Parse(StringInventoryNumber) <= 0)
                                 result = "Поле должно содержать число больше нуля";
                             else
                             {
@@ -53,7 +53,7 @@ namespace Inventory.Model
                                 }
                                 else
                                 {
-                                    if (_selectInventoryNumberPeripheral.Inventory_number != int.Parse(Inventory_numberString))
+                                    if (_selectInventoryNumberPeripheral.Inventory_number != int.Parse(StringInventoryNumber))
                                         if (IsUniqueInventoryNumber())
                                             result = "Номер должен быть уникальным";
                                 }
@@ -74,7 +74,7 @@ namespace Inventory.Model
 
         public bool IsUniqueInventoryNumber()
         {
-            Inventory_number = int.Parse(Inventory_numberString);
+            Inventory_number = int.Parse(StringInventoryNumber);
 
             using var db = new InventoryEntities();
             var isUniqueNumber = db.Inventory_numbers_peripherals.FirstOrDefault(number => number.Inventory_number == Inventory_number);
@@ -115,7 +115,7 @@ namespace Inventory.Model
             {
                 Fk_peripheral = inventoryNumber.Fk_peripheral,
                 Fk_status_peripheral = inventoryNumber.Fk_status_peripheral,
-                Inventory_number = inventoryNumber.Inventory_number = int.Parse(inventoryNumber.Inventory_numberString)
+                Inventory_number = inventoryNumber.Inventory_number = int.Parse(inventoryNumber.StringInventoryNumber)
             };
 
             db.Inventory_numbers_peripherals.Add(newInventoryNumberPeripheral);
@@ -148,7 +148,7 @@ namespace Inventory.Model
 
             findInventoryNumber.Fk_peripheral = selectInventoryNumber.Fk_peripheral;
             findInventoryNumber.Fk_status_peripheral = selectInventoryNumber.Fk_status_peripheral;
-            findInventoryNumber.Inventory_number = int.Parse(selectInventoryNumber.Inventory_numberString);
+            findInventoryNumber.Inventory_number = int.Parse(selectInventoryNumber.StringInventoryNumber);
 
             db.SaveChanges();
 

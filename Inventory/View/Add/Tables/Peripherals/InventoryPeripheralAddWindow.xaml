@@ -49,7 +49,7 @@
                             <TextBox
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryNumberPeripheral.Inventory_numberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding InventoryNumberPeripheral.StringInventoryNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Inventory_numberString], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
