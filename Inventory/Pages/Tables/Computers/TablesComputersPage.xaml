@@ -42,7 +42,7 @@
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Оперативная память" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="SSD-накопители" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Видеокарты" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Жесткие диски" />
+                <MenuItem Command="{Binding SelectHddsPage}" Header="Жесткие диски" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Блоки питания" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Операционные системы" />
             </MenuItem>
@@ -50,8 +50,8 @@
                 <MenuItem Command="{Binding SelectSoketsPage}" Header="Сокеты" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Типы памяти" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Типы SSD-накопителей" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Типы жестких дисков" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Единицы измерения" />
+                <MenuItem Command="{Binding SelectTypesHddPage}" Header="Типы жестких дисков" />
+                <MenuItem Command="{Binding SelectUnitsPage}" Header="Единицы измерения" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Производители" />
             </MenuItem>
         </Menu>
