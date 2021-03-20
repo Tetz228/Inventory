@@ -118,7 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-	<Compile Include="Model\Computer.cs">
+    <Compile Include="Model\Computer.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Department.cs">
@@ -245,9 +245,6 @@
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Statuses_peripherals.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Types_hdd.cs">
@@ -671,6 +668,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
     <Content Include="Model\InventoryModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InventoryModel.Context.cs</LastGenOutput>
@@ -682,7 +682,6 @@
       <LastGenOutput>InventoryModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

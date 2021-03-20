@@ -75,7 +75,6 @@ namespace Inventory.Model
                     db.SaveChanges();
                 }
             }
-
             Employee.PostsEmployees.Remove(selectPostEmp);
         }
     }

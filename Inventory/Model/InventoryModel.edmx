@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище InventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище InventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Computers">
           <Key>
             <PropertyRef Name="Id_computer" />
@@ -339,16 +339,6 @@
           <Property Name="Id_status_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Types_hdd">
           <Key>
             <PropertyRef Name="Id_type_hdd" />
@@ -560,6 +550,18 @@
             </Principal>
             <Dependent Role="Hdd_in_computers">
               <PropertyRef Name="Fk_inventory_number_hdd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+          <End Role="Hdd" Type="Self.Hdd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Hdd">
+              <PropertyRef Name="Fk_manufacturer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1094,7 +1096,6 @@
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statuses_computers" EntityType="Self.Statuses_computers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statuses_peripherals" EntityType="Self.Statuses_peripherals" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_hdd" EntityType="Self.Types_hdd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_memory" EntityType="Self.Types_memory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_peripherals" EntityType="Self.Types_peripherals" Schema="dbo" store:Type="Tables" />
@@ -1156,6 +1157,10 @@
           <AssociationSet Name="FK_Hdd_in_computers_Inventory_numbers_hdd" Association="Self.FK_Hdd_in_computers_Inventory_numbers_hdd">
             <End Role="Inventory_numbers_hdd" EntitySet="Inventory_numbers_hdd" />
             <End Role="Hdd_in_computers" EntitySet="Hdd_in_computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_Manufacturers" Association="Self.FK_Hdd_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Hdd" EntitySet="Hdd" />
           </AssociationSet>
           <AssociationSet Name="FK_Hdd_Types_hdd" Association="Self.FK_Hdd_Types_hdd">
             <End Role="Types_hdd" EntitySet="Types_hdd" />
@@ -1322,7 +1327,8 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1431,6 +1437,7 @@
           <Property Name="Memory_size" Type="Double" Nullable="false" />
           <Property Name="Fk_unit" Type="Int32" Nullable="false" />
           <Property Name="Fk_type_hdd" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Hdd_Manufacturers" FromRole="Hdd" ToRole="Manufacturers" />
           <NavigationProperty Name="Types_hdd" Relationship="Self.FK_Hdd_Types_hdd" FromRole="Hdd" ToRole="Types_hdd" />
           <NavigationProperty Name="Unit" Relationship="Self.FK_Hdd_Units" FromRole="Hdd" ToRole="Units" />
           <NavigationProperty Name="Inventory_numbers_hdd" Relationship="Self.FK_Inventory_numbers_hdd_Hdd" FromRole="Hdd" ToRole="Inventory_numbers_hdd" />
@@ -1574,6 +1581,7 @@
           <Property Name="Id_manufacturer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Graphics_cards" Relationship="Self.FK_Graphics_cards_Manufacturers" FromRole="Manufacturers" ToRole="Graphics_cards" />
+          <NavigationProperty Name="Hdds" Relationship="Self.FK_Hdd_Manufacturers" FromRole="Manufacturers" ToRole="Hdd" />
           <NavigationProperty Name="Motherboards" Relationship="Self.FK_Motherboards_Manufacturers" FromRole="Manufacturers" ToRole="Motherboards" />
           <NavigationProperty Name="Peripherals" Relationship="Self.FK_Peripherals_Manufacturers" FromRole="Manufacturers" ToRole="Peripherals" />
           <NavigationProperty Name="Power_supplies" Relationship="Self.FK_Power_supplies_Manufacturers" FromRole="Manufacturers" ToRole="Power_supplies" />
@@ -1757,16 +1765,6 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inventory_numbers_peripherals" Relationship="Self.FK_Inventory_numbers_peripherals_Statuses_peripherals" FromRole="Statuses_peripherals" ToRole="Inventory_numbers_peripherals" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Types_hdd">
           <Key>
             <PropertyRef Name="Id_type_hdd" />
@@ -1821,10 +1819,10 @@
           <Property Name="Login" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Fk_employee" Type="Int32" Nullable="false" />
+          <Property Name="Salt" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Dispensing_computers" Relationship="Self.FK_Dispensing_computers_Users" FromRole="Users" ToRole="Dispensing_computers" />
           <NavigationProperty Name="Dispensing_peripherals" Relationship="Self.FK_Dispensing_peripherals_Users" FromRole="Users" ToRole="Dispensing_peripherals" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Users_Employees" FromRole="Users" ToRole="Employees" />
-          <Property Name="Salt" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
           <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="0..1" />
@@ -2099,6 +2097,18 @@
             </Principal>
             <Dependent Role="Inventory_numbers_graphics_cards">
               <PropertyRef Name="Fk_graphics_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hdd_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Hdd" Type="Self.Hdd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Id_manufacturer" />
+            </Principal>
+            <Dependent Role="Hdd">
+              <PropertyRef Name="Fk_manufacturer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2525,7 +2535,6 @@
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" />
           <EntitySet Name="Statuses_computers" EntityType="Self.Statuses_computers" />
           <EntitySet Name="Statuses_peripherals" EntityType="Self.Statuses_peripherals" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Types_hdd" EntityType="Self.Types_hdd" />
           <EntitySet Name="Types_memory" EntityType="Self.Types_memory" />
           <EntitySet Name="Types_peripherals" EntityType="Self.Types_peripherals" />
@@ -2623,6 +2632,10 @@
           <AssociationSet Name="FK_Inventory_numbers_graphics_cards_Graphics_cards" Association="Self.FK_Inventory_numbers_graphics_cards_Graphics_cards">
             <End Role="Graphics_cards" EntitySet="Graphics_cards" />
             <End Role="Inventory_numbers_graphics_cards" EntitySet="Inventory_numbers_graphics_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hdd_Manufacturers" Association="Self.FK_Hdd_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Hdd" EntitySet="Hdds" />
           </AssociationSet>
           <AssociationSet Name="FK_Hdd_Types_hdd" Association="Self.FK_Hdd_Types_hdd">
             <End Role="Types_hdd" EntitySet="Types_hdd" />
@@ -3131,17 +3144,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="InventoryModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Types_hdd">
             <EntityTypeMapping TypeName="InventoryModel.Types_hdd">
               <MappingFragment StoreEntitySet="Types_hdd">
@@ -3186,11 +3188,11 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="InventoryModel.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="Id_user" ColumnName="Id_user" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

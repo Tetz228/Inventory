@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Inventory.ViewModels.Tables.Computers
 {
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Input;
-
     using DevExpress.Mvvm;
-
     using Inventory.Model;
     using Inventory.View.Add.Tables.Computers;
     using Inventory.View.Edit.Tables.Computers;
     using Inventory.ViewModels.Edit.Tables.Computers;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Data.Entity;
+    using System.Windows;
+    using System.Linq;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Input;
 
-    class HddsViewModel:BindableBase
+    class HddsViewModel : BindableBase
     {
         public HddsViewModel()
         {
             using var db = new InventoryEntities();
 
-            Hdds = new ObservableCollection<Hdd>(db.Hdds);
+            Hdds = new ObservableCollection<Hdd>(db.Hdds.Include(manufacturer=> manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd));
             HddsCollection = CollectionViewSource.GetDefaultView(Hdds);
             HddsCollection.SortDescriptions.Add(new SortDescription(nameof(Hdd.Name), ListSortDirection.Ascending));
         }
