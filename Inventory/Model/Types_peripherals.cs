@@ -74,7 +74,7 @@ namespace Inventory.Model
         public static void EditTypePeripheral(Types_peripherals typePeripheral)
         {
             using var db = new InventoryEntities();
-            var findTypePeripheral = db.Types_peripherals.FirstOrDefault(types => types.Id_type_peripheral == typePeripheral.Id_type_peripheral);
+            var findTypePeripheral = db.Types_peripherals.FirstOrDefault(type => type.Id_type_peripheral == typePeripheral.Id_type_peripheral);
 
             if (findTypePeripheral == null)
             {

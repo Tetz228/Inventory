@@ -19,7 +19,7 @@
     </Window.DataContext>
 
     <Grid>
-        <StackPanel Margin="010">
+        <StackPanel Margin="10">
             <TextBlock
                 Style="{StaticResource BaseText}"
                 Text="Новая должность"

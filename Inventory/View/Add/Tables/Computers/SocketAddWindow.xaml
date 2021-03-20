@@ -21,7 +21,7 @@
     </Window.DataContext>
 
     <Grid>
-        <StackPanel Margin="010">
+        <StackPanel Margin="10">
             <TextBlock
                 Style="{StaticResource BaseText}"
                 Text="Новый сокет"
@@ -52,7 +52,6 @@
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Socket.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding Socket.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
-
                         </UniformGrid>
                     </StackPanel>
                 </Border>
