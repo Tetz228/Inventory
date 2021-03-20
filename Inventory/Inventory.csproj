@@ -118,7 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Computer.cs">
+	<Compile Include="Model\Computer.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Department.cs">
@@ -268,11 +268,20 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Tables\Computers\HddsPage.xaml.cs">
+      <DependentUpon>HddsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Tables\Computers\SoketsPage.xaml.cs">
       <DependentUpon>SoketsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tables\Computers\TablesComputersPage.xaml.cs">
       <DependentUpon>TablesComputersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Tables\Computers\TypesHddPage.xaml.cs">
+      <DependentUpon>TypesHddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Tables\Computers\UnitsPage.xaml.cs">
+      <DependentUpon>UnitsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tables\Employees\DepartmentsPage.xaml.cs">
       <DependentUpon>DepartmentsPage.xaml</DependentUpon>
@@ -307,6 +316,9 @@
     <Compile Include="Pages\Tables\Peripherals\TypesPeripheralsPage.xaml.cs">
       <DependentUpon>TypesPeripheralsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Add\Tables\Computers\HddAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\TypeHddAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\UnitAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\DepartmentAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\PostAddViewModel.cs" />
@@ -317,7 +329,10 @@
     <Compile Include="ViewModels\Add\Tables\Peripherals\StatusPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\TypePeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Edit\ManufacturerEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\HddEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\SocketEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\TypeHddEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\UnitEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
@@ -325,7 +340,10 @@
     <Compile Include="ViewModels\Edit\Tables\Peripherals\PeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\HddsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TablesComputesViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\TypesHddViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\UnitsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\PostsViewModel.cs" />
@@ -337,6 +355,12 @@
     <Compile Include="ViewModels\Tables\Peripherals\TablesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TypesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\SocketsViewModel.cs" />
+    <Compile Include="View\Add\Tables\Computers\HddAddWindow.xaml.cs">
+      <DependentUpon>HddAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Computers\TypeHddAddWindow.xaml.cs">
+      <DependentUpon>TypeHddAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml.cs">
       <DependentUpon>DepartmentAddWindow.xaml</DependentUpon>
     </Compile>
@@ -375,11 +399,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\Tables\Computers\HddsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Tables\Computers\SoketsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Tables\Computers\TablesComputersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Tables\Computers\TypesHddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Tables\Computers\UnitsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -427,6 +463,14 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="View\Add\Tables\Computers\HddAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\TypeHddAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -471,7 +515,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Edit\Tables\Computers\HddEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Edit\Tables\Computers\SocketEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\UnitAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\TypeHddEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\UnitEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -515,8 +575,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\Edit\Tables\Computers\HddEditWindow.xaml.cs">
+      <DependentUpon>HddEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Edit\Tables\Computers\SocketEditWindow.xaml.cs">
       <DependentUpon>SocketEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Computers\UnitAddWindow.xaml.cs">
+      <DependentUpon>UnitAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\TypeHddEditWindow.xaml.cs">
+      <DependentUpon>TypeHddEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\UnitEditWindow.xaml.cs">
+      <DependentUpon>UnitEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml.cs">
       <DependentUpon>DepartmentEditWindow.xaml</DependentUpon>
