@@ -36,6 +36,21 @@
                     </Border.OpacityMask>
 
                     <StackPanel Width="455" HorizontalAlignment="Center">
+                        <!--  Производитель  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Manufacturers}"
+                                SelectedValue="{Binding Peripheral.Fk_manufacturer}"
+                                SelectedValuePath="Id_manufacturer"
+                                Style="{StaticResource BaseComboBox}" />
+                        </UniformGrid>
+
                         <!--  Тип периферии  -->
                         <UniformGrid Columns="2">
                             <TextBlock Style="{StaticResource BaseText}" Text="Тип периферии: " />
@@ -50,7 +65,6 @@
                                 SelectedValue="{Binding Peripheral.Fk_type_peripheral}"
                                 SelectedValuePath="Id_type_peripheral"
                                 Style="{StaticResource BaseComboBox}" />
-
                         </UniformGrid>
 
                         <!--  Наименование периферии  -->
@@ -58,25 +72,10 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование периферии: " />
 
                             <TextBox
-                                MaxLength="100"
+                                MaxLength="50"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Peripheral.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding Peripheral.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
-                        </UniformGrid>
-
-                        <!--  Производитель  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
-
-                            <ComboBox
-                                Width="208"
-                                MaxWidth="208"
-                                HorizontalAlignment="Center"
-                                DisplayMemberPath="Name"
-                                ItemsSource="{Binding Manufacturers}"
-                                SelectedValue="{Binding Peripheral.Fk_manufacturer}"
-                                SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>

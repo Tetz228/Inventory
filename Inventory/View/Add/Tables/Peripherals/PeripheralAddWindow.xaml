@@ -70,7 +70,6 @@
                                 SelectedValue="{Binding Peripheral.Fk_type_peripheral, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_type_peripheral"
                                 Style="{StaticResource BaseComboBox}" />
-
                         </UniformGrid>
 
                         <!--  Наименование периферии  -->
@@ -78,7 +77,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование периферии: " />
 
                             <TextBox
-                                MaxLength="100"
+                                MaxLength="50"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Peripheral.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding Peripheral.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

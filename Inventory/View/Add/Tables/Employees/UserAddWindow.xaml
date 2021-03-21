@@ -47,6 +47,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Логин: " />
 
                             <TextBox
+                                MaxLength="40"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding User.Login, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding User.ErrorCollection[Login], UpdateSourceTrigger=PropertyChanged}" />

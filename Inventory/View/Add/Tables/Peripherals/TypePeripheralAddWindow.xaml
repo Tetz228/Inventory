@@ -46,7 +46,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование типа: " />
 
                             <TextBox
-                                MaxLength="100"
+                                MaxLength="40"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding TypePeripheral.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding TypePeripheral.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

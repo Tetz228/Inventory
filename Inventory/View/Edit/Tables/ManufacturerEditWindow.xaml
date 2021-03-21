@@ -41,7 +41,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование производителя: " />
 
                             <TextBox
-                                MaxLength="100"
+                                MaxLength="50"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Manufacturer.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding Manufacturer.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

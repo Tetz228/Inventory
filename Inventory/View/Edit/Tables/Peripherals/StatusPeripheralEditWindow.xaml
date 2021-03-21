@@ -42,7 +42,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование статуса: " />
 
                             <TextBox
-                                MaxLength="100"
+                                MaxLength="200"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding StatusPeripheral.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding StatusPeripheral.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

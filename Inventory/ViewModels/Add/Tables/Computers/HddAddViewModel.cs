@@ -17,6 +17,7 @@
             Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
             TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd);
             Units = new ObservableCollection<Unit>(db.Units);
+            var f = float.MaxValue;
         }
 
         public Hdd Hdd { get; }

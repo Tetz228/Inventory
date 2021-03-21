@@ -20,7 +20,7 @@
     </Window.DataContext>
 
     <Grid>
-        <StackPanel Margin="010">
+        <StackPanel Margin="10">
             <TextBlock
                 Style="{StaticResource BaseText}"
                 Text="Новый тип жесткого диска"
@@ -47,7 +47,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование типа: " />
 
                             <TextBox
-                                MaxLength="100"
+                                MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding TypeHdd.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding TypeHdd.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

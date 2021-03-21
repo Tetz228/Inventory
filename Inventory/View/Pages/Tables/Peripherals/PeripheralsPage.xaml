@@ -44,7 +44,7 @@
                 <GridView>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Types_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Тип периферии"
+                        Header="Тип"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"

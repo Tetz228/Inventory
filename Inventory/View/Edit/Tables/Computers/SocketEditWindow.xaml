@@ -42,7 +42,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование сокета: " />
 
                             <TextBox
-                                MaxLength="100"
+                                MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Socket.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding Socket.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
