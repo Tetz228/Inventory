@@ -19,14 +19,18 @@
             using var db = new InventoryEntities();
 
             Departments = new ObservableCollection<Department>(db.Departments);
+            Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
             DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
-            DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
+        private ICollectionView DepartmentsCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
         public static ObservableCollection<Department> Departments { get; set; }
 
-        public ICollectionView DepartmentsCollection { get; }
+        public Department SelectDepartment { get; set; }
 
         private string _departmentsFilter;
 
@@ -46,8 +50,6 @@
                 DepartmentsCollection.Refresh();
             }
         }
-
-        public Department SelectDepartment { get; set; }
         #endregion
 
         #region События
@@ -59,20 +61,13 @@
             switch (columnHeader.Content.ToString())
             {
                 case "Наименование":
-                    {
-                        if (DepartmentsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            DepartmentsCollection.SortDescriptions.Clear();
-                            DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            DepartmentsCollection.SortDescriptions.Clear();
-                            DepartmentsCollection.SortDescriptions.Add(new SortDescription(nameof(Department.Name), ListSortDirection.Ascending));
-                        }
-                        DepartmentsCollection.Refresh();
-                        break;
-                    }
+                {
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Descending);
+                    else
+                        Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
+                    break;
+                }
             }
         }
 

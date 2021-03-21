@@ -11,7 +11,6 @@ namespace Inventory.ViewModels.Tables.Computers
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Windows;
-    using System.Linq;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
@@ -22,17 +21,19 @@ namespace Inventory.ViewModels.Tables.Computers
         {
             using var db = new InventoryEntities();
 
-            Hdds = new ObservableCollection<Hdd>(db.Hdds.Include(manufacturer=> manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd));
+            Hdds = new ObservableCollection<Hdd>(db.Hdds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd));
+            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             HddsCollection = CollectionViewSource.GetDefaultView(Hdds);
-            HddsCollection.SortDescriptions.Add(new SortDescription(nameof(Hdd.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Hdd> Hdds { get; set; }
+        private ICollectionView HddsCollection { get; }
 
-        public ICollectionView HddsCollection { get; }
+        private ListSortDirection SortDirection { get; set; }
 
         public Hdd SelectHdd { get; set; }
+
+        public static ObservableCollection<Hdd> Hdds { get; set; }
 
         private string _hddsFilter = string.Empty;
 
@@ -62,19 +63,44 @@ namespace Inventory.ViewModels.Tables.Computers
 
             switch (columnHeader.Content.ToString())
             {
+                case "Производитель":
+                    {
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
+                        else
+                            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                        break;
+                    }
+                case "Тип":
+                    {
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Hdds.Sort(type => type.Types_hdd.Name, SortDirection = ListSortDirection.Descending);
+                        else
+                            Hdds.Sort(type => type.Types_hdd.Name, SortDirection = ListSortDirection.Ascending);
+                        break;
+                    }
                 case "Наименование":
                     {
-                        if (HddsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            HddsCollection.SortDescriptions.Clear();
-                            HddsCollection.SortDescriptions.Add(new SortDescription(nameof(Hdd.Name), ListSortDirection.Descending));
-                        }
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Hdds.Sort(hdd => hdd.Name, SortDirection = ListSortDirection.Descending);
                         else
-                        {
-                            HddsCollection.SortDescriptions.Clear();
-                            HddsCollection.SortDescriptions.Add(new SortDescription(nameof(Hdd.Name), ListSortDirection.Ascending));
-                        }
-                        HddsCollection.Refresh();
+                            Hdds.Sort(hdd => hdd.Name, SortDirection = ListSortDirection.Ascending);
+                        break;
+                    }
+                case "Объём":
+                    {
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Hdds.Sort(hdd => hdd.Memory_size, SortDirection = ListSortDirection.Descending);
+                        else
+                            Hdds.Sort(hdd => hdd.Memory_size, SortDirection = ListSortDirection.Ascending);
+                        break;
+                    }
+                case "Единица измерения":
+                    {
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Hdds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Descending);
+                        else
+                            Hdds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
                         break;
                     }
             }

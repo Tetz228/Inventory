@@ -1,5 +1,7 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Employees
 {
+    using System.Collections.Generic;
+
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System.ComponentModel;
@@ -10,6 +12,10 @@
     {
         public EmployeeEditViewModel(Employee employee)
         {
+            using var db = new InventoryEntities();
+            Posts_employees.CollectionPosts = new List<Post>(db.Posts);
+            Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments);
+
             Employee = employee;
             Employee.BeginEdit();
         }

@@ -23,15 +23,17 @@
                                                                        .Select(post => post.Post))
                                                                        .Include(empDepart => empDepart.Employees_in_departments
                                                                        .Select(depart => depart.Department)));
-
+            Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Ascending);
             EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
-            EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Employee> Employees { get; set; }
 
-        public ICollectionView EmployeesCollection { get; }
+        private ICollectionView EmployeesCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<Employee> Employees { get; set; }
 
         public Employee SelectEmployee { get; set; }
 
@@ -64,50 +66,45 @@
             switch (columnHeader.Content.ToString())
             {
                 case "ФИО":
-                {
-                    if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
                     {
-                        EmployeesCollection.SortDescriptions.Clear();
-                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Descending));
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Descending);
+                        else
+                            Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Ascending);
+                        break;
                     }
-                    else
-                    {
-                        EmployeesCollection.SortDescriptions.Clear();
-                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.L_name), ListSortDirection.Ascending));
-                    }
-                    EmployeesCollection.Refresh();
-                    break;
-                }
                 case "Почта":
-                {
-                    if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
                     {
-                        EmployeesCollection.SortDescriptions.Clear();
-                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Email), ListSortDirection.Descending));
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Descending);
+                        else
+                            Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Ascending);
+                        break;
                     }
-                    else
-                    {
-                        EmployeesCollection.SortDescriptions.Clear();
-                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Email), ListSortDirection.Ascending));
-                    }
-                    EmployeesCollection.Refresh();
-                    break;
-                }
                 case "Номер телефона":
-                {
-                    if (EmployeesCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
                     {
-                        EmployeesCollection.SortDescriptions.Clear();
-                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Phone_number), ListSortDirection.Descending));
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Descending);
+                        else
+                            Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Ascending);
+                        break;
                     }
-                    else
-                    {
-                        EmployeesCollection.SortDescriptions.Clear();
-                        EmployeesCollection.SortDescriptions.Add(new SortDescription(nameof(Employee.Phone_number), ListSortDirection.Ascending));
-                    }
-                    EmployeesCollection.Refresh();
-                    break;
-                }
+                //case "Должности":
+                //    {
+                //        if (SortDirection == ListSortDirection.Ascending)
+                //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Descending);
+                //        else
+                //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Ascending);
+                //        break;
+                //    }
+                //case "Отделы":
+                //    {
+                //        if (SortDirection == ListSortDirection.Ascending)
+                //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Descending);
+                //        else
+                //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Ascending);
+                //        break;
+                //    }
             }
         }
 

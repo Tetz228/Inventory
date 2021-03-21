@@ -20,14 +20,16 @@
         {
             using var db = new InventoryEntities();
             Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
+            Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             ManufacturersCollection = CollectionViewSource.GetDefaultView(Manufacturers);
-            ManufacturersCollection.SortDescriptions.Add(new SortDescription(nameof(Manufacturer.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Manufacturer> Manufacturers { get; set; }
-
         public ICollectionView ManufacturersCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<Manufacturer> Manufacturers { get; set; }
 
         public Manufacturer SelectManufacturer { get; set; }
 
@@ -41,8 +43,8 @@
                 _manufacturersFilter = value;
                 ManufacturersCollection.Filter = obj =>
                 {
-                    if (obj is Manufacturer post)
-                        return Manufacturer.Search(post, ManufacturersFilter);
+                    if (obj is Manufacturer manufacturer)
+                        return Manufacturer.Search(manufacturer, ManufacturersFilter);
 
                     return false;
                 };
@@ -61,17 +63,10 @@
             {
                 case "Наименование":
                 {
-                    if (ManufacturersCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                    {
-                        ManufacturersCollection.SortDescriptions.Clear();
-                        ManufacturersCollection.SortDescriptions.Add(new SortDescription(nameof(Manufacturer.Name), ListSortDirection.Descending));
-                    }
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Descending);
                     else
-                    {
-                        ManufacturersCollection.SortDescriptions.Clear();
-                        ManufacturersCollection.SortDescriptions.Add(new SortDescription(nameof(Manufacturer.Name), ListSortDirection.Ascending));
-                    }
-                    ManufacturersCollection.Refresh();
+                        Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Ascending);
                     break;
                 }
             }

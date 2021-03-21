@@ -2,19 +2,15 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.View.Add.Tables.Peripherals;
-    using Inventory.View.Edit.Tables.Peripherals;
-    using Inventory.ViewModels.Edit.Tables.Peripherals;
+    using Inventory.View.Add.Tables.Computers;
+    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers;
 
     class TypesHddViewModel : BindableBase
     {
@@ -23,18 +19,19 @@
             using var db = new InventoryEntities();
 
             TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd);
+            TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection = ListSortDirection.Ascending);
             TypesHddsCollection = CollectionViewSource.GetDefaultView(TypesHdds);
-            TypesHddsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
+
+        private ICollectionView TypesHddsCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
         public static ObservableCollection<Types_hdd> TypesHdds { get; set; }
 
-        public ICollectionView TypesHddsCollection { get; }
-
-        public Types_hdd SelectTypeHdd 
-        { get; 
-            set; }
+        public Types_hdd SelectTypeHdd { get; set; }
 
         private string _typesHddsFilter = string.Empty;
 
@@ -66,17 +63,10 @@
             {
                 case "Наименование":
                     {
-                        if (TypesHddsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            TypesHddsCollection.SortDescriptions.Clear();
-                            TypesHddsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Descending));
-                        }
+                        if (SortDirection == ListSortDirection.Ascending)
+                            TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection = ListSortDirection.Descending);
                         else
-                        {
-                            TypesHddsCollection.SortDescriptions.Clear();
-                            TypesHddsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Ascending));
-                        }
-                        TypesHddsCollection.Refresh();
+                            TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection = ListSortDirection.Ascending);
                         break;
                     }
             }
@@ -98,7 +88,7 @@
             editWindow.DataContext = editViewModel;
             editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();
-        }, 
+        },
             typeHdd => typeHdd != null);
 
         public ICommand DeleteTypeHdd => new DelegateCommand<Types_hdd>(Types_hdd.DeleteTypeHdd, selectTypeHdd => selectTypeHdd != null);

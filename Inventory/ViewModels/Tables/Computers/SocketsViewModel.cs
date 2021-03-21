@@ -2,19 +2,15 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.View.Add.Tables.Employees;
+    using Inventory.View.Add.Tables.Computers;
+    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Add.Tables.Peripherals;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.View.Edit.Tables.Employees;
-    using Inventory.ViewModels.Edit.Tables.Computers;
 
     public class SocketsViewModel : BindableBase
     {
@@ -23,14 +19,16 @@
             using var db = new InventoryEntities();
 
             Sockets = new ObservableCollection<Socket>(db.Sockets);
+            Sockets.Sort(socket => socket.Name, SortDirection = ListSortDirection.Ascending);
             SocketsCollection = CollectionViewSource.GetDefaultView(Sockets);
-            SocketsCollection.SortDescriptions.Add(new SortDescription(nameof(Socket.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Socket> Sockets { get; set; }
+        private ICollectionView SocketsCollection { get; }
 
-        public ICollectionView SocketsCollection { get; }
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<Socket> Sockets { get; set; }
 
         public Socket SelectSocket { get; set; }
 
@@ -64,17 +62,10 @@
             {
                 case "Наименование":
                     {
-                        if (SocketsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            SocketsCollection.SortDescriptions.Clear();
-                            SocketsCollection.SortDescriptions.Add(new SortDescription(nameof(Socket.Name), ListSortDirection.Descending));
-                        }
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Sockets.Sort(socket => socket.Name, SortDirection = ListSortDirection.Descending);
                         else
-                        {
-                            SocketsCollection.SortDescriptions.Clear();
-                            SocketsCollection.SortDescriptions.Add(new SortDescription(nameof(Socket.Name), ListSortDirection.Ascending));
-                        }
-                        SocketsCollection.Refresh();
+                            Sockets.Sort(socket => socket.Name, SortDirection = ListSortDirection.Ascending);
                         break;
                     }
             }

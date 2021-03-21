@@ -19,14 +19,17 @@
             using var db = new InventoryEntities();
 
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
+            StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Ascending);
             StatusesPeripheralsCollection = CollectionViewSource.GetDefaultView(StatusesPeripherals);
-            StatusesPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Statuses_peripherals.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; set; }
 
-        public ICollectionView StatusesPeripheralsCollection { get; }
+        private ICollectionView StatusesPeripheralsCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; set; }
 
         public Statuses_peripherals SelectStatusPeripheral { get; set; }
 
@@ -60,17 +63,10 @@
             {
                 case "Наименование":
                     {
-                        if (StatusesPeripheralsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            StatusesPeripheralsCollection.SortDescriptions.Clear();
-                            StatusesPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Statuses_peripherals.Name), ListSortDirection.Descending));
-                        }
+                        if (SortDirection == ListSortDirection.Ascending)
+                            StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Descending);
                         else
-                        {
-                            StatusesPeripheralsCollection.SortDescriptions.Clear();
-                            StatusesPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Statuses_peripherals.Name), ListSortDirection.Ascending));
-                        }
-                        StatusesPeripheralsCollection.Refresh();
+                            StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Ascending);
                         break;
                     }
             }

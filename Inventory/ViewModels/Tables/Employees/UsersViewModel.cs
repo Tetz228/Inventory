@@ -18,14 +18,17 @@
             using var db = new InventoryEntities();
 
             Users = new ObservableCollection<User>(db.Users.Include(employee => employee.Employee));
+            Users.Sort(user => user.Login, SortDirection = ListSortDirection.Ascending);
             UsersCollection = CollectionViewSource.GetDefaultView(Users);
-            UsersCollection.SortDescriptions.Add(new SortDescription(nameof(User.Login), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<User> Users { get; set; }
 
-        public ICollectionView UsersCollection { get; }
+        private ICollectionView UsersCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<User> Users { get; set; }
 
         private string _usersFilter = string.Empty;
 
@@ -55,60 +58,29 @@
             switch (columnHeader.Content.ToString())
             {
                 case "Логин":
-                    {
-                        if (UsersCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            UsersCollection.SortDescriptions.Clear();
-                            UsersCollection.SortDescriptions.Add(new SortDescription(nameof(User.Login),
-                                ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            UsersCollection.SortDescriptions.Clear();
-                            UsersCollection.SortDescriptions.Add(new SortDescription(nameof(User.Login),
-                                ListSortDirection.Ascending));
-                        }
-
-                        UsersCollection.Refresh();
-
-                        break;
-                    }
+                {
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Users.Sort(user => user.Login, SortDirection = ListSortDirection.Descending);
+                    else
+                        Users.Sort(user => user.Login, SortDirection = ListSortDirection.Ascending);
+                    break;
+                }
                 case "ФИО":
-                    {
-                        if (UsersCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            UsersCollection.SortDescriptions.Clear();
-                            UsersCollection.SortDescriptions.Add(new SortDescription(nameof(User.Employee.L_name),
-                                ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            UsersCollection.SortDescriptions.Clear();
-                            UsersCollection.SortDescriptions.Add(new SortDescription(nameof(User.Employee.L_name),
-                                ListSortDirection.Ascending));
-                        }
-
-                        UsersCollection.Refresh();
-
-                        break;
-                    }
+                {
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Users.Sort(user => user.Employee.L_name, SortDirection = ListSortDirection.Descending);
+                    else
+                        Users.Sort(user => user.Employee.L_name, SortDirection = ListSortDirection.Ascending);
+                    break;
+                }
                 case "Почта":
-                    {
-                        if (UsersCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            UsersCollection.SortDescriptions.Clear();
-                            UsersCollection.SortDescriptions.Add(new SortDescription(nameof(User.Employee.Email),
-                                ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            UsersCollection.SortDescriptions.Clear();
-                            UsersCollection.SortDescriptions.Add(new SortDescription(nameof(User.Employee.Email),
-                                ListSortDirection.Ascending));
-                        }
-                        UsersCollection.Refresh();
-                        break;
-                    }
+                {
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Users.Sort(user => user.Employee.Email, SortDirection = ListSortDirection.Descending);
+                    else
+                        Users.Sort(user => user.Employee.Email, SortDirection = ListSortDirection.Ascending);
+                    break;
+                }
             }
         }
 

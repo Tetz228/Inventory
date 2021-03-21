@@ -21,7 +21,7 @@ namespace Inventory.Model
             CollectionPosts = new List<Post>(db.Posts);
         }
 
-        public List<Post> CollectionPosts { get; set; }
+        public static List<Post> CollectionPosts { get; set; }
 
         public int Id_post_employee { get; set; }
         public int Fk_employee { get; set; }

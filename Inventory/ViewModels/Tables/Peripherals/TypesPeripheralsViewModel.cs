@@ -19,14 +19,17 @@
             using var db = new InventoryEntities();
 
             TypesPeripherals = new ObservableCollection<Types_peripherals>(db.Types_peripherals);
+            TypesPeripherals.Sort(typePeripheral => typePeripheral.Name, SortDirection = ListSortDirection.Ascending);
             TypesPeripheralsCollection = CollectionViewSource.GetDefaultView(TypesPeripherals);
-            TypesPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Types_peripherals> TypesPeripherals { get; set; }
 
-        public ICollectionView TypesPeripheralsCollection { get; }
+        private ICollectionView TypesPeripheralsCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<Types_peripherals> TypesPeripherals { get; set; }
 
         public Types_peripherals SelectTypePeripheral { get; set; }
 
@@ -60,17 +63,10 @@
             {
                 case "Наименование":
                     {
-                        if (TypesPeripheralsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            TypesPeripheralsCollection.SortDescriptions.Clear();
-                            TypesPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Descending));
-                        }
+                        if (SortDirection == ListSortDirection.Ascending)
+                            TypesPeripherals.Sort(typePeripheral => typePeripheral.Name, SortDirection = ListSortDirection.Descending);
                         else
-                        {
-                            TypesPeripheralsCollection.SortDescriptions.Clear();
-                            TypesPeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Ascending));
-                        }
-                        TypesPeripheralsCollection.Refresh();
+                            TypesPeripherals.Sort(typePeripheral => typePeripheral.Name, SortDirection = ListSortDirection.Ascending);
                         break;
                     }
             }

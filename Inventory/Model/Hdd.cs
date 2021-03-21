@@ -11,35 +11,42 @@ namespace Inventory.Model
 {
     using DevExpress.Mvvm;
     using Inventory.ViewModels.Tables.Computers;
+    using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Controls;
 
     public partial class Hdd : BindableBase, IEditableObject, IDataErrorInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hdd()
         {
             this.Inventory_numbers_hdd = new HashSet<Inventory_numbers_hdd>();
         }
-    
+
         public int Id_hdd { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
         public double Memory_size { get; set; }
         public int Fk_unit { get; set; }
         public int Fk_type_hdd { get; set; }
-    
+
         public virtual Manufacturer Manufacturer { get; set; }
         public virtual Types_hdd Types_hdd { get; set; }
         public virtual Unit Unit { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory_numbers_hdd> Inventory_numbers_hdd { get; set; }
 
         #region Валидация
+
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
 
         public string this[string name]
@@ -66,17 +73,27 @@ namespace Inventory.Model
             }
         }
 
-        public string Error { get => null; }
+        public string Error
+        {
+            get => null;
+        }
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null) && Fk_manufacturer != 0 && Fk_unit != 0 && Fk_type_hdd != 0;
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 ||
+                                                ErrorCollection.Any(item => item.Value == null) &&
+                                                Fk_manufacturer != 0 && Fk_unit != 0 && Fk_type_hdd != 0;
+
         #endregion
 
         #region Метод поиска
         public static bool Search(Hdd hdd, string hddFilter) => hdd.Name.ToLower().Contains(hddFilter.ToLower())
-            || hdd.Unit.Full_name.ToLower().Contains(hddFilter.ToLower())
-            || hdd.Unit.Short_name.ToLower().Contains(hddFilter.ToLower())
-            || hdd.Types_hdd.Name.ToLower().Contains(hddFilter.ToLower())
-            || hdd.Manufacturer.Name.ToLower().Contains(hddFilter.ToLower());
+                                                                || hdd.Unit.Full_name.ToLower()
+                                                                    .Contains(hddFilter.ToLower())
+                                                                || hdd.Unit.Short_name.ToLower()
+                                                                    .Contains(hddFilter.ToLower())
+                                                                || hdd.Types_hdd.Name.ToLower()
+                                                                    .Contains(hddFilter.ToLower())
+                                                                || hdd.Manufacturer.Name.ToLower()
+                                                                    .Contains(hddFilter.ToLower());
         #endregion
 
         #region Методы обработки информации
@@ -96,7 +113,8 @@ namespace Inventory.Model
             db.Hdds.Add(newHdd);
             db.SaveChanges();
 
-            newHdd.Manufacturer = db.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id_manufacturer == newHdd.Fk_manufacturer);
+            newHdd.Manufacturer =
+                db.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id_manufacturer == newHdd.Fk_manufacturer);
             newHdd.Types_hdd = db.Types_hdd.FirstOrDefault(typesHdd => typesHdd.Id_type_hdd == newHdd.Fk_type_hdd);
             newHdd.Unit = db.Units.FirstOrDefault(unit => unit.Id_unit == newHdd.Fk_unit);
 
@@ -134,11 +152,12 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findHdd = db.Hdds.FirstOrDefault(hdd => hdd.Id_hdd == selectHdd.Id_hdd);
+            var findHdd = db.Hdds.FirstOrDefault(hdd => hdd == selectHdd);
 
             if (findHdd == null)
             {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении жесткого диска", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении жесткого диска",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
                 return;
             }
@@ -192,7 +211,6 @@ namespace Inventory.Model
         {
             if (_selectHdd == null)
                 return;
-
             Id_hdd = _selectHdd.Id_hdd;
             Memory_size = _selectHdd.Memory_size;
             Name = _selectHdd.Name;

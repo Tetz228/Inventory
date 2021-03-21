@@ -1,5 +1,7 @@
 ﻿namespace Inventory.ViewModels.Add.Tables.Employees
 {
+    using System.Collections.Generic;
+
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System.ComponentModel;
@@ -11,6 +13,11 @@
         public EmployeeAddViewModel()
         {
             Employee = new Employee();
+
+            using var db = new InventoryEntities();
+            Posts_employees.CollectionPosts = new List<Post>(db.Posts);
+            Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments);
+
             Employee.PostsEmployees.Add(new Posts_employees());
             Employee.EmployeesInDepartments.Add(new Employees_in_departments());
         }

@@ -19,14 +19,16 @@
             using var db = new InventoryEntities();
 
             Posts = new ObservableCollection<Post>(db.Posts);
+            Posts.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
             PostsCollection = CollectionViewSource.GetDefaultView(Posts);
-            PostsCollection.SortDescriptions.Add(new SortDescription(nameof(Post.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Post> Posts { get; set; }
+        private ICollectionView PostsCollection { get; }
 
-        public ICollectionView PostsCollection { get; }
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<Post> Posts { get; set; }
 
         public Post SelectPost { get; set; }
 
@@ -59,20 +61,13 @@
             switch (columnHeader.Content.ToString())
             {
                 case "Наименование":
-                    {
-                        if (PostsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            PostsCollection.SortDescriptions.Clear();
-                            PostsCollection.SortDescriptions.Add(new SortDescription(nameof(Post.Name), ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            PostsCollection.SortDescriptions.Clear();
-                            PostsCollection.SortDescriptions.Add(new SortDescription(nameof(Post.Name), ListSortDirection.Ascending));
-                        }
-                        PostsCollection.Refresh();
-                        break;
-                    }
+                {
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Posts.Sort(post => post.Name, SortDirection = ListSortDirection.Descending);
+                    else
+                        Posts.Sort(post => post.Name, SortDirection = ListSortDirection.Ascending);
+                    break;
+                }
             }
         }
 

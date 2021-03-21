@@ -21,7 +21,7 @@ namespace Inventory.Model
             CollectionDepartments = new List<Department>(db.Departments);
         }
 
-        public List<Department> CollectionDepartments { get; set; }
+        public static List<Department> CollectionDepartments { get; set; }
 
         public int Id_employee_in_department { get; set; }
         public int Fk_department { get; set; }

@@ -7,6 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Inventory.View.Pages.Tables.Computers"
+    xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     Title="HddsPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -36,7 +38,7 @@
 
         <ListView
             GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
-            ItemsSource="{Binding HddsCollection, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Hdds, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='LeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectHdd}"
             Style="{StaticResource BaseListView}">
@@ -45,7 +47,8 @@
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Manufacturer.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Производитель"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                    </GridViewColumn>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Types_hdd.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Тип"
@@ -56,7 +59,7 @@
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Memory_size, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Единица измерения"
+                        Header="Объём"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Unit.Full_name, UpdateSourceTrigger=PropertyChanged}"

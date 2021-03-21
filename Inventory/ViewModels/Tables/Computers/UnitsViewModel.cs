@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Tables.Computers
+﻿namespace Inventory.ViewModels.Tables.Computers
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers;
+    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
@@ -13,28 +12,24 @@ namespace Inventory.ViewModels.Tables.Computers
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers;
-
-    class  UnitsViewModel : BindableBase
+    class UnitsViewModel : BindableBase
     {
         public UnitsViewModel()
         {
             using var db = new InventoryEntities();
 
             Units = new ObservableCollection<Unit>(db.Units);
+            Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
             UnitsCollection = CollectionViewSource.GetDefaultView(Units);
-            UnitsCollection.SortDescriptions.Add(new SortDescription(nameof(Unit.Short_name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Unit> Units { get; set; }
 
-        public ICollectionView UnitsCollection { get; }
+        private ICollectionView UnitsCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<Unit> Units { get; set; }
 
         public Unit SelectUnit { get; set; }
 
@@ -68,34 +63,20 @@ namespace Inventory.ViewModels.Tables.Computers
             {
                 case "Полное наименование":
                     {
-                        if (UnitsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            UnitsCollection.SortDescriptions.Clear();
-                            UnitsCollection.SortDescriptions.Add(new SortDescription(nameof(Unit.Full_name), ListSortDirection.Descending));
-                        }
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Descending);
                         else
-                        {
-                            UnitsCollection.SortDescriptions.Clear();
-                            UnitsCollection.SortDescriptions.Add(new SortDescription(nameof(Unit.Full_name), ListSortDirection.Ascending));
-                        }
-                        UnitsCollection.Refresh();
+                            Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
                         break;
                     }
                 case "Краткое наименование":
-                {
-                    if (UnitsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
                     {
-                        UnitsCollection.SortDescriptions.Clear();
-                        UnitsCollection.SortDescriptions.Add(new SortDescription(nameof(Unit.Short_name), ListSortDirection.Descending));
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Descending);
+                        else
+                            Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Ascending);
+                        break;
                     }
-                    else
-                    {
-                        UnitsCollection.SortDescriptions.Clear();
-                        UnitsCollection.SortDescriptions.Add(new SortDescription(nameof(Unit.Short_name), ListSortDirection.Ascending));
-                    }
-                    UnitsCollection.Refresh();
-                    break;
-                }
             }
         }
 

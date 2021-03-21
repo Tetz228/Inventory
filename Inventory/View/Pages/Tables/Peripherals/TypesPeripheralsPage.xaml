@@ -36,7 +36,7 @@
 
         <ListView
             GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
-            ItemsSource="{Binding TypesPeripheralsCollection, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding TypesPeripherals, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='LeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectTypePeripheral}"
             Style="{StaticResource BaseListView}">

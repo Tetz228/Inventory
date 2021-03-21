@@ -20,14 +20,16 @@
             using var db = new InventoryEntities();
 
             Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.Include(manufacturer => manufacturer.Manufacturer).Include(typePeripheral => typePeripheral.Types_peripherals));
+            Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             PeripheralsCollection = CollectionViewSource.GetDefaultView(Peripherals);
-            PeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Peripheral.Types_peripherals.Name), ListSortDirection.Ascending));
         }
 
         #region Свойства
-        public static ObservableCollection<Peripheral> Peripherals { get; set; }
+        private ICollectionView PeripheralsCollection { get; }
 
-        public ICollectionView PeripheralsCollection { get; }
+        private ListSortDirection SortDirection { get; set; }
+
+        public static ObservableCollection<Peripheral> Peripherals { get; set; }
 
         public Peripheral SelectPeripheral { get; set; }
 
@@ -59,51 +61,30 @@
 
             switch (columnHeader.Content.ToString())
             {
-                case "Тип периферии":
-                    {
-                        if (PeripheralsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            PeripheralsCollection.SortDescriptions.Clear();
-                            PeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            PeripheralsCollection.SortDescriptions.Clear();
-                            PeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Types_peripherals.Name), ListSortDirection.Ascending));
-                        }
-                        PeripheralsCollection.Refresh();
-                        break;
-                    }
-                case "Наименование":
-                    {
-                        if (PeripheralsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            PeripheralsCollection.SortDescriptions.Clear();
-                            PeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Peripheral.Name), ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            PeripheralsCollection.SortDescriptions.Clear();
-                            PeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Peripheral.Name), ListSortDirection.Ascending));
-                        }
-                        PeripheralsCollection.Refresh();
-                        break;
-                    }
                 case "Производитель":
-                    {
-                        if (PeripheralsCollection.SortDescriptions[0].Direction == ListSortDirection.Ascending)
-                        {
-                            PeripheralsCollection.SortDescriptions.Clear();
-                            PeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Manufacturer.Name), ListSortDirection.Descending));
-                        }
-                        else
-                        {
-                            PeripheralsCollection.SortDescriptions.Clear();
-                            PeripheralsCollection.SortDescriptions.Add(new SortDescription(nameof(Manufacturer.Name), ListSortDirection.Ascending));
-                        }
-                        PeripheralsCollection.Refresh();
-                        break;
-                    }
+                {
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
+                    else
+                        Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                    break;
+                }
+                case "Тип периферии":
+                {
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection = ListSortDirection.Descending);
+                    else
+                        Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection = ListSortDirection.Ascending);
+                    break;
+                }
+                case "Наименование":
+                {
+                    if (SortDirection == ListSortDirection.Ascending)
+                        Peripherals.Sort(peripheral => peripheral.Name, SortDirection = ListSortDirection.Descending);
+                    else
+                        Peripherals.Sort(peripheral => peripheral.Name, SortDirection = ListSortDirection.Ascending);
+                    break;
+                }
             }
         }
 

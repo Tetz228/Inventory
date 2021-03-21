@@ -58,7 +58,7 @@
 
         <ListView
             GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
-            ItemsSource="{Binding EmployeesCollection}"
+            ItemsSource="{Binding Employees}"
             MouseLeftButtonDown="{DXEvent Handler='LeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectEmployee}"
             Style="{StaticResource BaseListView}">
