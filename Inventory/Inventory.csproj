@@ -265,52 +265,52 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Computers\HddsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Computers\HddsPage.xaml.cs">
       <DependentUpon>HddsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Computers\SoketsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Computers\SoketsPage.xaml.cs">
       <DependentUpon>SoketsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Computers\TablesComputersPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Computers\TablesComputersPage.xaml.cs">
       <DependentUpon>TablesComputersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Computers\TypesHddPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Computers\TypesHddPage.xaml.cs">
       <DependentUpon>TypesHddPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Computers\UnitsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Computers\UnitsPage.xaml.cs">
       <DependentUpon>UnitsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Employees\DepartmentsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Employees\DepartmentsPage.xaml.cs">
       <DependentUpon>DepartmentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Employees\EmployeesPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Employees\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Employees\PostsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Employees\PostsPage.xaml.cs">
       <DependentUpon>PostsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Employees\TablesEmployeesPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Employees\TablesEmployeesPage.xaml.cs">
       <DependentUpon>TablesEmployeesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Employees\UsersPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Employees\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\ManufacturersPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\ManufacturersPage.xaml.cs">
       <DependentUpon>ManufacturersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml.cs">
       <DependentUpon>InventoryPeripheralsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Peripherals\PeripheralsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Peripherals\PeripheralsPage.xaml.cs">
       <DependentUpon>PeripheralsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml.cs">
       <DependentUpon>StatusesPeripheralsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Peripherals\TablesPeripheralsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Peripherals\TablesPeripheralsPage.xaml.cs">
       <DependentUpon>TablesPeripheralsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tables\Peripherals\TypesPeripheralsPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Peripherals\TypesPeripheralsPage.xaml.cs">
       <DependentUpon>TypesPeripheralsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Add\Tables\Computers\HddAddViewModel.cs" />
@@ -396,67 +396,67 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Tables\Computers\HddsPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\HddsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Tables\Computers\SoketsPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\SoketsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Tables\Computers\TablesComputersPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\TablesComputersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Tables\Computers\TypesHddPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\TypesHddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Tables\Computers\UnitsPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\UnitsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Tables\Employees\DepartmentsPage.xaml">
+    <Page Include="View\Pages\Tables\Employees\DepartmentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\Employees\EmployeesPage.xaml">
+    <Page Include="View\Pages\Tables\Employees\EmployeesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\Employees\PostsPage.xaml">
+    <Page Include="View\Pages\Tables\Employees\PostsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\Employees\TablesEmployeesPage.xaml">
+    <Page Include="View\Pages\Tables\Employees\TablesEmployeesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\Employees\UsersPage.xaml">
+    <Page Include="View\Pages\Tables\Employees\UsersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\ManufacturersPage.xaml">
+    <Page Include="View\Pages\Tables\ManufacturersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml">
+    <Page Include="View\Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\Peripherals\PeripheralsPage.xaml">
+    <Page Include="View\Pages\Tables\Peripherals\PeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml">
+    <Page Include="View\Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\Peripherals\TablesPeripheralsPage.xaml">
+    <Page Include="View\Pages\Tables\Peripherals\TablesPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Pages\Tables\Peripherals\TypesPeripheralsPage.xaml">
+    <Page Include="View\Pages\Tables\Peripherals\TypesPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>

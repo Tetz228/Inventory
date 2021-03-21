@@ -5,7 +5,7 @@
 
     using DevExpress.Mvvm;
 
-    using Inventory.Pages.Tables.Employees;
+    using Inventory.View.Pages.Tables.Employees;
 
     internal class TablesEmployeesViewModel : BindableBase
     {

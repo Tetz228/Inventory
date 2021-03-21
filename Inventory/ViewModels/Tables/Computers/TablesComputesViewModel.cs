@@ -1,10 +1,12 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers
 {
     using DevExpress.Mvvm;
-    using Inventory.Pages.Tables;
-    using Inventory.Pages.Tables.Computers;
+
     using System.Windows.Controls;
     using System.Windows.Input;
+
+    using Inventory.View.Pages.Tables;
+    using Inventory.View.Pages.Tables.Computers;
 
     public class TablesComputesViewModel : BindableBase
     {

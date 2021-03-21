@@ -1,10 +1,12 @@
 ﻿namespace Inventory.ViewModels.Tables.Peripherals
 {
     using DevExpress.Mvvm;
-    using Inventory.Pages.Tables;
-    using Inventory.Pages.Tables.Peripherals;
+
     using System.Windows.Controls;
     using System.Windows.Input;
+
+    using Inventory.View.Pages.Tables;
+    using Inventory.View.Pages.Tables.Peripherals;
 
     public class TablesPeripheralsViewModel : BindableBase
     {

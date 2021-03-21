@@ -1,12 +1,14 @@
 ﻿namespace Inventory.ViewModels
 {
     using DevExpress.Mvvm;
-    using Inventory.Pages.Tables.Computers;
-    using Inventory.Pages.Tables.Employees;
-    using Inventory.Pages.Tables.Peripherals;
+
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+
+    using Inventory.View.Pages.Tables.Computers;
+    using Inventory.View.Pages.Tables.Employees;
+    using Inventory.View.Pages.Tables.Peripherals;
 
     public class MainViewModel : BindableBase
     {
