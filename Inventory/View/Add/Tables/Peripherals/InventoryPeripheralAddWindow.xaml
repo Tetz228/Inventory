@@ -49,8 +49,8 @@
                             <TextBox
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryNumberPeripheral.StringInventoryNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Inventory_numberString], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding InventoryNumberPeripheral.Inventory_number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Периферия  -->

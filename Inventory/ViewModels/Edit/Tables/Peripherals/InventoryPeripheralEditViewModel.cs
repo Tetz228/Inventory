@@ -16,7 +16,6 @@
             Peripherals = new ObservableCollection<Peripheral>(db.Peripherals);
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
             InventoryNumberPeripheral = inventoryNumberPeripheral;
-            InventoryNumberPeripheral.StringInventoryNumber = inventoryNumberPeripheral.Inventory_number.ToString();
             InventoryNumberPeripheral.BeginEdit();
         }
 

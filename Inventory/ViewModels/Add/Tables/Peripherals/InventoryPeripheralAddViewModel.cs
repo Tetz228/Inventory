@@ -15,7 +15,7 @@
             InventoryNumberPeripheral = new Inventory_numbers_peripherals();
             Peripherals = new ObservableCollection<Peripheral>(db.Peripherals);
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
-            InventoryNumberPeripheral.StringInventoryNumber = Inventory_numbers_peripherals.MaxInventoryNumber().ToString();
+            InventoryNumberPeripheral.Inventory_number = Inventory_numbers_peripherals.MaxInventoryNumber();
         }
 
         public Inventory_numbers_peripherals InventoryNumberPeripheral { get; }
