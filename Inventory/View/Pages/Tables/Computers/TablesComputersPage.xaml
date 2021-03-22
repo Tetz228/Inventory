@@ -49,7 +49,7 @@
             <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Прочее">
                 <MenuItem Command="{Binding SelectSoketsPage}" Header="Сокеты" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Типы памяти" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Типы SSD-накопителей" />
+                <MenuItem Command="{Binding SelectTypesSsdPage}" Header="Типы SSD-накопителей" />
                 <MenuItem Command="{Binding SelectTypesHddPage}" Header="Типы жестких дисков" />
                 <MenuItem Command="{Binding SelectUnitsPage}" Header="Единицы измерения" />
                 <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Производители" />

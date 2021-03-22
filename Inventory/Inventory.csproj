@@ -266,6 +266,15 @@
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Services.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\TypeSddAddViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\TypeSsdEditViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\TypesSddsViewModel.cs" />
+    <Compile Include="View\Add\Tables\Computers\TypeSsdAddWindow.xaml.cs">
+      <DependentUpon>TypeSsdAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\TypeSsdEditWindow.xaml.cs">
+      <DependentUpon>TypeSsdEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Tables\Computers\HddsPage.xaml.cs">
       <DependentUpon>HddsPage.xaml</DependentUpon>
     </Compile>
@@ -343,7 +352,7 @@
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\HddsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TablesComputesViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\TypesHddViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\TypesHddsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\UnitsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
@@ -399,6 +408,14 @@
     <Page Include="DataDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\TypeSsdAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\TypeSsdEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Tables\Computers\HddsPage.xaml">
       <SubType>Designer</SubType>

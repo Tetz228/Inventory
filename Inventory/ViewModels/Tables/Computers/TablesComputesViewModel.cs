@@ -17,6 +17,7 @@
             HddsPage = new HddsPage();
             UnitsPage = new UnitsPage();
             TypesHddsPage = new TypesHddsPage();
+            TypesSsdPage = new TypesSsdPage();
         }
 
         #region Свойства
@@ -25,6 +26,8 @@
         private ManufacturersPage ManufacturersPage { get; }
 
         private HddsPage HddsPage { get; }
+
+        private TypesSsdPage TypesSsdPage { get; }
 
         private UnitsPage UnitsPage { get; }
 
@@ -44,6 +47,8 @@
         public ICommand SelectTypesHddPage => new DelegateCommand(() => CurrentPage = TypesHddsPage);
 
         public ICommand SelectTablesManufacturers => new DelegateCommand(() => CurrentPage = ManufacturersPage);
+
+        public ICommand SelectTypesSsdPage => new DelegateCommand(() => CurrentPage = TypesSsdPage);
         #endregion
     }
 }
