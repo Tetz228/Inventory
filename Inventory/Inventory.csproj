@@ -275,8 +275,11 @@
     <Compile Include="View\Pages\Tables\Computers\TablesComputersPage.xaml.cs">
       <DependentUpon>TablesComputersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Computers\TypesHddPage.xaml.cs">
-      <DependentUpon>TypesHddPage.xaml</DependentUpon>
+    <Compile Include="View\Pages\Tables\Computers\TypesHddsPage.xaml.cs">
+      <DependentUpon>TypesHddsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Tables\Computers\TypesSsdPage.xaml.cs">
+      <DependentUpon>TypesSsdPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\UnitsPage.xaml.cs">
       <DependentUpon>UnitsPage.xaml</DependentUpon>
@@ -409,7 +412,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Computers\TypesHddPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\TypesHddsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Tables\Computers\TypesSsdPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

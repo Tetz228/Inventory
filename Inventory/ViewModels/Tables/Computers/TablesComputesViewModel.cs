@@ -16,7 +16,7 @@
             ManufacturersPage = new ManufacturersPage();
             HddsPage = new HddsPage();
             UnitsPage = new UnitsPage();
-            TypesHddPage = new TypesHddPage();
+            TypesHddsPage = new TypesHddsPage();
         }
 
         #region Свойства
@@ -30,7 +30,7 @@
 
         private SoketsPage SoketsPage { get; }
 
-        private TypesHddPage TypesHddPage { get; }
+        private TypesHddsPage TypesHddsPage { get; }
         
         #endregion
 
@@ -41,7 +41,7 @@
 
         public ICommand SelectUnitsPage => new DelegateCommand(() => CurrentPage = UnitsPage);
 
-        public ICommand SelectTypesHddPage => new DelegateCommand(() => CurrentPage = TypesHddPage);
+        public ICommand SelectTypesHddPage => new DelegateCommand(() => CurrentPage = TypesHddsPage);
 
         public ICommand SelectTablesManufacturers => new DelegateCommand(() => CurrentPage = ManufacturersPage);
         #endregion
