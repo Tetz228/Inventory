@@ -26,9 +26,11 @@
 
         <Menu Grid.Row="1" Style="{StaticResource BaseMenu}">
             <MenuItem Command="{Binding SelectInventoryPeripheralsPage}" Header="Инвентаризация периферии" />
-            <MenuItem Command="{Binding SelectTablesPeripherals}" Header="Периферия" />
-            <MenuItem Command="{Binding SelectStatusesPeripherals}" Header="Статусы периферии" />
-            <MenuItem Command="{Binding SelectTablesTypesPeripherals}" Header="Типы периферии" />
+            <MenuItem Header="Периферии">
+                <MenuItem Command="{Binding SelectTablesPeripherals}" Header="Периферии" />
+                <MenuItem Command="{Binding SelectStatusesPeripherals}" Header="Статусы периферии" />
+                <MenuItem Command="{Binding SelectTablesTypesPeripherals}" Header="Типы периферии" />
+            </MenuItem>
             <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Производители" />
         </Menu>
 
