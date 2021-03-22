@@ -48,7 +48,7 @@
             </MenuItem>
             <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Прочее">
                 <MenuItem Command="{Binding SelectSoketsPage}" Header="Сокеты" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Типы памяти" />
+                <MenuItem Command="{Binding SelectTypesMemoryPage}" Header="Типы памяти" />
                 <MenuItem Command="{Binding SelectTypesSsdPage}" Header="Типы SSD-накопителей" />
                 <MenuItem Command="{Binding SelectTypesHddPage}" Header="Типы жестких дисков" />
                 <MenuItem Command="{Binding SelectUnitsPage}" Header="Единицы измерения" />

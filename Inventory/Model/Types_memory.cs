@@ -9,11 +9,16 @@
 
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
+    using Inventory.ViewModels.Tables.Computers;
     using System.Collections.Generic;
-    
-    public partial class Types_memory
-    {
+    using System.ComponentModel;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using System.Windows;
+
+    public partial class Types_memory : BindableBase, IEditableObject, IDataErrorInfo
+{
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Types_memory()
         {
@@ -25,5 +30,141 @@ namespace Inventory.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ram> Rams { get; set; }
+
+        #region Валидация
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new();
+
+        public string this[string name]
+        {
+            get
+            {
+                string result = null;
+
+                switch (name)
+                {
+                    case "Name":
+                        if (string.IsNullOrWhiteSpace(Name))
+                            result = "Поле не должно быть пустым";
+                        else if (Name.Length < 2)
+                            result = "Поле должно содержать минимум 2 символа";
+                        break;
+                }
+
+                ErrorCollection[name] = result;
+
+                RaisePropertyChanged(nameof(ErrorCollection));
+
+                return result;
+            }
+        }
+
+        public string Error { get => null; }
+
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
+        #endregion
+
+        #region Метод поиска
+        public static bool Search(Types_memory typeMemory, string typeMemoryFilter) => typeMemory.Name.ToLower().Contains(typeMemoryFilter.ToLower());
+        #endregion
+
+        #region Методы обработки информации
+        public static void AddTypeMemory(string name)
+        {
+            using var db = new InventoryEntities();
+
+            var typeMemory = new Types_memory()
+            {
+                Name = name
+            };
+
+            db.Types_memory.Add(typeMemory);
+            db.SaveChanges();
+
+            TypesMemoryViewModel.TypesMemory.Add(typeMemory);
+        }
+
+        public static void EditTypeMemory(Types_memory typeMemory)
+        {
+            using var db = new InventoryEntities();
+            var findTypeMemory = db.Types_memory.FirstOrDefault(type => type.Id_type_memory == typeMemory.Id_type_memory);
+
+            if (findTypeMemory == null)
+            {
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении типа памяти",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                RefreshCollection();
+                return;
+            }
+
+            findTypeMemory.Name = typeMemory.Name;
+            db.SaveChanges();
+        }
+
+        public static void DeleteTypeMemory(Types_memory selectTypeMemory)
+        {
+            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectTypeMemory.Name}?",
+                "Удаление типа памяти", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                return;
+
+            using var db = new InventoryEntities();
+            var findTypeMemory = db.Types_memory.FirstOrDefault(type => type.Id_type_memory == selectTypeMemory.Id_type_memory);
+
+            if (findTypeMemory == null)
+            {
+                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении типа памяти", MessageBoxButton.OK, MessageBoxImage.Error);
+                RefreshCollection();
+                return;
+            }
+
+            try
+            {
+                db.Types_memory.Remove(findTypeMemory);
+                db.SaveChanges();
+
+                TypesMemoryViewModel.TypesMemory.Remove(selectTypeMemory);
+            }
+            catch (DbUpdateException)
+            {
+                MessageBox.Show("Невозможно удалить тип памяти, так как он связана с другими сущностями!",
+                    "Ошибка при удалении типа памяти", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public static void RefreshCollection()
+        {
+            TypesMemoryViewModel.TypesMemory.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Types_memory)
+                TypesMemoryViewModel.TypesMemory.Add(item);
+        }
+        #endregion
+
+        #region Откат изменений
+        private Types_memory _selectTypeMemory;
+
+        public void BeginEdit()
+        {
+            _selectTypeMemory = new Types_memory
+            {
+                Id_type_memory = this.Id_type_memory,
+                Name = this.Name
+            };
+        }
+
+        public void EndEdit()
+        {
+            _selectTypeMemory = null;
+        }
+
+        public void CancelEdit()
+        {
+            if (_selectTypeMemory == null)
+                return;
+
+            Id_type_memory = _selectTypeMemory.Id_type_memory;
+            Name = _selectTypeMemory.Name;
+        }
+        #endregion
     }
 }
