@@ -8,7 +8,7 @@
     x:Name="EditHddWindow"
     Title="Изменить жесткий диск"
     Width="500"
-    Height="180"
+    Height="340"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -37,15 +37,73 @@
                     </Border.OpacityMask>
 
                     <StackPanel Width="455" HorizontalAlignment="Center">
+                        <!--  Производитель  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Manufacturers}"
+                                SelectedValue="{Binding Hdd.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_manufacturer"
+                                Style="{StaticResource BaseComboBox}" />
+                        </UniformGrid>
+
+                        <!--  Тип ЖД  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Тип ЖД: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding TypesHdds}"
+                                SelectedValue="{Binding Hdd.Fk_type_hdd, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_type_hdd"
+                                Style="{StaticResource BaseComboBox}" />
+                        </UniformGrid>
+
                         <!--  Наименование жесткого диска  -->
                         <UniformGrid Columns="2">
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование ЖД: " />
 
                             <TextBox
+                                Name="TextBoxName"
                                 MaxLength="50"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding Socket.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding Socket.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding Hdd.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Hdd.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Объём  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Объём: " />
+
+                            <TextBox
+                                MaxLength="20"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding Hdd.Memory_size, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Hdd.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Единица измерения  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Единица измерения: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                DisplayMemberPath="Full_name"
+                                ItemsSource="{Binding Units}"
+                                SelectedValue="{Binding Hdd.Fk_unit, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_unit"
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>
