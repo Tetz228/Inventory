@@ -78,6 +78,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Наименование ЖД: " />
 
                             <TextBox
+                                Name="TextBoxName"
                                 MaxLength="50"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Hdd.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -92,7 +93,7 @@
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Hdd.Memory_size, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding Hdd.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
+                                ToolTip="{Binding Hdd.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Единица измерения  -->

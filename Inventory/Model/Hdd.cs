@@ -63,6 +63,10 @@ namespace Inventory.Model
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
                         break;
+                    case "Memory_size":
+                        if (Memory_size <= 0)
+                            result = "Поле должно быть больше 0";
+                        break;
                 }
 
                 ErrorCollection[name] = result;
@@ -87,6 +91,8 @@ namespace Inventory.Model
         #region Метод поиска
         public static bool Search(Hdd hdd, string hddFilter) => hdd.Name.ToLower().Contains(hddFilter.ToLower())
                                                                 || hdd.Unit.Full_name.ToLower()
+                                                                    .Contains(hddFilter.ToLower())
+                                                                || hdd.Memory_size.ToString().ToLower()
                                                                     .Contains(hddFilter.ToLower())
                                                                 || hdd.Unit.Short_name.ToLower()
                                                                     .Contains(hddFilter.ToLower())

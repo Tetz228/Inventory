@@ -1,6 +1,4 @@
-﻿
-
-namespace Inventory.ViewModels.Tables.Computers
+﻿namespace Inventory.ViewModels.Tables.Computers
 {
     using DevExpress.Mvvm;
     using Inventory.Model;

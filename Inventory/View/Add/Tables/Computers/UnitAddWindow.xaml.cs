@@ -10,6 +10,7 @@
         public UnitAddWindow()
         {
             InitializeComponent();
+            TextBoxFullName.Focus();
         }
     }
 }

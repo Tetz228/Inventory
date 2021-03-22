@@ -44,6 +44,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Инвенторный номер: " />
 
                             <TextBox
+                                Name="TextBoxInventoryNumber"
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding InventoryNumberPeripheral.Inventory_number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

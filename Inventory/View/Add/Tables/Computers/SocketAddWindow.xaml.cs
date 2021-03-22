@@ -10,6 +10,7 @@
         public SocketAddWindow()
         {
             InitializeComponent();
+            TextBoxName.Focus();
         }
     }
 }

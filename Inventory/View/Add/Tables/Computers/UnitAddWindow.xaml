@@ -47,6 +47,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Полное наименование: " />
 
                             <TextBox
+                                Name="TextBoxFullName"
                                 MaxLength="10"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Unit.Full_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

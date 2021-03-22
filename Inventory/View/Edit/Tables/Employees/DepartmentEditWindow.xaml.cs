@@ -5,6 +5,7 @@
         public DepartmentEditWindow()
         {
             InitializeComponent();
+            TextBoxName.Focus();
         }
     }
 }

@@ -47,6 +47,7 @@
                             <TextBlock Style="{StaticResource BaseText}" Text="Логин: " />
 
                             <TextBox
+                                Name="TextBoxLogin"
                                 MaxLength="40"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding User.Login, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

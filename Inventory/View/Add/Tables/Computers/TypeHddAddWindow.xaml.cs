@@ -22,6 +22,7 @@ namespace Inventory.View.Add.Tables.Computers
         public TypeHddAddWindow()
         {
             InitializeComponent();
+            TextBoxName.Focus();
         }
     }
 }

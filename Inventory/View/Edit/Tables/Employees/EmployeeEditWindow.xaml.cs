@@ -7,6 +7,7 @@
         public EmployeeEditWindow()
         {
             InitializeComponent();
+            TextBoxName.Focus();
         }
     }
 }

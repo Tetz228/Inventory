@@ -41,6 +41,7 @@
                                 <TextBlock Style="{StaticResource BaseText}" Text="Фамилия: " />
 
                                 <TextBox
+                                    Name="TextBoxName"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Employee.L_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{Binding Employee.ErrorCollection[L_name], UpdateSourceTrigger=PropertyChanged}" />
