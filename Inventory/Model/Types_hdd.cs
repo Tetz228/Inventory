@@ -80,7 +80,7 @@ namespace Inventory.Model
             db.Types_hdd.Add(typeHdd);
             db.SaveChanges();
 
-            TypesHddViewModel.TypesHdds.Add(typeHdd);
+            TypesHddsViewModel.TypesHdds.Add(typeHdd);
         }
 
         public static void EditTypeHdd(Types_hdd typeHdd)
@@ -121,7 +121,7 @@ namespace Inventory.Model
                 db.Types_hdd.Remove(findTypeHdd);
                 db.SaveChanges();
 
-                TypesHddViewModel.TypesHdds.Remove(selectTypeHdd);
+                TypesHddsViewModel.TypesHdds.Remove(selectTypeHdd);
             }
             catch (DbUpdateException)
             {
@@ -132,11 +132,11 @@ namespace Inventory.Model
 
         public static void RefreshCollection()
         {
-            TypesHddViewModel.TypesHdds.Clear();
+            TypesHddsViewModel.TypesHdds.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Types_hdd)
-                TypesHddViewModel.TypesHdds.Add(item);
+                TypesHddsViewModel.TypesHdds.Add(item);
         }
         #endregion
 

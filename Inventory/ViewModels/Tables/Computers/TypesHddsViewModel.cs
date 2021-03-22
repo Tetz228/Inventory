@@ -12,9 +12,9 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    class TypesHddViewModel : BindableBase
+    class TypesHddsViewModel : BindableBase
     {
-        public TypesHddViewModel()
+        public TypesHddsViewModel()
         {
             using var db = new InventoryEntities();
 
