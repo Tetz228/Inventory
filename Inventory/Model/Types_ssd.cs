@@ -11,13 +11,11 @@ namespace Inventory.Model
 {
     using DevExpress.Mvvm;
     using Inventory.ViewModels.Tables.Computers;
-    using Inventory.ViewModels.Tables.Peripherals;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Windows;
-
 
     public partial class Types_ssd : BindableBase, IEditableObject, IDataErrorInfo
     {
