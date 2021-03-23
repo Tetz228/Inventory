@@ -6,7 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    class UnitEditViewModel : BindableBase
+    public class UnitEditViewModel : BindableBase
     {
         public UnitEditViewModel(Unit unit)
         {

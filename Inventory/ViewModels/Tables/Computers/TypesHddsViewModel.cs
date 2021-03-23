@@ -12,7 +12,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    class TypesHddsViewModel : BindableBase
+    public class TypesHddsViewModel : BindableBase
     {
         public TypesHddsViewModel()
         {

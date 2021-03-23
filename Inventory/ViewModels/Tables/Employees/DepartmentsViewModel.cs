@@ -12,7 +12,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    internal class DepartmentsViewModel : BindableBase
+    public class DepartmentsViewModel : BindableBase
     {
         public DepartmentsViewModel()
         {

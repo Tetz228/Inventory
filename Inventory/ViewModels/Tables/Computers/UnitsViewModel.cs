@@ -12,7 +12,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    class UnitsViewModel : BindableBase
+    public class UnitsViewModel : BindableBase
     {
         public UnitsViewModel()
         {

@@ -6,7 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    internal class InventoryPeripheralAddViewModel : BindableBase
+    public class InventoryPeripheralAddViewModel : BindableBase
     {
         public InventoryPeripheralAddViewModel()
         {

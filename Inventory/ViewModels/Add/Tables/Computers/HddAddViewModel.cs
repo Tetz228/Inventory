@@ -7,7 +7,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    class HddAddViewModel : BindableBase
+    public class HddAddViewModel : BindableBase
     {
         public HddAddViewModel()
         {

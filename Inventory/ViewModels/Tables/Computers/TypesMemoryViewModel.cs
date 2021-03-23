@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Tables.Computers
+﻿namespace Inventory.ViewModels.Tables.Computers
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers;
+    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
@@ -13,14 +12,7 @@ namespace Inventory.ViewModels.Tables.Computers
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers;
-
-    class TypesMemoryViewModel : BindableBase
+    public class TypesMemoryViewModel : BindableBase
     {
         public TypesMemoryViewModel()
         {

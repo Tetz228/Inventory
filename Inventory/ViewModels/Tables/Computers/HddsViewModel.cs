@@ -13,7 +13,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    class HddsViewModel : BindableBase
+    public class HddsViewModel : BindableBase
     {
         public HddsViewModel()
         {

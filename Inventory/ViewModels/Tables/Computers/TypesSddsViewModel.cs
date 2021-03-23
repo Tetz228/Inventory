@@ -12,7 +12,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    class TypesSddsViewModel : BindableBase
+    public class TypesSddsViewModel : BindableBase
     {
         public TypesSddsViewModel()
         {

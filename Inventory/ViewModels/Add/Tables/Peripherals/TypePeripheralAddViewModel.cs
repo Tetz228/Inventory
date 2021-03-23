@@ -5,7 +5,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    internal class TypePeripheralAddViewModel : BindableBase
+    public class TypePeripheralAddViewModel : BindableBase
     {
         public TypePeripheralAddViewModel()
         {

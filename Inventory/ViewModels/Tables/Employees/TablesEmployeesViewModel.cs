@@ -7,7 +7,7 @@
 
     using Inventory.View.Pages.Tables.Employees;
 
-    internal class TablesEmployeesViewModel : BindableBase
+    public class TablesEmployeesViewModel : BindableBase
     {
         public TablesEmployeesViewModel()
         {

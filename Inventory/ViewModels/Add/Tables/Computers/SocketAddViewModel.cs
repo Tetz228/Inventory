@@ -7,7 +7,7 @@
 
     using Inventory.Model;
 
-    class SocketAddViewModel: BindableBase
+    public class SocketAddViewModel: BindableBase
     {
         public SocketAddViewModel()
         {

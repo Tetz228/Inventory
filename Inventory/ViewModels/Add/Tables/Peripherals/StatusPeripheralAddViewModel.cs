@@ -5,7 +5,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    internal class StatusPeripheralAddViewModel : BindableBase
+    public class StatusPeripheralAddViewModel : BindableBase
     {
         public StatusPeripheralAddViewModel() => StatusPeripheral = new Statuses_peripherals();
 

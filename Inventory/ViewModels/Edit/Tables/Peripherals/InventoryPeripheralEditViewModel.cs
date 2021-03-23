@@ -7,7 +7,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    internal class InventoryPeripheralEditViewModel : BindableBase
+    public class InventoryPeripheralEditViewModel : BindableBase
     {
         public InventoryPeripheralEditViewModel(Inventory_numbers_peripherals inventoryNumberPeripheral)
         {

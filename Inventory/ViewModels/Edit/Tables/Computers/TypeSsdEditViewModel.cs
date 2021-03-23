@@ -6,7 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    class TypeSsdEditViewModel : BindableBase
+    public class TypeSsdEditViewModel : BindableBase
     {
         public TypeSsdEditViewModel(Types_ssd typeSsd)
         {
