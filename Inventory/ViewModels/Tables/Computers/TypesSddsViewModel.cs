@@ -44,7 +44,7 @@
                 TypesSsdsCollection.Filter = obj =>
                 {
                     if (obj is Types_ssd typeSsd)
-                        return Types_ssd.Search(typeSsd, TypesSsdsFilter);
+                        return Types_ssd.SearchFor(typeSsd, TypesSsdsFilter);
 
                     return false;
                 };
@@ -54,7 +54,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -71,17 +71,17 @@
                     }
             }
         }
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeSsd = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeSsd = null;
         #endregion
 
         #region Команды
-        public ICommand AddTypeSsd => new DelegateCommand(() =>
+        public ICommand AddTypeSsdCommand => new DelegateCommand(() =>
         {
             var addWindow = new TypeSsdAddWindow();
             addWindow.ShowDialog();
         });
 
-        public ICommand EditTypeSsd => new DelegateCommand<Types_ssd>(typeSsd =>
+        public ICommand EditTypeSsdCommand => new DelegateCommand<Types_ssd>(typeSsd =>
         {
             var editWindow = new TypeSsdEditWindow();
             var editViewModel = new TypeSsdEditViewModel(typeSsd);
@@ -91,9 +91,9 @@
 
         }, typeSsd => typeSsd != null);
 
-        public ICommand DeleteTypeSsd => new DelegateCommand<Types_ssd>(Types_ssd.DeleteTypeSsd, selectTypeSsd => selectTypeSsd != null);
+        public ICommand DeleteTypeSsdCommand => new DelegateCommand<Types_ssd>(Types_ssd.DeleteTypeSsd, selectTypeSsd => selectTypeSsd != null);
 
-        public ICommand RefreshList => new DelegateCommand(Types_ssd.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Types_ssd.RefreshCollection);
         #endregion
     }
 }

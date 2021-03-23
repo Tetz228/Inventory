@@ -44,7 +44,7 @@
                 HddsCollection.Filter = obj =>
                 {
                     if (obj is Hdd hdd)
-                        return Hdd.Search(hdd, HddsFilter);
+                        return Hdd.SearchFor(hdd, HddsFilter);
 
                     return false;
                 };
@@ -54,7 +54,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -104,17 +104,17 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectHdd = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectHdd = null;
         #endregion
 
         #region Команды
-        public ICommand AddHdd => new DelegateCommand(() =>
+        public ICommand AddHddCommand => new DelegateCommand(() =>
         {
             var addHddWindow = new HddAddWindow();
             addHddWindow.ShowDialog();
         });
 
-        public ICommand EditHdd => new DelegateCommand<Hdd>(hdd =>
+        public ICommand EditHddCommand => new DelegateCommand<Hdd>(hdd =>
         {
             var editWindow = new HddEditWindow();
             var editViewModel = new HddEditViewModel(hdd);
@@ -123,9 +123,9 @@
             editWindow.ShowDialog();
         }, hdd => hdd != null);
 
-        public ICommand DeleteHdd => new DelegateCommand<Hdd>(Hdd.DeleteHdd, selectHdd => selectHdd != null);
+        public ICommand DeleteHddCommand => new DelegateCommand<Hdd>(Hdd.DeleteHdd, selectHdd => selectHdd != null);
 
-        public ICommand RefreshList => new DelegateCommand(Hdd.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Hdd.RefreshCollection);
         #endregion
     }
 }

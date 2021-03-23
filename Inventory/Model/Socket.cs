@@ -66,9 +66,7 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Socket socket, string socketsFilter) => socket.Name.ToLower().Contains(socketsFilter.ToLower());
-        #endregion
+        public static bool SearchFor(Socket socket, string socketsFilter) => socket.Name.ToLower().Contains(socketsFilter.ToLower());
 
         #region Методы обработки информации
         public static void AddSocket(string name)

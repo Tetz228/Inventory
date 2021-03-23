@@ -89,16 +89,16 @@ namespace Inventory.Model
             return ++isUniqueNumber;
         }
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null) && Fk_peripheral != 0 && Fk_status_peripheral != 0;
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 
+                                                || ErrorCollection.Any(item => item.Value == null) 
+                                                && Fk_peripheral != 0 && Fk_status_peripheral != 0;
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Inventory_numbers_peripherals inventoryNumberPeripheral, string inventoryNumberPeripheralFilter) => inventoryNumberPeripheral.Inventory_number.ToString().ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
+        public static bool SearchFor(Inventory_numbers_peripherals inventoryNumberPeripheral, string inventoryNumberPeripheralFilter) => inventoryNumberPeripheral.Inventory_number.ToString().ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
             || inventoryNumberPeripheral.Peripheral.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
             || inventoryNumberPeripheral.Peripheral.Types_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
             || inventoryNumberPeripheral.Peripheral.Manufacturer.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
             || inventoryNumberPeripheral.Statuses_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower());
-        #endregion
 
         #region Методы обработки информации
         public static void AddInventoryNumber(Inventory_numbers_peripherals inventoryNumber)

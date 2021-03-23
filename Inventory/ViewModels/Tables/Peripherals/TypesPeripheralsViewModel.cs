@@ -44,7 +44,7 @@
                 TypesPeripheralsCollection.Filter = obj =>
                 {
                     if (obj is Types_peripherals typePeripheral)
-                        return Types_peripherals.Search(typePeripheral, TypesPeripheralsFilter);
+                        return Types_peripherals.SearchFor(typePeripheral, TypesPeripheralsFilter);
 
                     return false;
                 };
@@ -54,7 +54,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -71,17 +71,17 @@
                     }
             }
         }
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectTypePeripheral = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectTypePeripheral = null;
         #endregion
 
         #region Команды
-        public ICommand AddTypePeripheral => new DelegateCommand(() =>
+        public ICommand AddTypePeripheralCommand => new DelegateCommand(() =>
         {
             var addTypePeripheralWindow = new TypePeripheralAddWindow();
             addTypePeripheralWindow.ShowDialog();
         });
 
-        public ICommand EditTypePeripheral => new DelegateCommand<Types_peripherals>(typePeripheral =>
+        public ICommand EditTypePeripheralCommand => new DelegateCommand<Types_peripherals>(typePeripheral =>
         {
             var editWindow = new TypePeripheralEditWindow();
             var editViewModel = new TypePeripheralEditViewModel(typePeripheral);
@@ -91,9 +91,9 @@
 
         }, typePeripheral => typePeripheral != null);
 
-        public ICommand DeleteTypePeripheral => new DelegateCommand<Types_peripherals>(Types_peripherals.DeleteTypePeripheral, selectTypePeripheral => selectTypePeripheral != null);
+        public ICommand DeleteTypePeripheralCommand => new DelegateCommand<Types_peripherals>(Types_peripherals.DeleteTypePeripheral, selectTypePeripheral => selectTypePeripheral != null);
 
-        public ICommand RefreshList => new DelegateCommand(Types_peripherals.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Types_peripherals.RefreshCollection);
         #endregion
     }
 }

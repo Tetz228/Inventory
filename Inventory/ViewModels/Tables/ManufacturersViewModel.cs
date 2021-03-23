@@ -44,7 +44,7 @@
                 ManufacturersCollection.Filter = obj =>
                 {
                     if (obj is Manufacturer manufacturer)
-                        return Manufacturer.Search(manufacturer, ManufacturersFilter);
+                        return Manufacturer.SearchFor(manufacturer, ManufacturersFilter);
 
                     return false;
                 };
@@ -54,7 +54,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -71,17 +71,17 @@
                 }
             }
         }
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectManufacturer = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectManufacturer = null;
         #endregion
 
         #region Команды
-        public ICommand AddManufacturer => new DelegateCommand(() =>
+        public ICommand AddManufacturerCommand => new DelegateCommand(() =>
         {
             var addManufacturerWindow = new ManufacturerAddWindow();
             addManufacturerWindow.ShowDialog();
         });
 
-        public ICommand EditManufacturer => new DelegateCommand<Manufacturer>(manufacturer =>
+        public ICommand EditManufacturerCommand => new DelegateCommand<Manufacturer>(manufacturer =>
         {
             var editWindow = new ManufacturerEditWindow();
             var editViewModel = new ManufacturerEditViewModel(manufacturer);
@@ -90,9 +90,9 @@
             editWindow.ShowDialog();
         }, manufacturer => manufacturer != null);
 
-        public ICommand DeleteManufacturer => new DelegateCommand<Manufacturer>(Manufacturer.DeleteManufacturer, selectManufacturer => selectManufacturer != null);
+        public ICommand DeleteManufacturerCommand => new DelegateCommand<Manufacturer>(Manufacturer.DeleteManufacturer, selectManufacturer => selectManufacturer != null);
 
-        public ICommand RefreshList => new DelegateCommand(Manufacturer.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Manufacturer.RefreshCollection);
         #endregion
     }
 }

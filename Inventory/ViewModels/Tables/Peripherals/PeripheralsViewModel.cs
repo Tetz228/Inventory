@@ -44,7 +44,7 @@
                 PeripheralsCollection.Filter = obj =>
                 {
                     if (obj is Peripheral peripheral)
-                        return Peripheral.Search(peripheral, PeripheralsFilter);
+                        return Peripheral.SearchFor(peripheral, PeripheralsFilter);
 
                     return false;
                 };
@@ -54,7 +54,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -88,17 +88,17 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectPeripheral = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectPeripheral = null;
         #endregion
 
         #region Команды
-        public ICommand AddPeripheral => new DelegateCommand(() =>
+        public ICommand AddPeripheralCommand => new DelegateCommand(() =>
         {
             var addWindow = new PeripheralAddWindow();
             addWindow.ShowDialog();
         });
 
-        public ICommand EditPeripheral => new DelegateCommand<Peripheral>(peripheral =>
+        public ICommand EditPeripheralCommand => new DelegateCommand<Peripheral>(peripheral =>
         {
             var editWindow = new PeripheralEditWindow();
             var editViewModel = new PeripheralEditViewModel(peripheral);
@@ -107,9 +107,9 @@
             editWindow.ShowDialog();
         }, peripheral => peripheral != null);
 
-        public ICommand DeletePeripheral => new DelegateCommand<Peripheral>(Peripheral.DeletePeripheral, selectPeripheral => selectPeripheral != null);
+        public ICommand DeletePeripheralCommand => new DelegateCommand<Peripheral>(Peripheral.DeletePeripheral, selectPeripheral => selectPeripheral != null);
 
-        public ICommand RefreshList => new DelegateCommand(Peripheral.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Peripheral.RefreshCollection);
         #endregion
     }
 }

@@ -43,7 +43,7 @@
                 PostsCollection.Filter = obj =>
                 {
                     if (obj is Post post)
-                        return Post.Search(post, PostsFilter);
+                        return Post.SearchFor(post, PostsFilter);
 
                     return false;
                 };
@@ -53,7 +53,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -71,17 +71,17 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectPost = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectPost = null;
         #endregion
 
         #region Команды
-        public ICommand AddPost => new DelegateCommand(() =>
+        public ICommand AddPostCommand => new DelegateCommand(() =>
         {
             var addPostWindow = new PostAddWindow();
             addPostWindow.ShowDialog();
         });
 
-        public ICommand EditPost => new DelegateCommand<Post>(post =>
+        public ICommand EditPostCommand => new DelegateCommand<Post>(post =>
         {
             var editPostWindow = new PostEditWindow();
             var editPostViewModel = new PostEditViewModel(post);
@@ -91,9 +91,9 @@
 
         }, post => post != null);
 
-        public ICommand DeletePost => new DelegateCommand<Post>(Post.DeletePost, selectPost => selectPost != null);
+        public ICommand DeletePostCommand => new DelegateCommand<Post>(Post.DeletePost, selectPost => selectPost != null);
 
-        public ICommand RefreshList => new DelegateCommand(Post.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Post.RefreshCollection);
         #endregion
     }
 }

@@ -26,7 +26,7 @@
             editWindow.Close();
         }, _ => Department.IsValidationProperties());
 
-        public ICommand Cancel => new DelegateCommand<Window>(editWindow =>
+        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
             Department.CancelEdit();
             editWindow.Close();

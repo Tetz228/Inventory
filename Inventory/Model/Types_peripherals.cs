@@ -63,9 +63,8 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Types_peripherals typePeripheral, string typePeripheralFilter) => typePeripheral.Name.ToLower().Contains(typePeripheralFilter.ToLower());
-        #endregion
+        
+        public static bool SearchFor(Types_peripherals typePeripheral, string typePeripheralFilter) => typePeripheral.Name.ToLower().Contains(typePeripheralFilter.ToLower());
 
         #region Методы обработки информации
         public static void AddTypePeripheral(string name)

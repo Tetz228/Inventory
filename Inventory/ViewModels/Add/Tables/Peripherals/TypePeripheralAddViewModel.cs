@@ -21,7 +21,7 @@
             addWindow.Close();
         }, _ => TypePeripheral.IsValidationProperties());
 
-        public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
+        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
     }
 }

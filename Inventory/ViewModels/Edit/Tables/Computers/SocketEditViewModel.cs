@@ -26,7 +26,7 @@
             editWindow.Close();
         }, _ => Socket.IsValidationProperties());
 
-        public ICommand Cancel => new DelegateCommand<Window>(editWindow =>
+        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
             Socket.CancelEdit();
             editWindow.Close();

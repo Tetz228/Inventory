@@ -37,9 +37,9 @@
         </Grid.RowDefinitions>
 
         <ListView
-            GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
+            GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding TypesSsds, UpdateSourceTrigger=PropertyChanged}"
-            MouseLeftButtonDown="{DXEvent Handler='LeftButtonDown(@sender, @args)'}"
+            MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectTypeSsd}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
@@ -59,27 +59,27 @@
             </ListView.ItemContainerStyle>
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Command="{Binding AddTypeSsd}" Header="Добавить" />
+                    <MenuItem Command="{Binding AddTypeSsdCommand}" Header="Добавить" />
                     <MenuItem
-                        Command="{Binding EditTypeSsd}"
+                        Command="{Binding EditTypeSsdCommand}"
                         CommandParameter="{Binding SelectTypeSsd}"
                         Header="Изменить" />
                     <MenuItem
-                        Command="{Binding DeleteTypeSsd}"
+                        Command="{Binding DeleteTypeSsdCommand}"
                         CommandParameter="{Binding SelectTypeSsd}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditTypeSsd}" CommandParameter="{Binding SelectTypeSsd}" />
+                    <b:InvokeCommandAction Command="{Binding EditTypeSsdCommand}" CommandParameter="{Binding SelectTypeSsd}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
 
         <StackPanel Style="{StaticResource BaseStackPanel}">
             <!--  Добавить  -->
-            <Button Command="{Binding AddTypeSsd}" Style="{StaticResource BaseButton}">
+            <Button Command="{Binding AddTypeSsdCommand}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -91,7 +91,7 @@
 
             <!--  Изменить  -->
             <Button
-                Command="{Binding EditTypeSsd}"
+                Command="{Binding EditTypeSsdCommand}"
                 CommandParameter="{Binding SelectTypeSsd}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
@@ -105,7 +105,7 @@
 
             <!--  Удалить  -->
             <Button
-                Command="{Binding DeleteTypeSsd}"
+                Command="{Binding DeleteTypeSsdCommand}"
                 CommandParameter="{Binding SelectTypeSsd}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
@@ -123,7 +123,7 @@
             HorizontalAlignment="Right"
             Style="{StaticResource BaseStackPanel}">
             <!--  Обновление  -->
-            <Button Command="{Binding RefreshList}" Style="{StaticResource BaseButton}">
+            <Button Command="{Binding RefreshCollectionCommand}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"

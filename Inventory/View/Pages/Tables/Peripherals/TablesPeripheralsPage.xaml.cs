@@ -2,9 +2,6 @@
 {
     using System.Windows.Controls;
 
-    /// <summary>
-    /// Логика взаимодействия для TablesPeripheralsPage.xaml
-    /// </summary>
     public partial class TablesPeripheralsPage : Page
     {
         public TablesPeripheralsPage()

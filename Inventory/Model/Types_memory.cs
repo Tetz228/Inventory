@@ -63,10 +63,8 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Types_memory typeMemory, string typeMemoryFilter) => typeMemory.Name.ToLower().Contains(typeMemoryFilter.ToLower());
-        #endregion
-
+        public static bool SearchFor(Types_memory typeMemory, string typeMemoryFilter) => typeMemory.Name.ToLower().Contains(typeMemoryFilter.ToLower());
+        
         #region Методы обработки информации
         public static void AddTypeMemory(string name)
         {

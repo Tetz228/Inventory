@@ -116,7 +116,7 @@
                                                     <Button
                                                         Grid.Column="1"
                                                         Margin="3"
-                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeletePostFromCollection}"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeletePostFromCollectionCommand}"
                                                         CommandParameter="{Binding}"
                                                         Content="Х"
                                                         Style="{StaticResource BaseButton}" />
@@ -128,7 +128,7 @@
                                     <!--  Добавить должность  -->
                                     <Button
                                         Margin="3"
-                                        Command="{Binding AddPostInCollection}"
+                                        Command="{Binding AddPostInCollectionCommand}"
                                         Content="Добавить"
                                         Style="{StaticResource BaseButton}" />
                                 </StackPanel>
@@ -161,7 +161,7 @@
                                                     <Button
                                                         Grid.Column="1"
                                                         Margin="3"
-                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteDepartmentFromCollection}"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteDepartmentFromCollectionCommand}"
                                                         CommandParameter="{Binding}"
                                                         Content="Х"
                                                         Style="{StaticResource BaseButton}" />
@@ -173,7 +173,7 @@
                                     <!--  Добавить отдел  -->
                                     <Button
                                         Margin="3"
-                                        Command="{Binding AddDepartmentInCollection}"
+                                        Command="{Binding AddDepartmentInCollectionCommand}"
                                         Content="Добавить"
                                         Style="{StaticResource BaseButton}" />
                                 </StackPanel>
@@ -187,7 +187,7 @@
                     <Button
                         Margin="5,10,5,5"
                         HorizontalAlignment="Center"
-                        Command="{Binding EditEmployee}"
+                        Command="{Binding EditEmployeeCommand}"
                         CommandParameter="{Binding ElementName=EditEmployeeWindow}"
                         Content="Изменить информацию о сотруднике"
                         Style="{StaticResource BaseButton}" />
@@ -196,7 +196,7 @@
                     <Button
                         Margin="5,10,5,5"
                         HorizontalAlignment="Right"
-                        Command="{Binding Cancel}"
+                        Command="{Binding CancelCommand}"
                         CommandParameter="{Binding ElementName=EditEmployeeWindow}"
                         Style="{StaticResource BaseButton}" />
                 </StackPanel>

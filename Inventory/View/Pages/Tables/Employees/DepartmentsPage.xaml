@@ -35,9 +35,9 @@
         </Grid.RowDefinitions>
 
         <ListView
-            GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
+            GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Departments, UpdateSourceTrigger=PropertyChanged}"
-            MouseLeftButtonDown="{DXEvent Handler='LeftButtonDown(@sender, @args)'}"
+            MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectDepartment}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
@@ -57,27 +57,27 @@
             </ListView.ItemContainerStyle>
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Command="{Binding AddDepartment}" Header="Добавить" />
+                    <MenuItem Command="{Binding AddDepartmentCommand}" Header="Добавить" />
                     <MenuItem
-                        Command="{Binding EditDepartment}"
+                        Command="{Binding EditDepartmentCommand}"
                         CommandParameter="{Binding SelectDepartment}"
                         Header="Изменить" />
                     <MenuItem
-                        Command="{Binding DeleteDepartment}"
+                        Command="{Binding DeleteDepartmentCommand}"
                         CommandParameter="{Binding SelectDepartment}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding EditDepartment}" CommandParameter="{Binding SelectDepartment}" />
+                    <i:InvokeCommandAction Command="{Binding EditDepartmentCommand}" CommandParameter="{Binding SelectDepartment}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
 
         <StackPanel Style="{StaticResource BaseStackPanel}">
             <!--  Добавить  -->
-            <Button Command="{Binding AddDepartment}" Style="{StaticResource BaseButton}">
+            <Button Command="{Binding AddDepartmentCommand}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -89,7 +89,7 @@
 
             <!--  Изменить  -->
             <Button
-                Command="{Binding EditDepartment}"
+                Command="{Binding EditDepartmentCommand}"
                 CommandParameter="{Binding SelectDepartment}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
@@ -103,7 +103,7 @@
 
             <!--  Удалить  -->
             <Button
-                Command="{Binding DeleteDepartment}"
+                Command="{Binding DeleteDepartmentCommand}"
                 CommandParameter="{Binding SelectDepartment}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
@@ -121,7 +121,7 @@
             HorizontalAlignment="Right"
             Style="{StaticResource BaseStackPanel}">
             <!--  Обновление  -->
-            <Button Command="{Binding RefreshList}" Style="{StaticResource BaseButton}">
+            <Button Command="{Binding RefreshCollectionCommand}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"

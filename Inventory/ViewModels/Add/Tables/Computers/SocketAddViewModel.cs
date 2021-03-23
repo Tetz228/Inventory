@@ -23,7 +23,7 @@
             addWindow.Close();
         }, _ => Socket.IsValidationProperties());
 
-        public ICommand Cancel => new DelegateCommand<Window>(addWindow => addWindow.Close());
+        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
     }
 }

@@ -35,9 +35,9 @@
         </Grid.RowDefinitions>
 
         <ListView
-            GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
+            GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Units, UpdateSourceTrigger=PropertyChanged}"
-            MouseLeftButtonDown="{DXEvent Handler='LeftButtonDown(@sender, @args)'}"
+            MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectUnit}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
@@ -61,27 +61,27 @@
             </ListView.ItemContainerStyle>
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Command="{Binding AddUnit}" Header="Добавить" />
+                    <MenuItem Command="{Binding AddUnitCommand}" Header="Добавить" />
                     <MenuItem
-                        Command="{Binding EditUnit}"
+                        Command="{Binding EditUnitCommand}"
                         CommandParameter="{Binding SelectUnit}"
                         Header="Изменить" />
                     <MenuItem
-                        Command="{Binding DeleteUnit}"
+                        Command="{Binding DeleteUnitCommand}"
                         CommandParameter="{Binding SelectUnit}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditUnit}" CommandParameter="{Binding SelectUnit}" />
+                    <b:InvokeCommandAction Command="{Binding EditUnitCommand}" CommandParameter="{Binding SelectUnit}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
 
         <StackPanel Style="{StaticResource BaseStackPanel}">
             <!--  Добавить  -->
-            <Button Command="{Binding AddUnit}" Style="{StaticResource BaseButton}">
+            <Button Command="{Binding AddUnitCommand}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -93,7 +93,7 @@
 
             <!--  Изменить  -->
             <Button
-                Command="{Binding EditUnit}"
+                Command="{Binding EditUnitCommand}"
                 CommandParameter="{Binding SelectUnit}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
@@ -107,7 +107,7 @@
 
             <!--  Удалить  -->
             <Button
-                Command="{Binding DeleteUnit}"
+                Command="{Binding DeleteUnitCommand}"
                 CommandParameter="{Binding SelectUnit}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
@@ -125,7 +125,7 @@
             HorizontalAlignment="Right"
             Style="{StaticResource BaseStackPanel}">
             <!--  Обновление  -->
-            <Button Command="{Binding RefreshList}" Style="{StaticResource BaseButton}">
+            <Button Command="{Binding RefreshCollectionCommand}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"

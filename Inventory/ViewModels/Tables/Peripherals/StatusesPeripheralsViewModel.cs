@@ -44,7 +44,7 @@
                 StatusesPeripheralsCollection.Filter = obj =>
                 {
                     if (obj is Statuses_peripherals statusPeripheral)
-                        return Statuses_peripherals.Search(statusPeripheral, StatusesPeripheralsFilter);
+                        return Statuses_peripherals.SearchFor(statusPeripheral, StatusesPeripheralsFilter);
 
                     return false;
                 };
@@ -53,8 +53,7 @@
         }
         #endregion
 
-        #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -72,17 +71,16 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectStatusPeripheral = null;
-        #endregion
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectStatusPeripheral = null;
 
         #region Команды
-        public ICommand AddStatusPeripheral => new DelegateCommand(() =>
+        public ICommand AddStatusPeripheralCommand => new DelegateCommand(() =>
         {
             var addWindow = new StatusPeripheralAddWindow();
             addWindow.ShowDialog();
         });
 
-        public ICommand EditStatusPeripheral => new DelegateCommand<Statuses_peripherals>(statusPeripheral =>
+        public ICommand EditStatusPeripheralCommand => new DelegateCommand<Statuses_peripherals>(statusPeripheral =>
         {
             var editWindow = new StatusPeripheralEditWindow();
             var editViewModel = new StatusPeripheralEditViewModel(statusPeripheral);
@@ -91,9 +89,9 @@
             editWindow.ShowDialog();
         }, statusPeripheral => statusPeripheral != null);
 
-        public ICommand DeleteStatusPeripheral => new DelegateCommand<Statuses_peripherals>(Statuses_peripherals.DeleteStatusPeripheral, selectStatusPeripheral => selectStatusPeripheral != null);
+        public ICommand DeleteStatusPeripheralCommand => new DelegateCommand<Statuses_peripherals>(Statuses_peripherals.DeleteStatusPeripheral, selectStatusPeripheral => selectStatusPeripheral != null);
 
-        public ICommand RefreshList => new DelegateCommand(Statuses_peripherals.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Statuses_peripherals.RefreshCollection);
         #endregion
     }
 }

@@ -30,24 +30,24 @@
         public Employee Employee { get; }
 
         #region Команды
-        public ICommand EditEmployee => new DelegateCommand<Window>(empEditWindow =>
+        public ICommand EditEmployeeCommand => new DelegateCommand<Window>(empEditWindow =>
         {
             Employee.EndEdit();
             Employee.EditEmployee(Employee);
             empEditWindow.Close();
         }, _ => Employee.IsValidationCollections() && Employee.IsValidationProperties());
 
-        public ICommand Cancel => new DelegateCommand<Window>(empAddWindow =>
+        public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow =>
         {
             Employee.CancelEdit();
             empAddWindow.Close();
         });
 
-        public ICommand AddPostInCollection => new DelegateCommand(() => Employee.PostsEmployees.Add(new Posts_employees()));
+        public ICommand AddPostInCollectionCommand => new DelegateCommand(() => Employee.PostsEmployees.Add(new Posts_employees()));
 
-        public ICommand AddDepartmentInCollection => new DelegateCommand(() => Employee.EmployeesInDepartments.Add(new Employees_in_departments()));
+        public ICommand AddDepartmentInCollectionCommand => new DelegateCommand(() => Employee.EmployeesInDepartments.Add(new Employees_in_departments()));
 
-        public ICommand DeletePostFromCollection => new DelegateCommand<Posts_employees>(selectPostEmp =>
+        public ICommand DeletePostFromCollectionCommand => new DelegateCommand<Posts_employees>(selectPostEmp =>
         {
             if (selectPostEmp.Id_post_employee != 0)
                 if (MessageBoxResult.Yes != MessageBox.Show("Вы действительно хотите удалить должность сотрудника? Удаленную должность будет невозможно восстановить.",
@@ -56,7 +56,7 @@
             Posts_employees.DeletePostEmployee(selectPostEmp);
         });
 
-        public ICommand DeleteDepartmentFromCollection => new DelegateCommand<Employees_in_departments>(selectEmpInDepart =>
+        public ICommand DeleteDepartmentFromCollectionCommand => new DelegateCommand<Employees_in_departments>(selectEmpInDepart =>
         {
             if (selectEmpInDepart.Id_employee_in_department != 0)
                 if (MessageBoxResult.Yes != MessageBox.Show("Вы действительно хотите удалить отдел сотрудника? Удаленный отдел будет невозможно восстановить.",

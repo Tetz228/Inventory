@@ -41,7 +41,7 @@
                 UsersCollection.Filter = obj =>
                 {
                     if (obj is User user)
-                        return User.Search(user, UsersFilter);
+                        return User.SearchFor(user, UsersFilter);
 
                     return false;
                 };
@@ -50,7 +50,7 @@
         }
         #endregion
 
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -85,14 +85,14 @@
         }
 
         #region Команды
-        public ICommand AddUser => new DelegateCommand(() =>
+        public ICommand AddUserCommand => new DelegateCommand(() =>
         {
             var addUserWindow = new UserAddWindow();
 
             addUserWindow.ShowDialog();
         });
 
-        public ICommand RefreshList => new DelegateCommand(User.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(User.RefreshCollection);
         #endregion
     }
 }

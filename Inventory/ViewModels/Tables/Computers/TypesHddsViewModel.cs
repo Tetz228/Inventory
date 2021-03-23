@@ -44,7 +44,7 @@
                 TypesHddsCollection.Filter = obj =>
                 {
                     if (obj is Types_hdd typesHdd)
-                        return Types_hdd.Search(typesHdd, TypesHddsFilter);
+                        return Types_hdd.SearchFor(typesHdd, TypesHddsFilter);
 
                     return false;
                 };
@@ -54,7 +54,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -71,17 +71,17 @@
                     }
             }
         }
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeHdd = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeHdd = null;
         #endregion
 
         #region Команды
-        public ICommand AddTypeHdd => new DelegateCommand(() =>
+        public ICommand AddTypeHddCommand => new DelegateCommand(() =>
         {
             var addWindow = new TypeHddAddWindow();
             addWindow.ShowDialog();
         });
 
-        public ICommand EditTypeHdd => new DelegateCommand<Types_hdd>(typeHdd =>
+        public ICommand EditTypeHddCommand => new DelegateCommand<Types_hdd>(typeHdd =>
         {
             var editWindow = new TypeHddEditWindow();
             var editViewModel = new TypeHddEditViewModel(typeHdd);
@@ -91,9 +91,9 @@
         },
             typeHdd => typeHdd != null);
 
-        public ICommand DeleteTypeHdd => new DelegateCommand<Types_hdd>(Types_hdd.DeleteTypeHdd, selectTypeHdd => selectTypeHdd != null);
+        public ICommand DeleteTypeHddCommand => new DelegateCommand<Types_hdd>(Types_hdd.DeleteTypeHdd, selectTypeHdd => selectTypeHdd != null);
 
-        public ICommand RefreshList => new DelegateCommand(Types_hdd.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Types_hdd.RefreshCollection);
         #endregion
     }
 }

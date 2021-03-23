@@ -27,35 +27,35 @@
         <Menu Grid.Row="1" Style="{StaticResource BaseMenu}">
 
             <MenuItem Header="Инвентаризация комплектующих">
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Материнские платы" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Процессоры" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Оперативная память" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="SSD-накопители" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Видеокарты" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Жесткие диски" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Блоки питания" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Материнские платы" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Процессоры" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Оперативная память" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="SSD-накопители" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Видеокарты" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Жесткие диски" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Блоки питания" />
             </MenuItem>
             <MenuItem Header="Компьютеры">
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Компьютеры" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Статусы компьютеров" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Операционные системы" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Компьютеры" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Статусы компьютеров" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Операционные системы" />
             </MenuItem>
             <MenuItem Header="Комплектующие">
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Материнские платы" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Процессоры" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Оперативная память" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="SSD-накопители" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Видеокарты" />
-                <MenuItem Command="{Binding SelectHddsPage}" Header="Жесткие диски" />
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Блоки питания" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Материнские платы" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Процессоры" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Оперативная память" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="SSD-накопители" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Видеокарты" />
+                <MenuItem Command="{Binding SelectHddsPageCommand}" Header="Жесткие диски" />
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Блоки питания" />
             </MenuItem>
-            <MenuItem  Header="Прочее">
-                <MenuItem Command="{Binding SelectTablesManufacturers}" Header="Производители" />
-                <MenuItem Command="{Binding SelectTypesMemoryPage}" Header="Типы памяти" />
-                <MenuItem Command="{Binding SelectTypesSsdPage}" Header="Типы SSD-накопителей" />
-                <MenuItem Command="{Binding SelectTypesHddPage}" Header="Типы жестких дисков" />
-                <MenuItem Command="{Binding SelectSoketsPage}" Header="Сокеты" />
-                <MenuItem Command="{Binding SelectUnitsPage}" Header="Единицы измерения" />
+            <MenuItem Header="Прочее">
+                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Производители" />
+                <MenuItem Command="{Binding SelectTypesMemoryPageCommand}" Header="Типы памяти" />
+                <MenuItem Command="{Binding SelectTypesSsdPageCommand}" Header="Типы SSD-накопителей" />
+                <MenuItem Command="{Binding SelectTypesHddPageCommand}" Header="Типы жестких дисков" />
+                <MenuItem Command="{Binding SelectSoketsPageCommand}" Header="Сокеты" />
+                <MenuItem Command="{Binding SelectUnitsPageCommand}" Header="Единицы измерения" />
             </MenuItem>
         </Menu>
 

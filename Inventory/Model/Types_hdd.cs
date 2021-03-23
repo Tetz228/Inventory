@@ -63,9 +63,7 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Types_hdd typeHdd, string typeHddFilter) => typeHdd.Name.ToLower().Contains(typeHddFilter.ToLower());
-        #endregion
+        public static bool SearchFor(Types_hdd typeHdd, string typeHddFilter) => typeHdd.Name.ToLower().Contains(typeHddFilter.ToLower());
 
         #region Методы обработки информации
         public static void AddTypeHdd(string name)

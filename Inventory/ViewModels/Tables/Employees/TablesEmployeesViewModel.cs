@@ -1,11 +1,9 @@
 ﻿namespace Inventory.ViewModels.Tables.Employees
 {
+    using DevExpress.Mvvm;
+    using Inventory.View.Pages.Tables.Employees;
     using System.Windows.Controls;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.View.Pages.Tables.Employees;
 
     public class TablesEmployeesViewModel : BindableBase
     {
@@ -30,14 +28,13 @@
         #endregion
 
         #region Команды
-        public ICommand SelectTablesDepartments => new DelegateCommand(() => CurrentPage = DepartmentsPage);
+        public ICommand SelectTablesDepartmentsCommand => new DelegateCommand(() => CurrentPage = DepartmentsPage);
 
-        public ICommand SelectTablesEmployees => new DelegateCommand(() => CurrentPage = EmployeesPage);
+        public ICommand SelectTablesEmployeesCommand => new DelegateCommand(() => CurrentPage = EmployeesPage);
 
-        public ICommand SelectTablesPosts => new DelegateCommand(() => CurrentPage = PostsPage);
+        public ICommand SelectTablesPostsCommand => new DelegateCommand(() => CurrentPage = PostsPage);
 
-        public ICommand SelectTablesUsers => new DelegateCommand(() => CurrentPage = UsersPage);
-
+        public ICommand SelectTablesUsersCommand => new DelegateCommand(() => CurrentPage = UsersPage);
         #endregion
     }
 }

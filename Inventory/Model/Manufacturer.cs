@@ -11,10 +11,8 @@ namespace Inventory.Model
 {
     using DevExpress.Mvvm;
     using Inventory.ViewModels.Tables;
-    using Inventory.ViewModels.Tables.Computers;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Windows;
@@ -86,9 +84,7 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Manufacturer manufacturer, string manufacturerFilter) => manufacturer.Name.ToLower().Contains(manufacturerFilter.ToLower());
-        #endregion
+        public static bool SearchFor(Manufacturer manufacturer, string manufacturerFilter) => manufacturer.Name.ToLower().Contains(manufacturerFilter.ToLower());
 
         #region Методы обработки информации
         public static void AddManufacturer(string name)

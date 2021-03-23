@@ -1,10 +1,7 @@
-﻿using System.Windows;
-
-namespace Inventory.View
+﻿namespace Inventory.View
 {
-    /// <summary>
-    /// Логика взаимодействия для AuthorizationWindow.xaml
-    /// </summary>
+    using System.Windows;
+
     public partial class AuthorizationWindow : Window
     {
         public AuthorizationWindow()

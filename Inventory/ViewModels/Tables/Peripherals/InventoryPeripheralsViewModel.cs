@@ -49,7 +49,7 @@
                 InventoryNumbersPeripheralsCollection.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_peripherals inventoryNumberPeripheral)
-                        return Inventory_numbers_peripherals.Search(inventoryNumberPeripheral, InventoryNumbersPeripheralsFilter);
+                        return Inventory_numbers_peripherals.SearchFor(inventoryNumberPeripheral, InventoryNumbersPeripheralsFilter);
 
                     return false;
                 };
@@ -59,7 +59,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -109,17 +109,17 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryNumberPeripheral = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryNumberPeripheral = null;
         #endregion
 
         #region Команды
-        public ICommand AddInventoryNumberPeripheral => new DelegateCommand(() =>
+        public ICommand AddInventoryNumberPeripheralCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryPeripheralAddWindow();
             addWindow.ShowDialog();
         });
 
-        public ICommand EditInventoryNumberPeripheral => new DelegateCommand<Inventory_numbers_peripherals>(inventoryNumberPeripheral =>
+        public ICommand EditInventoryNumberPeripheralCommand => new DelegateCommand<Inventory_numbers_peripherals>(inventoryNumberPeripheral =>
         {
             var editWindow = new InventoryPeripheralEditWindow();
             var editViewModel = new InventoryPeripheralEditViewModel(inventoryNumberPeripheral);
@@ -128,9 +128,9 @@
             editWindow.ShowDialog();
         }, peripheral => peripheral != null);
 
-        public ICommand DeleteInventoryNumberPeripheral => new DelegateCommand<Inventory_numbers_peripherals>(Inventory_numbers_peripherals.DeleteInventoryNumberPeripheral, selectInventoryNumberPeripheral => selectInventoryNumberPeripheral != null);
+        public ICommand DeleteInventoryNumberPeripheralCommand => new DelegateCommand<Inventory_numbers_peripherals>(Inventory_numbers_peripherals.DeleteInventoryNumberPeripheral, selectInventoryNumberPeripheral => selectInventoryNumberPeripheral != null);
 
-        public ICommand RefreshList => new DelegateCommand(Inventory_numbers_peripherals.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Inventory_numbers_peripherals.RefreshCollection);
         #endregion
     }
 }

@@ -63,9 +63,7 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Post post, string postsFilter) => post.Name.ToLower().Contains(postsFilter.ToLower());
-        #endregion
+        public static bool SearchFor(Post post, string postsFilter) => post.Name.ToLower().Contains(postsFilter.ToLower());
 
         #region Методы обработки информации
         public static void AddPost(string name)

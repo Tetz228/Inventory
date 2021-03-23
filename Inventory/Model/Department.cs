@@ -63,9 +63,7 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Department department, string departmentsFilter) => department.Name.ToLower().Contains(departmentsFilter.ToLower());
-        #endregion
+        public static bool SearchFor(Department department, string departmentsFilter) => department.Name.ToLower().Contains(departmentsFilter.ToLower());
 
         #region Методы обработки информации
         public static void AddDepartment(string name)

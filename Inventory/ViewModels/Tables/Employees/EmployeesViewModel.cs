@@ -48,7 +48,7 @@
                 EmployeesCollection.Filter = obj =>
                 {
                     if (obj is Employee employee)
-                        return Employee.Search(employee, EmployeesFilter);
+                        return Employee.SearchFor(employee, EmployeesFilter);
 
                     return false;
                 };
@@ -58,7 +58,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -108,17 +108,17 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectEmployee = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectEmployee = null;
         #endregion
 
         #region Команды
-        public ICommand AddEmployee => new DelegateCommand(() =>
+        public ICommand AddEmployeeCommand => new DelegateCommand(() =>
         {
             var addEmployeeWindow = new EmployeeAddWindow();
             addEmployeeWindow.ShowDialog();
         });
 
-        public ICommand EditEmployee => new DelegateCommand<Employee>(employee =>
+        public ICommand EditEmployeeCommand => new DelegateCommand<Employee>(employee =>
         {
             using var db = new InventoryEntities();
 
@@ -133,9 +133,9 @@
 
         }, employee => employee != null);
 
-        public ICommand DeleteEmployee => new DelegateCommand<Employee>(Employee.DeleteEmployee, selectEmployee => selectEmployee != null);
+        public ICommand DeleteEmployeeCommand => new DelegateCommand<Employee>(Employee.DeleteEmployee, selectEmployee => selectEmployee != null);
 
-        public ICommand RefreshList => new DelegateCommand(Employee.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Employee.RefreshCollection);
         #endregion
     }
 }

@@ -34,7 +34,7 @@
         </Grid.RowDefinitions>
 
         <ListView
-            GridViewColumnHeader.Click="{DXEvent Handler='Sort(@sender, @args)'}"
+            GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Users}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
@@ -67,14 +67,14 @@
             </ListView.ItemContainerStyle>
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Command="{Binding AddUser}" Header="Добавить" />
+                    <MenuItem Command="{Binding AddUserCommand}" Header="Добавить" />
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
 
         <StackPanel Style="{StaticResource BaseStackPanel}">
             <!--  Добавить  -->
-            <Button Command="{Binding AddUser}" Style="{StaticResource BaseButton}">
+            <Button Command="{Binding AddUserCommand}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"
@@ -90,7 +90,7 @@
             HorizontalAlignment="Right"
             Style="{StaticResource BaseStackPanel}">
             <!--  Обновление  -->
-            <Button Command="{Binding RefreshList}" Style="{StaticResource BaseButton}">
+            <Button Command="{Binding RefreshCollectionCommand}" Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
                         Width="20"

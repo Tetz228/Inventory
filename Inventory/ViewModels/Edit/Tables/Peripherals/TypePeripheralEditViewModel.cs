@@ -26,7 +26,7 @@
             editWindow.Close();
         }, _ => TypePeripheral.IsValidationProperties());
 
-        public ICommand Cancel => new DelegateCommand<Window>(editWindow =>
+        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
             TypePeripheral.CancelEdit();
             editWindow.Close();

@@ -82,25 +82,20 @@ namespace Inventory.Model
             get => null;
         }
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 ||
-                                                ErrorCollection.Any(item => item.Value == null) &&
-                                                Fk_manufacturer != 0 && Fk_unit != 0 && Fk_type_hdd != 0;
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 
+                                                || ErrorCollection.Any(item => item.Value == null) 
+                                                && Fk_manufacturer != 0 
+                                                && Fk_unit != 0 
+                                                && Fk_type_hdd != 0;
 
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Hdd hdd, string hddFilter) => hdd.Name.ToLower().Contains(hddFilter.ToLower())
-                                                                || hdd.Unit.Full_name.ToLower()
-                                                                    .Contains(hddFilter.ToLower())
-                                                                || hdd.Memory_size.ToString().ToLower()
-                                                                    .Contains(hddFilter.ToLower())
-                                                                || hdd.Unit.Short_name.ToLower()
-                                                                    .Contains(hddFilter.ToLower())
-                                                                || hdd.Types_hdd.Name.ToLower()
-                                                                    .Contains(hddFilter.ToLower())
-                                                                || hdd.Manufacturer.Name.ToLower()
-                                                                    .Contains(hddFilter.ToLower());
-        #endregion
+        public static bool SearchFor(Hdd hdd, string hddFilter) => hdd.Name.ToLower().Contains(hddFilter.ToLower())
+                                                                || hdd.Unit.Full_name.ToLower().Contains(hddFilter.ToLower())
+                                                                || hdd.Memory_size.ToString().ToLower().Contains(hddFilter.ToLower())
+                                                                || hdd.Unit.Short_name.ToLower().Contains(hddFilter.ToLower())
+                                                                || hdd.Types_hdd.Name.ToLower().Contains(hddFilter.ToLower())
+                                                                || hdd.Manufacturer.Name.ToLower().Contains(hddFilter.ToLower());
 
         #region Методы обработки информации
         public static void AddHdd(Hdd hdd)

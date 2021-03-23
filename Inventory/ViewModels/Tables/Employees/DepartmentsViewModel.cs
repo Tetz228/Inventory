@@ -43,7 +43,7 @@
                 DepartmentsCollection.Filter = obj =>
                 {
                     if (obj is Department department)
-                        return Department.Search(department, DepartmentsFilter);
+                        return Department.SearchFor(department, DepartmentsFilter);
 
                     return false;
                 };
@@ -53,7 +53,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -71,17 +71,17 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectDepartment = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectDepartment = null;
         #endregion
 
         #region Команды
-        public ICommand AddDepartment => new DelegateCommand(() =>
+        public ICommand AddDepartmentCommand => new DelegateCommand(() =>
         {
             var addDepartmentWindow = new DepartmentAddWindow();
             addDepartmentWindow.ShowDialog();
         });
 
-        public ICommand EditDepartment => new DelegateCommand<Department>(department =>
+        public ICommand EditDepartmentCommand => new DelegateCommand<Department>(department =>
         {
             var editDepartmentWindow = new DepartmentEditWindow();
             var editDepartmentViewModel = new DepartmentEditViewModel(department);
@@ -90,9 +90,9 @@
             editDepartmentWindow.ShowDialog();
         }, depart => depart != null);
 
-        public ICommand DeleteDepartment => new DelegateCommand<Department>(Department.DeleteDepartment, selectDepartment => selectDepartment != null);
+        public ICommand DeleteDepartmentCommand => new DelegateCommand<Department>(Department.DeleteDepartment, selectDepartment => selectDepartment != null);
 
-        public ICommand RefreshList => new DelegateCommand(Department.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Department.RefreshCollection);
         #endregion
     }
 }

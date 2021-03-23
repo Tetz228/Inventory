@@ -44,7 +44,7 @@
                 TypesMemoryCollection.Filter = obj =>
                 {
                     if (obj is Types_memory typeMemory)
-                        return Types_memory.Search(typeMemory, TypesMemoryFilter);
+                        return Types_memory.SearchFor(typeMemory, TypesMemoryFilter);
 
                     return false;
                 };
@@ -54,7 +54,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -71,17 +71,17 @@
                     }
             }
         }
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeMemory = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeMemory = null;
         #endregion
 
         #region Команды
-        public ICommand AddTypeMemory => new DelegateCommand(() =>
+        public ICommand AddTypeMemoryCommand => new DelegateCommand(() =>
         {
             var addWindow = new TypeMemoryAddWindow();
             addWindow.ShowDialog();
         });
 
-        public ICommand EditTypeMemory => new DelegateCommand<Types_memory>(typeMemory =>
+        public ICommand EditTypeMemoryCommand => new DelegateCommand<Types_memory>(typeMemory =>
         {
             var editWindow = new TypeMemoryEditWindow();
             var editViewModel = new TypeMemoryEditViewModel(typeMemory);
@@ -91,9 +91,9 @@
 
         }, typeSsd => typeSsd != null);
 
-        public ICommand DeleteTypeMemory => new DelegateCommand<Types_memory>(Types_memory.DeleteTypeMemory, selectTypeMemory => selectTypeMemory != null);
+        public ICommand DeleteTypeMemoryCommand => new DelegateCommand<Types_memory>(Types_memory.DeleteTypeMemory, selectTypeMemory => selectTypeMemory != null);
 
-        public ICommand RefreshList => new DelegateCommand(Types_memory.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Types_memory.RefreshCollection);
         #endregion
     }
 }

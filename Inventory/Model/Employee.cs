@@ -54,7 +54,7 @@ namespace Inventory.Model
         public static ObservableCollection<Posts_employees> PostsEmployees { get; set; } = new();
 
         public static ObservableCollection<Employees_in_departments> EmployeesInDepartments { get; set; } = new();
-#endregion
+        #endregion
 
         #region Валидация
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
@@ -126,13 +126,13 @@ namespace Inventory.Model
         #endregion
 
         #region Методы поиска
-        public static bool Search(Employee employee, string employeesFilter)
-        {
-            return employee.L_name.ToLower().Contains(employeesFilter.ToLower()) || employee.F_name.ToLower().Contains(employeesFilter.ToLower()) ||
-                   employee.Email.ToLower().Contains(employeesFilter.ToLower()) || employee.Phone_number.ToLower().Contains(employeesFilter.ToLower()) ||
-                   ContainsCollectionPostsEmployees(employee, employeesFilter.ToLower()) || ContainsCollectionEmployeesInDepartments(employee, employeesFilter.ToLower());
-        }
-
+        public static bool SearchFor(Employee employee, string employeesFilter) => employee.L_name.ToLower().Contains(employeesFilter.ToLower()) 
+                                                                                || employee.F_name.ToLower().Contains(employeesFilter.ToLower()) 
+                                                                                || employee.Email.ToLower().Contains(employeesFilter.ToLower()) 
+                                                                                || employee.Phone_number.ToLower().Contains(employeesFilter.ToLower()) 
+                                                                                || ContainsCollectionPostsEmployees(employee, employeesFilter.ToLower()) 
+                                                                                || ContainsCollectionEmployeesInDepartments(employee, employeesFilter.ToLower());
+        
         public static bool ContainsCollectionPostsEmployees(Employee employee, string employeesFilter) => employee.Posts_employees.Select(postsEmployees => postsEmployees.Post.Name.ToLower().Contains(employeesFilter)).FirstOrDefault();
 
         public static bool ContainsCollectionEmployeesInDepartments(Employee employee, string employeesFilter) => employee.Employees_in_departments.Select(employeesInDepartments => employeesInDepartments.Department.Name.ToLower().Contains(employeesFilter)).FirstOrDefault();
@@ -232,7 +232,7 @@ namespace Inventory.Model
         }
         #endregion
 
-        #region Откат изменений в случаи нажатия отмены
+        #region Откат изменений
         private Employee _selectEmployee;
 
         public void BeginEdit()

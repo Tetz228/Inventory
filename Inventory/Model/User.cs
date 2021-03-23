@@ -88,13 +88,11 @@ namespace Inventory.Model
         }
         #endregion
 
-        public static bool Search(User user, string usersFilter)
-        {
-            return user.Login.ToLower().Contains(usersFilter.ToLower()) ||
-                   user.Employee.L_name.ToLower().Contains(usersFilter.ToLower()) ||
-                   user.Employee.F_name.ToLower().Contains(usersFilter.ToLower()) ||
-                   user.Employee.Email.ToLower().Contains(usersFilter.ToLower());
-        }
+        public static bool SearchFor(User user, string usersFilter) => user.Login.ToLower().Contains(usersFilter.ToLower()) 
+                                                                       || user.Employee.L_name.ToLower().Contains(usersFilter.ToLower()) 
+                                                                       || user.Employee.F_name.ToLower().Contains(usersFilter.ToLower()) 
+                                                                       || user.Employee.Email.ToLower().Contains(usersFilter.ToLower());
+        
 
         #region Методы обработки информации
         public static void AddUser(User user)

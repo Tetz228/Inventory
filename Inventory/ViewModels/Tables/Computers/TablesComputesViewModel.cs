@@ -41,19 +41,19 @@
         #endregion
 
         #region Команды
-        public ICommand SelectSoketsPage => new DelegateCommand(() => CurrentPage = SoketsPage);
+        public ICommand SelectSoketsPageCommand => new DelegateCommand(() => CurrentPage = SoketsPage);
 
-        public ICommand SelectHddsPage => new DelegateCommand(() => CurrentPage = HddsPage);
+        public ICommand SelectHddsPageCommand => new DelegateCommand(() => CurrentPage = HddsPage);
 
-        public ICommand SelectUnitsPage => new DelegateCommand(() => CurrentPage = UnitsPage);
+        public ICommand SelectUnitsPageCommand => new DelegateCommand(() => CurrentPage = UnitsPage);
 
-        public ICommand SelectTypesHddPage => new DelegateCommand(() => CurrentPage = TypesHddsPage);
+        public ICommand SelectTypesHddPageCommand => new DelegateCommand(() => CurrentPage = TypesHddsPage);
 
-        public ICommand SelectTablesManufacturers => new DelegateCommand(() => CurrentPage = ManufacturersPage);
+        public ICommand SelectTablesManufacturersCommand => new DelegateCommand(() => CurrentPage = ManufacturersPage);
 
-        public ICommand SelectTypesSsdPage => new DelegateCommand(() => CurrentPage = TypesSsdsPage);
+        public ICommand SelectTypesSsdPageCommand => new DelegateCommand(() => CurrentPage = TypesSsdsPage);
 
-        public ICommand SelectTypesMemoryPage => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
+        public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
         #endregion
     }
 }

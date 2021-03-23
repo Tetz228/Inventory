@@ -26,7 +26,7 @@
             editWindow.Close();
         }, _ => StatusPeripheral.IsValidationProperties());
 
-        public ICommand Cancel => new DelegateCommand<Window>(editWindow =>
+        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
             StatusPeripheral.CancelEdit();
             editWindow.Close();

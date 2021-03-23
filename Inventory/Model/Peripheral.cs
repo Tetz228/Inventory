@@ -66,14 +66,15 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null) && Fk_manufacturer != 0 && Fk_type_peripheral != 0;
+        public bool IsValidationProperties() => ErrorCollection.Count == 0 
+                                                || ErrorCollection.Any(item => item.Value == null)
+                                                && Fk_manufacturer != 0 
+                                                && Fk_type_peripheral != 0;
         #endregion
 
-        #region Метод поиска
-        public static bool Search(Peripheral peripheral, string peripheralFilter) => peripheral.Name.ToLower().Contains(peripheralFilter.ToLower())
+        public static bool SearchFor(Peripheral peripheral, string peripheralFilter) => peripheral.Name.ToLower().Contains(peripheralFilter.ToLower())
             || peripheral.Types_peripherals.Name.ToLower().Contains(peripheralFilter.ToLower())
             || peripheral.Manufacturer.Name.ToLower().Contains(peripheralFilter.ToLower());
-        #endregion
 
         #region Методы обработки информации
         public static void AddPeripheral(Peripheral peripheral)

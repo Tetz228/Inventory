@@ -44,7 +44,7 @@
                 UnitsCollection.Filter = obj =>
                 {
                     if (obj is Unit unit)
-                        return Unit.Search(unit, UnitsFilter);
+                        return Unit.SearchFor(unit, UnitsFilter);
 
                     return false;
                 };
@@ -54,7 +54,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -80,17 +80,17 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectUnit = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectUnit = null;
         #endregion
 
         #region Команды
-        public ICommand AddUnit => new DelegateCommand(() =>
+        public ICommand AddUnitCommand => new DelegateCommand(() =>
         {
             var addWindow = new UnitAddWindow();
             addWindow.ShowDialog();
         });
 
-        public ICommand EditUnit => new DelegateCommand<Unit>(unit =>
+        public ICommand EditUnitCommand => new DelegateCommand<Unit>(unit =>
         {
             var editWindow = new UnitEditWindow();
             var editViewModel = new UnitEditViewModel(unit);
@@ -99,9 +99,9 @@
             editWindow.ShowDialog();
         }, socket => socket != null);
 
-        public ICommand DeleteUnit => new DelegateCommand<Unit>(Unit.DeleteUnit, selectUnit => selectUnit != null);
+        public ICommand DeleteUnitCommand => new DelegateCommand<Unit>(Unit.DeleteUnit, selectUnit => selectUnit != null);
 
-        public ICommand RefreshList => new DelegateCommand(Unit.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Unit.RefreshCollection);
         #endregion
     }
 }

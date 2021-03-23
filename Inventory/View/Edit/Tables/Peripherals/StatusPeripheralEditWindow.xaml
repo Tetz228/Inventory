@@ -67,7 +67,7 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
-                    Command="{Binding Cancel}"
+                    Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=EditPostWindow}"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>

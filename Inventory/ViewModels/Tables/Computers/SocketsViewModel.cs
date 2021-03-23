@@ -43,7 +43,7 @@
                 SocketsCollection.Filter = obj =>
                 {
                     if (obj is Socket socket)
-                        return Socket.Search(socket, SocketsFilter);
+                        return Socket.SearchFor(socket, SocketsFilter);
 
                     return false;
                 };
@@ -53,7 +53,7 @@
         #endregion
 
         #region События
-        public void Sort(object sender, RoutedEventArgs args)
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is not GridViewColumnHeader columnHeader)
                 return;
@@ -71,17 +71,17 @@
             }
         }
 
-        public void LeftButtonDown(object sender, RoutedEventArgs args) => SelectSocket = null;
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectSocket = null;
         #endregion
 
         #region Команды
-        public ICommand AddSocket => new DelegateCommand(() =>
+        public ICommand AddSocketCommand => new DelegateCommand(() =>
         {
             var addPostWindow = new SocketAddWindow();
             addPostWindow.ShowDialog();
         });
 
-        public ICommand EditSocket => new DelegateCommand<Socket>(socket =>
+        public ICommand EditSocketCommand => new DelegateCommand<Socket>(socket =>
         {
             var editWindow = new SocketEditWindow();
             var editViewModel = new SocketEditViewModel(socket);
@@ -90,9 +90,9 @@
             editWindow.ShowDialog();
         }, socket => socket != null);
 
-        public ICommand DeleteSocket => new DelegateCommand<Socket>(Socket.DeleteSocket, selectSocket => selectSocket != null);
+        public ICommand DeleteSocketCommand => new DelegateCommand<Socket>(Socket.DeleteSocket, selectSocket => selectSocket != null);
 
-        public ICommand RefreshList => new DelegateCommand(Socket.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(Socket.RefreshCollection);
         #endregion
     }
 }

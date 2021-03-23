@@ -1,9 +1,8 @@
 ﻿namespace Inventory.ViewModels.Add.Tables.Employees
 {
-    using System.Collections.Generic;
-
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
@@ -31,21 +30,21 @@
         }
 
         #region Команды
-        public ICommand AddEmployee => new DelegateCommand<Window>(empAddWindow =>
+        public ICommand AddEmployeeCommand => new DelegateCommand<Window>(empAddWindow =>
         {
             Employee.AddEmployee(Employee);
             empAddWindow.Close();
         }, _ => Employee.IsValidationCollections() && Employee.IsValidationProperties());
 
-        public ICommand Cancel => new DelegateCommand<Window>(empAddWindow => empAddWindow.Close());
+        public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow => empAddWindow.Close());
 
-        public ICommand AddPostInCollection => new DelegateCommand(() => Employee.PostsEmployees.Add(new Posts_employees()));
+        public ICommand AddPostInCollectionCommand => new DelegateCommand(() => Employee.PostsEmployees.Add(new Posts_employees()));
 
-        public ICommand DeletePostFromCollection => new DelegateCommand<Posts_employees>(postEmp => Employee.PostsEmployees.Remove(postEmp));
+        public ICommand DeletePostFromCollectionCommand => new DelegateCommand<Posts_employees>(postEmp => Employee.PostsEmployees.Remove(postEmp));
 
-        public ICommand AddDepartmentInCollection => new DelegateCommand(() => Employee.EmployeesInDepartments.Add(new Employees_in_departments()));
+        public ICommand AddDepartmentInCollectionCommand => new DelegateCommand(() => Employee.EmployeesInDepartments.Add(new Employees_in_departments()));
 
-        public ICommand DeleteDepartmentFromCollection => new DelegateCommand<Employees_in_departments>(empInDepart => Employee.EmployeesInDepartments.Remove(empInDepart));
+        public ICommand DeleteDepartmentFromCollectionCommand => new DelegateCommand<Employees_in_departments>(empInDepart => Employee.EmployeesInDepartments.Remove(empInDepart));
         #endregion
     }
 }
