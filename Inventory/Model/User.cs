@@ -16,6 +16,7 @@ namespace Inventory.Model
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Linq;
+    using System.Windows;
 
     public partial class User : BindableBase, IDataErrorInfo
     {
@@ -25,7 +26,9 @@ namespace Inventory.Model
             this.Dispensing_computers = new HashSet<Dispensing_computers>();
             this.Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
         }
-    
+
+        public static int AuthorizedUser { get; set; }
+
         public int Id_user { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
@@ -135,6 +138,31 @@ namespace Inventory.Model
 
             return (salt, hash);
         }
+
+        public static (int, bool) OnUserExist(string login, string password)
+        {
+            using var db = new InventoryEntities();
+            var foundUser = db.Users.FirstOrDefault(user => user.Login == login);
+
+            if (foundUser == null)
+            {
+                MessageBox.Show("Пользователь не найден! Проверьте правильность написания логина.", "Ошибка! Пользователь не найден.", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                return (0, false);
+            }
+
+            if (BCrypt.Verify(password, foundUser.Password) == false)
+            {
+                MessageBox.Show("Неверный пароль! Проверьте правильность написания пароля.", "Ошибка! Неверный пароль.", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                return (0, false);
+            }
+
+            return (foundUser.Id_user, true);
+        }
+
         #endregion
     }
 }
