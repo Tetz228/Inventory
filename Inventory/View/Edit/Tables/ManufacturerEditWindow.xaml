@@ -59,6 +59,7 @@
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditManufacturerWindow}"
                     Content="Изменить информацию о производителе"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -67,6 +68,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=EditManufacturerWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

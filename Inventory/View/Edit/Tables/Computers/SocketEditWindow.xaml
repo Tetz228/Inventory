@@ -60,6 +60,7 @@
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditSocketWindow}"
                     Content="Изменить информацию о сокете"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -68,6 +69,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=EditSocketWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

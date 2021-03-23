@@ -75,6 +75,7 @@
                     Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddUnitWindow}"
                     Content="Добавить новую единицу измерения"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -83,6 +84,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=AddUnitWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

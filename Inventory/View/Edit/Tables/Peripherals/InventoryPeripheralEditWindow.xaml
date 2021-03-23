@@ -93,6 +93,7 @@
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditInventoryPeripheralWindow}"
                     Content="Изменить инвенторный номер"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -101,6 +102,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=EditInventoryPeripheralWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

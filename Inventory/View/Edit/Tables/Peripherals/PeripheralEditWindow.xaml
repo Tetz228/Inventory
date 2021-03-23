@@ -90,6 +90,7 @@
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditPeripheralWindow}"
                     Content="Изменить информацию о периферии"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -98,6 +99,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=EditPeripheralWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

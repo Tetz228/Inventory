@@ -130,6 +130,7 @@
                     Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddUserWindow}"
                     Content="Добавить нового пользователя"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -138,6 +139,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=AddUserWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

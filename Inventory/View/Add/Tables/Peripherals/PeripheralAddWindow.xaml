@@ -95,6 +95,7 @@
                     Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddPeripheralWindow}"
                     Content="Добавить новую периферию"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -103,6 +104,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=AddPeripheralWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

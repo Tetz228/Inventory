@@ -196,6 +196,7 @@
                         Command="{Binding AddEmployeeCommand}"
                         CommandParameter="{Binding ElementName=AddEmployeeWindow}"
                         Content="Добавить нового сотрудника"
+                        IsDefault="True"
                         Style="{StaticResource BaseButton}" />
 
                     <!--  Отменить  -->
@@ -204,6 +205,7 @@
                         HorizontalAlignment="Right"
                         Command="{Binding CancelCommand}"
                         CommandParameter="{Binding ElementName=AddEmployeeWindow}"
+                        IsCancel="True"
                         Style="{StaticResource BaseButton}" />
                 </StackPanel>
             </StackPanel>

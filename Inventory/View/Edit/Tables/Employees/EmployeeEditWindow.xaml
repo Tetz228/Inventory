@@ -190,6 +190,7 @@
                         Command="{Binding EditEmployeeCommand}"
                         CommandParameter="{Binding ElementName=EditEmployeeWindow}"
                         Content="Изменить информацию о сотруднике"
+                        IsDefault="True"
                         Style="{StaticResource BaseButton}" />
 
                     <!--  Отменить  -->
@@ -198,6 +199,7 @@
                         HorizontalAlignment="Right"
                         Command="{Binding CancelCommand}"
                         CommandParameter="{Binding ElementName=EditEmployeeWindow}"
+                        IsCancel="True"
                         Style="{StaticResource BaseButton}" />
                 </StackPanel>
             </StackPanel>

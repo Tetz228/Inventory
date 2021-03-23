@@ -64,6 +64,7 @@
                     Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddTypePeripheralWindow}"
                     Content="Добавить новый тип"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -72,6 +73,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=AddTypePeripheralWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

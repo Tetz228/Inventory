@@ -7,6 +7,7 @@
         public AuthorizationWindow()
         {
             InitializeComponent();
+            TextBoxName.Focus();
         }
     }
 }

@@ -96,6 +96,7 @@
                     Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddInventoryPeripheralWindow}"
                     Content="Добавить новый инвенторный номер"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -104,6 +105,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=AddInventoryPeripheralWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

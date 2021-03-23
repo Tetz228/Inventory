@@ -64,6 +64,7 @@
                     Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddManufacturerWindow}"
                     Content="Добавить нового производителя"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -72,6 +73,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=AddManufacturerWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>

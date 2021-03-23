@@ -66,6 +66,7 @@
                     Command="{Binding AddCommand}"
                     CommandParameter="{Binding ElementName=AddSocketWindow}"
                     Content="Добавить новый сокет"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Отменить  -->
@@ -74,6 +75,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=AddSocketWindow}"
+                    IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
         </StackPanel>
