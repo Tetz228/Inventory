@@ -80,10 +80,10 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
-                    IsDefault="True"
                     Command="{Binding ComeInCommand}"
                     CommandParameter="{Binding ElementName=AuthWindow}"
                     Content="Войти"
+                    IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
                 <!--  Восстановление пароля  -->

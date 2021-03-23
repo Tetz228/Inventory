@@ -12,6 +12,8 @@
 
     public class AuthorizationViewModel : BindableBase, IDataErrorInfo
     {
+        #region Валидация
+
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
 
         public string this[string name]
@@ -40,17 +42,19 @@
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
 
+        #endregion
+
         public string Login { get; set; }
 
         public string Password { get; set; }
 
         public ICommand ComeInCommand => new DelegateCommand<Window>(authWindow =>
         {
-            var (idUser, userExist) = User.OnUserExist(Login, Password);
+            var (userId, userExist) = User.OnUserExist(Login, Password);
 
             if (userExist)
             {
-                User.AuthorizedUser = idUser;
+                User.AuthorizedUser = userId;
 
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
@@ -61,7 +65,8 @@
 
         public ICommand PasswordRecoveryCommand => new DelegateCommand(() =>
         {
-
+            var passwordRecoveryWindow = new PasswordRecoveryWindow();
+            passwordRecoveryWindow.ShowDialog();
         });
 
         public ICommand PasswordChanged => new DelegateCommand<PasswordBox>(passwordBox =>
