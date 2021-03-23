@@ -274,6 +274,8 @@
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\TypeMemoryEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\TypeSsdEditViewModel.cs" />
+    <Compile Include="ViewModels\EmailViewModel.cs" />
+    <Compile Include="ViewModels\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TypesMemoryViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TypesSddsViewModel.cs" />
     <Compile Include="View\Add\Tables\Computers\TypeMemoryAddWindow.xaml.cs">
@@ -287,6 +289,9 @@
     </Compile>
     <Compile Include="View\Edit\Tables\Computers\TypeSsdEditWindow.xaml.cs">
       <DependentUpon>TypeSsdEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\EmailPage.xaml.cs">
+      <DependentUpon>EmailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\HddsPage.xaml.cs">
       <DependentUpon>HddsPage.xaml</DependentUpon>
@@ -421,6 +426,9 @@
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="View\PasswordRecoveryWindow.xaml.cs">
+      <DependentUpon>PasswordRecoveryWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="DataDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -438,6 +446,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Computers\TypeSsdEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\EmailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -669,6 +681,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PasswordRecoveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
