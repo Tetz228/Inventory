@@ -61,14 +61,6 @@ namespace Inventory.Model
                         else if (UniqueLogin())
                             result = "Логин уже существует";
                         break;
-                    case "Password":
-                        if (string.IsNullOrWhiteSpace(Login))
-                            result = "Поле не должно быть пустым";
-                        else if (Login.Length < 2)
-                            result = "Поле должно содержать минимум 2 символа";
-                        else if (UniqueLogin())
-                            result = "Логин уже существует";
-                        break;
                 }
 
                 ErrorCollection[name] = result;
