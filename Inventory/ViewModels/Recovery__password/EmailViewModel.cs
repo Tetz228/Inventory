@@ -46,32 +46,26 @@
 
         public ICommand FurtherCommand => new DelegateCommand(() =>
         {
-            var securityСodePage = new SecurityСodePage();
-            var securityСodeViewModel = new SecurityСodeViewModel(Email,1111, 2);
+            (Employee employee, bool existEmployee) = Employee.OnEmailExist(Email);
 
-            securityСodePage.DataContext = securityСodeViewModel;
-            PasswordRecoveryViewModel.PageNavigation.Navigate(securityСodePage);
+            if (existEmployee)
+            {
+                (int idUser, bool existUser) = User.OnUserExist(employee);
 
-            //(Employee employee, bool existEmployee) = Employee.OnEmailExist(Email);
+                if (existUser)
+                {
+                    (int code, bool codeSent) = Employee.SendingSecurityCode(Email);
 
-            //if (existEmployee)
-            //{
-            //    (int idUser, bool existUser) = User.OnUserExist(employee);
+                    if (codeSent)
+                    {
+                        var securityСodePage = new SecurityСodePage();
+                        var securityСodeViewModel = new SecurityСodeViewModel(Email, code, idUser);
 
-            //    if (existUser)
-            //    {
-            //        (string code, bool codeSent) = Employee.SendingSecurityCode(Email);
-
-            //        if (codeSent)
-            //        {
-            //            var securityСodePage = new SecurityСodePage();
-            //            var securityСodeViewModel = new SecurityСodeViewModel(code, idUser);
-
-            //            securityСodePage.DataContext = securityСodeViewModel;
-            //            PasswordRecoveryViewModel.PageNavigation.Navigate(securityСodePage);
-            //        }
-            //    }
-            //}
+                        securityСodePage.DataContext = securityСodeViewModel;
+                        PasswordRecoveryViewModel.PageNavigation.Navigate(securityСodePage);
+                    }
+                }
+            }
 
         }, IsValidationProperties);
 

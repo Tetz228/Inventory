@@ -1,53 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Recovery__password
+﻿namespace Inventory.ViewModels.Recovery__password
 {
-    using System.ComponentModel;
-
     using DevExpress.Mvvm;
-
     using Inventory.Model;
+    using System.Windows.Controls;
+    using System.Windows.Input;
 
-    public class NewPasswordViewModel : BindableBase, IDataErrorInfo
+    public class NewPasswordViewModel : BindableBase
     {
         public NewPasswordViewModel(int idUser)
         {
-            IdUser = idUser;
+            User = new User { Id_user = idUser };
         }
 
-        private int IdUser { get; }
+        public User User { get; }
 
-        #region Валидация
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new();
-
-        public string this[string name]
+        #region Команды
+        public ICommand EditCommand => new DelegateCommand(() =>
         {
-            get
-            {
-                string result = null;
+            User.ChangePassword(User);
+            PasswordRecoveryViewModel.RecoveryWindow.Close();
+        }, () => User.ValidPassword() && User.EqualsPasswords());
 
-                switch (name)
-                {
-                    case "Email":
-                        
-                        break;
-                }
+        public ICommand PasswordChanged => new DelegateCommand<PasswordBox>(passwordBox =>
+        {
+            if (passwordBox != null)
+                User.Password = passwordBox.Password;
+        }, _ => true);
 
-                ErrorCollection[name] = result;
+        public ICommand PasswordChangedRepeated => new DelegateCommand<PasswordBox>(passwordBox =>
+        {
+            if (passwordBox != null)
+                User.PasswordRepeated = passwordBox.Password;
+        }, _ => true);
 
-                RaisePropertyChanged(nameof(ErrorCollection));
-
-                return result;
-            }
-        }
-
-        public string Error { get => null; }
-
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
+        public ICommand CancelCommand => new DelegateCommand(PasswordRecoveryViewModel.RecoveryWindow.Close);
         #endregion
     }
 }
