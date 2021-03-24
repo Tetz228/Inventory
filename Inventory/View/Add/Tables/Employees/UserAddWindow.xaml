@@ -9,7 +9,7 @@
     Name="AddUserWindow"
     Title="Добавить нового пользователя"
     Width="500"
-    Height="310"
+    Height="320"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
