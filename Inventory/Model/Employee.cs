@@ -235,7 +235,7 @@ namespace Inventory.Model
                 MessageBox.Show("Сотрудник c такой почтой не найден! Проверьте правильность написания почты.", "Ошибка! Сотрудник не найден.", MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
-                return (foundEmployee, false);
+                return (null, false);
             }
 
             return (foundEmployee, true);
@@ -248,10 +248,12 @@ namespace Inventory.Model
             var toMailAddress = new MailAddress(email);
             int code = random.Next(1000, 9999);
 
-            using var mailMessager = new MailMessage(fromMailAddress, toMailAddress);
-            mailMessager.Subject = "Восставноление пароля";
-            mailMessager.Body = "Ваш код безопасности для восставноления пароля - " + code;
-            mailMessager.IsBodyHtml = false;
+            using var mailMessager = new MailMessage(fromMailAddress, toMailAddress)
+            {
+                Subject = "Восставноление пароля",
+                Body = "Ваш код безопасности для восставноления пароля - " + code,
+                IsBodyHtml = false
+            };
 
             using var smtp = new SmtpClient
             {
