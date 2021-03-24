@@ -163,6 +163,21 @@ namespace Inventory.Model
             return (foundUser.Id_user, true);
         }
 
+        public static (int, bool) OnUserExist(Employee employee)
+        {
+            using var db = new InventoryEntities();
+            var foundUser = db.Users.FirstOrDefault(user => user.Fk_employee == employee.Id_employee);
+
+            if (foundUser == null)
+            {
+                MessageBox.Show("Пользователь c такой почтой не найден!", "Ошибка! Пользователь не найден.", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                return (0, false);
+            }
+
+            return (foundUser.Id_user, true);
+        }
         #endregion
     }
 }

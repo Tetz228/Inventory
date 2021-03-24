@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Inventory.View.Pages
+namespace Inventory.View.Pages.Recovery_password
 {
     /// <summary>
-    /// Логика взаимодействия для EmailPage.xaml
+    /// Логика взаимодействия для NewPasswordPage.xaml
     /// </summary>
-    public partial class EmailPage : Page
+    public partial class NewPasswordPage : Page
     {
-        public EmailPage()
+        public NewPasswordPage()
         {
             InitializeComponent();
         }
