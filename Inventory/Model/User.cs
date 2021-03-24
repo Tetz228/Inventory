@@ -61,6 +61,14 @@ namespace Inventory.Model
                         else if (UniqueLogin())
                             result = "Логин уже существует";
                         break;
+                    case "Password":
+                        if (string.IsNullOrWhiteSpace(Login))
+                            result = "Поле не должно быть пустым";
+                        else if (Login.Length < 2)
+                            result = "Поле должно содержать минимум 2 символа";
+                        else if (UniqueLogin())
+                            result = "Логин уже существует";
+                        break;
                 }
 
                 ErrorCollection[name] = result;
@@ -120,6 +128,31 @@ namespace Inventory.Model
             db.SaveChanges();
 
             UsersViewModel.Users.Add(newUser);
+        }
+
+        public static void ChangePassword(User user)
+        {
+            (string salt, string hash) = GenerateSaltAndHashingPassword(user.Password);
+
+            user.Salt = salt;
+            user.Password = hash;
+
+            using var db = new InventoryEntities();
+
+            var findUser = db.Users.FirstOrDefault(u => u.Id_user == user.Id_user);
+
+            if (findUser == null)
+            {
+                MessageBox.Show("Объект не найден в базе данных! Пароль не был изменен.", "Ошибка при изменение пароля", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            findUser.Password = user.Password;
+            findUser.Salt = user.Salt;
+
+            db.SaveChanges();
+
+            MessageBox.Show("Пароль успешно изменен!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public static void RefreshCollection()
