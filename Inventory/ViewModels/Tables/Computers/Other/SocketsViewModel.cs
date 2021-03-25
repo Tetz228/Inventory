@@ -16,6 +16,9 @@
 
     using ClosedXML.Excel;
 
+    using Inventory.View.Add.Tables.Computers.Other;
+    using Inventory.View.Edit.Tables.Computers.Other;
+
     public class SocketsViewModel : BindableBase
     {
         public SocketsViewModel()

@@ -1,4 +1,4 @@
-﻿namespace Inventory.View.Edit.Tables.Computers
+﻿namespace Inventory.View.Edit.Tables.Computers.Accessories
 {
     using System.Windows;
 

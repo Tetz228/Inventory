@@ -12,7 +12,9 @@
 
     using Inventory.Model;
     using Inventory.View.Add.Tables.Computers;
+    using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers;
+    using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
 

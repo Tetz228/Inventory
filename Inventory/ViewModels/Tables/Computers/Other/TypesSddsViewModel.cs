@@ -12,6 +12,9 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.View.Add.Tables.Computers.Other;
+    using Inventory.View.Edit.Tables.Computers.Other;
+
     public class TypesSddsViewModel : BindableBase
     {
         public TypesSddsViewModel()
