@@ -56,12 +56,11 @@
         #region События
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
-            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
-                return;
-
-            switch (columnHeader.Content.ToString())
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
-                case "Наименование":
+                switch (columnHeader.Content.ToString())
+                {
+                    case "Наименование":
                     {
                         if (SortDirection == ListSortDirection.Ascending)
                             TypesSsds.Sort(typeSsd => typeSsd.Name, SortDirection = ListSortDirection.Descending);
@@ -69,6 +68,7 @@
                             TypesSsds.Sort(typeSsd => typeSsd.Name, SortDirection = ListSortDirection.Ascending);
                         break;
                     }
+                }
             }
         }
         public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeSsd = null;

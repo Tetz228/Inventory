@@ -52,34 +52,34 @@
 
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
-            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
-                return;
-
-            switch (columnHeader.Content.ToString())
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
-                case "Логин":
+                switch (columnHeader.Content.ToString())
                 {
-                    if (SortDirection == ListSortDirection.Ascending)
-                        Users.Sort(user => user.Login, SortDirection = ListSortDirection.Descending);
-                    else
-                        Users.Sort(user => user.Login, SortDirection = ListSortDirection.Ascending);
-                    break;
-                }
-                case "ФИО":
-                {
-                    if (SortDirection == ListSortDirection.Ascending)
-                        Users.Sort(user => user.Employee.L_name, SortDirection = ListSortDirection.Descending);
-                    else
-                        Users.Sort(user => user.Employee.L_name, SortDirection = ListSortDirection.Ascending);
-                    break;
-                }
-                case "Почта":
-                {
-                    if (SortDirection == ListSortDirection.Ascending)
-                        Users.Sort(user => user.Employee.Email, SortDirection = ListSortDirection.Descending);
-                    else
-                        Users.Sort(user => user.Employee.Email, SortDirection = ListSortDirection.Ascending);
-                    break;
+                    case "Логин":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Users.Sort(user => user.Login, SortDirection = ListSortDirection.Descending);
+                            else
+                                Users.Sort(user => user.Login, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "ФИО":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Users.Sort(user => user.Employee.L_name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Users.Sort(user => user.Employee.L_name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Почта":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Users.Sort(user => user.Employee.Email, SortDirection = ListSortDirection.Descending);
+                            else
+                                Users.Sort(user => user.Employee.Email, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
                 }
             }
         }

@@ -1,18 +1,16 @@
 ﻿namespace Inventory.ViewModels.Tables
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables;
+    using Inventory.View.Edit.Tables;
+    using Inventory.ViewModels.Edit;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables;
-    using Inventory.View.Edit.Tables;
-    using Inventory.ViewModels.Edit;
 
     public class ManufacturersViewModel : BindableBase
     {
@@ -56,18 +54,18 @@
         #region События
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
-            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
-                return;
-
-            switch (columnHeader.Content.ToString())
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
-                case "Наименование":
+                switch (columnHeader.Content.ToString())
                 {
-                    if (SortDirection == ListSortDirection.Ascending)
-                        Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Descending);
-                    else
-                        Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Ascending);
-                    break;
+                    case "Наименование":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
                 }
             }
         }

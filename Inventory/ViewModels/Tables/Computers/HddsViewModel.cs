@@ -56,51 +56,53 @@
         #region События
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
-            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
-                return;
-
-            switch (columnHeader.Content.ToString())
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
-                case "Производитель":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
-                case "Тип":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Hdds.Sort(type => type.Types_hdd.Name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Hdds.Sort(type => type.Types_hdd.Name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
-                case "Наименование":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Hdds.Sort(hdd => hdd.Name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Hdds.Sort(hdd => hdd.Name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
-                case "Объём":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Hdds.Sort(hdd => hdd.Memory_size, SortDirection = ListSortDirection.Descending);
-                        else
-                            Hdds.Sort(hdd => hdd.Memory_size, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
-                case "Единица измерения":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Hdds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Hdds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
+                switch (columnHeader.Content.ToString())
+                {
+                    case "Производитель":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name,
+                                    SortDirection = ListSortDirection.Descending);
+                            else
+                                Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name,
+                                    SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Тип":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Hdds.Sort(type => type.Types_hdd.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Hdds.Sort(type => type.Types_hdd.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Наименование":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Hdds.Sort(hdd => hdd.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Hdds.Sort(hdd => hdd.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Объём":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Hdds.Sort(hdd => hdd.Memory_size, SortDirection = ListSortDirection.Descending);
+                            else
+                                Hdds.Sort(hdd => hdd.Memory_size, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Единица измерения":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Hdds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Hdds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                }
             }
         }
 

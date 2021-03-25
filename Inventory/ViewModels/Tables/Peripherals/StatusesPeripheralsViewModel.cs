@@ -55,19 +55,19 @@
 
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
-            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
-                return;
-
-            switch (columnHeader.Content.ToString())
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
-                case "Наименование":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Descending);
-                        else
-                            StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
+                switch (columnHeader.Content.ToString())
+                {
+                    case "Наименование":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                }
             }
         }
 

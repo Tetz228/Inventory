@@ -55,18 +55,18 @@
         #region События
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
-            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
-                return;
-
-            switch (columnHeader.Content.ToString())
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
-                case "Наименование":
+                switch (columnHeader.Content.ToString())
                 {
-                    if (SortDirection == ListSortDirection.Ascending)
-                        Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Descending);
-                    else
-                        Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
-                    break;
+                    case "Наименование":
+                    {
+                        if (SortDirection == ListSortDirection.Ascending)
+                            Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Descending);
+                        else
+                            Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
+                        break;
+                    }
                 }
             }
         }

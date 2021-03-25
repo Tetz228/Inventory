@@ -60,51 +60,51 @@
         #region События
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
-            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
-                return;
-
-            switch (columnHeader.Content.ToString())
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
-                case "ФИО":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
-                case "Почта":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Descending);
-                        else
-                            Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
-                case "Номер телефона":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Descending);
-                        else
-                            Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
-                //case "Должности":
-                //    {
-                //        if (SortDirection == ListSortDirection.Ascending)
-                //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Descending);
-                //        else
-                //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Ascending);
-                //        break;
-                //    }
-                //case "Отделы":
-                //    {
-                //        if (SortDirection == ListSortDirection.Ascending)
-                //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Descending);
-                //        else
-                //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Ascending);
-                //        break;
-                //    }
+                switch (columnHeader.Content.ToString())
+                {
+                    case "ФИО":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Почта":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Descending);
+                            else
+                                Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Номер телефона":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Descending);
+                            else
+                                Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                        //case "Должности":
+                        //    {
+                        //        if (SortDirection == ListSortDirection.Ascending)
+                        //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Descending);
+                        //        else
+                        //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Ascending);
+                        //        break;
+                        //    }
+                        //case "Отделы":
+                        //    {
+                        //        if (SortDirection == ListSortDirection.Ascending)
+                        //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Descending);
+                        //        else
+                        //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Ascending);
+                        //        break;
+                        //    }
+                }
             }
         }
 

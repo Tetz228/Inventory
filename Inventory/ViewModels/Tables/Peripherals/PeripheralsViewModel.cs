@@ -56,34 +56,34 @@
         #region События
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
-            if (args.OriginalSource is not GridViewColumnHeader columnHeader)
-                return;
-
-            switch (columnHeader.Content.ToString())
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
-                case "Производитель":
+                switch (columnHeader.Content.ToString())
                 {
-                    if (SortDirection == ListSortDirection.Ascending)
-                        Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
-                    else
-                        Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
-                    break;
-                }
-                case "Тип периферии":
-                {
-                    if (SortDirection == ListSortDirection.Ascending)
-                        Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection = ListSortDirection.Descending);
-                    else
-                        Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection = ListSortDirection.Ascending);
-                    break;
-                }
-                case "Наименование":
-                {
-                    if (SortDirection == ListSortDirection.Ascending)
-                        Peripherals.Sort(peripheral => peripheral.Name, SortDirection = ListSortDirection.Descending);
-                    else
-                        Peripherals.Sort(peripheral => peripheral.Name, SortDirection = ListSortDirection.Ascending);
-                    break;
+                    case "Производитель":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Тип периферии":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Наименование":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(peripheral => peripheral.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(peripheral => peripheral.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
                 }
             }
         }
