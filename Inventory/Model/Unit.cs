@@ -126,7 +126,7 @@ namespace Inventory.Model
         public static void DeleteUnit(Unit selectUnit)
         {
             if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectUnit.Full_name}?",
-                "Удаление типа периферии", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                "Удаление единицы измерения", MessageBoxButton.YesNo, MessageBoxImage.Question))
                 return;
 
             using var db = new InventoryEntities();

@@ -97,7 +97,7 @@
             editWindow.DataContext = editViewModel;
             editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();
-        }, socket => socket != null);
+        }, unit => unit != null);
 
         public ICommand DeleteUnitCommand => new DelegateCommand<Unit>(Unit.DeleteUnit, selectUnit => selectUnit != null);
 
