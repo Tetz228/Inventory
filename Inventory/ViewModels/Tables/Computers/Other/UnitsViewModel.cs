@@ -1,19 +1,16 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Other
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers;
+    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Other;
 
     public class UnitsViewModel : BindableBase
     {
@@ -64,21 +61,21 @@
                 switch (columnHeader.Content.ToString())
                 {
                     case "Полное наименование":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
                     case "Краткое наименование":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
                 }
             }
         }

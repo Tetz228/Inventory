@@ -1,19 +1,16 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Other
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers;
+    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Other;
 
     public class TypesMemoryViewModel : BindableBase
     {
