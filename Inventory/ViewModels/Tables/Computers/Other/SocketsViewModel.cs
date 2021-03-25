@@ -1,5 +1,12 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Other
 {
+    using System;
+
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers;
+    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
@@ -7,13 +14,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Other;
+    using ClosedXML.Excel;
 
     public class SocketsViewModel : BindableBase
     {
@@ -100,8 +101,34 @@
 
         public ICommand ExportExcelCommand => new DelegateCommand(() =>
         {
-            var addPostWindow = new SocketAddWindow();
-            addPostWindow.ShowDialog();
+            var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Список сокетов");
+            worksheet.Cell("B2").Value = "Сокеты"; // Title
+            worksheet.Cell("B3").Value = "Наименование";
+            worksheet.Cell("B4").Value = "AM3";
+            worksheet.Cell("B5").Value = "AM4";
+
+            var rngTable = worksheet.Range("B2:B5");
+            rngTable.FirstCell().Style
+                .Font.SetBold()
+                .Fill.SetBackgroundColor(XLColor.CornflowerBlue)
+                .Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            rngTable.FirstRow().Merge();
+
+            var rngHeaders = rngTable.Range("B2:B5"); // The address is relative to rngTable (NOT the worksheet)
+            rngHeaders.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            rngHeaders.Style.Font.Bold = true;
+            rngHeaders.Style.Font.FontColor = XLColor.DarkBlue;
+            rngHeaders.Style.Fill.BackgroundColor = XLColor.Aqua;
+
+            var rngData = worksheet.Range("B3:B5");
+            var excelTable = rngData.CreateTable();
+
+            // Add the totals row
+            excelTable.ShowTotalsRow = true;
+            worksheet.RangeUsed().Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+            worksheet.Columns().AdjustToContents();
+            workbook.SaveAs(@"D:\Showcase.xlsx");
         });
     }
 }
