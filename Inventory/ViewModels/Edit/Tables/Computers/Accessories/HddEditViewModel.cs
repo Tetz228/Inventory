@@ -1,12 +1,13 @@
-﻿namespace Inventory.ViewModels.Edit.Tables.Computers
+﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Accessories
 {
     using System.Collections.ObjectModel;
-
-    using DevExpress.Mvvm;
-    using Inventory.Model;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
+
+    using DevExpress.Mvvm;
+
+    using Inventory.Model;
 
     public class HddEditViewModel : BindableBase
     {

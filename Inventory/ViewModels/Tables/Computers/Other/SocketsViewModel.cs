@@ -13,6 +13,7 @@
     using Inventory.View.Add.Tables.Computers;
     using Inventory.View.Edit.Tables.Computers;
     using Inventory.ViewModels.Edit.Tables.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers.Other;
 
     public class SocketsViewModel : BindableBase
     {

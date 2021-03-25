@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:Inventory.View.Add.Tables.Peripherals"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:peripherals="clr-namespace:Inventory.ViewModels.Add.Tables.Peripherals"
+    xmlns:other="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Other"
     x:Name="AddSocketWindow"
     Title="Добавить новый сокет"
     Width="500"
@@ -17,7 +18,7 @@
     mc:Ignorable="d">
 
     <Window.DataContext>
-        <computers:SocketAddViewModel />
+        <other:SocketAddViewModel />
     </Window.DataContext>
 
     <Grid>

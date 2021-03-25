@@ -1,4 +1,4 @@
-﻿namespace Inventory.ViewModels.Add.Tables.Computers
+﻿namespace Inventory.ViewModels.Add.Tables.Computers.Other
 {
     using System.Windows;
     using System.Windows.Input;

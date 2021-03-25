@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Inventory.View.Add.Tables.Computers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:other="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Other"
     x:Name="AddTypeHddWindow"
     Title="Добавить новый тип жесткого диска"
     Width="500"
@@ -16,7 +17,7 @@
     mc:Ignorable="d">
 
     <Window.DataContext>
-        <computers:TypeHddAddViewModel />
+        <other:TypeHddAddViewModel />
     </Window.DataContext>
 
     <Grid>
