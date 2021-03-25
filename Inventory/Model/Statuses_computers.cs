@@ -10,6 +10,7 @@ namespace Inventory.Model
     using DevExpress.Mvvm;
 
     using Inventory.ViewModels.Tables.Computers;
+    using Inventory.ViewModels.Tables.Computers.Computers;
     using Inventory.ViewModels.Tables.Peripherals;
 
     public partial class Statuses_computers : BindableBase, IEditableObject, IDataErrorInfo

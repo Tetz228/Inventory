@@ -10,6 +10,7 @@ namespace Inventory.Model
     using DevExpress.Mvvm;
 
     using Inventory.ViewModels.Tables.Computers;
+    using Inventory.ViewModels.Tables.Computers.Computers;
 
     public partial class Operating_systems : BindableBase, IEditableObject, IDataErrorInfo
     {

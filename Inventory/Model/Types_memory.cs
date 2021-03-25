@@ -17,6 +17,8 @@ namespace Inventory.Model
     using System.Linq;
     using System.Windows;
 
+    using Inventory.ViewModels.Tables.Computers.Other;
+
     public partial class Types_memory : BindableBase, IEditableObject, IDataErrorInfo
 {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

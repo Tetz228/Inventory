@@ -21,6 +21,8 @@ namespace Inventory.Model
     using System.Windows;
     using System.Windows.Controls;
 
+    using Inventory.ViewModels.Tables.Computers.Accessories;
+
     public partial class Hdd : BindableBase, IEditableObject, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
