@@ -320,14 +320,32 @@
     <Compile Include="View\Pages\Recovery_password\SecurityСodePage.xaml.cs">
       <DependentUpon>SecurityСodePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\Tables\Computers\GraphicsCardsPage.xaml.cs">
+      <DependentUpon>GraphicsCardsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Tables\Computers\HddsPage.xaml.cs">
       <DependentUpon>HddsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Tables\Computers\MotherboardsPage.xaml.cs">
+      <DependentUpon>MotherboardsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\OperatingSystemsPage.xaml.cs">
       <DependentUpon>OperatingSystemsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\Tables\Computers\PowerSuppliesPage.xaml.cs">
+      <DependentUpon>PowerSuppliesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Tables\Computers\ProcessorsPage.xaml.cs">
+      <DependentUpon>ProcessorsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Tables\Computers\RamPage.xaml.cs">
+      <DependentUpon>RamPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Tables\Computers\SoketsPage.xaml.cs">
       <DependentUpon>SoketsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Tables\Computers\SsdPage.xaml.cs">
+      <DependentUpon>SsdPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\StatusesComputersPage.xaml.cs">
       <DependentUpon>StatusesComputersPage.xaml</DependentUpon>
@@ -510,7 +528,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\Tables\Computers\GraphicsCardsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\Tables\Computers\HddsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Tables\Computers\MotherboardsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -518,7 +544,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\Tables\Computers\PowerSuppliesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Tables\Computers\ProcessorsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Tables\Computers\RamPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\Tables\Computers\SoketsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Tables\Computers\SsdPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

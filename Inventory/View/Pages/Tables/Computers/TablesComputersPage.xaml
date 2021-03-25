@@ -41,13 +41,13 @@
                 <MenuItem Command="{Binding SelectOperatingSystemsPageCommand}" Header="Операционные системы" />
             </MenuItem>
             <MenuItem Header="Комплектующие">
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Материнские платы" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Процессоры" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Оперативная память" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="SSD-накопители" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Видеокарты" />
+                <MenuItem Command="{Binding SelectMotherboardsPageCommand}" Header="Материнские платы" />
+                <MenuItem Command="{Binding SelectProcessorsPageCommand}" Header="Процессоры" />
+                <MenuItem Command="{Binding SelectRamPageCommand}" Header="Оперативная память" />
+                <MenuItem Command="{Binding SelectSsdPageCommand}" Header="SSD-накопители" />
+                <MenuItem Command="{Binding SelectGraphicsCardsPageCommand}" Header="Видеокарты" />
                 <MenuItem Command="{Binding SelectHddsPageCommand}" Header="Жесткие диски" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Блоки питания" />
+                <MenuItem Command="{Binding SelectPowerSuppliesPageCommand}" Header="Блоки питания" />
             </MenuItem>
             <MenuItem Header="Прочее">
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Производители" />

@@ -1,12 +1,10 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers
 {
     using DevExpress.Mvvm;
-
-    using System.Windows.Controls;
-    using System.Windows.Input;
-
     using Inventory.View.Pages.Tables;
     using Inventory.View.Pages.Tables.Computers;
+    using System.Windows.Controls;
+    using System.Windows.Input;
 
     public class TablesComputesViewModel : BindableBase
     {
@@ -21,6 +19,12 @@
             TypesMemoryPage = new TypesMemoryPage();
             StatusesComputersPage = new StatusesComputersPage();
             OperatingSystemsPage = new OperatingSystemsPage();
+            MotherboardsPage = new MotherboardsPage();
+            ProcessorsPage = new ProcessorsPage();
+            RamPage = new RamPage();
+            SsdPage = new SsdPage();
+            GraphicsCardsPage = new GraphicsCardsPage();
+            PowerSuppliesPage = new PowerSuppliesPage();
         }
 
         #region Свойства
@@ -44,6 +48,17 @@
 
         private OperatingSystemsPage OperatingSystemsPage { get; }
 
+        private MotherboardsPage MotherboardsPage { get; }
+
+        private ProcessorsPage ProcessorsPage { get; }
+
+        private RamPage RamPage { get; }
+
+        private SsdPage SsdPage { get; }
+
+        private GraphicsCardsPage GraphicsCardsPage { get; }
+
+        private PowerSuppliesPage PowerSuppliesPage { get; }
         #endregion
 
         #region Команды
@@ -64,6 +79,18 @@
         public ICommand SelectStatusesComputersPageCommand => new DelegateCommand(() => CurrentPage = StatusesComputersPage);
 
         public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
+
+        public ICommand SelectMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = MotherboardsPage);
+
+        public ICommand SelectProcessorsPageCommand => new DelegateCommand(() => CurrentPage = ProcessorsPage);
+
+        public ICommand SelectRamPageCommand => new DelegateCommand(() => CurrentPage = RamPage);
+
+        public ICommand SelectSsdPageCommand => new DelegateCommand(() => CurrentPage = SsdPage);
+
+        public ICommand SelectGraphicsCardsPageCommand => new DelegateCommand(() => CurrentPage = GraphicsCardsPage);
+
+        public ICommand SelectPowerSuppliesPageCommand => new DelegateCommand(() => CurrentPage = PowerSuppliesPage);
         #endregion
     }
 }
