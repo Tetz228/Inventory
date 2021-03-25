@@ -20,6 +20,7 @@
             TypesSsdsPage = new TypesSsdsPage();
             TypesMemoryPage = new TypesMemoryPage();
             StatusesComputersPage = new StatusesComputersPage();
+            OperatingSystemsPage = new OperatingSystemsPage();
         }
 
         #region Свойства
@@ -41,6 +42,8 @@
 
         private StatusesComputersPage StatusesComputersPage { get; }
 
+        private OperatingSystemsPage OperatingSystemsPage { get; }
+
         #endregion
 
         #region Команды
@@ -55,6 +58,8 @@
         public ICommand SelectTablesManufacturersCommand => new DelegateCommand(() => CurrentPage = ManufacturersPage);
 
         public ICommand SelectTypesSsdPageCommand => new DelegateCommand(() => CurrentPage = TypesSsdsPage);
+
+        public ICommand SelectOperatingSystemsPageCommand => new DelegateCommand(() => CurrentPage = OperatingSystemsPage);
 
         public ICommand SelectStatusesComputersPageCommand => new DelegateCommand(() => CurrentPage = StatusesComputersPage);
 

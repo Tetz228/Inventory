@@ -1,0 +1,13 @@
+﻿namespace Inventory.View.Edit.Tables.Computers
+{
+    using System.Windows;
+
+    public partial class OperatingSystemEditWindow : Window
+    {
+        public OperatingSystemEditWindow()
+        {
+            InitializeComponent();
+            TextBoxName.Focus();
+        }
+    }
+}

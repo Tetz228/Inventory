@@ -270,10 +270,12 @@
     </Compile>
     <Compile Include="PageNavigation.cs" />
     <Compile Include="Services.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\OperatingSystemAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\StatusComputerAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\TypeMemoryAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\TypeSddAddViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\OperatingSystemEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\StatusComputerEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\TypeMemoryEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\TypeSsdEditViewModel.cs" />
@@ -281,9 +283,13 @@
     <Compile Include="ViewModels\Recovery__password\NewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\SecurityСodeViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\OperatingSystemsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\StatusesComputersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TypesMemoryViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TypesSddsViewModel.cs" />
+    <Compile Include="View\Add\Tables\Computers\OperatingSystemAddWindow.xaml.cs">
+      <DependentUpon>OperatingSystemAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Add\Tables\Computers\StatusComputerAddWindow.xaml.cs">
       <DependentUpon>StatusComputerAddWindow.xaml</DependentUpon>
     </Compile>
@@ -292,6 +298,9 @@
     </Compile>
     <Compile Include="View\Add\Tables\Computers\TypeSsdAddWindow.xaml.cs">
       <DependentUpon>TypeSsdAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\OperatingSystemEditWindow.xaml.cs">
+      <DependentUpon>OperatingSystemEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Computers\StatusComputerEditWindow.xaml.cs">
       <DependentUpon>StatusComputerEditWindow.xaml</DependentUpon>
@@ -313,6 +322,9 @@
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\HddsPage.xaml.cs">
       <DependentUpon>HddsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Tables\Computers\OperatingSystemsPage.xaml.cs">
+      <DependentUpon>OperatingSystemsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\SoketsPage.xaml.cs">
       <DependentUpon>SoketsPage.xaml</DependentUpon>
@@ -454,6 +466,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Add\Tables\Computers\OperatingSystemAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Add\Tables\Computers\StatusComputerAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -463,6 +479,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Add\Tables\Computers\TypeSsdAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\OperatingSystemEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -491,6 +511,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\Tables\Computers\HddsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Tables\Computers\OperatingSystemsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
