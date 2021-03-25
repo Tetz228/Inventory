@@ -66,11 +66,11 @@ namespace Inventory.Model
             if (selectEmpInDepart.Id_employee_in_department != 0)
             {
                 using var db = new InventoryEntities();
-                var findEmpDepart = db.Employees_in_departments.FirstOrDefault(inDepartments => inDepartments.Id_employee_in_department == selectEmpInDepart.Id_employee_in_department);
+                var foundEmpDepart = db.Employees_in_departments.FirstOrDefault(inDepartments => inDepartments.Id_employee_in_department == selectEmpInDepart.Id_employee_in_department);
 
-                if (findEmpDepart != null)
+                if (foundEmpDepart != null)
                 {
-                    db.Employees_in_departments.Remove(findEmpDepart);
+                    db.Employees_in_departments.Remove(foundEmpDepart);
                     db.SaveChanges();
                 }
             }

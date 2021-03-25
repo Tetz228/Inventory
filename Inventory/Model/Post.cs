@@ -84,9 +84,9 @@ namespace Inventory.Model
         public static void EditPost(Post post)
         {
             using var db = new InventoryEntities();
-            var findPost = db.Posts.FirstOrDefault(p => p.Id_post == post.Id_post);
+            var foundPost = db.Posts.FirstOrDefault(p => p.Id_post == post.Id_post);
 
-            if (findPost == null)
+            if (foundPost == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении должности",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -94,7 +94,7 @@ namespace Inventory.Model
                 return;
             }
 
-            findPost.Name = post.Name;
+            foundPost.Name = post.Name;
             db.SaveChanges();
         }
 
@@ -105,9 +105,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findPost = db.Posts.FirstOrDefault(post => post.Id_post == selectPost.Id_post);
+            var foundPost = db.Posts.FirstOrDefault(post => post.Id_post == selectPost.Id_post);
 
-            if (findPost == null)
+            if (foundPost == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -116,7 +116,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Posts.Remove(findPost);
+                db.Posts.Remove(foundPost);
                 db.SaveChanges();
 
                 PostsViewModel.Posts.Remove(selectPost);

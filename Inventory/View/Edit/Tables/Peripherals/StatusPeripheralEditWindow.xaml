@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Peripherals"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="EditPostWindow"
+    x:Name="EditStatusPeripheralWindow"
     Title="Изменить статус периферии"
     Width="500"
     Height="180"
@@ -59,7 +59,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
                     Command="{Binding EditCommand}"
-                    CommandParameter="{Binding ElementName=EditPostWindow}"
+                    CommandParameter="{Binding ElementName=EditStatusPeripheralWindow}"
                     Content="Изменить информацию о статусе периферии"
                     IsDefault="True"
                     Style="{StaticResource BaseButton}" />
@@ -69,7 +69,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=EditPostWindow}"
+                    CommandParameter="{Binding ElementName=EditStatusPeripheralWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>

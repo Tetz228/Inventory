@@ -85,9 +85,9 @@ namespace Inventory.Model
         public static void EditStatusPeripheral(Statuses_peripherals statusPeripheral)
         {
             using var db = new InventoryEntities();
-            var findStatusPeripheral = db.Statuses_peripherals.FirstOrDefault(status => status.Id_status_peripheral == statusPeripheral.Id_status_peripheral);
+            var foundStatusPeripheral = db.Statuses_peripherals.FirstOrDefault(status => status.Id_status_peripheral == statusPeripheral.Id_status_peripheral);
 
-            if (findStatusPeripheral == null)
+            if (foundStatusPeripheral == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении статуса периферии",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -95,7 +95,7 @@ namespace Inventory.Model
                 return;
             }
 
-            findStatusPeripheral.Name = statusPeripheral.Name;
+            foundStatusPeripheral.Name = statusPeripheral.Name;
             db.SaveChanges();
         }
 
@@ -106,9 +106,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findStatusPeripheral = db.Statuses_peripherals.FirstOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == selectStatusPeripheral.Id_status_peripheral);
+            var foundStatusPeripheral = db.Statuses_peripherals.FirstOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == selectStatusPeripheral.Id_status_peripheral);
 
-            if (findStatusPeripheral == null)
+            if (foundStatusPeripheral == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении статуса периферии", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -117,7 +117,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Statuses_peripherals.Remove(findStatusPeripheral);
+                db.Statuses_peripherals.Remove(foundStatusPeripheral);
                 db.SaveChanges();
 
                 StatusesPeripheralsViewModel.StatusesPeripherals.Remove(selectStatusPeripheral);

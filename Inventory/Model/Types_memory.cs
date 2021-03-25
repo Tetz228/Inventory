@@ -84,9 +84,9 @@ namespace Inventory.Model
         public static void EditTypeMemory(Types_memory typeMemory)
         {
             using var db = new InventoryEntities();
-            var findTypeMemory = db.Types_memory.FirstOrDefault(type => type.Id_type_memory == typeMemory.Id_type_memory);
+            var foundTypeMemory = db.Types_memory.FirstOrDefault(type => type.Id_type_memory == typeMemory.Id_type_memory);
 
-            if (findTypeMemory == null)
+            if (foundTypeMemory == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении типа памяти",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -94,7 +94,7 @@ namespace Inventory.Model
                 return;
             }
 
-            findTypeMemory.Name = typeMemory.Name;
+            foundTypeMemory.Name = typeMemory.Name;
             db.SaveChanges();
         }
 
@@ -105,9 +105,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findTypeMemory = db.Types_memory.FirstOrDefault(type => type.Id_type_memory == selectTypeMemory.Id_type_memory);
+            var foundTypeMemory = db.Types_memory.FirstOrDefault(type => type.Id_type_memory == selectTypeMemory.Id_type_memory);
 
-            if (findTypeMemory == null)
+            if (foundTypeMemory == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении типа памяти", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -116,7 +116,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Types_memory.Remove(findTypeMemory);
+                db.Types_memory.Remove(foundTypeMemory);
                 db.SaveChanges();
 
                 TypesMemoryViewModel.TypesMemory.Remove(selectTypeMemory);

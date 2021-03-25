@@ -100,9 +100,9 @@ namespace Inventory.Model
         public static void EditPeripheral(Peripheral selectPeripheral)
         {
             using var db = new InventoryEntities();
-            var findPeripheral = db.Peripherals.FirstOrDefault(peripheral => peripheral.Id_peripheral == selectPeripheral.Id_peripheral);
+            var foundPeripheral = db.Peripherals.FirstOrDefault(peripheral => peripheral.Id_peripheral == selectPeripheral.Id_peripheral);
 
-            if (findPeripheral == null)
+            if (foundPeripheral == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении периферии",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -110,9 +110,9 @@ namespace Inventory.Model
                 return;
             }
 
-            findPeripheral.Name = selectPeripheral.Name;
-            findPeripheral.Fk_manufacturer = selectPeripheral.Fk_manufacturer;
-            findPeripheral.Fk_type_peripheral = selectPeripheral.Fk_type_peripheral;
+            foundPeripheral.Name = selectPeripheral.Name;
+            foundPeripheral.Fk_manufacturer = selectPeripheral.Fk_manufacturer;
+            foundPeripheral.Fk_type_peripheral = selectPeripheral.Fk_type_peripheral;
 
             db.SaveChanges();
 
@@ -126,9 +126,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findPeripheral = db.Peripherals.FirstOrDefault(peripheral => peripheral.Id_peripheral == selectPeripheral.Id_peripheral);
+            var foundPeripheral = db.Peripherals.FirstOrDefault(peripheral => peripheral.Id_peripheral == selectPeripheral.Id_peripheral);
 
-            if (findPeripheral == null)
+            if (foundPeripheral == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении периферии", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -137,7 +137,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Peripherals.Remove(findPeripheral);
+                db.Peripherals.Remove(foundPeripheral);
                 db.SaveChanges();
 
                 PeripheralsViewModel.Peripherals.Remove(selectPeripheral);

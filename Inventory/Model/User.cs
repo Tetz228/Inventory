@@ -82,9 +82,9 @@ namespace Inventory.Model
         public bool UniqueLogin()
         {
             using var db = new InventoryEntities();
-            var findUser = db.Users.FirstOrDefault(user => user.Login == Login);
+            var foundUser = db.Users.FirstOrDefault(user => user.Login == Login);
 
-            if (findUser == null)
+            if (foundUser == null)
                 return false;
             else
                 return true;
@@ -131,16 +131,16 @@ namespace Inventory.Model
 
             using var db = new InventoryEntities();
 
-            var findUser = db.Users.FirstOrDefault(u => u.Id_user == user.Id_user);
+            var foundUser = db.Users.FirstOrDefault(u => u.Id_user == user.Id_user);
 
-            if (findUser == null)
+            if (foundUser == null)
             {
                 MessageBox.Show("Объект не найден в базе данных! Пароль не был изменен.", "Ошибка при изменение пароля", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            findUser.Password = user.Password;
-            findUser.Salt = user.Salt;
+            foundUser.Password = user.Password;
+            foundUser.Salt = user.Salt;
 
             db.SaveChanges();
 

@@ -84,9 +84,9 @@ namespace Inventory.Model
         public static void EditTypeSsd(Types_ssd typeSsd)
         {
             using var db = new InventoryEntities();
-            var findTypeSsd = db.Types_ssd.FirstOrDefault(type => type.Id_type_ssd == typeSsd.Id_type_ssd);
+            var foundTypeSsd = db.Types_ssd.FirstOrDefault(type => type.Id_type_ssd == typeSsd.Id_type_ssd);
 
-            if (findTypeSsd == null)
+            if (foundTypeSsd == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении типа SSD",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -94,7 +94,7 @@ namespace Inventory.Model
                 return;
             }
 
-            findTypeSsd.Name = typeSsd.Name;
+            foundTypeSsd.Name = typeSsd.Name;
             db.SaveChanges();
         }
 
@@ -105,9 +105,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findTypeSsd = db.Types_ssd.FirstOrDefault(type => type.Id_type_ssd == selectTypeSsd.Id_type_ssd);
+            var foundTypeSsd = db.Types_ssd.FirstOrDefault(type => type.Id_type_ssd == selectTypeSsd.Id_type_ssd);
 
-            if (findTypeSsd == null)
+            if (foundTypeSsd == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении типа SSD", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -116,7 +116,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Types_ssd.Remove(findTypeSsd);
+                db.Types_ssd.Remove(foundTypeSsd);
                 db.SaveChanges();
 
                 TypesSddsViewModel.TypesSsds.Remove(selectTypeSsd);

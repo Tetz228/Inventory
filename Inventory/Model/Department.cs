@@ -84,9 +84,9 @@ namespace Inventory.Model
         public static void EditDepartment(Department selectDepartment)
         {
             using var db = new InventoryEntities();
-            var findDepartment = db.Departments.FirstOrDefault(department => department.Id_department == selectDepartment.Id_department);
+            var foundDepartment = db.Departments.FirstOrDefault(department => department.Id_department == selectDepartment.Id_department);
 
-            if (findDepartment == null)
+            if (foundDepartment == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении отдела",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -94,7 +94,7 @@ namespace Inventory.Model
                 return;
             }
 
-            findDepartment.Name = selectDepartment.Name;
+            foundDepartment.Name = selectDepartment.Name;
             db.SaveChanges();
         }
 
@@ -105,9 +105,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findDepartment = db.Departments.FirstOrDefault(department => department.Id_department == selectDepartment.Id_department);
+            var foundDepartment = db.Departments.FirstOrDefault(department => department.Id_department == selectDepartment.Id_department);
 
-            if (findDepartment == null)
+            if (foundDepartment == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении отдела", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -116,7 +116,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Departments.Remove(findDepartment);
+                db.Departments.Remove(foundDepartment);
                 db.SaveChanges();
 
                 DepartmentsViewModel.Departments.Remove(selectDepartment);

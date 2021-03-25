@@ -107,9 +107,9 @@ namespace Inventory.Model
         public static void EditUnit(Unit unit)
         {
             using var db = new InventoryEntities();
-            var findUnit = db.Units.FirstOrDefault(u => u.Id_unit == unit.Id_unit);
+            var foundUnit = db.Units.FirstOrDefault(u => u.Id_unit == unit.Id_unit);
 
-            if (findUnit == null)
+            if (foundUnit == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении единицы измерения",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -117,8 +117,8 @@ namespace Inventory.Model
                 return;
             }
 
-            findUnit.Full_name = unit.Full_name;
-            findUnit.Short_name = unit.Short_name;
+            foundUnit.Full_name = unit.Full_name;
+            foundUnit.Short_name = unit.Short_name;
 
             db.SaveChanges();
         }
@@ -130,9 +130,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findUnit = db.Units.FirstOrDefault(u => u.Id_unit == selectUnit.Id_unit);
+            var foundUnit = db.Units.FirstOrDefault(u => u.Id_unit == selectUnit.Id_unit);
 
-            if (findUnit == null)
+            if (foundUnit == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении единицы измерения", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -141,7 +141,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Units.Remove(findUnit);
+                db.Units.Remove(foundUnit);
                 db.SaveChanges();
 
                 UnitsViewModel.Units.Remove(selectUnit);

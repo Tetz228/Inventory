@@ -87,9 +87,9 @@ namespace Inventory.Model
         public static void EditSocket(Socket socket)
         {
             using var db = new InventoryEntities();
-            var findPost = db.Sockets.FirstOrDefault(s => s.Id_socket == socket.Id_socket);
+            var foundSocket = db.Sockets.FirstOrDefault(s => s.Id_socket == socket.Id_socket);
 
-            if (findPost == null)
+            if (foundSocket == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении сокета",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -97,7 +97,7 @@ namespace Inventory.Model
                 return;
             }
 
-            findPost.Name = socket.Name;
+            foundSocket.Name = socket.Name;
             db.SaveChanges();
         }
 
@@ -108,9 +108,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findSocket = db.Sockets.FirstOrDefault(socket => socket.Id_socket == selectSocket.Id_socket);
+            var foundSocket = db.Sockets.FirstOrDefault(socket => socket.Id_socket == selectSocket.Id_socket);
 
-            if (findSocket == null)
+            if (foundSocket == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении сокета", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -119,7 +119,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Sockets.Remove(findSocket);
+                db.Sockets.Remove(foundSocket);
                 db.SaveChanges();
 
                 SocketsViewModel.Sockets.Remove(selectSocket);

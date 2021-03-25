@@ -161,13 +161,13 @@ namespace Inventory.Model
         public static void EditEmployee(Employee selectEmployee)
         {
             using var db = new InventoryEntities();
-            var findEmployee = db.Employees.Include(employeePost => employeePost.Posts_employees
+            var foundEmployee = db.Employees.Include(employeePost => employeePost.Posts_employees
                                            .Select(post => post.Post))
                                            .Include(empDepart => empDepart.Employees_in_departments
                                            .Select(depart => depart.Department))
                                            .FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
 
-            if (findEmployee == null)
+            if (foundEmployee == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении сотрудника",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -175,16 +175,16 @@ namespace Inventory.Model
                 return;
             }
 
-            findEmployee.L_name = selectEmployee.L_name;
-            findEmployee.F_name = selectEmployee.F_name;
-            findEmployee.M_name = selectEmployee.M_name;
-            findEmployee.Phone_number = selectEmployee.Phone_number;
-            findEmployee.Email = selectEmployee.Email;
+            foundEmployee.L_name = selectEmployee.L_name;
+            foundEmployee.F_name = selectEmployee.F_name;
+            foundEmployee.M_name = selectEmployee.M_name;
+            foundEmployee.Phone_number = selectEmployee.Phone_number;
+            foundEmployee.Email = selectEmployee.Email;
 
             db.SaveChanges();
 
-            Model.Posts_employees.EditPostEmployee(db, findEmployee.Id_employee);
-            Model.Employees_in_departments.EditEmployeeInDepartment(db, findEmployee.Id_employee);
+            Model.Posts_employees.EditPostEmployee(db, foundEmployee.Id_employee);
+            Model.Employees_in_departments.EditEmployeeInDepartment(db, foundEmployee.Id_employee);
 
             RefreshCollection();
         }
@@ -196,16 +196,16 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findEmployee = db.Employees.FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
+            var foundEmployee = db.Employees.FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
 
-            if (findEmployee == null)
+            if (foundEmployee == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении сотрудника", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
                 return;
             }
 
-            db.Employees.Remove(findEmployee);
+            db.Employees.Remove(foundEmployee);
             db.SaveChanges();
 
             EmployeesViewModel.Employees.Remove(selectEmployee);

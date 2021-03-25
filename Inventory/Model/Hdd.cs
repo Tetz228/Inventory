@@ -125,9 +125,9 @@ namespace Inventory.Model
         public static void EditHdd(Hdd selectHdd)
         {
             using var db = new InventoryEntities();
-            var findHdd = db.Hdds.FirstOrDefault(hdd => hdd.Id_hdd == selectHdd.Id_hdd);
+            var foundHdd = db.Hdds.FirstOrDefault(hdd => hdd.Id_hdd == selectHdd.Id_hdd);
 
-            if (findHdd == null)
+            if (foundHdd == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении жесткого диска",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -135,11 +135,11 @@ namespace Inventory.Model
                 return;
             }
 
-            findHdd.Memory_size = selectHdd.Memory_size;
-            findHdd.Name = selectHdd.Name;
-            findHdd.Fk_type_hdd = selectHdd.Fk_type_hdd;
-            findHdd.Fk_unit = selectHdd.Fk_unit;
-            findHdd.Fk_manufacturer = selectHdd.Fk_manufacturer;
+            foundHdd.Memory_size = selectHdd.Memory_size;
+            foundHdd.Name = selectHdd.Name;
+            foundHdd.Fk_type_hdd = selectHdd.Fk_type_hdd;
+            foundHdd.Fk_unit = selectHdd.Fk_unit;
+            foundHdd.Fk_manufacturer = selectHdd.Fk_manufacturer;
 
             db.SaveChanges();
 
@@ -153,9 +153,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findHdd = db.Hdds.FirstOrDefault(hdd => hdd == selectHdd);
+            var foundHdd = db.Hdds.FirstOrDefault(hdd => hdd == selectHdd);
 
-            if (findHdd == null)
+            if (foundHdd == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении жесткого диска",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -165,7 +165,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Hdds.Remove(findHdd);
+                db.Hdds.Remove(foundHdd);
                 db.SaveChanges();
 
                 HddsViewModel.Hdds.Remove(selectHdd);

@@ -84,9 +84,9 @@ namespace Inventory.Model
         public static void EditTypeHdd(Types_hdd typeHdd)
         {
             using var db = new InventoryEntities();
-            var findTypeHdd = db.Types_hdd.FirstOrDefault(type => type.Id_type_hdd == typeHdd.Id_type_hdd);
+            var foundTypeHdd = db.Types_hdd.FirstOrDefault(type => type.Id_type_hdd == typeHdd.Id_type_hdd);
 
-            if (findTypeHdd == null)
+            if (foundTypeHdd == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении типа жесткого диска",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -94,7 +94,7 @@ namespace Inventory.Model
                 return;
             }
 
-            findTypeHdd.Name = typeHdd.Name;
+            foundTypeHdd.Name = typeHdd.Name;
             db.SaveChanges();
         }
 
@@ -105,9 +105,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findTypeHdd = db.Types_hdd.FirstOrDefault(type => type.Id_type_hdd == selectTypeHdd.Id_type_hdd);
+            var foundTypeHdd = db.Types_hdd.FirstOrDefault(type => type.Id_type_hdd == selectTypeHdd.Id_type_hdd);
 
-            if (findTypeHdd == null)
+            if (foundTypeHdd == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении типа жесткого диска", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -116,7 +116,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Types_hdd.Remove(findTypeHdd);
+                db.Types_hdd.Remove(foundTypeHdd);
                 db.SaveChanges();
 
                 TypesHddsViewModel.TypesHdds.Remove(selectTypeHdd);

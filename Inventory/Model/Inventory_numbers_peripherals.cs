@@ -130,9 +130,9 @@ namespace Inventory.Model
         public static void EditInventoryNumber(Inventory_numbers_peripherals selectInventoryNumber)
         {
             using var db = new InventoryEntities();
-            var findInventoryNumber = db.Inventory_numbers_peripherals.FirstOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
+            var foundInventoryNumber = db.Inventory_numbers_peripherals.FirstOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
 
-            if (findInventoryNumber == null)
+            if (foundInventoryNumber == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении инвентарного номера периферии",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -140,9 +140,9 @@ namespace Inventory.Model
                 return;
             }
 
-            findInventoryNumber.Fk_peripheral = selectInventoryNumber.Fk_peripheral;
-            findInventoryNumber.Fk_status_peripheral = selectInventoryNumber.Fk_status_peripheral;
-            findInventoryNumber.Inventory_number = selectInventoryNumber.Inventory_number;
+            foundInventoryNumber.Fk_peripheral = selectInventoryNumber.Fk_peripheral;
+            foundInventoryNumber.Fk_status_peripheral = selectInventoryNumber.Fk_status_peripheral;
+            foundInventoryNumber.Inventory_number = selectInventoryNumber.Inventory_number;
 
             db.SaveChanges();
 
@@ -156,9 +156,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findInventoryNumber = db.Inventory_numbers_peripherals.FirstOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
+            var foundInventoryNumber = db.Inventory_numbers_peripherals.FirstOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
 
-            if (findInventoryNumber == null)
+            if (foundInventoryNumber == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при инвентарного номера периферии", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -167,7 +167,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Inventory_numbers_peripherals.Remove(findInventoryNumber);
+                db.Inventory_numbers_peripherals.Remove(foundInventoryNumber);
                 db.SaveChanges();
 
                 InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Remove(selectInventoryNumber);

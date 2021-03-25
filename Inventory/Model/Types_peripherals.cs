@@ -85,9 +85,9 @@ namespace Inventory.Model
         public static void EditTypePeripheral(Types_peripherals typePeripheral)
         {
             using var db = new InventoryEntities();
-            var findTypePeripheral = db.Types_peripherals.FirstOrDefault(type => type.Id_type_peripheral == typePeripheral.Id_type_peripheral);
+            var foundTypePeripheral = db.Types_peripherals.FirstOrDefault(type => type.Id_type_peripheral == typePeripheral.Id_type_peripheral);
 
-            if (findTypePeripheral == null)
+            if (foundTypePeripheral == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении типа периферии",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -95,7 +95,7 @@ namespace Inventory.Model
                 return;
             }
 
-            findTypePeripheral.Name = typePeripheral.Name;
+            foundTypePeripheral.Name = typePeripheral.Name;
             db.SaveChanges();
         }
 
@@ -106,9 +106,9 @@ namespace Inventory.Model
                 return;
 
             using var db = new InventoryEntities();
-            var findTypePeripheral = db.Types_peripherals.FirstOrDefault(types => types.Id_type_peripheral == selectTypePeripheral.Id_type_peripheral);
+            var foundTypePeripheral = db.Types_peripherals.FirstOrDefault(types => types.Id_type_peripheral == selectTypePeripheral.Id_type_peripheral);
 
-            if (findTypePeripheral == null)
+            if (foundTypePeripheral == null)
             {
                 MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении типа периферии", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshCollection();
@@ -117,7 +117,7 @@ namespace Inventory.Model
 
             try
             {
-                db.Types_peripherals.Remove(findTypePeripheral);
+                db.Types_peripherals.Remove(foundTypePeripheral);
                 db.SaveChanges();
 
                 TypesPeripheralsViewModel.TypesPeripherals.Remove(selectTypePeripheral);
