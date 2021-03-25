@@ -19,6 +19,7 @@
             TypesHddsPage = new TypesHddsPage();
             TypesSsdsPage = new TypesSsdsPage();
             TypesMemoryPage = new TypesMemoryPage();
+            StatusesComputersPage = new StatusesComputersPage();
         }
 
         #region Свойства
@@ -37,7 +38,9 @@
         private SoketsPage SoketsPage { get; }
 
         private TypesHddsPage TypesHddsPage { get; }
-        
+
+        private StatusesComputersPage StatusesComputersPage { get; }
+
         #endregion
 
         #region Команды
@@ -52,6 +55,8 @@
         public ICommand SelectTablesManufacturersCommand => new DelegateCommand(() => CurrentPage = ManufacturersPage);
 
         public ICommand SelectTypesSsdPageCommand => new DelegateCommand(() => CurrentPage = TypesSsdsPage);
+
+        public ICommand SelectStatusesComputersPageCommand => new DelegateCommand(() => CurrentPage = StatusesComputersPage);
 
         public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
         #endregion

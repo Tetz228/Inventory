@@ -37,7 +37,7 @@
             </MenuItem>
             <MenuItem Header="Компьютеры">
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Компьютеры" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Статусы компьютеров" />
+                <MenuItem Command="{Binding SelectStatusesComputersPageCommand}" Header="Статусы компьютеров" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Операционные системы" />
             </MenuItem>
             <MenuItem Header="Комплектующие">
