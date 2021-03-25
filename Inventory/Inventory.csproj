@@ -304,28 +304,28 @@
     <Compile Include="ViewModels\Tables\Computers\Computers\StatusesComputersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\TypesMemoryViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\TypesSddsViewModel.cs" />
-    <Compile Include="View\Add\Tables\Computers\OperatingSystemAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Computers\Computers\OperatingSystemAddWindow.xaml.cs">
       <DependentUpon>OperatingSystemAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\StatusComputerAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Computers\Computers\StatusComputerAddWindow.xaml.cs">
       <DependentUpon>StatusComputerAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\TypeMemoryAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Computers\Other\TypeMemoryAddWindow.xaml.cs">
       <DependentUpon>TypeMemoryAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\TypeSsdAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Computers\Other\TypeSsdAddWindow.xaml.cs">
       <DependentUpon>TypeSsdAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\OperatingSystemEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Computers\Computers\OperatingSystemEditWindow.xaml.cs">
       <DependentUpon>OperatingSystemEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\StatusComputerEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Computers\Computers\StatusComputerEditWindow.xaml.cs">
       <DependentUpon>StatusComputerEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\TypeMemoryEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Computers\Other\TypeMemoryEditWindow.xaml.cs">
       <DependentUpon>TypeMemoryEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\TypeSsdEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Computers\Other\TypeSsdEditWindow.xaml.cs">
       <DependentUpon>TypeSsdEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Recovery_password\EmailPage.xaml.cs">
@@ -454,10 +454,10 @@
     <Compile Include="ViewModels\Tables\Peripherals\TablesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TypesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\SocketsViewModel.cs" />
-    <Compile Include="View\Add\Tables\Computers\HddAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Computers\Accessories\HddAddWindow.xaml.cs">
       <DependentUpon>HddAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\TypeHddAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Computers\Other\TypeHddAddWindow.xaml.cs">
       <DependentUpon>TypeHddAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\Employees\DepartmentAddWindow.xaml.cs">
@@ -481,7 +481,7 @@
     <Compile Include="View\Add\Tables\Peripherals\PeripheralAddWindow.xaml.cs">
       <DependentUpon>PeripheralAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\SocketAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Computers\Other\SocketAddWindow.xaml.cs">
       <DependentUpon>SocketAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml.cs">
@@ -501,35 +501,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Add\Tables\Computers\OperatingSystemAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\Computers\OperatingSystemAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Add\Tables\Computers\StatusComputerAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\Computers\StatusComputerAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Add\Tables\Computers\TypeMemoryAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\Other\TypeMemoryAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Add\Tables\Computers\TypeSsdAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\Other\TypeSsdAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\OperatingSystemEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\Computers\OperatingSystemEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\StatusComputerEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\Computers\StatusComputerEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\TypeMemoryEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\Other\TypeMemoryEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\TypeSsdEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\Other\TypeSsdEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -649,11 +649,11 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\Add\Tables\Computers\HddAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\Accessories\HddAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Add\Tables\Computers\TypeHddAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\Other\TypeHddAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -685,7 +685,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\Add\Tables\Computers\SocketAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\Other\SocketAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -701,23 +701,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\HddEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\Accessories\HddEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\SocketEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\Other\SocketEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Add\Tables\Computers\UnitAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\Other\UnitAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\TypeHddEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\Other\TypeHddEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\UnitEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\Other\UnitEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -761,19 +761,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\HddEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Computers\Accessories\HddEditWindow.xaml.cs">
       <DependentUpon>HddEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\SocketEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Computers\Other\SocketEditWindow.xaml.cs">
       <DependentUpon>SocketEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\UnitAddWindow.xaml.cs">
+    <Compile Include="View\Add\Tables\Computers\Other\UnitAddWindow.xaml.cs">
       <DependentUpon>UnitAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\TypeHddEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Computers\Other\TypeHddEditWindow.xaml.cs">
       <DependentUpon>TypeHddEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\UnitEditWindow.xaml.cs">
+    <Compile Include="View\Edit\Tables\Computers\Other\UnitEditWindow.xaml.cs">
       <DependentUpon>UnitEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Employees\DepartmentEditWindow.xaml.cs">
