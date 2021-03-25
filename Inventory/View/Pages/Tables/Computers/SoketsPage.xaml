@@ -146,6 +146,16 @@
                 BorderThickness="1"
                 Style="{StaticResource BaseTextBox}"
                 Text="{Binding SocketsFilter, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Command="{Binding ExportExcelCommand}" Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="White"
+                        Kind="FileExcel" />
+                </ContentControl>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

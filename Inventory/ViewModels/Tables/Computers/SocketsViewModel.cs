@@ -11,6 +11,7 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
+    using Excel = Microsoft.Office.Interop.Excel;
 
     public class SocketsViewModel : BindableBase
     {
@@ -94,5 +95,11 @@
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Socket.RefreshCollection);
         #endregion
+
+        public ICommand ExportExcelCommand => new DelegateCommand(() =>
+        {
+            var addPostWindow = new SocketAddWindow();
+            addPostWindow.ShowDialog();
+        });
     }
 }
