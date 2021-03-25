@@ -270,15 +270,15 @@
     </Compile>
     <Compile Include="PageNavigation.cs" />
     <Compile Include="Services.cs" />
-    <Compile Include="ViewModels\Add\Tables\Computers\OperatingSystemAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Computers\StatusComputerAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Computers\TypeMemoryAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Computers\TypeSddAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Computers\OperatingSystemAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Computers\StatusComputerAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeMemoryAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeSddAddViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\OperatingSystemEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\StatusComputerEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\TypeMemoryEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\TypeSsdEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Computers\OperatingSystemEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Computers\StatusComputerEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeMemoryEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeSsdEditViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\EmailViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\NewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\PasswordRecoveryViewModel.cs" />
@@ -398,23 +398,23 @@
     <Compile Include="View\Pages\Tables\Peripherals\TypesPeripheralsPage.xaml.cs">
       <DependentUpon>TypesPeripheralsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Add\Tables\Computers\HddAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Computers\TypeHddAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Computers\UnitAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Accessories\HddAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeHddAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Other\UnitAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\DepartmentAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\PostAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\UserAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\InventoryPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\PeripheralAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Computers\SocketAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Other\SocketAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\StatusPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\TypePeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Edit\ManufacturerEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\HddEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\SocketEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\TypeHddEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\UnitEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\HddEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Other\SocketEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeHddEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Other\UnitEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
