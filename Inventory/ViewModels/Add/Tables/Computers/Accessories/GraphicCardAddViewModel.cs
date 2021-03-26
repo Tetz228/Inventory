@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Add.Tables.Computers.Accessories
+﻿namespace Inventory.ViewModels.Add.Tables.Computers.Accessories
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
     using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-
-    public class GraphicCardAddViewModel:BindableBase
+    public class GraphicCardAddViewModel : BindableBase
     {
         public GraphicCardAddViewModel()
         {

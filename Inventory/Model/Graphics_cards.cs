@@ -151,8 +151,8 @@ namespace Inventory.Model
             }
             catch (DbUpdateException)
             {
-                MessageBox.Show("Невозможно удалить видеокарту, так как он связана с другими сущностями!",
-                    "Ошибка при удалении жесткого диска", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Невозможно удалить видеокарту, так как она связана с другими сущностями!",
+                    "Ошибка при удалении видеокарты", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
