@@ -301,10 +301,34 @@
     <Compile Include="ViewModels\Recovery__password\NewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\SecurityСodeViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Accessories\GraphicsCardsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Accessories\MotherboardsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Accessories\PowerSuppliesViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Accessories\ProcessorsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Accessories\RamViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Accessories\SsdViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Computers\OperatingSystemsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Computers\StatusesComputersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\TypesMemoryViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\TypesSddsViewModel.cs" />
+    <Compile Include="View\Add\Tables\Computers\Accessories\GraphicCardAddWindow.xaml.cs">
+      <DependentUpon>GraphicCardAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Computers\Accessories\MotherboardAddWindow.xaml.cs">
+      <DependentUpon>MotherboardAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Computers\Accessories\PowerSupplyAddWindow.xaml.cs">
+      <DependentUpon>PowerSupplyAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Computers\Accessories\ProcessorAddWindow.xaml.cs">
+      <DependentUpon>ProcessorAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Computers\Accessories\RamAddWindow.xaml.cs">
+      <DependentUpon>RamAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Add\Tables\Computers\Accessories\SsdAddWindow.xaml.cs">
+      <DependentUpon>SsdAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Add\Tables\Computers\Computers\OperatingSystemAddWindow.xaml.cs">
       <DependentUpon>OperatingSystemAddWindow.xaml</DependentUpon>
     </Compile>
@@ -316,6 +340,24 @@
     </Compile>
     <Compile Include="View\Add\Tables\Computers\Other\TypeSsdAddWindow.xaml.cs">
       <DependentUpon>TypeSsdAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\Accessories\GraphicCardEditWindow.xaml.cs">
+      <DependentUpon>GraphicCardEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\Accessories\MotherboardEditWindow.xaml.cs">
+      <DependentUpon>MotherboardEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\Accessories\PowerSupplyEditWindow.xaml.cs">
+      <DependentUpon>PowerSupplyEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\Accessories\ProcessorEditWindow.xaml.cs">
+      <DependentUpon>ProcessorEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\Accessories\RamEditWindow.xaml.cs">
+      <DependentUpon>RamEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Computers\Accessories\SsdEditWindow.xaml.cs">
+      <DependentUpon>SsdEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Computers\Computers\OperatingSystemEditWindow.xaml.cs">
       <DependentUpon>OperatingSystemEditWindow.xaml</DependentUpon>
@@ -502,6 +544,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Add\Tables\Computers\Accessories\GraphicCardAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\Accessories\MotherboardAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\Accessories\PowerSupplyAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\Accessories\ProcessorAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\Accessories\RamAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Add\Tables\Computers\Accessories\SsdAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Add\Tables\Computers\Computers\OperatingSystemAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -515,6 +581,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Add\Tables\Computers\Other\TypeSsdAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\Accessories\GraphicCardEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\Accessories\MotherboardEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\Accessories\PowerSupplyEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\Accessories\ProcessorEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\Accessories\RamEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Computers\Accessories\SsdEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
