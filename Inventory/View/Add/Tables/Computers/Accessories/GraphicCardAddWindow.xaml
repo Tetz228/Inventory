@@ -2,12 +2,124 @@
     x:Class="Inventory.View.Add.Tables.Computers.Accessories.GraphicCardAddWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:accessories="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Accessories"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Inventory.View.Add.Tables.Computers.Accessories"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="GraphicCardAddWindow"
-    Width="800"
-    Height="450"
+    x:Name="AddWindow"
+    Title="Добавить новую видеокарту"
+    Width="515"
+    Height="310"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
-    <Grid />
+
+    <Window.DataContext>
+        <accessories:GraphicCardAddViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock
+                Style="{StaticResource BaseText}"
+                Text="Новая видеокарта"
+                TextAlignment="Center" />
+
+            <Grid>
+                <Border Background="#FFAEAEAE" CornerRadius="5">
+                    <Border.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border
+                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Background="Black"
+                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    SnapsToDevicePixels="True" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Border.OpacityMask>
+
+                    <StackPanel Width="474" HorizontalAlignment="Center">
+                        <!--  Производитель  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+
+                            <ComboBox
+                                Width="219"
+                                MaxWidth="219"
+                                Margin="0,7,0,0"
+                                HorizontalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Manufacturers}"
+                                SelectedValue="{Binding GraphicCard.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_manufacturer"
+                                Style="{StaticResource BaseComboBox}" />
+                        </UniformGrid>
+
+                        <!--  Наименование видеокарты  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование видеокарты: " />
+
+                            <TextBox
+                                Name="TextBoxName"
+                                MaxLength="100"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding GraphicCard.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding GraphicCard.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Объём  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Объём: " />
+
+                            <TextBox
+                                MaxLength="20"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding GraphicCard.Memory_size, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding GraphicCard.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Единица измерения  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Единица измерения: " />
+
+                            <ComboBox
+                                Width="219"
+                                MaxWidth="219"
+                                Margin="0,7,0,0"
+                                HorizontalAlignment="Center"
+                                DisplayMemberPath="Full_name"
+                                ItemsSource="{Binding Units}"
+                                SelectedValue="{Binding GraphicCard.Fk_unit, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_unit"
+                                Style="{StaticResource BaseComboBox}" />
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <!--  Добавить новую видеокарту  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding AddCommand}"
+                    CommandParameter="{Binding ElementName=AddWindow}"
+                    Content="Добавить новую видеокарту"
+                    IsDefault="True"
+                    Style="{StaticResource BaseButton}" />
+
+                <!--  Отменить  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Right"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=AddWindow}"
+                    IsCancel="True"
+                    Style="{StaticResource BaseButton}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
 </Window>
