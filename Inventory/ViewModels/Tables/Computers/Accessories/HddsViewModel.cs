@@ -1,5 +1,10 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Accessories
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers.Accessories;
+    using Inventory.View.Edit.Tables.Computers.Accessories;
+    using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
@@ -7,16 +12,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Add.Tables.Computers.Accessories;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers.Accessories;
-    using Inventory.ViewModels.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
 
     public class HddsViewModel : BindableBase
     {
