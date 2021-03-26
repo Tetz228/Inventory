@@ -1,13 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Add.Tables.Computers.Accessories
+﻿namespace Inventory.ViewModels.Add.Tables.Computers.Accessories
 {
-    public class MotherboardAddViewModel
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using System.Collections.ObjectModel;
+    using System.Windows;
+    using System.Windows.Input;
+
+    public class MotherboardAddViewModel : BindableBase
     {
-        
+        public MotherboardAddViewModel()
+        {
+            using var db = new InventoryEntities();
+
+            Motherboard = new Motherboard();
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
+            Sockets = new ObservableCollection<Socket>(db.Sockets);
+        }
+
+        public Motherboard Motherboard { get; }
+
+        public ObservableCollection<Manufacturer> Manufacturers { get; }
+
+        public ObservableCollection<Socket> Sockets { get; }
+
+        #region Команды
+        public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
+        {
+            Motherboard.AddMotherboard(Motherboard);
+            addWindow.Close();
+        }, _ => Motherboard.IsValidationProperties());
+
+        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
+        #endregion
     }
 }
