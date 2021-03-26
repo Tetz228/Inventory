@@ -288,11 +288,23 @@
     </Compile>
     <Compile Include="PageNavigation.cs" />
     <Compile Include="Services.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Accessories\GraphicCardAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Accessories\MotherboardAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Accessories\PowerSupplyAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Accessories\ProcessorAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Accessories\RamAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Computers\Accessories\SsdAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Computers\OperatingSystemAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Computers\StatusComputerAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeMemoryAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeSddAddViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\GraphicCardEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\MotherboardEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\PowerSupplyEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\ProcessorEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\RamEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\SsdEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Computers\OperatingSystemEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Computers\StatusComputerEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeMemoryEditViewModel.cs" />
