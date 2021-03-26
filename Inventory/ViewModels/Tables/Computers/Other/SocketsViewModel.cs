@@ -7,10 +7,13 @@
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Data;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
+
+    using ClosedXML.Excel;
 
     public class SocketsViewModel : BindableBase
     {
@@ -95,9 +98,9 @@
         public ICommand RefreshCollectionCommand => new DelegateCommand(Socket.RefreshCollection);
         #endregion
 
-        public ICommand ExportExcelCommand => new DelegateCommand(() =>
+        public ICommand ExportExcelCommand => new DelegateCommand<ListView>(list =>
         {
-
+           
         });
     }
 }
