@@ -51,12 +51,12 @@
                         Header="Тип"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
-                        DisplayMemberBinding="{Binding Peripheral.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Наименование"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
                         DisplayMemberBinding="{Binding Peripheral.Manufacturer.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Производитель"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Peripheral.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Наименование"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Statuses_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"

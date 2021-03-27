@@ -1,19 +1,24 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Other
 {
+    using ClosedXML.Report;
     using DevExpress.Mvvm;
     using Inventory.Model;
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Data;
+    using System.Data.Entity;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Linq.Dynamic.Core;
+    using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using ClosedXML.Excel;
 
     public class SocketsViewModel : BindableBase
     {
@@ -100,7 +105,19 @@
 
         public ICommand ExportExcelCommand => new DelegateCommand<ListView>(list =>
         {
-           
+            var f =Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            const string outputFile = @"D:\SocketReport.xlsx";
+            var template = new XLTemplate(@"D:\SocketTemplate.xlsx");
+
+            using var db = new InventoryEntities();
+
+            var socket = db.Sockets.Select(name => name.Name);
+            
+            template.AddVariable("Name", socket);
+            template.Generate();
+            template.SaveAs(outputFile);
+
+            Process.Start(new ProcessStartInfo(outputFile) { UseShellExecute = true });
         });
     }
 }

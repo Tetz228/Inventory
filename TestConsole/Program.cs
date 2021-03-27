@@ -1,25 +1,30 @@
 ﻿namespace TestConsole
 {
+    using ClosedXML.Excel;
     using System;
     using System.Collections.Generic;
-
-    using ClosedXML.Excel;
     using System.Data;
+
+    using ClosedXML.Report;
 
     class Program
     {
         static void Main(string[] args)
         {
-            var wb = new XLWorkbook();
-            var ws = wb.Worksheets.Add("Список сокетов");
 
-            var listOfArr = new List<Int32[]>();
-            listOfArr.Add(new Int32[] { 1, 2, 3 });
-            listOfArr.Add(new Int32[] { 1 });
-            listOfArr.Add(new Int32[] { 1, 2, 3, 4, 5, 6 });
-            ws.Cell(1, 3).Value = "Arrays";
-            ws.Range(1, 3, 1, 8).Merge().AddToNamed("Titles");
-            ws.Cell(2, 3).Value = listOfArr;
+            
+
+            #region MyRegion
+            //var wb = new XLWorkbook();
+            //var ws = wb.Worksheets.Add("Список сокетов");
+
+            ////var listOfArr = new List<Int32[]>();
+            ////listOfArr.Add(new Int32[] { 1, 2, 3 });
+            ////listOfArr.Add(new Int32[] { 1 });
+            ////listOfArr.Add(new Int32[] { 1, 2, 3, 4, 5, 6 });
+            ////ws.Cell(1, 3).Value = "Arrays";
+            ////ws.Range(1, 3, 1, 8).Merge().AddToNamed("Titles");
+            ////ws.Cell(2, 3).Value = listOfArr;
 
             //DataTable dataTable = new DataTable();
             //dataTable.Columns.Add("Наименование", typeof(string));
@@ -65,8 +70,10 @@
             //titles.Style.Border.LeftBorder = XLBorderStyleValues.Medium;
             //titles.Style.Border.TopBorder = XLBorderStyleValues.Medium;
 
-            //ws.Columns().AdjustToContents();
-            wb.SaveAs(@"D:\InsertingTables1.xlsx");
+            ////ws.Columns().AdjustToContents();
+            //wb.SaveAs(@"D:\InsertingTables1.xlsx");
+            #endregion
         }
+
     }
 }
