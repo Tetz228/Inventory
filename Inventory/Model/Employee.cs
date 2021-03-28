@@ -1,19 +1,16 @@
 namespace Inventory.Model
 {
     using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Employees;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Data.Entity;
     using System.Linq;
     using System.Net;
     using System.Net.Mail;
     using System.Text.RegularExpressions;
     using System.Windows;
-
 
     public partial class Employee : BindableBase, IDataErrorInfo
     {
@@ -34,7 +31,7 @@ namespace Inventory.Model
         public string M_name { get; set; }
         public string Email { get; set; }
         public string Phone_number { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_computers> Dispensing_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
