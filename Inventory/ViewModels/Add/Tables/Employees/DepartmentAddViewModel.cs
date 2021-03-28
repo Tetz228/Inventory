@@ -5,6 +5,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Employees;
+
     public class DepartmentAddViewModel : BindableBase
     {
         public DepartmentAddViewModel()
@@ -18,7 +21,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Department);
-            Department.RefreshCollection();
+            DepartmentsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Department.IsValidationProperties());
 

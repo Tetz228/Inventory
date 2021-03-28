@@ -2,8 +2,9 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.Model.Classes;
+    using Inventory.View.Add.Tables.Computers.Other;
+    using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -11,9 +12,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.View.Add.Tables.Computers.Other;
-    using Inventory.View.Edit.Tables.Computers.Other;
 
     public class TypesSddsViewModel : BindableBase
     {
@@ -47,7 +45,7 @@
                 TypesSsdsCollection.Filter = obj =>
                 {
                     if (obj is Types_ssd typeSsd)
-                        return Types_ssd.SearchFor(typeSsd, TypesSsdsFilter);
+                        return typeSsd.Search(TypesSsdsFilter);
 
                     return false;
                 };
@@ -102,10 +100,19 @@
                 return;
 
             Services.Delete<Types_ssd>(selectTypeSsd.Id_type_ssd);
-            Types_ssd.RefreshCollection();
+            RefreshCollection();
         }, selectTypeSsd => selectTypeSsd != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Types_ssd.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            TypesSsds.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Types_ssd)
+                TypesSsds.Add(item);
+        }
     }
 }

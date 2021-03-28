@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Model.Classes;
     using Inventory.View.Add.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -41,7 +42,7 @@
                 UsersCollection.Filter = obj =>
                 {
                     if (obj is User user)
-                        return User.SearchFor(user, UsersFilter);
+                        return user.Search(UsersFilter);
 
                     return false;
                 };
@@ -91,7 +92,16 @@
             addUserWindow.ShowDialog();
         });
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(User.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Users.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Users.Include(employee => employee.Employee))
+                Users.Add(item);
+        }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище InventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище InventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Computers">
           <Key>
             <PropertyRef Name="Id_computer" />
@@ -78,11 +78,11 @@
             <PropertyRef Name="Id_hdd" />
           </Key>
           <Property Name="Id_hdd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_type_hdd" Type="int" Nullable="false" />
           <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Memory_size" Type="float" Nullable="false" />
           <Property Name="Fk_unit" Type="int" Nullable="false" />
-          <Property Name="Fk_type_hdd" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Hdd_in_computers">
           <Key>
@@ -494,7 +494,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_in_department_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Employees_in_departments" Type="Self.Employees_in_departments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -530,7 +532,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Hdd_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Hdd_in_computers" Type="Self.Hdd_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -710,7 +714,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_List_dispensed_computers_Dispensing_computers">
-          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="1" />
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="List_dispensed_computers" Type="Self.List_dispensed_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dispensing_computers">
@@ -722,7 +728,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_List_dispensed_peripherals_Dispensing_peripherals">
-          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="1" />
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="List_dispensed_peripherals" Type="Self.List_dispensed_peripherals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dispensing_peripherals">
@@ -770,7 +778,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Operating_systems_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Operating_systems_in_computers" Type="Self.Operating_systems_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -818,7 +828,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Posts_employees_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -866,7 +878,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Processors_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Processors_in_computers" Type="Self.Processors_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -926,7 +940,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ram_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ram_in_computers" Type="Self.Ram_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -986,7 +1002,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ssd_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ssd_in_computers" Type="Self.Ssd_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -1327,8 +1345,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

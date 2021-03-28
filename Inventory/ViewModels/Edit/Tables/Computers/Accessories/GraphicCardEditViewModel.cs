@@ -2,12 +2,14 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 
-    public class GraphicCardEditViewModel : BindableBase
+    public class GraphicCardEditViewModel : BindableBase, IEditableObject
     {
         public GraphicCardEditViewModel(Graphics_cards graphicCard)
         {
@@ -17,7 +19,7 @@
             Units = new ObservableCollection<Unit>(db.Units);
 
             GraphicCard = graphicCard;
-            GraphicCard.BeginEdit();
+            BeginEdit();
         }
 
         public Graphics_cards GraphicCard { get; }
@@ -26,22 +28,55 @@
 
         public ObservableCollection<Unit> Units { get; }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e) => GraphicCard.CancelEdit();
+        public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
-            GraphicCard.EndEdit();
+            EndEdit();
             Services.Edit(GraphicCard.Id_graphics_card, GraphicCard);
-            Graphics_cards.RefreshCollection();
+            GraphicsCardsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => GraphicCard.IsValidationProperties());
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
-            GraphicCard.CancelEdit();
+            CancelEdit();
             editWindow.Close();
         });
+        #endregion
+
+        #region Откат изменений
+        private Graphics_cards _selectGraphicCard;
+
+        public void BeginEdit()
+        {
+            _selectGraphicCard = new Graphics_cards()
+            {
+                Id_graphics_card = GraphicCard.Id_graphics_card,
+                Memory_size = GraphicCard.Memory_size,
+                Name = GraphicCard.Name,
+                Fk_unit = GraphicCard.Fk_unit,
+                Fk_manufacturer = GraphicCard.Fk_manufacturer,
+            };
+        }
+
+        public void EndEdit()
+        {
+            _selectGraphicCard = null;
+        }
+
+        public void CancelEdit()
+        {
+            if (_selectGraphicCard == null)
+                return;
+
+            GraphicCard.Id_graphics_card = _selectGraphicCard.Id_graphics_card;
+            GraphicCard.Memory_size = _selectGraphicCard.Memory_size;
+            GraphicCard.Name = _selectGraphicCard.Name;
+            GraphicCard.Fk_unit = _selectGraphicCard.Fk_unit;
+            GraphicCard.Fk_manufacturer = _selectGraphicCard.Fk_manufacturer;
+        }
         #endregion
     }
 }

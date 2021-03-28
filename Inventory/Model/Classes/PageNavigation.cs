@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory
+﻿namespace Inventory.Model.Classes
 {
+    using System;
     using System.Windows.Controls;
 
     public class PageNavigation

@@ -12,13 +12,15 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class StatusesComputersViewModel : BindableBase
     {
         public StatusesComputersViewModel()
         {
             using var db = new InventoryEntities();
 
-            StatusesComputers = new ObservableCollection<Statuses_computers>(db.Statuses_computers);
+            StatusesComputers = new ObservableCollection<Statuses_computers>((System.Collections.Generic.IEnumerable<Statuses_computers>)db.Statuses_computers);
             StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Ascending);
             StatusesComputersCollection = CollectionViewSource.GetDefaultView(StatusesComputers);
         }
@@ -44,7 +46,7 @@
                 StatusesComputersCollection.Filter = obj =>
                 {
                     if (obj is Statuses_computers statusComputer)
-                        return Statuses_computers.SearchFor(statusComputer, StatusesComputersFilter);
+                        return statusComputer.Search(StatusesComputersFilter);
 
                     return false;
                 };
@@ -101,10 +103,19 @@
                 return;
 
             Services.Delete<Statuses_computers>(selectStatusComputer.Id_status_computer);
-            Statuses_computers.RefreshCollection();
+            RefreshCollection();
         }, selectStatusComputer => selectStatusComputer != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Statuses_computers.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            StatusesComputers.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Statuses_computers)
+                StatusesComputers.Add(item);
+        }
     }
 }

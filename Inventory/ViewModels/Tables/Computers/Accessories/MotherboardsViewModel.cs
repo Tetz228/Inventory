@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Model.Classes;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -44,7 +45,7 @@
                 MotherboardsCollection.Filter = obj =>
                 {
                     if (obj is Motherboard motherboard)
-                        return Motherboard.SearchFor(motherboard, MotherboardsFilter);
+                        return motherboard.Search(MotherboardsFilter);
 
                     return false;
                 };
@@ -117,10 +118,19 @@
                 return;
 
             Services.Delete<Motherboard>(selectMotherboard.Id_motherboard);
-            Motherboard.RefreshCollection();
+            RefreshCollection();
         }, selectMotherboard => selectMotherboard != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Motherboard.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Motherboards.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket))
+                Motherboards.Add(item);
+        }
     }
 }

@@ -7,6 +7,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Peripherals;
+
     public class InventoryPeripheralEditViewModel : BindableBase
     {
         public InventoryPeripheralEditViewModel(Inventory_numbers_peripherals inventoryNumberPeripheral)
@@ -32,7 +35,7 @@
         {
             InventoryNumberPeripheral.EndEdit();
             Services.Edit(InventoryNumberPeripheral.Id_inventory_number_peripheral, InventoryNumberPeripheral);
-            Inventory_numbers_peripherals.RefreshCollection();
+            InventoryPeripheralsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => InventoryNumberPeripheral.IsValidationProperties());
 

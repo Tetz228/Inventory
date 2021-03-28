@@ -12,6 +12,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class TypesPeripheralsViewModel : BindableBase
     {
         public TypesPeripheralsViewModel()
@@ -44,7 +46,7 @@
                 TypesPeripheralsCollection.Filter = obj =>
                 {
                     if (obj is Types_peripherals typePeripheral)
-                        return Types_peripherals.SearchFor(typePeripheral, TypesPeripheralsFilter);
+                        return typePeripheral.Search(TypesPeripheralsFilter);
 
                     return false;
                 };
@@ -99,10 +101,19 @@
                 return;
 
             Services.Delete<Types_peripherals>(selectTypePeripheral.Id_type_peripheral);
-            Types_peripherals.RefreshCollection();
+            RefreshCollection();
         }, selectTypePeripheral => selectTypePeripheral != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Types_peripherals.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            TypesPeripherals.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Types_peripherals)
+                TypesPeripherals.Add(item);
+        }
     }
 }

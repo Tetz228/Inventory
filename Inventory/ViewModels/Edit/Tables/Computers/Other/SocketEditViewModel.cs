@@ -7,33 +7,62 @@
     using DevExpress.Mvvm;
 
     using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Other;
 
-    public class SocketEditViewModel : BindableBase
+    public class SocketEditViewModel : BindableBase, IEditableObject
     {
         public SocketEditViewModel(Socket socket)
         {
             Socket = socket;
-            Socket.BeginEdit();
+            BeginEdit();
         }
 
         public Socket Socket { get; }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e) => Socket.CancelEdit();
+        public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
-            Socket.EndEdit();
+           EndEdit();
             Services.Edit(Socket.Id_socket, Socket);
-            Socket.RefreshCollection();
+            SocketsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Socket.IsValidationProperties());
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
-            Socket.CancelEdit();
+            CancelEdit();
             editWindow.Close();
         });
+        #endregion
+
+        #region Откат изменений
+        private Socket _selectSocket;
+
+        public void BeginEdit()
+        {
+            _selectSocket = new Socket
+            {
+                Id_socket = Socket.Id_socket,
+                Name = Socket.Name,
+            };
+        }
+
+        public void EndEdit()
+        {
+            _selectSocket = null;
+        }
+
+        public void CancelEdit()
+        {
+            if (_selectSocket == null)
+                return;
+
+            Socket.Id_socket = _selectSocket.Id_socket;
+            Socket.Name = _selectSocket.Name;
+        }
         #endregion
     }
 }

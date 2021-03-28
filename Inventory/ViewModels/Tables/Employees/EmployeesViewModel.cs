@@ -14,6 +14,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class EmployeesViewModel : BindableBase
     {
         public EmployeesViewModel()
@@ -48,7 +50,7 @@
                 EmployeesCollection.Filter = obj =>
                 {
                     if (obj is Employee employee)
-                        return Employee.SearchFor(employee, EmployeesFilter);
+                        return employee.Search(EmployeesFilter);
 
                     return false;
                 };
@@ -140,14 +142,28 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            int id = selectEmployee.Id_employee;
-            Employee.DeleteEmployee(selectEmployee);
-            //Services.Delete<Employee>(selectEmployee.Id_employee);
-            //Dele
-            Employee.RefreshCollection();
+            Employees_in_departments.DeleteEmployeeDepartment(selectEmployee.Id_employee);
+            Posts_employees.DeletePostEmployee(selectEmployee.Id_employee);
+            Services.Delete<Employee>(selectEmployee.Id_employee);
+            
+            RefreshCollection();
         }, selectHdd => selectHdd != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Employee.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Employees.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Employees.Include(employeePost => employeePost.Posts_employees
+                    .Select(post => post.Post))
+                .Include(empDepart => empDepart.Employees_in_departments
+                    .Select(depart => depart.Department)))
+            {
+                Employees.Add(item);
+            }
+        }
     }
 }

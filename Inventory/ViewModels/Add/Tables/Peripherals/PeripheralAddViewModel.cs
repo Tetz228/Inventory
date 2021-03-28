@@ -7,6 +7,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Peripherals;
+
     public class PeripheralAddViewModel : BindableBase
     {
         public PeripheralAddViewModel()
@@ -28,7 +31,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Peripheral);
-            Peripheral.RefreshCollection();
+            PeripheralsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Peripheral.IsValidationProperties());
 

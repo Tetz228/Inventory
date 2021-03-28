@@ -1,28 +1,29 @@
 namespace Inventory.Model
 {
-    using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Computers.Other;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
 
-    public partial class Unit : BindableBase, IEditableObject, IDataErrorInfo
+    using DevExpress.Mvvm;
+
+    public partial class Unit : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Unit()
         {
-            this.Graphics_cards = new HashSet<Graphics_cards>();
-            this.Hdds = new HashSet<Hdd>();
-            this.Power_supplies = new HashSet<Power_supplies>();
-            this.Processors = new HashSet<Processor>();
-            this.Rams = new HashSet<Ram>();
-            this.Ssds = new HashSet<Ssd>();
+            Graphics_cards = new HashSet<Graphics_cards>();
+            Hdds = new HashSet<Hdd>();
+            Power_supplies = new HashSet<Power_supplies>();
+            Processors = new HashSet<Processor>();
+            Rams = new HashSet<Ram>();
+            Ssds = new HashSet<Ssd>();
         }
-
+    
         public int Id_unit { get; set; }
         public string Full_name { get; set; }
         public string Short_name { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Graphics_cards> Graphics_cards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -72,46 +73,6 @@ namespace Inventory.Model
         public string Error { get => null; }
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
-        #endregion
-
-        public static bool SearchFor(Unit unit, string unitsFilter) => unit.Full_name.ToLower().Contains(unitsFilter.ToLower()) || unit.Short_name.ToLower().Contains(unitsFilter.ToLower());
-
-        public static void RefreshCollection()
-        {
-            UnitsViewModel.Units.Clear();
-            using var db = new InventoryEntities();
-
-            foreach (var item in db.Units)
-                UnitsViewModel.Units.Add(item);
-        }
-
-        #region Откат изменений
-        private Unit _selectUnit;
-
-        public void BeginEdit()
-        {
-            _selectUnit = new Unit
-            {
-                Id_unit = this.Id_unit,
-                Full_name = this.Full_name,
-                Short_name = this.Short_name
-            };
-        }
-
-        public void EndEdit()
-        {
-            _selectUnit = null;
-        }
-
-        public void CancelEdit()
-        {
-            if (_selectUnit == null)
-                return;
-
-            Id_unit = _selectUnit.Id_unit;
-            Full_name = _selectUnit.Full_name;
-            Short_name = _selectUnit.Short_name;
-        }
         #endregion
     }
 }

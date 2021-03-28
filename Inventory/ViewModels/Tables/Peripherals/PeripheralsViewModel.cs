@@ -13,6 +13,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class PeripheralsViewModel : BindableBase
     {
         public PeripheralsViewModel()
@@ -44,7 +46,7 @@
                 PeripheralsCollection.Filter = obj =>
                 {
                     if (obj is Peripheral peripheral)
-                        return Peripheral.SearchFor(peripheral, PeripheralsFilter);
+                        return peripheral.Search(PeripheralsFilter);
 
                     return false;
                 };
@@ -115,10 +117,19 @@
                 return;
 
             Services.Delete<Peripheral>(selectPeripheral.Id_peripheral);
-            Peripheral.RefreshCollection();
+            RefreshCollection();
         }, selectPeripheral => selectPeripheral != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Peripheral.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Peripherals.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Peripherals.Include(manufacturer => manufacturer.Manufacturer).Include(typePeripheral => typePeripheral.Types_peripherals))
+                Peripherals.Add(item);
+        }
     }
 }

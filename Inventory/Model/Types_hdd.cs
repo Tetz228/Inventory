@@ -1,22 +1,23 @@
 namespace Inventory.Model
 {
-    using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Computers.Other;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
 
-    public partial class Types_hdd : BindableBase, IEditableObject, IDataErrorInfo
+    using DevExpress.Mvvm;
+
+    public partial class Types_hdd : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Types_hdd()
         {
-            this.Hdds = new HashSet<Hdd>();
+            Hdds = new HashSet<Hdd>();
         }
-
+    
         public int Id_type_hdd { get; set; }
         public string Name { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hdd> Hdds { get; set; }
 
@@ -52,42 +53,5 @@ namespace Inventory.Model
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
 
-        public static bool SearchFor(Types_hdd typeHdd, string typeHddFilter) => typeHdd.Name.ToLower().Contains(typeHddFilter.ToLower());
-
-        public static void RefreshCollection()
-        {
-            TypesHddsViewModel.TypesHdds.Clear();
-            using var db = new InventoryEntities();
-
-            foreach (var item in db.Types_hdd)
-                TypesHddsViewModel.TypesHdds.Add(item);
-        }
-
-        #region Откат изменений
-        private Types_hdd _selectTypeHdd;
-
-        public void BeginEdit()
-        {
-            _selectTypeHdd = new Types_hdd
-            {
-                Id_type_hdd = this.Id_type_hdd,
-                Name = this.Name
-            };
-        }
-
-        public void EndEdit()
-        {
-            _selectTypeHdd = null;
-        }
-
-        public void CancelEdit()
-        {
-            if (_selectTypeHdd == null)
-                return;
-
-            Id_type_hdd = _selectTypeHdd.Id_type_hdd;
-            Name = _selectTypeHdd.Name;
-        }
-        #endregion
     }
 }

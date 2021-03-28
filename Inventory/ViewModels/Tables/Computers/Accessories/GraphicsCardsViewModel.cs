@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Model.Classes;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -44,7 +45,7 @@
                 GraphicsCardsCollection.Filter = obj =>
                 {
                     if (obj is Graphics_cards graphicCard)
-                        return Graphics_cards.SearchFor(graphicCard, GraphicsCardsFilter);
+                        return graphicCard.Search(GraphicsCardsFilter);
 
                     return false;
                 };
@@ -125,10 +126,19 @@
                 return;
 
             Services.Delete<Graphics_cards>(selectGraphicCard.Id_graphics_card);
-            Graphics_cards.RefreshCollection();
+            RefreshCollection();
         }, selectGraphicCard => selectGraphicCard != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Graphics_cards.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            GraphicsCards.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Graphics_cards.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit))
+                GraphicsCards.Add(item);
+        }
     }
 }

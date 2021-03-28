@@ -1,21 +1,22 @@
 namespace Inventory.Model
 {
+    using System;
     using BCrypt.Net;
-    using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Employees;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data.Entity;
+    using DevExpress.Mvvm;
+    using Inventory.ViewModels.Tables.Employees;
     using System.Linq;
     using System.Windows;
+    using System.Data.Entity;
 
     public partial class User : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Dispensing_computers = new HashSet<Dispensing_computers>();
-            this.Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
+            Dispensing_computers = new HashSet<Dispensing_computers>();
+            Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
         }
 
         public static int AuthorizedUser { get; set; }
@@ -82,12 +83,6 @@ namespace Inventory.Model
         }
         #endregion
 
-        public static bool SearchFor(User user, string usersFilter) => user.Login.ToLower().Contains(usersFilter.ToLower())
-                                                                       || user.Employee.L_name.ToLower().Contains(usersFilter.ToLower())
-                                                                       || user.Employee.F_name.ToLower().Contains(usersFilter.ToLower())
-                                                                       || user.Employee.Email.ToLower().Contains(usersFilter.ToLower());
-
-
         #region Методы обработки информации
         public static void ChangePassword(User user)
         {
@@ -112,15 +107,6 @@ namespace Inventory.Model
             db.SaveChanges();
 
             MessageBox.Show("Пароль успешно изменен!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        public static void RefreshCollection()
-        {
-            UsersViewModel.Users.Clear();
-            using var db = new InventoryEntities();
-
-            foreach (var item in db.Users.Include(employee => employee.Employee))
-                UsersViewModel.Users.Add(item);
         }
 
         public static (string salt, string hash) GenerateSaltAndHashingPassword(string password)

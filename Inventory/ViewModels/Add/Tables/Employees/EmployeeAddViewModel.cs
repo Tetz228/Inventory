@@ -7,6 +7,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Employees;
+
     public class EmployeeAddViewModel : BindableBase
     {
         public EmployeeAddViewModel()
@@ -35,8 +38,7 @@
             Services.Add(Employee);
             Posts_employees.AddPostEmployee(Employee.Id_employee);
             Employees_in_departments.AddEmployeeInDepartment(Employee.Id_employee);
-            Employee.RefreshCollection();
-            
+            EmployeesViewModel.RefreshCollection();
             empAddWindow.Close();
         }, _ => Employee.IsValidationCollections() && Employee.IsValidationProperties());
 

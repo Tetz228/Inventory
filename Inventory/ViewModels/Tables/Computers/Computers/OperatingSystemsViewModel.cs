@@ -1,21 +1,17 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Computers
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.View.Add.Tables.Computers.Computers;
+    using Inventory.View.Edit.Tables.Computers.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers.Computers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Add.Tables.Computers.Computers;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Computers;
 
     public class OperatingSystemsViewModel : BindableBase
     {
@@ -49,7 +45,7 @@
                 OperatingSystemsCollection.Filter = obj =>
                 {
                     if (obj is Operating_systems operatingSystem)
-                        return Operating_systems.SearchFor(operatingSystem, OperatingSystemsFilter);
+                        return operatingSystem.Search(OperatingSystemsFilter);
 
                     return false;
                 };
@@ -112,10 +108,19 @@
                 return;
 
             Services.Delete<Operating_systems>(selectOperatingSystem.Id_operating_system);
-            Operating_systems.RefreshCollection();
+            RefreshCollection();
         }, selectOperatingSystem => selectOperatingSystem != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Operating_systems.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            OperatingSystems.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Operating_systems)
+                OperatingSystems.Add(item);
+        }
     }
 }
