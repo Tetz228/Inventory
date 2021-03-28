@@ -149,7 +149,7 @@ namespace Inventory.Model
             db.Employees.Add(emp);
             db.SaveChanges();
 
-            //Model.Posts_employees.AddPostEmployee(db, emp.Id_employee);
+            
             //Model.Employees_in_departments.AddEmployeeInDepartment(db, emp.Id_employee);
 
             emp.Employees_in_departments = new List<Employees_in_departments>(db.Employees_in_departments.Include(dep => dep.Department).Where(empDep => empDep.Fk_employee == emp.Id_employee));
@@ -202,7 +202,6 @@ namespace Inventory.Model
                 RefreshCollection();
                 return;
             }
-
 
             var postEmp = db.Posts_employees.Where(emp => emp.Fk_employee == foundEmployee.Id_employee);
             var depEmp = db.Employees_in_departments.Where(emp => emp.Fk_employee == foundEmployee.Id_employee);
