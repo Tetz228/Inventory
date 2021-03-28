@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Model.Classes;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -44,7 +45,7 @@
                 HddsCollection.Filter = obj =>
                 {
                     if (obj is Hdd hdd)
-                        return Hdd.SearchFor(hdd, HddsFilter);
+                        return hdd.Search(HddsFilter);
 
                     return false;
                 };
@@ -133,10 +134,19 @@
                 return;
 
             Services.Delete<Hdd>(selectHdd.Id_hdd);
-            Hdd.RefreshCollection();
+            RefreshCollection();
         }, selectHdd => selectHdd != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Hdd.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Hdds.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Hdds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd))
+                Hdds.Add(item);
+        }
     }
 }

@@ -5,6 +5,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables;
+
     public class ManufacturerAddViewModel : BindableBase
     {
         public ManufacturerAddViewModel()
@@ -18,7 +21,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Manufacturer);
-            Manufacturer.RefreshCollection();
+            ManufacturersViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Manufacturer.IsValidationProperties());
 

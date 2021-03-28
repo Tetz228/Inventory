@@ -12,6 +12,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
 
@@ -47,7 +48,7 @@
                 UnitsCollection.Filter = obj =>
                 {
                     if (obj is Unit unit)
-                        return Unit.SearchFor(unit, UnitsFilter);
+                        return unit.Search(UnitsFilter);
 
                     return false;
                 };
@@ -110,10 +111,19 @@
                 return;
 
             Services.Delete<Unit>(selectUnit.Id_unit);
-            Unit.RefreshCollection();
+            RefreshCollection();
         }, selectUnit => selectUnit != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Unit.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Units.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Units)
+                Units.Add(item);
+        }
     }
 }

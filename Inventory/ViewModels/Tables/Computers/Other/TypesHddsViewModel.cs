@@ -12,6 +12,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class TypesHddsViewModel : BindableBase
     {
         public TypesHddsViewModel()
@@ -44,7 +46,7 @@
                 TypesHddsCollection.Filter = obj =>
                 {
                     if (obj is Types_hdd typesHdd)
-                        return Types_hdd.SearchFor(typesHdd, TypesHddsFilter);
+                        return typesHdd.Search(TypesHddsFilter);
 
                     return false;
                 };
@@ -99,10 +101,19 @@
                 return;
 
             Services.Delete<Types_hdd>(selectTypeHdd.Id_type_hdd);
-            Types_hdd.RefreshCollection();
+            RefreshCollection();
         }, selectTypeHdd => selectTypeHdd != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Types_hdd.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            TypesHdds.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Types_hdd)
+                TypesHdds.Add(item);
+        }
     }
 }

@@ -6,32 +6,62 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class ManufacturerEditViewModel : BindableBase
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables;
+
+    public class ManufacturerEditViewModel : BindableBase, IEditableObject
     {
         public ManufacturerEditViewModel(Manufacturer manufacturer)
         {
             Manufacturer = manufacturer;
-            Manufacturer.BeginEdit();
+            BeginEdit();
         }
 
         public Manufacturer Manufacturer { get; }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e) => Manufacturer.CancelEdit();
+        public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
-            Manufacturer.EndEdit();
+            EndEdit();
             Services.Edit(Manufacturer.Id_manufacturer, Manufacturer);
-            Manufacturer.RefreshCollection();
+            ManufacturersViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Manufacturer.IsValidationProperties());
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
-            Manufacturer.CancelEdit();
+            CancelEdit();
             editWindow.Close();
         });
+        #endregion
+
+        #region Откат изменений
+        private Manufacturer _selectManufacturer;
+
+        public void BeginEdit()
+        {
+            _selectManufacturer = new Manufacturer
+            {
+                Id_manufacturer = Manufacturer.Id_manufacturer,
+                Name = Manufacturer.Name
+            };
+        }
+
+        public void EndEdit()
+        {
+            _selectManufacturer = null;
+        }
+
+        public void CancelEdit()
+        {
+            if (_selectManufacturer == null)
+                return;
+
+            Manufacturer.Id_manufacturer = _selectManufacturer.Id_manufacturer;
+            Manufacturer.Name = _selectManufacturer.Name;
+        }
         #endregion
     }
 }

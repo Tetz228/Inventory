@@ -14,16 +14,17 @@ namespace Inventory.Model
     using System.Text.RegularExpressions;
     using System.Windows;
 
-    public partial class Employee : BindableBase, IEditableObject, IDataErrorInfo
+
+    public partial class Employee : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.Dispensing_computers = new HashSet<Dispensing_computers>();
-            this.Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
-            this.Employees_in_departments = new HashSet<Employees_in_departments>();
-            this.Posts_employees = new HashSet<Posts_employees>();
-            this.Users = new HashSet<User>();
+            Dispensing_computers = new HashSet<Dispensing_computers>();
+            Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
+            Employees_in_departments = new HashSet<Employees_in_departments>();
+            Posts_employees = new HashSet<Posts_employees>();
+            Users = new HashSet<User>();
         }
 
         #region Свойства
@@ -33,7 +34,7 @@ namespace Inventory.Model
         public string M_name { get; set; }
         public string Email { get; set; }
         public string Phone_number { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dispensing_computers> Dispensing_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -119,115 +120,6 @@ namespace Inventory.Model
         }
         #endregion
 
-        #region Методы поиска
-        public static bool SearchFor(Employee employee, string employeesFilter) => employee.L_name.ToLower().Contains(employeesFilter.ToLower())
-                                                                                || employee.F_name.ToLower().Contains(employeesFilter.ToLower())
-                                                                                || employee.Email.ToLower().Contains(employeesFilter.ToLower())
-                                                                                || employee.Phone_number.ToLower().Contains(employeesFilter.ToLower())
-                                                                                || ContainsCollectionPostsEmployees(employee, employeesFilter.ToLower())
-                                                                                || ContainsCollectionEmployeesInDepartments(employee, employeesFilter.ToLower());
-
-        public static bool ContainsCollectionPostsEmployees(Employee employee, string employeesFilter) => employee.Posts_employees.Select(postsEmployees => postsEmployees.Post.Name.ToLower().Contains(employeesFilter)).FirstOrDefault();
-
-        public static bool ContainsCollectionEmployeesInDepartments(Employee employee, string employeesFilter) => employee.Employees_in_departments.Select(employeesInDepartments => employeesInDepartments.Department.Name.ToLower().Contains(employeesFilter)).FirstOrDefault();
-        #endregion
-
-        #region Методы обработки информации
-        public static void AddEmployee(Employee employee)
-        {
-            using var db = new InventoryEntities();
-
-            var emp = new Employee
-            {
-                L_name = employee.L_name,
-                F_name = employee.F_name,
-                M_name = employee.M_name,
-                Phone_number = employee.Phone_number,
-                Email = employee.Email
-            };
-
-            db.Employees.Add(emp);
-            db.SaveChanges();
-
-            //Model.Posts_employees.AddPostEmployee(db, emp.Id_employee);
-            //Model.Employees_in_departments.AddEmployeeInDepartment(db, emp.Id_employee);
-
-            emp.Employees_in_departments = new List<Employees_in_departments>(db.Employees_in_departments.Include(dep => dep.Department).Where(empDep => empDep.Fk_employee == emp.Id_employee));
-            emp.Posts_employees = new List<Posts_employees>(db.Posts_employees.Include(post => post.Post).Where(postEmp => postEmp.Fk_employee == emp.Id_employee));
-
-            EmployeesViewModel.Employees.Add(emp);
-        }
-
-        public static void EditEmployee(Employee selectEmployee)
-        {
-            using var db = new InventoryEntities();
-            var foundEmployee = db.Employees.Include(employeePost => employeePost.Posts_employees
-                                           .Select(post => post.Post))
-                                           .Include(empDepart => empDepart.Employees_in_departments
-                                           .Select(depart => depart.Department))
-                                           .FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
-
-            if (foundEmployee == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении сотрудника",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            foundEmployee.L_name = selectEmployee.L_name;
-            foundEmployee.F_name = selectEmployee.F_name;
-            foundEmployee.M_name = selectEmployee.M_name;
-            foundEmployee.Phone_number = selectEmployee.Phone_number;
-            foundEmployee.Email = selectEmployee.Email;
-
-            db.SaveChanges();
-
-            //Model.Posts_employees.EditPostEmployee(db, foundEmployee.Id_employee);
-            //Model.Employees_in_departments.EditEmployeeInDepartment(db, foundEmployee.Id_employee);
-
-            RefreshCollection();
-        }
-
-        public static void DeleteEmployee(Employee selectEmployee)
-        {
-            using var db = new InventoryEntities();
-            var foundEmployee = db.Employees.Include(post => post.Posts_employees)
-                .Include(depart => depart.Employees_in_departments)
-                .FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
-
-            if (foundEmployee == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении сотрудника", MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-
-            var postEmp = db.Posts_employees.Where(emp => emp.Fk_employee == foundEmployee.Id_employee);
-            var depEmp = db.Employees_in_departments.Where(emp => emp.Fk_employee == foundEmployee.Id_employee);
-            db.Posts_employees.RemoveRange(postEmp);
-            db.Employees_in_departments.RemoveRange(depEmp);
-            //db.Employees.Remove(foundEmployee);
-            db.SaveChanges();
-
-            EmployeesViewModel.Employees.Remove(selectEmployee);
-        }
-
-        public static void RefreshCollection()
-        {
-            EmployeesViewModel.Employees.Clear();
-            using var db = new InventoryEntities();
-
-            foreach (var item in db.Employees.Include(employeePost => employeePost.Posts_employees
-                                                     .Select(post => post.Post))
-                                                     .Include(empDepart => empDepart.Employees_in_departments
-                                                     .Select(depart => depart.Department)))
-            {
-                EmployeesViewModel.Employees.Add(item);
-            }
-        }
-
         public static (Employee, bool) OnEmailExist(string email)
         {
             using var db = new InventoryEntities();
@@ -285,41 +177,5 @@ namespace Inventory.Model
                 return (0, false);
             }
         }
-        #endregion
-
-        #region Откат изменений
-        private Employee _selectEmployee;
-
-        public void BeginEdit()
-        {
-            _selectEmployee = new Employee
-            {
-                Id_employee = this.Id_employee,
-                L_name = this.L_name,
-                F_name = this.F_name,
-                M_name = this.M_name,
-                Phone_number = this.Phone_number,
-                Email = this.Email
-            };
-        }
-
-        public void EndEdit()
-        {
-            _selectEmployee = null;
-        }
-
-        public void CancelEdit()
-        {
-            if (_selectEmployee == null)
-                return;
-
-            Id_employee = _selectEmployee.Id_employee;
-            L_name = _selectEmployee.L_name;
-            F_name = _selectEmployee.F_name;
-            M_name = _selectEmployee.M_name;
-            Phone_number = _selectEmployee.Phone_number;
-            Email = _selectEmployee.Email;
-        }
-        #endregion
     }
 }

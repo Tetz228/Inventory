@@ -6,32 +6,62 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class TypePeripheralEditViewModel : BindableBase
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Peripherals;
+
+    public class TypePeripheralEditViewModel : BindableBase, IEditableObject
     {
         public TypePeripheralEditViewModel(Types_peripherals typePeripheral)
         {
             TypePeripheral = typePeripheral;
-            TypePeripheral.BeginEdit();
+            BeginEdit();
         }
 
         public Types_peripherals TypePeripheral { get; }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e) => TypePeripheral.CancelEdit();
+        public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
-            TypePeripheral.EndEdit();
+            EndEdit();
             Services.Edit(TypePeripheral.Id_type_peripheral, TypePeripheral);
-            Types_peripherals.RefreshCollection();
+            TypesPeripheralsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => TypePeripheral.IsValidationProperties());
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
-            TypePeripheral.CancelEdit();
+            CancelEdit();
             editWindow.Close();
         });
+        #endregion
+
+        #region Откат изменений
+        private Types_peripherals _selectTypePeripheral;
+
+        public void BeginEdit()
+        {
+            _selectTypePeripheral = new Types_peripherals
+            {
+                Id_type_peripheral = TypePeripheral.Id_type_peripheral,
+                Name = TypePeripheral.Name
+            };
+        }
+
+        public void EndEdit()
+        {
+            _selectTypePeripheral = null;
+        }
+
+        public void CancelEdit()
+        {
+            if (_selectTypePeripheral == null)
+                return;
+
+            TypePeripheral.Id_type_peripheral = _selectTypePeripheral.Id_type_peripheral;
+            TypePeripheral.Name = _selectTypePeripheral.Name;
+        }
         #endregion
     }
 }

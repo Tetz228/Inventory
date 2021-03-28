@@ -6,32 +6,62 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class DepartmentEditViewModel : BindableBase
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Employees;
+
+    public class DepartmentEditViewModel : BindableBase, IEditableObject
     {
         public DepartmentEditViewModel(Department department)
         {
             Department = department;
-            Department.BeginEdit();
+            BeginEdit();
         }
 
         public Department Department { get; }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e) => Department.CancelEdit();
+        public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
-            Department.EndEdit();
+            EndEdit();
             Services.Edit(Department.Id_department, Department);
-            Department.RefreshCollection();
+            DepartmentsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Department.IsValidationProperties());
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
-            Department.CancelEdit();
+            CancelEdit();
             editWindow.Close();
         });
+        #endregion
+
+        #region Откат изменений
+        private Department _selectDepartment;
+
+        public void BeginEdit()
+        {
+            _selectDepartment = new Department()
+            {
+                Id_department = Department.Id_department,
+                Name = Department.Name,
+            };
+        }
+
+        public void EndEdit()
+        {
+            _selectDepartment = null;
+        }
+
+        public void CancelEdit()
+        {
+            if (_selectDepartment == null)
+                return;
+
+            Department.Id_department = _selectDepartment.Id_department;
+            Department.Name = _selectDepartment.Name;
+        }
         #endregion
     }
 }

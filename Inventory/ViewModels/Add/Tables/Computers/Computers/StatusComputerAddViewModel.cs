@@ -5,6 +5,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Computers;
+
     public class StatusComputerAddViewModel : BindableBase
     {
         public StatusComputerAddViewModel() => StatusComputer = new Statuses_computers();
@@ -15,7 +18,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(StatusComputer);
-            Statuses_computers.RefreshCollection();
+            StatusesComputersViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => StatusComputer.IsValidationProperties());
 

@@ -7,6 +7,9 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Employees;
+
     public class UserAddViewModel : BindableBase
     {
         public UserAddViewModel()
@@ -31,7 +34,7 @@
             User.Password = hash;
 
             Services.Add(User);
-            User.RefreshCollection();
+            UsersViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => User.IsValidationProperties() && User.ValidPassword() && User.Fk_employee != 0 && User.EqualsPasswords());
 

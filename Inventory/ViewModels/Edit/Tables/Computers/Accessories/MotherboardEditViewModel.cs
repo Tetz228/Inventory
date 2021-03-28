@@ -1,13 +1,13 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Accessories
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
 
     public class MotherboardEditViewModel : BindableBase
     {
@@ -19,7 +19,7 @@
             Sockets = new ObservableCollection<Socket>(db.Sockets);
 
             Motherboard = motherboard;
-            Motherboard.BeginEdit();
+            BeginEdit();
         }
 
         public Motherboard Motherboard { get; }
@@ -28,22 +28,53 @@
 
         public ObservableCollection<Socket> Sockets { get; }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e) => Motherboard.CancelEdit();
+        public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
-            Motherboard.EndEdit();
+            EndEdit();
             Services.Edit(Motherboard.Id_motherboard, Motherboard);
-            Motherboard.RefreshCollection();
+            MotherboardsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Motherboard.IsValidationProperties());
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {
-            Motherboard.CancelEdit();
+            CancelEdit();
             editWindow.Close();
         });
+        #endregion
+
+        #region Откат изменений
+        private Motherboard _selectMotherboard;
+
+        public void BeginEdit()
+        {
+            _selectMotherboard = new Motherboard()
+            {
+                Id_motherboard = Motherboard.Id_motherboard,
+                Name = Motherboard.Name,
+                Fk_socket = Motherboard.Fk_socket,
+                Fk_manufacturer = Motherboard.Fk_manufacturer,
+            };
+        }
+
+        public void EndEdit()
+        {
+            _selectMotherboard = null;
+        }
+
+        public void CancelEdit()
+        {
+            if (_selectMotherboard == null)
+                return;
+
+            Motherboard.Id_motherboard = _selectMotherboard.Id_motherboard;
+            Motherboard.Name = _selectMotherboard.Name;
+            Motherboard.Fk_socket = _selectMotherboard.Fk_socket;
+            Motherboard.Fk_manufacturer = _selectMotherboard.Fk_manufacturer;
+        }
         #endregion
     }
 }

@@ -12,6 +12,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class TypesMemoryViewModel : BindableBase
     {
         public TypesMemoryViewModel()
@@ -44,7 +46,7 @@
                 TypesMemoryCollection.Filter = obj =>
                 {
                     if (obj is Types_memory typeMemory)
-                        return Types_memory.SearchFor(typeMemory, TypesMemoryFilter);
+                        return typeMemory.Search(TypesMemoryFilter);
 
                     return false;
                 };
@@ -99,10 +101,19 @@
                 return;
 
             Services.Delete<Types_memory>(selectTypeMemory.Id_type_memory);
-            Types_memory.RefreshCollection();
+            RefreshCollection();
         }, selectTypeMemory => selectTypeMemory != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Types_memory.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            TypesMemory.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Types_memory)
+                TypesMemory.Add(item);
+        }
     }
 }

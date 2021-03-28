@@ -1,22 +1,23 @@
 namespace Inventory.Model
 {
-    using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Employees;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
 
-    public partial class Department : BindableBase, IEditableObject, IDataErrorInfo
+    using DevExpress.Mvvm;
+
+    public partial class Department : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            this.Employees_in_departments = new HashSet<Employees_in_departments>();
+            Employees_in_departments = new HashSet<Employees_in_departments>();
         }
-
+    
         public int Id_department { get; set; }
         public string Name { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
 
@@ -50,44 +51,6 @@ namespace Inventory.Model
         public string Error { get => null; }
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
-        #endregion
-
-        public static bool SearchFor(Department department, string departmentsFilter) => department.Name.ToLower().Contains(departmentsFilter.ToLower());
-
-        public static void RefreshCollection()
-        {
-            DepartmentsViewModel.Departments.Clear();
-            using var db = new InventoryEntities();
-
-            foreach (var item in db.Departments)
-                DepartmentsViewModel.Departments.Add(item);
-        }
-
-        #region Откат изменений
-        private Department _selectDepartment;
-
-        public void BeginEdit()
-        {
-            _selectDepartment = new Department()
-            {
-                Id_department = this.Id_department,
-                Name = this.Name,
-            };
-        }
-
-        public void EndEdit()
-        {
-            _selectDepartment = null;
-        }
-
-        public void CancelEdit()
-        {
-            if (_selectDepartment == null)
-                return;
-
-            Id_department = _selectDepartment.Id_department;
-            Name = _selectDepartment.Name;
-        }
         #endregion
     }
 }

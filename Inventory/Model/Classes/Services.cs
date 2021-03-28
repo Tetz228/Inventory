@@ -1,4 +1,4 @@
-﻿namespace Inventory
+﻿namespace Inventory.Model.Classes
 {
     using System;
     using System.Collections.ObjectModel;

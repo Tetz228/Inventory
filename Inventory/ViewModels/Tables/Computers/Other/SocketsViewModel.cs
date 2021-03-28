@@ -17,6 +17,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class SocketsViewModel : BindableBase
     {
         public SocketsViewModel()
@@ -48,7 +50,7 @@
                 SocketsCollection.Filter = obj =>
                 {
                     if (obj is Socket socket)
-                        return Socket.SearchFor(socket, SocketsFilter);
+                        return socket.Search(SocketsFilter);
 
                     return false;
                 };
@@ -103,10 +105,10 @@
                 return;
 
             Services.Delete<Socket>(selectSocket.Id_socket);
-            Socket.RefreshCollection();
+            RefreshCollection();
         }, selectSocket => selectSocket != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Socket.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ListView>(list =>
         {
@@ -125,5 +127,14 @@
             Process.Start(new ProcessStartInfo(outputFile) { UseShellExecute = true });
         });
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Sockets.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Sockets)
+                Sockets.Add(item);
+        }
     }
 }

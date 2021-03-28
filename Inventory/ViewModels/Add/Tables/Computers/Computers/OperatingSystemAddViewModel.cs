@@ -5,6 +5,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Computers;
+
     public class OperatingSystemAddViewModel : BindableBase
     {
         public OperatingSystemAddViewModel()
@@ -18,7 +21,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(OperatingSystem);
-            Operating_systems.RefreshCollection();
+            OperatingSystemsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => OperatingSystem.IsValidationProperties());
 

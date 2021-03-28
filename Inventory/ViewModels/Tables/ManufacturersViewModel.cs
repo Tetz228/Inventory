@@ -12,6 +12,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class ManufacturersViewModel : BindableBase
     {
         public ManufacturersViewModel()
@@ -42,7 +44,7 @@
                 ManufacturersCollection.Filter = obj =>
                 {
                     if (obj is Manufacturer manufacturer)
-                        return Manufacturer.SearchFor(manufacturer, ManufacturersFilter);
+                        return manufacturer.Search(ManufacturersFilter);
 
                     return false;
                 };
@@ -96,10 +98,19 @@
                 return;
 
             Services.Delete<Manufacturer>(selectManufacturer.Id_manufacturer);
-            Manufacturer.RefreshCollection();
+            RefreshCollection();
         }, selectManufacturer => selectManufacturer != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Manufacturer.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Manufacturers.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Manufacturers)
+                Manufacturers.Add(item);
+        }
     }
 }

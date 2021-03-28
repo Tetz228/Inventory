@@ -6,6 +6,8 @@
     using DevExpress.Mvvm;
 
     using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Other;
 
     public class SocketAddViewModel: BindableBase
     {
@@ -20,7 +22,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Socket);
-            Socket.RefreshCollection();
+            SocketsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Socket.IsValidationProperties());
 

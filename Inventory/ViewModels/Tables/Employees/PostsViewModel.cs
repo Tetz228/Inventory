@@ -12,6 +12,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class PostsViewModel : BindableBase
     {
         public PostsViewModel()
@@ -43,7 +45,7 @@
                 PostsCollection.Filter = obj =>
                 {
                     if (obj is Post post)
-                        return Post.SearchFor(post, PostsFilter);
+                        return post.Search(PostsFilter);
 
                     return false;
                 };
@@ -99,10 +101,19 @@
                 return;
 
             Services.Delete<Post>(selectPost.Id_post);
-            Post.RefreshCollection();
+            RefreshCollection();
         }, selectPost => selectPost != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Post.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Posts.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Posts)
+                Posts.Add(item);
+        }
     }
 }

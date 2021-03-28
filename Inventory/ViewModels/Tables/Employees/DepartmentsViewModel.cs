@@ -12,6 +12,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class DepartmentsViewModel : BindableBase
     {
         public DepartmentsViewModel()
@@ -43,7 +45,7 @@
                 DepartmentsCollection.Filter = obj =>
                 {
                     if (obj is Department department)
-                        return Department.SearchFor(department, DepartmentsFilter);
+                        return department.Search(DepartmentsFilter);
 
                     return false;
                 };
@@ -98,10 +100,19 @@
                 return;
 
             Services.Delete<Department>(selectDepartment.Id_department);
-            Department.RefreshCollection();
+            RefreshCollection();
         }, selectDepartment => selectDepartment != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Department.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            Departments.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Departments)
+                Departments.Add(item);
+        }
     }
 }

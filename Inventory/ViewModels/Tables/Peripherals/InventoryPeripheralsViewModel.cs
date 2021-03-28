@@ -13,6 +13,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     internal class InventoryPeripheralsViewModel : BindableBase
     {
         public InventoryPeripheralsViewModel()
@@ -49,7 +51,7 @@
                 InventoryNumbersPeripheralsCollection.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_peripherals inventoryNumberPeripheral)
-                        return Inventory_numbers_peripherals.SearchFor(inventoryNumberPeripheral, InventoryNumbersPeripheralsFilter);
+                        return inventoryNumberPeripheral.Search(InventoryNumbersPeripheralsFilter);
 
                     return false;
                 };
@@ -136,10 +138,25 @@
                 return;
 
             Services.Delete<Inventory_numbers_peripherals>(selectInventoryNumberPeripheral.Id_inventory_number_peripheral);
-            Inventory_numbers_peripherals.RefreshCollection();
+            RefreshCollection();
         }, selectInventoryNumberPeripheral => selectInventoryNumberPeripheral != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(Inventory_numbers_peripherals.RefreshCollection);
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
+
+        public static void RefreshCollection()
+        {
+            InventoryNumbersPeripherals.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Inventory_numbers_peripherals
+                .Include(status => status.Statuses_peripherals)
+                .Include(peripheral => peripheral.Peripheral)
+                .Include(manufacturer => manufacturer.Peripheral.Manufacturer)
+                .Include(typePeripheral => typePeripheral.Peripheral.Types_peripherals))
+            {
+                InventoryNumbersPeripherals.Add(item);
+            }
+        }
     }
 }

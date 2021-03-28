@@ -2,6 +2,8 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Input;
@@ -27,7 +29,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Motherboard);
-            Motherboard.RefreshCollection();
+            MotherboardsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Motherboard.IsValidationProperties());
 

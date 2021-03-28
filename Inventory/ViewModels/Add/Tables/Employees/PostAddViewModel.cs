@@ -5,6 +5,9 @@ namespace Inventory.ViewModels.Add.Tables.Employees
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Employees;
+
     public class PostAddViewModel : BindableBase
     {
         public PostAddViewModel()
@@ -18,7 +21,7 @@ namespace Inventory.ViewModels.Add.Tables.Employees
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Post);
-            Post.RefreshCollection();
+            PostsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Post.IsValidationProperties());
 

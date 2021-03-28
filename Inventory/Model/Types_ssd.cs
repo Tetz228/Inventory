@@ -1,22 +1,23 @@
 namespace Inventory.Model
 {
-    using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Computers.Other;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
 
-    public partial class Types_ssd : BindableBase, IEditableObject, IDataErrorInfo
+    using DevExpress.Mvvm;
+
+    public partial class Types_ssd : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Types_ssd()
         {
-            this.Ssds = new HashSet<Ssd>();
+            Ssds = new HashSet<Ssd>();
         }
-
+    
         public int Id_type_ssd { get; set; }
         public string Name { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ssd> Ssds { get; set; }
 
@@ -50,44 +51,6 @@ namespace Inventory.Model
         public string Error { get => null; }
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
-        #endregion
-
-        public static bool SearchFor(Types_ssd typeSsd, string typeSsdFilter) => typeSsd.Name.ToLower().Contains(typeSsdFilter.ToLower());
-
-        public static void RefreshCollection()
-        {
-            TypesSddsViewModel.TypesSsds.Clear();
-            using var db = new InventoryEntities();
-
-            foreach (var item in db.Types_ssd)
-                TypesSddsViewModel.TypesSsds.Add(item);
-        }
-
-        #region Откат изменений
-        private Types_ssd _selectTypeSsd;
-
-        public void BeginEdit()
-        {
-            _selectTypeSsd = new Types_ssd
-            {
-                Id_type_ssd = this.Id_type_ssd,
-                Name = this.Name
-            };
-        }
-
-        public void EndEdit()
-        {
-            _selectTypeSsd = null;
-        }
-
-        public void CancelEdit()
-        {
-            if (_selectTypeSsd == null)
-                return;
-
-            Id_type_ssd = _selectTypeSsd.Id_type_ssd;
-            Name = _selectTypeSsd.Name;
-        }
         #endregion
     }
 }

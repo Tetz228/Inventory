@@ -6,6 +6,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Accessories;
+
     public class GraphicCardAddViewModel : BindableBase
     {
         public GraphicCardAddViewModel()
@@ -27,7 +30,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(GraphicCard);
-            Graphics_cards.RefreshCollection();
+            GraphicsCardsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => GraphicCard.IsValidationProperties());
 

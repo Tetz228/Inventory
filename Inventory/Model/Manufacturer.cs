@@ -1,26 +1,25 @@
 namespace Inventory.Model
 {
-    using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data.Entity.Infrastructure;
     using System.Linq;
-    using System.Windows;
 
-    public partial class Manufacturer : BindableBase, IEditableObject, IDataErrorInfo
+    using DevExpress.Mvvm;
+
+    public partial class Manufacturer : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Manufacturer()
         {
-            this.Graphics_cards = new HashSet<Graphics_cards>();
-            this.Hdds = new HashSet<Hdd>();
-            this.Motherboards = new HashSet<Motherboard>();
-            this.Peripherals = new HashSet<Peripheral>();
-            this.Power_supplies = new HashSet<Power_supplies>();
-            this.Processors = new HashSet<Processor>();
-            this.Rams = new HashSet<Ram>();
-            this.Ssds = new HashSet<Ssd>();
+            Graphics_cards = new HashSet<Graphics_cards>();
+            Hdds = new HashSet<Hdd>();
+            Motherboards = new HashSet<Motherboard>();
+            Peripherals = new HashSet<Peripheral>();
+            Power_supplies = new HashSet<Power_supplies>();
+            Processors = new HashSet<Processor>();
+            Rams = new HashSet<Ram>();
+            Ssds = new HashSet<Ssd>();
         }
     
         public int Id_manufacturer { get; set; }
@@ -73,44 +72,6 @@ namespace Inventory.Model
         public string Error { get => null; }
 
         public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
-        #endregion
-
-        public static bool SearchFor(Manufacturer manufacturer, string manufacturerFilter) => manufacturer.Name.ToLower().Contains(manufacturerFilter.ToLower());
-
-        public static void RefreshCollection()
-        {
-            ManufacturersViewModel.Manufacturers.Clear();
-            using var db = new InventoryEntities();
-
-            foreach (var item in db.Manufacturers)
-                ManufacturersViewModel.Manufacturers.Add(item);
-        }
-
-        #region Откат изменений
-        private Manufacturer _selectManufacturer;
-
-        public void BeginEdit()
-        {
-            _selectManufacturer = new Manufacturer
-            {
-                Id_manufacturer = this.Id_manufacturer,
-                Name = this.Name
-            };
-        }
-
-        public void EndEdit()
-        {
-            _selectManufacturer = null;
-        }
-
-        public void CancelEdit()
-        {
-            if (_selectManufacturer == null)
-                return;
-
-            Id_manufacturer = _selectManufacturer.Id_manufacturer;
-            Name = _selectManufacturer.Name;
-        }
         #endregion
     }
 }
