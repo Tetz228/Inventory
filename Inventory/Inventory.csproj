@@ -959,7 +959,8 @@
     </None>
     <Compile Include="ViewModels\Tables\ManufacturersViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\ManufacturerAddViewModel.cs" />
-    <None Include="Templates\SocketTemplate.xlsx" />
+    <None Include="Templates\TwoColumnTemplate.xlsx" />
+    <None Include="Templates\OneColumnTemplate.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -1018,7 +1019,8 @@
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Import Project="..\packages\Fody.6.4.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.4.0\build\Fody.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>mkdir "$(TargetDir)\Templates"
+xcopy /d /s "$(ProjectDir)Templates\*.*" "$(TargetDir)\Templates"
+</PreBuildEvent>
   </PropertyGroup>
 </Project>
