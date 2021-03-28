@@ -1,12 +1,12 @@
 ﻿namespace Inventory.Model.Classes
 {
+    using Inventory.Model;
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
-
-    using Inventory.Model;
 
     public static class Services
     {
@@ -21,6 +21,17 @@
             foreach (var item in sortCollection)
                 observableCollection.Add(item);
         }
+
+        public static bool IsValidationProperties<TClass>(TClass dictionary, params int[] properties)
+            where TClass : Dictionary<string, string>
+            => dictionary.Count == 0 ||
+               dictionary.Any(item => item.Value == null) && 
+               properties.All(property => property != 0);
+
+        public static bool IsValidationProperties<TClass>(TClass dictionary)
+            where TClass : Dictionary<string, string>
+            => dictionary.Count == 0 ||
+               dictionary.Any(item => item.Value == null);
 
         public static void Add<TClass>(TClass value) where TClass : class
         {
@@ -69,7 +80,7 @@
 
             var dbSet = db.Set<TClass>();
             var foundObject = dbSet.Find(idObject);
-            
+
             if (foundObject == null)
             {
                 MessageBox.Show("Ошибка при удалении данных в базе данных. Удаляемый объект не найдет в базе данных.", "Ошибка при удаления данных.", MessageBoxButton.OK, MessageBoxImage.Error);

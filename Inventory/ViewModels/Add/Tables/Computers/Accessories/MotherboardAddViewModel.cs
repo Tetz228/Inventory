@@ -26,12 +26,13 @@
         public ObservableCollection<Socket> Sockets { get; }
 
         #region Команды
+
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Motherboard);
-            MotherboardsViewModel.RefreshCollection();
-            addWindow.Close();
-        }, _ => Motherboard.IsValidationProperties());
+                Services.Add(Motherboard);
+                MotherboardsViewModel.RefreshCollection();
+                addWindow.Close();
+        }, _ => Services.IsValidationProperties(Motherboard.ErrorCollection, Motherboard.Fk_manufacturer, Motherboard.Fk_socket));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

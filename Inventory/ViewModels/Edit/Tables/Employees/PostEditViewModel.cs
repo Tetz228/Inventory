@@ -28,7 +28,7 @@
             Services.Edit(Post.Id_post, Post);
             PostsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Post.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Post.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

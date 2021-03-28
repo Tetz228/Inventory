@@ -24,7 +24,7 @@
             Services.Add(TypeSsd);
             TypesSddsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => TypeSsd.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(TypeSsd.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

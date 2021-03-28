@@ -33,7 +33,7 @@
             Services.Add(InventoryNumberPeripheral);
             InventoryPeripheralsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => InventoryNumberPeripheral.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(InventoryNumberPeripheral.ErrorCollection, InventoryNumberPeripheral.Fk_status_peripheral, InventoryNumberPeripheral.Fk_peripheral));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

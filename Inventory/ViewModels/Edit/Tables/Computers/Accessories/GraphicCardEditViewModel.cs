@@ -37,7 +37,7 @@
             Services.Edit(GraphicCard.Id_graphics_card, GraphicCard);
             GraphicsCardsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => GraphicCard.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(GraphicCard.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

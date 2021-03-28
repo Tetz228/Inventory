@@ -29,7 +29,7 @@
             Services.Edit(Unit.Id_unit, Unit);
             UnitsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Unit.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Unit.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

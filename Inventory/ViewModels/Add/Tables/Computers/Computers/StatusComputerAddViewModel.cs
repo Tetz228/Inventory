@@ -20,7 +20,7 @@
             Services.Add(StatusComputer);
             StatusesComputersViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => StatusComputer.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(StatusComputer.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

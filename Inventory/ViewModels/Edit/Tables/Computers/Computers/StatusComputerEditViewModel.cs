@@ -27,7 +27,7 @@
             Services.Edit(StatusComputer.Id_status_computer, StatusComputer);
             StatusesComputersViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => StatusComputer.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(StatusComputer.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

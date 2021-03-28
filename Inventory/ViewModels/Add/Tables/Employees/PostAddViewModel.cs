@@ -23,7 +23,7 @@ namespace Inventory.ViewModels.Add.Tables.Employees
             Services.Add(Post);
             PostsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Post.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Post.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

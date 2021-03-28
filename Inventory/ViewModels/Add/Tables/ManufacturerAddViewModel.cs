@@ -23,7 +23,7 @@
             Services.Add(Manufacturer);
             ManufacturersViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Manufacturer.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Manufacturer.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

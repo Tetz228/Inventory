@@ -40,7 +40,7 @@
             Employees_in_departments.EditEmployeeInDepartment(Employee.Id_employee);
             EmployeesViewModel.RefreshCollection();
             empEditWindow.Close();
-        }, _ => Employee.IsValidationCollections() && Employee.IsValidationProperties());
+        }, _ => Employee.IsValidationCollections() && Services.IsValidationProperties(Employee.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow =>
         {

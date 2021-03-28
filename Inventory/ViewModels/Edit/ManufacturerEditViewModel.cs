@@ -28,7 +28,7 @@
             Services.Edit(Manufacturer.Id_manufacturer, Manufacturer);
             ManufacturersViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Manufacturer.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Manufacturer.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

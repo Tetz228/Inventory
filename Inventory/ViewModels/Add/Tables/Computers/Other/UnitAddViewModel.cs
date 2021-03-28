@@ -24,7 +24,7 @@
             Services.Add(Unit);
             UnitsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Unit.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Unit.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

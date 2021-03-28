@@ -24,7 +24,7 @@
             Services.Add(TypeHdd);
             TypesHddsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => TypeHdd.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(TypeHdd.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

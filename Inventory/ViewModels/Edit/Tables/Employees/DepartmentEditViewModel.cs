@@ -28,7 +28,7 @@
             Services.Edit(Department.Id_department, Department);
             DepartmentsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Department.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Department.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

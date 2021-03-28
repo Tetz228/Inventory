@@ -24,7 +24,7 @@
             Services.Add(Socket);
             SocketsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Socket.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Socket.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

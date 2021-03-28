@@ -33,7 +33,7 @@
             Services.Add(Peripheral);
             PeripheralsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Peripheral.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Peripheral.ErrorCollection, Peripheral.Fk_manufacturer, Peripheral.Fk_type_peripheral));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

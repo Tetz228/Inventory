@@ -29,7 +29,7 @@
             Services.Edit(TypeHdd.Id_type_hdd, TypeHdd);
             TypesHddsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => TypeHdd.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(TypeHdd.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

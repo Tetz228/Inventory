@@ -28,7 +28,7 @@
             Services.Edit(TypeSsd.Id_type_ssd, TypeSsd);
             TypesSddsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => TypeSsd.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(TypeSsd.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

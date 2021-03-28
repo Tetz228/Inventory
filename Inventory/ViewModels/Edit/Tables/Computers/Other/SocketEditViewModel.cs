@@ -29,7 +29,7 @@
             Services.Edit(Socket.Id_socket, Socket);
             SocketsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Socket.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Socket.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

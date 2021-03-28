@@ -27,12 +27,14 @@
         public ObservableCollection<Unit> Units { get; }
 
         #region Команды
+
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
-        {
-            Services.Add(GraphicCard);
-            GraphicsCardsViewModel.RefreshCollection();
-            addWindow.Close();
-        }, _ => GraphicCard.IsValidationProperties());
+            {
+                Services.Add(GraphicCard);
+                GraphicsCardsViewModel.RefreshCollection();
+                addWindow.Close();
+            },
+            _ => Services.IsValidationProperties(GraphicCard.ErrorCollection, GraphicCard.Fk_manufacturer, GraphicCard.Fk_unit));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

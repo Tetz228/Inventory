@@ -28,7 +28,7 @@
             Services.Edit(StatusPeripheral.Id_status_peripheral, StatusPeripheral);
             StatusesPeripheralsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => StatusPeripheral.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(StatusPeripheral.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

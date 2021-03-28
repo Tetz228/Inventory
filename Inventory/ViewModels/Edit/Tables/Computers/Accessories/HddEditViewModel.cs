@@ -34,13 +34,14 @@
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
         #region Команды
+
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(Hdd.Id_hdd, Hdd);
             HddsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Hdd.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Hdd.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

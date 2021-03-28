@@ -20,7 +20,7 @@
             Services.Add(StatusPeripheral);
             StatusesPeripheralsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => StatusPeripheral.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(StatusPeripheral.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

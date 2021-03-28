@@ -28,7 +28,7 @@
             Services.Edit(TypePeripheral.Id_type_peripheral, TypePeripheral);
             TypesPeripheralsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => TypePeripheral.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(TypePeripheral.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

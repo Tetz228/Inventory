@@ -27,7 +27,7 @@
             Services.Edit(TypeMemory.Id_type_memory, TypeMemory);
             TypesMemoryViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => TypeMemory.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(TypeMemory.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

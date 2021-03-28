@@ -29,7 +29,7 @@
             Services.Edit(OperatingSystem.Id_operating_system, OperatingSystem);
             OperatingSystemsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => OperatingSystem.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(OperatingSystem.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

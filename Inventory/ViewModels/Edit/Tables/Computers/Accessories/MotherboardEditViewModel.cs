@@ -37,7 +37,7 @@
             Services.Edit(Motherboard.Id_motherboard, Motherboard);
             MotherboardsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Motherboard.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Motherboard.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

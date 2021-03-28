@@ -37,7 +37,7 @@
             Services.Edit(InventoryNumberPeripheral.Id_inventory_number_peripheral, InventoryNumberPeripheral);
             InventoryPeripheralsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => InventoryNumberPeripheral.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(InventoryNumberPeripheral.ErrorCollection, InventoryNumberPeripheral.Fk_status_peripheral, InventoryNumberPeripheral.Fk_peripheral));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

@@ -23,7 +23,7 @@
             Services.Add(OperatingSystem);
             OperatingSystemsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => OperatingSystem.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(OperatingSystem.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

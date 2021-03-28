@@ -109,8 +109,6 @@ namespace Inventory.Model
 
         private bool IsValidationPhoneNumber(string phoneNumber) => Regex.IsMatch(phoneNumber, @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$");
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
-
         public bool IsValidationCollections()
         {
             if (PostsEmployees.Count == 0 || EmployeesInDepartments.Count == 0)

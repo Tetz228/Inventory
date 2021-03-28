@@ -86,10 +86,6 @@ namespace Inventory.Model
 
             return ++isUniqueNumber;
         }
-
-        public bool IsValidationProperties() => ErrorCollection.Count == 0
-                                                || ErrorCollection.Any(item => item.Value == null)
-                                                && Fk_peripheral != 0 && Fk_status_peripheral != 0;
         #endregion
 
         #region Откат изменений

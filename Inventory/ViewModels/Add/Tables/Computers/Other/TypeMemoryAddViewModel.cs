@@ -24,7 +24,7 @@
             Services.Add(TypeMemory);
             TypesMemoryViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => TypeMemory.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(TypeMemory.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
