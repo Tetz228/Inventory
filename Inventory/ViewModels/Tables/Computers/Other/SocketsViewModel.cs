@@ -105,14 +105,14 @@
 
         public ICommand ExportExcelCommand => new DelegateCommand<ListView>(list =>
         {
-            var f =Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             const string outputFile = @"D:\SocketReport.xlsx";
-            var template = new XLTemplate(@"D:\SocketTemplate.xlsx");
-
+            var template = new XLTemplate(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Templates" + "\\OneColumnTemplate.xlsx");
+            
             using var db = new InventoryEntities();
 
             var socket = db.Sockets.Select(name => name.Name);
-            
+
+            template.AddVariable("TableName", "Сокеты");
             template.AddVariable("Name", socket);
             template.Generate();
             template.SaveAs(outputFile);
