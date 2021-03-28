@@ -9,7 +9,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class MotherboardEditViewModel : BindableBase
+    public class MotherboardEditViewModel : BindableBase, IEditableObject
     {
         public MotherboardEditViewModel(Motherboard motherboard)
         {

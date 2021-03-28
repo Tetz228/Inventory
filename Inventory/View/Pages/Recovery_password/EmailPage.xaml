@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:recoveryPassword="clr-namespace:Inventory.ViewModels.Recovery__password"
-    xmlns:viewModels="clr-namespace:Inventory.ViewModels"
     Name="PageEmail"
     Title="EmailPage"
     d:DesignHeight="400"

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="EditHddWindow"
+    x:Name="EditWindow"
     Title="Изменить жесткий диск"
     Width="500"
     Height="340"
@@ -114,7 +114,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
                     Command="{Binding EditCommand}"
-                    CommandParameter="{Binding ElementName=EditHddWindow}"
+                    CommandParameter="{Binding ElementName=EditWindow}"
                     Content="Изменить информацию о жестком диске"
                     IsDefault="True"
                     Style="{StaticResource BaseButton}" />
@@ -124,7 +124,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=EditHddWindow}"
+                    CommandParameter="{Binding ElementName=EditWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>

@@ -9,7 +9,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class HddEditViewModel : BindableBase
+    public class HddEditViewModel : BindableBase, IEditableObject
     {
         public HddEditViewModel(Hdd hdd)
         {

@@ -1,16 +1,14 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Computers
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Computers;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Computers.Computers;
-
-    public class OperatingSystemEditViewModel : BindableBase,IEditableObject
+    public class OperatingSystemEditViewModel : BindableBase, IEditableObject
     {
         public OperatingSystemEditViewModel(Operating_systems operatingSystem)
         {

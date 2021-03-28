@@ -37,8 +37,6 @@
             }
         }
 
-        private static bool f;
-
         public string Error { get => null; }
         #endregion
 
