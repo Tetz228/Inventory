@@ -203,7 +203,12 @@ namespace Inventory.Model
                 return;
             }
 
-            db.Employees.Remove(foundEmployee);
+
+            var postEmp = db.Posts_employees.Where(emp => emp.Fk_employee == foundEmployee.Id_employee);
+            var depEmp = db.Employees_in_departments.Where(emp => emp.Fk_employee == foundEmployee.Id_employee);
+            db.Posts_employees.RemoveRange(postEmp);
+            db.Employees_in_departments.RemoveRange(depEmp);
+            //db.Employees.Remove(foundEmployee);
             db.SaveChanges();
 
             EmployeesViewModel.Employees.Remove(selectEmployee);
