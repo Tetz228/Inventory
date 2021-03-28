@@ -28,6 +28,12 @@ namespace Inventory.Model.Classes
                                                                    || hdd.Types_hdd.Name.ToLower().Contains(hddFilter.ToLower())
                                                                    || hdd.Manufacturer.Name.ToLower().Contains(hddFilter.ToLower());
 
+        public static bool Search(this Power_supplies powerSupply, string powerSupplyFilter) => powerSupply.Name.ToLower().Contains(powerSupplyFilter.ToLower())
+                                                                     || powerSupply.Unit.Full_name.ToLower().Contains(powerSupplyFilter.ToLower())
+                                                                     || powerSupply.Power.ToString().ToLower().Contains(powerSupplyFilter.ToLower())
+                                                                     || powerSupply.Unit.Short_name.ToLower().Contains(powerSupplyFilter.ToLower())
+                                                                     || powerSupply.Manufacturer.Name.ToLower().Contains(powerSupplyFilter.ToLower());
+
         public static bool Search(this Inventory_numbers_peripherals inventoryNumberPeripheral, string inventoryNumberPeripheralFilter) => inventoryNumberPeripheral.Inventory_number.ToString().ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
                                                                                                                                         || inventoryNumberPeripheral.Peripheral.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
                                                                                                                                         || inventoryNumberPeripheral.Peripheral.Types_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
