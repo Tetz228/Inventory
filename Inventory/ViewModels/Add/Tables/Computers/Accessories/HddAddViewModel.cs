@@ -31,7 +31,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Hdd.AddHdd(Hdd);
+            Services.Add(Hdd);
+            Hdd.RefreshCollection();
             addWindow.Close();
         }, _ => Hdd.IsValidationProperties());
 

@@ -125,7 +125,16 @@
             editWindow.ShowDialog();
         }, hdd => hdd != null);
 
-        public ICommand DeleteHddCommand => new DelegateCommand<Hdd>(Hdd.DeleteHdd, selectHdd => selectHdd != null);
+        public ICommand DeleteHddCommand => new DelegateCommand<Hdd>(selectHdd =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectHdd.Name}?", "Удаление жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Hdd>(selectHdd.Id_hdd);
+            Hdd.RefreshCollection();
+        }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Hdd.RefreshCollection);
         #endregion

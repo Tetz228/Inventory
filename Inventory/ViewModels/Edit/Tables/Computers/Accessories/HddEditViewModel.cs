@@ -37,7 +37,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             Hdd.EndEdit();
-            Hdd.EditHdd(Hdd);
+            Services.Edit(Hdd.Id_hdd, Hdd);
+            Hdd.RefreshCollection();
             editWindow.Close();
         }, _ => Hdd.IsValidationProperties());
 
