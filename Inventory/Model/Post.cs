@@ -65,69 +65,6 @@ namespace Inventory.Model
 
         public static bool SearchFor(Post post, string postsFilter) => post.Name.ToLower().Contains(postsFilter.ToLower());
 
-        #region Методы обработки информации
-        public static void AddPost(string name)
-        {
-            using var db = new InventoryEntities();
-
-            var post = new Post
-            {
-                Name = name
-            };
-
-            db.Posts.Add(post);
-            db.SaveChanges();
-
-            PostsViewModel.Posts.Add(post);
-        }
-
-        public static void EditPost(Post post)
-        {
-            using var db = new InventoryEntities();
-            var foundPost = db.Posts.FirstOrDefault(p => p.Id_post == post.Id_post);
-
-            if (foundPost == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении должности",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            foundPost.Name = post.Name;
-            db.SaveChanges();
-        }
-
-        public static void DeletePost(Post selectPost)
-        {
-            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectPost.Name}?",
-                "Удаление должности", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return;
-
-            using var db = new InventoryEntities();
-            var foundPost = db.Posts.FirstOrDefault(post => post.Id_post == selectPost.Id_post);
-
-            if (foundPost == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            try
-            {
-                db.Posts.Remove(foundPost);
-                db.SaveChanges();
-
-                PostsViewModel.Posts.Remove(selectPost);
-            }
-            catch (DbUpdateException)
-            {
-                MessageBox.Show("Невозможно удалить должность, так как она связана с другими сущностями!",
-                    "Ошибка при удалении должности", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         public static void RefreshCollection()
         {
             PostsViewModel.Posts.Clear();
@@ -136,8 +73,7 @@ namespace Inventory.Model
             foreach (var item in db.Posts)
                 PostsViewModel.Posts.Add(item);
         }
-        #endregion
-
+        
         #region Откат изменений
         private Post _selectPost;
 

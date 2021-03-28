@@ -133,7 +133,19 @@
 
         }, employee => employee != null);
 
-        public ICommand DeleteEmployeeCommand => new DelegateCommand<Employee>(Employee.DeleteEmployee, selectEmployee => selectEmployee != null);
+        public ICommand DeleteEmployeeCommand => new DelegateCommand<Employee>(selectEmployee =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name} {selectEmployee.Email}?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            int id = selectEmployee.Id_employee;
+            Employee.DeleteEmployee(selectEmployee);
+            //Services.Delete<Employee>(selectEmployee.Id_employee);
+            //Dele
+            Employee.RefreshCollection();
+        }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Employee.RefreshCollection);
         #endregion

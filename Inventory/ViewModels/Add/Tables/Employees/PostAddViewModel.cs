@@ -17,7 +17,8 @@ namespace Inventory.ViewModels.Add.Tables.Employees
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Post.AddPost(Post.Name);
+            Services.Add(Post);
+            Post.RefreshCollection();
             addWindow.Close();
         }, _ => Post.IsValidationProperties());
 

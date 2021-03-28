@@ -508,7 +508,7 @@
     <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Accessories\HddsViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\Computers\TablesComputesViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\TablesComputesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\TypesHddsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\UnitsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\DepartmentsViewModel.cs" />

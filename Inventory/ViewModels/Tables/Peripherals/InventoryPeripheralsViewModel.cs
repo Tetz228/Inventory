@@ -128,7 +128,16 @@
             editWindow.ShowDialog();
         }, peripheral => peripheral != null);
 
-        public ICommand DeleteInventoryNumberPeripheralCommand => new DelegateCommand<Inventory_numbers_peripherals>(Inventory_numbers_peripherals.DeleteInventoryNumberPeripheral, selectInventoryNumberPeripheral => selectInventoryNumberPeripheral != null);
+        public ICommand DeleteInventoryNumberPeripheralCommand => new DelegateCommand<Inventory_numbers_peripherals>(selectInventoryNumberPeripheral =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryNumberPeripheral.Inventory_number}, {selectInventoryNumberPeripheral.Peripheral.Manufacturer.Name} {selectInventoryNumberPeripheral.Peripheral.Types_peripherals.Name} {selectInventoryNumberPeripheral.Peripheral.Name}?", "Удаление инвенторной периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Inventory_numbers_peripherals>(selectInventoryNumberPeripheral.Id_inventory_number_peripheral);
+            Inventory_numbers_peripherals.RefreshCollection();
+        }, selectInventoryNumberPeripheral => selectInventoryNumberPeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Inventory_numbers_peripherals.RefreshCollection);
         #endregion

@@ -88,7 +88,6 @@
         public ICommand AddUserCommand => new DelegateCommand(() =>
         {
             var addUserWindow = new UserAddWindow();
-
             addUserWindow.ShowDialog();
         });
 

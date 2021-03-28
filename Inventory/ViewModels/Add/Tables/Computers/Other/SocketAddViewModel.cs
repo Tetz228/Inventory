@@ -19,7 +19,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Socket.AddSocket(Socket.Name);
+            Services.Add(Socket);
+            Socket.RefreshCollection();
             addWindow.Close();
         }, _ => Socket.IsValidationProperties());
 

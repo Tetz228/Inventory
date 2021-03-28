@@ -17,7 +17,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Types_peripherals.AddTypePeripheral(TypePeripheral.Name);
+            Services.Add(TypePeripheral);
+            Types_peripherals.RefreshCollection();
             addWindow.Close();
         }, _ => TypePeripheral.IsValidationProperties());
 

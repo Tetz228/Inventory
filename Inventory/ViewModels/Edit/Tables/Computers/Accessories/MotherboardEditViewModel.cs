@@ -34,7 +34,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             Motherboard.EndEdit();
-            Motherboard.EditMotherboard(Motherboard);
+            Services.Edit(Motherboard.Id_motherboard, Motherboard);
+            Motherboard.RefreshCollection();
             editWindow.Close();
         }, _ => Motherboard.IsValidationProperties());
 

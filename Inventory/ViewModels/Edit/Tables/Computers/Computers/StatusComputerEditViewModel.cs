@@ -1,12 +1,10 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Computers
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
 
     public class StatusComputerEditViewModel : BindableBase
     {
@@ -24,7 +22,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             StatusComputer.EndEdit();
-            Statuses_computers.EditStatusComputer(StatusComputer);
+            Services.Edit(StatusComputer.Id_status_computer, StatusComputer);
+            Statuses_computers.RefreshCollection();
             editWindow.Close();
         }, _ => StatusComputer.IsValidationProperties());
 

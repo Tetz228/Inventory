@@ -19,7 +19,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Types_memory.AddTypeMemory(TypeMemory.Name);
+            Services.Add(TypeMemory);
+            Types_memory.RefreshCollection();
             addWindow.Close();
         }, _ => TypeMemory.IsValidationProperties());
 

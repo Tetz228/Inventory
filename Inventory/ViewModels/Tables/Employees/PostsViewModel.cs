@@ -91,7 +91,16 @@
 
         }, post => post != null);
 
-        public ICommand DeletePostCommand => new DelegateCommand<Post>(Post.DeletePost, selectPost => selectPost != null);
+        public ICommand DeletePostCommand => new DelegateCommand<Post>(selectPost =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectPost.Name}?", "Удаление должности", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Post>(selectPost.Id_post);
+            Post.RefreshCollection();
+        }, selectPost => selectPost != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Post.RefreshCollection);
         #endregion

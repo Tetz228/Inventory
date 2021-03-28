@@ -94,7 +94,16 @@
 
         }, typeSsd => typeSsd != null);
 
-        public ICommand DeleteTypeSsdCommand => new DelegateCommand<Types_ssd>(Types_ssd.DeleteTypeSsd, selectTypeSsd => selectTypeSsd != null);
+        public ICommand DeleteTypeSsdCommand => new DelegateCommand<Types_ssd>(selectTypeSsd =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectTypeSsd.Name}?", "Удаление типа SSD-накопителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Types_ssd>(selectTypeSsd.Id_type_ssd);
+            Types_ssd.RefreshCollection();
+        }, selectTypeSsd => selectTypeSsd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Types_ssd.RefreshCollection);
         #endregion

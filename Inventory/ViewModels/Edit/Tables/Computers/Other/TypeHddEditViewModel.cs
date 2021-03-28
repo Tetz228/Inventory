@@ -24,7 +24,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             TypeHdd.EndEdit();
-            Types_hdd.EditTypeHdd(TypeHdd);
+            Services.Edit(TypeHdd.Id_type_hdd, TypeHdd);
+            Types_hdd.RefreshCollection();
             editWindow.Close();
         }, _ => TypeHdd.IsValidationProperties());
 

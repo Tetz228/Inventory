@@ -1,13 +1,11 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Accessories
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
 
     public class GraphicCardEditViewModel : BindableBase
     {
@@ -34,7 +32,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             GraphicCard.EndEdit();
-            Graphics_cards.EditGraphicCard(GraphicCard);
+            Services.Edit(GraphicCard.Id_graphics_card, GraphicCard);
+            Graphics_cards.RefreshCollection();
             editWindow.Close();
         }, _ => GraphicCard.IsValidationProperties());
 

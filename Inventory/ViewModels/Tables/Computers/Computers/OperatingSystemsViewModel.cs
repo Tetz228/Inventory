@@ -104,7 +104,16 @@
             editWindow.ShowDialog();
         }, operatingSystems => operatingSystems != null);
 
-        public ICommand DeleteOperatingSystemCommand => new DelegateCommand<Operating_systems>(Operating_systems.DeleteOperatingSystem, selectOperatingSystem => selectOperatingSystem != null);
+        public ICommand DeleteOperatingSystemCommand => new DelegateCommand<Operating_systems>(selectOperatingSystem =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectOperatingSystem.Name} версии {selectOperatingSystem.System_version}?", "Удаление операционной системы", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Operating_systems>(selectOperatingSystem.Id_operating_system);
+            Operating_systems.RefreshCollection();
+        }, selectOperatingSystem => selectOperatingSystem != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Operating_systems.RefreshCollection);
         #endregion

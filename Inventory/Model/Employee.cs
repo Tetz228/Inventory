@@ -149,8 +149,8 @@ namespace Inventory.Model
             db.Employees.Add(emp);
             db.SaveChanges();
 
-            Model.Posts_employees.AddPostEmployee(db, emp.Id_employee);
-            Model.Employees_in_departments.AddEmployeeInDepartment(db, emp.Id_employee);
+            //Model.Posts_employees.AddPostEmployee(db, emp.Id_employee);
+            //Model.Employees_in_departments.AddEmployeeInDepartment(db, emp.Id_employee);
 
             emp.Employees_in_departments = new List<Employees_in_departments>(db.Employees_in_departments.Include(dep => dep.Department).Where(empDep => empDep.Fk_employee == emp.Id_employee));
             emp.Posts_employees = new List<Posts_employees>(db.Posts_employees.Include(post => post.Post).Where(postEmp => postEmp.Fk_employee == emp.Id_employee));
@@ -183,20 +183,18 @@ namespace Inventory.Model
 
             db.SaveChanges();
 
-            Model.Posts_employees.EditPostEmployee(db, foundEmployee.Id_employee);
-            Model.Employees_in_departments.EditEmployeeInDepartment(db, foundEmployee.Id_employee);
+            //Model.Posts_employees.EditPostEmployee(db, foundEmployee.Id_employee);
+            //Model.Employees_in_departments.EditEmployeeInDepartment(db, foundEmployee.Id_employee);
 
             RefreshCollection();
         }
 
         public static void DeleteEmployee(Employee selectEmployee)
         {
-            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name}?",
-                "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return;
-
             using var db = new InventoryEntities();
-            var foundEmployee = db.Employees.FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
+            var foundEmployee = db.Employees.Include(post => post.Posts_employees)
+                .Include(depart => depart.Employees_in_departments)
+                .FirstOrDefault(employee => employee.Id_employee == selectEmployee.Id_employee);
 
             if (foundEmployee == null)
             {

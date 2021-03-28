@@ -117,7 +117,16 @@
             editWindow.ShowDialog();
         }, graphicCard => graphicCard != null);
 
-        public ICommand DeleteGraphicCardCommand => new DelegateCommand<Graphics_cards>(Graphics_cards.DeleteGraphicCard, selectGraphicCard => selectGraphicCard != null);
+        public ICommand DeleteGraphicCardCommand => new DelegateCommand<Graphics_cards>(selectGraphicCard =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectGraphicCard.Manufacturer.Name} {selectGraphicCard.Name} {selectGraphicCard.Memory_size} {selectGraphicCard.Unit.Short_name}?", "Удаление видеокарты", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Graphics_cards>(selectGraphicCard.Id_graphics_card);
+            Graphics_cards.RefreshCollection();
+        }, selectGraphicCard => selectGraphicCard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Graphics_cards.RefreshCollection);
         #endregion

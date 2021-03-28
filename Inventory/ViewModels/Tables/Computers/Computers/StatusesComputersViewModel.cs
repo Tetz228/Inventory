@@ -1,21 +1,16 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Computers
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers.Computers;
+    using Inventory.View.Edit.Tables.Computers.Computers;
+    using Inventory.ViewModels.Edit.Tables.Computers.Computers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Add.Tables.Computers.Computers;
-    using Inventory.View.Edit.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Computers;
 
     public class StatusesComputersViewModel : BindableBase
     {
@@ -58,6 +53,8 @@
         }
         #endregion
 
+        #region События
+
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -65,18 +62,20 @@
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
-                        {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Ascending);
-                            break;
-                        }
+                    {
+                        if (SortDirection == ListSortDirection.Ascending)
+                            StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Descending);
+                        else
+                            StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Ascending);
+                        break;
+                    }
                 }
             }
         }
 
         public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectStatusComputer = null;
+
+        #endregion
 
         #region Команды
         public ICommand AddStatusComputerCommand => new DelegateCommand(() =>
@@ -94,7 +93,16 @@
             editWindow.ShowDialog();
         }, statusComputer => statusComputer != null);
 
-        public ICommand DeleteStatusComputerCommand => new DelegateCommand<Statuses_computers>(Statuses_computers.DeleteStatusComputer, selectStatusComputer => selectStatusComputer != null);
+        public ICommand DeleteStatusComputerCommand => new DelegateCommand<Statuses_computers>(selectStatusComputer =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectStatusComputer.Name}?", "Удаление статуса компьютера", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Statuses_computers>(selectStatusComputer.Id_status_computer);
+            Statuses_computers.RefreshCollection();
+        }, selectStatusComputer => selectStatusComputer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Statuses_computers.RefreshCollection);
         #endregion

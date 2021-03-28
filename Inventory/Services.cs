@@ -69,7 +69,7 @@
 
             var dbSet = db.Set<TClass>();
             var foundObject = dbSet.Find(idObject);
-
+            
             if (foundObject == null)
             {
                 MessageBox.Show("Ошибка при удалении данных в базе данных. Удаляемый объект не найдет в базе данных.", "Ошибка при удаления данных.", MessageBoxButton.OK, MessageBoxImage.Error);

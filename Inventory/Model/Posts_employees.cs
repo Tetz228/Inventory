@@ -29,8 +29,10 @@ namespace Inventory.Model
         public virtual Employee Employee { get; set; }
         public virtual Post Post { get; set; }
 
-        public static void AddPostEmployee(InventoryEntities db, int idEmployee)
+        public static void AddPostEmployee(int idEmployee)
         {
+            using var db = new InventoryEntities();
+
             foreach (var post in Employee.PostsEmployees)
                 post.Fk_employee = idEmployee;
 
@@ -38,8 +40,10 @@ namespace Inventory.Model
             db.SaveChanges();
         }
 
-        public static void EditPostEmployee(InventoryEntities db, int idEmployee)
+        public static void EditPostEmployee(int idEmployee)
         {
+            using var db = new InventoryEntities();
+
             foreach (var post in Employee.PostsEmployees)
             {
                 if (post.Id_post_employee == 0)

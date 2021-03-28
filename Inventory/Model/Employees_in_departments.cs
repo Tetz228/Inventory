@@ -30,8 +30,10 @@ namespace Inventory.Model
         public virtual Department Department { get; set; }
         public virtual Employee Employee { get; set; }
 
-        public static void AddEmployeeInDepartment(InventoryEntities db, int idEmployee)
+        public static void AddEmployeeInDepartment(int idEmployee)
         {
+            using var db = new InventoryEntities();
+
             foreach (var department in Employee.EmployeesInDepartments)
                 department.Fk_employee = idEmployee;
 

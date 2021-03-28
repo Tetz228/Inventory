@@ -26,7 +26,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Motherboard.AddMotherboard(Motherboard);
+            Services.Add(Motherboard);
+            Motherboard.RefreshCollection();
             addWindow.Close();
         }, _ => Motherboard.IsValidationProperties());
 

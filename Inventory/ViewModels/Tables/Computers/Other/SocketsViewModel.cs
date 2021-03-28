@@ -6,14 +6,11 @@
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Data.Entity;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Linq.Dynamic.Core;
     using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
@@ -98,16 +95,24 @@
             editWindow.ShowDialog();
         }, socket => socket != null);
 
-        public ICommand DeleteSocketCommand => new DelegateCommand<Socket>(Socket.DeleteSocket, selectSocket => selectSocket != null);
+        public ICommand DeleteSocketCommand => new DelegateCommand<Socket>(selectSocket =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectSocket.Name}?", "Удаление сокета", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Socket>(selectSocket.Id_socket);
+            Socket.RefreshCollection();
+        }, selectSocket => selectSocket != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Socket.RefreshCollection);
-        #endregion
 
         public ICommand ExportExcelCommand => new DelegateCommand<ListView>(list =>
         {
             const string outputFile = @"D:\SocketReport.xlsx";
             var template = new XLTemplate(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Templates" + "\\OneColumnTemplate.xlsx");
-            
+
             using var db = new InventoryEntities();
 
             var socket = db.Sockets.Select(name => name.Name);
@@ -119,5 +124,6 @@
 
             Process.Start(new ProcessStartInfo(outputFile) { UseShellExecute = true });
         });
+        #endregion
     }
 }

@@ -61,69 +61,6 @@ namespace Inventory.Model
 
         public static bool SearchFor(Statuses_computers statusComputer, string statusComputerFilter) => statusComputer.Name.ToLower().Contains(statusComputerFilter.ToLower());
 
-        #region Методы обработки информации
-        public static void AddStatusComputer(string name)
-        {
-            using var db = new InventoryEntities();
-
-            var statusComputer = new Statuses_computers()
-            {
-                Name = name
-            };
-
-            db.Statuses_computers.Add(statusComputer);
-            db.SaveChanges();
-
-            StatusesComputersViewModel.StatusesComputers.Add(statusComputer);
-        }
-
-        public static void EditStatusComputer(Statuses_computers statusComputer)
-        {
-            using var db = new InventoryEntities();
-            var foundStatusComputer = db.Statuses_computers.FirstOrDefault(status => status.Id_status_computer == statusComputer.Id_status_computer);
-
-            if (foundStatusComputer == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении статуса компьтера",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            foundStatusComputer.Name = statusComputer.Name;
-            db.SaveChanges();
-        }
-
-        public static void DeleteStatusComputer(Statuses_computers selectStatusComputer)
-        {
-            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectStatusComputer.Name}?",
-                "Удаление статуса компьтера", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return;
-
-            using var db = new InventoryEntities();
-            var foundStatusComputer = db.Statuses_computers.FirstOrDefault(status => status.Id_status_computer == selectStatusComputer.Id_status_computer);
-
-            if (foundStatusComputer == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении статуса компьтера", MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            try
-            {
-                db.Statuses_computers.Remove(foundStatusComputer);
-                db.SaveChanges();
-
-                StatusesComputersViewModel.StatusesComputers.Remove(selectStatusComputer);
-            }
-            catch (DbUpdateException)
-            {
-                MessageBox.Show("Невозможно удалить статус компьтера, так как он связана с другими сущностями!",
-                    "Ошибка при удалении статуса компьтера", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         public static void RefreshCollection()
         {
             StatusesComputersViewModel.StatusesComputers.Clear();
@@ -132,7 +69,6 @@ namespace Inventory.Model
             foreach (var item in db.Statuses_computers)
                 StatusesComputersViewModel.StatusesComputers.Add(item);
         }
-        #endregion
 
         #region Откат изменений
         private Statuses_computers _selectStatusComputer;

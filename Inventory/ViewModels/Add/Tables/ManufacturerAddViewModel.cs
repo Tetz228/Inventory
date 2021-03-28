@@ -17,7 +17,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Manufacturer.AddManufacturer(Manufacturer.Name);
+            Services.Add(Manufacturer);
+            Manufacturer.RefreshCollection();
             addWindow.Close();
         }, _ => Manufacturer.IsValidationProperties());
 

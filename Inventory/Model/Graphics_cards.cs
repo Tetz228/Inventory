@@ -5,10 +5,8 @@ namespace Inventory.Model
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
     using System.Globalization;
     using System.Linq;
-    using System.Windows;
 
     public partial class Graphics_cards : BindableBase, IEditableObject, IDataErrorInfo
     {
@@ -79,83 +77,6 @@ namespace Inventory.Model
                                                                               || graphicCard.Unit.Short_name.ToLower().Contains(graphicCardFilter.ToLower())
                                                                               || graphicCard.Manufacturer.Name.ToLower().Contains(graphicCardFilter.ToLower());
 
-        #region Методы обработки информации
-        public static void AddGraphicCard(Graphics_cards graphicCard)
-        {
-            using var db = new InventoryEntities();
-
-            var newGraphicCard = new Graphics_cards()
-            {
-                Memory_size = graphicCard.Memory_size,
-                Name = graphicCard.Name,
-                Fk_unit = graphicCard.Fk_unit,
-                Fk_manufacturer = graphicCard.Fk_manufacturer
-            };
-
-            db.Graphics_cards.Add(newGraphicCard);
-            db.SaveChanges();
-
-            newGraphicCard.Manufacturer = db.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id_manufacturer == newGraphicCard.Fk_manufacturer);
-            newGraphicCard.Unit = db.Units.FirstOrDefault(unit => unit.Id_unit == newGraphicCard.Fk_unit);
-
-            GraphicsCardsViewModel.GraphicsCards.Add(newGraphicCard);
-        }
-
-        public static void EditGraphicCard(Graphics_cards graphicCard)
-        {
-            using var db = new InventoryEntities();
-            var foundGraphicCard = db.Graphics_cards.FirstOrDefault(card => card.Id_graphics_card == graphicCard.Id_graphics_card);
-
-            if (foundGraphicCard == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении видеокарты",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            foundGraphicCard.Memory_size = graphicCard.Memory_size;
-            foundGraphicCard.Name = graphicCard.Name;
-            foundGraphicCard.Fk_unit = graphicCard.Fk_unit;
-            foundGraphicCard.Fk_manufacturer = graphicCard.Fk_manufacturer;
-
-            db.SaveChanges();
-
-            RefreshCollection();
-        }
-
-        public static void DeleteGraphicCard(Graphics_cards selectGraphicCard)
-        {
-            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectGraphicCard.Name}?",
-                "Удаление видеокарты", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return;
-
-            using var db = new InventoryEntities();
-
-            var foundGraphicCard = db.Graphics_cards.FirstOrDefault(graphicCard => graphicCard.Id_graphics_card == selectGraphicCard.Id_graphics_card);
-
-            if (foundGraphicCard == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении видеокарты",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            try
-            {
-                db.Graphics_cards.Remove(foundGraphicCard);
-                db.SaveChanges();
-
-                GraphicsCardsViewModel.GraphicsCards.Remove(selectGraphicCard);
-            }
-            catch (DbUpdateException)
-            {
-                MessageBox.Show("Невозможно удалить видеокарту, так как она связана с другими сущностями!",
-                    "Ошибка при удалении видеокарты", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         public static void RefreshCollection()
         {
             GraphicsCardsViewModel.GraphicsCards.Clear();
@@ -164,7 +85,6 @@ namespace Inventory.Model
             foreach (var item in db.Graphics_cards.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit))
                 GraphicsCardsViewModel.GraphicsCards.Add(item);
         }
-        #endregion
 
         #region Откат изменений
         private Graphics_cards _selectGraphicCard;

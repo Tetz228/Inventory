@@ -22,7 +22,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             TypePeripheral.EndEdit();
-            Types_peripherals.EditTypePeripheral(TypePeripheral);
+            Services.Edit(TypePeripheral.Id_type_peripheral, TypePeripheral);
+            Types_peripherals.RefreshCollection();
             editWindow.Close();
         }, _ => TypePeripheral.IsValidationProperties());
 

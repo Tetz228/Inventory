@@ -24,7 +24,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             Socket.EndEdit();
-            Socket.EditSocket(Socket);
+            Services.Edit(Socket.Id_socket, Socket);
+            Socket.RefreshCollection();
             editWindow.Close();
         }, _ => Socket.IsValidationProperties());
 

@@ -2,8 +2,8 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.View.Add.Tables.Computers.Other;
+    using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -11,9 +11,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.View.Add.Tables.Computers.Other;
-    using Inventory.View.Edit.Tables.Computers.Other;
 
     public class TypesMemoryViewModel : BindableBase
     {
@@ -94,7 +91,16 @@
 
         }, typeSsd => typeSsd != null);
 
-        public ICommand DeleteTypeMemoryCommand => new DelegateCommand<Types_memory>(Types_memory.DeleteTypeMemory, selectTypeMemory => selectTypeMemory != null);
+        public ICommand DeleteTypeMemoryCommand => new DelegateCommand<Types_memory>(selectTypeMemory =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectTypeMemory.Name}?", "Удаление типа памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Types_memory>(selectTypeMemory.Id_type_memory);
+            Types_memory.RefreshCollection();
+        }, selectTypeMemory => selectTypeMemory != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Types_memory.RefreshCollection);
         #endregion

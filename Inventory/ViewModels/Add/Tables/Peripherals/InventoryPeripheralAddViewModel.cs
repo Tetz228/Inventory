@@ -27,7 +27,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Inventory_numbers_peripherals.AddInventoryNumber(InventoryNumberPeripheral);
+            Services.Add(InventoryNumberPeripheral);
+            Inventory_numbers_peripherals.RefreshCollection();
             addWindow.Close();
         }, _ => InventoryNumberPeripheral.IsValidationProperties());
 

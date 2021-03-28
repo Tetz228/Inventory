@@ -14,7 +14,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Statuses_peripherals.AddStatusPeripheral(StatusPeripheral.Name);
+            Services.Add(StatusPeripheral);
+            Statuses_peripherals.RefreshCollection();
             addWindow.Close();
         }, _ => StatusPeripheral.IsValidationProperties());
 

@@ -109,7 +109,16 @@
             editWindow.ShowDialog();
         }, motherboard => motherboard != null);
 
-        public ICommand DeleteMotherboardCommand => new DelegateCommand<Motherboard>(Motherboard.DeleteMotherboard, selectMotherboard => selectMotherboard != null);
+        public ICommand DeleteMotherboardCommand => new DelegateCommand<Motherboard>(selectMotherboard =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectMotherboard.Manufacturer.Name} {selectMotherboard.Name} {selectMotherboard.Socket.Name}?", "Удаление материнской платы", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Motherboard>(selectMotherboard.Id_motherboard);
+            Motherboard.RefreshCollection();
+        }, selectMotherboard => selectMotherboard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Motherboard.RefreshCollection);
         #endregion

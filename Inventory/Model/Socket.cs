@@ -70,69 +70,6 @@ namespace Inventory.Model
 
         public static bool SearchFor(Socket socket, string socketsFilter) => socket.Name.ToLower().Contains(socketsFilter.ToLower());
 
-        #region Методы обработки информации
-        public static void AddSocket(string name)
-        {
-            using var db = new InventoryEntities();
-
-            var post = new Socket
-            {
-                Name = name
-            };
-
-            db.Sockets.Add(post);
-            db.SaveChanges();
-
-            SocketsViewModel.Sockets.Add(post);
-        }
-
-        public static void EditSocket(Socket socket)
-        {
-            using var db = new InventoryEntities();
-            var foundSocket = db.Sockets.FirstOrDefault(s => s.Id_socket == socket.Id_socket);
-
-            if (foundSocket == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении сокета",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            foundSocket.Name = socket.Name;
-            db.SaveChanges();
-        }
-
-        public static void DeleteSocket(Socket selectSocket)
-        {
-            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectSocket.Name}?",
-                "Удаление сокета", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return;
-
-            using var db = new InventoryEntities();
-            var foundSocket = db.Sockets.FirstOrDefault(socket => socket.Id_socket == selectSocket.Id_socket);
-
-            if (foundSocket == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении сокета", MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            try
-            {
-                db.Sockets.Remove(foundSocket);
-                db.SaveChanges();
-
-                SocketsViewModel.Sockets.Remove(selectSocket);
-            }
-            catch (DbUpdateException)
-            {
-                MessageBox.Show("Невозможно удалить сокет, так как он связан с другими сущностями!",
-                    "Ошибка при удалении сокета", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         public static void RefreshCollection()
         {
             SocketsViewModel.Sockets.Clear();
@@ -141,8 +78,7 @@ namespace Inventory.Model
             foreach (var item in db.Sockets)
                 SocketsViewModel.Sockets.Add(item);
         }
-        #endregion
-
+        
         #region Откат изменений
         private Socket _selectSocket;
 

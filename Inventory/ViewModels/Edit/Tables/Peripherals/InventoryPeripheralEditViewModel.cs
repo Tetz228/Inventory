@@ -31,7 +31,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventoryNumberPeripheral.EndEdit();
-            Inventory_numbers_peripherals.EditInventoryNumber(InventoryNumberPeripheral);
+            Services.Edit(InventoryNumberPeripheral.Id_inventory_number_peripheral, InventoryNumberPeripheral);
+            Inventory_numbers_peripherals.RefreshCollection();
             editWindow.Close();
         }, _ => InventoryNumberPeripheral.IsValidationProperties());
 

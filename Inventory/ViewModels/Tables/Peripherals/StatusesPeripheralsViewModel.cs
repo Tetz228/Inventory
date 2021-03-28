@@ -53,6 +53,8 @@
         }
         #endregion
 
+        #region События
+
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -73,6 +75,8 @@
 
         public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectStatusPeripheral = null;
 
+        #endregion
+
         #region Команды
         public ICommand AddStatusPeripheralCommand => new DelegateCommand(() =>
         {
@@ -89,7 +93,16 @@
             editWindow.ShowDialog();
         }, statusPeripheral => statusPeripheral != null);
 
-        public ICommand DeleteStatusPeripheralCommand => new DelegateCommand<Statuses_peripherals>(Statuses_peripherals.DeleteStatusPeripheral, selectStatusPeripheral => selectStatusPeripheral != null);
+        public ICommand DeleteStatusPeripheralCommand => new DelegateCommand<Statuses_peripherals>(selectStatusPeripheral =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectStatusPeripheral.Name}?", "Удаление статус периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Statuses_peripherals>(selectStatusPeripheral.Id_status_peripheral);
+            Statuses_peripherals.RefreshCollection();
+        }, selectStatusPeripheral => selectStatusPeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Statuses_peripherals.RefreshCollection);
         #endregion

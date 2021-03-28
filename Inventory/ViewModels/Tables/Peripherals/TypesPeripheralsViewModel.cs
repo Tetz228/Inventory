@@ -91,7 +91,16 @@
 
         }, typePeripheral => typePeripheral != null);
 
-        public ICommand DeleteTypePeripheralCommand => new DelegateCommand<Types_peripherals>(Types_peripherals.DeleteTypePeripheral, selectTypePeripheral => selectTypePeripheral != null);
+        public ICommand DeleteTypePeripheralCommand => new DelegateCommand<Types_peripherals>(selectTypePeripheral =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectTypePeripheral.Name}?", "Удаление типа периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Types_peripherals>(selectTypePeripheral.Id_type_peripheral);
+            Types_peripherals.RefreshCollection();
+        }, selectTypePeripheral => selectTypePeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Types_peripherals.RefreshCollection);
         #endregion

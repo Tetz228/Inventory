@@ -26,7 +26,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Graphics_cards.AddGraphicCard(GraphicCard);
+            Services.Add(GraphicCard);
+            Graphics_cards.RefreshCollection();
             addWindow.Close();
         }, _ => GraphicCard.IsValidationProperties());
 

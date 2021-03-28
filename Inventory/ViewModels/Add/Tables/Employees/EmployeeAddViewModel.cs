@@ -32,7 +32,11 @@
         #region Команды
         public ICommand AddEmployeeCommand => new DelegateCommand<Window>(empAddWindow =>
         {
-            Employee.AddEmployee(Employee);
+            Services.Add(Employee);
+            Posts_employees.AddPostEmployee(Employee.Id_employee);
+            Employees_in_departments.AddEmployeeInDepartment(Employee.Id_employee);
+            Employee.RefreshCollection();
+            
             empAddWindow.Close();
         }, _ => Employee.IsValidationCollections() && Employee.IsValidationProperties());
 

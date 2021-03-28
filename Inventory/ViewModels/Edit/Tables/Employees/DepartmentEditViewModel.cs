@@ -22,7 +22,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             Department.EndEdit();
-            Department.EditDepartment(Department);
+            Services.Edit(Department.Id_department, Department);
+            Department.RefreshCollection();
             editWindow.Close();
         }, _ => Department.IsValidationProperties());
 

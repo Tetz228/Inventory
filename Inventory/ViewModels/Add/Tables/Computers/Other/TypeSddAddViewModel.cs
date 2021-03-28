@@ -19,7 +19,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Types_ssd.AddTypeSsd(TypeSsd.Name);
+            Services.Add(TypeSsd);
+            Types_ssd.RefreshCollection();
             addWindow.Close();
         }, _ => TypeSsd.IsValidationProperties());
 

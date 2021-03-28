@@ -33,7 +33,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             Peripheral.EndEdit();
-            Peripheral.EditPeripheral(Peripheral);
+            Services.Edit(Peripheral.Id_peripheral, Peripheral);
+            Peripheral.RefreshCollection();
             editWindow.Close();
         }, _ => Peripheral.IsValidationProperties());
 

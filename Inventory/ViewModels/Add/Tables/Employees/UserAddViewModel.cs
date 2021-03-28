@@ -25,7 +25,13 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            User.AddUser(User);
+            (string salt, string hash) = User.GenerateSaltAndHashingPassword(User.Password);
+
+            User.Salt = salt;
+            User.Password = hash;
+
+            Services.Add(User);
+            User.RefreshCollection();
             addWindow.Close();
         }, _ => User.IsValidationProperties() && User.ValidPassword() && User.Fk_employee != 0 && User.EqualsPasswords());
 

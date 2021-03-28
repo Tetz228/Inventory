@@ -1,11 +1,9 @@
 ﻿namespace Inventory.ViewModels.Add.Tables.Computers.Computers
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
 
     public class OperatingSystemAddViewModel : BindableBase
     {
@@ -19,7 +17,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Operating_systems.AddOperatingSystem(OperatingSystem.Name, OperatingSystem.System_version);
+            Services.Add(OperatingSystem);
+            Operating_systems.RefreshCollection();
             addWindow.Close();
         }, _ => OperatingSystem.IsValidationProperties());
 

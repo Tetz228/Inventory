@@ -19,7 +19,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Types_hdd.AddTypeHdd(TypeHdd.Name);
+            Services.Add(TypeHdd);
+            Types_hdd.RefreshCollection();
             addWindow.Close();
         }, _ => TypeHdd.IsValidationProperties());
 

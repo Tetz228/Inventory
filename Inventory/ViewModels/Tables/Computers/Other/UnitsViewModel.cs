@@ -102,7 +102,16 @@
             editWindow.ShowDialog();
         }, unit => unit != null);
 
-        public ICommand DeleteUnitCommand => new DelegateCommand<Unit>(Unit.DeleteUnit, selectUnit => selectUnit != null);
+        public ICommand DeleteUnitCommand => new DelegateCommand<Unit>(selectUnit =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectUnit.Full_name}?", "Удаление жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Unit>(selectUnit.Id_unit);
+            Unit.RefreshCollection();
+        }, selectUnit => selectUnit != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Unit.RefreshCollection);
         #endregion

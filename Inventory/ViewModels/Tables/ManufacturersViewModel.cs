@@ -88,7 +88,16 @@
             editWindow.ShowDialog();
         }, manufacturer => manufacturer != null);
 
-        public ICommand DeleteManufacturerCommand => new DelegateCommand<Manufacturer>(Manufacturer.DeleteManufacturer, selectManufacturer => selectManufacturer != null);
+        public ICommand DeleteManufacturerCommand => new DelegateCommand<Manufacturer>(selectManufacturer =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectManufacturer.Name}?", "Удаление производителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Manufacturer>(selectManufacturer.Id_manufacturer);
+            Manufacturer.RefreshCollection();
+        }, selectManufacturer => selectManufacturer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Manufacturer.RefreshCollection);
         #endregion

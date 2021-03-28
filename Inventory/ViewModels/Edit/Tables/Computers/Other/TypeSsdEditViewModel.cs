@@ -24,7 +24,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             TypeSsd.EndEdit();
-            Types_ssd.EditTypeSsd(TypeSsd);
+            Services.Edit(TypeSsd.Id_type_ssd, TypeSsd);
+            Types_ssd.RefreshCollection();
             editWindow.Close();
         }, _ => TypeSsd.IsValidationProperties());
 

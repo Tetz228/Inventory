@@ -95,89 +95,10 @@ namespace Inventory.Model
         #endregion
 
         public static bool SearchFor(Inventory_numbers_peripherals inventoryNumberPeripheral, string inventoryNumberPeripheralFilter) => inventoryNumberPeripheral.Inventory_number.ToString().ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
-            || inventoryNumberPeripheral.Peripheral.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
-            || inventoryNumberPeripheral.Peripheral.Types_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
-            || inventoryNumberPeripheral.Peripheral.Manufacturer.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
-            || inventoryNumberPeripheral.Statuses_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower());
-
-        #region Методы обработки информации
-        public static void AddInventoryNumber(Inventory_numbers_peripherals inventoryNumber)
-        {
-            using var db = new InventoryEntities();
-
-            var newInventoryNumberPeripheral = new Inventory_numbers_peripherals
-            {
-                Fk_peripheral = inventoryNumber.Fk_peripheral,
-                Fk_status_peripheral = inventoryNumber.Fk_status_peripheral,
-                Inventory_number = inventoryNumber.Inventory_number
-            };
-
-            db.Inventory_numbers_peripherals.Add(newInventoryNumberPeripheral);
-            db.SaveChanges();
-
-            newInventoryNumberPeripheral.Statuses_peripherals = db.Statuses_peripherals.FirstOrDefault(statusPeripheral => statusPeripheral.Id_status_peripheral == newInventoryNumberPeripheral.Fk_status_peripheral);
-            newInventoryNumberPeripheral.Peripheral = db.Peripherals.FirstOrDefault(peripheral => peripheral.Id_peripheral == newInventoryNumberPeripheral.Fk_peripheral);
-
-            if (newInventoryNumberPeripheral.Peripheral != null)
-            {
-                newInventoryNumberPeripheral.Peripheral.Manufacturer = db.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id_manufacturer == newInventoryNumberPeripheral.Peripheral.Fk_manufacturer);
-                newInventoryNumberPeripheral.Peripheral.Types_peripherals = db.Types_peripherals.FirstOrDefault(typePeripheral => typePeripheral.Id_type_peripheral == newInventoryNumberPeripheral.Peripheral.Fk_type_peripheral);
-            }
-
-            InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Add(newInventoryNumberPeripheral);
-        }
-
-        public static void EditInventoryNumber(Inventory_numbers_peripherals selectInventoryNumber)
-        {
-            using var db = new InventoryEntities();
-            var foundInventoryNumber = db.Inventory_numbers_peripherals.FirstOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
-
-            if (foundInventoryNumber == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении инвентарного номера периферии",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            foundInventoryNumber.Fk_peripheral = selectInventoryNumber.Fk_peripheral;
-            foundInventoryNumber.Fk_status_peripheral = selectInventoryNumber.Fk_status_peripheral;
-            foundInventoryNumber.Inventory_number = selectInventoryNumber.Inventory_number;
-
-            db.SaveChanges();
-
-            RefreshCollection();
-        }
-
-        public static void DeleteInventoryNumberPeripheral(Inventory_numbers_peripherals selectInventoryNumber)
-        {
-            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryNumber.Inventory_number}, {selectInventoryNumber.Peripheral.Name}?",
-                "Удаление инвентарного номера периферии", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return;
-
-            using var db = new InventoryEntities();
-            var foundInventoryNumber = db.Inventory_numbers_peripherals.FirstOrDefault(inventoryNumberPeripheral => inventoryNumberPeripheral.Id_inventory_number_peripheral == selectInventoryNumber.Id_inventory_number_peripheral);
-
-            if (foundInventoryNumber == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при инвентарного номера периферии", MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            try
-            {
-                db.Inventory_numbers_peripherals.Remove(foundInventoryNumber);
-                db.SaveChanges();
-
-                InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Remove(selectInventoryNumber);
-            }
-            catch (DbUpdateException)
-            {
-                MessageBox.Show("Невозможно удалить инвентарный номер периферии, так как он связана с другими сущностями!",
-                    "Ошибка при удалении инвентарного номера периферии", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+                                                                                                                                      || inventoryNumberPeripheral.Peripheral.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
+                                                                                                                                      || inventoryNumberPeripheral.Peripheral.Types_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
+                                                                                                                                      || inventoryNumberPeripheral.Peripheral.Manufacturer.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
+                                                                                                                                      || inventoryNumberPeripheral.Statuses_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower());
 
         public static void RefreshCollection()
         {
@@ -193,8 +114,7 @@ namespace Inventory.Model
                 InventoryPeripheralsViewModel.InventoryNumbersPeripherals.Add(item);
             }
         }
-        #endregion
-
+        
         #region Откат изменений
         private Inventory_numbers_peripherals _selectInventoryNumberPeripheral;
 

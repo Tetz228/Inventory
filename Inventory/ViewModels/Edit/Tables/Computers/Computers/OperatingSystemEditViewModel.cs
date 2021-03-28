@@ -24,7 +24,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             OperatingSystem.EndEdit();
-            Operating_systems.EditOperatingSystem(OperatingSystem);
+            Services.Edit(OperatingSystem.Id_operating_system, OperatingSystem);
+            Operating_systems.RefreshCollection();
             editWindow.Close();
         }, _ => OperatingSystem.IsValidationProperties());
 

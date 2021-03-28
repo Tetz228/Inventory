@@ -24,7 +24,8 @@
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             TypeMemory.EndEdit();
-            Types_memory.EditTypeMemory(TypeMemory);
+            Services.Edit(TypeMemory.Id_type_memory, TypeMemory);
+            Types_memory.RefreshCollection();
             editWindow.Close();
         }, _ => TypeMemory.IsValidationProperties());
 

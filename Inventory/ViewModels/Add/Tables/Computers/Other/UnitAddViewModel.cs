@@ -19,7 +19,8 @@
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Unit.AddUnit(Unit.Full_name, Unit.Short_name);
+            Services.Add(Unit);
+            Unit.RefreshCollection();
             addWindow.Close();
         }, _ => Unit.IsValidationProperties());
 

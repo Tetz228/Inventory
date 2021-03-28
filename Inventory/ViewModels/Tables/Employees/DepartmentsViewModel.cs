@@ -90,7 +90,16 @@
             editDepartmentWindow.ShowDialog();
         }, depart => depart != null);
 
-        public ICommand DeleteDepartmentCommand => new DelegateCommand<Department>(Department.DeleteDepartment, selectDepartment => selectDepartment != null);
+        public ICommand DeleteDepartmentCommand => new DelegateCommand<Department>(selectDepartment =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectDepartment.Name}?", "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Department>(selectDepartment.Id_department);
+            Department.RefreshCollection();
+        }, selectDepartment => selectDepartment != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(Department.RefreshCollection);
         #endregion

@@ -72,81 +72,6 @@ namespace Inventory.Model
                                                                               || motherboard.Socket.Name.ToLower().Contains(motherboardFilter.ToLower())
                                                                               || motherboard.Manufacturer.Name.ToLower().Contains(motherboardFilter.ToLower());
 
-        #region Методы обработки информации
-        public static void AddMotherboard(Motherboard motherboard)
-        {
-            using var db = new InventoryEntities();
-
-            var newMotherboard = new Motherboard()
-            {
-                Fk_socket = motherboard.Fk_socket,
-                Name = motherboard.Name,
-                Fk_manufacturer = motherboard.Fk_manufacturer
-            };
-
-            db.Motherboards.Add(newMotherboard);
-            db.SaveChanges();
-
-            newMotherboard.Manufacturer = db.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id_manufacturer == newMotherboard.Fk_manufacturer);
-            newMotherboard.Socket = db.Sockets.FirstOrDefault(socket => socket.Id_socket == newMotherboard.Fk_socket);
-
-            MotherboardsViewModel.Motherboards.Add(newMotherboard);
-        }
-
-        public static void EditMotherboard(Motherboard motherboard)
-        {
-            using var db = new InventoryEntities();
-            var foundMotherboard = db.Motherboards.FirstOrDefault(mother => mother.Id_motherboard == motherboard.Id_motherboard);
-
-            if (foundMotherboard == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при изменении материнской платы",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            foundMotherboard.Name = motherboard.Name;
-            foundMotherboard.Fk_socket = motherboard.Fk_socket;
-            foundMotherboard.Fk_manufacturer = motherboard.Fk_manufacturer;
-
-            db.SaveChanges();
-
-            RefreshCollection();
-        }
-
-        public static void DeleteMotherboard(Motherboard selectMotherboard)
-        {
-            if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить - {selectMotherboard.Name}?",
-                "Удаление материнской платы", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                return;
-
-            using var db = new InventoryEntities();
-
-            var foundMotherboard = db.Motherboards.FirstOrDefault(motherboard => motherboard.Id_motherboard == selectMotherboard.Id_motherboard);
-
-            if (foundMotherboard == null)
-            {
-                MessageBox.Show("Объект не найден в базе данных!", "Ошибка при удалении материнской платы",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                RefreshCollection();
-                return;
-            }
-
-            try
-            {
-                db.Motherboards.Remove(foundMotherboard);
-                db.SaveChanges();
-
-                MotherboardsViewModel.Motherboards.Remove(selectMotherboard);
-            }
-            catch (DbUpdateException)
-            {
-                MessageBox.Show("Невозможно удалить материнскую плату, так как она связана с другими сущностями!",
-                    "Ошибка при удалении материнской платы", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         public static void RefreshCollection()
         {
             MotherboardsViewModel.Motherboards.Clear();
@@ -155,7 +80,6 @@ namespace Inventory.Model
             foreach (var item in db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket))
                 MotherboardsViewModel.Motherboards.Add(item);
         }
-        #endregion
 
         #region Откат изменений
         private Motherboard _selectMotherboard;
