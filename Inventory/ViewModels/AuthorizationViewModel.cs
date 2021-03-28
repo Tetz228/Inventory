@@ -10,6 +10,8 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class AuthorizationViewModel : BindableBase, IDataErrorInfo
     {
         #region Валидация
@@ -50,7 +52,7 @@
 
         public ICommand ComeInCommand => new DelegateCommand<Window>(authWindow =>
         {
-            var (userId, userExist) = User.OnUserExist(Login, Password);
+            var (userId, userExist) = UsersInteraction.OnUserExist(Login, Password);
 
             if (userExist)
             {

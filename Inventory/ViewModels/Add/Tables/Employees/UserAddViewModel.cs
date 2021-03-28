@@ -2,13 +2,12 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Employees;
 
     public class UserAddViewModel : BindableBase
     {
@@ -26,9 +25,10 @@
         #endregion
 
         #region Команды
+
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            (string salt, string hash) = User.GenerateSaltAndHashingPassword(User.Password);
+            (string salt, string hash) = UsersInteraction.GenerateSaltAndHashingPassword(User.Password);
 
             User.Salt = salt;
             User.Password = hash;
@@ -36,7 +36,9 @@
             Services.Add(User);
             UsersViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => User.IsValidationProperties() && User.ValidPassword() && User.Fk_employee != 0 && User.EqualsPasswords());
+        }, _ => Services.IsValidationProperties(User.ErrorCollection, User.Fk_employee)
+                            && UsersInteraction.ValidPassword(User.Password)
+                            && UsersInteraction.EqualsPasswords(User.Password, User.PasswordRepeated));
 
         public ICommand PasswordChanged => new DelegateCommand<PasswordBox>(passwordBox =>
         {

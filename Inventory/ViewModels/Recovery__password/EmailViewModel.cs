@@ -2,10 +2,10 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Model.Classes;
     using Inventory.View.Pages.Recovery_password;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
     using System.Windows.Input;
 
     public class EmailViewModel : BindableBase, IDataErrorInfo
@@ -24,7 +24,7 @@
                     case "Email":
                         if (string.IsNullOrWhiteSpace(Email))
                             result = "Поле не должно быть пустым";
-                        else if (Employee.IsValidationEmail(Email) == false)
+                        else if (!MailsInteraction.IsValidationEmail(Email))
                             result = "Некорректная почта";
                         break;
                 }
@@ -37,24 +37,24 @@
             }
         }
 
-        public string Error { get => null; }
+        private static bool f;
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
+        public string Error { get => null; }
         #endregion
 
         public string Email { get; set; }
 
         public ICommand FurtherCommand => new DelegateCommand(() =>
         {
-            (Employee employee, bool existEmployee) = Employee.OnEmailExist(Email);
+            (Employee employee, bool existEmployee) = MailsInteraction.OnEmailExist(Email);
 
             if (existEmployee)
             {
-                (int idUser, bool existUser) = User.OnUserExist(employee);
+                (int idUser, bool existUser) = UsersInteraction.OnUserExist(employee);
 
                 if (existUser)
                 {
-                    (int code, bool codeSent) = Employee.SendingSecurityCode(Email);
+                    (int code, bool codeSent) = MailsInteraction.SendingSecurityCode(Email);
 
                     if (codeSent)
                     {
@@ -67,7 +67,7 @@
                 }
             }
 
-        }, IsValidationProperties);
+        }, Services.IsValidationProperties(ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand(() => PasswordRecoveryViewModel.RecoveryWindow.Close());
     }

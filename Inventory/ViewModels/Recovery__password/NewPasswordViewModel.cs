@@ -5,6 +5,8 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using Inventory.Model.Classes;
+
     public class NewPasswordViewModel : BindableBase
     {
         public NewPasswordViewModel(int idUser)
@@ -17,9 +19,9 @@
         #region Команды
         public ICommand EditCommand => new DelegateCommand(() =>
         {
-            User.ChangePassword(User);
+            UsersInteraction.ChangePassword(User);
             PasswordRecoveryViewModel.RecoveryWindow.Close();
-        }, () => User.ValidPassword() && User.EqualsPasswords());
+        }, () => UsersInteraction.ValidPassword(User.Password) && UsersInteraction.EqualsPasswords(User.Password, User.PasswordRepeated));
 
         public ICommand PasswordChanged => new DelegateCommand<PasswordBox>(passwordBox =>
         {

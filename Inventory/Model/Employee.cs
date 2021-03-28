@@ -1,16 +1,12 @@
 namespace Inventory.Model
 {
     using DevExpress.Mvvm;
-    using System;
+    using Inventory.Model.Classes;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Net;
-    using System.Net.Mail;
     using System.Text.RegularExpressions;
-    using System.Windows;
 
     public partial class Employee : BindableBase, IDataErrorInfo
     {
@@ -79,7 +75,7 @@ namespace Inventory.Model
                     case "Email":
                         if (string.IsNullOrWhiteSpace(Email))
                             result = "Поле не должно быть пустым";
-                        else if (!IsValidationEmail(Email))
+                        else if (MailsInteraction.IsValidationEmail(Email) == false)
                             result = "Некорректная почта";
                         break;
                     case "Phone_number":
@@ -87,7 +83,7 @@ namespace Inventory.Model
                             result = "Поле не должно быть пустым";
                         else if (Phone_number.Length < 5)
                             result = "Поле должно содержать минимум 5 символа";
-                        else if (!IsValidationPhoneNumber(Phone_number))
+                        else if (IsValidationPhoneNumber(Phone_number) == false)
                             result = "Некорректный номер";
                         break;
                 }
@@ -102,8 +98,6 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        public static bool IsValidationEmail(string email) => new EmailAddressAttribute().IsValid(email);
-
         private bool IsValidationPhoneNumber(string phoneNumber) => Regex.IsMatch(phoneNumber, @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$");
 
         public bool IsValidationCollections()
@@ -114,63 +108,5 @@ namespace Inventory.Model
             return PostsEmployees.All(item => item.Fk_post != 0) && EmployeesInDepartments.All(item => item.Fk_department != 0);
         }
         #endregion
-
-        public static (Employee, bool) OnEmailExist(string email)
-        {
-            using var db = new InventoryEntities();
-            var foundEmployee = db.Employees.FirstOrDefault(employee => employee.Email == email);
-
-            if (foundEmployee == null)
-            {
-                MessageBox.Show("Сотрудник c такой почтой не найден! Проверьте правильность написания почты.", "Ошибка! Сотрудник не найден.", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                return (null, false);
-            }
-
-            return (foundEmployee, true);
-        }
-
-        public static (int, bool) SendingSecurityCode(string email)
-        {
-            var random = new Random();
-            var fromMailAddress = new MailAddress("itproject719@gmail.com", "ITProject");
-            var toMailAddress = new MailAddress(email);
-            int code = random.Next(1000, 9999);
-
-            using var mailMessager = new MailMessage(fromMailAddress, toMailAddress)
-            {
-                Subject = "Восставноление пароля",
-                Body = "Ваш код безопасности для восставноления пароля - " + code,
-                IsBodyHtml = false
-            };
-
-            using var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                EnableSsl = true,
-                Port = 587,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromMailAddress.Address, "%*kHy#l7~x")
-            };
-
-            try
-            {
-                smtp.Send(mailMessager);
-
-                MessageBox.Show("Код безопасности отправлен на почту! Если сообщение с кодом не пришло, то посмотрите в папке спам.", "Код отправлен", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-
-                return (code, true);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Ошибка! Код безопасноcти не отправлен.", "Ошибка при отправке кода безопасности.", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                return (0, false);
-            }
-        }
     }
 }

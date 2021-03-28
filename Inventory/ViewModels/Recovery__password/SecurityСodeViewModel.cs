@@ -1,14 +1,13 @@
 ﻿namespace Inventory.ViewModels.Recovery__password
 {
     using DevExpress.Mvvm;
+    using Inventory.Model.Classes;
+    using Inventory.View.Pages.Recovery_password;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Model;
-    using Inventory.View.Pages.Recovery_password;
 
     public class SecurityСodeViewModel : BindableBase, IDataErrorInfo
     {
@@ -74,7 +73,7 @@
 
         public ICommand SendingSecurityCodeCommand => new DelegateCommand(() =>
         {
-            (int code, bool codeSent) = Employee.SendingSecurityCode(Email);
+            (int code, bool codeSent) = MailsInteraction.SendingSecurityCode(Email);
 
             if (codeSent)
                 SentСode = code;

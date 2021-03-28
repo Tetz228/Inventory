@@ -152,7 +152,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Classes\MailsInteraction.cs" />
     <Compile Include="Model\Classes\SearchFor.cs" />
+    <Compile Include="Model\Classes\UsersInteraction.cs" />
     <Compile Include="Model\Computer.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
