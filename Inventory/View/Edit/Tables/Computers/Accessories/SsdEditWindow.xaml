@@ -51,7 +51,7 @@
                                 Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
 
-                        <!--  Тип SSD -->
+                        <!--  Тип SSD  -->
                         <UniformGrid Columns="2">
                             <TextBlock Style="{StaticResource BaseText}" Text="Тип SSD: " />
 
