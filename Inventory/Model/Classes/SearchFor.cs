@@ -22,17 +22,25 @@ namespace Inventory.Model.Classes
                                                                                              || graphicCard.Manufacturer.Name.ToLower().Contains(graphicCardFilter.ToLower());
 
         public static bool Search(this Hdd hdd, string hddFilter) => hdd.Name.ToLower().Contains(hddFilter.ToLower())
-                                                                   || hdd.Unit.Full_name.ToLower().Contains(hddFilter.ToLower())
-                                                                   || hdd.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(hddFilter.ToLower())
-                                                                   || hdd.Unit.Short_name.ToLower().Contains(hddFilter.ToLower())
-                                                                   || hdd.Types_hdd.Name.ToLower().Contains(hddFilter.ToLower())
-                                                                   || hdd.Manufacturer.Name.ToLower().Contains(hddFilter.ToLower());
+                                                                  || hdd.Unit.Full_name.ToLower().Contains(hddFilter.ToLower())
+                                                                  || hdd.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(hddFilter.ToLower())
+                                                                  || hdd.Unit.Short_name.ToLower().Contains(hddFilter.ToLower())
+                                                                  || hdd.Types_hdd.Name.ToLower().Contains(hddFilter.ToLower())
+                                                                  || hdd.Manufacturer.Name.ToLower().Contains(hddFilter.ToLower());
 
-        public static bool Search(this Power_supplies powerSupply, string powerSupplyFilter) => powerSupply.Name.ToLower().Contains(powerSupplyFilter.ToLower())
-                                                                     || powerSupply.Unit.Full_name.ToLower().Contains(powerSupplyFilter.ToLower())
-                                                                     || powerSupply.Power.ToString().ToLower().Contains(powerSupplyFilter.ToLower())
-                                                                     || powerSupply.Unit.Short_name.ToLower().Contains(powerSupplyFilter.ToLower())
-                                                                     || powerSupply.Manufacturer.Name.ToLower().Contains(powerSupplyFilter.ToLower());
+        public static bool Search(this Power_supplies powerSupply, string powerSuppliesFilter) => powerSupply.Name.ToLower().Contains(powerSuppliesFilter.ToLower())
+                                                                     || powerSupply.Unit.Full_name.ToLower().Contains(powerSuppliesFilter.ToLower())
+                                                                     || powerSupply.Power.ToString().ToLower().Contains(powerSuppliesFilter.ToLower())
+                                                                     || powerSupply.Unit.Short_name.ToLower().Contains(powerSuppliesFilter.ToLower())
+                                                                     || powerSupply.Manufacturer.Name.ToLower().Contains(powerSuppliesFilter.ToLower());
+
+        public static bool Search(this Processor processor, string processorsFilter) => processor.Name.ToLower().Contains(processorsFilter.ToLower())
+                                                                                        || processor.Unit.Full_name.ToLower().Contains(processorsFilter.ToLower())
+                                                                                        || processor.Base_frequency.ToString(CultureInfo.InvariantCulture).ToLower().Contains(processorsFilter.ToLower())
+                                                                                        || processor.Socket.Name.ToLower().Contains(processorsFilter.ToLower())
+                                                                                        || processor.Amount_cores.ToString().ToLower().Contains(processorsFilter.ToLower())
+                                                                                        || processor.Unit.Short_name.ToLower().Contains(processorsFilter.ToLower())
+                                                                                        || processor.Manufacturer.Name.ToLower().Contains(processorsFilter.ToLower());
 
         public static bool Search(this Inventory_numbers_peripherals inventoryNumberPeripheral, string inventoryNumberPeripheralFilter) => inventoryNumberPeripheral.Inventory_number.ToString().ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
                                                                                                                                         || inventoryNumberPeripheral.Peripheral.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())

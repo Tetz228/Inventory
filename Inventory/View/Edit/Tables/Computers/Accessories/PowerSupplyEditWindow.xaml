@@ -57,7 +57,7 @@
 
                             <TextBox
                                 Name="TextBoxName"
-                                MaxLength="50"
+                                MaxLength="40"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding PowerSupply.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding PowerSupply.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

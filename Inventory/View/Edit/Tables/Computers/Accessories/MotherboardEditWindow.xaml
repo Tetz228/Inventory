@@ -64,9 +64,9 @@
                                 ToolTip="{Binding Motherboard.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
-                        <!--  Сокеты  -->
+                        <!--  Сокет  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Сокеты: " />
+                            <TextBlock Style="{StaticResource BaseText}" Text="Сокет: " />
 
                             <ComboBox
                                 Width="219"
