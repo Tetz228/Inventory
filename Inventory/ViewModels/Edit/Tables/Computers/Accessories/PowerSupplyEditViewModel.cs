@@ -1,15 +1,13 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Accessories
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Model.Classes;
+    using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Computers.Accessories;
 
     public class PowerSupplyEditViewModel : BindableBase, IEditableObject
     {
@@ -38,9 +36,9 @@
         {
             EndEdit();
             Services.Edit(PowerSupply.Id_power_supplie, PowerSupply);
-            HddsViewModel.RefreshCollection();
+            PowerSuppliesViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Services.IsValidationProperties(PowerSupply.ErrorCollection));
+        }, _ => Services.IsValidationProperties(PowerSupply.ErrorCollection, PowerSupply.Fk_manufacturer, PowerSupply.Fk_unit, PowerSupply.Power));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

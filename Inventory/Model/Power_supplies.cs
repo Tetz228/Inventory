@@ -17,8 +17,8 @@ namespace Inventory.Model
         public int Id_power_supplie { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Power { get; set; }
-        public Nullable<int> Fk_unit { get; set; }
+        public int Power { get; set; }
+        public int Fk_unit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory_numbers_power_supplies> Inventory_numbers_power_supplies { get; set; }

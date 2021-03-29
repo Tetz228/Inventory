@@ -31,7 +31,7 @@
             Services.Add(PowerSupply);
             PowerSuppliesViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Services.IsValidationProperties(PowerSupply.ErrorCollection, PowerSupply.Fk_manufacturer));
+        }, _ => Services.IsValidationProperties(PowerSupply.ErrorCollection, PowerSupply.Fk_manufacturer, PowerSupply.Fk_unit, PowerSupply.Power));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
