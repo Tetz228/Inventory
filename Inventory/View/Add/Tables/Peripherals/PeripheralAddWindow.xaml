@@ -51,9 +51,10 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding Manufacturers}"
-                                SelectedValue="{Binding Peripheral.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValue="{Binding Peripheral.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}" />
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding Peripheral.ErrorCollection[Fk_manufacturer], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Тип периферии  -->
@@ -67,9 +68,10 @@
                                 VerticalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding TypesPeripherals}"
-                                SelectedValue="{Binding Peripheral.Fk_type_peripheral, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValue="{Binding Peripheral.Fk_type_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_type_peripheral"
-                                Style="{StaticResource BaseComboBox}" />
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding Peripheral.ErrorCollection[Fk_type_peripheral], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Наименование периферии  -->

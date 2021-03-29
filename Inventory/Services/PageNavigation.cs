@@ -1,4 +1,4 @@
-﻿namespace Inventory.Model.Classes
+﻿namespace Inventory.Services
 {
     using System;
     using System.Windows.Controls;

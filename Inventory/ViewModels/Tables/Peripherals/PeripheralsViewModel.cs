@@ -13,7 +13,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
 
     public class PeripheralsViewModel : BindableBase
     {

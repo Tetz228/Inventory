@@ -1,12 +1,13 @@
-﻿namespace Inventory.Model.Classes
+﻿namespace Inventory.Services
 {
-    using Inventory.Model;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
+
+    using Inventory.Model;
 
     public static class Services
     {
@@ -20,16 +21,6 @@
 
             foreach (var item in sortCollection)
                 observableCollection.Add(item);
-        }
-
-        public static bool IsValidationProperties<TClass>(TClass dictionary, params int[] properties)
-            where TClass : Dictionary<string, string>
-        {
-            if (dictionary.Count == 0 || dictionary.Any(item => item.Value == null)&& properties.All(property => property != 0))
-                return true;
-            
-
-            return false;
         }
 
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0 
@@ -51,6 +42,7 @@
                 MessageBox.Show($"Ошибка при добавлении данных в базу данных. {e.Message}", "Ошибка при добавлении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         public static void Edit<TClass>(int idObject, TClass updatedObject) where TClass : class
         {

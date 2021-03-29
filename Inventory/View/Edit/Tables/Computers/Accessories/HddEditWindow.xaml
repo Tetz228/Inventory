@@ -86,8 +86,8 @@
                             <TextBox
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding Hdd.Memory_size, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding Hdd.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding Hdd.MemorySizeString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Hdd.ErrorCollection[MemorySizeString], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Единица измерения  -->

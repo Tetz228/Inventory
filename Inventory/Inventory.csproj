@@ -152,9 +152,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Classes\MailsInteraction.cs" />
-    <Compile Include="Model\Classes\SearchFor.cs" />
-    <Compile Include="Model\Classes\UsersInteraction.cs" />
+    <Compile Include="Services\MailsInteraction.cs" />
+    <Compile Include="Services\SearchFor.cs" />
+    <Compile Include="Services\UsersInteraction.cs" />
     <Compile Include="Model\Computer.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
@@ -302,8 +302,8 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Classes\PageNavigation.cs" />
-    <Compile Include="Model\Classes\Services.cs" />
+    <Compile Include="Services\PageNavigation.cs" />
+    <Compile Include="Services\Services.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Accessories\GraphicCardAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Accessories\MotherboardAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Accessories\PowerSupplyAddViewModel.cs" />

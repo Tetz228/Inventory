@@ -13,7 +13,6 @@
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
-
     <Grid>
         <StackPanel Margin="10">
             <TextBlock
@@ -45,8 +44,8 @@
                                 Name="TextBoxInventoryNumber"
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryNumberPeripheral.Inventory_number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding InventoryNumberPeripheral.InventoryNumberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[InventoryNumberString], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Периферия  -->

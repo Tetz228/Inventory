@@ -1,16 +1,11 @@
 namespace Inventory.Model
 {
-    using System;
-    using BCrypt.Net;
+    using DevExpress.Mvvm;
+
     using System.Collections.Generic;
     using System.ComponentModel;
-    using DevExpress.Mvvm;
-    using Inventory.ViewModels.Tables.Employees;
-    using System.Linq;
-    using System.Windows;
-    using System.Data.Entity;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
 
     public partial class User : BindableBase, IDataErrorInfo
     {
@@ -54,6 +49,10 @@ namespace Inventory.Model
                             result = "Поле должно содержать минимум 2 символа";
                         else if (UsersInteraction.UniqueLogin(Login))
                             result = "Логин уже существует";
+                        break;
+                    case "Fk_employee":
+                        if (Fk_employee == 0)
+                            result = "Поле не должно быть пустым";
                         break;
                 }
 

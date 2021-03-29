@@ -1,8 +1,9 @@
-﻿using System.Linq;
-
-namespace Inventory.Model.Classes
+﻿namespace Inventory.Services
 {
     using System.Globalization;
+    using System.Linq;
+
+    using Inventory.Model;
 
     public static class SearchFor
     {

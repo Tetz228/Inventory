@@ -5,7 +5,7 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
 
     public class NewPasswordViewModel : BindableBase
     {

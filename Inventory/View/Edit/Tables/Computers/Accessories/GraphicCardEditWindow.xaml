@@ -71,8 +71,8 @@
                             <TextBox
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding GraphicCard.Memory_size, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding GraphicCard.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding GraphicCard.MemorySizeString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding GraphicCard.ErrorCollection[MemorySizeString], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Единица измерения  -->

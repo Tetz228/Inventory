@@ -13,7 +13,9 @@ namespace Inventory.Model
         {
             this.Inventory_numbers_power_supplies = new HashSet<Inventory_numbers_power_supplies>();
         }
-    
+
+        public string PowerString { get; set; }
+
         public int Id_power_supplie { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
@@ -42,6 +44,24 @@ namespace Inventory.Model
                             result = "Поле не должно быть пустым";
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
+                        break;
+                    case "PowerString":
+                        if (string.IsNullOrWhiteSpace(PowerString))
+                            result = "Поле не должно быть пустым";
+                        else if (int.TryParse(PowerString, out int _) == false)
+                            result = "Некорректное поле";
+                        else if (int.Parse(PowerString) <= 0)
+                            result = "Число должно быть больше 0";
+                        else
+                            Power = int.Parse(PowerString);
+                        break;
+                    case "Fk_manufacturer":
+                        if (Fk_manufacturer == 0)
+                            result = "Поле не должно быть пустым";
+                        break;
+                    case "Fk_unit":
+                        if (Fk_unit == 0)
+                            result = "Поле не должно быть пустым";
                         break;
                 }
 

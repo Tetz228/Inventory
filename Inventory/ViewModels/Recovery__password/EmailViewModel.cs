@@ -2,11 +2,12 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
     using Inventory.View.Pages.Recovery_password;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows.Input;
+
+    using Inventory.Services;
 
     public class EmailViewModel : BindableBase, IDataErrorInfo
     {

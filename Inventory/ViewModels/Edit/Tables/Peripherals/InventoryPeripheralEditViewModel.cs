@@ -7,7 +7,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Peripherals;
 
     public class InventoryPeripheralEditViewModel : BindableBase
@@ -19,6 +19,7 @@
             Peripherals = new ObservableCollection<Peripheral>(db.Peripherals);
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
             InventoryNumberPeripheral = inventoryNumberPeripheral;
+            InventoryNumberPeripheral.InventoryNumberString = inventoryNumberPeripheral.Inventory_number.ToString();
             InventoryNumberPeripheral.BeginEdit();
         }
 
@@ -37,7 +38,7 @@
             Services.Edit(InventoryNumberPeripheral.Id_inventory_number_peripheral, InventoryNumberPeripheral);
             InventoryPeripheralsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Services.IsValidationProperties(InventoryNumberPeripheral.ErrorCollection, InventoryNumberPeripheral.Fk_status_peripheral, InventoryNumberPeripheral.Fk_peripheral));
+        }, _ => Services.IsValidationProperties(InventoryNumberPeripheral.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

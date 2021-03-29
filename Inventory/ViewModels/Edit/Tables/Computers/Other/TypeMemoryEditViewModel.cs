@@ -2,11 +2,12 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
     using Inventory.ViewModels.Tables.Computers.Other;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
+
+    using Inventory.Services;
 
     public class TypeMemoryEditViewModel : BindableBase, IEditableObject
     {

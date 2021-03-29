@@ -1,11 +1,17 @@
 namespace Inventory.Model
 {
     using System;
+    using System.Collections;
+
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+    using System.Reflection;
+    using System.Windows;
 
-    using DevExpress.Mvvm;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables.Peripherals;
 
     public partial class Inventory_numbers_peripherals : BindableBase, IDataErrorInfo
     {
@@ -14,12 +20,14 @@ namespace Inventory.Model
         {
             List_dispensed_peripherals = new HashSet<List_dispensed_peripherals>();
         }
-    
+
+        public string InventoryNumberString { get; set; }
+
         public int Id_inventory_number_peripheral { get; set; }
         public int Fk_peripheral { get; set; }
         public int Inventory_number { get; set; }
         public int Fk_status_peripheral { get; set; }
-    
+
         public virtual Peripheral Peripheral { get; set; }
         public virtual Statuses_peripherals Statuses_peripherals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -36,23 +44,23 @@ namespace Inventory.Model
 
                 switch (name)
                 {
-                    case "Inventory_number":
-                        if (Inventory_number <= 0)
-                            result = "Поле должно содержать число больше нуля";
+                    case "InventoryNumberString":
+                        if (string.IsNullOrWhiteSpace(InventoryNumberString))
+                            result = "Поле не должно быть пустым";
+                        else if (int.TryParse(InventoryNumberString, out int _) == false)
+                            result = "Некорректное поле";
+                        else if (int.Parse(InventoryNumberString) <= 0)
+                            result = "Число должно быть больше 0";
                         else
-                        {
-                            if (_selectInventoryNumberPeripheral == null)
-                            {
-                                if (IsUniqueInventoryNumber())
-                                    result = "Номер должен быть уникальным";
-                            }
-                            else
-                            {
-                                if (_selectInventoryNumberPeripheral.Inventory_number != Inventory_number)
-                                    if (IsUniqueInventoryNumber())
-                                        result = "Номер должен быть уникальным";
-                            }
-                        }
+                            ValidInventoryNumber(ref result);
+                        break;
+                    case "Fk_peripheral":
+                        if (Fk_peripheral == 0)
+                            result = "Поле не должно быть пустым";
+                        break;
+                    case "Fk_status_peripheral":
+                        if (Fk_status_peripheral == 0)
+                            result = "Поле не должно быть пустым";
                         break;
                 }
 
@@ -61,6 +69,23 @@ namespace Inventory.Model
                 RaisePropertyChanged(nameof(ErrorCollection));
 
                 return result;
+            }
+        }
+
+        public void ValidInventoryNumber(ref string result)
+        {
+            Inventory_number = int.Parse(InventoryNumberString);
+
+            if (_selectInventoryNumberPeripheral == null)
+            {
+                if (IsUniqueInventoryNumber())
+                    result = "Номер должен быть уникальным";
+            }
+            else
+            {
+                if (_selectInventoryNumberPeripheral.Inventory_number != Inventory_number)
+                    if (IsUniqueInventoryNumber())
+                        result = "Номер должен быть уникальным";
             }
         }
 
@@ -78,7 +103,7 @@ namespace Inventory.Model
         {
             using var db = new InventoryEntities();
             var isEmpty = db.Inventory_numbers_peripherals.FirstOrDefault();
-
+      
             if (isEmpty == null)
                 return 1;
 

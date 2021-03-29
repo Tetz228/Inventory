@@ -48,7 +48,7 @@
                                 ItemsSource="{Binding Manufacturers}"
                                 SelectedValue="{Binding PowerSupply.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}" />
+                                Style="{StaticResource BaseComboBox}"/>
                         </UniformGrid>
 
                         <!--  Наименование блока питания  -->
@@ -63,15 +63,15 @@
                                 ToolTip="{Binding PowerSupply.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
-                        <!--  Объём  -->
+                        <!--  Мощность  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Объём: " />
+                            <TextBlock Style="{StaticResource BaseText}" Text="Мощность: " />
 
                             <TextBox
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding PowerSupply.Power, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding PowerSupply.ErrorCollection[Power], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding PowerSupply.PowerString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding PowerSupply.ErrorCollection[PowerString], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Единица измерения  -->
@@ -86,7 +86,7 @@
                                 ItemsSource="{Binding Units}"
                                 SelectedValue="{Binding PowerSupply.Fk_unit, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_unit"
-                                Style="{StaticResource BaseComboBox}" />
+                                Style="{StaticResource BaseComboBox}"/>
                         </UniformGrid>
                     </StackPanel>
                 </Border>

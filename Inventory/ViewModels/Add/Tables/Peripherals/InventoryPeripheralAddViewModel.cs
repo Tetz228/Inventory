@@ -6,7 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Peripherals;
 
     public class InventoryPeripheralAddViewModel : BindableBase
@@ -33,7 +33,7 @@
             Services.Add(InventoryNumberPeripheral);
             InventoryPeripheralsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Services.IsValidationProperties(InventoryNumberPeripheral.ErrorCollection, InventoryNumberPeripheral.Fk_status_peripheral, InventoryNumberPeripheral.Fk_peripheral));
+        }, _ => Services.IsValidationProperties(InventoryNumberPeripheral.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

@@ -99,9 +99,10 @@
                                 MaxWidth="208"
                                 HorizontalAlignment="Center"
                                 ItemsSource="{Binding Employees}"
-                                SelectedValue="{Binding User.Fk_employee}"
+                                SelectedValue="{Binding User.Fk_employee, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                 SelectedValuePath="Id_employee"
-                                Style="{StaticResource BaseComboBox}">
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding User.ErrorCollection[Fk_employee], UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock>

@@ -5,7 +5,7 @@
 
     using DevExpress.Mvvm;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.View.Pages.Recovery_password;
 
     public class PasswordRecoveryViewModel : BindableBase

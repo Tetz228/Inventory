@@ -2,12 +2,13 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
+
+    using Inventory.Services;
 
     public class PowerSupplyEditViewModel : BindableBase, IEditableObject
     {
@@ -19,6 +20,7 @@
             Units = new ObservableCollection<Unit>(db.Units);
 
             PowerSupply = powerSupply;
+            PowerSupply.PowerString = powerSupply.Power.ToString();
             BeginEdit();
         }
 
@@ -38,7 +40,7 @@
             Services.Edit(PowerSupply.Id_power_supplie, PowerSupply);
             PowerSuppliesViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Services.IsValidationProperties(PowerSupply.ErrorCollection, PowerSupply.Fk_manufacturer, PowerSupply.Fk_unit, PowerSupply.Power));
+        }, _ => Services.IsValidationProperties(PowerSupply.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
         {

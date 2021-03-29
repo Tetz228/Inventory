@@ -1,4 +1,4 @@
-﻿namespace Inventory.Model.Classes
+﻿namespace Inventory.Services
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -6,6 +6,8 @@
     using System.Net;
     using System.Net.Mail;
     using System.Windows;
+
+    using Inventory.Model;
 
     internal class MailsInteraction
     {

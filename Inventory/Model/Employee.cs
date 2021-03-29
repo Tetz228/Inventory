@@ -1,12 +1,14 @@
 namespace Inventory.Model
 {
     using DevExpress.Mvvm;
-    using Inventory.Model.Classes;
+
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Text.RegularExpressions;
+
+    using Inventory.Services;
 
     public partial class Employee : BindableBase, IDataErrorInfo
     {

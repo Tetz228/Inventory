@@ -6,7 +6,7 @@
     using DevExpress.Mvvm;
 
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Other;
 
     public class TypeMemoryAddViewModel : BindableBase

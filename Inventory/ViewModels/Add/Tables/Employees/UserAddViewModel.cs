@@ -2,12 +2,13 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
     using Inventory.ViewModels.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+
+    using Inventory.Services;
 
     public class UserAddViewModel : BindableBase
     {
@@ -36,7 +37,7 @@
             Services.Add(User);
             UsersViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Services.IsValidationProperties(User.ErrorCollection, User.Fk_employee)
+        }, _ => Services.IsValidationProperties(User.ErrorCollection)
                             && UsersInteraction.ValidPassword(User.Password)
                             && UsersInteraction.EqualsPasswords(User.Password, User.PasswordRepeated));
 

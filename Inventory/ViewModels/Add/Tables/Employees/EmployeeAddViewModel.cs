@@ -7,7 +7,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Employees;
 
     public class EmployeeAddViewModel : BindableBase

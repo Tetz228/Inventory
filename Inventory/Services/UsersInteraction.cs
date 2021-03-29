@@ -1,8 +1,11 @@
-﻿namespace Inventory.Model.Classes
+﻿namespace Inventory.Services
 {
     using System.Linq;
     using System.Windows;
+
     using BCrypt.Net;
+
+    using Inventory.Model;
 
     public class UsersInteraction
     {

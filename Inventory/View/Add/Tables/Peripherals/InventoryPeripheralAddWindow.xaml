@@ -49,8 +49,8 @@
                                 Name="TextBoxInventoryNumber"
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryNumberPeripheral.Inventory_number, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding InventoryNumberPeripheral.InventoryNumberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[InventoryNumberString], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Периферия  -->
@@ -64,9 +64,10 @@
                                 VerticalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding Peripherals}"
-                                SelectedValue="{Binding InventoryNumberPeripheral.Fk_peripheral, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValue="{Binding InventoryNumberPeripheral.Fk_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_peripheral"
-                                Style="{StaticResource BaseComboBox}" />
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Fk_peripheral], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Статус  -->
@@ -79,9 +80,10 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding StatusesPeripherals}"
-                                SelectedValue="{Binding InventoryNumberPeripheral.Fk_status_peripheral, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValue="{Binding InventoryNumberPeripheral.Fk_status_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_status_peripheral"
-                                Style="{StaticResource BaseComboBox}" />
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Fk_status_peripheral], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>

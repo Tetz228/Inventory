@@ -2,13 +2,14 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Input;
+
+    using Inventory.Services;
 
     public class ProcessorEditViewModel : BindableBase, IEditableObject
     {

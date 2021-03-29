@@ -2,7 +2,6 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
@@ -12,6 +11,8 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
+
+    using Inventory.Services;
 
     public class TypesSddsViewModel : BindableBase
     {

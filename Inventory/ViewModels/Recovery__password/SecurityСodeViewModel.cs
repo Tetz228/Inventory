@@ -1,13 +1,15 @@
 ﻿namespace Inventory.ViewModels.Recovery__password
 {
     using DevExpress.Mvvm;
-    using Inventory.Model.Classes;
+
     using Inventory.View.Pages.Recovery_password;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
+
+    using Inventory.Services;
 
     public class SecurityСodeViewModel : BindableBase, IDataErrorInfo
     {
