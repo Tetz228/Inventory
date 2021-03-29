@@ -24,14 +24,16 @@
 
         public static bool IsValidationProperties<TClass>(TClass dictionary, params int[] properties)
             where TClass : Dictionary<string, string>
-            => dictionary.Count == 0 ||
-               dictionary.Any(item => item.Value == null) && 
-               properties.All(property => property != 0);
+        {
+            if (dictionary.Count == 0 || dictionary.Any(item => item.Value == null)&& properties.All(property => property != 0))
+                return true;
+            
 
-        public static bool IsValidationProperties<TClass>(TClass dictionary)
-            where TClass : Dictionary<string, string>
-            => dictionary.Count == 0 ||
-               dictionary.Any(item => item.Value == null);
+            return false;
+        }
+
+        public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0 
+                                                                             || dictionary.All(item => item.Value == null);
 
         public static void Add<TClass>(TClass value) where TClass : class
         {
