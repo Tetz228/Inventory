@@ -1,13 +1,152 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Tables.Computers.Accessories
+﻿namespace Inventory.ViewModels.Tables.Computers.Accessories
 {
-    public class SsdViewModel
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers.Accessories;
+    using Inventory.View.Edit.Tables.Computers.Accessories;
+    using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Data.Entity;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Input;
+    using Inventory.Services;
+
+    public class SsdViewModel : BindableBase
     {
-        
+        public SsdViewModel()
+        {
+            using var db = new InventoryEntities();
+
+            Ssds = new ObservableCollection<Ssd>(db.Ssds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd));
+            Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            SsdsCollection = CollectionViewSource.GetDefaultView(Ssds);
+        }
+
+        #region Свойства
+        private ICollectionView SsdsCollection { get; }
+
+        private ListSortDirection SortDirection { get; set; }
+
+        public Ssd SelectSsd { get; set; }
+
+        public static ObservableCollection<Ssd> Ssds { get; set; }
+
+        private string _ssdsFilter = string.Empty;
+
+        public string SsdsFilter
+        {
+            get => _ssdsFilter;
+            set
+            {
+                _ssdsFilter = value;
+                SsdsCollection.Filter = obj =>
+                {
+                    if (obj is Ssd ssd)
+                        return ssd.Search(SsdsFilter);
+
+                    return false;
+                };
+                SsdsCollection.Refresh();
+            }
+        }
+        #endregion
+
+        #region События
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        {
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
+            {
+                switch (columnHeader.Content.ToString())
+                {
+                    case "Производитель":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name,
+                                    SortDirection = ListSortDirection.Descending);
+                            else
+                                Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name,
+                                    SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Тип":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Ssds.Sort(type => type.Types_ssd.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Ssds.Sort(type => type.Types_ssd.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Наименование":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Ssds.Sort(ssd => ssd.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Ssds.Sort(ssd => ssd.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Объём":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Ssds.Sort(ssd => ssd.Memory_size, SortDirection = ListSortDirection.Descending);
+                            else
+                                Ssds.Sort(ssd => ssd.Memory_size, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Единица измерения":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Ssds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Ssds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                }
+            }
+        }
+
+        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectSsd = null;
+        #endregion
+
+        #region Команды
+        public ICommand AddSsdCommand => new DelegateCommand(() =>
+        {
+            var addSsdWindow = new SsdAddWindow();
+            addSsdWindow.ShowDialog();
+        });
+
+        public ICommand EditSsdCommand => new DelegateCommand<Ssd>(ssd =>
+        {
+            var editWindow = new SsdEditWindow();
+            var editViewModel = new SsdEditViewModel(ssd);
+            editWindow.DataContext = editViewModel;
+            editWindow.Closing += editViewModel.OnWindowClosing;
+            editWindow.ShowDialog();
+        }, ssd => ssd != null);
+
+        public ICommand DeleteSsdCommand => new DelegateCommand<Ssd>(selectSsd =>
+        {
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectSsd.Manufacturer.Name} {selectSsd.Name} {selectSsd.Memory_size} {selectSsd.Unit.Short_name}?", "Удаление SSD-накопителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageResult != MessageBoxResult.Yes)
+                return;
+
+            Services.Delete<Ssd>(selectSsd.Id_ssd);
+            RefreshCollection();
+        }, selectSsd => selectSsd != null);
+
+        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
+        #endregion
+
+        public static void RefreshCollection()
+        {
+            Ssds.Clear();
+            using var db = new InventoryEntities();
+
+            foreach (var item in db.Ssds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd))
+                Ssds.Add(item);
+        }
     }
 }

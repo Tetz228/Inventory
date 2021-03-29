@@ -49,7 +49,7 @@
                                     ItemsSource="{Binding Manufacturers}"
                                     SelectedValue="{Binding Ram.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_manufacturer"
-                                    Style="{StaticResource BaseComboBox}"/>
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
 
                             <!--  Наименование оперативной памяти  -->
@@ -87,7 +87,7 @@
                                     ItemsSource="{Binding Units}"
                                     SelectedValue="{Binding Ram.Fk_unit, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_unit"
-                                    Style="{StaticResource BaseComboBox}"/>
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
 
                             <!--  Тактовая частота  -->
@@ -114,7 +114,7 @@
                                     ItemsSource="{Binding TypesMemories}"
                                     SelectedValue="{Binding Ram.Fk_type_memory, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_type_memory"
-                                    Style="{StaticResource BaseComboBox}"/>
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
                         </StackPanel>
                     </Border>

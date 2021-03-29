@@ -28,6 +28,13 @@
                                                                   || hdd.Types_hdd.Name.ToLower().Contains(hddFilter.ToLower())
                                                                   || hdd.Manufacturer.Name.ToLower().Contains(hddFilter.ToLower());
 
+        public static bool Search(this Ssd ssd, string ssdFilter) => ssd.Name.ToLower().Contains(ssdFilter.ToLower())
+                                                                     || ssd.Unit.Full_name.ToLower().Contains(ssdFilter.ToLower())
+                                                                     || ssd.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(ssdFilter.ToLower())
+                                                                     || ssd.Unit.Short_name.ToLower().Contains(ssdFilter.ToLower())
+                                                                     || ssd.Types_ssd.Name.ToLower().Contains(ssdFilter.ToLower())
+                                                                     || ssd.Manufacturer.Name.ToLower().Contains(ssdFilter.ToLower());
+
         public static bool Search(this Power_supplies powerSupply, string powerSuppliesFilter) => powerSupply.Name.ToLower().Contains(powerSuppliesFilter.ToLower())
                                                                      || powerSupply.Unit.Full_name.ToLower().Contains(powerSuppliesFilter.ToLower())
                                                                      || powerSupply.Power.ToString().ToLower().Contains(powerSuppliesFilter.ToLower())
