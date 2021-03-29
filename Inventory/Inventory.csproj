@@ -438,7 +438,7 @@
     <Compile Include="View\Pages\Tables\Computers\Computers\StatusesComputersPage.xaml.cs">
       <DependentUpon>StatusesComputersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Computers\Computers\TablesComputersPage.xaml.cs">
+    <Compile Include="View\Pages\Tables\Computers\TablesComputersPage.xaml.cs">
       <DependentUpon>TablesComputersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\Other\TypesHddsPage.xaml.cs">
@@ -704,7 +704,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Computers\Computers\TablesComputersPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\TablesComputersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -25,8 +25,6 @@
 
         <Menu Grid.Row="0" Style="{StaticResource BaseMenu}">
             <MenuItem Header="Файл">
-                <MenuItem Header="Заглушка" />
-                <MenuItem Header="Заглушка" />
                 <MenuItem Header="Сменить пользователя" />
                 <MenuItem Command="{Binding Exit}" Header="Выход" />
             </MenuItem>
