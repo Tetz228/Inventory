@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventory.ViewModels.Add.Tables.Computers.Accessories
+﻿namespace Inventory.ViewModels.Add.Tables.Computers.Accessories
 {
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Windows;
-    using System.Windows.Input;
-
     using DevExpress.Mvvm;
-
     using Inventory.Model;
     using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
+    using System.Collections.ObjectModel;
+    using System.Windows;
+    using System.Windows.Input;
 
     public class ProcessorAddViewModel : BindableBase
     {

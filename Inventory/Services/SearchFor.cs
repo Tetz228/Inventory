@@ -1,9 +1,8 @@
 ﻿namespace Inventory.Services
 {
+    using Inventory.Model;
     using System.Globalization;
     using System.Linq;
-
-    using Inventory.Model;
 
     public static class SearchFor
     {
@@ -55,7 +54,7 @@
                                                                                           || motherboard.Socket.Name.ToLower().Contains(motherboardFilter.ToLower())
                                                                                           || motherboard.Manufacturer.Name.ToLower().Contains(motherboardFilter.ToLower());
 
-        public static bool Search(this Operating_systems operatingSystem, string operatingSystemsFilter) => operatingSystem.Name.ToLower().Contains(operatingSystemsFilter.ToLower()) 
+        public static bool Search(this Operating_systems operatingSystem, string operatingSystemsFilter) => operatingSystem.Name.ToLower().Contains(operatingSystemsFilter.ToLower())
                                                                                                          || operatingSystem.System_version.ToLower().Contains(operatingSystemsFilter.ToLower());
 
         public static bool Search(this Peripheral peripheral, string peripheralFilter) => peripheral.Name.ToLower().Contains(peripheralFilter.ToLower())
@@ -84,5 +83,13 @@
                                                                       || user.Employee.L_name.ToLower().Contains(usersFilter.ToLower())
                                                                       || user.Employee.F_name.ToLower().Contains(usersFilter.ToLower())
                                                                       || user.Employee.Email.ToLower().Contains(usersFilter.ToLower());
+
+        public static bool Search(this Ram ram, string ramsFilter) => ram.Name.ToLower().Contains(ramsFilter.ToLower())
+                                                                               || ram.Unit.Full_name.ToLower().Contains(ramsFilter.ToLower())
+                                                                               || ram.Clock_frequency.ToString(CultureInfo.InvariantCulture).ToLower().Contains(ramsFilter.ToLower())
+                                                                               || ram.Types_memory.Name.ToLower().Contains(ramsFilter.ToLower())
+                                                                               || ram.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(ramsFilter.ToLower())
+                                                                               || ram.Unit.Short_name.ToLower().Contains(ramsFilter.ToLower())
+                                                                               || ram.Manufacturer.Name.ToLower().Contains(ramsFilter.ToLower());
     }
 }
