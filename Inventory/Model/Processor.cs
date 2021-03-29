@@ -53,7 +53,7 @@ namespace Inventory.Model
                             result = "Поле не должно быть пустым";
                         else if (double.TryParse(BaseFrequencyString, out double _) == false)
                             result = "Некорректное поле";
-                        else if (double.Parse(BaseFrequencyString) <= 0.0)
+                        else if (double.Parse(BaseFrequencyString) <= 0)
                             result = "Число должно быть больше 0";
                         else
                             Base_frequency = double.Parse(BaseFrequencyString);

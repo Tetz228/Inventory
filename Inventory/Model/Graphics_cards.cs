@@ -1,10 +1,8 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using DevExpress.Mvvm;
 
     public partial class Graphics_cards : BindableBase, IDataErrorInfo
     {
@@ -13,13 +11,15 @@ namespace Inventory.Model
         {
             Inventory_numbers_graphics_cards = new HashSet<Inventory_numbers_graphics_cards>();
         }
-    
+
+        public string MemorySizeString { get; set; }
+
         public int Id_graphics_card { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
         public double Memory_size { get; set; }
         public int Fk_unit { get; set; }
-    
+
         public virtual Manufacturer Manufacturer { get; set; }
         public virtual Unit Unit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -43,9 +43,23 @@ namespace Inventory.Model
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
                         break;
-                    case "Memory_size":
-                        if (Memory_size <= 0)
-                            result = "Поле должно быть больше 0";
+                    case "MemorySizeString":
+                        if (string.IsNullOrWhiteSpace(MemorySizeString))
+                            result = "Поле не должно быть пустым";
+                        else if (double.TryParse(MemorySizeString, out double _) == false)
+                            result = "Некорректное поле";
+                        else if (double.Parse(MemorySizeString) <= 0)
+                            result = "Число должно быть больше 0";
+                        else
+                            Memory_size = double.Parse(MemorySizeString);
+                        break;
+                    case "Fk_manufacturer":
+                        if (Fk_manufacturer == 0)
+                            result = "Поле не должно быть пустым";
+                        break;
+                    case "Fk_unit":
+                        if (Fk_unit == 0)
+                            result = "Поле не должно быть пустым";
                         break;
                 }
 

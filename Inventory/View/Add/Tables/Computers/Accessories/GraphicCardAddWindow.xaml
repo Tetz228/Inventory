@@ -52,9 +52,10 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding Manufacturers}"
-                                SelectedValue="{Binding GraphicCard.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValue="{Binding GraphicCard.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}" />
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding GraphicCard.ErrorCollection[Fk_manufacturer], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Наименование видеокарты  -->
@@ -76,8 +77,8 @@
                             <TextBox
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding GraphicCard.Memory_size, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding GraphicCard.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding GraphicCard.MemorySizeString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding GraphicCard.ErrorCollection[MemorySizeString], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Единица измерения  -->
@@ -91,9 +92,10 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Full_name"
                                 ItemsSource="{Binding Units}"
-                                SelectedValue="{Binding GraphicCard.Fk_unit, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValue="{Binding GraphicCard.Fk_unit, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_unit"
-                                Style="{StaticResource BaseComboBox}" />
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding GraphicCard.ErrorCollection[Fk_unit], ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>

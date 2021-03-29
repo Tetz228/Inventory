@@ -34,7 +34,7 @@
                 GraphicsCardsViewModel.RefreshCollection();
                 addWindow.Close();
             },
-            _ => Services.IsValidationProperties(GraphicCard.ErrorCollection, GraphicCard.Fk_manufacturer, GraphicCard.Fk_unit));
+            _ => Services.IsValidationProperties(GraphicCard.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

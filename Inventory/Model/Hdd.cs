@@ -14,7 +14,9 @@ namespace Inventory.Model
         {
             Inventory_numbers_hdd = new HashSet<Inventory_numbers_hdd>();
         }
-    
+
+        public string MemorySizeString { get; set; }
+
         public int Id_hdd { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
@@ -46,9 +48,27 @@ namespace Inventory.Model
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
                         break;
-                    case "Memory_size":
-                        if (Memory_size <= 0)
-                            result = "Поле должно быть больше 0";
+                    case "MemorySizeString":
+                        if (string.IsNullOrWhiteSpace(MemorySizeString))
+                            result = "Поле не должно быть пустым";
+                        else if (double.TryParse(MemorySizeString, out double _) == false)
+                            result = "Некорректное поле";
+                        else if (double.Parse(MemorySizeString) <= 0)
+                            result = "Число должно быть больше 0";
+                        else
+                            Memory_size = double.Parse(MemorySizeString);
+                        break;
+                    case "Fk_manufacturer":
+                        if (Fk_manufacturer == 0)
+                            result = "Поле не должно быть пустым";
+                        break;
+                    case "Fk_unit":
+                        if (Fk_unit == 0)
+                            result = "Поле не должно быть пустым";
+                        break;
+                    case "Fk_type_hdd":
+                        if (Fk_type_hdd == 0)
+                            result = "Поле не должно быть пустым";
                         break;
                 }
 

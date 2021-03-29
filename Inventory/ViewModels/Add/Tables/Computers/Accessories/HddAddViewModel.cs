@@ -34,7 +34,7 @@
             Services.Add(Hdd);
             HddsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Services.IsValidationProperties(Hdd.ErrorCollection, Hdd.Fk_manufacturer, Hdd.Fk_type_hdd, Hdd.Fk_unit));
+        }, _ => Services.IsValidationProperties(Hdd.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion
