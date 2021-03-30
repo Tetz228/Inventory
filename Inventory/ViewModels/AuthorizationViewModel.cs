@@ -50,11 +50,11 @@
 
         public ICommand ComeInCommand => new DelegateCommand<Window>(authWindow =>
         {
-            var (userId, userExist) = UsersInteraction.OnUserExist(Login, Password);
+            var (authorizedUser, userExist) = UsersInteraction.OnUserExist(Login, Password);
 
             if (userExist)
             {
-                User.AuthorizedUser = userId;
+                User.AuthorizedUser = authorizedUser;
 
                 var mainWindow = new MainWindow();
                 mainWindow.Show();

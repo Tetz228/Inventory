@@ -1,5 +1,6 @@
 ﻿namespace Inventory.Services
 {
+    using System.Data.Entity;
     using System.Linq;
     using System.Windows;
 
@@ -60,17 +61,17 @@
             return (salt, hash);
         }
 
-        public static (int, bool) OnUserExist(string login, string password)
+        public static (User, bool) OnUserExist(string login, string password)
         {
             using var db = new InventoryEntities();
-            var foundUser = db.Users.FirstOrDefault(user => user.Login == login);
+            var foundUser = db.Users.Include(role => role.Role).FirstOrDefault(user => user.Login == login);
 
             if (foundUser == null)
             {
                 MessageBox.Show("Пользователь не найден! Проверьте правильность написания логина.", "Ошибка! Пользователь не найден.", MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
-                return (0, false);
+                return (null, false);
             }
 
             if (foundUser.Password == " ")
@@ -84,7 +85,7 @@
                 PasswordRecoveryViewModel.PageNavigation.Navigate(newPassword);
                 passwordRecoveryWindow.ShowDialog();
 
-                return (0, false);
+                return (null, false);
             }
             
             if (BCrypt.Verify(password, foundUser.Password) == false)
@@ -92,10 +93,10 @@
                 MessageBox.Show("Неверный пароль! Проверьте правильность написания пароля.", "Ошибка! Неверный пароль.", MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
-                return (0, false);
+                return (null, false);
             }
 
-            return (foundUser.Id_user, true);
+            return (foundUser, true);
         }
 
         public static (int, bool) OnUserExist(Employee employee)
@@ -113,6 +114,5 @@
 
             return (foundUser.Id_user, true);
         }
-
     }
 }

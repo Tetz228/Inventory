@@ -25,7 +25,15 @@
         <StackPanel Grid.Row="0" Style="{StaticResource BaseTableStackPanel}" />
 
         <Menu Grid.Row="1" Style="{StaticResource BaseMenu}">
-            <MenuItem Command="{Binding SelectTablesUsersCommand}" Header="Пользователи" />
+            <MenuItem Command="{Binding SelectTablesUsersCommand}" Header="Пользователи">
+                <MenuItem.Visibility>
+                    <Binding
+                        Converter="{StaticResource BoolToVis}"
+                        FallbackValue="Hidden"
+                        Path="OnAdmin"
+                        UpdateSourceTrigger="PropertyChanged" />
+                </MenuItem.Visibility>
+            </MenuItem>
             <MenuItem Command="{Binding SelectTablesEmployeesCommand}" Header="Сотрудники" />
             <MenuItem Command="{Binding SelectTablesPostsCommand}" Header="Должности" />
             <MenuItem Command="{Binding SelectTablesDepartmentsCommand}" Header="Отделы" />

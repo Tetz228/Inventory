@@ -7,6 +7,8 @@
 
     public class TablesEmployeesViewModel : BindableBase
     {
+        private const string USER_S = "Пользователь";
+
         public TablesEmployeesViewModel()
         {
             CurrentPage = EmployeesPage = new EmployeesPage();
@@ -25,6 +27,8 @@
         private PostsPage PostsPage { get; }
 
         private UsersPage UsersPage { get; }
+
+        public bool OnAdmin { get; set; } = true/*User.AuthorizedUser.Role.Name != USER_S*/;
         #endregion
 
         #region Команды
@@ -35,6 +39,7 @@
         public ICommand SelectTablesPostsCommand => new DelegateCommand(() => CurrentPage = PostsPage);
 
         public ICommand SelectTablesUsersCommand => new DelegateCommand(() => CurrentPage = UsersPage);
+
         #endregion
     }
 }

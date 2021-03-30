@@ -16,7 +16,7 @@ namespace Inventory.Model
             this.Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
         }
 
-        public static int AuthorizedUser { get; set; }
+        public static User AuthorizedUser { get; set; }
 
         public int Id_user { get; set; }
         public string Login { get; set; }
