@@ -6,6 +6,9 @@
     using BCrypt.Net;
 
     using Inventory.Model;
+    using Inventory.View;
+    using Inventory.View.Pages.Recovery_password;
+    using Inventory.ViewModels.Recovery__password;
 
     public class UsersInteraction
     {
@@ -70,6 +73,20 @@
                 return (0, false);
             }
 
+            if (foundUser.Password == " ")
+            {
+                var passwordRecoveryWindow = new PasswordRecoveryWindow();
+                var newPassword = new NewPasswordPage();
+
+                var newPasswordViewModel = new NewPasswordViewModel(foundUser.Id_user);
+                newPassword.DataContext = newPasswordViewModel;
+
+                PasswordRecoveryViewModel.PageNavigation.Navigate(newPassword);
+                passwordRecoveryWindow.ShowDialog();
+
+                return (0, false);
+            }
+            
             if (BCrypt.Verify(password, foundUser.Password) == false)
             {
                 MessageBox.Show("Неверный пароль! Проверьте правильность написания пароля.", "Ошибка! Неверный пароль.", MessageBoxButton.OK,
