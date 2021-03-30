@@ -1,6 +1,7 @@
 namespace Inventory.Model
 {
     using DevExpress.Mvvm;
+    using Services;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
@@ -44,7 +45,7 @@ namespace Inventory.Model
                         else if (int.Parse(InventoryNumberString) <= 0)
                             result = "Число должно быть больше 0";
                         else
-                            result = ValidInventoryNumber();
+                            result = Services.ValidInventoryNumber(InventoryNumberString, _selectInventoryNumberPeripheral?.Inventory_number, this);
                         break;
                     case "Fk_peripheral":
                         if (Fk_peripheral == 0)
@@ -64,31 +65,12 @@ namespace Inventory.Model
             }
         }
 
-        public string ValidInventoryNumber()
-        {
-            string result = string.Empty;
-
-            Inventory_number = int.Parse(InventoryNumberString);
-
-            if (_selectInventoryNumberPeripheral == null)
-            {
-                result = IsUniqueInventoryNumber();
-            }
-            else
-            {
-                if (_selectInventoryNumberPeripheral.Inventory_number != Inventory_number)
-                    result = IsUniqueInventoryNumber();
-            }
-
-            return result;
-        }
-
         public string Error { get => null; }
 
-        private string IsUniqueInventoryNumber()
+        public string IsUniqueInventoryNumber(int inventoryNumber)
         {
             using var db = new InventoryEntities();
-            var isUniqueNumber = db.Inventory_numbers_peripherals.FirstOrDefault(number => number.Inventory_number == Inventory_number);
+            var isUniqueNumber = db.Inventory_numbers_peripherals.FirstOrDefault(number => number.Inventory_number == inventoryNumber);
 
             return isUniqueNumber == null ? null : "Номер должен быть уникальным";
         }

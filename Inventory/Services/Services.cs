@@ -25,6 +25,24 @@
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 
+        public static string ValidInventoryNumber(string inventoryNumberString, int? selectInventoryNumber, dynamic classInventoryNumbers)
+        {
+            string result = string.Empty;
+            int inventoryNumber = int.Parse(inventoryNumberString);
+
+            if (selectInventoryNumber == null)
+            {
+                result = classInventoryNumbers.IsUniqueInventoryNumber(inventoryNumber);
+            }
+            else
+            {
+                if (selectInventoryNumber != inventoryNumber)
+                    result = classInventoryNumbers.IsUniqueInventoryNumber(inventoryNumber);
+            }
+
+            return result;
+        }
+
         public static void Add<TClass>(TClass value) where TClass : class
         {
             using var db = new InventoryEntities();

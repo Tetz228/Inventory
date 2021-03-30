@@ -63,6 +63,7 @@
             }
         }, _ => Services.IsValidationProperties(ErrorCollection));
 
+
         public ICommand PasswordRecoveryCommand => new DelegateCommand(() =>
         {
             var passwordRecoveryWindow = new PasswordRecoveryWindow();
