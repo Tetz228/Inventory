@@ -152,6 +152,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Role.cs">
+      <DependentUpon>InventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Services\MailsInteraction.cs" />
     <Compile Include="Services\SearchFor.cs" />
     <Compile Include="Services\UsersInteraction.cs" />
@@ -332,6 +335,7 @@
     <Compile Include="ViewModels\Edit\Tables\Computers\InventoryNumbers\InventoryNumbersSsdEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeMemoryEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeSsdEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Employees\UserEditViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\EmailViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\NewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Recovery__password\PasswordRecoveryViewModel.cs" />
@@ -461,6 +465,9 @@
     </Compile>
     <Compile Include="View\Edit\Tables\Computers\Other\TypeSsdEditWindow.xaml.cs">
       <DependentUpon>TypeSsdEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\Employees\UserEditWindow.xaml.cs">
+      <DependentUpon>UserEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Recovery_password\EmailPage.xaml.cs">
       <DependentUpon>EmailPage.xaml</DependentUpon>
@@ -789,6 +796,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Computers\Other\TypeSsdEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\Employees\UserEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

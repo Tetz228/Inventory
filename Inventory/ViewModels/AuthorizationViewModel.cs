@@ -42,8 +42,6 @@
 
         public string Error { get => null; }
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
-
         #endregion
 
         public string Login { get; set; }
@@ -63,7 +61,7 @@
 
                 authWindow.Close();
             }
-        }, _ => IsValidationProperties() && Password?.Length > 2);
+        }, _ => Services.IsValidationProperties(ErrorCollection));
 
         public ICommand PasswordRecoveryCommand => new DelegateCommand(() =>
         {

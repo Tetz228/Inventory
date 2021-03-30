@@ -2,10 +2,9 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using System.Windows.Controls;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class NewPasswordViewModel : BindableBase
     {
@@ -35,7 +34,11 @@
                 User.PasswordRepeated = passwordBox.Password;
         }, _ => true);
 
-        public ICommand CancelCommand => new DelegateCommand(PasswordRecoveryViewModel.RecoveryWindow.Close);
+        public ICommand CancelCommand => new DelegateCommand(() =>
+        {
+            if (PasswordRecoveryViewModel.RecoveryWindow != null)
+                PasswordRecoveryViewModel.RecoveryWindow.Close();
+        });
         #endregion
     }
 }
