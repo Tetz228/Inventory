@@ -3,6 +3,7 @@
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Input;
 
@@ -18,7 +19,7 @@
             InventoryNumberPeripheral = new Inventory_numbers_peripherals();
             Peripherals = new ObservableCollection<Peripheral>(db.Peripherals);
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
-            InventoryNumberPeripheral.Inventory_number = Inventory_numbers_peripherals.MaxInventoryNumber();
+            InventoryNumberPeripheral.Inventory_number = MaxInventoryNumber();
         }
 
         public Inventory_numbers_peripherals InventoryNumberPeripheral { get; }
@@ -26,6 +27,19 @@
         public ObservableCollection<Peripheral> Peripherals { get; }
 
         public ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; }
+
+        private static int MaxInventoryNumber()
+        {
+            using var db = new InventoryEntities();
+            var isEmpty = db.Inventory_numbers_peripherals.FirstOrDefault();
+
+            if (isEmpty == null)
+                return 1;
+
+            var isUniqueNumber = db.Inventory_numbers_peripherals.Max(number => number.Inventory_number);
+
+            return ++isUniqueNumber;
+        }
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

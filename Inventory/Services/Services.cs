@@ -1,13 +1,12 @@
 ﻿namespace Inventory.Services
 {
+    using Inventory.Model;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
-
-    using Inventory.Model;
 
     public static class Services
     {
@@ -23,7 +22,7 @@
                 observableCollection.Add(item);
         }
 
-        public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0 
+        public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 
         public static void Add<TClass>(TClass value) where TClass : class

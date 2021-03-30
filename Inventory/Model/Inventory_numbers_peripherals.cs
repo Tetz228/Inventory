@@ -1,17 +1,9 @@
 namespace Inventory.Model
 {
-    using System;
-    using System.Collections;
-
     using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using System.Reflection;
-    using System.Windows;
-
-    using Inventory.Services;
-    using Inventory.ViewModels.Tables.Peripherals;
 
     public partial class Inventory_numbers_peripherals : BindableBase, IDataErrorInfo
     {
@@ -52,7 +44,7 @@ namespace Inventory.Model
                         else if (int.Parse(InventoryNumberString) <= 0)
                             result = "Число должно быть больше 0";
                         else
-                            ValidInventoryNumber(ref result);
+                            result = ValidInventoryNumber();
                         break;
                     case "Fk_peripheral":
                         if (Fk_peripheral == 0)
@@ -72,45 +64,35 @@ namespace Inventory.Model
             }
         }
 
-        public void ValidInventoryNumber(ref string result)
+        public string ValidInventoryNumber()
         {
+            string result = string.Empty;
+
             Inventory_number = int.Parse(InventoryNumberString);
 
             if (_selectInventoryNumberPeripheral == null)
             {
-                if (IsUniqueInventoryNumber())
-                    result = "Номер должен быть уникальным";
+                result = IsUniqueInventoryNumber();
             }
             else
             {
                 if (_selectInventoryNumberPeripheral.Inventory_number != Inventory_number)
-                    if (IsUniqueInventoryNumber())
-                        result = "Номер должен быть уникальным";
+                    result = IsUniqueInventoryNumber();
             }
+
+            return result;
         }
 
         public string Error { get => null; }
 
-        public bool IsUniqueInventoryNumber()
+        private string IsUniqueInventoryNumber()
         {
             using var db = new InventoryEntities();
             var isUniqueNumber = db.Inventory_numbers_peripherals.FirstOrDefault(number => number.Inventory_number == Inventory_number);
 
-            return isUniqueNumber != null;
+            return isUniqueNumber == null ? null : "Номер должен быть уникальным";
         }
 
-        public static int MaxInventoryNumber()
-        {
-            using var db = new InventoryEntities();
-            var isEmpty = db.Inventory_numbers_peripherals.FirstOrDefault();
-      
-            if (isEmpty == null)
-                return 1;
-
-            var isUniqueNumber = db.Inventory_numbers_peripherals.Max(number => number.Inventory_number);
-
-            return ++isUniqueNumber;
-        }
         #endregion
 
         #region Откат изменений
