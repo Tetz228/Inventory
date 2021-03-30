@@ -11,7 +11,7 @@
     using Inventory.View.Pages.Recovery_password;
     using Inventory.ViewModels.Recovery__password;
 
-    public class UsersInteraction
+    public static class UsersInteraction
     {
         public static bool ValidPassword(string password) => password?.Length > 2;
 
@@ -22,10 +22,7 @@
             using var db = new InventoryEntities();
             var foundUser = db.Users.FirstOrDefault(user => user.Login == login);
 
-            if (foundUser == null)
-                return false;
-
-            return true;
+            return foundUser != null;
         }
 
         public static void ChangePassword(User user)
@@ -61,7 +58,7 @@
             return (salt, hash);
         }
 
-        public static (User, bool) OnUserExist(string login, string password)
+        public static User OnUserExist(string login, string password)
         {
             using var db = new InventoryEntities();
             var foundUser = db.Users.Include(role => role.Role).FirstOrDefault(user => user.Login == login);
@@ -71,21 +68,14 @@
                 MessageBox.Show("Пользователь не найден! Проверьте правильность написания логина.", "Ошибка! Пользователь не найден.", MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
-                return (null, false);
+                return null;
             }
 
             if (foundUser.Password == " ")
             {
-                var passwordRecoveryWindow = new PasswordRecoveryWindow();
-                var newPassword = new NewPasswordPage();
+                OnWindowChangePassword(foundUser.Id_user);
 
-                var newPasswordViewModel = new NewPasswordViewModel(foundUser.Id_user);
-                newPassword.DataContext = newPasswordViewModel;
-
-                PasswordRecoveryViewModel.PageNavigation.Navigate(newPassword);
-                passwordRecoveryWindow.ShowDialog();
-
-                return (null, false);
+                return null;
             }
             
             if (BCrypt.Verify(password, foundUser.Password) == false)
@@ -93,10 +83,10 @@
                 MessageBox.Show("Неверный пароль! Проверьте правильность написания пароля.", "Ошибка! Неверный пароль.", MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
-                return (null, false);
+                return null;
             }
 
-            return (foundUser, true);
+            return foundUser;
         }
 
         public static (int, bool) OnUserExist(Employee employee)
@@ -113,6 +103,18 @@
             }
 
             return (foundUser.Id_user, true);
+        }
+
+        public static void OnWindowChangePassword(int idUser)
+        {
+            var passwordRecoveryWindow = new PasswordRecoveryWindow();
+            var newPassword = new NewPasswordPage();
+
+            var newPasswordViewModel = new NewPasswordViewModel(idUser);
+            newPassword.DataContext = newPasswordViewModel;
+
+            PasswordRecoveryViewModel.PageNavigation.Navigate(newPassword);
+            passwordRecoveryWindow.ShowDialog();
         }
     }
 }

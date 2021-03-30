@@ -13,7 +13,7 @@
             User = new User { Id_user = idUser };
         }
 
-        public User User { get; }
+        private User User { get; }
 
         #region Команды
         public ICommand EditCommand => new DelegateCommand(() =>

@@ -46,13 +46,13 @@
 
         public string Login { get; set; }
 
-        public string Password { get; set; }
+        private string Password { get; set; }
 
         public ICommand ComeInCommand => new DelegateCommand<Window>(authWindow =>
         {
-            var (authorizedUser, userExist) = UsersInteraction.OnUserExist(Login, Password);
+            var authorizedUser = UsersInteraction.OnUserExist(Login, Password);
 
-            if (userExist)
+            if (authorizedUser != null)
             {
                 User.AuthorizedUser = authorizedUser;
 
