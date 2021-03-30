@@ -17,12 +17,15 @@
             User = new User();
             using var db = new InventoryEntities();
             Employees = new ObservableCollection<Employee>(db.Employees);
+            Roles = new ObservableCollection<Role>(db.Roles);
         }
 
         #region Свойства
         public User User { get; }
 
         public ObservableCollection<Employee> Employees { get; }
+
+        public ObservableCollection<Role> Roles { get; }
         #endregion
 
         #region Команды

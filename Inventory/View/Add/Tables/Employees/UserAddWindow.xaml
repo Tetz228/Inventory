@@ -9,7 +9,7 @@
     Name="AddUserWindow"
     Title="Добавить нового пользователя"
     Width="500"
-    Height="320"
+    Height="360"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -118,6 +118,22 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
+                        </UniformGrid>
+
+                        <!--  Роль  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseText}" Text="Роль: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Roles}"
+                                SelectedValue="{Binding User.Fk_role, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_role"
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding User.ErrorCollection[Fk_role], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>
