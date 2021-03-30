@@ -69,5 +69,6 @@ namespace Inventory.Model
         public virtual DbSet<Types_ssd> Types_ssd { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }

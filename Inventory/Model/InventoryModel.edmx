@@ -78,11 +78,11 @@
             <PropertyRef Name="Id_hdd" />
           </Key>
           <Property Name="Id_hdd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Fk_type_hdd" Type="int" Nullable="false" />
           <Property Name="Fk_manufacturer" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Memory_size" Type="float" Nullable="false" />
           <Property Name="Fk_unit" Type="int" Nullable="false" />
+          <Property Name="Fk_type_hdd" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Hdd_in_computers">
           <Key>
@@ -299,6 +299,13 @@
           <Property Name="Fk_inventory_number_ram" Type="int" Nullable="false" />
           <Property Name="Fk_computer" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id_role" />
+          </Key>
+          <Property Name="Id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="Sockets">
           <Key>
             <PropertyRef Name="Id_socket" />
@@ -383,6 +390,7 @@
           <Property Name="Login" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="Fk_employee" Type="int" Nullable="false" />
+          <Property Name="Fk_role" Type="int" Nullable="false" />
           <Property Name="Salt" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
@@ -494,9 +502,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_in_department_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
           <End Role="Employees_in_departments" Type="Self.Employees_in_departments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -532,9 +538,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Hdd_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
           <End Role="Hdd_in_computers" Type="Self.Hdd_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -714,9 +718,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_List_dispensed_computers_Dispensing_computers">
-          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="1" />
           <End Role="List_dispensed_computers" Type="Self.List_dispensed_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dispensing_computers">
@@ -728,9 +730,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_List_dispensed_peripherals_Dispensing_peripherals">
-          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="1" />
           <End Role="List_dispensed_peripherals" Type="Self.List_dispensed_peripherals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dispensing_peripherals">
@@ -778,9 +778,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Operating_systems_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
           <End Role="Operating_systems_in_computers" Type="Self.Operating_systems_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -828,9 +826,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Posts_employees_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
           <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -878,9 +874,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Processors_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
           <End Role="Processors_in_computers" Type="Self.Processors_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -940,9 +934,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ram_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
           <End Role="Ram_in_computers" Type="Self.Ram_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -1002,9 +994,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ssd_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
           <End Role="Ssd_in_computers" Type="Self.Ssd_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -1075,6 +1065,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_role" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Fk_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище InventoryModelContainer">
           <EntitySet Name="Computers" EntityType="Self.Computers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
@@ -1109,6 +1111,7 @@
           <EntitySet Name="Processors_in_computers" EntityType="Self.Processors_in_computers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ram" EntityType="Self.Ram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ram_in_computers" EntityType="Self.Ram_in_computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sockets" EntityType="Self.Sockets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ssd" EntityType="Self.Ssd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" Schema="dbo" store:Type="Tables" />
@@ -1342,6 +1345,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Users_Employees" Association="Self.FK_Users_Employees">
             <End Role="Employees" EntitySet="Employees" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
@@ -1840,6 +1847,8 @@
           <NavigationProperty Name="Dispensing_computers" Relationship="Self.FK_Dispensing_computers_Users" FromRole="Users" ToRole="Dispensing_computers" />
           <NavigationProperty Name="Dispensing_peripherals" Relationship="Self.FK_Dispensing_peripherals_Users" FromRole="Users" ToRole="Dispensing_peripherals" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Users_Employees" FromRole="Users" ToRole="Employees" />
+          <Property Name="Fk_role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="InventoryModel.FK_Users_Roles" FromRole="User" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Computers_Inventory_numbers_graphics_cards">
           <End Role="Inventory_numbers_graphics_cards" Type="Self.Inventory_numbers_graphics_cards" Multiplicity="0..1" />
@@ -2782,7 +2791,32 @@
             <End Role="Units" EntitySet="Units" />
             <End Role="Ssd" EntitySet="Ssds" />
           </AssociationSet>
+          <EntitySet Name="Roles" EntityType="InventoryModel.Role" />
+          <AssociationSet Name="FK_Users_Roles" Association="InventoryModel.FK_Users_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_role" />
+          </Key>
+          <Property Name="Id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="InventoryModel.FK_Users_Roles" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Users_Roles">
+          <End Type="InventoryModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="InventoryModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Fk_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3205,11 +3239,20 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="InventoryModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Fk_role" ColumnName="Fk_role" />
                 <ScalarProperty Name="Id_user" ColumnName="Id_user" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
                 <ScalarProperty Name="Salt" ColumnName="Salt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="InventoryModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id_role" ColumnName="Id_role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

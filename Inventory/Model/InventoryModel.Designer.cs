@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\tetz2\source\repos\Inventory\Inventory\Model\InventoryModel.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\tetz2\source\repos\Tetz228\Inventory\Inventory\Model\InventoryModel.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.
