@@ -87,9 +87,10 @@
         public static bool Search(this Unit unit, string unitsFilter) => unit.Full_name.ToLower().Contains(unitsFilter.ToLower()) || unit.Short_name.ToLower().Contains(unitsFilter.ToLower());
 
         public static bool Search(this User user, string usersFilter) => user.Login.ToLower().Contains(usersFilter.ToLower())
-                                                                      || user.Employee.L_name.ToLower().Contains(usersFilter.ToLower())
-                                                                      || user.Employee.F_name.ToLower().Contains(usersFilter.ToLower())
-                                                                      || user.Employee.Email.ToLower().Contains(usersFilter.ToLower());
+                                                                         || user.Employee.L_name.ToLower().Contains(usersFilter.ToLower())
+                                                                         || user.Employee.F_name.ToLower().Contains(usersFilter.ToLower())
+                                                                         || user.Employee.Email.ToLower().Contains(usersFilter.ToLower())
+                                                                         || user.Role.Name.ToLower().Contains(usersFilter.ToLower());
 
         public static bool Search(this Ram ram, string ramsFilter) => ram.Name.ToLower().Contains(ramsFilter.ToLower())
                                                                                || ram.Unit.Full_name.ToLower().Contains(ramsFilter.ToLower())
