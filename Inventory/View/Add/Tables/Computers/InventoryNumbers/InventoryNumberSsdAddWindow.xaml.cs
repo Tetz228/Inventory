@@ -3,11 +3,11 @@
     using System.Windows;
 
     /// <summary>
-    /// Логика взаимодействия для InventoryProcessorEditWindow.xaml
+    /// Логика взаимодействия для InventorySsdEditWindow.xaml
     /// </summary>
-    public partial class InventoryProcessorAddWindow : Window
+    public partial class InventoryNumberSsdAddWindow : Window
     {
-        public InventoryProcessorAddWindow()
+        public InventoryNumberSsdAddWindow()
         {
             InitializeComponent();
         }

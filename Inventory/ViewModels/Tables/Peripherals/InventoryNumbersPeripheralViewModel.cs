@@ -15,9 +15,9 @@
 
     using Inventory.Services;
 
-    internal class InventoryPeripheralsViewModel : BindableBase
+    internal class InventoryNumbersPeripheralViewModel : BindableBase
     {
-        public InventoryPeripheralsViewModel()
+        public InventoryNumbersPeripheralViewModel()
         {
             using var db = new InventoryEntities();
 
@@ -123,8 +123,8 @@
 
         public ICommand EditInventoryNumberPeripheralCommand => new DelegateCommand<Inventory_numbers_peripherals>(inventoryNumberPeripheral =>
         {
-            var editWindow = new InventoryPeripheralEditWindow();
-            var editViewModel = new InventoryPeripheralEditViewModel(inventoryNumberPeripheral);
+            var editWindow = new InventoryNumberPeripheralEditWindow();
+            var editViewModel = new InventoryNumbersPeripheralEditViewModel(inventoryNumberPeripheral);
             editWindow.DataContext = editViewModel;
             editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();

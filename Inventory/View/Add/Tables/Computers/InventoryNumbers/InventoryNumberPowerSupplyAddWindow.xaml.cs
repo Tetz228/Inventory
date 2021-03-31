@@ -5,9 +5,9 @@
     /// <summary>
     /// Логика взаимодействия для InventoryPowerSupplyEditWindow.xaml
     /// </summary>
-    public partial class InventoryPowerSupplyAddWindow : Window
+    public partial class InventoryNumberPowerSupplyAddWindow : Window
     {
-        public InventoryPowerSupplyAddWindow()
+        public InventoryNumberPowerSupplyAddWindow()
         {
             InitializeComponent();
         }

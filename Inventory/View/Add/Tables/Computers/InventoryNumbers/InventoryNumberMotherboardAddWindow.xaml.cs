@@ -5,9 +5,9 @@
     /// <summary>
     /// Логика взаимодействия для InventoryMotherboardEditWindow.xaml
     /// </summary>
-    public partial class InventoryMotherboardAddWindow : Window
+    public partial class InventoryNumberMotherboardAddWindow : Window
     {
-        public InventoryMotherboardAddWindow()
+        public InventoryNumberMotherboardAddWindow()
         {
             InitializeComponent();
         }

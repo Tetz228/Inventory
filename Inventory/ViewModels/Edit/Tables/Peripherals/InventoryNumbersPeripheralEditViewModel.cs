@@ -4,19 +4,20 @@
     using Inventory.Model;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Data.Entity;
     using System.Windows;
     using System.Windows.Input;
 
     using Inventory.Services;
     using Inventory.ViewModels.Tables.Peripherals;
 
-    public class InventoryPeripheralEditViewModel : BindableBase
+    public class InventoryNumbersPeripheralEditViewModel : BindableBase
     {
-        public InventoryPeripheralEditViewModel(Inventory_numbers_peripherals inventoryNumberPeripheral)
+        public InventoryNumbersPeripheralEditViewModel(Inventory_numbers_peripherals inventoryNumberPeripheral)
         {
             using var db = new InventoryEntities();
 
-            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals);
+            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_peripherals));
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
             InventoryNumberPeripheral = inventoryNumberPeripheral;
             InventoryNumberPeripheral.InventoryNumberString = inventoryNumberPeripheral.Inventory_number.ToString();
@@ -36,7 +37,7 @@
         {
             InventoryNumberPeripheral.EndEdit();
             Services.Edit(InventoryNumberPeripheral.Id_inventory_number_peripheral, InventoryNumberPeripheral);
-            InventoryPeripheralsViewModel.RefreshCollection();
+            InventoryNumbersPeripheralViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryNumberPeripheral.ErrorCollection));
 

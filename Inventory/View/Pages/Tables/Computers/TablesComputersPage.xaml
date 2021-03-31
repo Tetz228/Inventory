@@ -32,7 +32,7 @@
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Оперативная память" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="SSD-накопители" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Видеокарты" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Жесткие диски" />
+                <MenuItem Command="{Binding SelectInventoryNumbersHddsPageCommand}" Header="Жесткие диски" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Блоки питания" />
             </MenuItem>
             <MenuItem Header="Компьютеры">

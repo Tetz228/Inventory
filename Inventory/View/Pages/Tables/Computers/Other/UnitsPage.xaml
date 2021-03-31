@@ -152,7 +152,6 @@
 
             <Button
                 Command="{Binding ExportExcelCommand}"
-                CommandParameter="{Binding ElementName=ListView}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

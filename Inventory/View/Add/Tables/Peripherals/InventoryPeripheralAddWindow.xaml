@@ -15,7 +15,7 @@
     mc:Ignorable="d">
 
     <Window.DataContext>
-        <peripherals:InventoryPeripheralAddViewModel />
+        <peripherals:InventoryNumbersPeripheralAddViewModel />
     </Window.DataContext>
 
     <Grid>
@@ -62,12 +62,25 @@
                                 MaxWidth="208"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                DisplayMemberPath="Name"
                                 ItemsSource="{Binding Peripherals}"
                                 SelectedValue="{Binding InventoryNumberPeripheral.Fk_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_peripheral"
                                 Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Fk_peripheral], UpdateSourceTrigger=PropertyChanged}" />
+                                ToolTip="{Binding InventoryNumberPeripheral.ErrorCollection[Fk_peripheral], UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                    <Binding Path="Types_peripherals.Name" />
+                                                    <Binding Path="Manufacturer.Name" />
+                                                    <Binding Path="Name" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </UniformGrid>
 
                         <!--  Статус  -->

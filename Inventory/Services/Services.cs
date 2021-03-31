@@ -25,7 +25,8 @@
         }
 
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
-                                                                             || dictionary.All(item => item.Value == null);
+                                                                             || dictionary.All(item => item.Value == null) 
+                                                                             || dictionary.All(item => item.Value == "");
 
         public static string IsSavingDocumentExcel()
         {

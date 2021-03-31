@@ -5,9 +5,9 @@
     /// <summary>
     /// Логика взаимодействия для InventoryGraphicCardEditWindow.xaml
     /// </summary>
-    public partial class InventoryGraphicCardAddWindow : Window
+    public partial class InventoryNumberGraphicCardAddWindow : Window
     {
-        public InventoryGraphicCardAddWindow()
+        public InventoryNumberGraphicCardAddWindow()
         {
             InitializeComponent();
         }

@@ -2,9 +2,9 @@
 {
     using System.Windows;
 
-    public partial class InventoryPeripheralEditWindow : Window
+    public partial class InventoryNumberPeripheralEditWindow : Window
     {
-        public InventoryPeripheralEditWindow()
+        public InventoryNumberPeripheralEditWindow()
         {
             InitializeComponent();
             TextBoxInventoryNumber.Focus();

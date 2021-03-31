@@ -3,6 +3,7 @@
     using DevExpress.Mvvm;
     using Inventory.Model;
     using System.Collections.ObjectModel;
+    using System.Data.Entity;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
@@ -10,14 +11,14 @@
     using Inventory.Services;
     using Inventory.ViewModels.Tables.Peripherals;
 
-    public class InventoryPeripheralAddViewModel : BindableBase
+    public class InventoryNumbersPeripheralAddViewModel : BindableBase
     {
-        public InventoryPeripheralAddViewModel()
+        public InventoryNumbersPeripheralAddViewModel()
         {
             using var db = new InventoryEntities();
 
             InventoryNumberPeripheral = new Inventory_numbers_peripherals();
-            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals);
+            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.Include(manufacturer=>manufacturer.Manufacturer).Include(type => type.Types_peripherals));
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
             InventoryNumberPeripheral.Inventory_number = MaxInventoryNumber();
         }
@@ -45,7 +46,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryNumberPeripheral);
-            InventoryPeripheralsViewModel.RefreshCollection();
+            InventoryNumbersPeripheralViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryNumberPeripheral.ErrorCollection));
 

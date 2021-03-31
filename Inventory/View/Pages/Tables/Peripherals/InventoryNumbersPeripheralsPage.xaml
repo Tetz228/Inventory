@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Inventory.View.Pages.Tables.Peripherals.InventoryPeripheralsPage"
+    x:Class="Inventory.View.Pages.Tables.Peripherals.InventoryNumbersPeripheralsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <peripherals:InventoryPeripheralsViewModel />
+        <peripherals:InventoryNumbersPeripheralViewModel />
     </Page.DataContext>
 
     <Page.Resources>

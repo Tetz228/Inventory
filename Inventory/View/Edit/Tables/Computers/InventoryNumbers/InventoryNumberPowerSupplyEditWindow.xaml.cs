@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Inventory.View.Edit.Tables.Computers.InventoryNumbers
 {
     /// <summary>
-    /// Логика взаимодействия для InventoryRamEditWindow.xaml
+    /// Логика взаимодействия для InventoryPowerSupplyEditWindow.xaml
     /// </summary>
-    public partial class InventoryRamEditWindow : Window
+    public partial class InventoryNumberPowerSupplyEditWindow : Window
     {
-        public InventoryRamEditWindow()
+        public InventoryNumberPowerSupplyEditWindow()
         {
             InitializeComponent();
         }

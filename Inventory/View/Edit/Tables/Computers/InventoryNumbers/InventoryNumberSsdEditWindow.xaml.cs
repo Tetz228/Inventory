@@ -17,9 +17,9 @@ namespace Inventory.View.Edit.Tables.Computers.InventoryNumbers
     /// <summary>
     /// Логика взаимодействия для InventorySsdEditWindow.xaml
     /// </summary>
-    public partial class InventorySsdEditWindow : Window
+    public partial class InventoryNumberSsdEditWindow : Window
     {
-        public InventorySsdEditWindow()
+        public InventoryNumberSsdEditWindow()
         {
             InitializeComponent();
         }

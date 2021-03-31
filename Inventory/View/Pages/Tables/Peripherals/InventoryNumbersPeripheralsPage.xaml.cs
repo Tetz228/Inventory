@@ -5,9 +5,9 @@
     /// <summary>
     /// Логика взаимодействия для InventoryPeripheralPage.xaml
     /// </summary>
-    public partial class InventoryPeripheralsPage : Page
+    public partial class InventoryNumbersPeripheralsPage : Page
     {
-        public InventoryPeripheralsPage()
+        public InventoryNumbersPeripheralsPage()
         {
             InitializeComponent();
         }

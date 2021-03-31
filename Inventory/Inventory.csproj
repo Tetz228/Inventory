@@ -381,26 +381,26 @@
     <Compile Include="View\Add\Tables\Computers\Computers\StatusComputerAddWindow.xaml.cs">
       <DependentUpon>StatusComputerAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryGraphicCardAddWindow.xaml.cs">
-      <DependentUpon>InventoryGraphicCardAddWindow.xaml</DependentUpon>
+    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberGraphicCardAddWindow.xaml.cs">
+      <DependentUpon>InventoryNumberGraphicCardAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryHddAddWindow.xaml.cs">
-      <DependentUpon>InventoryHddAddWindow.xaml</DependentUpon>
+    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberHddAddWindow.xaml.cs">
+      <DependentUpon>InventoryNumberHddAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryMotherboardAddWindow.xaml.cs">
-      <DependentUpon>InventoryMotherboardAddWindow.xaml</DependentUpon>
+    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberMotherboardAddWindow.xaml.cs">
+      <DependentUpon>InventoryNumberMotherboardAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryPowerSupplyAddWindow.xaml.cs">
-      <DependentUpon>InventoryPowerSupplyAddWindow.xaml</DependentUpon>
+    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberPowerSupplyAddWindow.xaml.cs">
+      <DependentUpon>InventoryNumberPowerSupplyAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryProcessorAddWindow.xaml.cs">
-      <DependentUpon>InventoryProcessorAddWindow.xaml</DependentUpon>
+    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberProcessorAddWindow.xaml.cs">
+      <DependentUpon>InventoryNumberProcessorAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryRamAddWindow.xaml.cs">
-      <DependentUpon>InventoryRamAddWindow.xaml</DependentUpon>
+    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberRamAddWindow.xaml.cs">
+      <DependentUpon>InventoryNumberRamAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventorySsdAddWindow.xaml.cs">
-      <DependentUpon>InventorySsdAddWindow.xaml</DependentUpon>
+    <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberSsdAddWindow.xaml.cs">
+      <DependentUpon>InventoryNumberSsdAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\Computers\Other\TypeMemoryAddWindow.xaml.cs">
       <DependentUpon>TypeMemoryAddWindow.xaml</DependentUpon>
@@ -442,23 +442,23 @@
     <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryGraphicCardEditWindow.xaml.cs">
       <DependentUpon>InventoryGraphicCardEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryHddEditWindow.xaml.cs">
-      <DependentUpon>InventoryHddEditWindow.xaml</DependentUpon>
+    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberHddEditWindow.xaml.cs">
+      <DependentUpon>InventoryNumberHddEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryMotherboardEditWindow.xaml.cs">
       <DependentUpon>InventoryMotherboardEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryPowerSupplyEditWindow.xaml.cs">
-      <DependentUpon>InventoryPowerSupplyEditWindow.xaml</DependentUpon>
+    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberPowerSupplyEditWindow.xaml.cs">
+      <DependentUpon>InventoryNumberPowerSupplyEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryProcessorEditWindow.xaml.cs">
-      <DependentUpon>InventoryProcessorEditWindow.xaml</DependentUpon>
+    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberProcessorEditWindow.xaml.cs">
+      <DependentUpon>InventoryNumberProcessorEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryRamEditWindow.xaml.cs">
-      <DependentUpon>InventoryRamEditWindow.xaml</DependentUpon>
+    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberRamEditWindow.xaml.cs">
+      <DependentUpon>InventoryNumberRamEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventorySsdEditWindow.xaml.cs">
-      <DependentUpon>InventorySsdEditWindow.xaml</DependentUpon>
+    <Compile Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberSsdEditWindow.xaml.cs">
+      <DependentUpon>InventoryNumberSsdEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Computers\Other\TypeMemoryEditWindow.xaml.cs">
       <DependentUpon>TypeMemoryEditWindow.xaml</DependentUpon>
@@ -562,8 +562,8 @@
     <Compile Include="View\Pages\Tables\ManufacturersPage.xaml.cs">
       <DependentUpon>ManufacturersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml.cs">
-      <DependentUpon>InventoryPeripheralsPage.xaml</DependentUpon>
+    <Compile Include="View\Pages\Tables\Peripherals\InventoryNumbersPeripheralsPage.xaml.cs">
+      <DependentUpon>InventoryNumbersPeripheralsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Peripherals\PeripheralsPage.xaml.cs">
       <DependentUpon>PeripheralsPage.xaml</DependentUpon>
@@ -584,7 +584,7 @@
     <Compile Include="ViewModels\Add\Tables\Employees\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\PostAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Employees\UserAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Peripherals\InventoryPeripheralAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\Peripherals\InventoryNumbersPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\PeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\SocketAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\StatusPeripheralAddViewModel.cs" />
@@ -597,7 +597,7 @@
     <Compile Include="ViewModels\Edit\Tables\Employees\DepartmentEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Peripherals\InventoryPeripheralEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\Peripherals\InventoryNumbersPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\PeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
@@ -610,7 +610,7 @@
     <Compile Include="ViewModels\Tables\Employees\PostsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\TablesEmployeesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\UsersViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Peripherals\InventoryPeripheralsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Peripherals\InventoryNumbersPeripheralViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\PeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\StatusesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TablesPeripheralsViewModel.cs" />
@@ -695,31 +695,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryGraphicCardAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberGraphicCardAddWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryHddAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberHddAddWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryMotherboardAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberMotherboardAddWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryPowerSupplyAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberPowerSupplyAddWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryProcessorAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberProcessorAddWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryRamAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberRamAddWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventorySsdAddWindow.xaml">
+    <Page Include="View\Add\Tables\Computers\InventoryNumbers\InventoryNumberSsdAddWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -767,7 +767,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryHddEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberHddEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -775,19 +775,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryPowerSupplyEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberPowerSupplyEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryProcessorEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberProcessorEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryRamEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberRamEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventorySsdEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Computers\InventoryNumbers\InventoryNumberSsdEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -927,7 +927,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Peripherals\InventoryPeripheralsPage.xaml">
+    <Page Include="View\Pages\Tables\Peripherals\InventoryNumbersPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
@@ -1035,7 +1035,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Peripherals\InventoryPeripheralEditWindow.xaml">
+    <Page Include="View\Edit\Tables\Peripherals\InventoryNumberPeripheralEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
@@ -1086,8 +1086,8 @@
     <Compile Include="View\Edit\Tables\ManufacturerEditWindow.xaml.cs">
       <DependentUpon>ManufacturerEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit\Tables\Peripherals\InventoryPeripheralEditWindow.xaml.cs">
-      <DependentUpon>InventoryPeripheralEditWindow.xaml</DependentUpon>
+    <Compile Include="View\Edit\Tables\Peripherals\InventoryNumberPeripheralEditWindow.xaml.cs">
+      <DependentUpon>InventoryNumberPeripheralEditWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\Edit\Tables\Peripherals\PeripheralEditWindow.xaml.cs">
