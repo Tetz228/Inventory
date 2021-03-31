@@ -8,6 +8,8 @@
     using System.Linq;
     using System.Windows;
 
+    using Microsoft.Win32;
+
     public static class Services
     {
         public static void Sort<TClassSource, TProperty>(this ObservableCollection<TClassSource> observableCollection, Func<TClassSource, TProperty> property, ListSortDirection sortDirection)
@@ -24,6 +26,18 @@
 
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
+
+        public static string IsSavingDocumentExcel()
+        {
+            var saveExcelDoc = new SaveFileDialog
+            {
+                Filter = "Excel документ|*.xlsx",
+                Title = "Сохранение данных в Excel"
+            };
+            saveExcelDoc.ShowDialog();
+
+            return saveExcelDoc.FileName != "" ? saveExcelDoc.FileName : null;
+        }
 
         public static string ValidInventoryNumber(string inventoryNumberString, int? selectInventoryNumber, dynamic classInventoryNumbers)
         {

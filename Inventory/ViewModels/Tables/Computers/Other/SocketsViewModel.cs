@@ -112,19 +112,23 @@
 
         public ICommand ExportExcelCommand => new DelegateCommand<ListView>(list =>
         {
-            const string outputFile = @"D:\SocketReport.xlsx";
-            var template = new XLTemplate(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Templates" + "\\OneColumnTemplate.xlsx");
+            string fileName = Services.IsSavingDocumentExcel();
 
-            using var db = new InventoryEntities();
+            if (fileName != null)
+            {
+                var template = new XLTemplate(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Templates" + "\\OneColumnTemplate.xlsx");
 
-            var socket = db.Sockets.Select(name => name.Name);
+                using var db = new InventoryEntities();
 
-            template.AddVariable("TableName", "Сокеты");
-            template.AddVariable("Name", socket);
-            template.Generate();
-            template.SaveAs(outputFile);
+                var socketName = db.Sockets.Select(name => name.Name);
 
-            Process.Start(new ProcessStartInfo(outputFile) { UseShellExecute = true });
+                template.AddVariable("TableName", "Сокеты");
+                template.AddVariable("Name", socketName);
+                template.Generate();
+                template.SaveAs(fileName);
+
+                Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
+            }
         });
         #endregion
 
