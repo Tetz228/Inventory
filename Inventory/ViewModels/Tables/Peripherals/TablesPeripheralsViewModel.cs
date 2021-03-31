@@ -15,7 +15,7 @@
             CurrentPage = PeripheralsPage = new PeripheralsPage();
             TypesPeripheralsPage = new TypesPeripheralsPage();
             ManufacturersPage = new ManufacturersPage();
-            InventoryNumbersPeripheralsPage = new InventoryNumbersPeripheralsPage();
+            InventoryPeripheralsPage = new InventoryPeripheralsPage();
             StatusesPeripheralsPage = new StatusesPeripheralsPage();
         }
 
@@ -26,7 +26,7 @@
 
         private PeripheralsPage PeripheralsPage { get; }
 
-        private InventoryNumbersPeripheralsPage InventoryNumbersPeripheralsPage { get; }
+        private InventoryPeripheralsPage InventoryPeripheralsPage { get; }
 
         private TypesPeripheralsPage TypesPeripheralsPage { get; }
 
@@ -34,7 +34,7 @@
         #endregion
 
         #region Команды
-        public ICommand SelectInventoryPeripheralsPageCommand => new DelegateCommand(() => CurrentPage = InventoryNumbersPeripheralsPage);
+        public ICommand SelectInventoryPeripheralsPageCommand => new DelegateCommand(() => CurrentPage = InventoryPeripheralsPage);
 
         public ICommand SelectTablesPeripheralsCommand => new DelegateCommand(() => CurrentPage = PeripheralsPage);
 

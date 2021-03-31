@@ -2,12 +2,11 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Services;
-    using Inventory.ViewModels.Tables.Computers.Accessories;
 
     public class GraphicCardAddViewModel : BindableBase
     {
@@ -29,12 +28,11 @@
         #region Команды
 
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
-            {
-                Services.Add(GraphicCard);
-                GraphicsCardsViewModel.RefreshCollection();
-                addWindow.Close();
-            },
-            _ => Services.IsValidationProperties(GraphicCard.ErrorCollection));
+        {
+            Services.Add(GraphicCard);
+            GraphicsCardsViewModel.RefreshCollection();
+            addWindow.Close();
+        }, _ => Services.IsValidationProperties(GraphicCard.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
         #endregion

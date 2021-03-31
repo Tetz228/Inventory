@@ -25,8 +25,7 @@
         }
 
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
-                                                                             || dictionary.All(item => item.Value == null) 
-                                                                             || dictionary.All(item => item.Value == "");
+                                                                             || dictionary.All(item => item.Value == null);
 
         public static string IsSavingDocumentExcel()
         {
@@ -42,17 +41,16 @@
 
         public static string ValidInventoryNumber(string inventoryNumberString, int? selectInventoryNumber, dynamic classInventoryNumbers)
         {
-            string result = string.Empty;
-            int inventoryNumber = int.Parse(inventoryNumberString);
+            string result;
+            classInventoryNumbers.Inventory_number = int.Parse(inventoryNumberString);
 
             if (selectInventoryNumber == null)
             {
-                result = classInventoryNumbers.IsUniqueInventoryNumber(inventoryNumber);
+                result = classInventoryNumbers.IsUniqueInventoryNumber(classInventoryNumbers.Inventory_number);
             }
             else
             {
-                if (selectInventoryNumber != inventoryNumber)
-                    result = classInventoryNumbers.IsUniqueInventoryNumber(inventoryNumber);
+                result = selectInventoryNumber != classInventoryNumbers.Inventory_number ? (string) classInventoryNumbers.IsUniqueInventoryNumber(classInventoryNumbers.Inventory_number) : null;
             }
 
             return result;

@@ -43,7 +43,7 @@ namespace Inventory.Model
                         else if (int.Parse(InventoryNumberString) <= 0)
                             result = "Число должно быть больше 0";
                         else
-                            result = Services.ValidInventoryNumber(InventoryNumberString, _selectInventoryNumberHdd?.Inventory_number, this);
+                            result = Services.ValidInventoryNumber(InventoryNumberString, _selectInventoryHdd?.Inventory_number, this);
                         break;
                     case "Fk_hdd":
                         if (Fk_hdd == 0)
@@ -72,11 +72,11 @@ namespace Inventory.Model
         #endregion
 
         #region Откат изменений
-        private Inventory_numbers_hdd _selectInventoryNumberHdd;
+        private Inventory_numbers_hdd _selectInventoryHdd;
 
         public void BeginEdit()
         {
-            _selectInventoryNumberHdd = new Inventory_numbers_hdd()
+            _selectInventoryHdd = new Inventory_numbers_hdd()
             {
                 Id_inventory_number_hdd = Id_inventory_number_hdd,
                 Inventory_number = Inventory_number,
@@ -86,17 +86,17 @@ namespace Inventory.Model
 
         public void EndEdit()
         {
-            _selectInventoryNumberHdd = null;
+            _selectInventoryHdd = null;
         }
 
         public void CancelEdit()
         {
-            if (_selectInventoryNumberHdd == null)
+            if (_selectInventoryHdd == null)
                 return;
 
-            Id_inventory_number_hdd = _selectInventoryNumberHdd.Id_inventory_number_hdd;
-            Inventory_number = _selectInventoryNumberHdd.Inventory_number;
-            Fk_hdd = _selectInventoryNumberHdd.Fk_hdd;
+            Id_inventory_number_hdd = _selectInventoryHdd.Id_inventory_number_hdd;
+            Inventory_number = _selectInventoryHdd.Inventory_number;
+            Fk_hdd = _selectInventoryHdd.Fk_hdd;
         }
         #endregion
     }
