@@ -8,6 +8,7 @@
     using Inventory.View.Pages.Tables;
     using Inventory.View.Pages.Tables.Computers.Accessories;
     using Inventory.View.Pages.Tables.Computers.Computers;
+    using Inventory.View.Pages.Tables.Computers.InventoryNumbers;
     using Inventory.View.Pages.Tables.Computers.Other;
 
     using GraphicsCardsPage = Inventory.View.Pages.Tables.Computers.Accessories.GraphicsCardsPage;
@@ -31,6 +32,7 @@
             SsdPage = new SsdPage();
             GraphicsCardsPage = new GraphicsCardsPage();
             PowerSuppliesPage = new PowerSuppliesPage();
+            InventoryNumbersHddsPage = new InventoryNumbersHddsPage();
         }
 
         #region Свойства
@@ -64,6 +66,8 @@
 
         private GraphicsCardsPage GraphicsCardsPage { get; }
 
+        private InventoryNumbersHddsPage InventoryNumbersHddsPage { get; }
+
         private PowerSuppliesPage PowerSuppliesPage { get; }
         #endregion
 
@@ -85,6 +89,8 @@
         public ICommand SelectStatusesComputersPageCommand => new DelegateCommand(() => CurrentPage = StatusesComputersPage);
 
         public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
+
+        public ICommand SelectInventoryNumbersHddsPageCommand => new DelegateCommand(() => CurrentPage = InventoryNumbersHddsPage);
 
         public ICommand SelectMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = MotherboardsPage);
 

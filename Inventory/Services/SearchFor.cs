@@ -55,6 +55,14 @@
                                                                                                                                         || inventoryNumberPeripheral.Peripheral.Manufacturer.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
                                                                                                                                         || inventoryNumberPeripheral.Statuses_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower());
 
+        public static bool Search(this Inventory_numbers_hdd inventoryNumberHdd, string inventoryNumberHddFilter) => inventoryNumberHdd.Inventory_number.ToString().ToLower().Contains(inventoryNumberHddFilter.ToLower())
+                                                                                                                    || inventoryNumberHdd.Hdd.Name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
+                                                                                                                    || inventoryNumberHdd.Hdd.Types_hdd.Name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
+                                                                                                                    || inventoryNumberHdd.Hdd.Manufacturer.Name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
+                                                                                                                    || inventoryNumberHdd.Hdd.Unit.Full_name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
+                                                                                                                    || inventoryNumberHdd.Hdd.Unit.Short_name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
+                                                                                                                    || inventoryNumberHdd.Hdd.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(inventoryNumberHddFilter.ToLower());
+
         public static bool Search(this Manufacturer manufacturer, string manufacturerFilter) => manufacturer.Name.ToLower().Contains(manufacturerFilter.ToLower());
 
         public static bool Search(this Motherboard motherboard, string motherboardFilter) => motherboard.Name.ToLower().Contains(motherboardFilter.ToLower())
