@@ -32,7 +32,8 @@
             SsdPage = new SsdPage();
             GraphicsCardsPage = new GraphicsCardsPage();
             PowerSuppliesPage = new PowerSuppliesPage();
-            InventoryNumbersHddsPage = new InventoryNumbersHddsPage();
+            InventoryHddsPage = new InventoryHddsPage();
+            InventoryGraphicsCardsPage = new InventoryGraphicsCardsPage();
         }
 
         #region Свойства
@@ -66,9 +67,12 @@
 
         private GraphicsCardsPage GraphicsCardsPage { get; }
 
-        private InventoryNumbersHddsPage InventoryNumbersHddsPage { get; }
+        private InventoryHddsPage InventoryHddsPage { get; }
 
         private PowerSuppliesPage PowerSuppliesPage { get; }
+
+        private InventoryGraphicsCardsPage InventoryGraphicsCardsPage { get; }
+        
         #endregion
 
         #region Команды
@@ -90,7 +94,9 @@
 
         public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
 
-        public ICommand SelectInventoryNumbersHddsPageCommand => new DelegateCommand(() => CurrentPage = InventoryNumbersHddsPage);
+        public ICommand SelectInventoryHddsPageCommand => new DelegateCommand(() => CurrentPage = InventoryHddsPage);
+
+        public ICommand SelectInventoryGraphicsCardsPageCommand => new DelegateCommand(() => CurrentPage = InventoryGraphicsCardsPage);
 
         public ICommand SelectMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = MotherboardsPage);
 

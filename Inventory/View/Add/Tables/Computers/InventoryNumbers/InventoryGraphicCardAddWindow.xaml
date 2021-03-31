@@ -1,13 +1,13 @@
 ﻿<Window
-    x:Class="Inventory.View.Edit.Tables.Computers.InventoryNumbers.InventoryGraphicCardEditWindow"
+    x:Class="Inventory.View.Add.Tables.Computers.InventoryNumbers.InventoryGraphicCardAddWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:inventoryNumbers="clr-namespace:Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers"
+    xmlns:inventoryNumbers="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.InventoryNumbers"
     xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Computers.InventoryNumbers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="EditInventoryWindow"
-    Title="Изменить инвентарный номер для видеокарты"
+    x:Name="AddInventoryWindow"
+    Title="Добавить новый инвентарный номер для видеокарты"
     Width="500"
     Height="230"
     ResizeMode="CanMinimize"
@@ -15,11 +15,15 @@
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
+    <Window.DataContext>
+        <inventoryNumbers:InventoryGraphicCardAddViewModel />
+    </Window.DataContext>
+
     <Grid>
         <StackPanel Margin="10">
             <TextBlock
                 Style="{StaticResource BaseText}"
-                Text="Изменить инвентарный номер"
+                Text="Новый инвентарный номер"
                 TextAlignment="Center" />
 
             <Grid>
@@ -60,9 +64,10 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 ItemsSource="{Binding GraphicsCards}"
-                                SelectedValue="{Binding InventoryGraphicCard.Fk_graphics_card, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValue="{Binding InventoryGraphicCard.Fk_graphics_card, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_graphics_card"
-                                Style="{StaticResource BaseComboBox}">
+                                Style="{StaticResource BaseComboBox}"
+                                ToolTip="{Binding InventoryGraphicCard.ErrorCollection[Fk_graphics_card], UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock>
@@ -84,13 +89,13 @@
             </Grid>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <!--  Изменить инвентарный номер  -->
+                <!--  Добавить новый инвентарный номер  -->
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
-                    Command="{Binding EditCommand}"
-                    CommandParameter="{Binding ElementName=EditInventoryWindow}"
-                    Content="Изменить инвентарный номер"
+                    Command="{Binding AddCommand}"
+                    CommandParameter="{Binding ElementName=AddInventoryWindow}"
+                    Content="Добавить новый инвентарный номер"
                     IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
@@ -99,7 +104,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=EditInventoryWindow}"
+                    CommandParameter="{Binding ElementName=AddInventoryWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>

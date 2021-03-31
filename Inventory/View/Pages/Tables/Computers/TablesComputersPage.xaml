@@ -31,8 +31,8 @@
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Процессоры" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Оперативная память" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="SSD-накопители" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Видеокарты" />
-                <MenuItem Command="{Binding SelectInventoryNumbersHddsPageCommand}" Header="Жесткие диски" />
+                <MenuItem Command="{Binding SelectInventoryGraphicsCardsPageCommand}" Header="Видеокарты" />
+                <MenuItem Command="{Binding SelectInventoryHddsPageCommand}" Header="Жесткие диски" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Блоки питания" />
             </MenuItem>
             <MenuItem Header="Компьютеры">

@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Inventory.View.Edit.Tables.Computers.InventoryNumbers
+namespace Inventory.View.Pages.Tables.Computers.InventoryNumbers
 {
     /// <summary>
-    /// Логика взаимодействия для InventoryGraphicCardEditWindow.xaml
+    /// Логика взаимодействия для InventoryNumbersGraphicsCardsPage.xaml
     /// </summary>
-    public partial class InventoryGraphicCardEditWindow : Window
+    public partial class InventoryGraphicsCardsPage : Page
     {
-        public InventoryGraphicCardEditWindow()
+        public InventoryGraphicsCardsPage()
         {
             InitializeComponent();
-            TextBoxInventoryNumber.Focus();
         }
     }
 }
