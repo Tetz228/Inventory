@@ -6,7 +6,7 @@
     xmlns:inventoryNumbers="clr-namespace:Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers"
     xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Computers.InventoryNumbers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="EditInventoryHddWindow"
+    x:Name="EditInventoryWindow"
     Title="Изменить инвентарный номер для жесткого диска"
     Width="500"
     Height="230"
@@ -50,7 +50,7 @@
                                 ToolTip="{Binding InventoryHdd.ErrorCollection[InventoryNumberString], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
-                        <!--  Периферия  -->
+                        <!--  Жесткий диск  -->
                         <UniformGrid Columns="2">
                             <TextBlock Style="{StaticResource BaseText}" Text="Жесткий диск: " />
 
@@ -90,7 +90,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
                     Command="{Binding EditCommand}"
-                    CommandParameter="{Binding ElementName=EditInventoryHddWindow}"
+                    CommandParameter="{Binding ElementName=EditInventoryWindow}"
                     Content="Изменить инвентарный номер"
                     IsDefault="True"
                     Style="{StaticResource BaseButton}" />
@@ -100,7 +100,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=EditInventoryHddWindow}"
+                    CommandParameter="{Binding ElementName=EditInventoryWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
