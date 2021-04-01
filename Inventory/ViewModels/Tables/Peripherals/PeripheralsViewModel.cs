@@ -60,30 +60,23 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                            Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Тип периферии":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection = ListSortDirection.Ascending);
+                            Peripherals.Sort(type => type.Types_peripherals.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Peripherals.Sort(peripheral => peripheral.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Peripherals.Sort(peripheral => peripheral.Name, SortDirection = ListSortDirection.Ascending);
+                            Peripherals.Sort(peripheral => peripheral.Name, SortDirection);
                             break;
                         }
                 }

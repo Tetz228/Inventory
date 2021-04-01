@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -12,8 +13,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class HddsViewModel : BindableBase
     {
@@ -60,48 +59,33 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Descending);
-                            else
-                                Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Ascending);
+                            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Тип":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Hdds.Sort(type => type.Types_hdd.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Hdds.Sort(type => type.Types_hdd.Name, SortDirection = ListSortDirection.Ascending);
+                            Hdds.Sort(type => type.Types_hdd.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Hdds.Sort(hdd => hdd.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Hdds.Sort(hdd => hdd.Name, SortDirection = ListSortDirection.Ascending);
+                            Hdds.Sort(hdd => hdd.Name, SortDirection);
                             break;
                         }
                     case "Объём":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Hdds.Sort(hdd => hdd.Memory_size, SortDirection = ListSortDirection.Descending);
-                            else
-                                Hdds.Sort(hdd => hdd.Memory_size, SortDirection = ListSortDirection.Ascending);
+                            Hdds.Sort(hdd => hdd.Memory_size, SortDirection);
                             break;
                         }
                     case "Единица измерения":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Hdds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Hdds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            Hdds.Sort(unit => unit.Unit.Full_name, SortDirection);
                             break;
                         }
                 }

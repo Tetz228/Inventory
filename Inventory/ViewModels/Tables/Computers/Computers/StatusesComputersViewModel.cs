@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Computers;
     using Inventory.View.Edit.Tables.Computers.Computers;
     using Inventory.ViewModels.Edit.Tables.Computers.Computers;
@@ -11,8 +12,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class StatusesComputersViewModel : BindableBase
     {
@@ -61,16 +60,15 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Descending);
-                        else
-                            StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
+                        {
+                            StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection);
+                            break;
+                        }
                 }
             }
         }

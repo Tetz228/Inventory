@@ -60,14 +60,13 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                TypesSsds.Sort(typeSsd => typeSsd.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                TypesSsds.Sort(typeSsd => typeSsd.Name, SortDirection = ListSortDirection.Ascending);
+                            TypesSsds.Sort(typeSsd => typeSsd.Name, SortDirection);
                             break;
                         }
                 }

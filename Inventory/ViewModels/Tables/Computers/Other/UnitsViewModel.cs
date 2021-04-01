@@ -7,7 +7,6 @@
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
-    using Microsoft.Win32;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -65,22 +64,18 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Полное наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            Units.Sort(unit => unit.Full_name, SortDirection);
                             break;
                         }
                     case "Краткое наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Ascending);
+                            Units.Sort(unit => unit.Short_name, SortDirection);
                             break;
                         }
                 }

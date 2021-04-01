@@ -60,14 +60,13 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection = ListSortDirection.Ascending);
+                            TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection);
                             break;
                         }
                 }

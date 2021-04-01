@@ -60,32 +60,23 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Descending);
-                            else
-                                Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Ascending);
+                            Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Motherboards.Sort(graphicCard => graphicCard.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Motherboards.Sort(graphicCard => graphicCard.Name, SortDirection = ListSortDirection.Ascending);
+                            Motherboards.Sort(graphicCard => graphicCard.Name, SortDirection);
                             break;
                         }
                     case "Сокет":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Motherboards.Sort(socket => socket.Socket.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Motherboards.Sort(socket => socket.Socket.Name, SortDirection = ListSortDirection.Ascending);
+                            Motherboards.Sort(socket => socket.Socket.Name, SortDirection);
                             break;
                         }
                 }

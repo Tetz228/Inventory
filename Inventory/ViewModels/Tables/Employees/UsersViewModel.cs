@@ -61,38 +61,28 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Логин":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Users.Sort(user => user.Login, SortDirection = ListSortDirection.Descending);
-                            else
-                                Users.Sort(user => user.Login, SortDirection = ListSortDirection.Ascending);
+                            Users.Sort(user => user.Login, SortDirection);
                             break;
                         }
                     case "ФИО":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Users.Sort(user => user.Employee.L_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Users.Sort(user => user.Employee.L_name, SortDirection = ListSortDirection.Ascending);
+                            Users.Sort(user => user.Employee.L_name, SortDirection);
                             break;
                         }
                     case "Почта":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Users.Sort(user => user.Employee.Email, SortDirection = ListSortDirection.Descending);
-                            else
-                                Users.Sort(user => user.Employee.Email, SortDirection = ListSortDirection.Ascending);
+                            Users.Sort(user => user.Employee.Email, SortDirection);
                             break;
                         }
                     case "Роль":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Users.Sort(role => role.Role.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Users.Sort(role => role.Role.Name, SortDirection = ListSortDirection.Ascending);
+                            Users.Sort(role => role.Role.Name, SortDirection);
                             break;
                         }
                 }

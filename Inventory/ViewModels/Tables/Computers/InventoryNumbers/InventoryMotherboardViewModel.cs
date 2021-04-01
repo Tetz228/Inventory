@@ -64,44 +64,28 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Инвентарный номер":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryMotherboards.Sort(motherboard => motherboard.Inventory_number,
-                                    SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryMotherboards.Sort(motherboard => motherboard.Inventory_number,
-                                    SortDirection = ListSortDirection.Ascending);
+                            InventoryMotherboards.Sort(motherboard => motherboard.Inventory_number, SortDirection);
                             break;
                         }
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryMotherboards.Sort(manufacturer => manufacturer.Motherboard.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryMotherboards.Sort(manufacturer => manufacturer.Motherboard.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Ascending);
+                            InventoryMotherboards.Sort(manufacturer => manufacturer.Motherboard.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryMotherboards.Sort(motherboard => motherboard.Motherboard.Name,
-                                    SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryMotherboards.Sort(motherboard => motherboard.Motherboard.Name,
-                                    SortDirection = ListSortDirection.Ascending);
+                            InventoryMotherboards.Sort(motherboard => motherboard.Motherboard.Name, SortDirection);
                             break;
                         }
                     case "Сокет":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryMotherboards.Sort(socket => socket.Motherboard.Socket.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryMotherboards.Sort(socket => socket.Motherboard.Socket.Name, SortDirection = ListSortDirection.Ascending);
+                            InventoryMotherboards.Sort(socket => socket.Motherboard.Socket.Name, SortDirection);
                             break;
                         }
                 }

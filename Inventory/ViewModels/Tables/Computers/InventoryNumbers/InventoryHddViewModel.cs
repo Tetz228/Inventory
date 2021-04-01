@@ -65,54 +65,38 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Инвентарный номер":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryHdds.Sort(numberHdd => numberHdd.Inventory_number, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryHdds.Sort(numberHdd => numberHdd.Inventory_number, SortDirection = ListSortDirection.Ascending);
+                            InventoryHdds.Sort(numberHdd => numberHdd.Inventory_number, SortDirection);
                             break;
                         }
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryHdds.Sort(manufacturer => manufacturer.Hdd.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryHdds.Sort(manufacturer => manufacturer.Hdd.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                            InventoryHdds.Sort(manufacturer => manufacturer.Hdd.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Тип":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryHdds.Sort(type => type.Hdd.Types_hdd.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryHdds.Sort(type => type.Hdd.Types_hdd.Name, SortDirection = ListSortDirection.Ascending);
+                            InventoryHdds.Sort(type => type.Hdd.Types_hdd.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryHdds.Sort(hdd => hdd.Hdd.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryHdds.Sort(hdd => hdd.Hdd.Name, SortDirection = ListSortDirection.Ascending);
+                            InventoryHdds.Sort(hdd => hdd.Hdd.Name, SortDirection);
                             break;
                         }
                     case "Объем":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryHdds.Sort(memorySize => memorySize.Hdd.Memory_size, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryHdds.Sort(memorySize => memorySize.Hdd.Memory_size, SortDirection = ListSortDirection.Ascending);
+                            InventoryHdds.Sort(memorySize => memorySize.Hdd.Memory_size, SortDirection);
                             break;
                         }
                     case "Единица измерения":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryHdds.Sort(unit => unit.Hdd.Unit.Full_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryHdds.Sort(unit => unit.Hdd.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            InventoryHdds.Sort(unit => unit.Hdd.Unit.Full_name, SortDirection);
                             break;
                         }
                 }

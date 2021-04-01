@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -12,8 +13,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class PowerSuppliesViewModel : BindableBase
     {
@@ -60,38 +59,28 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                PowerSupplies.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                PowerSupplies.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                            PowerSupplies.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                PowerSupplies.Sort(powerSupply => powerSupply.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                PowerSupplies.Sort(powerSupply => powerSupply.Name, SortDirection = ListSortDirection.Ascending);
+                            PowerSupplies.Sort(powerSupply => powerSupply.Name, SortDirection);
                             break;
                         }
                     case "Объём":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                PowerSupplies.Sort(powerSupply => powerSupply.Power, SortDirection = ListSortDirection.Descending);
-                            else
-                                PowerSupplies.Sort(powerSupply => powerSupply.Power, SortDirection = ListSortDirection.Ascending);
+                            PowerSupplies.Sort(powerSupply => powerSupply.Power, SortDirection);
                             break;
                         }
                     case "Единица измерения":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                PowerSupplies.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                PowerSupplies.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            PowerSupplies.Sort(unit => unit.Unit.Full_name, SortDirection);
                             break;
                         }
                 }

@@ -3,6 +3,7 @@
     using ClosedXML.Report;
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
@@ -16,8 +17,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class SocketsViewModel : BindableBase
     {
@@ -64,14 +63,13 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Sockets.Sort(socket => socket.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Sockets.Sort(socket => socket.Name, SortDirection = ListSortDirection.Ascending);
+                            Sockets.Sort(socket => socket.Name, SortDirection);
                             break;
                         }
                 }

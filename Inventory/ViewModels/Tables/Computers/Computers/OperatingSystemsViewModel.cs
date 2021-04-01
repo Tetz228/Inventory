@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Computers;
     using Inventory.View.Edit.Tables.Computers.Computers;
     using Inventory.ViewModels.Edit.Tables.Computers.Computers;
@@ -12,8 +13,6 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Services;
-
     public class OperatingSystemsViewModel : BindableBase
     {
         public OperatingSystemsViewModel()
@@ -21,7 +20,7 @@
             using var db = new InventoryEntities();
 
             OperatingSystems = new ObservableCollection<Operating_systems>(db.Operating_systems);
-            OperatingSystems.Sort(system => system.Name, SortDirection = ListSortDirection.Ascending);
+            OperatingSystems.Sort(system => system.Name, SortDirection);
             OperatingSystemsCollection = CollectionViewSource.GetDefaultView(OperatingSystems);
         }
 
@@ -60,22 +59,18 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                OperatingSystems.Sort(operatingSystem => operatingSystem.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                OperatingSystems.Sort(operatingSystem => operatingSystem.Name, SortDirection = ListSortDirection.Ascending);
+                            OperatingSystems.Sort(operatingSystem => operatingSystem.Name, SortDirection);
                             break;
                         }
                     case "Версия":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                OperatingSystems.Sort(operatingSystem => operatingSystem.System_version, SortDirection = ListSortDirection.Descending);
-                            else
-                                OperatingSystems.Sort(operatingSystem => operatingSystem.System_version, SortDirection = ListSortDirection.Ascending);
+                            OperatingSystems.Sort(operatingSystem => operatingSystem.System_version, SortDirection);
                             break;
                         }
                 }

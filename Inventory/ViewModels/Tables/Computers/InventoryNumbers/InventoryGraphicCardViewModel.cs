@@ -60,48 +60,33 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Инвентарный номер":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryGraphicsCards.Sort(numberHdd => numberHdd.Inventory_number, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryGraphicsCards.Sort(numberHdd => numberHdd.Inventory_number, SortDirection = ListSortDirection.Ascending);
+                            InventoryGraphicsCards.Sort(numberHdd => numberHdd.Inventory_number, SortDirection);
                             break;
                         }
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryGraphicsCards.Sort(manufacturer => manufacturer.Graphics_cards.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryGraphicsCards.Sort(manufacturer => manufacturer.Graphics_cards.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Ascending);
+                            InventoryGraphicsCards.Sort(manufacturer => manufacturer.Graphics_cards.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryGraphicsCards.Sort(graphicCard => graphicCard.Graphics_cards.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryGraphicsCards.Sort(graphicCard => graphicCard.Graphics_cards.Name, SortDirection = ListSortDirection.Ascending);
+                            InventoryGraphicsCards.Sort(graphicCard => graphicCard.Graphics_cards.Name, SortDirection);
                             break;
                         }
                     case "Объём":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryGraphicsCards.Sort(graphicCard => graphicCard.Graphics_cards.Memory_size, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryGraphicsCards.Sort(graphicCard => graphicCard.Graphics_cards.Memory_size, SortDirection = ListSortDirection.Ascending);
+                            InventoryGraphicsCards.Sort(graphicCard => graphicCard.Graphics_cards.Memory_size, SortDirection);
                             break;
                         }
                     case "Единица измерения":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryGraphicsCards.Sort(unit => unit.Graphics_cards.Unit.Full_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryGraphicsCards.Sort(unit => unit.Graphics_cards.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            InventoryGraphicsCards.Sort(unit => unit.Graphics_cards.Unit.Full_name, SortDirection);
                             break;
                         }
                 }

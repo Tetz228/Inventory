@@ -59,16 +59,15 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
+                        {
+                            Departments.Sort(department => department.Name, SortDirection);
+                            break;
+                        }
                 }
             }
         }

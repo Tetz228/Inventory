@@ -21,7 +21,7 @@
             using var db = new InventoryEntities();
 
             Ssds = new ObservableCollection<Ssd>(db.Ssds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd));
-            Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
             SsdsCollection = CollectionViewSource.GetDefaultView(Ssds);
         }
 
@@ -59,48 +59,33 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Descending);
-                            else
-                                Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Ascending);
+                            Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Тип":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Ssds.Sort(type => type.Types_ssd.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Ssds.Sort(type => type.Types_ssd.Name, SortDirection = ListSortDirection.Ascending);
+                            Ssds.Sort(type => type.Types_ssd.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Ssds.Sort(ssd => ssd.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Ssds.Sort(ssd => ssd.Name, SortDirection = ListSortDirection.Ascending);
+                            Ssds.Sort(ssd => ssd.Name, SortDirection);
                             break;
                         }
                     case "Объём":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Ssds.Sort(ssd => ssd.Memory_size, SortDirection = ListSortDirection.Descending);
-                            else
-                                Ssds.Sort(ssd => ssd.Memory_size, SortDirection = ListSortDirection.Ascending);
+                            Ssds.Sort(ssd => ssd.Memory_size, SortDirection);
                             break;
                         }
                     case "Единица измерения":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Ssds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Ssds.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            Ssds.Sort(unit => unit.Unit.Full_name, SortDirection);
                             break;
                         }
                 }

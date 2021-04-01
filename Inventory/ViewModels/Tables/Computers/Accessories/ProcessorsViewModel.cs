@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -12,8 +13,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class ProcessorsViewModel : BindableBase
     {
@@ -60,54 +59,38 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Processors.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Processors.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                            Processors.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Processors.Sort(powerSupply => powerSupply.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Processors.Sort(powerSupply => powerSupply.Name, SortDirection = ListSortDirection.Ascending);
+                            Processors.Sort(powerSupply => powerSupply.Name, SortDirection);
                             break;
                         }
                     case "Сокет":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Processors.Sort(powerSupply => powerSupply.Socket.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Processors.Sort(powerSupply => powerSupply.Socket.Name, SortDirection = ListSortDirection.Ascending);
+                            Processors.Sort(powerSupply => powerSupply.Socket.Name, SortDirection);
                             break;
                         }
                     case "Количество ядер":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Processors.Sort(powerSupply => powerSupply.Amount_cores, SortDirection = ListSortDirection.Descending);
-                            else
-                                Processors.Sort(powerSupply => powerSupply.Amount_cores, SortDirection = ListSortDirection.Ascending);
+                            Processors.Sort(powerSupply => powerSupply.Amount_cores, SortDirection);
                             break;
                         }
                     case "Базовая частота":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Processors.Sort(powerSupply => powerSupply.Base_frequency, SortDirection = ListSortDirection.Descending);
-                            else
-                                Processors.Sort(powerSupply => powerSupply.Base_frequency, SortDirection = ListSortDirection.Ascending);
+                            Processors.Sort(powerSupply => powerSupply.Base_frequency, SortDirection);
                             break;
                         }
                     case "Единица измерения":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Processors.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Processors.Sort(unit => unit.Unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            Processors.Sort(unit => unit.Unit.Full_name, SortDirection);
                             break;
                         }
                 }

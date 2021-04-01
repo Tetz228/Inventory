@@ -64,48 +64,35 @@
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "ФИО":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Ascending);
+                            Employees.Sort(employee => employee.L_name, SortDirection);
                             break;
                         }
                     case "Почта":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Descending);
-                            else
-                                Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Ascending);
+                            Employees.Sort(employee => employee.Email, SortDirection);
                             break;
                         }
                     case "Номер телефона":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Descending);
-                            else
-                                Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Ascending);
+                            Employees.Sort(employee => employee.Phone_number, SortDirection);
                             break;
                         }
-                        //case "Должности":
-                        //    {
-                        //        if (SortDirection == ListSortDirection.Ascending)
-                        //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Descending);
-                        //        else
-                        //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Ascending);
-                        //        break;
-                        //    }
-                        //case "Отделы":
-                        //    {
-                        //        if (SortDirection == ListSortDirection.Ascending)
-                        //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Descending);
-                        //        else
-                        //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Ascending);
-                        //        break;
-                        //    }
+                    //case "Должности":
+                    //    {
+                    //        Employees.Sort(employee => employee.Posts_employees, SortDirection);
+                    //        break;
+                    //    }
+                    //case "Отделы":
+                    //    {
+                    //        Employees.Sort(employee => employee.Employees_in_departments, SortDirection);
+                    //        break;
+                    //    }
                 }
             }
         }
