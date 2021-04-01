@@ -6,7 +6,7 @@
     xmlns:inventoryNumbers="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.InventoryNumbers"
     xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Computers.InventoryNumbers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="AddInventoryHddWindow"
+    x:Name="AddInventoryWindow"
     Title="Добавить новый инвентарный номер для жесткого диска"
     Width="500"
     Height="230"
@@ -95,7 +95,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
                     Command="{Binding AddCommand}"
-                    CommandParameter="{Binding ElementName=AddInventoryHddWindow}"
+                    CommandParameter="{Binding ElementName=AddInventoryWindow}"
                     Content="Добавить новый инвентарный номер"
                     IsDefault="True"
                     Style="{StaticResource BaseButton}" />
@@ -105,7 +105,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
                     Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=AddInventoryHddWindow}"
+                    CommandParameter="{Binding ElementName=AddInventoryWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
