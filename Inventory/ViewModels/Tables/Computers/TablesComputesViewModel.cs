@@ -1,22 +1,21 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers
 {
-    using System.Windows.Controls;
-    using System.Windows.Input;
-
     using DevExpress.Mvvm;
-
     using Inventory.View.Pages.Tables;
     using Inventory.View.Pages.Tables.Computers.Accessories;
     using Inventory.View.Pages.Tables.Computers.Computers;
     using Inventory.View.Pages.Tables.Computers.InventoryNumbers;
     using Inventory.View.Pages.Tables.Computers.Other;
-
+    using System.Windows.Controls;
+    using System.Windows.Input;
     using GraphicsCardsPage = Inventory.View.Pages.Tables.Computers.Accessories.GraphicsCardsPage;
 
     public class TablesComputesViewModel : BindableBase
     {
         public TablesComputesViewModel()
         {
+            #region Инициализация объектов
+
             CurrentPage = SoketsPage = new SoketsPage();
             ManufacturersPage = new ManufacturersPage();
             HddsPage = new HddsPage();
@@ -35,6 +34,12 @@
             InventoryHddsPage = new InventoryHddsPage();
             InventoryGraphicsCardsPage = new InventoryGraphicsCardsPage();
             InventoryMotherboardsPage = new InventoryMotherboardsPage();
+            InventorySsdsPage = new InventorySsdsPage();
+            InventoryPowerSuppliesPag = new InventoryPowerSuppliesPage();
+            InventoryProcessorsPage = new InventoryProcessorsPage();
+            InventoryRamPage = new InventoryRamPage();
+
+            #endregion
         }
 
         #region Свойства
@@ -70,12 +75,20 @@
 
         private InventoryHddsPage InventoryHddsPage { get; }
 
+        private InventorySsdsPage InventorySsdsPage { get; }
+
         private InventoryMotherboardsPage InventoryMotherboardsPage { get; }
 
         private PowerSuppliesPage PowerSuppliesPage { get; }
 
         private InventoryGraphicsCardsPage InventoryGraphicsCardsPage { get; }
-        
+
+        private InventoryPowerSuppliesPage InventoryPowerSuppliesPag { get; }
+
+        private InventoryProcessorsPage InventoryProcessorsPage { get; }
+
+        private InventoryRamPage InventoryRamPage { get; }
+
         #endregion
 
         #region Команды
@@ -97,7 +110,15 @@
 
         public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
 
+        public ICommand SelectInventoryPowerSuppliesPageCommand => new DelegateCommand(() => CurrentPage = InventoryPowerSuppliesPag);
+
+        public ICommand SelectInventoryProcessorsPageCommand => new DelegateCommand(() => CurrentPage = InventoryProcessorsPage);
+
+        public ICommand SelectInventoryRamPageCommand => new DelegateCommand(() => CurrentPage = InventoryRamPage);
+
         public ICommand SelectInventoryHddsPageCommand => new DelegateCommand(() => CurrentPage = InventoryHddsPage);
+
+        public ICommand SelectInventorySsdsPageCommand => new DelegateCommand(() => CurrentPage = InventorySsdsPage);
 
         public ICommand SelectInventoryMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = InventoryMotherboardsPage);
 

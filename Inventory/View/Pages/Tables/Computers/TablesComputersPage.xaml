@@ -28,12 +28,12 @@
 
             <MenuItem Header="Инвентаризация комплектующих">
                 <MenuItem Command="{Binding SelectInventoryMotherboardsPageCommand}" Header="Материнские платы" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Процессоры" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Оперативная память" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="SSD-накопители" />
+                <MenuItem Command="{Binding SelectInventoryProcessorsPageCommand}" Header="Процессоры" />
+                <MenuItem Command="{Binding SelectInventoryRamPageCommand}" Header="Оперативная память" />
+                <MenuItem Command="{Binding SelectInventorySsdsPageCommand}" Header="SSD-накопители" />
                 <MenuItem Command="{Binding SelectInventoryGraphicsCardsPageCommand}" Header="Видеокарты" />
                 <MenuItem Command="{Binding SelectInventoryHddsPageCommand}" Header="Жесткие диски" />
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Блоки питания" />
+                <MenuItem Command="{Binding SelectInventoryPowerSuppliesPageCommand}" Header="Блоки питания" />
             </MenuItem>
             <MenuItem Header="Компьютеры">
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Компьютеры" />

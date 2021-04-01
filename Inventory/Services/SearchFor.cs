@@ -61,13 +61,21 @@
             || inventoryMotherboard.Motherboard.Socket.Name.ToLower().Contains(inventoryMotherboardFilter.ToLower());
 
 
-        public static bool Search(this Inventory_numbers_hdd inventoryNumberHdd, string inventoryNumberHddFilter) => inventoryNumberHdd.Inventory_number.ToString().ToLower().Contains(inventoryNumberHddFilter.ToLower())
-                                                                                                                    || inventoryNumberHdd.Hdd.Name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
-                                                                                                                    || inventoryNumberHdd.Hdd.Types_hdd.Name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
-                                                                                                                    || inventoryNumberHdd.Hdd.Manufacturer.Name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
-                                                                                                                    || inventoryNumberHdd.Hdd.Unit.Full_name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
-                                                                                                                    || inventoryNumberHdd.Hdd.Unit.Short_name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
-                                                                                                                    || inventoryNumberHdd.Hdd.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(inventoryNumberHddFilter.ToLower());
+        public static bool Search(this Inventory_numbers_hdd inventoryHdd, string inventoryHddFilter) => inventoryHdd.Inventory_number.ToString().ToLower().Contains(inventoryHddFilter.ToLower())
+                                                                                                                    || inventoryHdd.Hdd.Name.ToLower().Contains(inventoryHddFilter.ToLower())
+                                                                                                                    || inventoryHdd.Hdd.Types_hdd.Name.ToLower().Contains(inventoryHddFilter.ToLower())
+                                                                                                                    || inventoryHdd.Hdd.Manufacturer.Name.ToLower().Contains(inventoryHddFilter.ToLower())
+                                                                                                                    || inventoryHdd.Hdd.Unit.Full_name.ToLower().Contains(inventoryHddFilter.ToLower())
+                                                                                                                    || inventoryHdd.Hdd.Unit.Short_name.ToLower().Contains(inventoryHddFilter.ToLower())
+                                                                                                                    || inventoryHdd.Hdd.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(inventoryHddFilter.ToLower());
+
+        public static bool Search(this Inventory_numbers_ssd inventorySsd, string inventorySsdFilter) => inventorySsd.Inventory_number.ToString().ToLower().Contains(inventorySsdFilter.ToLower())
+            || inventorySsd.Ssd.Name.ToLower().Contains(inventorySsdFilter.ToLower())
+            || inventorySsd.Ssd.Types_ssd.Name.ToLower().Contains(inventorySsdFilter.ToLower())
+            || inventorySsd.Ssd.Manufacturer.Name.ToLower().Contains(inventorySsdFilter.ToLower())
+            || inventorySsd.Ssd.Unit.Full_name.ToLower().Contains(inventorySsdFilter.ToLower())
+            || inventorySsd.Ssd.Unit.Short_name.ToLower().Contains(inventorySsdFilter.ToLower())
+            || inventorySsd.Ssd.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(inventorySsdFilter.ToLower());
 
         public static bool Search(this Inventory_numbers_graphics_cards inventoryNumberHdd, string inventoryNumberHddFilter) => inventoryNumberHdd.Inventory_number.ToString().ToLower().Contains(inventoryNumberHddFilter.ToLower())
                                                                                                                                 || inventoryNumberHdd.Graphics_cards.Name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
