@@ -27,7 +27,7 @@
         <Menu Grid.Row="1" Style="{StaticResource BaseMenu}">
 
             <MenuItem Header="Инвентаризация комплектующих">
-                <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Материнские платы" />
+                <MenuItem Command="{Binding SelectInventoryMotherboardsPageCommand}" Header="Материнские платы" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Процессоры" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="Оперативная память" />
                 <MenuItem Command="{Binding SelectTablesManufacturersCommand}" Header="SSD-накопители" />

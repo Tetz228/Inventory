@@ -1,6 +1,51 @@
 ﻿namespace Inventory.ViewModels.Add.Tables.Computers.InventoryNumbers
 {
-    class InventoryMotherboardAddViewModel
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.ViewModels.Tables.Computers.InventoryNumbers;
+    using Services;
+    using System.Collections.ObjectModel;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Input;
+
+    public class InventoryMotherboardAddViewModel : BindableBase
     {
+        public InventoryMotherboardAddViewModel()
+        {
+            using var db = new InventoryEntities();
+            InventoryMotherboard = new Inventory_numbers_motherboards();
+            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
+            InventoryMotherboard.Inventory_number = MaxInventoryNumber();
+        }
+
+        public Inventory_numbers_motherboards InventoryMotherboard { get; }
+
+        public ObservableCollection<Motherboard> Motherboards { get; }
+
+        private static int MaxInventoryNumber()
+        {
+            using var db = new InventoryEntities();
+            var isEmpty = db.Inventory_numbers_motherboards.FirstOrDefault();
+
+            if (isEmpty == null)
+                return 1;
+
+            var isUniqueNumber = db.Inventory_numbers_motherboards.Max(number => number.Inventory_number);
+
+            return ++isUniqueNumber;
+        }
+
+        #region Команды
+        public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
+        {
+            Services.Add(InventoryMotherboard);
+            InventoryMotherboardViewModel.RefreshCollection();
+            addWindow.Close();
+        }, _ => Services.IsValidationProperties(InventoryMotherboard.ErrorCollection));
+
+        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
+        #endregion
     }
 }

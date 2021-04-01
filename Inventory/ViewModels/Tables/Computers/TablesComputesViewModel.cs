@@ -34,6 +34,7 @@
             PowerSuppliesPage = new PowerSuppliesPage();
             InventoryHddsPage = new InventoryHddsPage();
             InventoryGraphicsCardsPage = new InventoryGraphicsCardsPage();
+            InventoryMotherboardsPage = new InventoryMotherboardsPage();
         }
 
         #region Свойства
@@ -69,6 +70,8 @@
 
         private InventoryHddsPage InventoryHddsPage { get; }
 
+        private InventoryMotherboardsPage InventoryMotherboardsPage { get; }
+
         private PowerSuppliesPage PowerSuppliesPage { get; }
 
         private InventoryGraphicsCardsPage InventoryGraphicsCardsPage { get; }
@@ -95,6 +98,8 @@
         public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
 
         public ICommand SelectInventoryHddsPageCommand => new DelegateCommand(() => CurrentPage = InventoryHddsPage);
+
+        public ICommand SelectInventoryMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = InventoryMotherboardsPage);
 
         public ICommand SelectInventoryGraphicsCardsPageCommand => new DelegateCommand(() => CurrentPage = InventoryGraphicsCardsPage);
 

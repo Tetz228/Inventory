@@ -49,11 +49,17 @@
                                                                                         || processor.Unit.Short_name.ToLower().Contains(processorsFilter.ToLower())
                                                                                         || processor.Manufacturer.Name.ToLower().Contains(processorsFilter.ToLower());
 
-        public static bool Search(this Inventory_numbers_peripherals inventoryNumberPeripheral, string inventoryNumberPeripheralFilter) => inventoryNumberPeripheral.Inventory_number.ToString().ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
-                                                                                                                                        || inventoryNumberPeripheral.Peripheral.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
-                                                                                                                                        || inventoryNumberPeripheral.Peripheral.Types_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
-                                                                                                                                        || inventoryNumberPeripheral.Peripheral.Manufacturer.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower())
-                                                                                                                                        || inventoryNumberPeripheral.Statuses_peripherals.Name.ToLower().Contains(inventoryNumberPeripheralFilter.ToLower());
+        public static bool Search(this Inventory_numbers_peripherals inventoryPeripheral, string inventoryPeripheralFilter) => inventoryPeripheral.Inventory_number.ToString().ToLower().Contains(inventoryPeripheralFilter.ToLower())
+                                                                                                                                        || inventoryPeripheral.Peripheral.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower())
+                                                                                                                                        || inventoryPeripheral.Peripheral.Types_peripherals.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower())
+                                                                                                                                        || inventoryPeripheral.Peripheral.Manufacturer.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower())
+                                                                                                                                        || inventoryPeripheral.Statuses_peripherals.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower());
+
+        public static bool Search(this Inventory_numbers_motherboards inventoryMotherboard, string inventoryMotherboardFilter) => inventoryMotherboard.Inventory_number.ToString().ToLower().Contains(inventoryMotherboardFilter.ToLower())
+            || inventoryMotherboard.Motherboard.Name.ToLower().Contains(inventoryMotherboardFilter.ToLower())
+            || inventoryMotherboard.Motherboard.Manufacturer.Name.ToLower().Contains(inventoryMotherboardFilter.ToLower())
+            || inventoryMotherboard.Motherboard.Socket.Name.ToLower().Contains(inventoryMotherboardFilter.ToLower());
+
 
         public static bool Search(this Inventory_numbers_hdd inventoryNumberHdd, string inventoryNumberHddFilter) => inventoryNumberHdd.Inventory_number.ToString().ToLower().Contains(inventoryNumberHddFilter.ToLower())
                                                                                                                     || inventoryNumberHdd.Hdd.Name.ToLower().Contains(inventoryNumberHddFilter.ToLower())
