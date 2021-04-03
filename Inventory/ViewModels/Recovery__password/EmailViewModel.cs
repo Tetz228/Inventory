@@ -45,9 +45,9 @@
 
         public ICommand FurtherCommand => new DelegateCommand(() =>
         {
-            (Employee employee, bool existEmployee) = MailsInteraction.OnEmailExist(Email);
+            var employee = MailsInteraction.OnEmailExist(Email);
 
-            if (existEmployee)
+            if (employee != null)
             {
                 (int idUser, bool existUser) = UsersInteraction.OnUserExist(employee);
 

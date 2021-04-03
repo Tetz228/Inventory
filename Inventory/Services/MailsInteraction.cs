@@ -11,7 +11,7 @@
 
     internal class MailsInteraction
     {
-        public static (Employee, bool) OnEmailExist(string email)
+        public static Employee OnEmailExist(string email)
         {
             using var db = new InventoryEntities();
             var foundEmployee = db.Employees.FirstOrDefault(employee => employee.Email == email);
@@ -21,10 +21,10 @@
                 MessageBox.Show("Сотрудник c такой почтой не найден! Проверьте правильность написания почты.", "Ошибка! Сотрудник не найден.", MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
-                return (null, false);
+                return null;
             }
 
-            return (foundEmployee, true);
+            return foundEmployee;
         }
 
         public static (int, bool) SendingSecurityCode(string email)
