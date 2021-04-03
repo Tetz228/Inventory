@@ -18,15 +18,15 @@
         <Employees:PostAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новая должность"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -43,7 +43,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Наименование должности  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование должности: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование должности: " />
 
                             <TextBox
                                 Name="TextBoxName"

@@ -75,5 +75,7 @@
             if (passwordBox != null)
                 Password = passwordBox.Password;
         }, _ => true);
+
+        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
     }
 }

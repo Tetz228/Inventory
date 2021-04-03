@@ -18,15 +18,15 @@
         <accessories:GraphicCardAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новая видеокарта"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -43,7 +43,7 @@
                     <StackPanel Width="474" HorizontalAlignment="Center">
                         <!--  Производитель  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                             <ComboBox
                                 Width="219"
@@ -60,7 +60,7 @@
 
                         <!--  Наименование видеокарты  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование видеокарты: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование видеокарты: " />
 
                             <TextBox
                                 Name="TextBoxName"
@@ -72,7 +72,7 @@
 
                         <!--  Объём  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Объём: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Объём: " />
 
                             <TextBox
                                 MaxLength="20"
@@ -83,7 +83,7 @@
 
                         <!--  Единица измерения  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Единица измерения: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Единица измерения: " />
 
                             <ComboBox
                                 Width="219"

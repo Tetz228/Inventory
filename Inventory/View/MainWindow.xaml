@@ -18,17 +18,17 @@
         <viewModels:MainViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" Style="{StaticResource BaseMenu}">
-            <MenuItem Header="Файл">
-                <MenuItem Command="{Binding ChangePasswordCommand}" Header="Изменить пароль" />
-                <MenuItem Command="{Binding ChangeUserCommand}" CommandParameter="{Binding ElementName=WindowMain}" Header="Сменить пользователя" />
-                <MenuItem Command="{Binding ExitCommand}" Header="Выход" />
+        <Menu Grid.Row="0" Height="30" Style="{StaticResource BaseMenu}">
+            <MenuItem BorderBrush="#0074B7" Background="#0074B7" Header="Файл">
+                <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ChangePasswordCommand}" Header="Изменить пароль" />
+                <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ChangeUserCommand}" CommandParameter="{Binding ElementName=WindowMain}" Header="Сменить пользователя" />
+                <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ExitCommand}" Header="Выход" />
             </MenuItem>
             <MenuItem Header="Выдачи компьютеров" />
             <MenuItem Header="Выдачи периферии" />

@@ -18,15 +18,15 @@
         <peripherals:PeripheralAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новая периферия"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -43,7 +43,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Производитель  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                             <ComboBox
                                 Width="208"
@@ -59,7 +59,7 @@
 
                         <!--  Тип периферии  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Тип периферии: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Тип периферии: " />
 
                             <ComboBox
                                 Width="208"
@@ -76,7 +76,7 @@
 
                         <!--  Наименование периферии  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование периферии: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование периферии: " />
 
                             <TextBox
                                 Name="TextBoxName"

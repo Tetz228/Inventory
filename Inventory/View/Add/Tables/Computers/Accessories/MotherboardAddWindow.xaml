@@ -18,15 +18,15 @@
         <accessories:MotherboardAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новая материнская плата"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -43,7 +43,7 @@
                     <StackPanel Width="474" HorizontalAlignment="Center">
                         <!--  Производитель  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                             <ComboBox
                                 Width="219"
@@ -60,7 +60,7 @@
 
                         <!--  Наименование материнской платы  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование мат. платы: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование мат. платы: " />
 
                             <TextBox
                                 Name="TextBoxName"
@@ -72,7 +72,7 @@
 
                         <!--  Сокеты  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Сокеты: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Сокеты: " />
 
                             <ComboBox
                                 Width="219"

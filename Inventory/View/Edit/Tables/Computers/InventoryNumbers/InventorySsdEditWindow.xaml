@@ -14,15 +14,16 @@
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
-    <Grid>
+
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Изменить инвентарный номер"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -39,7 +40,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Инвентарный номер  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Инвентарный номер: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Инвентарный номер: " />
 
                             <TextBox
                                 Name="TextBoxInventoryNumber"
@@ -51,7 +52,9 @@
 
                         <!--  SSD-накопитель  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="SSD-накопитель: " />
+                            <TextBlock
+                                Style="{StaticResource BaseTextBlock}"
+                                Text="SSD-накопитель: " />
 
                             <ComboBox
                                 Width="208"

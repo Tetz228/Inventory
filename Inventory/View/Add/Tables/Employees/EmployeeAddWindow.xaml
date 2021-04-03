@@ -19,15 +19,15 @@
         <employees:EmployeeAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <ScrollViewer>
             <StackPanel Margin="10">
                 <TextBlock
-                    Style="{StaticResource BaseText}"
+                    Style="{StaticResource BaseTextBlock}"
                     Text="Новый сотрудник"
                     TextAlignment="Center" />
-                <Grid>
-                    <Border Background="#FFAEAEAE" CornerRadius="5">
+                <Grid Background="#FF2BA8E2">
+                    <Border Style="{StaticResource BaseBorder}">
                         <Border.OpacityMask>
                             <VisualBrush>
                                 <VisualBrush.Visual>
@@ -44,7 +44,7 @@
                         <StackPanel Width="455" HorizontalAlignment="Center">
                             <!--  Фамилия  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Фамилия: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Фамилия: " />
 
                                 <TextBox
                                     Name="TextBoxFName"
@@ -55,7 +55,7 @@
 
                             <!--  Имя  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Имя: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Имя: " />
 
                                 <TextBox
                                     Style="{StaticResource BaseTextBox}"
@@ -65,7 +65,7 @@
 
                             <!--  Отчество  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Отчество: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Отчество: " />
 
                                 <TextBox
                                     Style="{StaticResource BaseTextBox}"
@@ -75,7 +75,7 @@
 
                             <!--  Номер телефона  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Номер телефона: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Номер телефона: " />
 
                                 <TextBox
                                     MaxLength="20"
@@ -86,7 +86,7 @@
 
                             <!--  Email  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Email: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Email: " />
 
                                 <TextBox
                                     MaxLength="70"
@@ -97,13 +97,13 @@
 
                             <!--  Должности  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Должности: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Должности: " />
 
                                 <StackPanel Margin="10">
                                     <ItemsControl ItemsSource="{Binding Employee.PostsEmployees}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid>
+                                                <Grid Background="#FF2BA8E2">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4*" />
                                                         <ColumnDefinition Width="1*" />
@@ -142,13 +142,13 @@
 
                             <!--  Отделы  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Отделы: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Отделы: " />
 
                                 <StackPanel Margin="10">
                                     <ItemsControl ItemsSource="{Binding Employee.EmployeesInDepartments}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid>
+                                                <Grid Background="#FF2BA8E2">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4*" />
                                                         <ColumnDefinition Width="1*" />

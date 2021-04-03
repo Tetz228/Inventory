@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Computers.InventoryNumbers"
         mc:Ignorable="d"
         Title="InventoryRamEditWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Grid Background="#FF2BA8E2" />
 </Window>

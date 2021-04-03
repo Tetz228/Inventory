@@ -19,15 +19,15 @@
         <inventoryNumbers:InventoryHddAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новый инвентарный номер"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -44,7 +44,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Инвентарный номер  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Инвентарный номер: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Инвентарный номер: " />
 
                             <TextBox
                                 Name="TextBoxInventoryNumber"
@@ -56,7 +56,7 @@
 
                         <!--  Жесткий диск  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Жесткий диск: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Жесткий диск: " />
 
                             <ComboBox
                                 Width="208"

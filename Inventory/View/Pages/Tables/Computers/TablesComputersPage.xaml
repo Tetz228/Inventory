@@ -14,7 +14,7 @@
         <computers:TablesComputesViewModel />
     </Page.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="30" />

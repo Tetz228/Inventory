@@ -16,15 +16,15 @@
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="010">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Изменить пользователя"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -42,7 +42,7 @@
 
                         <!--  Роль  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Роль: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Роль: " />
 
                             <ComboBox
                                 Width="208"
@@ -59,7 +59,7 @@
             </Grid>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                <TextBlock Style="{StaticResource BaseText}">
+                <TextBlock Style="{StaticResource BaseTextBlock}">
                     <Hyperlink Command="{Binding PasswordResetCommand}">Сбросить пароль пользователю</Hyperlink>
                 </TextBlock>
             </StackPanel>

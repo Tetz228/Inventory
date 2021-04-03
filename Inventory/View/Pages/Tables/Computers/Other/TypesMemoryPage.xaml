@@ -16,14 +16,7 @@
         <other:TypesMemoryViewModel />
     </Page.DataContext>
 
-    <Page.Resources>
-        <Style BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="FontFamily" Value="Verdana" />
-            <Setter Property="FontSize" Value="15" />
-        </Style>
-    </Page.Resources>
-
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="121*" />
             <ColumnDefinition Width="279*" />
@@ -49,11 +42,7 @@
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="FontFamily" Value="Verdana" />
-                    <Setter Property="FontSize" Value="14" />
-                    <Setter Property="Foreground" Value="Black" />
-                </Style>
+                <StaticResource ResourceKey="BaseListViewItem" />
             </ListView.ItemContainerStyle>
             <ListView.ContextMenu>
                 <ContextMenu>
@@ -135,14 +124,13 @@
             <TextBlock
                 Margin="5"
                 HorizontalAlignment="Right"
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Поиск:" />
 
             <TextBox
                 Width="300"
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
-                BorderThickness="1"
                 Style="{StaticResource BaseTextBox}"
                 Text="{Binding TypesMemoryFilter, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>

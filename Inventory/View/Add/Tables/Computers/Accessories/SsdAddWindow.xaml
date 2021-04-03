@@ -18,15 +18,15 @@
         <accessories:SsdAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новый SSD-накопитель"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -43,7 +43,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Производитель  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                             <ComboBox
                                 Width="208"
@@ -59,7 +59,7 @@
 
                         <!--  Тип SSD  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Тип SSD: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Тип SSD: " />
 
                             <ComboBox
                                 Width="208"
@@ -76,7 +76,7 @@
 
                         <!--  Наименование SSD  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование SSD: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование SSD: " />
 
                             <TextBox
                                 Name="TextBoxName"
@@ -88,7 +88,7 @@
 
                         <!--  Объём  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Объём: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Объём: " />
 
                             <TextBox
                                 MaxLength="20"
@@ -99,7 +99,7 @@
 
                         <!--  Единица измерения  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Единица измерения: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Единица измерения: " />
 
                             <ComboBox
                                 Width="208"
