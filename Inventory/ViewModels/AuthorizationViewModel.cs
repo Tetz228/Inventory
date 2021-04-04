@@ -61,12 +61,13 @@
 
                 authWindow.Close();
             }
-        }, _ => Services.IsValidationProperties(ErrorCollection));
+        }, _ => Services.IsValidationProperties(ErrorCollection) && string.IsNullOrEmpty(Password) == false);
 
 
         public ICommand PasswordRecoveryCommand => new DelegateCommand(() =>
         {
             var passwordRecoveryWindow = new PasswordRecoveryWindow();
+            passwordRecoveryWindow.Title = "Новый пароль";
             passwordRecoveryWindow.ShowDialog();
         });
 

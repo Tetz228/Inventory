@@ -10,7 +10,7 @@
     Name="EditWindow"
     Title="Изменить пользователя"
     Width="500"
-    Height="360"
+    Height="220"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"

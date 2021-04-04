@@ -7,7 +7,7 @@
     Name="EditEmployeeWindow"
     Title="Изменить сотрудника"
     Width="500"
-    Height="465"
+    Height="530"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -97,7 +97,7 @@
                                     <ItemsControl ItemsSource="{Binding Employee.PostsEmployees}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid Background="#FF2BA8E2">
+                                                <Grid Background="#b0ddf5">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4*" />
                                                         <ColumnDefinition Width="1*" />
@@ -142,7 +142,7 @@
                                     <ItemsControl ItemsSource="{Binding Employee.EmployeesInDepartments}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid Background="#FF2BA8E2">
+                                                <Grid Background="#b0ddf5">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4*" />
                                                         <ColumnDefinition Width="1*" />

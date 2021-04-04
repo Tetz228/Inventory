@@ -28,7 +28,7 @@
             <MenuItem BorderBrush="#0074B7" Background="#0074B7" Header="Файл">
                 <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ChangePasswordCommand}" Header="Изменить пароль" />
                 <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ChangeUserCommand}" CommandParameter="{Binding ElementName=WindowMain}" Header="Сменить пользователя" />
-                <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ExitCommand}" Header="Выход" />
+                <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ExitCommand}" Header="Выход" Height="21" Margin="-3,0,0,0" />
             </MenuItem>
             <MenuItem Header="Выдачи компьютеров" />
             <MenuItem Header="Выдачи периферии" />

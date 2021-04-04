@@ -37,7 +37,7 @@
             using var mailMessager = new MailMessage(fromMailAddress, toMailAddress)
             {
                 Subject = "Восставноление пароля",
-                Body = "Ваш код безопасности для восставноления пароля - " + code,
+                Body = "Ваш код безопасности для восстановления пароля - " + code,
                 IsBodyHtml = false
             };
 

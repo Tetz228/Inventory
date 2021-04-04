@@ -80,7 +80,7 @@
         <Setter Property="FontSize" Value="15" />
         <Setter Property="Background" Value="#FF78C0E2" />
         <Setter Property="Foreground" Value="White" />
-        
+
     </Style>
 
     <Style x:Key="BaseListViewItem" TargetType="ListViewItem">
@@ -179,7 +179,6 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Menu}">
-                    <!--  Here is where you change the border thickness to zero on the menu  -->
                     <Border Background="#0074B7" BorderThickness="0">
                         <StackPanel
                             ClipToBounds="True"

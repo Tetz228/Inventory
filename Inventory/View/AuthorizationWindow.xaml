@@ -9,7 +9,7 @@
     Name="AuthWindow"
     Title="Авторизация"
     Width="370"
-    Height="250"
+    Height="260"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
