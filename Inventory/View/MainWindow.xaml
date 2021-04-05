@@ -24,11 +24,29 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" Height="30" Style="{StaticResource BaseMenu}">
-            <MenuItem BorderBrush="#0074B7" Background="#0074B7" Header="Файл">
-                <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ChangePasswordCommand}" Header="Изменить пароль" />
-                <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ChangeUserCommand}" CommandParameter="{Binding ElementName=WindowMain}" Header="Сменить пользователя" />
-                <MenuItem BorderThickness="0" Background="#0074B7" Command="{Binding ExitCommand}" Header="Выход" Height="21" Margin="-3,0,0,0" />
+        <Menu
+            Grid.Row="0"
+            Height="30"
+            Style="{StaticResource BaseMenu}">
+            <MenuItem
+                
+                Background="#0074B7"
+                BorderBrush="#0074B7"
+                Header="Файл" Foreground="White">
+                <MenuItem
+                    Style="{StaticResource BaseMenuItem}"
+                    Command="{Binding ChangePasswordCommand}"
+                    Header="Изменить пароль" />
+                <MenuItem
+                    Style="{StaticResource BaseMenuItem}"
+                    Command="{Binding ChangeUserCommand}"
+                    CommandParameter="{Binding ElementName=WindowMain}"
+                    Header="Сменить пользователя" />
+                <MenuItem
+                    Style="{StaticResource BaseMenuItem}"
+                    Height="21"
+                    Command="{Binding ExitCommand}"
+                    Header="Выход" />
             </MenuItem>
             <MenuItem Header="Выдачи компьютеров" />
             <MenuItem Header="Выдачи периферии" />

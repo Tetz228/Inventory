@@ -190,6 +190,16 @@
         </Setter>
     </Style>
 
+    <Style x:Key="BaseMenuItem" TargetType="MenuItem">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontFamily" Value="Verdana" />
+        <Setter Property="Background" Value="#0074B7" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+
+    </Style>
+
     <Style x:Key="BaseLabel" TargetType="Label">
         <Setter Property="FontFamily" Value="Verdana" />
         <Setter Property="FontSize" Value="13" />
