@@ -164,7 +164,7 @@
     </Style>
 
     <Style x:Key="BaseBorder" TargetType="Border">
-        <Setter Property="Background" Value="#b0ddf5" />
+        <Setter Property="Background" Value="#98c9e3" />
         <Setter Property="CornerRadius" Value="5" />
     </Style>
 
