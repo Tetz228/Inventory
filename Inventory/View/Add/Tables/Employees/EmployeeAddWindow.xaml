@@ -103,7 +103,7 @@
                                     <ItemsControl ItemsSource="{Binding Employee.PostsEmployees}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid Background="#b0ddf5">
+                                                <Grid Background="#98c9e3">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4*" />
                                                         <ColumnDefinition Width="1*" />
@@ -148,7 +148,7 @@
                                     <ItemsControl ItemsSource="{Binding Employee.EmployeesInDepartments}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid Background="#b0ddf5">
+                                                <Grid Background="#98c9e3">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4*" />
                                                         <ColumnDefinition Width="1*" />
