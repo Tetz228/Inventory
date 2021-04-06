@@ -59,7 +59,7 @@
                     HorizontalAlignment="Center"
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditStatusComputerWindow}"
-                    Content="Изменить информацию о статусе компьютера"
+                    Content="Изменить информацию о статусе"
                     IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 

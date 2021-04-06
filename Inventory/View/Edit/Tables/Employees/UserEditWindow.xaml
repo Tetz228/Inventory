@@ -71,7 +71,7 @@
                     HorizontalAlignment="Center"
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=EditWindow}"
-                    Content="Изменить пользователя"
+                    Content="Изменить информацию о пользователе"
                     IsDefault="True"
                     Style="{StaticResource BaseButton}" />
 
