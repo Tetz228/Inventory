@@ -38,7 +38,7 @@
 
             User.Password = " ";
 
-            MessageBox.Show("Успех! Пароль успешно сброшен. Для того чтобы применить изменения нажмите на кнопку \"Изменить пользователя\"", "Пароль сброшен", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            MessageBox.Show("Успех! Пароль успешно сброшен. Для того чтобы применить изменения нажмите на кнопку \"Изменить информацию о пользователе\"", "Пароль сброшен", MessageBoxButton.YesNo, MessageBoxImage.Information);
         }, true);
 
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>

@@ -103,7 +103,7 @@
 
         public ICommand DeleteUnitCommand => new DelegateCommand<Unit>(selectUnit =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectUnit.Full_name}?", "Удаление жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectUnit.Full_name}?", "Удаление единицы измерения", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
