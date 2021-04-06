@@ -155,12 +155,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Role.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Services\MailsInteraction.cs" />
-    <Compile Include="Services\SearchFor.cs" />
-    <Compile Include="Services\UsersInteraction.cs" />
     <Compile Include="Model\Computer.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
@@ -193,21 +187,6 @@
     </Compile>
     <Compile Include="Model\History_dispensed_peripherals.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InventoryModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InventoryModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InventoryModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\Inventory_numbers_graphics_cards.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
@@ -275,6 +254,9 @@
     <Compile Include="Model\Ram_in_computers.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Role.cs">
+      <DependentUpon>InventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Socket.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
@@ -307,6 +289,24 @@
     </Compile>
     <Compile Include="Model\User.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\MailsInteraction.cs" />
+    <Compile Include="Services\SearchFor.cs" />
+    <Compile Include="Services\UsersInteraction.cs" />
+    <Compile Include="Model\InventoryModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InventoryModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InventoryModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Services\PageNavigation.cs" />
     <Compile Include="Services\Services.cs" />

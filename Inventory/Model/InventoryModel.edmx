@@ -2055,8 +2055,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_in_department_Employees">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Employees_in_departments" Type="Self.Employees_in_departments" Multiplicity="*" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees_in_departments" Type="Self.Employees_in_departments" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Id_employee" />
@@ -2067,8 +2070,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Posts_employees_Employees">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Id_employee" />

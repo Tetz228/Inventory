@@ -72,15 +72,5 @@ namespace Inventory.Model
 
             Employee.EmployeesInDepartments.Remove(selectEmpInDepart);
         }
-
-        public static void DeleteEmployeeDepartment(int idEmployee)
-        {
-            using var db = new InventoryEntities();
-
-            var depEmp = db.Employees_in_departments.Where(emp => emp.Fk_employee == idEmployee);
-
-            db.Employees_in_departments.RemoveRange(depEmp);
-            db.SaveChanges();
-        }
     }
 }

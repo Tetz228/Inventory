@@ -129,8 +129,6 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Employees_in_departments.DeleteEmployeeDepartment(selectEmployee.Id_employee);
-            Posts_employees.DeletePostEmployee(selectEmployee.Id_employee);
             Services.Delete<Employee>(selectEmployee.Id_employee);
             
             RefreshCollection();
