@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            Posts = new ObservableCollection<Post>(db.Posts);
+            Posts = new ObservableCollection<Post>(db.Posts.AsNoTracking());
             Posts.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
             PostsCollection = CollectionViewSource.GetDefaultView(Posts);
         }
@@ -111,7 +111,7 @@
             Posts.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Posts)
+            foreach (var item in db.Posts.AsNoTracking())
                 Posts.Add(item);
         }
     }

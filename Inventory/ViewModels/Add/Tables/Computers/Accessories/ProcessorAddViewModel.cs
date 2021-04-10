@@ -14,14 +14,12 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
-            Sockets = new ObservableCollection<Socket>(db.Sockets);
-
-            Processor = new Processor();
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking());
         }
 
-        public Processor Processor { get; }
+        public Processor Processor { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 

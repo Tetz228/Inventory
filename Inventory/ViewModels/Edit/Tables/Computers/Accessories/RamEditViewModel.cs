@@ -18,9 +18,9 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
-            TypesMemories = new ObservableCollection<Types_memory>(db.Types_memory);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            TypesMemories = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking());
 
             Ram = ram;
             Ram.ClockFrequencyString = ram.Clock_frequency.ToString(CultureInfo.InvariantCulture);

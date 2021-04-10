@@ -16,8 +16,8 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Sockets = new ObservableCollection<Socket>(db.Sockets);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking());
 
             Motherboard = motherboard;
             BeginEdit();

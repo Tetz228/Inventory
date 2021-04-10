@@ -11,12 +11,7 @@
 
     public class TypeSddAddViewModel : BindableBase
     {
-        public TypeSddAddViewModel()
-        {
-            TypeSsd = new Types_ssd();
-        }
-
-        public Types_ssd TypeSsd { get; }
+        public Types_ssd TypeSsd { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

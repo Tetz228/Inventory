@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            Ssds = new ObservableCollection<Ssd>(db.Ssds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd));
+            Ssds = new ObservableCollection<Ssd>(db.Ssds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd));
             Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
             SsdsCollection = CollectionViewSource.GetDefaultView(Ssds);
         }
@@ -130,7 +130,7 @@
             Ssds.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Ssds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd))
+            foreach (var item in db.Ssds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd))
                 Ssds.Add(item);
         }
     }

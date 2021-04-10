@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            Processors = new ObservableCollection<Processor>(db.Processors.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(socket => socket.Socket));
+            Processors = new ObservableCollection<Processor>(db.Processors.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(socket => socket.Socket));
             Processors.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             ProcessorsCollection = CollectionViewSource.GetDefaultView(Processors);
         }
@@ -135,7 +135,7 @@
             Processors.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Processors.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(socket => socket.Socket))
+            foreach (var item in db.Processors.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(socket => socket.Socket))
                 Processors.Add(item);
         }
     }

@@ -14,12 +14,11 @@
         {
             using var db = new InventoryEntities();
 
-            GraphicCard = new Graphics_cards();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
         }
 
-        public Graphics_cards GraphicCard { get; }
+        public Graphics_cards GraphicCard { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 

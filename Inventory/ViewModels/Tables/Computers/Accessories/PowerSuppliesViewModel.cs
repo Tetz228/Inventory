@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            PowerSupplies = new ObservableCollection<Power_supplies>(db.Power_supplies.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit));
+            PowerSupplies = new ObservableCollection<Power_supplies>(db.Power_supplies.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit));
             PowerSupplies.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             PowerSuppliesCollection = CollectionViewSource.GetDefaultView(PowerSupplies);
         }
@@ -125,7 +125,7 @@
             PowerSupplies.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Power_supplies.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit))
+            foreach (var item in db.Power_supplies.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit))
                 PowerSupplies.Add(item);
         }
     }

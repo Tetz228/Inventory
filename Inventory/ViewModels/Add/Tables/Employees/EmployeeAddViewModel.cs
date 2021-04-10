@@ -14,17 +14,16 @@
     {
         public EmployeeAddViewModel()
         {
-            Employee = new Employee();
-
             using var db = new InventoryEntities();
-            Posts_employees.CollectionPosts = new List<Post>(db.Posts);
-            Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments);
+
+            Posts_employees.CollectionPosts = new List<Post>(db.Posts.AsNoTracking());
+            Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments.AsNoTracking());
 
             Employee.PostsEmployees.Add(new Posts_employees());
             Employee.EmployeesInDepartments.Add(new Employees_in_departments());
         }
 
-        public Employee Employee { get; }
+        public Employee Employee { get; } = new();
 
         public void OnWindowClosing(object sender, CancelEventArgs args)
         {

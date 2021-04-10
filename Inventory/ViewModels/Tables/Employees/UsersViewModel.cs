@@ -21,7 +21,7 @@
         {
             using var db = new InventoryEntities();
 
-            Users = new ObservableCollection<User>(db.Users.Include(employee => employee.Employee).Include(role => role.Role));
+            Users = new ObservableCollection<User>(db.Users.AsNoTracking().Include(employee => employee.Employee).Include(role => role.Role));
             Users.Sort(user => user.Login, SortDirection = ListSortDirection.Ascending);
             UsersCollection = CollectionViewSource.GetDefaultView(Users);
         }
@@ -127,7 +127,7 @@
             Users.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Users.Include(employee => employee.Employee).Include(role => role.Role))
+            foreach (var item in db.Users.AsNoTracking().Include(employee => employee.Employee).Include(role => role.Role))
                 Users.Add(item);
         }
     }

@@ -19,7 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            StatusesComputers = new ObservableCollection<Statuses_computers>((System.Collections.Generic.IEnumerable<Statuses_computers>)db.Statuses_computers);
+            StatusesComputers = new ObservableCollection<Statuses_computers>(db.Statuses_computers.AsNoTracking());
             StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Ascending);
             StatusesComputersCollection = CollectionViewSource.GetDefaultView(StatusesComputers);
         }
@@ -112,7 +112,7 @@
             StatusesComputers.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Statuses_computers)
+            foreach (var item in db.Statuses_computers.AsNoTracking())
                 StatusesComputers.Add(item);
         }
     }

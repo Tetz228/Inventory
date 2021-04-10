@@ -24,7 +24,7 @@
         {
             using var db = new InventoryEntities();
 
-            Units = new ObservableCollection<Unit>(db.Units);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
             Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
             UnitsCollection = CollectionViewSource.GetDefaultView(Units);
         }
@@ -146,7 +146,7 @@
             Units.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Units)
+            foreach (var item in db.Units.AsNoTracking())
                 Units.Add(item);
         }
     }

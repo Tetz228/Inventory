@@ -17,24 +17,24 @@
         public InventorySsdAddViewModel()
         {
             using var db = new InventoryEntities();
-            InventorySsd = new Inventory_numbers_ssd();
-            Ssds = new ObservableCollection<Ssd>(db.Ssds.Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_ssd).Include(unit => unit.Unit));
+
+            Ssds = new ObservableCollection<Ssd>(db.Ssds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_ssd).Include(unit => unit.Unit));
             InventorySsd.Inventory_number = MaxInventoryNumber();
         }
 
-        public Inventory_numbers_ssd InventorySsd { get; }
+        public Inventory_numbers_ssd InventorySsd { get; } = new();
 
         public ObservableCollection<Ssd> Ssds { get; }
 
         private static int MaxInventoryNumber()
         {
             using var db = new InventoryEntities();
-            var isEmpty = db.Inventory_numbers_ssd.FirstOrDefault();
+            var isEmpty = db.Inventory_numbers_ssd.AsNoTracking().FirstOrDefault();
 
             if (isEmpty == null)
                 return 1;
 
-            var isUniqueNumber = db.Inventory_numbers_ssd.Max(number => number.Inventory_number);
+            var isUniqueNumber = db.Inventory_numbers_ssd.AsNoTracking().Max(number => number.Inventory_number);
 
             return ++isUniqueNumber;
         }

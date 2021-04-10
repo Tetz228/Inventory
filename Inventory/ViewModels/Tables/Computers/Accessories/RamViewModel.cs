@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            Rams = new ObservableCollection<Ram>(db.Rams.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_memory));
+            Rams = new ObservableCollection<Ram>(db.Rams.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_memory));
             Rams.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             RamsCollection = CollectionViewSource.GetDefaultView(Rams);
         }
@@ -135,7 +135,7 @@
             Rams.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Rams.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_memory))
+            foreach (var item in db.Rams.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_memory))
                 Rams.Add(item);
         }
     }

@@ -17,7 +17,7 @@
         {
             using var db = new InventoryEntities();
 
-            Hdds = new ObservableCollection<Hdd>(db.Hdds.Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_hdd).Include(unit => unit.Unit));
+            Hdds = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_hdd).Include(unit => unit.Unit));
             InventoryHdd = inventoryHdd;
             InventoryHdd.InventoryNumberString = inventoryHdd.Inventory_number.ToString();
             InventoryHdd.BeginEdit();

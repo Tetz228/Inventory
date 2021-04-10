@@ -14,14 +14,14 @@
     {
         public UserAddViewModel()
         {
-            User = new User();
             using var db = new InventoryEntities();
-            Employees = new ObservableCollection<Employee>(db.Employees);
-            Roles = new ObservableCollection<Role>(db.Roles);
+
+            Employees = new ObservableCollection<Employee>(db.Employees.AsNoTracking());
+            Roles = new ObservableCollection<Role>(db.Roles.AsNoTracking());
         }
 
         #region Свойства
-        public User User { get; }
+        public User User { get; } = new();
 
         public ObservableCollection<Employee> Employees { get; }
 

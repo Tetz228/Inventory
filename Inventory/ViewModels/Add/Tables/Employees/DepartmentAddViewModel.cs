@@ -10,12 +10,7 @@
 
     public class DepartmentAddViewModel : BindableBase
     {
-        public DepartmentAddViewModel()
-        {
-            Department = new Department();
-        }
-
-        public Department Department { get; }
+        public Department Department { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

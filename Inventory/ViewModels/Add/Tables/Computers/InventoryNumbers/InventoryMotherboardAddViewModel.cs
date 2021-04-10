@@ -15,24 +15,24 @@
         public InventoryMotherboardAddViewModel()
         {
             using var db = new InventoryEntities();
-            InventoryMotherboard = new Inventory_numbers_motherboards();
-            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
+           
+            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
             InventoryMotherboard.Inventory_number = MaxInventoryNumber();
         }
 
-        public Inventory_numbers_motherboards InventoryMotherboard { get; }
+        public Inventory_numbers_motherboards InventoryMotherboard { get; } = new();
 
         public ObservableCollection<Motherboard> Motherboards { get; }
 
         private static int MaxInventoryNumber()
         {
             using var db = new InventoryEntities();
-            var isEmpty = db.Inventory_numbers_motherboards.FirstOrDefault();
+            var isEmpty = db.Inventory_numbers_motherboards.AsNoTracking().FirstOrDefault();
 
             if (isEmpty == null)
                 return 1;
 
-            var isUniqueNumber = db.Inventory_numbers_motherboards.Max(number => number.Inventory_number);
+            var isUniqueNumber = db.Inventory_numbers_motherboards.AsNoTracking().Max(number => number.Inventory_number);
 
             return ++isUniqueNumber;
         }

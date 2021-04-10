@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            Departments = new ObservableCollection<Department>(db.Departments);
+            Departments = new ObservableCollection<Department>(db.Departments.AsNoTracking());
             Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
             DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
         }
@@ -110,7 +110,7 @@
             Departments.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Departments)
+            foreach (var item in db.Departments.AsNoTracking())
                 Departments.Add(item);
         }
     }

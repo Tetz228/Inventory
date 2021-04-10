@@ -11,12 +11,7 @@
 
     public class TypeHddAddViewModel : BindableBase
     {
-        public TypeHddAddViewModel()
-        {
-            TypeHdd = new Types_hdd();
-        }
-
-        public Types_hdd TypeHdd { get; }
+        public Types_hdd TypeHdd { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

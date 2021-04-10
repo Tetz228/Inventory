@@ -10,12 +10,7 @@ namespace Inventory.ViewModels.Add.Tables.Employees
 
     public class PostAddViewModel : BindableBase
     {
-        public PostAddViewModel()
-        {
-            Post = new Post();
-        }
-
-        public Post Post { get; }
+        public Post Post { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

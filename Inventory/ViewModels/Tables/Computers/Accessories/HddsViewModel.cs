@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            Hdds = new ObservableCollection<Hdd>(db.Hdds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd));
+            Hdds = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd));
             Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             HddsCollection = CollectionViewSource.GetDefaultView(Hdds);
         }
@@ -130,7 +130,7 @@
             Hdds.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Hdds.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd))
+            foreach (var item in db.Hdds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd))
                 Hdds.Add(item);
         }
     }

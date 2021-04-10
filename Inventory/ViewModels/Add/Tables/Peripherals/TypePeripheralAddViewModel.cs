@@ -2,20 +2,14 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables.Peripherals;
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Services;
-    using Inventory.ViewModels.Tables.Peripherals;
-
     public class TypePeripheralAddViewModel : BindableBase
     {
-        public TypePeripheralAddViewModel()
-        {
-            TypePeripheral = new Types_peripherals();
-        }
-
-        public Types_peripherals TypePeripheral { get; }
+        public Types_peripherals TypePeripheral { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

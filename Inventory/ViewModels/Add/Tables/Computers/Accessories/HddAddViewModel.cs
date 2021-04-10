@@ -15,13 +15,12 @@
         {
             using var db = new InventoryEntities();
 
-            Hdd = new Hdd();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
         }
 
-        public Hdd Hdd { get; }
+        public Hdd Hdd { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 

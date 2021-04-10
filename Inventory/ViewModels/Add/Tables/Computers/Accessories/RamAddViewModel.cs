@@ -14,14 +14,12 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
-            TypesMemories = new ObservableCollection<Types_memory>(db.Types_memory);
-
-            Ram = new Ram();
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            TypesMemories = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking());
         }
 
-        public Ram Ram { get; }
+        public Ram Ram { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 

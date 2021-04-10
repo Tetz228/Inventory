@@ -11,12 +11,7 @@
 
     public class TypeMemoryAddViewModel : BindableBase
     {
-        public TypeMemoryAddViewModel()
-        {
-            TypeMemory = new Types_memory();
-        }
-
-        public Types_memory TypeMemory { get; }
+        public Types_memory TypeMemory { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

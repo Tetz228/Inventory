@@ -10,9 +10,7 @@
 
     public class StatusComputerAddViewModel : BindableBase
     {
-        public StatusComputerAddViewModel() => StatusComputer = new Statuses_computers();
-
-        public Statuses_computers StatusComputer { get; }
+        public Statuses_computers StatusComputer { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

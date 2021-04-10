@@ -24,7 +24,7 @@
         {
             using var db = new InventoryEntities();
 
-            Sockets = new ObservableCollection<Socket>(db.Sockets);
+            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking());
             Sockets.Sort(socket => socket.Name, SortDirection = ListSortDirection.Ascending);
             SocketsCollection = CollectionViewSource.GetDefaultView(Sockets);
         }
@@ -118,7 +118,7 @@
 
                 using var db = new InventoryEntities();
 
-                var socketName = db.Sockets.Select(name => name.Name);
+                var socketName = db.Sockets.AsNoTracking().Select(name => name.Name);
 
                 template.AddVariable("TableName", "Сокеты");
                 template.AddVariable("Name", socketName);
@@ -135,7 +135,7 @@
             Sockets.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Sockets)
+            foreach (var item in db.Sockets.AsNoTracking())
                 Sockets.Add(item);
         }
     }

@@ -17,7 +17,7 @@
         {
             using var db = new InventoryEntities();
 
-            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
+            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
             InventoryMotherboard = inventoryMotherboard;
             InventoryMotherboard.InventoryNumberString = inventoryMotherboard.Inventory_number.ToString();
             InventoryMotherboard.BeginEdit();

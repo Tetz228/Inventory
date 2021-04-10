@@ -19,7 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
+            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking());
             StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Ascending);
             StatusesPeripheralsCollection = CollectionViewSource.GetDefaultView(StatusesPeripherals);
         }
@@ -112,7 +112,7 @@
             StatusesPeripherals.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Statuses_peripherals)
+            foreach (var item in db.Statuses_peripherals.AsNoTracking())
                 StatusesPeripherals.Add(item);
         }
     }

@@ -20,9 +20,9 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
 
             Ssd = ssd;
             Ssd.MemorySizeString = ssd.Memory_size.ToString(CultureInfo.InvariantCulture);

@@ -15,12 +15,11 @@
         {
             using var db = new InventoryEntities();
 
-            Motherboard = new Motherboard();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Sockets = new ObservableCollection<Socket>(db.Sockets);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking());
         }
 
-        public Motherboard Motherboard { get; }
+        public Motherboard Motherboard { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 

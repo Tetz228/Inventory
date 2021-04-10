@@ -21,7 +21,7 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryPeripherals = new ObservableCollection<Inventory_numbers_peripherals>(db.Inventory_numbers_peripherals
+            InventoryPeripherals = new ObservableCollection<Inventory_numbers_peripherals>(db.Inventory_numbers_peripherals.AsNoTracking()
                 .Include(status => status.Statuses_peripherals)
                 .Include(peripheral => peripheral.Peripheral)
                 .Include(manufacturer => manufacturer.Peripheral.Manufacturer)
@@ -149,7 +149,7 @@
             InventoryPeripherals.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_peripherals
+            foreach (var item in db.Inventory_numbers_peripherals.AsNoTracking()
                 .Include(status => status.Statuses_peripherals)
                 .Include(peripheral => peripheral.Peripheral)
                 .Include(manufacturer => manufacturer.Peripheral.Manufacturer)

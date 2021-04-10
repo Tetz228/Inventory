@@ -18,8 +18,8 @@
 
             Peripheral = peripheral;
             BeginEdit();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            TypesPeripherals = new ObservableCollection<Types_peripherals>(db.Types_peripherals);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            TypesPeripherals = new ObservableCollection<Types_peripherals>(db.Types_peripherals.AsNoTracking());
         }
 
         #region Свойства

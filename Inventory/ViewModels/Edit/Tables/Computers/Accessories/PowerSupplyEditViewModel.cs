@@ -16,8 +16,8 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
 
             PowerSupply = powerSupply;
             PowerSupply.PowerString = powerSupply.Power.ToString();

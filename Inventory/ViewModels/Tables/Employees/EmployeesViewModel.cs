@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Employees;
     using Inventory.View.Edit.Tables.Employees;
     using Inventory.ViewModels.Edit.Tables.Employees;
@@ -14,14 +15,12 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Services;
-
     public class EmployeesViewModel : BindableBase
     {
         public EmployeesViewModel()
         {
             using var db = new InventoryEntities();
-            Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
+            Employees = new ObservableCollection<Employee>(db.Employees.AsNoTracking().Include(employeePost => employeePost.Posts_employees
                                                                        .Select(post => post.Post))
                                                                        .Include(empDepart => empDepart.Employees_in_departments
                                                                        .Select(depart => depart.Department)));
@@ -83,16 +82,16 @@
                             Employees.Sort(employee => employee.Phone_number, SortDirection);
                             break;
                         }
-                    //case "Должности":
-                    //    {
-                    //        Employees.Sort(employee => employee.Posts_employees, SortDirection);
-                    //        break;
-                    //    }
-                    //case "Отделы":
-                    //    {
-                    //        Employees.Sort(employee => employee.Employees_in_departments, SortDirection);
-                    //        break;
-                    //    }
+                        //case "Должности":
+                        //    {
+                        //        Employees.Sort(employee => employee.Posts_employees, SortDirection);
+                        //        break;
+                        //    }
+                        //case "Отделы":
+                        //    {
+                        //        Employees.Sort(employee => employee.Employees_in_departments, SortDirection);
+                        //        break;
+                        //    }
                 }
             }
         }
@@ -109,8 +108,6 @@
 
         public ICommand EditEmployeeCommand => new DelegateCommand<Employee>(employee =>
         {
-            using var db = new InventoryEntities();
-
             var editEmployeeViewModel = new EmployeeEditViewModel(employee);
             Employee.EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments);
             Employee.PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees);
@@ -130,7 +127,7 @@
                 return;
 
             Services.Delete<Employee>(selectEmployee.Id_employee);
-            
+
             RefreshCollection();
         }, selectHdd => selectHdd != null);
 
@@ -142,7 +139,7 @@
             Employees.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Employees.Include(employeePost => employeePost.Posts_employees
+            foreach (var item in db.Employees.AsNoTracking().Include(employeePost => employeePost.Posts_employees
                     .Select(post => post.Post))
                 .Include(empDepart => empDepart.Employees_in_departments
                     .Select(depart => depart.Department)))

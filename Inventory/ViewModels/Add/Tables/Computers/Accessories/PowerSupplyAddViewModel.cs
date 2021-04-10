@@ -15,12 +15,11 @@
         {
             using var db = new InventoryEntities();
 
-            PowerSupply = new Power_supplies();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
         }
 
-        public Power_supplies PowerSupply { get; }
+        public Power_supplies PowerSupply { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 

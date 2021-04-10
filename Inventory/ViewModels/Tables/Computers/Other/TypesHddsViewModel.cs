@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd);
+            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking());
             TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection = ListSortDirection.Ascending);
             TypesHddsCollection = CollectionViewSource.GetDefaultView(TypesHdds);
         }
@@ -111,7 +111,7 @@
             TypesHdds.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Types_hdd)
+            foreach (var item in db.Types_hdd.AsNoTracking())
                 TypesHdds.Add(item);
         }
     }

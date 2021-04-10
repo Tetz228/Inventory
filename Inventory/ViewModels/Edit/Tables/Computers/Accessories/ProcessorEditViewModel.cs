@@ -17,9 +17,9 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
-            Sockets = new ObservableCollection<Socket>(db.Sockets);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking());
 
             Processor = processor;
             Processor.BaseFrequencyString = processor.Base_frequency.ToString(CultureInfo.InvariantCulture);

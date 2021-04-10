@@ -21,7 +21,7 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryHdds = new ObservableCollection<Inventory_numbers_hdd>(db.Inventory_numbers_hdd
+            InventoryHdds = new ObservableCollection<Inventory_numbers_hdd>(db.Inventory_numbers_hdd.AsNoTracking()
                 .Include(hdd => hdd.Hdd)
                 .Include(manufacturer => manufacturer.Hdd.Manufacturer)
                 .Include(type => type.Hdd.Types_hdd)
@@ -141,7 +141,7 @@
             InventoryHdds.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_hdd
+            foreach (var item in db.Inventory_numbers_hdd.AsNoTracking()
                 .Include(hdd => hdd.Hdd)
                 .Include(manufacturer => manufacturer.Hdd.Manufacturer)
                 .Include(type => type.Hdd.Types_hdd)

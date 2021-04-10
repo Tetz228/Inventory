@@ -23,7 +23,7 @@
         {
             using var db = new InventoryEntities();
 
-            InventorySsds = new ObservableCollection<Inventory_numbers_ssd>(db.Inventory_numbers_ssd.Include(manufacturer => manufacturer.Ssd.Manufacturer).Include(unit => unit.Ssd.Unit).Include(type => type.Ssd.Types_ssd));
+            InventorySsds = new ObservableCollection<Inventory_numbers_ssd>(db.Inventory_numbers_ssd.AsNoTracking().Include(manufacturer => manufacturer.Ssd.Manufacturer).Include(unit => unit.Ssd.Unit).Include(type => type.Ssd.Types_ssd));
             InventorySsds.Sort(manufacturer => manufacturer.Inventory_number, SortDirection = ListSortDirection.Ascending);
             InventorySsdsCollection = CollectionViewSource.GetDefaultView(InventorySsds);
         }
@@ -138,7 +138,7 @@
             InventorySsds.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_ssd.Include(manufacturer => manufacturer.Ssd.Manufacturer).Include(unit => unit.Ssd.Unit).Include(type => type.Ssd.Types_ssd))
+            foreach (var item in db.Inventory_numbers_ssd.AsNoTracking().Include(manufacturer => manufacturer.Ssd.Manufacturer).Include(unit => unit.Ssd.Unit).Include(type => type.Ssd.Types_ssd))
                 InventorySsds.Add(item);
         }
     }

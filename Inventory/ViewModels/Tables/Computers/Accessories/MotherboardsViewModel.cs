@@ -21,7 +21,7 @@
         {
             using var db = new InventoryEntities();
 
-            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
+            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
             Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             MotherboardsCollection = CollectionViewSource.GetDefaultView(Motherboards);
         }
@@ -121,7 +121,7 @@
             Motherboards.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket))
+            foreach (var item in db.Motherboards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket))
                 Motherboards.Add(item);
         }
     }

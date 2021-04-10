@@ -19,7 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            OperatingSystems = new ObservableCollection<Operating_systems>(db.Operating_systems);
+            OperatingSystems = new ObservableCollection<Operating_systems>(db.Operating_systems.AsNoTracking());
             OperatingSystems.Sort(system => system.Name, SortDirection);
             OperatingSystemsCollection = CollectionViewSource.GetDefaultView(OperatingSystems);
         }
@@ -115,7 +115,7 @@
             OperatingSystems.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Operating_systems)
+            foreach (var item in db.Operating_systems.AsNoTracking())
                 OperatingSystems.Add(item);
         }
     }

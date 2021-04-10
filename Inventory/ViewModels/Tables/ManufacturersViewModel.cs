@@ -19,7 +19,7 @@
         public ManufacturersViewModel()
         {
             using var db = new InventoryEntities();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
             Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             ManufacturersCollection = CollectionViewSource.GetDefaultView(Manufacturers);
         }
@@ -109,7 +109,7 @@
             Manufacturers.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Manufacturers)
+            foreach (var item in db.Manufacturers.AsNoTracking())
                 Manufacturers.Add(item);
         }
     }

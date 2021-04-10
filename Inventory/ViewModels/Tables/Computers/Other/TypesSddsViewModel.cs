@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd);
+            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd.AsNoTracking());
             TypesSsds.Sort(typeSsd => typeSsd.Name, SortDirection = ListSortDirection.Ascending);
             TypesSsdsCollection = CollectionViewSource.GetDefaultView(TypesSsds);
         }
@@ -111,7 +111,7 @@
             TypesSsds.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Types_ssd)
+            foreach (var item in db.Types_ssd.AsNoTracking())
                 TypesSsds.Add(item);
         }
     }

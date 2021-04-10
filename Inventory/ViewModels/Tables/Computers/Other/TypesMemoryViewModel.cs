@@ -19,7 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            TypesMemory = new ObservableCollection<Types_memory>(db.Types_memory);
+            TypesMemory = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking());
             TypesMemory.Sort(typeMemory => typeMemory.Name, SortDirection = ListSortDirection.Ascending);
             TypesMemoryCollection = CollectionViewSource.GetDefaultView(TypesMemory);
         }
@@ -110,7 +110,7 @@
             TypesMemory.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Types_memory)
+            foreach (var item in db.Types_memory.AsNoTracking())
                 TypesMemory.Add(item);
         }
     }

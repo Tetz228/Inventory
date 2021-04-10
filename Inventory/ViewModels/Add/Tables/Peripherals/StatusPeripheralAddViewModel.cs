@@ -10,9 +10,7 @@
 
     public class StatusPeripheralAddViewModel : BindableBase
     {
-        public StatusPeripheralAddViewModel() => StatusPeripheral = new Statuses_peripherals();
-
-        public Statuses_peripherals StatusPeripheral { get; }
+        public Statuses_peripherals StatusPeripheral { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

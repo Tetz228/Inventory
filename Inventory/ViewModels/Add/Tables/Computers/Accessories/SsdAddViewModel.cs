@@ -14,13 +14,12 @@
         {
             using var db = new InventoryEntities();
 
-            Ssd = new Ssd();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
         }
 
-        public Ssd Ssd { get; }
+        public Ssd Ssd { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 

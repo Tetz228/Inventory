@@ -2,20 +2,14 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables;
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Services;
-    using Inventory.ViewModels.Tables;
-
     public class ManufacturerAddViewModel : BindableBase
     {
-        public ManufacturerAddViewModel()
-        {
-            Manufacturer = new Manufacturer();
-        }
-
-        public Manufacturer Manufacturer { get; }
+        public Manufacturer Manufacturer { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

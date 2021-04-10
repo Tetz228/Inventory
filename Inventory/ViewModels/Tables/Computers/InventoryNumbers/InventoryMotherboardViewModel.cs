@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryMotherboards = new ObservableCollection<Inventory_numbers_motherboards>(db.Inventory_numbers_motherboards
+            InventoryMotherboards = new ObservableCollection<Inventory_numbers_motherboards>(db.Inventory_numbers_motherboards.AsNoTracking()
                 .Include(manufacturer => manufacturer.Motherboard.Manufacturer)
                 .Include(socket => socket.Motherboard.Socket));
             InventoryMotherboards.Sort(inventoryMotherboards => inventoryMotherboards.Inventory_number, SortDirection = ListSortDirection.Ascending);
@@ -134,8 +134,7 @@
             InventoryMotherboards.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_motherboards
-                .Include(motherboard => motherboard.Motherboard)
+            foreach (var item in db.Inventory_numbers_motherboards.AsNoTracking()
                 .Include(manufacturer => manufacturer.Motherboard.Manufacturer)
                 .Include(socket => socket.Motherboard.Socket))
             {

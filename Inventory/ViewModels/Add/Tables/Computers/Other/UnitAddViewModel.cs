@@ -11,12 +11,7 @@
 
     public class UnitAddViewModel : BindableBase
     {
-        public UnitAddViewModel()
-        {
-            Unit = new Unit();
-        }
-
-        public Unit Unit { get; }
+        public Unit Unit { get; } = new();
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

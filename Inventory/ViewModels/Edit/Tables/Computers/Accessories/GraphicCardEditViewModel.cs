@@ -17,8 +17,8 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
 
             GraphicCard = graphicCard;
             GraphicCard.MemorySizeString = graphicCard.Memory_size.ToString(CultureInfo.InvariantCulture);

@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit));
+            GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit));
             GraphicsCards.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
             GraphicsCardsCollection = CollectionViewSource.GetDefaultView(GraphicsCards);
         }
@@ -125,7 +125,7 @@
             GraphicsCards.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Graphics_cards.Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit))
+            foreach (var item in db.Graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit))
                 GraphicsCards.Add(item);
         }
     }

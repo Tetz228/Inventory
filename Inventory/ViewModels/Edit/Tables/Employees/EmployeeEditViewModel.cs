@@ -15,8 +15,8 @@
         public EmployeeEditViewModel(Employee employee)
         {
             using var db = new InventoryEntities();
-            Posts_employees.CollectionPosts = new List<Post>(db.Posts);
-            Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments);
+            Posts_employees.CollectionPosts = new List<Post>(db.Posts.AsNoTracking());
+            Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments.AsNoTracking());
 
             Employee = employee;
             BeginEdit();

@@ -21,7 +21,7 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryGraphicsCards = new ObservableCollection<Inventory_numbers_graphics_cards>(db.Inventory_numbers_graphics_cards.Include(manufacturer => manufacturer.Graphics_cards.Manufacturer).Include(unit => unit.Graphics_cards.Unit));
+            InventoryGraphicsCards = new ObservableCollection<Inventory_numbers_graphics_cards>(db.Inventory_numbers_graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Graphics_cards.Manufacturer).Include(unit => unit.Graphics_cards.Unit));
             InventoryGraphicsCards.Sort(manufacturer => manufacturer.Inventory_number, SortDirection = ListSortDirection.Ascending);
             InventoryGraphicsCardsCollection = CollectionViewSource.GetDefaultView(InventoryGraphicsCards);
         }
@@ -131,7 +131,7 @@
             InventoryGraphicsCards.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_graphics_cards.Include(manufacturer => manufacturer.Graphics_cards.Manufacturer).Include(unit => unit.Graphics_cards.Unit))
+            foreach (var item in db.Inventory_numbers_graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Graphics_cards.Manufacturer).Include(unit => unit.Graphics_cards.Unit))
                 InventoryGraphicsCards.Add(item);
         }
     }
