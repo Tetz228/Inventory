@@ -59,7 +59,7 @@
     <StartupObject>Inventory.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Services\icons8-warehouse-48.ico</ApplicationIcon>
+    <ApplicationIcon>logo%402x.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
@@ -1166,8 +1166,7 @@
     <Resource Include="LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Services\icons8-warehouse-48.ico" />
-    <Resource Include="icons8-warehouse-48.ico" />
+    <Resource Include="logo%402x.ico" />
     <Content Include="Model\InventoryModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InventoryModel.Context.cs</LastGenOutput>
