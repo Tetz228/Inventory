@@ -4,17 +4,11 @@ namespace Inventory.Model
     using Services;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
 
-    public partial class Inventory_numbers_motherboards : BindableBase, IDataErrorInfo
+    public partial class Inventory_numbers_motherboards : BindableBase, IDataErrorInfo, IEditableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inventory_numbers_motherboards()
-        {
-            this.Computers = new HashSet<Computer>();
-        }
-
-        public string InventoryNumberString { get; set; }
+        public Inventory_numbers_motherboards() => Computers = new HashSet<Computer>();
 
         public int Id_inventory_number_motherboard { get; set; }
         public int Fk_motherboard { get; set; }
@@ -35,15 +29,8 @@ namespace Inventory.Model
 
                 switch (name)
                 {
-                    case "InventoryNumberString":
-                        if (string.IsNullOrWhiteSpace(InventoryNumberString))
-                            result = "Поле не должно быть пустым";
-                        else if (int.TryParse(InventoryNumberString, out int _) == false)
-                            result = "Некорректное поле";
-                        else if (int.Parse(InventoryNumberString) <= 0)
-                            result = "Число должно быть больше 0";
-                        else
-                            result = Services.ValidInventoryNumber(InventoryNumberString, _selectInventoryMotherboard?.Inventory_number, this);
+                    case "Inventory_number":
+                        result = Inventory_number <= 0 ? "Число должно быть больше 0" : Services.ValidInventoryNumber<Inventory_numbers_motherboards>(Inventory_number, _selectInventoryMotherboard?.Inventory_number);
                         break;
                     case "Fk_motherboard":
                         if (Fk_motherboard == 0)
@@ -61,14 +48,6 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        public string IsUniqueInventoryNumber(int inventoryNumber)
-        {
-            using var db = new InventoryEntities();
-            var isUniqueNumber = db.Inventory_numbers_motherboards.FirstOrDefault(number => number.Inventory_number == inventoryNumber);
-
-            return isUniqueNumber == null ? null : "Номер должен быть уникальным";
-        }
-
         #endregion
 
         #region Откат изменений
@@ -76,7 +55,7 @@ namespace Inventory.Model
 
         public void BeginEdit()
         {
-            _selectInventoryMotherboard = new Inventory_numbers_motherboards()
+            _selectInventoryMotherboard = new Inventory_numbers_motherboards
             {
                 Id_inventory_number_motherboard = Id_inventory_number_motherboard,
                 Inventory_number = Inventory_number,
@@ -84,10 +63,7 @@ namespace Inventory.Model
             };
         }
 
-        public void EndEdit()
-        {
-            _selectInventoryMotherboard = null;
-        }
+        public void EndEdit() => _selectInventoryMotherboard = null;
 
         public void CancelEdit()
         {

@@ -4,17 +4,11 @@ namespace Inventory.Model
     using Services;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
 
-    public partial class Inventory_numbers_peripherals : BindableBase, IDataErrorInfo
+    public partial class Inventory_numbers_peripherals : BindableBase, IDataErrorInfo, IEditableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inventory_numbers_peripherals()
-        {
-            List_dispensed_peripherals = new HashSet<List_dispensed_peripherals>();
-        }
-
-        public string InventoryNumberString { get; set; }
+        public Inventory_numbers_peripherals() => List_dispensed_peripherals = new HashSet<List_dispensed_peripherals>();
 
         public int Id_inventory_number_peripheral { get; set; }
         public int Fk_peripheral { get; set; }
@@ -37,15 +31,8 @@ namespace Inventory.Model
 
                 switch (name)
                 {
-                    case "InventoryNumberString":
-                        if (string.IsNullOrWhiteSpace(InventoryNumberString))
-                            result = "Поле не должно быть пустым";
-                        else if (int.TryParse(InventoryNumberString, out int _) == false)
-                            result = "Некорректное поле";
-                        else if (int.Parse(InventoryNumberString) <= 0)
-                            result = "Число должно быть больше 0";
-                        else
-                            result = Services.ValidInventoryNumber(InventoryNumberString, _selectInventoryNumberPeripheral?.Inventory_number, this);
+                    case "Inventory_number":
+                        result = Inventory_number <= 0 ? "Число должно быть больше 0" : Services.ValidInventoryNumber<Inventory_numbers_peripherals>(Inventory_number, _selectInventoryNumberPeripheral?.Inventory_number);
                         break;
                     case "Fk_peripheral":
                         if (Fk_peripheral == 0)
@@ -67,14 +54,6 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        public string IsUniqueInventoryNumber(int inventoryNumber)
-        {
-            using var db = new InventoryEntities();
-            var isUniqueNumber = db.Inventory_numbers_peripherals.FirstOrDefault(number => number.Inventory_number == inventoryNumber);
-
-            return isUniqueNumber == null ? null : "Номер должен быть уникальным";
-        }
-
         #endregion
 
         #region Откат изменений
@@ -82,7 +61,7 @@ namespace Inventory.Model
 
         public void BeginEdit()
         {
-            _selectInventoryNumberPeripheral = new Inventory_numbers_peripherals()
+            _selectInventoryNumberPeripheral = new Inventory_numbers_peripherals
             {
                 Id_inventory_number_peripheral = Id_inventory_number_peripheral,
                 Inventory_number = Inventory_number,
@@ -91,10 +70,7 @@ namespace Inventory.Model
             };
         }
 
-        public void EndEdit()
-        {
-            _selectInventoryNumberPeripheral = null;
-        }
+        public void EndEdit() => _selectInventoryNumberPeripheral = null;
 
         public void CancelEdit()
         {

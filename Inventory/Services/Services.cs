@@ -1,14 +1,13 @@
 ﻿namespace Inventory.Services
 {
     using Inventory.Model;
+    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
-
-    using Microsoft.Win32;
 
     public static class Services
     {
@@ -39,21 +38,27 @@
             return saveExcelDoc.FileName != "" ? saveExcelDoc.FileName : null;
         }
 
-        public static string ValidInventoryNumber(string inventoryNumberString, int? selectInventoryNumber, dynamic classInventoryNumbers)
+        public static string ValidInventoryNumber<TClass>(int inventoryNumber, int? selectInventoryNumber) where TClass : class
         {
-            string result;
-            classInventoryNumbers.Inventory_number = int.Parse(inventoryNumberString);
+            if (selectInventoryNumber == inventoryNumber)
+                return null;
 
-            if (selectInventoryNumber == null)
-            {
-                result = classInventoryNumbers.IsUniqueInventoryNumber(classInventoryNumbers.Inventory_number);
-            }
-            else
-            {
-                result = selectInventoryNumber != classInventoryNumbers.Inventory_number ? (string) classInventoryNumbers.IsUniqueInventoryNumber(classInventoryNumbers.Inventory_number) : null;
-            }
+            const string propertyName = "Inventory_number";
 
-            return result;
+            using var db = new InventoryEntities();
+            var dbSet = db.Set<TClass>();
+
+            var type = typeof(TClass);
+
+            var parameterExpression = System.Linq.Expressions.Expression.Parameter(type, "inventory");
+            var constant = System.Linq.Expressions.Expression.Constant(inventoryNumber);
+            var property = System.Linq.Expressions.Expression.Property(parameterExpression, propertyName);
+            var expression = System.Linq.Expressions.Expression.Equal(property, constant);
+            var lambda = System.Linq.Expressions.Expression.Lambda<Func<TClass, bool>>(expression, parameterExpression);
+            var compiledLambda = lambda.Compile();
+            var result = dbSet.FirstOrDefault(compiledLambda);
+
+            return result != null ? "Номер должен быть уникальным" : null;
         }
 
         public static void Add<TClass>(TClass value) where TClass : class

@@ -7,15 +7,10 @@ namespace Inventory.Model
     using Services;
     using DevExpress.Mvvm;
 
-    public partial class Inventory_numbers_ssd : BindableBase, IDataErrorInfo
+    public partial class Inventory_numbers_ssd : BindableBase, IDataErrorInfo, IEditableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inventory_numbers_ssd()
-        {
-            this.Ssd_in_computers = new HashSet<Ssd_in_computers>();
-        }
-
-        public string InventoryNumberString { get; set; }
+        public Inventory_numbers_ssd() => this.Ssd_in_computers = new HashSet<Ssd_in_computers>();
 
         public int Id_inventory_number_ssd { get; set; }
         public int Fk_ssd { get; set; }
@@ -36,15 +31,8 @@ namespace Inventory.Model
 
                 switch (name)
                 {
-                    case "InventoryNumberString":
-                        if (string.IsNullOrWhiteSpace(InventoryNumberString))
-                            result = "Поле не должно быть пустым";
-                        else if (int.TryParse(InventoryNumberString, out int _) == false)
-                            result = "Некорректное поле";
-                        else if (int.Parse(InventoryNumberString) <= 0)
-                            result = "Число должно быть больше 0";
-                        else
-                            result = Services.ValidInventoryNumber(InventoryNumberString, _selectInventorySsd?.Inventory_number, this);
+                    case "Inventory_number":
+                        result = Inventory_number <= 0 ? "Число должно быть больше 0" : Services.ValidInventoryNumber<Inventory_numbers_ssd>(Inventory_number, _selectInventorySsd?.Inventory_number);
                         break;
                     case "Fk_ssd":
                         if (Fk_ssd == 0)
@@ -62,14 +50,6 @@ namespace Inventory.Model
 
         public string Error { get => null; }
 
-        public string IsUniqueInventoryNumber(int inventoryNumber)
-        {
-            using var db = new InventoryEntities();
-            var isUniqueNumber = db.Inventory_numbers_ssd.FirstOrDefault(number => number.Inventory_number == inventoryNumber);
-
-            return isUniqueNumber == null ? null : "Номер должен быть уникальным";
-        }
-
         #endregion
 
         #region Откат изменений
@@ -77,7 +57,7 @@ namespace Inventory.Model
 
         public void BeginEdit()
         {
-            _selectInventorySsd = new Inventory_numbers_ssd()
+            _selectInventorySsd = new Inventory_numbers_ssd
             {
                 Id_inventory_number_ssd = Id_inventory_number_ssd,
                 Inventory_number = Inventory_number,
@@ -85,10 +65,7 @@ namespace Inventory.Model
             };
         }
 
-        public void EndEdit()
-        {
-            _selectInventorySsd = null;
-        }
+        public void EndEdit() => _selectInventorySsd = null;
 
         public void CancelEdit()
         {
