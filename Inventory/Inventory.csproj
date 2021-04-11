@@ -290,6 +290,7 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\StringToIntConverter.cs" />
     <Compile Include="Services\MailsInteraction.cs" />
     <Compile Include="Services\SearchFor.cs" />
     <Compile Include="Services\UsersInteraction.cs" />

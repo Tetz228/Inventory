@@ -58,7 +58,7 @@
 
         public void BeginEdit()
         {
-            _selectHdd = new Hdd()
+            _selectHdd = new Hdd
             {
                 Id_hdd = Hdd.Id_hdd,
                 Memory_size = Hdd.Memory_size,
@@ -69,10 +69,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectHdd = null;
-        }
+        public void EndEdit() => _selectHdd = null;
 
         public void CancelEdit()
         {

@@ -61,17 +61,14 @@
 
         public void BeginEdit()
         {
-            _selectPost = new User()
+            _selectPost = new User
             {
                 Fk_role = User.Fk_role,
                 Password = User.Password
             };
         }
 
-        public void EndEdit()
-        {
-            _selectPost = null;
-        }
+        public void EndEdit() => _selectPost = null;
 
         public void CancelEdit()
         {

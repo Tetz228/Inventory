@@ -61,7 +61,7 @@
 
         public void BeginEdit()
         {
-            _selectRam = new Ram()
+            _selectRam = new Ram
             {
                 Id_ram = Ram.Id_ram,
                 Clock_frequency = Ram.Clock_frequency,
@@ -73,10 +73,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectRam = null;
-        }
+        public void EndEdit() => _selectRam = null;
 
         public void CancelEdit()
         {

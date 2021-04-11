@@ -54,7 +54,7 @@
 
         public void BeginEdit()
         {
-            _selectPowerSupply = new Power_supplies()
+            _selectPowerSupply = new Power_supplies
             {
                 Id_power_supplie = PowerSupply.Id_power_supplie,
                 Power = PowerSupply.Power,
@@ -64,10 +64,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectPowerSupply = null;
-        }
+        public void EndEdit() => _selectPowerSupply = null;
 
         public void CancelEdit()
         {

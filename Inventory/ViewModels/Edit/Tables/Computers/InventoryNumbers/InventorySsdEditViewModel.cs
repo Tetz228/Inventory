@@ -17,8 +17,8 @@
             using var db = new InventoryEntities();
 
             Ssds = new ObservableCollection<Ssd>(db.Ssds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_ssd).Include(unit => unit.Unit));
+            
             InventorySsd = inventorySsd;
-            InventorySsd.InventoryNumberString = inventorySsd.Inventory_number.ToString();
             InventorySsd.BeginEdit();
         }
 

@@ -52,7 +52,7 @@
 
         public void BeginEdit()
         {
-            _selectMotherboard = new Motherboard()
+            _selectMotherboard = new Motherboard
             {
                 Id_motherboard = Motherboard.Id_motherboard,
                 Name = Motherboard.Name,
@@ -61,10 +61,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectMotherboard = null;
-        }
+        public void EndEdit() => _selectMotherboard = null;
 
         public void CancelEdit()
         {

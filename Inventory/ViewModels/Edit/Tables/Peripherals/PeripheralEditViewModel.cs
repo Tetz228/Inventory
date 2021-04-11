@@ -53,7 +53,7 @@
 
         public void BeginEdit()
         {
-            _selectPeripheral = new Peripheral()
+            _selectPeripheral = new Peripheral
             {
                 Id_peripheral = Peripheral.Id_peripheral,
                 Fk_manufacturer = Peripheral.Fk_manufacturer,
@@ -62,10 +62,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectPeripheral = null;
-        }
+        public void EndEdit() => _selectPeripheral = null;
 
         public void CancelEdit()
         {

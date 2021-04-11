@@ -54,7 +54,7 @@
 
         public void BeginEdit()
         {
-            _selectGraphicCard = new Graphics_cards()
+            _selectGraphicCard = new Graphics_cards
             {
                 Id_graphics_card = GraphicCard.Id_graphics_card,
                 Memory_size = GraphicCard.Memory_size,
@@ -64,10 +64,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectGraphicCard = null;
-        }
+        public void EndEdit() => _selectGraphicCard = null;
 
         public void CancelEdit()
         {

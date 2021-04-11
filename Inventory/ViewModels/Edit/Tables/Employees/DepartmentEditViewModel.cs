@@ -42,17 +42,14 @@
 
         public void BeginEdit()
         {
-            _selectDepartment = new Department()
+            _selectDepartment = new Department
             {
                 Id_department = Department.Id_department,
                 Name = Department.Name,
             };
         }
 
-        public void EndEdit()
-        {
-            _selectDepartment = null;
-        }
+        public void EndEdit() => _selectDepartment = null;
 
         public void CancelEdit()
         {

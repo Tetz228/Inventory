@@ -59,7 +59,7 @@
 
         public void BeginEdit()
         {
-            _selectProcessor = new Processor()
+            _selectProcessor = new Processor
             {
                 Id_processor = Processor.Id_processor,
                 Base_frequency = Processor.Base_frequency,
@@ -71,10 +71,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectProcessor = null;
-        }
+        public void EndEdit() => _selectProcessor = null;
 
         public void CancelEdit()
         {

@@ -19,8 +19,8 @@
 
             Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_peripherals));
             StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking());
+            
             InventoryPeripheral = inventoryPeripheral;
-            InventoryPeripheral.InventoryNumberString = inventoryPeripheral.Inventory_number.ToString();
             InventoryPeripheral.BeginEdit();
         }
 

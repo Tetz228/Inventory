@@ -20,7 +20,6 @@
 
             GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit));
             InventoryGraphicCard = inventoryGraphicCard;
-            InventoryGraphicCard.InventoryNumberString = inventoryGraphicCard.Inventory_number.ToString();
             InventoryGraphicCard.BeginEdit();
         }
 

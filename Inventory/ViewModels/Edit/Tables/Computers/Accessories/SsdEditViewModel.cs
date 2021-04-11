@@ -61,7 +61,7 @@
 
         public void BeginEdit()
         {
-            _selectSsd = new Ssd()
+            _selectSsd = new Ssd
             {
                 Id_ssd = Ssd.Id_ssd,
                 Memory_size = Ssd.Memory_size,
@@ -72,10 +72,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectSsd = null;
-        }
+        public void EndEdit() => _selectSsd = null;
 
         public void CancelEdit()
         {

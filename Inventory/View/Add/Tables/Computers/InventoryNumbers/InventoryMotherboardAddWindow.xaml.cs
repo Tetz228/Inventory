@@ -2,14 +2,12 @@
 {
     using System.Windows;
 
-    /// <summary>
-    /// Логика взаимодействия для InventoryMotherboardEditWindow.xaml
-    /// </summary>
     public partial class InventoryMotherboardAddWindow : Window
     {
         public InventoryMotherboardAddWindow()
         {
             InitializeComponent();
+            TextBoxInventoryNumber.Focus();
         }
     }
 }
