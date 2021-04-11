@@ -17,7 +17,7 @@
     mc:Ignorable="d">
 
     <Window.Resources>
-        <services:StringToIntConverter x:Key="StringToIntConverter"/>
+        <services:StringToIntConverter x:Key="StringToIntConverter" />
     </Window.Resources>
 
     <Window.DataContext>

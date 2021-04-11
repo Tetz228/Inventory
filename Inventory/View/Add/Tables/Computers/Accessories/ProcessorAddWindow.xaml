@@ -5,6 +5,7 @@
     xmlns:accessories="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Accessories"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="AddWindow"
     Title="Добавить новый процессор"
     Width="530"
@@ -17,6 +18,11 @@
     <Window.DataContext>
         <accessories:ProcessorAddViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <services:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+        <services:StringToIntConverter x:Key="StringToIntConverter" />
+    </Window.Resources>
 
     <Grid Background="#FF2BA8E2">
         <ScrollViewer>
@@ -94,8 +100,8 @@
                                 <TextBox
                                     MaxLength="20"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Processor.AmountCoresString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                    ToolTip="{Binding Processor.ErrorCollection[AmountCoresString], UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Processor.Amount_cores, ValidatesOnDataErrors=True, Converter={StaticResource StringToIntConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Processor.ErrorCollection[Amount_cores], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Базовая частота  -->
@@ -105,8 +111,8 @@
                                 <TextBox
                                     MaxLength="20"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Processor.BaseFrequencyString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                    ToolTip="{Binding Processor.ErrorCollection[BaseFrequencyString], UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Processor.Base_frequency, ValidatesOnDataErrors=True, Converter={StaticResource StringToDoubleConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Processor.ErrorCollection[Base_frequency], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Единица измерения  -->

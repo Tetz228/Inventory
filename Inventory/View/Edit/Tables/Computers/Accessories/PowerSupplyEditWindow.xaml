@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="EditWindow"
     Title="Изменить блок питания"
     Width="500"
@@ -12,6 +13,10 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <services:StringToIntConverter x:Key="StringToIntConverter" />
+    </Window.Resources>
 
     <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
@@ -48,7 +53,7 @@
                                 ItemsSource="{Binding Manufacturers}"
                                 SelectedValue="{Binding PowerSupply.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}"/>
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
 
                         <!--  Наименование блока питания  -->
@@ -70,8 +75,8 @@
                             <TextBox
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding PowerSupply.PowerString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding PowerSupply.ErrorCollection[PowerString], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding PowerSupply.Power, ValidatesOnDataErrors=True, Converter={StaticResource StringToIntConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding PowerSupply.ErrorCollection[Power], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Единица измерения  -->
@@ -86,7 +91,7 @@
                                 ItemsSource="{Binding Units}"
                                 SelectedValue="{Binding PowerSupply.Fk_unit, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_unit"
-                                Style="{StaticResource BaseComboBox}"/>
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="EditWindow"
     Title="Изменить жесткий диск"
     Width="500"
@@ -12,6 +13,10 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <services:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+    </Window.Resources>
 
     <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
@@ -86,8 +91,8 @@
                             <TextBox
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding Hdd.MemorySizeString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding Hdd.ErrorCollection[MemorySizeString], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding Hdd.Memory_size, ValidatesOnDataErrors=True, Converter={StaticResource StringToDoubleConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding Hdd.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Единица измерения  -->

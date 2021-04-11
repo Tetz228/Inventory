@@ -5,6 +5,7 @@
     xmlns:accessories="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Accessories"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="AddWindow"
     Title="Добавить новую оперативную память"
     Width="530"
@@ -13,6 +14,10 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <services:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+    </Window.Resources>
 
     <Window.DataContext>
         <accessories:RamAddViewModel />
@@ -77,8 +82,8 @@
                                 <TextBox
                                     MaxLength="20"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Ram.MemorySizeString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                    ToolTip="{Binding Ram.ErrorCollection[MemorySizeString], UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Ram.Memory_size, Converter={StaticResource StringToDoubleConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Ram.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Единица измерения  -->
@@ -104,8 +109,8 @@
                                 <TextBox
                                     MaxLength="20"
                                     Style="{StaticResource BaseTextBox}"
-                                    Text="{Binding Ram.ClockFrequencyString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                    ToolTip="{Binding Ram.ErrorCollection[ClockFrequencyString], UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Ram.Clock_frequency, Converter={StaticResource StringToDoubleConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding Ram.ErrorCollection[Clock_frequency], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
                             <!--  Тип памяти  -->
