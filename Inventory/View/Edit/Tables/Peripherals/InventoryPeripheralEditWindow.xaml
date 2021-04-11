@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="EditInventoryPeripheralWindow"
     Title="Изменить инвентарный номер для периферии"
     Width="500"
@@ -12,6 +13,10 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <services:StringToIntConverter x:Key="StringToIntConverter" />
+    </Window.Resources>
 
     <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
@@ -44,8 +49,8 @@
                                 Name="TextBoxInventoryNumber"
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryPeripheral.InventoryNumberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryPeripheral.ErrorCollection[InventoryNumberString], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding InventoryPeripheral.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryPeripheral.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Периферия  -->

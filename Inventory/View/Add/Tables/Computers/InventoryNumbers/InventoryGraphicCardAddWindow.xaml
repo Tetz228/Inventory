@@ -6,6 +6,7 @@
     xmlns:inventoryNumbers="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.InventoryNumbers"
     xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Computers.InventoryNumbers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="AddInventoryWindow"
     Title="Добавить новый инвентарный номер для видеокарты"
     Width="500"
@@ -14,6 +15,10 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <services:StringToIntConverter x:Key="StringToIntConverter"/>
+    </Window.Resources>
 
     <Window.DataContext>
         <inventoryNumbers:InventoryGraphicCardAddViewModel />
@@ -50,8 +55,8 @@
                                 Name="TextBoxInventoryNumber"
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryGraphicCard.InventoryNumberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryGraphicCard.ErrorCollection[InventoryNumberString], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding InventoryGraphicCard.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryGraphicCard.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Видеокарта  -->

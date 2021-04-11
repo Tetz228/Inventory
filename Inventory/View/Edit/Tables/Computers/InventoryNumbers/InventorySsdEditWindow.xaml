@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Computers.InventoryNumbers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="EditInventoryWindow"
     Title="Изменить инвентарный номер для SSD-накопителя"
     Width="500"
@@ -14,6 +15,9 @@
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
+    <Window.Resources>
+        <services:StringToIntConverter x:Key="StringToIntConverter" />
+    </Window.Resources>
 
     <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
@@ -46,15 +50,13 @@
                                 Name="TextBoxInventoryNumber"
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventorySsd.InventoryNumberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventorySsd.ErrorCollection[InventoryNumberString], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding InventorySsd.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventorySsd.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  SSD-накопитель  -->
                         <UniformGrid Columns="2">
-                            <TextBlock
-                                Style="{StaticResource BaseTextBlock}"
-                                Text="SSD-накопитель: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="SSD-накопитель: " />
 
                             <ComboBox
                                 Width="208"

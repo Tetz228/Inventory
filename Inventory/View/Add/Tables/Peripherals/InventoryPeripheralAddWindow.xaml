@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:peripherals="clr-namespace:Inventory.ViewModels.Add.Tables.Peripherals"
+    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="AddInventoryPeripheralWindow"
     Title="Добавить новый инвентарный номер для периферии"
     Width="500"
@@ -13,6 +14,10 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <services:StringToIntConverter x:Key="StringToIntConverter" />
+    </Window.Resources>
 
     <Window.DataContext>
         <peripherals:InventoryPeripheralAddViewModel />
@@ -49,8 +54,8 @@
                                 Name="TextBoxInventoryNumber"
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryPeripheral.InventoryNumberString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryPeripheral.ErrorCollection[InventoryNumberString], UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding InventoryPeripheral.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryPeripheral.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Периферия  -->
