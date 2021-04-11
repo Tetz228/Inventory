@@ -38,6 +38,13 @@
             return saveExcelDoc.FileName != "" ? saveExcelDoc.FileName : null;
         }
 
+        /// <summary>
+        /// Поиск инвентарного номера с помощью дерева выражений
+        /// </summary>
+        /// <typeparam name="TClass">Класс, который содержит инвентарный номер</typeparam>
+        /// <param name="inventoryNumber">Инвентарный номер</param>
+        /// <param name="selectInventoryNumber">Инвентарный номер, который записан в переменную для отката изменений</param>
+        /// <returns>Возвращает null, когда инвентарный номер не найден в базе данных, иначе "Номер должен быть уникальным" </returns>
         public static string ValidInventoryNumber<TClass>(int inventoryNumber, int? selectInventoryNumber) where TClass : class
         {
             if (selectInventoryNumber == inventoryNumber)
