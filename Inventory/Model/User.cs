@@ -1,19 +1,17 @@
 namespace Inventory.Model
 {
     using DevExpress.Mvvm;
-
+    using Inventory.Services;
     using System.Collections.Generic;
     using System.ComponentModel;
-
-    using Inventory.Services;
 
     public partial class User : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Dispensing_computers = new HashSet<Dispensing_computers>();
-            this.Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
+            Dispensing_computers = new HashSet<Dispensing_computers>();
+            Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
         }
 
         public static User AuthorizedUser { get; set; }

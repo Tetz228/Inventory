@@ -1,6 +1,5 @@
 namespace Inventory.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -17,7 +16,7 @@ namespace Inventory.Model
         public int Id_employee_in_department { get; set; }
         public int Fk_department { get; set; }
         public int Fk_employee { get; set; }
-    
+
         public virtual Department Department { get; set; }
         public virtual Employee Employee { get; set; }
 

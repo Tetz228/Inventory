@@ -1,23 +1,17 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-
-    using DevExpress.Mvvm;
 
     public partial class Types_peripherals : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Types_peripherals()
-        {
-            Peripherals = new HashSet<Peripheral>();
-        }
-    
+        public Types_peripherals() => Peripherals = new HashSet<Peripheral>();
+
         public int Id_type_peripheral { get; set; }
         public string Name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Peripheral> Peripherals { get; set; }
 

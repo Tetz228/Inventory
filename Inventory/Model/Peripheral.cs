@@ -7,10 +7,7 @@ namespace Inventory.Model
     public partial class Peripheral : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Peripheral()
-        {
-            Inventory_numbers_peripherals = new HashSet<Inventory_numbers_peripherals>();
-        }
+        public Peripheral() => Inventory_numbers_peripherals = new HashSet<Inventory_numbers_peripherals>();
 
         public int Id_peripheral { get; set; }
         public int Fk_type_peripheral { get; set; }

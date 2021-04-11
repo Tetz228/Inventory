@@ -7,10 +7,7 @@ namespace Inventory.Model
     public partial class Graphics_cards : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Graphics_cards()
-        {
-            Inventory_numbers_graphics_cards = new HashSet<Inventory_numbers_graphics_cards>();
-        }
+        public Graphics_cards() => Inventory_numbers_graphics_cards = new HashSet<Inventory_numbers_graphics_cards>();
 
         public int Id_graphics_card { get; set; }
         public int Fk_manufacturer { get; set; }

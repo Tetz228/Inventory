@@ -4,17 +4,16 @@ namespace Inventory.Model
     using Services;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
 
     public partial class Inventory_numbers_graphics_cards : BindableBase, IDataErrorInfo, IEditableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inventory_numbers_graphics_cards() => this.Computers = new HashSet<Computer>();
+        public Inventory_numbers_graphics_cards() => Computers = new HashSet<Computer>();
 
         public int Id_inventory_number_graphics_card { get; set; }
         public int Fk_graphics_card { get; set; }
         public int Inventory_number { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Computer> Computers { get; set; }
         public virtual Graphics_cards Graphics_cards { get; set; }
@@ -64,10 +63,7 @@ namespace Inventory.Model
             };
         }
 
-        public void EndEdit()
-        {
-            _selectInventoryGraphicCard = null;
-        }
+        public void EndEdit() => _selectInventoryGraphicCard = null;
 
         public void CancelEdit()
         {

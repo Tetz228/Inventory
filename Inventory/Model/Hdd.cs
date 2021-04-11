@@ -7,10 +7,7 @@ namespace Inventory.Model
     public partial class Hdd : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Hdd()
-        {
-            Inventory_numbers_hdd = new HashSet<Inventory_numbers_hdd>();
-        }
+        public Hdd() => Inventory_numbers_hdd = new HashSet<Inventory_numbers_hdd>();
 
         public int Id_hdd { get; set; }
         public int Fk_manufacturer { get; set; }

@@ -71,15 +71,5 @@ namespace Inventory.Model
             }
             Employee.PostsEmployees.Remove(selectPostEmp);
         }
-
-        public static void DeletePostEmployee(int idEmployee)
-        {
-            using var db = new InventoryEntities();
-
-            var postEmp = db.Posts_employees.Where(emp => emp.Fk_employee == idEmployee);
-            
-            db.Posts_employees.RemoveRange(postEmp);
-            db.SaveChanges();
-        }
     }
 }

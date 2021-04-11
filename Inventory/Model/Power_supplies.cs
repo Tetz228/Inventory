@@ -1,22 +1,20 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-
-    using DevExpress.Mvvm;
 
     public partial class Power_supplies : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Power_supplies() => this.Inventory_numbers_power_supplies = new HashSet<Inventory_numbers_power_supplies>();
+        public Power_supplies() => Inventory_numbers_power_supplies = new HashSet<Inventory_numbers_power_supplies>();
 
         public int Id_power_supplie { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
         public int Power { get; set; }
         public int Fk_unit { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory_numbers_power_supplies> Inventory_numbers_power_supplies { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
