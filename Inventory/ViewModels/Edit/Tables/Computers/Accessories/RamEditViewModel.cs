@@ -1,16 +1,13 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Accessories
 {
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Windows;
-    using System.Windows.Input;
-
     using DevExpress.Mvvm;
-
     using Inventory.Model;
     using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Windows;
+    using System.Windows.Input;
 
     public class RamEditViewModel : BindableBase, IEditableObject
     {
@@ -23,9 +20,6 @@
             TypesMemories = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking());
 
             Ram = ram;
-            Ram.ClockFrequencyString = ram.Clock_frequency.ToString(CultureInfo.InvariantCulture);
-            Ram.MemorySizeString = ram.Memory_size.ToString(CultureInfo.InvariantCulture);
-
             BeginEdit();
         }
 

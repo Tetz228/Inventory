@@ -9,12 +9,7 @@ namespace Inventory.Model
     public partial class Power_supplies : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Power_supplies()
-        {
-            this.Inventory_numbers_power_supplies = new HashSet<Inventory_numbers_power_supplies>();
-        }
-
-        public string PowerString { get; set; }
+        public Power_supplies() => this.Inventory_numbers_power_supplies = new HashSet<Inventory_numbers_power_supplies>();
 
         public int Id_power_supplie { get; set; }
         public int Fk_manufacturer { get; set; }
@@ -45,15 +40,9 @@ namespace Inventory.Model
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
                         break;
-                    case "PowerString":
-                        if (string.IsNullOrWhiteSpace(PowerString))
-                            result = "Поле не должно быть пустым";
-                        else if (int.TryParse(PowerString, out int _) == false)
-                            result = "Некорректное поле";
-                        else if (int.Parse(PowerString) <= 0)
+                    case "Power":
+                        if (Power <= 0)
                             result = "Число должно быть больше 0";
-                        else
-                            Power = int.Parse(PowerString);
                         break;
                     case "Fk_manufacturer":
                         if (Fk_manufacturer == 0)

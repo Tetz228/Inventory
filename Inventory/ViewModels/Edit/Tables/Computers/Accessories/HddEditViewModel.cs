@@ -22,7 +22,6 @@
             Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
 
             Hdd = hdd;
-            Hdd.MemorySizeString = hdd.Memory_size.ToString(CultureInfo.InvariantCulture);
             BeginEdit();
         }
 

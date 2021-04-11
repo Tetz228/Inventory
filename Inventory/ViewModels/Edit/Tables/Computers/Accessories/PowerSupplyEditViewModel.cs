@@ -20,7 +20,6 @@
             Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
 
             PowerSupply = powerSupply;
-            PowerSupply.PowerString = powerSupply.Power.ToString();
             BeginEdit();
         }
 

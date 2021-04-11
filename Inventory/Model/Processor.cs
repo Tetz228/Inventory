@@ -7,14 +7,7 @@ namespace Inventory.Model
     public partial class Processor : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Processor()
-        {
-            this.Inventory_numbers_processors = new HashSet<Inventory_numbers_processors>();
-        }
-
-        public string BaseFrequencyString { get; set; }
-
-        public string AmountCoresString { get; set; }
+        public Processor() => this.Inventory_numbers_processors = new HashSet<Inventory_numbers_processors>();
 
         public int Id_processor { get; set; }
         public int Fk_manufacturer { get; set; }
@@ -48,15 +41,9 @@ namespace Inventory.Model
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
                         break;
-                    case "BaseFrequencyString":
-                        if (string.IsNullOrWhiteSpace(BaseFrequencyString))
-                            result = "Поле не должно быть пустым";
-                        else if (double.TryParse(BaseFrequencyString, out double _) == false)
-                            result = "Некорректное поле";
-                        else if (double.Parse(BaseFrequencyString) <= 0)
+                    case "Base_frequency":
+                        if (Base_frequency <= 0)
                             result = "Число должно быть больше 0";
-                        else
-                            Base_frequency = double.Parse(BaseFrequencyString);
                         break;
                     case "Fk_manufacturer":
                         if (Fk_manufacturer == 0)
@@ -70,15 +57,9 @@ namespace Inventory.Model
                         if (Fk_socket == 0)
                             result = "Поле не должно быть пустым";
                         break;
-                    case "AmountCoresString":
-                        if (string.IsNullOrWhiteSpace(AmountCoresString))
-                            result = "Поле не должно быть пустым";
-                        else if (int.TryParse(AmountCoresString, out int _) == false)
-                            result = "Некорректное поле";
-                        else if (int.Parse(AmountCoresString) <= 0)
+                    case "Amount_cores":
+                        if (Amount_cores <= 0)
                             result = "Число должно быть больше 0";
-                        else
-                            Amount_cores = int.Parse(AmountCoresString);
                         break;
                 }
 

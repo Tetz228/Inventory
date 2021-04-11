@@ -12,8 +12,6 @@ namespace Inventory.Model
             Inventory_numbers_graphics_cards = new HashSet<Inventory_numbers_graphics_cards>();
         }
 
-        public string MemorySizeString { get; set; }
-
         public int Id_graphics_card { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
@@ -43,16 +41,10 @@ namespace Inventory.Model
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
                         break;
-                    case "MemorySizeString":
-                        if (string.IsNullOrWhiteSpace(MemorySizeString))
-                            result = "Поле не должно быть пустым";
-                        else if (double.TryParse(MemorySizeString, out double _) == false)
-                            result = "Некорректное поле";
-                        else if (double.Parse(MemorySizeString) <= 0)
+                    case "Memory_size":
+                         if (Memory_size <= 0)
                             result = "Число должно быть больше 0";
-                        else
-                            Memory_size = double.Parse(MemorySizeString);
-                        break;
+                         break;
                     case "Fk_manufacturer":
                         if (Fk_manufacturer == 0)
                             result = "Поле не должно быть пустым";

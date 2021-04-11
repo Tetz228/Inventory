@@ -21,7 +21,6 @@
             Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
 
             GraphicCard = graphicCard;
-            GraphicCard.MemorySizeString = graphicCard.Memory_size.ToString(CultureInfo.InvariantCulture);
             BeginEdit();
         }
 

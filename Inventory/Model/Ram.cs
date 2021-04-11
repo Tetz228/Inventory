@@ -7,14 +7,7 @@ namespace Inventory.Model
     public partial class Ram : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ram()
-        {
-            Inventory_numbers_ram = new HashSet<Inventory_numbers_ram>();
-        }
-
-        public string MemorySizeString { get; set; }
-
-        public string ClockFrequencyString { get; set; }
+        public Ram() => Inventory_numbers_ram = new HashSet<Inventory_numbers_ram>();
 
         public int Id_ram { get; set; }
         public int Fk_manufacturer { get; set; }
@@ -48,15 +41,9 @@ namespace Inventory.Model
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
                         break;
-                    case "ClockFrequencyString":
-                        if (string.IsNullOrWhiteSpace(ClockFrequencyString))
-                            result = "Поле не должно быть пустым";
-                        else if (double.TryParse(ClockFrequencyString, out double _) == false)
-                            result = "Некорректное поле";
-                        else if (double.Parse(ClockFrequencyString) <= 0)
+                    case "Clock_frequency":
+                        if (Clock_frequency <= 0)
                             result = "Число должно быть больше 0";
-                        else
-                            Clock_frequency = double.Parse(ClockFrequencyString);
                         break;
                     case "Fk_manufacturer":
                         if (Fk_manufacturer == 0)
@@ -70,15 +57,9 @@ namespace Inventory.Model
                         if (Fk_type_memory == 0)
                             result = "Поле не должно быть пустым";
                         break;
-                    case "MemorySizeString":
-                        if (string.IsNullOrWhiteSpace(MemorySizeString))
-                            result = "Поле не должно быть пустым";
-                        else if (double.TryParse(MemorySizeString, out double _) == false)
-                            result = "Некорректное поле";
-                        else if (double.Parse(MemorySizeString) <= 0)
+                    case "Memory_size":
+                        if (Memory_size <= 0)
                             result = "Число должно быть больше 0";
-                        else
-                            Memory_size = double.Parse(MemorySizeString);
                         break;
                 }
 

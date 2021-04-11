@@ -2,14 +2,12 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Globalization;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class ProcessorEditViewModel : BindableBase, IEditableObject
     {
@@ -22,8 +20,6 @@
             Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking());
 
             Processor = processor;
-            Processor.BaseFrequencyString = processor.Base_frequency.ToString(CultureInfo.InvariantCulture);
-            Processor.AmountCoresString = processor.Amount_cores.ToString();
             BeginEdit();
         }
 

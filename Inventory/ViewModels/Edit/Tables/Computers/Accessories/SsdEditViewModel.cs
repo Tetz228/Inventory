@@ -1,18 +1,13 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Accessories
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Globalization;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Services;
-
-    using Inventory.Model;
-    using Inventory.ViewModels.Tables.Computers.Accessories;
-
 
     public class SsdEditViewModel : BindableBase, IEditableObject
     {
@@ -25,7 +20,6 @@
             Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
 
             Ssd = ssd;
-            Ssd.MemorySizeString = ssd.Memory_size.ToString(CultureInfo.InvariantCulture);
             BeginEdit();
         }
 
