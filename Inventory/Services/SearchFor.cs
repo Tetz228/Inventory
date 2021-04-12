@@ -128,5 +128,13 @@
                                                                                || ram.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(ramsFilter.ToLower())
                                                                                || ram.Unit.Short_name.ToLower().Contains(ramsFilter.ToLower())
                                                                                || ram.Manufacturer.Name.ToLower().Contains(ramsFilter.ToLower());
+
+        public static bool Search(this Inventory_numbers_ram inventoryRam, string inventoryRamsFilter) => inventoryRam.Ram.Name.ToLower().Contains(inventoryRamsFilter.ToLower())
+                                                                      || inventoryRam.Ram.Unit.Full_name.ToLower().Contains(inventoryRamsFilter.ToLower())
+                                                                      || inventoryRam.Ram.Clock_frequency.ToString(CultureInfo.InvariantCulture).ToLower().Contains(inventoryRamsFilter.ToLower())
+                                                                      || inventoryRam.Ram.Types_memory.Name.ToLower().Contains(inventoryRamsFilter.ToLower())
+                                                                      || inventoryRam.Ram.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(inventoryRamsFilter.ToLower())
+                                                                      || inventoryRam.Ram.Unit.Short_name.ToLower().Contains(inventoryRamsFilter.ToLower())
+                                                                      || inventoryRam.Ram.Manufacturer.Name.ToLower().Contains(inventoryRamsFilter.ToLower());
     }
 }

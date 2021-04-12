@@ -2,14 +2,12 @@
 {
     using System.Windows;
 
-    /// <summary>
-    /// Логика взаимодействия для InventoryRamEditWindow.xaml
-    /// </summary>
     public partial class InventoryRamAddWindow : Window
     {
         public InventoryRamAddWindow()
         {
             InitializeComponent();
+            TextBoxInventoryNumber.Focus();
         }
     }
 }

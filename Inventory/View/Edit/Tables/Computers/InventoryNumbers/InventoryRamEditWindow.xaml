@@ -5,9 +5,110 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Computers.InventoryNumbers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="InventoryRamEditWindow"
-    Width="800"
-    Height="450"
+    xmlns:services="clr-namespace:Inventory.Services"
+    x:Name="EditInventoryWindow"
+    Title="Изменить инвентарный номер для оперативной памяти"
+    Width="500"
+    Height="230"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
-    <Grid Background="#FF2BA8E2" />
+
+    <Window.Resources>
+        <services:StringToIntConverter x:Key="StringToIntConverter" />
+    </Window.Resources>
+
+    <Grid Background="#FF2BA8E2">
+        <StackPanel Margin="10">
+            <TextBlock
+                Style="{StaticResource BaseTextBlock}"
+                Text="Изменить инвентарный номер"
+                TextAlignment="Center" />
+
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
+                    <Border.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border
+                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Background="Black"
+                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    SnapsToDevicePixels="True" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Border.OpacityMask>
+
+                    <StackPanel Width="455" HorizontalAlignment="Center">
+                        <!--  Инвентарный номер  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Инвентарный номер: " />
+
+                            <TextBox
+                                Name="TextBoxInventoryNumber"
+                                MaxLength="20"
+                                Style="{StaticResource BaseTextBox}"
+                                Text="{Binding InventoryRam.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding InventoryRam.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
+                        </UniformGrid>
+
+                        <!--  Оперативная память  -->
+                        <UniformGrid Columns="2">
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Оперативная память: " />
+
+                            <ComboBox
+                                Width="208"
+                                MaxWidth="208"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                ItemsSource="{Binding Rams}"
+                                SelectedValue="{Binding InventoryRam.Fk_ram, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Id_ram"
+                                Style="{StaticResource BaseComboBox}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1} {2} {3} {4} {5}">
+                                                    <Binding Path="Manufacturer.Name" />
+                                                    <Binding Path="Name" />
+                                                    <Binding Path="Memory_size" />
+                                                    <Binding Path="Unit.Short_name" />
+                                                    <Binding Path="Clock_frequency" />
+                                                    <Binding Path="Types_memory.Name" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <!--  Изменить инвентарный номер  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding ElementName=EditInventoryWindow}"
+                    Content="Изменить инвентарный номер"
+                    IsDefault="True"
+                    Style="{StaticResource BaseButton}" />
+
+                <!--  Отменить  -->
+                <Button
+                    Margin="5,10,5,5"
+                    HorizontalAlignment="Right"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=EditInventoryWindow}"
+                    IsCancel="True"
+                    Style="{StaticResource BaseButton}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
 </Window>
