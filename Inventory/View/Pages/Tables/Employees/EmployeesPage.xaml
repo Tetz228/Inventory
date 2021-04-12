@@ -69,12 +69,12 @@
                         </GridViewColumn.DisplayMemberBinding>
                     </GridViewColumn>
                     <GridViewColumn
-                        DisplayMemberBinding="{Binding Email}"
-                        Header="Почта"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
                         DisplayMemberBinding="{Binding Phone_number}"
                         Header="Номер телефона"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Email}"
+                        Header="Почта"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn Header="Должности">
                         <GridViewColumn.CellTemplate>

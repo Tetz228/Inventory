@@ -77,8 +77,8 @@
                                         <TextBlock>
                                             <TextBlock.Text>
                                                 <MultiBinding StringFormat="{}{0} {1} {2}">
-                                                    <Binding Path="Types_peripherals.Name" />
                                                     <Binding Path="Manufacturer.Name" />
+                                                    <Binding Path="Types_peripherals.Name" />
                                                     <Binding Path="Name" />
                                                 </MultiBinding>
                                             </TextBlock.Text>

@@ -37,12 +37,12 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        DisplayMemberBinding="{Binding Types_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Тип"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
                         DisplayMemberBinding="{Binding Manufacturer.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Производитель"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Types_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Тип"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"

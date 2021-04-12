@@ -45,7 +45,7 @@
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Power, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Объём"
+                        Header="Мощность"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Unit.Full_name, UpdateSourceTrigger=PropertyChanged}"

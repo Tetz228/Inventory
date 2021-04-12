@@ -41,12 +41,12 @@
                         Header="Инвентарный номер"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
-                        DisplayMemberBinding="{Binding Hdd.Types_hdd.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Тип"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
                         DisplayMemberBinding="{Binding Hdd.Manufacturer.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Производитель"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Hdd.Types_hdd.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Тип"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Hdd.Name, UpdateSourceTrigger=PropertyChanged}"

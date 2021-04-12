@@ -107,7 +107,7 @@
             addWindow.ShowDialog();
         });
 
-        public ICommand EditProcessorCommand => new DelegateCommand<Ram>(ram =>
+        public ICommand EditRamCommand => new DelegateCommand<Ram>(ram =>
         {
             var editWindow = new RamEditWindow();
             var editViewModel = new RamEditViewModel(ram);
