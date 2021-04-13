@@ -13,18 +13,6 @@
 
     public static class UsersInteraction
     {
-        public static bool ValidPassword(string password) => password?.Length > 2;
-
-        public static bool EqualsPasswords(string password, string passwordRepeated) => password.Equals(passwordRepeated);
-
-        public static bool UniqueLogin(string login)
-        {
-            using var db = new InventoryEntities();
-            var foundUser = db.Users.FirstOrDefault(user => user.Login == login);
-
-            return foundUser != null;
-        }
-
         public static void ChangePassword(User user)
         {
             (string salt, string hash) = GenerateSaltAndHashingPassword(user.Password);

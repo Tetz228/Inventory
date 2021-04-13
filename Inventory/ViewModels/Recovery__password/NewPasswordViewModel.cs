@@ -20,7 +20,7 @@
         {
             UsersInteraction.ChangePassword(User);
             PasswordRecoveryViewModel.RecoveryWindow.Close();
-        }, () => UsersInteraction.ValidPassword(User.Password) && UsersInteraction.EqualsPasswords(User.Password, User.PasswordRepeated));
+        }, () => User.Password?.Length > 2 && User.Password.Equals(User.PasswordRepeated));
 
         public ICommand PasswordChanged => new DelegateCommand<PasswordBox>(passwordBox =>
         {
