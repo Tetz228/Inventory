@@ -26,13 +26,6 @@
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 
-        /// <summary>
-        /// Поиск инвентарного номера с помощью дерева выражений
-        /// </summary>
-        /// <typeparam name="TClass">Класс, который содержит инвентарный номер</typeparam>
-        /// <param name="inventoryNumber">Инвентарный номер</param>
-        /// <param name="selectInventoryNumber">Инвентарный номер, который записан в переменную для отката изменений</param>
-        /// <returns>Возвращает null, когда инвентарный номер не найден в базе данных, иначе "Номер должен быть уникальным" </returns>
         public static string IsSavingDocumentExcel()
         {
             var saveExcelDoc = new SaveFileDialog
