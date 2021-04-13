@@ -5,7 +5,7 @@
     xmlns:accessories="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Accessories"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:services="clr-namespace:Inventory.Services"
+    xmlns:converters="clr-namespace:Inventory.Services.Converters"
     x:Name="AddWindow"
     Title="Добавить новый процессор"
     Width="530"
@@ -20,8 +20,8 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <services:StringToDoubleConverter x:Key="StringToDoubleConverter" />
-        <services:StringToIntConverter x:Key="StringToIntConverter" />
+        <converters:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+        <converters:StringToIntConverter x:Key="StringToIntConverter" />
     </Window.Resources>
 
     <Grid Background="#FF2BA8E2">

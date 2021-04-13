@@ -3,9 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Inventory.View.Edit.Tables.Computers.InventoryNumbers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:services="clr-namespace:Inventory.Services"
+    xmlns:converters="clr-namespace:Inventory.Services.Converters"
     x:Name="EditInventoryWindow"
     Title="Изменить инвентарный номер для оперативной памяти"
     Width="500"
@@ -16,7 +15,7 @@
     mc:Ignorable="d">
 
     <Window.Resources>
-        <services:StringToIntConverter x:Key="StringToIntConverter" />
+        <converters:StringToIntConverter x:Key="StringToIntConverter" />
     </Window.Resources>
 
     <Grid Background="#FF2BA8E2">

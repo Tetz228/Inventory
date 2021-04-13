@@ -2,10 +2,10 @@
     x:Class="Inventory.View.Add.Tables.Peripherals.InventoryPeripheralAddWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Inventory.Services.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:peripherals="clr-namespace:Inventory.ViewModels.Add.Tables.Peripherals"
-    xmlns:services="clr-namespace:Inventory.Services"
     x:Name="AddInventoryPeripheralWindow"
     Title="Добавить новый инвентарный номер для периферии"
     Width="500"
@@ -16,7 +16,7 @@
     mc:Ignorable="d">
 
     <Window.Resources>
-        <services:StringToIntConverter x:Key="StringToIntConverter" />
+        <converters:StringToIntConverter x:Key="StringToIntConverter" />
     </Window.Resources>
 
     <Window.DataContext>
