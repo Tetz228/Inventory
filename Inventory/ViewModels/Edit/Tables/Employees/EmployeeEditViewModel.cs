@@ -10,7 +10,7 @@
     using Inventory.Services;
     using Inventory.ViewModels.Tables.Employees;
 
-    public class EmployeeEditViewModel : BindableBase, IEditableObject
+    public class EmployeeEditViewModel : BindableBase
     {
         public EmployeeEditViewModel(Employee employee)
         {
@@ -19,14 +19,14 @@
             Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments.AsNoTracking());
 
             Employee = employee;
-            BeginEdit();
+            Employee.BeginEdit();
         }
 
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             Employee.PostsEmployees.Clear();
             Employee.EmployeesInDepartments.Clear();
-            CancelEdit();
+            Employee.CancelEdit();
         }
 
         public Employee Employee { get; }
@@ -34,7 +34,7 @@
         #region Команды
         public ICommand EditEmployeeCommand => new DelegateCommand<Window>(empEditWindow =>
         {
-            EndEdit();
+            Employee.EndEdit();
             Services.Edit(Employee.Id_employee, Employee);
             Posts_employees.EditPostEmployee(Employee.Id_employee);
             Employees_in_departments.EditEmployeeInDepartment(Employee.Id_employee);
@@ -44,7 +44,7 @@
 
         public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow =>
         {
-            CancelEdit();
+            Employee.CancelEdit();
             empAddWindow.Close();
         });
 
@@ -69,41 +69,6 @@
                     return;
             Employees_in_departments.DeleteEmployeeDepartment(selectEmpInDepart);
         });
-        #endregion
-
-        #region Откат изменений
-        private Employee _selectEmployee;
-
-        public void BeginEdit()
-        {
-            _selectEmployee = new Employee
-            {
-                Id_employee = Employee.Id_employee,
-                L_name = Employee.L_name,
-                F_name = Employee.F_name,
-                M_name = Employee.M_name,
-                Phone_number = Employee.Phone_number,
-                Email = Employee.Email
-            };
-        }
-
-        public void EndEdit()
-        {
-            _selectEmployee = null;
-        }
-
-        public void CancelEdit()
-        {
-            if (_selectEmployee == null)
-                return;
-
-            Employee.Id_employee = _selectEmployee.Id_employee;
-            Employee.L_name = _selectEmployee.L_name;
-            Employee.F_name = _selectEmployee.F_name;
-            Employee.M_name = _selectEmployee.M_name;
-            Employee.Phone_number = _selectEmployee.Phone_number;
-            Employee.Email = _selectEmployee.Email;
-        }
         #endregion
     }
 }

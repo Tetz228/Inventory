@@ -1,16 +1,14 @@
 namespace Inventory.Model
 {
     using DevExpress.Mvvm;
-
+    using Inventory.Services;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Text.RegularExpressions;
 
-    using Inventory.Services;
-
-    public partial class Employee : BindableBase, IDataErrorInfo
+    public partial class Employee : BindableBase, IDataErrorInfo, IEditableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
@@ -79,6 +77,8 @@ namespace Inventory.Model
                             result = "Поле не должно быть пустым";
                         else if (MailsInteraction.IsValidationEmail(Email) == false)
                             result = "Некорректная почта";
+                        else if (Services.CheckForUniqueness<Employee>(nameof(Email), Email, _selectEmployee?.Email))
+                            result = "Сотрудник с такой почтой уже существует";
                         break;
                     case "Phone_number":
                         if (string.IsNullOrWhiteSpace(Phone_number))
@@ -87,6 +87,8 @@ namespace Inventory.Model
                             result = "Поле должно содержать минимум 5 символа";
                         else if (IsValidationPhoneNumber(Phone_number) == false)
                             result = "Некорректный номер";
+                        else if (Services.CheckForUniqueness<Employee>(nameof(Phone_number), Phone_number, _selectEmployee?.Phone_number))
+                            result = "Сотрудник с таким номером уже существует";
                         break;
                 }
 
@@ -108,6 +110,41 @@ namespace Inventory.Model
                 return false;
 
             return PostsEmployees.All(item => item.Fk_post != 0) && EmployeesInDepartments.All(item => item.Fk_department != 0);
+        }
+        #endregion
+
+        #region Откат изменений
+        private Employee _selectEmployee;
+
+        public void BeginEdit()
+        {
+            _selectEmployee = new Employee
+            {
+                Id_employee = Id_employee,
+                L_name = L_name,
+                F_name = F_name,
+                M_name = M_name,
+                Phone_number = Phone_number,
+                Email = Email
+            };
+        }
+
+        public void EndEdit()
+        {
+            _selectEmployee = null;
+        }
+
+        public void CancelEdit()
+        {
+            if (_selectEmployee == null)
+                return;
+
+            Id_employee = _selectEmployee.Id_employee;
+            L_name = _selectEmployee.L_name;
+            F_name = _selectEmployee.F_name;
+            M_name = _selectEmployee.M_name;
+            Phone_number = _selectEmployee.Phone_number;
+            Email = _selectEmployee.Email;
         }
         #endregion
     }

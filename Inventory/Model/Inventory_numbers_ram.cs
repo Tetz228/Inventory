@@ -30,7 +30,10 @@ namespace Inventory.Model
                 switch (name)
                 {
                     case "Inventory_number":
-                        result = Inventory_number <= 0 ? "Число должно быть больше 0" : Services.ValidInventoryNumber<Inventory_numbers_ram>(Inventory_number, _selectInventoryRam?.Inventory_number);
+                        if (Inventory_number <= 0)
+                            result = "Число должно быть больше 0";
+                        else if (Services.CheckForUniqueness<Inventory_numbers_ram>(nameof(Inventory_number), Inventory_number, _selectInventoryRam?.Inventory_number))
+                            result = "Номер должен быть уникальным";
                         break;
                     case "Fk_ram":
                         if (Fk_ram == 0)

@@ -47,7 +47,7 @@ namespace Inventory.Model
                             result = "Поле не должно быть пустым";
                         else if (Login.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
-                        else if (UsersInteraction.UniqueLogin(Login))
+                        else if (Services.CheckForUniqueness<User>(nameof(Login), Login, null))
                             result = "Логин уже существует";
                         break;
                     case "Fk_employee":

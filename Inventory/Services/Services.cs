@@ -26,6 +26,13 @@
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 
+        /// <summary>
+        /// Поиск инвентарного номера с помощью дерева выражений
+        /// </summary>
+        /// <typeparam name="TClass">Класс, который содержит инвентарный номер</typeparam>
+        /// <param name="inventoryNumber">Инвентарный номер</param>
+        /// <param name="selectInventoryNumber">Инвентарный номер, который записан в переменную для отката изменений</param>
+        /// <returns>Возвращает null, когда инвентарный номер не найден в базе данных, иначе "Номер должен быть уникальным" </returns>
         public static string IsSavingDocumentExcel()
         {
             var saveExcelDoc = new SaveFileDialog
@@ -39,41 +46,40 @@
         }
 
         /// <summary>
-        /// Поиск инвентарного номера с помощью дерева выражений
+        /// Проверка на уникальность определенного свойства
         /// </summary>
-        /// <typeparam name="TClass">Класс, который содержит инвентарный номер</typeparam>
-        /// <param name="inventoryNumber">Инвентарный номер</param>
-        /// <param name="selectInventoryNumber">Инвентарный номер, который записан в переменную для отката изменений</param>
-        /// <returns>Возвращает null, когда инвентарный номер не найден в базе данных, иначе "Номер должен быть уникальным" </returns>
-        public static string ValidInventoryNumber<TClass>(int inventoryNumber, int? selectInventoryNumber) where TClass : class
+        /// <typeparam name="TClass">Класс, который содержит свойство</typeparam>
+        /// <param name="propertyName">Имя этого свойства, которую нужно проверить на уникальность</param>
+        /// <param name="obj">Содержимое свойства</param>
+        /// <param name="selectObj"></param>
+        /// <returns></returns>
+        public static bool CheckForUniqueness<TClass>(string propertyName, object obj, object selectObj) where TClass : class
         {
-            if (selectInventoryNumber == inventoryNumber)
-                return null;
-
-            const string propertyName = "Inventory_number";
+            if (selectObj != null)
+                if (selectObj.Equals(obj))
+                    return false;
 
             using var db = new InventoryEntities();
             var dbSet = db.Set<TClass>();
 
             var type = typeof(TClass);
 
-            var parameterExpression = System.Linq.Expressions.Expression.Parameter(type, "inventory");
-            var constant = System.Linq.Expressions.Expression.Constant(inventoryNumber);
+            var parameterExpression = System.Linq.Expressions.Expression.Parameter(type, "tClass");
+            var constant = System.Linq.Expressions.Expression.Constant(obj);
             var property = System.Linq.Expressions.Expression.Property(parameterExpression, propertyName);
             var expression = System.Linq.Expressions.Expression.Equal(property, constant);
             var lambda = System.Linq.Expressions.Expression.Lambda<Func<TClass, bool>>(expression, parameterExpression);
             var compiledLambda = lambda.Compile();
             var result = dbSet.FirstOrDefault(compiledLambda);
 
-            return result != null ? "Номер должен быть уникальным" : null;
+            return result != null;
         }
 
         public static void Add<TClass>(TClass value) where TClass : class
         {
             using var db = new InventoryEntities();
 
-            var dbSet = db.Set<TClass>();
-            dbSet.Add(value);
+            db.Set<TClass>().Add(value);
 
             try
             {
