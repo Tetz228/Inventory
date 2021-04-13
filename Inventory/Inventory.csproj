@@ -105,6 +105,7 @@
       <HintPath>..\packages\morelinq.2.9.0\lib\net40\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="PropertyChanged, Version=3.3.3.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.3.3.3\lib\net40\PropertyChanged.dll</HintPath>
     </Reference>
@@ -290,8 +291,9 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Services\StringToDoubleConverter.cs" />
-    <Compile Include="Services\StringToIntConverter.cs" />
+    <Compile Include="Services\Converters\BaseConverter.cs" />
+    <Compile Include="Services\Converters\StringToDoubleConverter.cs" />
+    <Compile Include="Services\Converters\StringToIntConverter.cs" />
     <Compile Include="Services\MailsInteraction.cs" />
     <Compile Include="Services\SearchFor.cs" />
     <Compile Include="Services\UsersInteraction.cs" />

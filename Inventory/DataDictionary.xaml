@@ -13,9 +13,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border
-                        Name="brd"
+                        Name="border"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="2">
+                        CornerRadius="5">
                         <ContentPresenter
                             Margin="5"
                             HorizontalAlignment="Center"
@@ -80,7 +80,6 @@
         <Setter Property="FontSize" Value="15" />
         <Setter Property="Background" Value="#FF78C0E2" />
         <Setter Property="Foreground" Value="White" />
-
     </Style>
 
     <Style x:Key="BaseListViewItem" TargetType="ListViewItem">
@@ -99,7 +98,7 @@
                         <Border
                             Name="InnerBorder"
                             BorderThickness="1"
-                            CornerRadius="1">
+                            CornerRadius="5">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition MaxHeight="11" />
