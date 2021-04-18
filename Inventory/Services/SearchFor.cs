@@ -106,7 +106,7 @@
 
         #endregion
 
-        #region InventoryNumbers
+        #region Inventory numbers
 
         public static bool Search(this Inventory_numbers_motherboards inventoryMotherboard, string inventoryMotherboardFilter) => inventoryMotherboard.Inventory_number.ToString().ToLower().Contains(inventoryMotherboardFilter.ToLower())
             || inventoryMotherboard.Motherboard.Name.ToLower().Contains(inventoryMotherboardFilter.ToLower())
@@ -144,6 +144,22 @@
             || inventoryRam.Ram.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(inventoryRamsFilter.ToLower())
             || inventoryRam.Ram.Unit.Short_name.ToLower().Contains(inventoryRamsFilter.ToLower())
             || inventoryRam.Ram.Manufacturer.Name.ToLower().Contains(inventoryRamsFilter.ToLower());
+
+        public static bool Search(this Inventory_numbers_processors inventoryProcessor, string inventoryProcessorsFilter) => inventoryProcessor.Inventory_number.ToString().ToLower().Contains(inventoryProcessorsFilter.ToLower())
+            || inventoryProcessor.Processor.Name.ToLower().Contains(inventoryProcessorsFilter.ToLower())
+            || inventoryProcessor.Processor.Unit.Full_name.ToLower().Contains(inventoryProcessorsFilter.ToLower())
+            || inventoryProcessor.Processor.Base_frequency.ToString(CultureInfo.InvariantCulture).ToLower().Contains(inventoryProcessorsFilter.ToLower())
+            || inventoryProcessor.Processor.Socket.Name.ToLower().Contains(inventoryProcessorsFilter.ToLower())
+            || inventoryProcessor.Processor.Amount_cores.ToString().ToLower().Contains(inventoryProcessorsFilter.ToLower())
+            || inventoryProcessor.Processor.Unit.Short_name.ToLower().Contains(inventoryProcessorsFilter.ToLower())
+            || inventoryProcessor.Processor.Manufacturer.Name.ToLower().Contains(inventoryProcessorsFilter.ToLower());
+
+        public static bool Search(this Inventory_numbers_power_supplies inventoryPowerSupply, string inventoryPowerSuppliesFilter) => inventoryPowerSupply.Inventory_number.ToString().ToLower().Contains(inventoryPowerSuppliesFilter.ToLower())
+            || inventoryPowerSupply.Power_supplies.Name.ToLower().Contains(inventoryPowerSuppliesFilter.ToLower())
+            || inventoryPowerSupply.Power_supplies.Unit.Full_name.ToLower().Contains(inventoryPowerSuppliesFilter.ToLower())
+            || inventoryPowerSupply.Power_supplies.Power.ToString().ToLower().Contains(inventoryPowerSuppliesFilter.ToLower())
+            || inventoryPowerSupply.Power_supplies.Unit.Short_name.ToLower().Contains(inventoryPowerSuppliesFilter.ToLower())
+            || inventoryPowerSupply.Power_supplies.Manufacturer.Name.ToLower().Contains(inventoryPowerSuppliesFilter.ToLower());
 
         #endregion
 
