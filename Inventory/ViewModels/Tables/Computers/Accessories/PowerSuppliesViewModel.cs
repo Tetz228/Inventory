@@ -73,7 +73,7 @@
                             PowerSupplies.Sort(powerSupply => powerSupply.Name, SortDirection);
                             break;
                         }
-                    case "Объём":
+                    case "Мощность":
                         {
                             PowerSupplies.Sort(powerSupply => powerSupply.Power, SortDirection);
                             break;

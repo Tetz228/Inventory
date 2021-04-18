@@ -42,10 +42,10 @@
         /// Проверка на уникальность определенного свойства
         /// </summary>
         /// <typeparam name="TClass">Класс, который содержит свойство</typeparam>
-        /// <param name="propertyName">Имя этого свойства, которую нужно проверить на уникальность</param>
-        /// <param name="obj">Содержимое свойства</param>
+        /// <param name="propertyName">Имя свойства, которое нужно проверить на уникальность</param>
+        /// <param name="obj">Само свойство</param>
         /// <param name="selectObj"></param>
-        /// <returns></returns>
+        /// <returns>Возвращает true, если свойство не уникально, иначе false</returns>
         public static bool CheckForUniqueness<TClass>(string propertyName, object obj, object selectObj) where TClass : class
         {
             if (selectObj != null)
@@ -83,7 +83,6 @@
                 MessageBox.Show($"Ошибка при добавлении данных в базу данных. {e.Message}", "Ошибка при добавлении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
 
         public static void Edit<TClass>(int idObject, TClass updatedObject) where TClass : class
         {

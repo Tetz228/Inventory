@@ -70,22 +70,22 @@
                         }
                     case "Наименование":
                         {
-                            Processors.Sort(powerSupply => powerSupply.Name, SortDirection);
+                            Processors.Sort(processor => processor.Name, SortDirection);
                             break;
                         }
                     case "Сокет":
                         {
-                            Processors.Sort(powerSupply => powerSupply.Socket.Name, SortDirection);
+                            Processors.Sort(processor => processor.Socket.Name, SortDirection);
                             break;
                         }
                     case "Количество ядер":
                         {
-                            Processors.Sort(powerSupply => powerSupply.Amount_cores, SortDirection);
+                            Processors.Sort(processor => processor.Amount_cores, SortDirection);
                             break;
                         }
                     case "Базовая частота":
                         {
-                            Processors.Sort(powerSupply => powerSupply.Base_frequency, SortDirection);
+                            Processors.Sort(processor => processor.Base_frequency, SortDirection);
                             break;
                         }
                     case "Единица измерения":
