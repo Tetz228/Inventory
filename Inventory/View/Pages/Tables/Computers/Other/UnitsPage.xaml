@@ -28,6 +28,7 @@
         </Grid.RowDefinitions>
 
         <ListView
+            Name="ListView"
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Units, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
@@ -140,6 +141,7 @@
 
             <Button
                 Command="{Binding ExportExcelCommand}"
+                CommandParameter="{Binding ElementName=ListView}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
