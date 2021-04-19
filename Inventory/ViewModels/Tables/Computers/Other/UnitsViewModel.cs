@@ -9,10 +9,9 @@
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Data.Entity;
     using System.Diagnostics;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -24,7 +23,7 @@
         {
             using var db = new InventoryEntities();
 
-            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            Units = new ObservableCollection<Unit>(db.Units.Include(ram => ram.Rams).Include(processor => processor.Processors).Include(graph => graph.Graphics_cards).Include(hdd => hdd.Hdds).Include(power => power.Power_supplies).Include(ssd => ssd.Ssds).AsNoTracking());
             Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
             UnitsCollection = CollectionViewSource.GetDefaultView(Units);
         }
@@ -113,32 +112,6 @@
         }, selectUnit => selectUnit != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        public ICommand ExportExcelCommand => new DelegateCommand<ListView>(list =>
-        {
-            string fileName = Services.IsSavingDocumentExcel();
-
-            if (fileName != null)
-            {
-                var template = new XLTemplate(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Templates" + "\\TwoColumnTemplate.xlsx");
-
-                using var db = new InventoryEntities();
-
-                var unitFullName = db.Units.Select(name => name.Full_name);
-                var unitShortName = db.Units.Select(name => name.Short_name);
-
-                template.AddVariable("TableName", "Единицы измерения");
-                template.AddVariable("ColumnName1", "Полное наименование");
-                template.AddVariable("ColumnName2", "Краткое наименование");
-                template.AddVariable("Name1", unitFullName);
-                template.AddVariable("Name2", unitShortName);
-                template.Generate();
-
-                template.SaveAs(fileName);
-
-                Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
-            }
-        });
         #endregion
 
         public static void RefreshCollection()

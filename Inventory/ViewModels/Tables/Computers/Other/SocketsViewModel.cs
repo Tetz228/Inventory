@@ -107,27 +107,6 @@
         }, selectSocket => selectSocket != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        public ICommand ExportExcelCommand => new DelegateCommand<ListView>(list =>
-        {
-            string fileName = Services.IsSavingDocumentExcel();
-
-            if (fileName != null)
-            {
-                var template = new XLTemplate(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Templates" + "\\OneColumnTemplate.xlsx");
-
-                using var db = new InventoryEntities();
-
-                var socketName = db.Sockets.AsNoTracking().Select(name => name.Name);
-
-                template.AddVariable("TableName", "Сокеты");
-                template.AddVariable("Name", socketName);
-                template.Generate();
-                template.SaveAs(fileName);
-
-                Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
-            }
-        });
         #endregion
 
         public static void RefreshCollection()
