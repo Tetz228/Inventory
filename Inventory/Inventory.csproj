@@ -1148,8 +1148,8 @@
     </None>
     <Compile Include="ViewModels\Tables\ManufacturersViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\ManufacturerAddViewModel.cs" />
-    <None Include="Templates\TwoColumnTemplate.xlsx" />
-    <None Include="Templates\OneColumnTemplate.xlsx" />
+    <None Include="Templates\TemplateInventoryGraphicsCards.xlsx" />
+    <None Include="Templates\TemplateInventoryHdd.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
