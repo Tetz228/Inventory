@@ -4,6 +4,7 @@
     using Inventory.Model;
     using Inventory.View.Add.Tables.Computers.InventoryNumbers;
     using Inventory.View.Edit.Tables.Computers.InventoryNumbers;
+    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
     using Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -12,8 +13,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
 
     public class InventoryGraphicCardViewModel : BindableBase
     {
@@ -25,6 +24,9 @@
             InventoryGraphicsCards.Sort(manufacturer => manufacturer.Inventory_number, SortDirection = ListSortDirection.Ascending);
             InventoryGraphicsCardsCollection = CollectionViewSource.GetDefaultView(InventoryGraphicsCards);
         }
+
+        private const string NAME_TEMPLATE = "TemplateInventoryGraphicsCards.xlsx";
+        private const string NAMED_AREA_NAME = "InventoryGraphicsCards";
 
         #region Свойства
         private ICollectionView InventoryGraphicsCardsCollection { get; }
@@ -122,6 +124,8 @@
             Services.Delete<Inventory_numbers_graphics_cards>(selectInventoryGraphicCard.Id_inventory_number_graphics_card);
             RefreshCollection();
         }, selectInventoryGraphicCard => selectInventoryGraphicCard != null);
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ListView>(listView => listView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion

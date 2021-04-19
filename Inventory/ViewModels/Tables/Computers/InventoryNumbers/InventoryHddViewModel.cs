@@ -2,6 +2,9 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.View.Add.Tables.Computers.InventoryNumbers;
+    using Inventory.View.Edit.Tables.Computers.InventoryNumbers;
+    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
     using Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -10,10 +13,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.View.Add.Tables.Computers.InventoryNumbers;
-    using Inventory.View.Edit.Tables.Computers.InventoryNumbers;
-    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
 
     public class InventoryHddViewModel : BindableBase
     {
@@ -29,6 +28,9 @@
             InventoryHdds.Sort(numberHdd => numberHdd.Inventory_number, SortDirection = ListSortDirection.Ascending);
             InventoryHddsCollection = CollectionViewSource.GetDefaultView(InventoryHdds);
         }
+
+        private const string NAME_TEMPLATE = "TemplateInventoryHdd.xlsx";
+        private const string NAMED_AREA_NAME = "InventoryHdd";
 
         #region Свойства
 
@@ -132,6 +134,8 @@
             Services.Delete<Inventory_numbers_hdd>(selectInventoryHdd.Id_inventory_number_hdd);
             RefreshCollection();
         }, selectInventoryHdd => selectInventoryHdd != null);
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ListView>(listView => listView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion

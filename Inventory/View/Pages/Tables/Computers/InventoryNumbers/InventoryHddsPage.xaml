@@ -28,6 +28,7 @@
         </Grid.RowDefinitions>
 
         <ListView
+            Name="ListView"
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding InventoryHdds, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
@@ -153,6 +154,19 @@
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
                 Text="{Binding InventoryHddsFilter, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                Command="{Binding ExportExcelCommand}"
+                CommandParameter="{Binding ElementName=ListView}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="White"
+                        Kind="FileExcel" />
+                </ContentControl>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

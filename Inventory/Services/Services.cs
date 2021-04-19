@@ -1,13 +1,18 @@
 ﻿namespace Inventory.Services
 {
+    using ClosedXML.Report;
     using Inventory.Model;
     using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Windows;
+    using System.Windows.Controls;
 
     public static class Services
     {
@@ -26,13 +31,24 @@
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 
-        public static string IsSavingDocumentExcel()
+        public static void ExportExcel(this ListView listView, string nameTemplate, string namedAreaName)
         {
-            var saveExcelDoc = new SaveFileDialog
+            string fileName = IsSavingDocumentExcel();
+
+            if (fileName != null)
             {
-                Filter = "Excel документ|*.xlsx",
-                Title = "Сохранение данных в Excel"
-            };
+                var template = new XLTemplate(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Templates\\" + nameTemplate);
+                template.AddVariable(namedAreaName, listView.ItemsSource);
+                template.Generate();
+                template.SaveAs(fileName);
+
+                Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
+            }
+        }
+
+        private static string IsSavingDocumentExcel()
+        {
+            var saveExcelDoc = new SaveFileDialog { Filter = "Excel-документ|*.xlsx", Title = "Экспорт данных в Excel-документ" };
             saveExcelDoc.ShowDialog();
 
             return saveExcelDoc.FileName != "" ? saveExcelDoc.FileName : null;
@@ -42,8 +58,8 @@
         /// Проверка на уникальность определенного свойства
         /// </summary>
         /// <typeparam name="TClass">Класс, который содержит свойство</typeparam>
-        /// <param name="propertyName">Имя свойства, которое нужно проверить на уникальность</param>
-        /// <param name="obj">Само свойство</param>
+        /// <param name="propertyName">Имя свойства</param>
+        /// <param name="obj">Cвойство</param>
         /// <param name="selectObj"></param>
         /// <returns>Возвращает true, если свойство не уникально, иначе false</returns>
         public static bool CheckForUniqueness<TClass>(string propertyName, object obj, object selectObj) where TClass : class
