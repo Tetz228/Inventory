@@ -104,6 +104,10 @@
 
         public static bool Search(this Statuses_computers statusComputer, string statusComputerFilter) => statusComputer.Name.ToLower().Contains(statusComputerFilter.ToLower());
 
+        public static bool Search(this Computer computer, string computerFilter) => computer.Inventory_number.ToString().ToLower().Contains(computerFilter.ToLower())
+                                                                                 || computer.Ip_address.ToLower().Contains(computerFilter.ToLower())
+                                                                                 || computer.Statuses_computers.Name.ToLower().Contains(computerFilter.ToLower());
+
         #endregion
 
         #region Inventory numbers
