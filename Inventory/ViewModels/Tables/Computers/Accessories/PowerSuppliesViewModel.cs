@@ -78,11 +78,6 @@
                             PowerSupplies.Sort(powerSupply => powerSupply.Power, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            PowerSupplies.Sort(unit => unit.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

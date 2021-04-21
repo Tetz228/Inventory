@@ -83,11 +83,6 @@
                             Hdds.Sort(hdd => hdd.Memory_size, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            Hdds.Sort(unit => unit.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

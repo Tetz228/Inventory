@@ -78,11 +78,6 @@
                             Rams.Sort(memory => memory.Memory_size, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            Rams.Sort(unit => unit.Unit.Full_name, SortDirection);
-                            break;
-                        }
                     case "Тактовая частота":
                         {
                             Rams.Sort(clock => clock.Clock_frequency, SortDirection);

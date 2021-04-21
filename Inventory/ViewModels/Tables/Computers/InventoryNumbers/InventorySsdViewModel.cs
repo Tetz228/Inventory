@@ -91,11 +91,6 @@
                             InventorySsds.Sort(ssd => ssd.Ssd.Memory_size, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            InventorySsds.Sort(unit => unit.Ssd.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

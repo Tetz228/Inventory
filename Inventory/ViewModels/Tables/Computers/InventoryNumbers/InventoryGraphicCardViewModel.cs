@@ -86,11 +86,6 @@
                             InventoryGraphicsCards.Sort(graphicCard => graphicCard.Graphics_cards.Memory_size, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            InventoryGraphicsCards.Sort(unit => unit.Graphics_cards.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

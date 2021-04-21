@@ -83,11 +83,6 @@
                             Ssds.Sort(ssd => ssd.Memory_size, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            Ssds.Sort(unit => unit.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

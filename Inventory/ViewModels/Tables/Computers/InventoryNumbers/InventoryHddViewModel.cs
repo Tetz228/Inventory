@@ -96,11 +96,6 @@
                             InventoryHdds.Sort(memorySize => memorySize.Hdd.Memory_size, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            InventoryHdds.Sort(unit => unit.Hdd.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

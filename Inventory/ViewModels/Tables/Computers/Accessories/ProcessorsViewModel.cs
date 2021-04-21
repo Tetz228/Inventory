@@ -88,11 +88,6 @@
                             Processors.Sort(processor => processor.Base_frequency, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            Processors.Sort(unit => unit.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

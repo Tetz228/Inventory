@@ -78,11 +78,6 @@
                             GraphicsCards.Sort(graphicCard => graphicCard.Memory_size, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            GraphicsCards.Sort(unit => unit.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

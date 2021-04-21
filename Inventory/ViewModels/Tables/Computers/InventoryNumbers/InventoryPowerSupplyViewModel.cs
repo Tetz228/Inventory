@@ -83,11 +83,6 @@
                             InventoryPowerSupplies.Sort(powerSupply => powerSupply.Power_supplies.Power, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            InventoryPowerSupplies.Sort(unit => unit.Power_supplies.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

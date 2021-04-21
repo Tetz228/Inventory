@@ -93,11 +93,6 @@
                             InventoryRams.Sort(clock => clock.Ram.Clock_frequency, SortDirection);
                             break;
                         }
-                    case "Тип памяти":
-                        {
-                            InventoryRams.Sort(type => type.Ram.Types_memory.Name, SortDirection);
-                            break;
-                        }
                 }
             }
         }

@@ -97,11 +97,6 @@
                             InventoryProcessors.Sort(processor => processor.Processor.Base_frequency, SortDirection);
                             break;
                         }
-                    case "Единица измерения":
-                        {
-                            InventoryProcessors.Sort(unit => unit.Processor.Unit.Full_name, SortDirection);
-                            break;
-                        }
                 }
             }
         }
