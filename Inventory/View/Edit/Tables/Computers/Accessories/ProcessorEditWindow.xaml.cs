@@ -4,10 +4,6 @@
 
     public partial class ProcessorEditWindow : Window
     {
-        public ProcessorEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public ProcessorEditWindow() => InitializeComponent();
     }
 }

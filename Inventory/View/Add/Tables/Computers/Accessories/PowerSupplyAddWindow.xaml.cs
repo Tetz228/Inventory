@@ -4,10 +4,6 @@
 
     public partial class PowerSupplyAddWindow : Window
     {
-        public PowerSupplyAddWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public PowerSupplyAddWindow() => InitializeComponent();
     }
 }

@@ -56,6 +56,7 @@
                                 Margin="0,7,0,0"
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
+                                IsDropDownOpen="True"
                                 ItemsSource="{Binding Manufacturers}"
                                 SelectedValue="{Binding GraphicCard.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
@@ -68,7 +69,6 @@
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование видеокарты: " />
 
                             <TextBox
-                                Name="TextBoxName"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding GraphicCard.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

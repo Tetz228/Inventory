@@ -4,10 +4,6 @@
 
     public partial class RamEditWindow : Window
     {
-        public RamEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public RamEditWindow() => InitializeComponent();
     }
 }

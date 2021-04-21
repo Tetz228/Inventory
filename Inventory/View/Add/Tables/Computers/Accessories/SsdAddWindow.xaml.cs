@@ -4,10 +4,6 @@
 
     public partial class SsdAddWindow : Window
     {
-        public SsdAddWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public SsdAddWindow() => InitializeComponent();
     }
 }

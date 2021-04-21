@@ -50,6 +50,7 @@
                                 MaxWidth="208"
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
+                                IsDropDownOpen="True"
                                 ItemsSource="{Binding Manufacturers}"
                                 SelectedValue="{Binding Peripheral.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
@@ -79,7 +80,6 @@
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование периферии: " />
 
                             <TextBox
-                                Name="TextBoxName"
                                 MaxLength="50"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Peripheral.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

@@ -4,10 +4,6 @@
 
     public partial class OperatingSystemEditWindow : Window
     {
-        public OperatingSystemEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public OperatingSystemEditWindow() => InitializeComponent();
     }
 }

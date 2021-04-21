@@ -4,10 +4,6 @@
 
     public partial class RamAddWindow : Window
     {
-        public RamAddWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public RamAddWindow() => InitializeComponent();
     }
 }

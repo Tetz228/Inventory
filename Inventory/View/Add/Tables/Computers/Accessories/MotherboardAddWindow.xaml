@@ -51,6 +51,7 @@
                                 Margin="0,7,0,0"
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
+                                IsDropDownOpen="True"
                                 ItemsSource="{Binding Manufacturers}"
                                 SelectedValue="{Binding Motherboard.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
@@ -63,7 +64,6 @@
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование мат. платы: " />
 
                             <TextBox
-                                Name="TextBoxName"
                                 MaxLength="40"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Motherboard.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

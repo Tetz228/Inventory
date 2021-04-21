@@ -54,10 +54,9 @@
 
                         <!--  Наименование материнской платы  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование материнской платы: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование мат. платы: " />
 
                             <TextBox
-                                Name="TextBoxName"
                                 MaxLength="40"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Motherboard.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

@@ -4,10 +4,6 @@
 
     public partial class SsdEditWindow : Window
     {
-        public SsdEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public SsdEditWindow() => InitializeComponent();
     }
 }

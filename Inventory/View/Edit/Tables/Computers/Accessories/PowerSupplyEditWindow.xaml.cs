@@ -4,10 +4,6 @@
 
     public partial class PowerSupplyEditWindow : Window
     {
-        public PowerSupplyEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public PowerSupplyEditWindow() => InitializeComponent();
     }
 }

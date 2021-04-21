@@ -4,10 +4,6 @@
 
     public partial class HddEditWindow : Window
     {
-        public HddEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public HddEditWindow() => InitializeComponent();
     }
 }

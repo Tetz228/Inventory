@@ -3,9 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:accessories="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Accessories"
+    xmlns:converters="clr-namespace:Inventory.Services.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters="clr-namespace:Inventory.Services.Converters"
     x:Name="AddWindow"
     Title="Добавить новый процессор"
     Width="530"
@@ -55,8 +55,10 @@
                                 <ComboBox
                                     Width="208"
                                     MaxWidth="208"
+                                    Margin="0,9,0,0"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
+                                    IsDropDownOpen="True"
                                     ItemsSource="{Binding Manufacturers}"
                                     SelectedValue="{Binding Processor.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_manufacturer"
@@ -69,7 +71,6 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование процессора: " />
 
                                 <TextBox
-                                    Name="TextBoxName"
                                     MaxLength="50"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Processor.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

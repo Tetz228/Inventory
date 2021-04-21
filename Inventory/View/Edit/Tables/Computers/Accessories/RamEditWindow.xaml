@@ -62,11 +62,26 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование ОЗУ: " />
 
                                 <TextBox
-                                    Name="TextBoxName"
                                     MaxLength="50"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Ram.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{Binding Ram.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
+                            </UniformGrid>
+
+                            <!--  Тип памяти  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Тип памяти: " />
+
+                                <ComboBox
+                                    Width="219"
+                                    MaxWidth="219"
+                                    Margin="0,7,0,0"
+                                    HorizontalAlignment="Center"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding TypesMemories}"
+                                    SelectedValue="{Binding Ram.Fk_type_memory, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_type_memory"
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
 
                             <!--  Объём  -->
@@ -97,29 +112,13 @@
 
                             <!--  Тактовая частота  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Базовая частота: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Тактовая частота: " />
 
                                 <TextBox
                                     MaxLength="20"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Ram.Clock_frequency, ValidatesOnDataErrors=True, Converter={StaticResource StringToDoubleConverter}, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{Binding Ram.ErrorCollection[Clock_frequency], UpdateSourceTrigger=PropertyChanged}" />
-                            </UniformGrid>
-
-                            <!--  Тип памяти  -->
-                            <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Тип памяти: " />
-
-                                <ComboBox
-                                    Width="219"
-                                    MaxWidth="219"
-                                    Margin="0,7,0,0"
-                                    HorizontalAlignment="Center"
-                                    DisplayMemberPath="Name"
-                                    ItemsSource="{Binding TypesMemories}"
-                                    SelectedValue="{Binding Ram.Fk_type_memory, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedValuePath="Id_type_memory"
-                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
                         </StackPanel>
                     </Border>

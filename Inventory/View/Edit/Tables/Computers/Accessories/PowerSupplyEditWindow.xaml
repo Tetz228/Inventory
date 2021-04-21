@@ -61,7 +61,6 @@
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование БП: " />
 
                             <TextBox
-                                Name="TextBoxName"
                                 MaxLength="40"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding PowerSupply.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

@@ -4,10 +4,6 @@
 
     public partial class EmployeeEditWindow : Window
     {
-        public EmployeeEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public EmployeeEditWindow() => InitializeComponent();
     }
 }

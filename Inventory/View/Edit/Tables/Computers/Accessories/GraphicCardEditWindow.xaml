@@ -62,7 +62,6 @@
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование видеокарты: " />
 
                             <TextBox
-                                Name="TextBoxName"
                                 MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding GraphicCard.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"

@@ -4,10 +4,6 @@
 
     public partial class ProcessorAddWindow : Window
     {
-        public ProcessorAddWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public ProcessorAddWindow() => InitializeComponent();
     }
 }
