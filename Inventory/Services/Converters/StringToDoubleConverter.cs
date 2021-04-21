@@ -1,7 +1,6 @@
 ﻿namespace Inventory.Services.Converters
 {
     using System.Globalization;
-    using System.Linq;
 
     public class StringToDoubleConverter : BaseConverter
     {

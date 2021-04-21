@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Inventory.ViewModels"
     Name="WindowMain"
-    Title="Главное окно"
+    Title="{Binding TitleWindow, UpdateSourceTrigger=PropertyChanged}"
     Width="880"
     Height="450"
     MinWidth="880"
@@ -29,24 +29,24 @@
             Height="30"
             Style="{StaticResource BaseMenu}">
             <MenuItem
-                
                 Background="#0074B7"
                 BorderBrush="#0074B7"
-                Header="Файл" Foreground="White">
+                Foreground="White"
+                Header="Файл">
                 <MenuItem
-                    Style="{StaticResource BaseMenuItem}"
                     Command="{Binding ChangePasswordCommand}"
-                    Header="Изменить пароль" />
+                    Header="Изменить пароль"
+                    Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
-                    Style="{StaticResource BaseMenuItem}"
                     Command="{Binding ChangeUserCommand}"
                     CommandParameter="{Binding ElementName=WindowMain}"
-                    Header="Сменить пользователя" />
+                    Header="Сменить пользователя"
+                    Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
-                    Style="{StaticResource BaseMenuItem}"
                     Height="21"
                     Command="{Binding ExitCommand}"
-                    Header="Выход" />
+                    Header="Выход"
+                    Style="{StaticResource BaseMenuItem}" />
             </MenuItem>
             <MenuItem Header="Выдачи компьютеров" />
             <MenuItem Header="Выдачи периферии" />

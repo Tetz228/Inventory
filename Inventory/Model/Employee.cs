@@ -129,10 +129,7 @@ namespace Inventory.Model
             };
         }
 
-        public void EndEdit()
-        {
-            _selectEmployee = null;
-        }
+        public void EndEdit() => _selectEmployee = null;
 
         public void CancelEdit()
         {

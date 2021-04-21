@@ -14,27 +14,33 @@
 
     public class MainViewModel : BindableBase
     {
-        public MainViewModel()
-        {
-            Peripherals = new TablesPeripheralsPage();
-            CurrentPage = Computers = new TablesComputersPage();
-            Employees = new TablesEmployeesPage();
-        }
+        public MainViewModel() => CurrentPage = new TablesComputersPage();
 
         #region Свойства
-        private TablesEmployeesPage Employees { get; }
-
-        private TablesPeripheralsPage Peripherals { get; }
-
-        private TablesComputersPage Computers { get; }
 
         public Page CurrentPage { get; private set; }
+
+        public string TitleWindow { get; set; } = "Главное окно";
         #endregion
 
         #region Команды
-        public ICommand OpenPageComputers => new DelegateCommand(() => CurrentPage = Computers);
+        public ICommand OpenPageComputers => new DelegateCommand(() =>
+        {
+            CurrentPage = new TablesComputersPage();
+            TitleWindow = "Главное окно -> Компьютеры";
+        });
 
-        public ICommand OpenPagePeripherals => new DelegateCommand(() => CurrentPage = Peripherals);
+        public ICommand OpenPageEmployees => new DelegateCommand(() =>
+        {
+            CurrentPage = new TablesEmployeesPage();
+            TitleWindow = "Главное окно -> Сотрудники";
+        });
+
+        public ICommand OpenPagePeripherals => new DelegateCommand(() =>
+        {
+            CurrentPage = new TablesPeripheralsPage();
+            TitleWindow = "Главное окно -> Периферия";
+        });
 
         public ICommand ChangePasswordCommand => new DelegateCommand(() =>
         {
@@ -51,7 +57,7 @@
 
         public ICommand ExitCommand => new DelegateCommand(() => Application.Current.Shutdown());
 
-        public ICommand OpenPageEmployees => new DelegateCommand(() => CurrentPage = Employees);
+        
         #endregion
     }
 }

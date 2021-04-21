@@ -9,36 +9,20 @@
     {
         private const string USER_S = "Пользователь";
 
-        public TablesEmployeesViewModel()
-        {
-            CurrentPage = EmployeesPage = new EmployeesPage();
-            DepartmentsPage = new DepartmentsPage();
-            PostsPage = new PostsPage();
-            UsersPage = new UsersPage();
-        }
+        public TablesEmployeesViewModel() => CurrentPage = new EmployeesPage();
 
-        #region Свойства
         public Page CurrentPage { get; private set; }
 
-        private DepartmentsPage DepartmentsPage { get; }
-
-        private EmployeesPage EmployeesPage { get; }
-
-        private PostsPage PostsPage { get; }
-
-        private UsersPage UsersPage { get; }
-
         public bool OnAdmin { get; set; } = true/*User.AuthorizedUser.Role.Name != USER_S*/;
-        #endregion
 
         #region Команды
-        public ICommand SelectTablesDepartmentsCommand => new DelegateCommand(() => CurrentPage = DepartmentsPage);
+        public ICommand SelectTablesDepartmentsCommand => new DelegateCommand(() => CurrentPage = new DepartmentsPage());
 
-        public ICommand SelectTablesEmployeesCommand => new DelegateCommand(() => CurrentPage = EmployeesPage);
+        public ICommand SelectTablesEmployeesCommand => new DelegateCommand(() => CurrentPage = new EmployeesPage());
 
-        public ICommand SelectTablesPostsCommand => new DelegateCommand(() => CurrentPage = PostsPage);
+        public ICommand SelectTablesPostsCommand => new DelegateCommand(() => CurrentPage = new PostsPage());
 
-        public ICommand SelectTablesUsersCommand => new DelegateCommand(() => CurrentPage = UsersPage);
+        public ICommand SelectTablesUsersCommand => new DelegateCommand(() => CurrentPage = new UsersPage());
 
         #endregion
     }

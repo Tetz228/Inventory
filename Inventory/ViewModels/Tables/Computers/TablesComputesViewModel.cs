@@ -8,133 +8,57 @@
     using Inventory.View.Pages.Tables.Computers.Other;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using GraphicsCardsPage = Inventory.View.Pages.Tables.Computers.Accessories.GraphicsCardsPage;
 
     public class TablesComputesViewModel : BindableBase
     {
-        public TablesComputesViewModel()
-        {
-            #region Инициализация объектов
+        public TablesComputesViewModel() => CurrentPage = new SoketsPage();
 
-            CurrentPage = SoketsPage = new SoketsPage();
-            ManufacturersPage = new ManufacturersPage();
-            HddsPage = new HddsPage();
-            UnitsPage = new UnitsPage();
-            TypesHddsPage = new TypesHddsPage();
-            TypesSsdsPage = new TypesSsdsPage();
-            TypesMemoryPage = new TypesMemoryPage();
-            StatusesComputersPage = new StatusesComputersPage();
-            OperatingSystemsPage = new OperatingSystemsPage();
-            MotherboardsPage = new MotherboardsPage();
-            ProcessorsPage = new ProcessorsPage();
-            RamPage = new RamPage();
-            SsdPage = new SsdPage();
-            GraphicsCardsPage = new GraphicsCardsPage();
-            PowerSuppliesPage = new PowerSuppliesPage();
-            InventoryHddsPage = new InventoryHddsPage();
-            InventoryGraphicsCardsPage = new InventoryGraphicsCardsPage();
-            InventoryMotherboardsPage = new InventoryMotherboardsPage();
-            InventorySsdsPage = new InventorySsdsPage();
-            InventoryPowerSuppliesPag = new InventoryPowerSuppliesPage();
-            InventoryProcessorsPage = new InventoryProcessorsPage();
-            InventoryRamPage = new InventoryRamPage();
-
-            #endregion
-        }
-
-        #region Свойства
         public Page CurrentPage { get; private set; }
 
-        private ManufacturersPage ManufacturersPage { get; }
-
-        private HddsPage HddsPage { get; }
-
-        private TypesSsdsPage TypesSsdsPage { get; }
-
-        private TypesMemoryPage TypesMemoryPage { get; }
-
-        private UnitsPage UnitsPage { get; }
-
-        private SoketsPage SoketsPage { get; }
-
-        private TypesHddsPage TypesHddsPage { get; }
-
-        private StatusesComputersPage StatusesComputersPage { get; }
-
-        private OperatingSystemsPage OperatingSystemsPage { get; }
-
-        private MotherboardsPage MotherboardsPage { get; }
-
-        private ProcessorsPage ProcessorsPage { get; }
-
-        private RamPage RamPage { get; }
-
-        private SsdPage SsdPage { get; }
-
-        private GraphicsCardsPage GraphicsCardsPage { get; }
-
-        private InventoryHddsPage InventoryHddsPage { get; }
-
-        private InventorySsdsPage InventorySsdsPage { get; }
-
-        private InventoryMotherboardsPage InventoryMotherboardsPage { get; }
-
-        private PowerSuppliesPage PowerSuppliesPage { get; }
-
-        private InventoryGraphicsCardsPage InventoryGraphicsCardsPage { get; }
-
-        private InventoryPowerSuppliesPage InventoryPowerSuppliesPag { get; }
-
-        private InventoryProcessorsPage InventoryProcessorsPage { get; }
-
-        private InventoryRamPage InventoryRamPage { get; }
-
-        #endregion
-
         #region Команды
-        public ICommand SelectSoketsPageCommand => new DelegateCommand(() => CurrentPage = SoketsPage);
+        public ICommand SelectSoketsPageCommand => new DelegateCommand(() => CurrentPage = new SoketsPage());
 
-        public ICommand SelectHddsPageCommand => new DelegateCommand(() => CurrentPage = HddsPage);
+        public ICommand SelectHddsPageCommand => new DelegateCommand(() => CurrentPage = new HddsPage());
 
-        public ICommand SelectUnitsPageCommand => new DelegateCommand(() => CurrentPage = UnitsPage);
+        public ICommand SelectUnitsPageCommand => new DelegateCommand(() => CurrentPage = new UnitsPage());
 
-        public ICommand SelectTypesHddPageCommand => new DelegateCommand(() => CurrentPage = TypesHddsPage);
+        public ICommand SelectTypesHddPageCommand => new DelegateCommand(() => CurrentPage = new TypesHddsPage());
 
-        public ICommand SelectTablesManufacturersCommand => new DelegateCommand(() => CurrentPage = ManufacturersPage);
+        public ICommand SelectTablesManufacturersCommand => new DelegateCommand(() => CurrentPage = new ManufacturersPage());
 
-        public ICommand SelectTypesSsdPageCommand => new DelegateCommand(() => CurrentPage = TypesSsdsPage);
+        public ICommand SelectTypesSsdPageCommand => new DelegateCommand(() => CurrentPage = new TypesSsdsPage());
 
-        public ICommand SelectOperatingSystemsPageCommand => new DelegateCommand(() => CurrentPage = OperatingSystemsPage);
+        public ICommand SelectOperatingSystemsPageCommand => new DelegateCommand(() => CurrentPage = new OperatingSystemsPage());
 
-        public ICommand SelectStatusesComputersPageCommand => new DelegateCommand(() => CurrentPage = StatusesComputersPage);
+        public ICommand SelectStatusesComputersPageCommand => new DelegateCommand(() => CurrentPage = new StatusesComputersPage());
 
-        public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = TypesMemoryPage);
+        public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = new TypesMemoryPage());
 
-        public ICommand SelectInventoryPowerSuppliesPageCommand => new DelegateCommand(() => CurrentPage = InventoryPowerSuppliesPag);
+        public ICommand SelectInventoryPowerSuppliesPageCommand => new DelegateCommand(() => CurrentPage = new InventoryPowerSuppliesPage());
 
-        public ICommand SelectInventoryProcessorsPageCommand => new DelegateCommand(() => CurrentPage = InventoryProcessorsPage);
+        public ICommand SelectInventoryProcessorsPageCommand => new DelegateCommand(() => CurrentPage = new InventoryProcessorsPage());
 
-        public ICommand SelectInventoryRamPageCommand => new DelegateCommand(() => CurrentPage = InventoryRamPage);
+        public ICommand SelectInventoryRamPageCommand => new DelegateCommand(() => CurrentPage = new InventoryRamPage());
 
-        public ICommand SelectInventoryHddsPageCommand => new DelegateCommand(() => CurrentPage = InventoryHddsPage);
+        public ICommand SelectInventoryHddsPageCommand => new DelegateCommand(() => CurrentPage = new InventoryHddsPage());
 
-        public ICommand SelectInventorySsdsPageCommand => new DelegateCommand(() => CurrentPage = InventorySsdsPage);
+        public ICommand SelectInventorySsdsPageCommand => new DelegateCommand(() => CurrentPage = new InventorySsdsPage());
 
-        public ICommand SelectInventoryMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = InventoryMotherboardsPage);
+        public ICommand SelectInventoryMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = new InventoryMotherboardsPage());
 
-        public ICommand SelectInventoryGraphicsCardsPageCommand => new DelegateCommand(() => CurrentPage = InventoryGraphicsCardsPage);
+        public ICommand SelectInventoryGraphicsCardsPageCommand => new DelegateCommand(() => CurrentPage = new InventoryGraphicsCardsPage());
 
-        public ICommand SelectMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = MotherboardsPage);
+        public ICommand SelectMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = new MotherboardsPage());
 
-        public ICommand SelectProcessorsPageCommand => new DelegateCommand(() => CurrentPage = ProcessorsPage);
+        public ICommand SelectProcessorsPageCommand => new DelegateCommand(() => CurrentPage = new ProcessorsPage());
 
-        public ICommand SelectRamPageCommand => new DelegateCommand(() => CurrentPage = RamPage);
+        public ICommand SelectRamPageCommand => new DelegateCommand(() => CurrentPage = new RamPage());
 
-        public ICommand SelectSsdPageCommand => new DelegateCommand(() => CurrentPage = SsdPage);
+        public ICommand SelectSsdPageCommand => new DelegateCommand(() => CurrentPage = new SsdPage());
 
-        public ICommand SelectGraphicsCardsPageCommand => new DelegateCommand(() => CurrentPage = GraphicsCardsPage);
+        public ICommand SelectGraphicsCardsPageCommand => new DelegateCommand(() => CurrentPage = new GraphicsCardsPage());
 
-        public ICommand SelectPowerSuppliesPageCommand => new DelegateCommand(() => CurrentPage = PowerSuppliesPage);
+        public ICommand SelectPowerSuppliesPageCommand => new DelegateCommand(() => CurrentPage = new PowerSuppliesPage());
         #endregion
     }
 }
