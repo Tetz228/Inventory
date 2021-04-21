@@ -47,14 +47,14 @@
                         DisplayMemberBinding="{Binding Power_supplies.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Наименование"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Power_supplies.Power, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Мощность"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Power_supplies.Unit.Full_name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Единица измерения"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn Header="Мощность" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Power_supplies.Power" />
+                                <Binding Path="Power_supplies.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>

@@ -55,14 +55,14 @@
                         DisplayMemberBinding="{Binding Processor.Amount_cores, UpdateSourceTrigger=PropertyChanged}"
                         Header="Количество ядер"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Processor.Base_frequency, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Базовая частота"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Processor.Unit.Full_name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Единица измерения"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn Header="Базовая частота" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Processor.Base_frequency" />
+                                <Binding Path="Processor.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>

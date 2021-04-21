@@ -52,14 +52,14 @@
                         DisplayMemberBinding="{Binding Hdd.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Наименование"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Hdd.Memory_size, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Объём"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Hdd.Unit.Full_name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Единица измерения"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn Header="Объём" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Hdd.Memory_size" />
+                                <Binding Path="Hdd.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>

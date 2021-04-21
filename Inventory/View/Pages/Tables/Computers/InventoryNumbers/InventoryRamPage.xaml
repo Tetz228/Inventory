@@ -48,20 +48,20 @@
                         Header="Наименование"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
-                        DisplayMemberBinding="{Binding Ram.Memory_size, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Объём"
+                        DisplayMemberBinding="{Binding Ram.Types_memory.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Тип памяти"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Ram.Unit.Full_name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Единица измерения"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn Header="Объём" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Ram.Memory_size" />
+                                <Binding Path="Ram.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Ram.Clock_frequency, UpdateSourceTrigger=PropertyChanged}"
                         Header="Тактовая частота"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Ram.Types_memory.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Тип памяти"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                 </GridView>
             </ListView.View>
