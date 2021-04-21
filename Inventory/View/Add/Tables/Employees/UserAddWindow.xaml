@@ -9,7 +9,7 @@
     Name="AddUserWindow"
     Title="Добавить нового пользователя"
     Width="500"
-    Height="360"
+    Height="375"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -20,145 +20,148 @@
     </Window.DataContext>
 
     <Grid Background="#FF2BA8E2">
-        <StackPanel Margin="010">
-            <TextBlock
-                Style="{StaticResource BaseTextBlock}"
-                Text="Новый пользователь"
-                TextAlignment="Center" />
+        <ScrollViewer>
+            <StackPanel Margin="010">
+                <TextBlock
+                    Style="{StaticResource BaseTextBlock}"
+                    Text="Новый пользователь"
+                    TextAlignment="Center" />
 
-            <Grid Background="#FF2BA8E2">
-                <Border Style="{StaticResource BaseBorder}">
-                    <Border.OpacityMask>
-                        <VisualBrush>
-                            <VisualBrush.Visual>
-                                <Border
-                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    Background="Black"
-                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    SnapsToDevicePixels="True" />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Border.OpacityMask>
+                <Grid Background="#FF2BA8E2">
+                    <Border Style="{StaticResource BaseBorder}">
+                        <Border.OpacityMask>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Border
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Background="Black"
+                                        CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        SnapsToDevicePixels="True" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.OpacityMask>
 
-                    <StackPanel Width="455" HorizontalAlignment="Center">
-                        <!--  Логин  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Логин: " />
+                        <StackPanel Width="455" HorizontalAlignment="Center">
+                            <!--  Логин  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Логин: " />
 
-                            <TextBox
-                                Name="TextBoxLogin"
-                                MaxLength="40"
-                                Style="{StaticResource BaseTextBox}"
-                                Text="{Binding User.Login, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding User.ErrorCollection[Login], UpdateSourceTrigger=PropertyChanged}" />
-                        </UniformGrid>
+                                <TextBox
+                                    Name="TextBoxLogin"
+                                    MaxLength="40"
+                                    Style="{StaticResource BaseTextBox}"
+                                    Text="{Binding User.Login, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding User.ErrorCollection[Login], UpdateSourceTrigger=PropertyChanged}" />
+                            </UniformGrid>
 
-                        <!--  Пароль  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Пароль: " />
+                            <!--  Пароль  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Пароль: " />
 
-                            <PasswordBox
-                                x:Name="PasswordBox"
-                                Margin="10"
-                                VerticalAlignment="Center"
-                                MaxLength="30"
-                                Style="{StaticResource BasePasswordBox}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="PasswordChanged">
-                                        <i:InvokeCommandAction Command="{Binding PasswordChanged}" CommandParameter="{Binding ElementName=PasswordBox}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </PasswordBox>
-                        </UniformGrid>
+                                <PasswordBox
+                                    x:Name="PasswordBox"
+                                    Margin="10"
+                                    VerticalAlignment="Center"
+                                    MaxLength="30"
+                                    Style="{StaticResource BasePasswordBox}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PasswordChanged">
+                                            <i:InvokeCommandAction Command="{Binding PasswordChanged}" CommandParameter="{Binding ElementName=PasswordBox}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </PasswordBox>
+                            </UniformGrid>
 
-                        <!--  Повторный пароль  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Повторный пароль: " />
+                            <!--  Повторный пароль  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Повторный пароль: " />
 
-                            <PasswordBox
-                                x:Name="PasswordBoxRepeated"
-                                Margin="10"
-                                VerticalAlignment="Center"
-                                MaxLength="30"
-                                Style="{StaticResource BasePasswordBox}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="PasswordChanged">
-                                        <i:InvokeCommandAction Command="{Binding PasswordChangedRepeated}" CommandParameter="{Binding ElementName=PasswordBoxRepeated}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </PasswordBox>
-                        </UniformGrid>
+                                <PasswordBox
+                                    x:Name="PasswordBoxRepeated"
+                                    Margin="10"
+                                    VerticalAlignment="Center"
+                                    MaxLength="30"
+                                    Style="{StaticResource BasePasswordBox}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PasswordChanged">
+                                            <i:InvokeCommandAction Command="{Binding PasswordChangedRepeated}" CommandParameter="{Binding ElementName=PasswordBoxRepeated}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </PasswordBox>
+                            </UniformGrid>
 
-                        <!--  Сотрудник  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Сотрудник: " />
+                            <!--  Сотрудник  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Сотрудник: " />
 
-                            <ComboBox
-                                Width="208"
-                                MaxWidth="208"
-                                HorizontalAlignment="Center"
-                                ItemsSource="{Binding Employees}"
-                                SelectedValue="{Binding User.Fk_employee, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                SelectedValuePath="Id_employee"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding User.ErrorCollection[Fk_employee], UpdateSourceTrigger=PropertyChanged}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} {1} {2}, {3}">
-                                                    <Binding Path="L_name" />
-                                                    <Binding Path="F_name" />
-                                                    <Binding Path="M_name" />
-                                                    <Binding Path="Email" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </UniformGrid>
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    ItemsSource="{Binding Employees}"
+                                    SelectedValue="{Binding User.Fk_employee, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                    SelectedValuePath="Id_employee"
+                                    Style="{StaticResource BaseComboBox}"
+                                    ToolTip="{Binding User.ErrorCollection[Fk_employee], UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}ФИО: {0} {1} {2};&#x0d;&#x0a;Телефон: {3};&#x0d;&#x0a;Почта: {4}.">
+                                                        <Binding Path="L_name" />
+                                                        <Binding Path="F_name" />
+                                                        <Binding Path="M_name" />
+                                                        <Binding Path="Phone_number" />
+                                                        <Binding Path="Email" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </UniformGrid>
 
-                        <!--  Роль  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Роль: " />
+                            <!--  Роль  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Роль: " />
 
-                            <ComboBox
-                                Width="208"
-                                MaxWidth="208"
-                                HorizontalAlignment="Center"
-                                DisplayMemberPath="Name"
-                                ItemsSource="{Binding Roles}"
-                                SelectedValue="{Binding User.Fk_role, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedValuePath="Id_role"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding User.ErrorCollection[Fk_role], UpdateSourceTrigger=PropertyChanged}" />
-                        </UniformGrid>
-                    </StackPanel>
-                </Border>
-            </Grid>
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding Roles}"
+                                    SelectedValue="{Binding User.Fk_role, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_role"
+                                    Style="{StaticResource BaseComboBox}"
+                                    ToolTip="{Binding User.ErrorCollection[Fk_role], UpdateSourceTrigger=PropertyChanged}" />
+                            </UniformGrid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
 
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <!--  Добавить нового пользователя  -->
-                <Button
-                    Margin="5,10,5,5"
-                    HorizontalAlignment="Center"
-                    Command="{Binding AddCommand}"
-                    CommandParameter="{Binding ElementName=AddUserWindow}"
-                    Content="Добавить нового пользователя"
-                    IsDefault="True"
-                    Style="{StaticResource BaseButton}" />
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <!--  Добавить нового пользователя  -->
+                    <Button
+                        Margin="5,10,5,5"
+                        HorizontalAlignment="Center"
+                        Command="{Binding AddCommand}"
+                        CommandParameter="{Binding ElementName=AddUserWindow}"
+                        Content="Добавить нового пользователя"
+                        IsDefault="True"
+                        Style="{StaticResource BaseButton}" />
 
-                <!--  Отменить  -->
-                <Button
-                    Margin="5,10,5,5"
-                    HorizontalAlignment="Right"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=AddUserWindow}"
-                    IsCancel="True"
-                    Style="{StaticResource BaseButton}" />
+                    <!--  Отменить  -->
+                    <Button
+                        Margin="5,10,5,5"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=AddUserWindow}"
+                        IsCancel="True"
+                        Style="{StaticResource BaseButton}" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

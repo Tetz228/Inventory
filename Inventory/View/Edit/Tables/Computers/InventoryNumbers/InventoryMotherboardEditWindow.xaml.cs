@@ -4,10 +4,6 @@
 
     public partial class InventoryMotherboardEditWindow : Window
     {
-        public InventoryMotherboardEditWindow()
-        {
-            InitializeComponent();
-            TextBoxInventoryNumber.Focus();
-        }
+        public InventoryMotherboardEditWindow() => InitializeComponent();
     }
 }

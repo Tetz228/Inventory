@@ -9,7 +9,7 @@
     x:Name="AddInventoryPeripheralWindow"
     Title="Добавить новый инвентарный номер для периферии"
     Width="500"
-    Height="260"
+    Height="288"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -24,109 +24,111 @@
     </Window.DataContext>
 
     <Grid Background="#FF2BA8E2">
-        <StackPanel Margin="10">
-            <TextBlock
-                Style="{StaticResource BaseTextBlock}"
-                Text="Новый инвентарный номер"
-                TextAlignment="Center" />
+        <ScrollViewer>
+            <StackPanel Margin="10">
+                <TextBlock
+                    Style="{StaticResource BaseTextBlock}"
+                    Text="Новый инвентарный номер"
+                    TextAlignment="Center" />
 
-            <Grid Background="#FF2BA8E2">
-                <Border Style="{StaticResource BaseBorder}">
-                    <Border.OpacityMask>
-                        <VisualBrush>
-                            <VisualBrush.Visual>
-                                <Border
-                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    Background="Black"
-                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    SnapsToDevicePixels="True" />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Border.OpacityMask>
+                <Grid Background="#FF2BA8E2">
+                    <Border Style="{StaticResource BaseBorder}">
+                        <Border.OpacityMask>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Border
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Background="Black"
+                                        CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        SnapsToDevicePixels="True" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.OpacityMask>
 
-                    <StackPanel Width="455" HorizontalAlignment="Center">
-                        <!--  Инвентарный номер  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Инвентарный номер: " />
+                        <StackPanel Width="455" HorizontalAlignment="Center">
+                            <!--  Инвентарный номер  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Инвентарный номер: " />
 
-                            <TextBox
-                                Name="TextBoxInventoryNumber"
-                                MaxLength="20"
-                                Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryPeripheral.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryPeripheral.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
-                        </UniformGrid>
+                                <TextBox
+                                    Name="TextBoxInventoryNumber"
+                                    MaxLength="20"
+                                    Style="{StaticResource BaseTextBox}"
+                                    Text="{Binding InventoryPeripheral.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding InventoryPeripheral.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
+                            </UniformGrid>
 
-                        <!--  Периферия  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Периферия: " />
+                            <!--  Периферия  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Периферия: " />
 
-                            <ComboBox
-                                Width="208"
-                                MaxWidth="208"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                ItemsSource="{Binding Peripherals}"
-                                SelectedValue="{Binding InventoryPeripheral.Fk_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedValuePath="Id_peripheral"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding InventoryPeripheral.ErrorCollection[Fk_peripheral], UpdateSourceTrigger=PropertyChanged}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} {1} {2}">
-                                                    <Binding Path="Manufacturer.Name" />
-                                                    <Binding Path="Types_peripherals.Name" />
-                                                    <Binding Path="Name" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </UniformGrid>
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ItemsSource="{Binding Peripherals}"
+                                    SelectedValue="{Binding InventoryPeripheral.Fk_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_peripheral"
+                                    Style="{StaticResource BaseComboBox}"
+                                    ToolTip="{Binding InventoryPeripheral.ErrorCollection[Fk_peripheral], UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}Производитель: {0};&#x0d;&#x0a;Тип периферии: {1};&#x0d;&#x0a;Название: {2}.">
+                                                        <Binding Path="Manufacturer.Name" />
+                                                        <Binding Path="Types_peripherals.Name" />
+                                                        <Binding Path="Name" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </UniformGrid>
 
-                        <!--  Статус  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Статус: " />
+                            <!--  Статус  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Статус: " />
 
-                            <ComboBox
-                                Width="208"
-                                MaxWidth="208"
-                                HorizontalAlignment="Center"
-                                DisplayMemberPath="Name"
-                                ItemsSource="{Binding StatusesPeripherals}"
-                                SelectedValue="{Binding InventoryPeripheral.Fk_status_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedValuePath="Id_status_peripheral"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding InventoryPeripheral.ErrorCollection[Fk_status_peripheral], UpdateSourceTrigger=PropertyChanged}" />
-                        </UniformGrid>
-                    </StackPanel>
-                </Border>
-            </Grid>
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding StatusesPeripherals}"
+                                    SelectedValue="{Binding InventoryPeripheral.Fk_status_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_status_peripheral"
+                                    Style="{StaticResource BaseComboBox}"
+                                    ToolTip="{Binding InventoryPeripheral.ErrorCollection[Fk_status_peripheral], UpdateSourceTrigger=PropertyChanged}" />
+                            </UniformGrid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
 
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <!--  Добавить новый инвентарный номер  -->
-                <Button
-                    Margin="5,10,5,5"
-                    HorizontalAlignment="Center"
-                    Command="{Binding AddCommand}"
-                    CommandParameter="{Binding ElementName=AddInventoryPeripheralWindow}"
-                    Content="Добавить новый инвентарный номер"
-                    IsDefault="True"
-                    Style="{StaticResource BaseButton}" />
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <!--  Добавить новый инвентарный номер  -->
+                    <Button
+                        Margin="5,10,5,5"
+                        HorizontalAlignment="Center"
+                        Command="{Binding AddCommand}"
+                        CommandParameter="{Binding ElementName=AddInventoryPeripheralWindow}"
+                        Content="Добавить новый инвентарный номер"
+                        IsDefault="True"
+                        Style="{StaticResource BaseButton}" />
 
-                <!--  Отменить  -->
-                <Button
-                    Margin="5,10,5,5"
-                    HorizontalAlignment="Right"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=AddInventoryPeripheralWindow}"
-                    IsCancel="True"
-                    Style="{StaticResource BaseButton}" />
+                    <!--  Отменить  -->
+                    <Button
+                        Margin="5,10,5,5"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=AddInventoryPeripheralWindow}"
+                        IsCancel="True"
+                        Style="{StaticResource BaseButton}" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

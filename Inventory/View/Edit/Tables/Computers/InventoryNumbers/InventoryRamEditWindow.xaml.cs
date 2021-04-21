@@ -4,10 +4,6 @@
 
     public partial class InventoryRamEditWindow : Window
     {
-        public InventoryRamEditWindow()
-        {
-            InitializeComponent();
-            TextBoxInventoryNumber.Focus();
-        }
+        public InventoryRamEditWindow() => InitializeComponent();
     }
 }

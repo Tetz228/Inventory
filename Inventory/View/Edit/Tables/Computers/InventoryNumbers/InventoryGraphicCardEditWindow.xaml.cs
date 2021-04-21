@@ -4,10 +4,6 @@
 
     public partial class InventoryGraphicCardEditWindow : Window
     {
-        public InventoryGraphicCardEditWindow()
-        {
-            InitializeComponent();
-            TextBoxInventoryNumber.Focus();
-        }
+        public InventoryGraphicCardEditWindow() => InitializeComponent();
     }
 }

@@ -8,7 +8,7 @@
     x:Name="EditInventoryWindow"
     Title="Изменить инвентарный номер для процессора"
     Width="500"
-    Height="230"
+    Height="285"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -19,95 +19,96 @@
     </Window.Resources>
 
     <Grid Background="#FF2BA8E2">
-        <StackPanel Margin="10">
-            <TextBlock
-                Style="{StaticResource BaseTextBlock}"
-                Text="Изменить инвентарный номер"
-                TextAlignment="Center" />
+        <ScrollViewer>
+            <StackPanel Margin="10">
+                <TextBlock
+                    Style="{StaticResource BaseTextBlock}"
+                    Text="Изменить инвентарный номер"
+                    TextAlignment="Center" />
 
-            <Grid Background="#FF2BA8E2">
-                <Border Style="{StaticResource BaseBorder}">
-                    <Border.OpacityMask>
-                        <VisualBrush>
-                            <VisualBrush.Visual>
-                                <Border
-                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    Background="Black"
-                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
-                                    SnapsToDevicePixels="True" />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Border.OpacityMask>
+                <Grid Background="#FF2BA8E2">
+                    <Border Style="{StaticResource BaseBorder}">
+                        <Border.OpacityMask>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Border
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        Background="Black"
+                                        CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                        SnapsToDevicePixels="True" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.OpacityMask>
 
-                    <StackPanel Width="455" HorizontalAlignment="Center">
-                        <!--  Инвентарный номер  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Инвентарный номер: " />
+                        <StackPanel Width="455" HorizontalAlignment="Center">
+                            <!--  Инвентарный номер  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Инвентарный номер: " />
 
-                            <TextBox
-                                Name="TextBoxInventoryNumber"
-                                MaxLength="20"
-                                Style="{StaticResource BaseTextBox}"
-                                Text="{Binding InventoryProcessor.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="{Binding InventoryProcessor.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
-                        </UniformGrid>
+                                <TextBox
+                                    MaxLength="20"
+                                    Style="{StaticResource BaseTextBox}"
+                                    Text="{Binding InventoryProcessor.Inventory_number, Converter={StaticResource StringToIntConverter}, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{Binding InventoryProcessor.ErrorCollection[Inventory_number], UpdateSourceTrigger=PropertyChanged}" />
+                            </UniformGrid>
 
-                        <!--  Процессор  -->
-                        <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Процессор: " />
+                            <!--  Процессор  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Процессор: " />
 
-                            <ComboBox
-                                Width="208"
-                                MaxWidth="208"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                ItemsSource="{Binding Processors}"
-                                SelectedValue="{Binding InventoryProcessor.Fk_processor, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedValuePath="Id_processor"
-                                Style="{StaticResource BaseComboBox}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} {1} {2} {3} {4} {5}">
-                                                    <Binding Path="Manufacturer.Name" />
-                                                    <Binding Path="Name" />
-                                                    <Binding Path="Socket.Name" />
-                                                    <Binding Path="Amount_cores" />
-                                                    <Binding Path="Base_frequency" />
-                                                    <Binding Path="Unit.Short_name" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </UniformGrid>
-                    </StackPanel>
-                </Border>
-            </Grid>
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ItemsSource="{Binding Processors}"
+                                    SelectedValue="{Binding InventoryProcessor.Fk_processor, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_processor"
+                                    Style="{StaticResource BaseComboBox}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}Производитель: {0};&#x0d;&#x0a;Название: {1};&#x0d;&#x0a;Сокет: {2};&#x0d;&#x0a;Кол-во ядер: {3};&#x0d;&#x0a;Базовая частота: {4} {5}.">
+                                                        <Binding Path="Manufacturer.Name" />
+                                                        <Binding Path="Name" />
+                                                        <Binding Path="Socket.Name" />
+                                                        <Binding Path="Amount_cores" />
+                                                        <Binding Path="Base_frequency" />
+                                                        <Binding Path="Unit.Short_name" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </UniformGrid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
 
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <!--  Изменить инвентарный номер  -->
-                <Button
-                    Margin="5,10,5,5"
-                    HorizontalAlignment="Center"
-                    Command="{Binding EditCommand}"
-                    CommandParameter="{Binding ElementName=EditInventoryWindow}"
-                    Content="Изменить инвентарный номер"
-                    IsDefault="True"
-                    Style="{StaticResource BaseButton}" />
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <!--  Изменить инвентарный номер  -->
+                    <Button
+                        Margin="5,10,5,5"
+                        HorizontalAlignment="Center"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding ElementName=EditInventoryWindow}"
+                        Content="Изменить инвентарный номер"
+                        IsDefault="True"
+                        Style="{StaticResource BaseButton}" />
 
-                <!--  Отменить  -->
-                <Button
-                    Margin="5,10,5,5"
-                    HorizontalAlignment="Right"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=EditInventoryWindow}"
-                    IsCancel="True"
-                    Style="{StaticResource BaseButton}" />
+                    <!--  Отменить  -->
+                    <Button
+                        Margin="5,10,5,5"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=EditInventoryWindow}"
+                        IsCancel="True"
+                        Style="{StaticResource BaseButton}" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

@@ -4,10 +4,6 @@
 
     public partial class InventoryProcessorEditWindow : Window
     {
-        public InventoryProcessorEditWindow()
-        {
-            InitializeComponent();
-            TextBoxInventoryNumber.Focus();
-        }
+        public InventoryProcessorEditWindow() => InitializeComponent();
     }
 }

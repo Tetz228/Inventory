@@ -4,10 +4,6 @@
 
     public partial class InventorySsdEditWindow : Window
     {
-        public InventorySsdEditWindow()
-        {
-            InitializeComponent();
-            TextBoxInventoryNumber.Focus();
-        }
+        public InventorySsdEditWindow() => InitializeComponent();
     }
 }

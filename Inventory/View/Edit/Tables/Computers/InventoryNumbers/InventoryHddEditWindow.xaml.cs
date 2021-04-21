@@ -4,10 +4,6 @@
 
     public partial class InventoryHddEditWindow : Window
     {
-        public InventoryHddEditWindow()
-        {
-            InitializeComponent();
-            TextBoxInventoryNumber.Focus();
-        }
+        public InventoryHddEditWindow() => InitializeComponent();
     }
 }

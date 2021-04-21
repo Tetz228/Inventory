@@ -4,10 +4,6 @@
 
     public partial class InventoryPowerSupplyEditWindow : Window
     {
-        public InventoryPowerSupplyEditWindow()
-        {
-            InitializeComponent();
-            TextBoxInventoryNumber.Focus();
-        }
+        public InventoryPowerSupplyEditWindow() => InitializeComponent();
     }
 }
