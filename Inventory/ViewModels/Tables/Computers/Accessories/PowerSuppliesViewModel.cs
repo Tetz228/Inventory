@@ -75,7 +75,7 @@
                         }
                     case "Мощность":
                         {
-                            PowerSupplies.Sort(powerSupply => powerSupply.Power, SortDirection);
+                            PowerSupplies.Sort(powerSupply => powerSupply.Power + " " + powerSupply.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -103,7 +103,7 @@
 
         public ICommand DeletePowerSupplyCommand => new DelegateCommand<Power_supplies>(selectPowerSupply =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectPowerSupply.Manufacturer.Name} {selectPowerSupply.Name} {selectPowerSupply.Power} {selectPowerSupply.Unit.Short_name}?", "Удаление блока питания", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить блок питания:\nпроизводитель - {selectPowerSupply.Manufacturer.Name};\nнаименование - {selectPowerSupply.Name};\nмощность - {selectPowerSupply.Power} {selectPowerSupply.Unit.Short_name}?", "Удаление блока питания", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

@@ -80,7 +80,7 @@
                         }
                     case "Объём":
                         {
-                            Hdds.Sort(hdd => hdd.Memory_size, SortDirection);
+                            Hdds.Sort(hdd => hdd.Memory_size + " " + hdd.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -108,7 +108,7 @@
 
         public ICommand DeleteHddCommand => new DelegateCommand<Hdd>(selectHdd =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectHdd.Manufacturer.Name} {selectHdd.Name} {selectHdd.Memory_size} {selectHdd.Unit.Short_name}?", "Удаление жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить жесткий диск:\nпроизводитель - {selectHdd.Manufacturer.Name};\nтип - {selectHdd.Types_hdd.Name};\nнаименование - {selectHdd.Name};\nобъём - {selectHdd.Memory_size} {selectHdd.Unit.Short_name}?", "Удаление жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

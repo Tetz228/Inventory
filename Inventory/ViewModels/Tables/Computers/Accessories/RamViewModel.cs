@@ -75,7 +75,7 @@
                         }
                     case "Объём":
                         {
-                            Rams.Sort(memory => memory.Memory_size, SortDirection);
+                            Rams.Sort(memory => memory.Memory_size + " " + memory.Unit.Short_name, SortDirection);
                             break;
                         }
                     case "Тактовая частота":
@@ -113,7 +113,7 @@
 
         public ICommand DeleteRamCommand => new DelegateCommand<Ram>(selectRam =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectRam.Manufacturer.Name} {selectRam.Name} {selectRam.Memory_size} {selectRam.Unit.Short_name}?", "Удаление оперативной памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить оператив. память:\nпроизводитель - {selectRam.Manufacturer.Name};\nнаименование - {selectRam.Name};\nтип памяти - {selectRam.Types_memory.Name};\nобъём - {selectRam.Memory_size} {selectRam.Unit.Short_name};\nтактовая частота - {selectRam.Clock_frequency}?", "Удаление оперативной памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

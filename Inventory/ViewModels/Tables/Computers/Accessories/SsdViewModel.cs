@@ -80,7 +80,7 @@
                         }
                     case "Объём":
                         {
-                            Ssds.Sort(ssd => ssd.Memory_size, SortDirection);
+                            Ssds.Sort(ssd => ssd.Memory_size + " " + ssd.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -108,7 +108,7 @@
 
         public ICommand DeleteSsdCommand => new DelegateCommand<Ssd>(selectSsd =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectSsd.Manufacturer.Name} {selectSsd.Name} {selectSsd.Memory_size} {selectSsd.Unit.Short_name}?", "Удаление SSD-накопителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить SSD-накопитель:\nпроизводитель - {selectSsd.Manufacturer.Name};\nтип - {selectSsd.Types_ssd.Name};\nнаименование - {selectSsd.Name};\nОбъём - {selectSsd.Memory_size} {selectSsd.Unit.Short_name}?", "Удаление SSD-накопителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

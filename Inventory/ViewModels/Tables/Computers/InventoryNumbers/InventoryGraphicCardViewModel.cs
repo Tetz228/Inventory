@@ -111,7 +111,7 @@
 
         public ICommand DeleteInventoryGraphicCardCommand => new DelegateCommand<Inventory_numbers_graphics_cards>(selectInventoryGraphicCard =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryGraphicCard.Graphics_cards.Manufacturer.Name} {selectInventoryGraphicCard.Graphics_cards.Name} {selectInventoryGraphicCard.Graphics_cards.Memory_size} {selectInventoryGraphicCard.Graphics_cards.Unit.Short_name}?", "Удаление инвентарной видеокарты", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить инвентарную видеокарту:\nинвент. номер - {selectInventoryGraphicCard.Inventory_number};\nпроизводитель - {selectInventoryGraphicCard.Graphics_cards.Manufacturer.Name};\nнаименование - {selectInventoryGraphicCard.Graphics_cards.Name};\nобъём - {selectInventoryGraphicCard.Graphics_cards.Memory_size} {selectInventoryGraphicCard.Graphics_cards.Unit.Short_name}?", "Удаление инвентарной видеокарты", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

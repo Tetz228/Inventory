@@ -3,9 +3,9 @@
     using DevExpress.Mvvm;
     using Inventory.Model;
     using Inventory.Services;
-    using Inventory.View.Add.Tables.Computers.Accessories;
-    using Inventory.View.Edit.Tables.Computers.Accessories;
-    using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
+    using Inventory.View.Add.Tables.Computers.InventoryNumbers;
+    using Inventory.View.Edit.Tables.Computers.InventoryNumbers;
+    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
@@ -13,10 +13,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.View.Add.Tables.Computers.InventoryNumbers;
-    using Inventory.View.Edit.Tables.Computers.InventoryNumbers;
-    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
 
     public class InventoryProcessorViewModel : BindableBase
     {
@@ -94,7 +90,7 @@
                         }
                     case "Базовая частота":
                         {
-                            InventoryProcessors.Sort(processor => processor.Processor.Base_frequency, SortDirection);
+                            InventoryProcessors.Sort(processor => processor.Processor.Base_frequency + " " + processor.Processor.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -122,7 +118,7 @@
 
         public ICommand DeleteInventoryProcessorCommand => new DelegateCommand<Inventory_numbers_processors>(selectInventoryProcessor =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryProcessor.Inventory_number}  {selectInventoryProcessor.Processor.Manufacturer.Name} {selectInventoryProcessor.Processor.Name} {selectInventoryProcessor.Processor.Amount_cores} {selectInventoryProcessor.Processor.Unit.Short_name}?", "Удаление инвентарного процессора", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить инвентарный процессор:\nинвент. номер - {selectInventoryProcessor.Inventory_number};\nпроизводитель - {selectInventoryProcessor.Processor.Manufacturer.Name};\nнаименование - {selectInventoryProcessor.Processor.Name};\nсокет - {selectInventoryProcessor.Processor.Socket.Name};\nкол-во ядер - {selectInventoryProcessor.Processor.Amount_cores};\nбазовая частота - {selectInventoryProcessor.Processor.Base_frequency} {selectInventoryProcessor.Processor.Unit.Short_name}?", "Удаление инвентарного процессора", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

@@ -75,7 +75,7 @@
                         }
                     case "Объём":
                         {
-                            GraphicsCards.Sort(graphicCard => graphicCard.Memory_size, SortDirection);
+                            GraphicsCards.Sort(graphicCard => graphicCard.Memory_size + " " + graphicCard.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -103,7 +103,7 @@
 
         public ICommand DeleteGraphicCardCommand => new DelegateCommand<Graphics_cards>(selectGraphicCard =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectGraphicCard.Manufacturer.Name} {selectGraphicCard.Name} {selectGraphicCard.Memory_size} {selectGraphicCard.Unit.Short_name}?", "Удаление видеокарты", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить видеокарту:\nпроизводитель - {selectGraphicCard.Manufacturer.Name};\nнаименование - {selectGraphicCard.Name};\nобъём - {selectGraphicCard.Memory_size} {selectGraphicCard.Unit.Short_name}?", "Удаление видеокарты", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

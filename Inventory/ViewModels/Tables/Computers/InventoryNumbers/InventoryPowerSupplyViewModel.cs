@@ -80,7 +80,7 @@
                         }
                     case "Мощность":
                         {
-                            InventoryPowerSupplies.Sort(powerSupply => powerSupply.Power_supplies.Power, SortDirection);
+                            InventoryPowerSupplies.Sort(powerSupply => powerSupply.Power_supplies.Power + " " + powerSupply.Power_supplies.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -108,7 +108,7 @@
 
         public ICommand DeleteInventoryPowerSupplyCommand => new DelegateCommand<Inventory_numbers_power_supplies>(selectInventoryPowerSupplies =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryPowerSupplies.Inventory_number} {selectInventoryPowerSupplies.Power_supplies.Manufacturer.Name} {selectInventoryPowerSupplies.Power_supplies.Name} {selectInventoryPowerSupplies.Power_supplies.Power} {selectInventoryPowerSupplies.Power_supplies.Unit.Short_name}?", "Удаление инвентарного блока питания", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить инвентарный блок питания:\nинвент. номер - {selectInventoryPowerSupplies.Inventory_number};\nпроизводитель - {selectInventoryPowerSupplies.Power_supplies.Manufacturer.Name};\nнаименование - {selectInventoryPowerSupplies.Power_supplies.Name};\nмощность -{selectInventoryPowerSupplies.Power_supplies.Power} {selectInventoryPowerSupplies.Power_supplies.Unit.Short_name}?", "Удаление инвентарного блока питания", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

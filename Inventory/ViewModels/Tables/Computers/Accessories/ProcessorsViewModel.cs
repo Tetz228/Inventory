@@ -85,7 +85,7 @@
                         }
                     case "Базовая частота":
                         {
-                            Processors.Sort(processor => processor.Base_frequency, SortDirection);
+                            Processors.Sort(processor => processor.Base_frequency + " " + processor.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -113,7 +113,7 @@
 
         public ICommand DeleteProcessorCommand => new DelegateCommand<Processor>(selectProcessor =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectProcessor.Manufacturer.Name} {selectProcessor.Name} {selectProcessor.Amount_cores} {selectProcessor.Unit.Short_name}?", "Удаление процессора", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить процессор:\nпроизводитель - {selectProcessor.Manufacturer.Name};\nнаименование - {selectProcessor.Name};\nсокет - {selectProcessor.Socket.Name};\nкол-во ядер - {selectProcessor.Amount_cores};\nбазовая частота - {selectProcessor.Base_frequency} {selectProcessor.Unit.Short_name}?", "Удаление процессора", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

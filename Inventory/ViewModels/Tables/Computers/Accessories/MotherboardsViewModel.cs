@@ -104,7 +104,7 @@
 
         public ICommand DeleteMotherboardCommand => new DelegateCommand<Motherboard>(selectMotherboard =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectMotherboard.Manufacturer.Name} {selectMotherboard.Name} {selectMotherboard.Socket.Name}?", "Удаление материнской платы", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить мат. плату:\nпроизводитель - {selectMotherboard.Manufacturer.Name};\nнаименование - {selectMotherboard.Name};\nсокет - {selectMotherboard.Socket.Name}?", "Удаление материнской платы", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

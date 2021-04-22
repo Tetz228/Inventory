@@ -75,7 +75,7 @@
                         }
                     case "Наименование":
                         {
-                            InventoryRams.Sort(ram => ram.Ram.Name, SortDirection);
+                            InventoryRams.Sort(ram => ram.Ram.Name + " " + ram.Ram.Unit.Short_name, SortDirection);
                             break;
                         }
                     case "Объём":
@@ -118,7 +118,7 @@
 
         public ICommand DeleteInventoryRamCommand => new DelegateCommand<Inventory_numbers_ram>(selectInventoryRam =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryRam.Ram.Manufacturer.Name} {selectInventoryRam.Ram.Name} {selectInventoryRam.Ram.Memory_size} {selectInventoryRam.Ram.Unit.Short_name}?", "Удаление инвентарной оперативной памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить оператив. память:\nинвент. номер - {selectInventoryRam.Inventory_number};\nпроизводитель - {selectInventoryRam.Ram.Manufacturer.Name};\nнаименование - {selectInventoryRam.Ram.Name};\nтип памяти - {selectInventoryRam.Ram.Types_memory.Name};\nобъём - {selectInventoryRam.Ram.Memory_size} {selectInventoryRam.Ram.Unit.Short_name};\nтактовая частота - {selectInventoryRam.Ram.Clock_frequency}?", "Удаление инвентарной оперативной памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

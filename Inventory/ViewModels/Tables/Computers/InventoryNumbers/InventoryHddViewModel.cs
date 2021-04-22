@@ -93,7 +93,7 @@
                         }
                     case "Объем":
                         {
-                            InventoryHdds.Sort(memorySize => memorySize.Hdd.Memory_size, SortDirection);
+                            InventoryHdds.Sort(memorySize => memorySize.Hdd.Memory_size + " " + memorySize.Hdd.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -121,7 +121,7 @@
 
         public ICommand DeleteInventoryHddCommand => new DelegateCommand<Inventory_numbers_hdd>(selectInventoryHdd =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryHdd.Inventory_number}, {selectInventoryHdd.Hdd.Manufacturer.Name} {selectInventoryHdd.Hdd.Types_hdd.Name} {selectInventoryHdd.Hdd.Name}?", "Удаление инвентарного жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить инвентарный жесткий диск:\nинвент. номер - {selectInventoryHdd.Inventory_number};\nпроизводитель - {selectInventoryHdd.Hdd.Manufacturer.Name};\nтип - {selectInventoryHdd.Hdd.Types_hdd.Name};\nнаименование - {selectInventoryHdd.Hdd.Name};\nобъём - {selectInventoryHdd.Hdd.Memory_size} {selectInventoryHdd.Hdd.Unit.Short_name}?", "Удаление инвентарного жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

@@ -4,18 +4,15 @@
     using Inventory.Model;
     using Inventory.View.Add.Tables.Computers.InventoryNumbers;
     using Inventory.View.Edit.Tables.Computers.InventoryNumbers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
+    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
     using Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
-    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
 
     public class InventorySsdViewModel : BindableBase
     {
@@ -88,7 +85,7 @@
                         }
                     case "Объём":
                         {
-                            InventorySsds.Sort(ssd => ssd.Ssd.Memory_size, SortDirection);
+                            InventorySsds.Sort(ssd => ssd.Ssd.Memory_size + " " + ssd.Ssd.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -116,7 +113,7 @@
 
         public ICommand DeleteSsdCommand => new DelegateCommand<Inventory_numbers_ssd>(selectInventorySsd =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventorySsd.Ssd.Manufacturer.Name} {selectInventorySsd.Ssd.Name} {selectInventorySsd.Ssd.Memory_size} {selectInventorySsd.Ssd.Unit.Short_name}?", "Удаление инвентарного SSD-накопителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить инвентарный SSD-накопитель:\nинвент. номер - {selectInventorySsd.Inventory_number};\nпроизводитель - {selectInventorySsd.Ssd.Manufacturer.Name};\nтип - {selectInventorySsd.Ssd.Types_ssd.Name};\nнаименование - {selectInventorySsd.Ssd.Name};\nОбъём - {selectInventorySsd.Ssd.Memory_size} {selectInventorySsd.Ssd.Unit.Short_name}?", "Удаление инвентарного SSD-накопителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

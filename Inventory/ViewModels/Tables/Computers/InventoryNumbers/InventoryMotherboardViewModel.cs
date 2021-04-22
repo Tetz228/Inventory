@@ -115,7 +115,7 @@
 
         public ICommand DeleteInventoryMotherboardCommand => new DelegateCommand<Inventory_numbers_motherboards>(selectInventoryMotherboard =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryMotherboard.Inventory_number}, {selectInventoryMotherboard.Motherboard.Manufacturer.Name} {selectInventoryMotherboard.Motherboard.Name} {selectInventoryMotherboard.Motherboard.Socket.Name}?",
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить инвентарную мат. плату:\nинвент. номер - {selectInventoryMotherboard.Inventory_number};\nпроизводитель - {selectInventoryMotherboard.Motherboard.Manufacturer.Name};\nнаименование - {selectInventoryMotherboard.Motherboard.Name};\nсокет - {selectInventoryMotherboard.Motherboard.Socket.Name}?",
                 "Удаление инвентарной материнской платы", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
