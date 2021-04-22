@@ -58,7 +58,7 @@
             </MenuItem>
             <MenuItem Header="Компьютеры">
                 <MenuItem
-                    Command="{Binding SelectTablesManufacturersCommand}"
+                    Command="{Binding SelectComputersCommand}"
                     Header="Компьютеры"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem

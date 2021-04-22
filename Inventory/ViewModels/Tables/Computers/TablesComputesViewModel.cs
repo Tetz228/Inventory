@@ -11,7 +11,7 @@
 
     public class TablesComputesViewModel : BindableBase
     {
-        public TablesComputesViewModel() => CurrentPage = new SoketsPage();
+        public TablesComputesViewModel() => CurrentPage = new ComputersPage();
 
         public Page CurrentPage { get; private set; }
 
@@ -25,6 +25,8 @@
         public ICommand SelectTypesHddPageCommand => new DelegateCommand(() => CurrentPage = new TypesHddsPage());
 
         public ICommand SelectTablesManufacturersCommand => new DelegateCommand(() => CurrentPage = new ManufacturersPage());
+
+        public ICommand SelectComputersCommand => new DelegateCommand(() => CurrentPage = new ComputersPage());
 
         public ICommand SelectTypesSsdPageCommand => new DelegateCommand(() => CurrentPage = new TypesSsdsPage());
 
