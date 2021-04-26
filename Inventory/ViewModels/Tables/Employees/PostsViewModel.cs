@@ -20,8 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            Posts = new ObservableCollection<Post>(db.Posts.AsNoTracking());
-            Posts.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
+            Posts = new ObservableCollection<Post>(db.Posts.AsNoTracking()).Sort(department => department.Name);
             PostsCollection = CollectionViewSource.GetDefaultView(Posts);
         }
 

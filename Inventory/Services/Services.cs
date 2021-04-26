@@ -28,6 +28,18 @@
                 observableCollection.Add(item);
         }
 
+        public static ObservableCollection<TClassSource> Sort<TClassSource, TProperty>(this ObservableCollection<TClassSource> observableCollection, Func<TClassSource, TProperty> property)
+        {
+            var sortCollection = observableCollection.OrderBy(property).ToList();
+
+            observableCollection.Clear();
+
+            foreach (var item in sortCollection)
+                observableCollection.Add(item);
+
+            return observableCollection;
+        }
+
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 

@@ -1,6 +1,5 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Other
 {
-    using ClosedXML.Report;
     using DevExpress.Mvvm;
     using Inventory.Model;
     using Inventory.Services;
@@ -9,10 +8,6 @@
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -24,8 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking());
-            Sockets.Sort(socket => socket.Name, SortDirection = ListSortDirection.Ascending);
+            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking()).Sort(socket => socket.Name);
             SocketsCollection = CollectionViewSource.GetDefaultView(Sockets);
         }
 

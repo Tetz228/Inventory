@@ -20,8 +20,10 @@
         {
             using var db = new InventoryEntities();
 
-            GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit));
-            GraphicsCards.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(unit => unit.Unit))
+                .Sort(manufacturer => manufacturer.Manufacturer.Name);
             GraphicsCardsCollection = CollectionViewSource.GetDefaultView(GraphicsCards);
         }
 

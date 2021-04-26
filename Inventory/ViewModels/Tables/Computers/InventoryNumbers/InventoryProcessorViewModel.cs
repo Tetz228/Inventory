@@ -20,8 +20,12 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryProcessors = new ObservableCollection<Inventory_numbers_processors>(db.Inventory_numbers_processors.AsNoTracking().Include(processor => processor.Processor).Include(manufacturer => manufacturer.Processor.Manufacturer).Include(unit => unit.Processor.Unit).Include(socket => socket.Processor.Socket));
-            InventoryProcessors.Sort(inventoryProcessor => inventoryProcessor.Inventory_number, SortDirection = ListSortDirection.Ascending);
+            InventoryProcessors = new ObservableCollection<Inventory_numbers_processors>(db.Inventory_numbers_processors.AsNoTracking()
+                .Include(processor => processor.Processor)
+                .Include(manufacturer => manufacturer.Processor.Manufacturer)
+                .Include(unit => unit.Processor.Unit)
+                .Include(socket => socket.Processor.Socket))
+                .Sort(inventoryProcessor => inventoryProcessor.Inventory_number);
             InventoryProcessorsCollection = CollectionViewSource.GetDefaultView(InventoryProcessors);
         }
 

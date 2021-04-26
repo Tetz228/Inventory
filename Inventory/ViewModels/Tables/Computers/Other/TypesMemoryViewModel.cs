@@ -19,8 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            TypesMemory = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking());
-            TypesMemory.Sort(typeMemory => typeMemory.Name, SortDirection = ListSortDirection.Ascending);
+            TypesMemory = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking()).Sort(typeMemory => typeMemory.Name);
             TypesMemoryCollection = CollectionViewSource.GetDefaultView(TypesMemory);
         }
 

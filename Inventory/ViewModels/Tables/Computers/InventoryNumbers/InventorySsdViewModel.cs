@@ -20,8 +20,11 @@
         {
             using var db = new InventoryEntities();
 
-            InventorySsds = new ObservableCollection<Inventory_numbers_ssd>(db.Inventory_numbers_ssd.AsNoTracking().Include(manufacturer => manufacturer.Ssd.Manufacturer).Include(unit => unit.Ssd.Unit).Include(type => type.Ssd.Types_ssd));
-            InventorySsds.Sort(manufacturer => manufacturer.Inventory_number, SortDirection = ListSortDirection.Ascending);
+            InventorySsds = new ObservableCollection<Inventory_numbers_ssd>(db.Inventory_numbers_ssd.AsNoTracking()
+                .Include(manufacturer => manufacturer.Ssd.Manufacturer)
+                .Include(unit => unit.Ssd.Unit)
+                .Include(type => type.Ssd.Types_ssd))
+                .Sort(manufacturer => manufacturer.Inventory_number);
             InventorySsdsCollection = CollectionViewSource.GetDefaultView(InventorySsds);
         }
 

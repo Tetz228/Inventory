@@ -17,7 +17,11 @@
         {
             using var db = new InventoryEntities();
 
-            Rams = new ObservableCollection<Ram>(db.Rams.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_memory).Include(unit => unit.Unit));
+            Rams = new ObservableCollection<Ram>(db.Rams.AsNoTracking()
+                    .Include(manufacturer => manufacturer.Manufacturer)
+                    .Include(unit => unit.Unit)
+                    .Include(type => type.Types_memory))
+                    .Sort(manufact => manufact.Manufacturer.Name);
             InventoryRam = inventoryRam;
             InventoryRam.BeginEdit();
         }

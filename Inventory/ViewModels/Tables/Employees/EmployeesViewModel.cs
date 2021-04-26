@@ -23,8 +23,8 @@
             Employees = new ObservableCollection<Employee>(db.Employees.AsNoTracking().Include(employeePost => employeePost.Posts_employees
                                                                        .Select(post => post.Post))
                                                                        .Include(empDepart => empDepart.Employees_in_departments
-                                                                       .Select(depart => depart.Department)));
-            Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Ascending);
+                                                                       .Select(depart => depart.Department)))
+                                                                       .Sort(employee => employee.L_name);
             EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
         }
 

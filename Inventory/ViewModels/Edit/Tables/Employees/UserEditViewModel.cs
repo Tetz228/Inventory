@@ -15,7 +15,7 @@
         {
             User = user;
             using var db = new InventoryEntities();
-            Roles = new ObservableCollection<Role>(db.Roles.AsNoTracking());
+            Roles = new ObservableCollection<Role>(db.Roles.AsNoTracking()).Sort(role => role.Name);
             BeginEdit();
         }
 

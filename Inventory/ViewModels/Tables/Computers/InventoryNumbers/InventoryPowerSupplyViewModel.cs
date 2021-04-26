@@ -20,8 +20,10 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryPowerSupplies = new ObservableCollection<Inventory_numbers_power_supplies>(db.Inventory_numbers_power_supplies.AsNoTracking().Include(manufacturer => manufacturer.Power_supplies.Manufacturer).Include(unit => unit.Power_supplies.Unit));
-            InventoryPowerSupplies.Sort(inventoryPowerSupplies => inventoryPowerSupplies.Inventory_number, SortDirection = ListSortDirection.Ascending);
+            InventoryPowerSupplies = new ObservableCollection<Inventory_numbers_power_supplies>(db.Inventory_numbers_power_supplies.AsNoTracking()
+                .Include(manufacturer => manufacturer.Power_supplies.Manufacturer)
+                .Include(unit => unit.Power_supplies.Unit))
+                .Sort(inventoryPowerSupplies => inventoryPowerSupplies.Inventory_number);
             InventoryPowerSuppliesCollection = CollectionViewSource.GetDefaultView(InventoryPowerSupplies);
         }
 

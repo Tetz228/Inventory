@@ -2,14 +2,12 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Globalization;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class GraphicCardEditViewModel : BindableBase, IEditableObject
     {
@@ -17,8 +15,8 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
-            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
 
             GraphicCard = graphicCard;
             BeginEdit();

@@ -14,7 +14,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    class InventoryMotherboardViewModel : BindableBase
+    public class InventoryMotherboardViewModel : BindableBase
     {
         public InventoryMotherboardViewModel()
         {
@@ -22,8 +22,8 @@
 
             InventoryMotherboards = new ObservableCollection<Inventory_numbers_motherboards>(db.Inventory_numbers_motherboards.AsNoTracking()
                 .Include(manufacturer => manufacturer.Motherboard.Manufacturer)
-                .Include(socket => socket.Motherboard.Socket));
-            InventoryMotherboards.Sort(inventoryMotherboards => inventoryMotherboards.Inventory_number, SortDirection = ListSortDirection.Ascending);
+                .Include(socket => socket.Motherboard.Socket))
+                .Sort(inventoryMotherboards => inventoryMotherboards.Inventory_number);
             InventoryMotherboardsCollection = CollectionViewSource.GetDefaultView(InventoryMotherboards);
         }
 

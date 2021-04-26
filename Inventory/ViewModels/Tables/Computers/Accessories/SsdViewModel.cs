@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -12,7 +13,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-    using Inventory.Services;
 
     public class SsdViewModel : BindableBase
     {
@@ -20,8 +20,11 @@
         {
             using var db = new InventoryEntities();
 
-            Ssds = new ObservableCollection<Ssd>(db.Ssds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd));
-            Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
+            Ssds = new ObservableCollection<Ssd>(db.Ssds.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(unit => unit.Unit)
+                .Include(type => type.Types_ssd))
+                .Sort(manufacturer => manufacturer.Manufacturer.Name);
             SsdsCollection = CollectionViewSource.GetDefaultView(Ssds);
         }
 

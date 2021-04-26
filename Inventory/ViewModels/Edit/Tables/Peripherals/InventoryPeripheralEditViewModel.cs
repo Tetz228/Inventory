@@ -17,9 +17,11 @@
         {
             using var db = new InventoryEntities();
 
-            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_peripherals));
-            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking());
-            
+            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.AsNoTracking()
+                    .Include(manufacturer => manufacturer.Manufacturer)
+                    .Include(type => type.Types_peripherals))
+                    .Sort(manufact => manufact.Manufacturer.Name);
+            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking()).Sort(status => status.Name);
             InventoryPeripheral = inventoryPeripheral;
             InventoryPeripheral.BeginEdit();
         }

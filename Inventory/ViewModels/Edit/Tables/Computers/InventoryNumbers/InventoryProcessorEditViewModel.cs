@@ -17,7 +17,11 @@
         {
             using var db = new InventoryEntities();
 
-            Processors = new ObservableCollection<Processor>(db.Processors.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(socket => socket.Socket));
+            Processors = new ObservableCollection<Processor>(db.Processors.AsNoTracking()
+                    .Include(manufacturer => manufacturer.Manufacturer)
+                    .Include(unit => unit.Unit)
+                    .Include(socket => socket.Socket))
+                    .Sort(socket => socket.Socket.Name);
             InventoryProcessor = inventoryProcessor;
             InventoryProcessor.BeginEdit();
         }

@@ -19,8 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking());
-            StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name, SortDirection = ListSortDirection.Ascending);
+            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking()).Sort(statusPeripheral => statusPeripheral.Name);
             StatusesPeripheralsCollection = CollectionViewSource.GetDefaultView(StatusesPeripherals);
         }
 

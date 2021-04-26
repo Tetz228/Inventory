@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -13,16 +14,16 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Services;
-
     public class MotherboardsViewModel : BindableBase
     {
         public MotherboardsViewModel()
         {
             using var db = new InventoryEntities();
 
-            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
-            Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(socket => socket.Socket))
+                .Sort(manufacturer => manufacturer.Manufacturer.Name);
             MotherboardsCollection = CollectionViewSource.GetDefaultView(Motherboards);
         }
 

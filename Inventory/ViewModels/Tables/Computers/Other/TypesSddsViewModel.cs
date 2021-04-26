@@ -20,8 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd.AsNoTracking());
-            TypesSsds.Sort(typeSsd => typeSsd.Name, SortDirection = ListSortDirection.Ascending);
+            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd.AsNoTracking()).Sort(typeSsd => typeSsd.Name);
             TypesSsdsCollection = CollectionViewSource.GetDefaultView(TypesSsds);
         }
 

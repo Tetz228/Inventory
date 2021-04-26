@@ -20,8 +20,11 @@
         {
             using var db = new InventoryEntities();
 
-            Processors = new ObservableCollection<Processor>(db.Processors.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(socket => socket.Socket));
-            Processors.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            Processors = new ObservableCollection<Processor>(db.Processors.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(unit => unit.Unit)
+                .Include(socket => socket.Socket))
+                .Sort(manufacturer => manufacturer.Manufacturer.Name);
             ProcessorsCollection = CollectionViewSource.GetDefaultView(Processors);
         }
 

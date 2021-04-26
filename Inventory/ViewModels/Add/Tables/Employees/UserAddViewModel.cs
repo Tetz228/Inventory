@@ -2,13 +2,12 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Employees;
     using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class UserAddViewModel : BindableBase
     {
@@ -16,8 +15,8 @@
         {
             using var db = new InventoryEntities();
 
-            Employees = new ObservableCollection<Employee>(db.Employees.AsNoTracking());
-            Roles = new ObservableCollection<Role>(db.Roles.AsNoTracking());
+            Employees = new ObservableCollection<Employee>(db.Employees.AsNoTracking()).Sort(emp => emp.L_name);
+            Roles = new ObservableCollection<Role>(db.Roles.AsNoTracking()).Sort(role => role.Name);
         }
 
         #region Свойства

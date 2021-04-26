@@ -21,8 +21,10 @@
         {
             using var db = new InventoryEntities();
 
-            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(typePeripheral => typePeripheral.Types_peripherals));
-            Peripherals.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(typePeripheral => typePeripheral.Types_peripherals))
+                .Sort(manufacturer => manufacturer.Manufacturer.Name);
             PeripheralsCollection = CollectionViewSource.GetDefaultView(Peripherals);
         }
 

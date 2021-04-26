@@ -14,8 +14,8 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
-            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
         }
 
         public Graphics_cards GraphicCard { get; } = new();

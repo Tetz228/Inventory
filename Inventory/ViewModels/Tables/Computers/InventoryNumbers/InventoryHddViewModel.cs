@@ -24,8 +24,8 @@
                 .Include(hdd => hdd.Hdd)
                 .Include(manufacturer => manufacturer.Hdd.Manufacturer)
                 .Include(type => type.Hdd.Types_hdd)
-                .Include(unit => unit.Hdd.Unit));
-            InventoryHdds.Sort(numberHdd => numberHdd.Inventory_number, SortDirection = ListSortDirection.Ascending);
+                .Include(unit => unit.Hdd.Unit))
+                .Sort(numberHdd => numberHdd.Inventory_number);
             InventoryHddsCollection = CollectionViewSource.GetDefaultView(InventoryHdds);
         }
 

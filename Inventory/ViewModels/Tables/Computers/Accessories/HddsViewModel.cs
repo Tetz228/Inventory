@@ -20,8 +20,10 @@
         {
             using var db = new InventoryEntities();
 
-            Hdds = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd));
-            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            Hdds = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(unit => unit.Unit).Include(type => type.Types_hdd))
+                .Sort(manufacturer => manufacturer.Manufacturer.Name);
             HddsCollection = CollectionViewSource.GetDefaultView(Hdds);
         }
 

@@ -15,9 +15,9 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
-            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
-            TypesMemories = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking());
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
+            TypesMemories = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking()).Sort(type => type.Name);
 
             Ram = ram;
             BeginEdit();

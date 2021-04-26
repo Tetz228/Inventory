@@ -15,9 +15,9 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
-            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd.AsNoTracking());
-            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd.AsNoTracking()).Sort(type => type.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
 
             Ssd = ssd;
             BeginEdit();

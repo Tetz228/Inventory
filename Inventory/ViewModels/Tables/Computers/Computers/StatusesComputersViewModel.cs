@@ -19,8 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            StatusesComputers = new ObservableCollection<Statuses_computers>(db.Statuses_computers.AsNoTracking());
-            StatusesComputers.Sort(statusComputer => statusComputer.Name, SortDirection = ListSortDirection.Ascending);
+            StatusesComputers = new ObservableCollection<Statuses_computers>(db.Statuses_computers.AsNoTracking()).Sort(statusComputer => statusComputer.Name);
             StatusesComputersCollection = CollectionViewSource.GetDefaultView(StatusesComputers);
         }
 

@@ -1,14 +1,12 @@
 ﻿namespace Inventory.ViewModels.Add.Tables.Peripherals
 {
-    using System.Collections.ObjectModel;
-
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using System.Windows;
-    using System.Windows.Input;
-
     using Inventory.Services;
     using Inventory.ViewModels.Tables.Peripherals;
+    using System.Collections.ObjectModel;
+    using System.Windows;
+    using System.Windows.Input;
 
     public class PeripheralAddViewModel : BindableBase
     {
@@ -16,8 +14,8 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
-            TypesPeripherals = new ObservableCollection<Types_peripherals>(db.Types_peripherals.AsNoTracking());
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            TypesPeripherals = new ObservableCollection<Types_peripherals>(db.Types_peripherals.AsNoTracking()).Sort(type => type.Name);
         }
 
         public Peripheral Peripheral { get; } = new();

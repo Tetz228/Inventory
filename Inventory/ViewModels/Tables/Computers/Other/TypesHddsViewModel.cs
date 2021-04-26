@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
@@ -12,16 +13,13 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Services;
-
     public class TypesHddsViewModel : BindableBase
     {
         public TypesHddsViewModel()
         {
             using var db = new InventoryEntities();
 
-            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking());
-            TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection = ListSortDirection.Ascending);
+            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking()).Sort(typeHdd => typeHdd.Name);
             TypesHddsCollection = CollectionViewSource.GetDefaultView(TypesHdds);
         }
 

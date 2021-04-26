@@ -1,6 +1,5 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Other
 {
-    using ClosedXML.Report;
     using DevExpress.Mvvm;
     using Inventory.Model;
     using Inventory.Services;
@@ -9,9 +8,6 @@
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Data.Entity;
-    using System.Diagnostics;
-    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -23,8 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            Units = new ObservableCollection<Unit>(db.Units.Include(ram => ram.Rams).Include(processor => processor.Processors).Include(graph => graph.Graphics_cards).Include(hdd => hdd.Hdds).Include(power => power.Power_supplies).Include(ssd => ssd.Ssds).AsNoTracking());
-            Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
             UnitsCollection = CollectionViewSource.GetDefaultView(Units);
         }
 

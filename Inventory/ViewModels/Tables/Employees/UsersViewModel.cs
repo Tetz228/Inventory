@@ -21,8 +21,10 @@
         {
             using var db = new InventoryEntities();
 
-            Users = new ObservableCollection<User>(db.Users.AsNoTracking().Include(employee => employee.Employee).Include(role => role.Role));
-            Users.Sort(user => user.Login, SortDirection = ListSortDirection.Ascending);
+            Users = new ObservableCollection<User>(db.Users.AsNoTracking()
+                .Include(employee => employee.Employee)
+                .Include(role => role.Role))
+                .Sort(user => user.Login);
             UsersCollection = CollectionViewSource.GetDefaultView(Users);
         }
 

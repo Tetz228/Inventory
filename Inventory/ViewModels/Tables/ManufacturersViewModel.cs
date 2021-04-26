@@ -19,8 +19,7 @@
         public ManufacturersViewModel()
         {
             using var db = new InventoryEntities();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
-            Manufacturers.Sort(manufacturer => manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufacturer => manufacturer.Name);
             ManufacturersCollection = CollectionViewSource.GetDefaultView(Manufacturers);
         }
 

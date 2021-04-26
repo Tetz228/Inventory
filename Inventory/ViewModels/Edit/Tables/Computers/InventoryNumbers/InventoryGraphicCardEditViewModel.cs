@@ -18,7 +18,10 @@
         {
             using var db = new InventoryEntities();
 
-            GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit));
+            GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.AsNoTracking()
+                    .Include(manufacturer => manufacturer.Manufacturer)
+                    .Include(unit => unit.Unit))
+                    .Sort(manufact => manufact.Manufacturer.Name);
             InventoryGraphicCard = inventoryGraphicCard;
             InventoryGraphicCard.BeginEdit();
         }

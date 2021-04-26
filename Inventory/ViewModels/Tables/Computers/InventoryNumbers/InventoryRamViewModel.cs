@@ -20,8 +20,11 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryRams = new ObservableCollection<Inventory_numbers_ram>(db.Inventory_numbers_ram.AsNoTracking().Include(manufacturer => manufacturer.Ram.Manufacturer).Include(unit => unit.Ram.Unit).Include(type => type.Ram.Types_memory));
-            InventoryRams.Sort(manufacturer => manufacturer.Ram.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+            InventoryRams = new ObservableCollection<Inventory_numbers_ram>(db.Inventory_numbers_ram.AsNoTracking()
+                .Include(manufacturer => manufacturer.Ram.Manufacturer)
+                .Include(unit => unit.Ram.Unit)
+                .Include(type => type.Ram.Types_memory))
+                .Sort(manufacturer => manufacturer.Ram.Manufacturer.Name);
             InventoryRamsCollection = CollectionViewSource.GetDefaultView(InventoryRams);
         }
 

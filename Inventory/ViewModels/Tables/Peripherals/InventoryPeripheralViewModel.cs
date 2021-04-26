@@ -25,8 +25,8 @@
                 .Include(status => status.Statuses_peripherals)
                 .Include(peripheral => peripheral.Peripheral)
                 .Include(manufacturer => manufacturer.Peripheral.Manufacturer)
-                .Include(typePeripheral => typePeripheral.Peripheral.Types_peripherals));
-            InventoryPeripherals.Sort(numberPeripheral => numberPeripheral.Inventory_number, SortDirection = ListSortDirection.Ascending);
+                .Include(typePeripheral => typePeripheral.Peripheral.Types_peripherals))
+                .Sort(numberPeripheral => numberPeripheral.Inventory_number);
             InventoryPeripheralsCollection = CollectionViewSource.GetDefaultView(InventoryPeripherals);
         }
 

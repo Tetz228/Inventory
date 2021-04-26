@@ -19,8 +19,7 @@
         {
             using var db = new InventoryEntities();
 
-            OperatingSystems = new ObservableCollection<Operating_systems>(db.Operating_systems.AsNoTracking());
-            OperatingSystems.Sort(system => system.Name, SortDirection);
+            OperatingSystems = new ObservableCollection<Operating_systems>(db.Operating_systems.AsNoTracking()).Sort(system => system.Name);
             OperatingSystemsCollection = CollectionViewSource.GetDefaultView(OperatingSystems);
         }
 

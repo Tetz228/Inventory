@@ -17,7 +17,11 @@
         {
             using var db = new InventoryEntities();
 
-            Hdds = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_hdd).Include(unit => unit.Unit));
+            Hdds = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking()
+                    .Include(manufacturer => manufacturer.Manufacturer)
+                    .Include(type => type.Types_hdd)
+                    .Include(unit => unit.Unit))
+                    .Sort(manufact => manufact.Manufacturer.Name);
             InventoryHdd = inventoryHdd;
             InventoryHdd.BeginEdit();
         }

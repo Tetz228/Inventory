@@ -2,14 +2,12 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Globalization;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class HddEditViewModel : BindableBase, IEditableObject
     {
@@ -17,9 +15,9 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking());
-            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking());
-            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking());
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking()).Sort(type => type.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
 
             Hdd = hdd;
             BeginEdit();
