@@ -298,6 +298,190 @@
                                         Style="{StaticResource BaseButton}" />
                                 </StackPanel>
                             </UniformGrid>
+
+                            <!--  Жесткий диск  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Жесткий диск: " />
+
+                                <StackPanel Margin="10">
+                                    <ItemsControl ItemsSource="{Binding Computer.Hdd_in_computers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Background="#98c9e3">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="1*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ComboBox
+                                                        Width="156"
+                                                        MaxWidth="156"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryHdds}"
+                                                        SelectedValue="{Binding Fk_inventory_number_hdd}"
+                                                        SelectedValuePath="Id_inventory_number_hdd"
+                                                        Style="{StaticResource BaseComboBox}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock>
+                                                                    <TextBlock.Text>
+                                                                        <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Тип ЖД: {2};&#x0d;&#x0a;Название: {3};&#x0d;&#x0a;Объём: {4} {5}.">
+                                                                            <Binding Path="Inventory_number" />
+                                                                            <Binding Path="Hdd.Manufacturer.Name" />
+                                                                            <Binding Path="Hdd.Types_hdd.Name" />
+                                                                            <Binding Path="Hdd.Name" />
+                                                                            <Binding Path="Hdd.Memory_size" />
+                                                                            <Binding Path="Hdd.Unit.Short_name" />
+                                                                        </MultiBinding>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+
+                                                    <!--  Удалить жесткий диск  -->
+                                                    <Button
+                                                        Grid.Column="1"
+                                                        Margin="3"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteHddFromCollectionCommand}"
+                                                        CommandParameter="{Binding}"
+                                                        Content="Х"
+                                                        Style="{StaticResource BaseButton}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <!--  Добавить жесткий диск  -->
+                                    <Button
+                                        Margin="3"
+                                        Command="{Binding AddHddInCollectionCommand}"
+                                        Content="Добавить"
+                                        Style="{StaticResource BaseButton}" />
+                                </StackPanel>
+                            </UniformGrid>
+
+                            <!--  Оперативная память  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Оперативная память: " />
+
+                                <StackPanel Margin="10">
+                                    <ItemsControl ItemsSource="{Binding Computer.Ram_in_computers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Background="#98c9e3">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="1*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ComboBox
+                                                        Width="156"
+                                                        MaxWidth="156"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryRams}"
+                                                        SelectedValue="{Binding Fk_inventory_number_ram}"
+                                                        SelectedValuePath="Id_inventory_number_ram"
+                                                        Style="{StaticResource BaseComboBox}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock>
+                                                                    <TextBlock.Text>
+                                                                        <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Название: {2};&#x0d;&#x0a;Тип памяти: {3};&#x0d;&#x0a;Кол-во памяти: {4} {5};&#x0d;&#x0a;Тактовая частота: {6}.">
+                                                                            <Binding Path="Inventory_number" />
+                                                                            <Binding Path="Ram.Manufacturer.Name" />
+                                                                            <Binding Path="Ram.Name" />
+                                                                            <Binding Path="Ram.Types_memory.Name" />
+                                                                            <Binding Path="Ram.Memory_size" />
+                                                                            <Binding Path="Ram.Unit.Short_name" />
+                                                                            <Binding Path="Ram.Clock_frequency" />
+                                                                        </MultiBinding>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+
+                                                    <!--  Удалить оперативная память  -->
+                                                    <Button
+                                                        Grid.Column="1"
+                                                        Margin="3"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteRamFromCollectionCommand}"
+                                                        CommandParameter="{Binding}"
+                                                        Content="Х"
+                                                        Style="{StaticResource BaseButton}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <!--  Добавить оперативная память  -->
+                                    <Button
+                                        Margin="3"
+                                        Command="{Binding AddRamInCollectionCommand}"
+                                        Content="Добавить"
+                                        Style="{StaticResource BaseButton}" />
+                                </StackPanel>
+                            </UniformGrid>
+
+                            <!--  SSD-накопитель  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="SSD-накопитель: " />
+
+                                <StackPanel Margin="10">
+                                    <ItemsControl ItemsSource="{Binding Computer.Ssd_in_computers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Background="#98c9e3">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="1*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ComboBox
+                                                        Width="156"
+                                                        MaxWidth="156"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventorySsds}"
+                                                        SelectedValue="{Binding Fk_inventory_number_ssd}"
+                                                        SelectedValuePath="Id_inventory_number_ssd"
+                                                        Style="{StaticResource BaseComboBox}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock>
+                                                                    <TextBlock.Text>
+                                                                        <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Тип: {2};&#x0d;&#x0a;Название: {3};&#x0d;&#x0a;Объём: {4} {5}.">
+                                                                            <Binding Path="Inventory_number" />
+                                                                            <Binding Path="Ssd.Manufacturer.Name" />
+                                                                            <Binding Path="Ssd.Types_ssd.Name" />
+                                                                            <Binding Path="Ssd.Name" />
+                                                                            <Binding Path="Ssd.Memory_size" />
+                                                                            <Binding Path="Ssd.Unit.Short_name" />
+                                                                        </MultiBinding>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+
+                                                    <!--  Удалить SSD-накопитель  -->
+                                                    <Button
+                                                        Grid.Column="1"
+                                                        Margin="3"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteSsdFromCollectionCommand}"
+                                                        CommandParameter="{Binding}"
+                                                        Content="Х"
+                                                        Style="{StaticResource BaseButton}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <!--  Добавить SSD-накопитель  -->
+                                    <Button
+                                        Margin="3"
+                                        Command="{Binding AddSsdInCollectionCommand}"
+                                        Content="Добавить"
+                                        Style="{StaticResource BaseButton}" />
+                                </StackPanel>
+                            </UniformGrid>
                         </StackPanel>
                     </Border>
                 </Grid>

@@ -7,19 +7,18 @@ namespace Inventory.Model
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Text.RegularExpressions;
-    using System.Data.Entity;
 
     public partial class Computer : BindableBase, IDataErrorInfo, IEditableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Computer()
         {
-            Hdd_in_computers = new HashSet<Hdd_in_computers>();
-            List_dispensed_computers = new HashSet<List_dispensed_computers>();
-            Operating_systems_in_computers = new HashSet<Operating_systems_in_computers>();
-            Processors_in_computers = new HashSet<Processors_in_computers>();
-            Ram_in_computers = new HashSet<Ram_in_computers>();
-            Ssd_in_computers = new HashSet<Ssd_in_computers>();
+            Hdd_in_computers = new ObservableCollection<Hdd_in_computers>();
+            List_dispensed_computers = new ObservableCollection<List_dispensed_computers>();
+            Operating_systems_in_computers = new ObservableCollection<Operating_systems_in_computers>();
+            Processors_in_computers = new ObservableCollection<Processors_in_computers>();
+            Ram_in_computers = new ObservableCollection<Ram_in_computers>();
+            Ssd_in_computers = new ObservableCollection<Ssd_in_computers>();
         }
 
         public int Id_computer { get; set; }
@@ -35,17 +34,17 @@ namespace Inventory.Model
         public virtual Inventory_numbers_power_supplies Inventory_numbers_power_supplies { get; set; }
         public virtual Statuses_computers Statuses_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hdd_in_computers> Hdd_in_computers { get; set; }
+        public virtual ObservableCollection<Hdd_in_computers> Hdd_in_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<List_dispensed_computers> List_dispensed_computers { get; set; }
+        public virtual ObservableCollection<List_dispensed_computers> List_dispensed_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Operating_systems_in_computers> Operating_systems_in_computers { get; set; }
+        public virtual ObservableCollection<Operating_systems_in_computers> Operating_systems_in_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Processors_in_computers> Processors_in_computers { get; set; }
+        public virtual ObservableCollection<Processors_in_computers> Processors_in_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ram_in_computers> Ram_in_computers { get; set; }
+        public virtual ObservableCollection<Ram_in_computers> Ram_in_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ssd_in_computers> Ssd_in_computers { get; set; }
+        public virtual ObservableCollection<Ssd_in_computers> Ssd_in_computers { get; set; }
 
         #region Валидация
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
