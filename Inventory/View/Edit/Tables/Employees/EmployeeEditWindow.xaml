@@ -93,7 +93,7 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Должности: " />
 
                                 <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding Employee.PostsEmployees}">
+                                    <ItemsControl ItemsSource="{Binding Employee.Posts_employees}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid Background="#98c9e3">
@@ -106,7 +106,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         DisplayMemberPath="Name"
-                                                        ItemsSource="{Binding CollectionPosts}"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Posts}"
                                                         SelectedValue="{Binding Fk_post}"
                                                         SelectedValuePath="Id_post"
                                                         Style="{StaticResource BaseComboBox}" />
@@ -138,7 +138,7 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Отделы: " />
 
                                 <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding Employee.EmployeesInDepartments}">
+                                    <ItemsControl ItemsSource="{Binding Employee.Employees_in_departments}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid Background="#98c9e3">
@@ -151,7 +151,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         DisplayMemberPath="Name"
-                                                        ItemsSource="{Binding CollectionDepartments}"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Departments}"
                                                         SelectedValue="{Binding Fk_department}"
                                                         SelectedValuePath="Id_department"
                                                         Style="{StaticResource BaseComboBox}" />

@@ -5,7 +5,6 @@ namespace Inventory.Model
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Linq;
     using System.Text.RegularExpressions;
 
     public partial class Employee : BindableBase, IDataErrorInfo, IEditableObject
@@ -13,11 +12,11 @@ namespace Inventory.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            Dispensing_computers = new HashSet<Dispensing_computers>();
-            Dispensing_peripherals = new HashSet<Dispensing_peripherals>();
-            Employees_in_departments = new HashSet<Employees_in_departments>();
-            Posts_employees = new HashSet<Posts_employees>();
-            Users = new HashSet<User>();
+            Dispensing_computers = new ObservableCollection<Dispensing_computers>();
+            Dispensing_peripherals = new ObservableCollection<Dispensing_peripherals>();
+            Employees_in_departments = new ObservableCollection<Employees_in_departments>();
+            Posts_employees = new ObservableCollection<Posts_employees>();
+            Users = new ObservableCollection<User>();
         }
 
         #region Свойства
@@ -29,19 +28,15 @@ namespace Inventory.Model
         public string Phone_number { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dispensing_computers> Dispensing_computers { get; set; }
+        public virtual ObservableCollection<Dispensing_computers> Dispensing_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dispensing_peripherals> Dispensing_peripherals { get; set; }
+        public virtual ObservableCollection<Dispensing_peripherals> Dispensing_peripherals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees_in_departments> Employees_in_departments { get; set; }
+        public virtual ObservableCollection<Employees_in_departments> Employees_in_departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Posts_employees> Posts_employees { get; set; }
+        public virtual ObservableCollection<Posts_employees> Posts_employees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
-
-        public static ObservableCollection<Posts_employees> PostsEmployees { get; set; } = new();
-
-        public static ObservableCollection<Employees_in_departments> EmployeesInDepartments { get; set; } = new();
+        public virtual ObservableCollection<User> Users { get; set; }
         #endregion
 
         #region Валидация
@@ -104,13 +99,6 @@ namespace Inventory.Model
 
         private bool IsValidationPhoneNumber(string phoneNumber) => Regex.IsMatch(phoneNumber, @"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$");
 
-        public bool IsValidationCollections()
-        {
-            if (PostsEmployees.Count == 0 || EmployeesInDepartments.Count == 0)
-                return false;
-
-            return PostsEmployees.All(item => item.Fk_post != 0) && EmployeesInDepartments.All(item => item.Fk_department != 0);
-        }
         #endregion
 
         #region Откат изменений

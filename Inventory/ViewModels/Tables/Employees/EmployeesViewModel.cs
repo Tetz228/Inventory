@@ -109,12 +109,8 @@
         public ICommand EditEmployeeCommand => new DelegateCommand<Employee>(employee =>
         {
             var editEmployeeViewModel = new EmployeeEditViewModel(employee);
-            Employee.EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments);
-            Employee.PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees);
-
             var editEmployeeWindow = new EmployeeEditWindow();
             editEmployeeWindow.DataContext = editEmployeeViewModel;
-            editEmployeeWindow.Closing += editEmployeeViewModel.OnWindowClosing;
             editEmployeeWindow.ShowDialog();
 
         }, employee => employee != null);

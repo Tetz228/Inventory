@@ -2,13 +2,11 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Windows;
-    using System.Windows.Input;
-
     using Inventory.Services;
     using Inventory.ViewModels.Tables.Employees;
+    using System.Collections.ObjectModel;
+    using System.Windows;
+    using System.Windows.Input;
 
     public class EmployeeAddViewModel : BindableBase
     {
@@ -16,40 +14,33 @@
         {
             using var db = new InventoryEntities();
 
-            Posts_employees.CollectionPosts = new List<Post>(db.Posts.AsNoTracking());
-            Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments.AsNoTracking());
-
-            Employee.PostsEmployees.Add(new Posts_employees());
-            Employee.EmployeesInDepartments.Add(new Employees_in_departments());
+            Posts = new ObservableCollection<Post>(db.Posts);
+            Departments = new ObservableCollection<Department>(db.Departments);
         }
 
         public Employee Employee { get; } = new();
 
-        public void OnWindowClosing(object sender, CancelEventArgs args)
-        {
-            Employee.PostsEmployees.Clear();
-            Employee.EmployeesInDepartments.Clear();
-        }
+        public ObservableCollection<Post> Posts { get; set; }
+
+        public ObservableCollection<Department> Departments { get; set; }
 
         #region Команды
         public ICommand AddEmployeeCommand => new DelegateCommand<Window>(empAddWindow =>
         {
             Services.Add(Employee);
-            Posts_employees.AddPostEmployee(Employee.Id_employee);
-            Employees_in_departments.AddEmployeeInDepartment(Employee.Id_employee);
             EmployeesViewModel.RefreshCollection();
             empAddWindow.Close();
-        }, _ => Employee.IsValidationCollections() && Services.IsValidationProperties(Employee.ErrorCollection));
+        }, _ => Services.IsValidationProperties(Employee.ErrorCollection));
 
         public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow => empAddWindow.Close());
 
-        public ICommand AddPostInCollectionCommand => new DelegateCommand(() => Employee.PostsEmployees.Add(new Posts_employees()));
+        public ICommand AddPostInCollectionCommand => new DelegateCommand(() => Employee.Posts_employees.Add(new Posts_employees()));
 
-        public ICommand DeletePostFromCollectionCommand => new DelegateCommand<Posts_employees>(postEmp => Employee.PostsEmployees.Remove(postEmp));
+        public ICommand DeletePostFromCollectionCommand => new DelegateCommand<Posts_employees>(postEmp => Employee.Posts_employees.Remove(postEmp));
 
-        public ICommand AddDepartmentInCollectionCommand => new DelegateCommand(() => Employee.EmployeesInDepartments.Add(new Employees_in_departments()));
+        public ICommand AddDepartmentInCollectionCommand => new DelegateCommand(() => Employee.Employees_in_departments.Add(new Employees_in_departments()));
 
-        public ICommand DeleteDepartmentFromCollectionCommand => new DelegateCommand<Employees_in_departments>(empInDepart => Employee.EmployeesInDepartments.Remove(empInDepart));
+        public ICommand DeleteDepartmentFromCollectionCommand => new DelegateCommand<Employees_in_departments>(empInDepart => Employee.Employees_in_departments.Remove(empInDepart));
         #endregion
     }
 }
