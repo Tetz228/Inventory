@@ -16,9 +16,20 @@
         {
             using var db = new InventoryEntities();
 
-            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(type => type.Types_peripherals));
-            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking());
-            InventoryPeripheral.Inventory_number = MaxInventoryNumber();
+            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(type => type.Types_peripherals))
+                .Sort(manufact => manufact.Manufacturer.Name);
+            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking()).Sort(status => status.Name);
+
+            try
+            {
+                InventoryPeripheral.Inventory_number = db.Inventory_numbers_peripherals.Select(peripherals => peripherals.Inventory_number).Max() + 1;
+            }
+            catch
+            {
+                InventoryPeripheral.Inventory_number = 1;
+            }
         }
 
         public Inventory_numbers_peripherals InventoryPeripheral { get; } = new();
@@ -26,19 +37,6 @@
         public ObservableCollection<Peripheral> Peripherals { get; }
 
         public ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; }
-
-        private static int MaxInventoryNumber()
-        {
-            using var db = new InventoryEntities();
-            var isEmpty = db.Inventory_numbers_peripherals.AsNoTracking().FirstOrDefault();
-
-            if (isEmpty == null)
-                return 1;
-
-            var isUniqueNumber = db.Inventory_numbers_peripherals.AsNoTracking().Max(number => number.Inventory_number);
-
-            return ++isUniqueNumber;
-        }
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>

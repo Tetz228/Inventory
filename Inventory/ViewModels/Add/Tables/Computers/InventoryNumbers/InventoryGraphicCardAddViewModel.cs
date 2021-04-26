@@ -16,26 +16,24 @@
         {
             using var db = new InventoryEntities();
 
-            GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit));
-            InventoryGraphicCard.Inventory_number = MaxInventoryNumber();
+            GraphicsCards = new ObservableCollection<Graphics_cards>(db.Graphics_cards.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(unit => unit.Unit))
+                .Sort(manufact => manufact.Manufacturer.Name);
+
+            try
+            {
+                InventoryGraphicCard.Inventory_number = db.Inventory_numbers_graphics_cards.Select(graphicsCards => graphicsCards.Inventory_number).Max() + 1;
+            }
+            catch
+            {
+                InventoryGraphicCard.Inventory_number = 1;
+            }
         }
 
         public Inventory_numbers_graphics_cards InventoryGraphicCard { get; } = new();
 
         public ObservableCollection<Graphics_cards> GraphicsCards { get; }
-
-        private static int MaxInventoryNumber()
-        {
-            using var db = new InventoryEntities();
-            var isEmpty = db.Inventory_numbers_graphics_cards.AsNoTracking().FirstOrDefault();
-
-            if (isEmpty == null)
-                return 1;
-
-            var isUniqueNumber = db.Inventory_numbers_graphics_cards.AsNoTracking().Max(number => number.Inventory_number);
-
-            return ++isUniqueNumber;
-        }
 
         #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
