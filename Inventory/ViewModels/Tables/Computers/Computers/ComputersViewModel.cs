@@ -3,20 +3,16 @@
     using DevExpress.Mvvm;
     using Inventory.Model;
     using Inventory.Services;
-    using Inventory.View.Add.Tables.Computers.InventoryNumbers;
-    using Inventory.View.Edit.Tables.Computers.InventoryNumbers;
-    using Inventory.ViewModels.Edit.Tables.Computers.InventoryNumbers;
+    using Inventory.View.Add.Tables.Computers.Computers;
+    using Inventory.View.Edit.Tables.Computers.Computers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.View.Add.Tables.Computers.Computers;
-    using Inventory.View.Edit.Tables.Computers.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Computers;
 
     public class ComputersViewModel : BindableBase
     {
@@ -24,8 +20,25 @@
         {
             using var db = new InventoryEntities();
 
-            Computers = new ObservableCollection<Computer>(db.Computers.AsNoTracking().Include(status => status.Statuses_computers));
-            Computers.Sort(inventoryPowerSupplies => inventoryPowerSupplies.Inventory_number, SortDirection = ListSortDirection.Ascending);
+            Computers = new ObservableCollection<Computer>(db.Computers.AsNoTracking()
+                .Include(status => status.Statuses_computers)
+                .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Manufacturer))
+                .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Types_hdd))
+                .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Unit))
+                .Include(ramComp => ramComp.Ram_in_computers.Select(inventoryRam => inventoryRam.Inventory_numbers_ram.Ram.Manufacturer))
+                .Include(ramComp => ramComp.Ram_in_computers.Select(inventoryRam => inventoryRam.Inventory_numbers_ram.Ram.Types_memory))
+                .Include(ramComp => ramComp.Ram_in_computers.Select(inventoryRam => inventoryRam.Inventory_numbers_ram.Ram.Unit))
+                .Include(ssdComp => ssdComp.Ssd_in_computers.Select(inventorySsd => inventorySsd.Inventory_numbers_ssd.Ssd.Manufacturer))
+                .Include(ssdComp => ssdComp.Ssd_in_computers.Select(inventorySsd => inventorySsd.Inventory_numbers_ssd.Ssd.Types_ssd))
+                .Include(ssdComp => ssdComp.Ssd_in_computers.Select(inventorySsd => inventorySsd.Inventory_numbers_ssd.Ssd.Unit))
+                .Include(procComp => procComp.Processors_in_computers.Select(inventoryProc => inventoryProc.Inventory_numbers_processors.Processor.Manufacturer))
+                .Include(procComp => procComp.Processors_in_computers.Select(inventoryProc => inventoryProc.Inventory_numbers_processors.Processor.Socket))
+                .Include(procComp => procComp.Processors_in_computers.Select(inventoryProc => inventoryProc.Inventory_numbers_processors.Processor.Unit))
+                .Include(motherboard => motherboard.Inventory_numbers_motherboards.Motherboard.Manufacturer)
+                .Include(motherboard => motherboard.Inventory_numbers_motherboards.Motherboard.Socket)
+                .Include(power => power.Inventory_numbers_power_supplies.Power_supplies.Manufacturer)
+                .Include(power => power.Inventory_numbers_power_supplies.Power_supplies.Unit)
+                .Include(systemComp => systemComp.Operating_systems_in_computers.Select(system => system.Operating_systems))).Sort(inventoryPowerSupplies => inventoryPowerSupplies.Inventory_number);
             ComputersCollection = CollectionViewSource.GetDefaultView(Computers);
         }
 
@@ -98,7 +111,7 @@
 
         public ICommand EditComputerCommand => new DelegateCommand<Computer>(selectComputer =>
         {
-            //var editWindow = new ComputerEditWindow();
+            var editWindow = new ComputerEditWindow();
             //var editViewModel = new ComputerEditViewModel(selectComputer);
             //editWindow.DataContext = editViewModel;
             //editWindow.Closing += editViewModel.OnWindowClosing;
@@ -124,8 +137,28 @@
             Computers.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Computers.AsNoTracking().Include(status => status.Statuses_computers))
+            foreach (var item in db.Computers.AsNoTracking()
+                .Include(status => status.Statuses_computers)
+                .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Manufacturer))
+                .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Types_hdd))
+                .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Unit))
+                .Include(ramComp => ramComp.Ram_in_computers.Select(inventoryRam => inventoryRam.Inventory_numbers_ram.Ram.Manufacturer))
+                .Include(ramComp => ramComp.Ram_in_computers.Select(inventoryRam => inventoryRam.Inventory_numbers_ram.Ram.Types_memory))
+                .Include(ramComp => ramComp.Ram_in_computers.Select(inventoryRam => inventoryRam.Inventory_numbers_ram.Ram.Unit))
+                .Include(ssdComp => ssdComp.Ssd_in_computers.Select(inventorySsd => inventorySsd.Inventory_numbers_ssd.Ssd.Manufacturer))
+                .Include(ssdComp => ssdComp.Ssd_in_computers.Select(inventorySsd => inventorySsd.Inventory_numbers_ssd.Ssd.Types_ssd))
+                .Include(ssdComp => ssdComp.Ssd_in_computers.Select(inventorySsd => inventorySsd.Inventory_numbers_ssd.Ssd.Unit))
+                .Include(procComp => procComp.Processors_in_computers.Select(inventoryProc => inventoryProc.Inventory_numbers_processors.Processor.Manufacturer))
+                .Include(procComp => procComp.Processors_in_computers.Select(inventoryProc => inventoryProc.Inventory_numbers_processors.Processor.Socket))
+                .Include(procComp => procComp.Processors_in_computers.Select(inventoryProc => inventoryProc.Inventory_numbers_processors.Processor.Unit))
+                .Include(motherboard => motherboard.Inventory_numbers_motherboards.Motherboard.Manufacturer)
+                .Include(motherboard => motherboard.Inventory_numbers_motherboards.Motherboard.Socket)
+                .Include(power => power.Inventory_numbers_power_supplies.Power_supplies.Manufacturer)
+                .Include(power => power.Inventory_numbers_power_supplies.Power_supplies.Unit)
+                .Include(systemComp => systemComp.Operating_systems_in_computers.Select(system => system.Operating_systems)))
+            {
                 Computers.Add(item);
+            }
         }
     }
 }
