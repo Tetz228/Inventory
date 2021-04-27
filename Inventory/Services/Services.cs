@@ -108,7 +108,7 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Ошибка при добавлении данных в базу данных. {e.Message}", "Ошибка при добавлении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при добавлении данных в базу данных.\n{e.Message}", "Ошибка при добавлении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -132,7 +132,7 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Ошибка при изменении данных в базе данных. {e.Message}", "Ошибка при изменении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при изменении данных в базе данных.\n{e.Message}", "Ошибка при изменении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -145,7 +145,7 @@
 
             if (foundObject == null)
             {
-                MessageBox.Show("Ошибка при удалении данных в базе данных. Удаляемый объект не найдет в базе данных.", "Ошибка при удаления данных.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ошибка при удалении данных в базе данных. Удаляемый объект не найдет в базе данных.", "Ошибка при удалении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -157,7 +157,7 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Ошибка при удалении данных в базе данных. {e.Message}", "Ошибка при удаления данных.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при удалении данных в базе данных.\n{e.Message}", "Ошибка при удалении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
