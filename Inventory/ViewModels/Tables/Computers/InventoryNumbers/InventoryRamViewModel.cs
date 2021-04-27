@@ -24,7 +24,7 @@
                 .Include(manufacturer => manufacturer.Ram.Manufacturer)
                 .Include(unit => unit.Ram.Unit)
                 .Include(type => type.Ram.Types_memory))
-                .Sort(manufacturer => manufacturer.Ram.Manufacturer.Name);
+                .Sort(ram => ram.Inventory_number);
             InventoryRamsCollection = CollectionViewSource.GetDefaultView(InventoryRams);
         }
 
@@ -138,8 +138,14 @@
             InventoryRams.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_ram.AsNoTracking().Include(manufacturer => manufacturer.Ram.Manufacturer).Include(unit => unit.Ram.Unit).Include(type => type.Ram.Types_memory))
+            foreach (var item in db.Inventory_numbers_ram.AsNoTracking()
+                .Include(manufacturer => manufacturer.Ram.Manufacturer)
+                .Include(unit => unit.Ram.Unit)
+                .Include(type => type.Ram.Types_memory))
+            {
                 InventoryRams.Add(item);
+            }
+            InventoryRams.Sort(ram => ram.Inventory_number);
         }
     }
 }

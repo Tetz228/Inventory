@@ -97,7 +97,7 @@
 
         public ICommand DeleteUnitCommand => new DelegateCommand<Unit>(selectUnit =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectUnit.Full_name}?", "Удаление единицы измерения", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить единицу измерения:\nполное наименование - {selectUnit.Full_name};\nкраткое наименование - {selectUnit.Short_name}?", "Удаление единицы измерения", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -115,7 +115,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Units.AsNoTracking())
+            {
                 Units.Add(item);
+            }
+            Units.Sort(unit => unit.Full_name);
         }
     }
 }

@@ -117,7 +117,7 @@
 
         public ICommand DeleteEmployeeCommand => new DelegateCommand<Employee>(selectEmployee =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name} {selectEmployee.Email}?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить сотрудника:\nФИО - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name};\nпочта - {selectEmployee.Email};\nномер телефона - {selectEmployee.Phone_number}?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

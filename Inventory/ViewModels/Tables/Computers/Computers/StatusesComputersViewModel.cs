@@ -94,7 +94,7 @@
 
         public ICommand DeleteStatusComputerCommand => new DelegateCommand<Statuses_computers>(selectStatusComputer =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectStatusComputer.Name}?", "Удаление статуса компьютера", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить статус:\nнаименование - {selectStatusComputer.Name}?", "Удаление статуса компьютера", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -113,6 +113,8 @@
 
             foreach (var item in db.Statuses_computers.AsNoTracking())
                 StatusesComputers.Add(item);
+
+            StatusesComputers.Sort(statusComputer => statusComputer.Name);
         }
     }
 }

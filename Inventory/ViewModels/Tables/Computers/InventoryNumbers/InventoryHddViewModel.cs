@@ -148,6 +148,8 @@
             {
                 InventoryHdds.Add(item);
             }
+
+            InventoryHdds.Sort(numberHdd => numberHdd.Inventory_number);
         }
     }
 }

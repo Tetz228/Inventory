@@ -97,7 +97,7 @@
 
         public ICommand DeleteOperatingSystemCommand => new DelegateCommand<Operating_systems>(selectOperatingSystem =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectOperatingSystem.Name} версии {selectOperatingSystem.System_version}?", "Удаление операционной системы", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить операционную систему:\nнаименование - {selectOperatingSystem.Name};\nверсия - {selectOperatingSystem.System_version}?", "Удаление операционной системы", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -116,6 +116,8 @@
 
             foreach (var item in db.Operating_systems.AsNoTracking())
                 OperatingSystems.Add(item);
+
+            OperatingSystems.Sort(system => system.Name);
         }
     }
 }

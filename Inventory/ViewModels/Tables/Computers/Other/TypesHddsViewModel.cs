@@ -92,7 +92,7 @@
 
         public ICommand DeleteTypeHddCommand => new DelegateCommand<Types_hdd>(selectTypeHdd =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectTypeHdd.Name}?", "Удаление типа жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить тип:\nнаименование - {selectTypeHdd.Name}?", "Удаление типа жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -110,7 +110,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Types_hdd.AsNoTracking())
+            {
                 TypesHdds.Add(item);
+            }
+            TypesHdds.Sort(typeHdd => typeHdd.Name);
         }
     }
 }

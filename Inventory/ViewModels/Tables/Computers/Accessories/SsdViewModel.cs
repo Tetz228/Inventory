@@ -130,6 +130,8 @@
 
             foreach (var item in db.Ssds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd))
                 Ssds.Add(item);
+
+            Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

@@ -134,6 +134,8 @@
 
             foreach (var item in db.Inventory_numbers_graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Graphics_cards.Manufacturer).Include(unit => unit.Graphics_cards.Unit))
                 InventoryGraphicsCards.Add(item);
+
+            InventoryGraphicsCards.Sort(manufacturer => manufacturer.Inventory_number);
         }
     }
 }

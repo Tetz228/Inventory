@@ -129,6 +129,8 @@
 
             foreach (var item in db.Hdds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd))
                 Hdds.Add(item);
+
+            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Employees;
     using Inventory.View.Edit.Tables.Employees;
     using Inventory.ViewModels.Edit.Tables.Employees;
@@ -11,8 +12,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class DepartmentsViewModel : BindableBase
     {
@@ -59,7 +58,7 @@
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
                 SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
@@ -92,7 +91,7 @@
 
         public ICommand DeleteDepartmentCommand => new DelegateCommand<Department>(selectDepartment =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectDepartment.Name}?", "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить отдел:\nнаименование - {selectDepartment.Name}?", "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -110,7 +109,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Departments.AsNoTracking())
+            {
                 Departments.Add(item);
+            }
+            Departments.Sort(department => department.Name);
         }
     }
 }

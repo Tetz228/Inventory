@@ -132,7 +132,7 @@
 
         public ICommand DeleteInventoryPeripheralCommand => new DelegateCommand<Inventory_numbers_peripherals>(selectInventoryPeripheral =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectInventoryPeripheral.Inventory_number}, {selectInventoryPeripheral.Peripheral.Manufacturer.Name} {selectInventoryPeripheral.Peripheral.Types_peripherals.Name} {selectInventoryPeripheral.Peripheral.Name}?", "Удаление инвентарной периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить инвентарную периферию:\nинвент. номер - {selectInventoryPeripheral.Inventory_number};\nпроизводитель - {selectInventoryPeripheral.Peripheral.Manufacturer.Name};\nтип - {selectInventoryPeripheral.Peripheral.Types_peripherals.Name};\nнаименование - {selectInventoryPeripheral.Peripheral.Name}?", "Удаление инвентарной периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -157,6 +157,7 @@
             {
                 InventoryPeripherals.Add(item);
             }
+            InventoryPeripherals.Sort(numberPeripheral => numberPeripheral.Inventory_number);
         }
     }
 }

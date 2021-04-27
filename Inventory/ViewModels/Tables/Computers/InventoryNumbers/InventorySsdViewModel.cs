@@ -24,7 +24,7 @@
                 .Include(manufacturer => manufacturer.Ssd.Manufacturer)
                 .Include(unit => unit.Ssd.Unit)
                 .Include(type => type.Ssd.Types_ssd))
-                .Sort(manufacturer => manufacturer.Inventory_number);
+                .Sort(ssd => ssd.Inventory_number);
             InventorySsdsCollection = CollectionViewSource.GetDefaultView(InventorySsds);
         }
 
@@ -133,8 +133,14 @@
             InventorySsds.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_ssd.AsNoTracking().Include(manufacturer => manufacturer.Ssd.Manufacturer).Include(unit => unit.Ssd.Unit).Include(type => type.Ssd.Types_ssd))
+            foreach (var item in db.Inventory_numbers_ssd.AsNoTracking()
+                .Include(manufacturer => manufacturer.Ssd.Manufacturer)
+                .Include(unit => unit.Ssd.Unit)
+                .Include(type => type.Ssd.Types_ssd))
+            {
                 InventorySsds.Add(item);
+            }
+            InventorySsds.Sort(ssd => ssd.Inventory_number);
         }
     }
 }

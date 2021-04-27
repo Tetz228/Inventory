@@ -20,7 +20,7 @@
         {
             using var db = new InventoryEntities();
 
-            Posts = new ObservableCollection<Post>(db.Posts.AsNoTracking()).Sort(department => department.Name);
+            Posts = new ObservableCollection<Post>(db.Posts.AsNoTracking()).Sort(post => post.Name);
             PostsCollection = CollectionViewSource.GetDefaultView(Posts);
         }
 
@@ -93,7 +93,7 @@
 
         public ICommand DeletePostCommand => new DelegateCommand<Post>(selectPost =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectPost.Name}?", "Удаление должности", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить должность:\nнаименование - {selectPost.Name}?", "Удаление должности", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -111,7 +111,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Posts.AsNoTracking())
+            {
                 Posts.Add(item);
+            }
+            Posts.Sort(post => post.Name);
         }
     }
 }

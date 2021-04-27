@@ -124,6 +124,8 @@
 
             foreach (var item in db.Power_supplies.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit))
                 PowerSupplies.Add(item);
+
+            PowerSupplies.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

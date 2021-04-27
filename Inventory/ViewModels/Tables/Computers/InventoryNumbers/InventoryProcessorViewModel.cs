@@ -139,8 +139,15 @@
             InventoryProcessors.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_processors.AsNoTracking().Include(processor => processor.Processor).Include(manufacturer => manufacturer.Processor.Manufacturer).Include(unit => unit.Processor.Unit).Include(socket => socket.Processor.Socket))
+            foreach (var item in db.Inventory_numbers_processors.AsNoTracking()
+                .Include(processor => processor.Processor)
+                .Include(manufacturer => manufacturer.Processor.Manufacturer)
+                .Include(unit => unit.Processor.Unit)
+                .Include(socket => socket.Processor.Socket))
+            {
                 InventoryProcessors.Add(item);
+            }
+            InventoryProcessors.Sort(inventoryProcessor => inventoryProcessor.Inventory_number);
         }
     }
 }

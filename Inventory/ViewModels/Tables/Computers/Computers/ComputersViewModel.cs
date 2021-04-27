@@ -38,7 +38,8 @@
                 .Include(motherboard => motherboard.Inventory_numbers_motherboards.Motherboard.Socket)
                 .Include(power => power.Inventory_numbers_power_supplies.Power_supplies.Manufacturer)
                 .Include(power => power.Inventory_numbers_power_supplies.Power_supplies.Unit)
-                .Include(systemComp => systemComp.Operating_systems_in_computers.Select(system => system.Operating_systems))).Sort(inventoryPowerSupplies => inventoryPowerSupplies.Inventory_number);
+                .Include(systemComp => systemComp.Operating_systems_in_computers.Select(system => system.Operating_systems)))
+                .Sort(computer => computer.Inventory_number);
             ComputersCollection = CollectionViewSource.GetDefaultView(Computers);
         }
 
@@ -159,6 +160,8 @@
             {
                 Computers.Add(item);
             }
+
+            Computers.Sort(computer => computer.Inventory_number);
         }
     }
 }

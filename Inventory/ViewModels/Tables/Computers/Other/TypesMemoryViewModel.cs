@@ -92,7 +92,7 @@
 
         public ICommand DeleteTypeMemoryCommand => new DelegateCommand<Types_memory>(selectTypeMemory =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectTypeMemory.Name}?", "Удаление типа памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить тип:\nнаименование - {selectTypeMemory.Name}?", "Удаление типа памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -110,7 +110,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Types_memory.AsNoTracking())
+            {
                 TypesMemory.Add(item);
+            }
+            TypesMemory.Sort(typeMemory => typeMemory.Name);
         }
     }
 }

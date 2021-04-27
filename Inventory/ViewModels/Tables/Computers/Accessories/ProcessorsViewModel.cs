@@ -135,6 +135,8 @@
 
             foreach (var item in db.Processors.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(socket => socket.Socket))
                 Processors.Add(item);
+
+            Processors.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

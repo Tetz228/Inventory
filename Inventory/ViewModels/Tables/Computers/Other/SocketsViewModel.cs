@@ -91,7 +91,7 @@
 
         public ICommand DeleteSocketCommand => new DelegateCommand<Socket>(selectSocket =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectSocket.Name}?", "Удаление сокета", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить сокет:\nнаименование - {selectSocket.Name}?", "Удаление сокета", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -109,7 +109,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Sockets.AsNoTracking())
+            {
                 Sockets.Add(item);
+            }
+            Sockets.Sort(socket => socket.Name);
         }
     }
 }

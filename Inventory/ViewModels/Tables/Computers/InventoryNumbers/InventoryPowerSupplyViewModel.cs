@@ -127,8 +127,13 @@
             InventoryPowerSupplies.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Inventory_numbers_power_supplies.AsNoTracking().Include(manufacturer => manufacturer.Power_supplies.Manufacturer).Include(unit => unit.Power_supplies.Unit))
+            foreach (var item in db.Inventory_numbers_power_supplies.AsNoTracking()
+                .Include(manufacturer => manufacturer.Power_supplies.Manufacturer)
+                .Include(unit => unit.Power_supplies.Unit))
+            {
                 InventoryPowerSupplies.Add(item);
+            }
+            InventoryPowerSupplies.Sort(inventoryPowerSupplies => inventoryPowerSupplies.Inventory_number);
         }
     }
 }

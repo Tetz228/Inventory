@@ -93,7 +93,7 @@
 
         public ICommand DeleteTypeSsdCommand => new DelegateCommand<Types_ssd>(selectTypeSsd =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectTypeSsd.Name}?", "Удаление типа SSD-накопителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить тип:\nнаименование - {selectTypeSsd.Name}?", "Удаление типа SSD-накопителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -111,7 +111,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Types_ssd.AsNoTracking())
+            {
                 TypesSsds.Add(item);
+            }
+            TypesSsds.Sort(typeSsd => typeSsd.Name);
         }
     }
 }

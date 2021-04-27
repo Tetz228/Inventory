@@ -124,6 +124,8 @@
 
             foreach (var item in db.Motherboards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket))
                 Motherboards.Add(item);
+
+            Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

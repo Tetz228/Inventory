@@ -116,7 +116,7 @@
 
         public ICommand DeleteRamCommand => new DelegateCommand<Ram>(selectRam =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить оператив. память:\nпроизводитель - {selectRam.Manufacturer.Name};\nнаименование - {selectRam.Name};\nтип памяти - {selectRam.Types_memory.Name};\nобъём - {selectRam.Memory_size} {selectRam.Unit.Short_name};\nтактовая частота - {selectRam.Clock_frequency}?", "Удаление оперативной памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить оперативную память:\nпроизводитель - {selectRam.Manufacturer.Name};\nнаименование - {selectRam.Name};\nтип памяти - {selectRam.Types_memory.Name};\nобъём - {selectRam.Memory_size} {selectRam.Unit.Short_name};\nтактовая частота - {selectRam.Clock_frequency}?", "Удаление оперативной памяти", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -135,6 +135,8 @@
 
             foreach (var item in db.Rams.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_memory))
                 Rams.Add(item);
+
+            Rams.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

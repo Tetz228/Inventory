@@ -93,7 +93,7 @@
 
         public ICommand DeleteTypePeripheralCommand => new DelegateCommand<Types_peripherals>(selectTypePeripheral =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectTypePeripheral.Name}?", "Удаление типа периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить тип:\nнаименование -  {selectTypePeripheral.Name}?", "Удаление типа периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -111,7 +111,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Types_peripherals.AsNoTracking())
+            {
                 TypesPeripherals.Add(item);
+            }
+            TypesPeripherals.Sort(typePeripheral => typePeripheral.Name);
         }
     }
 }

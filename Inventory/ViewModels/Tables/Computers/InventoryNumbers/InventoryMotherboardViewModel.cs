@@ -140,6 +140,8 @@
             {
                 InventoryMotherboards.Add(item);
             }
+
+            InventoryMotherboards.Sort(inventoryMotherboards => inventoryMotherboards.Inventory_number);
         }
     }
 }

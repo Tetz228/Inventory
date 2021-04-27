@@ -112,7 +112,7 @@
 
         public ICommand DeleteUserCommand => new DelegateCommand<User>(selectUser =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectUser.Login}?", "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить пользователя:\nлогин - {selectUser.Login};\nроль - {selectUser.Role.Name}?", "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -130,7 +130,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Users.AsNoTracking().Include(employee => employee.Employee).Include(role => role.Role))
+            {
                 Users.Add(item);
+            }
+            Users.Sort(user => user.Login);
         }
     }
 }

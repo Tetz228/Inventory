@@ -124,6 +124,8 @@
 
             foreach (var item in db.Graphics_cards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit))
                 GraphicsCards.Add(item);
+
+            GraphicsCards.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

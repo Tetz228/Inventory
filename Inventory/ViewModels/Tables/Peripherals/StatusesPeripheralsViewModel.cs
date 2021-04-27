@@ -94,7 +94,7 @@
 
         public ICommand DeleteStatusPeripheralCommand => new DelegateCommand<Statuses_peripherals>(selectStatusPeripheral =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectStatusPeripheral.Name}?", "Удаление статус периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить статус:\nнаименование - {selectStatusPeripheral.Name}?", "Удаление статус периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -112,7 +112,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Statuses_peripherals.AsNoTracking())
+            {
                 StatusesPeripherals.Add(item);
+            }
+            StatusesPeripherals.Sort(statusPeripheral => statusPeripheral.Name);
         }
     }
 }

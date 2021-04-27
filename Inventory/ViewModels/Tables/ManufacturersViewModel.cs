@@ -91,7 +91,7 @@
 
         public ICommand DeleteManufacturerCommand => new DelegateCommand<Manufacturer>(selectManufacturer =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectManufacturer.Name}?", "Удаление производителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить производителя:\nнаименование - {selectManufacturer.Name}?", "Удаление производителя", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
@@ -109,7 +109,10 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Manufacturers.AsNoTracking())
+            {
                 Manufacturers.Add(item);
+            }
+            Manufacturers.Sort(manufacturer => manufacturer.Name);
         }
     }
 }
