@@ -142,6 +142,7 @@
             {
                 Employees.Add(item);
             }
+            Employees.Sort(employee => employee.L_name);
         }
     }
 }
