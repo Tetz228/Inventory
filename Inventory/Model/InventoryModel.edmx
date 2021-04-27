@@ -502,7 +502,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_in_department_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Employees_in_departments" Type="Self.Employees_in_departments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -538,7 +540,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Hdd_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Hdd_in_computers" Type="Self.Hdd_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -778,7 +782,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Operating_systems_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Operating_systems_in_computers" Type="Self.Operating_systems_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -826,7 +832,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Posts_employees_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Posts_employees" Type="Self.Posts_employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -874,7 +882,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Processors_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Processors_in_computers" Type="Self.Processors_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -934,7 +944,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ram_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ram_in_computers" Type="Self.Ram_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">
@@ -994,7 +1006,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ssd_in_computers_Computers">
-          <End Role="Computers" Type="Self.Computers" Multiplicity="1" />
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ssd_in_computers" Type="Self.Ssd_in_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Computers">

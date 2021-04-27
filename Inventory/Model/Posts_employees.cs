@@ -1,5 +1,7 @@
 namespace Inventory.Model
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
 
     using DevExpress.Mvvm;
 
