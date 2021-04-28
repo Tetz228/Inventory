@@ -14,6 +14,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.ViewModels.Edit.Tables.Computers.Computers;
+
     public class ComputersViewModel : BindableBase
     {
         public ComputersViewModel()
@@ -113,10 +115,10 @@
         public ICommand EditComputerCommand => new DelegateCommand<Computer>(selectComputer =>
         {
             var editWindow = new ComputerEditWindow();
-            //var editViewModel = new ComputerEditViewModel(selectComputer);
-            //editWindow.DataContext = editViewModel;
-            //editWindow.Closing += editViewModel.OnWindowClosing;
-            //editWindow.ShowDialog();
+            var editViewModel = new ComputerEditViewModel(selectComputer);
+            editWindow.DataContext = editViewModel;
+            editWindow.Closing += editViewModel.OnWindowClosing;
+            editWindow.ShowDialog();
         }, computer => computer != null);
 
         public ICommand DeleteComputerCommand => new DelegateCommand<Computer>(selectComputer =>
