@@ -5,7 +5,6 @@
     xmlns:computers="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Computers"
     xmlns:converters="clr-namespace:Inventory.Services.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Inventory.View.Add.Tables.Computers.Computers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="AddWindow"
     Title="Добавить новый компьютер"
@@ -64,7 +63,7 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="IP-адрес: " />
 
                                 <TextBox
-                                    MaxLength="20"
+                                    MaxLength="25"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Computer.Ip_address, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{Binding Computer.ErrorCollection[Ip_address], UpdateSourceTrigger=PropertyChanged}" />
@@ -80,10 +79,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     ItemsSource="{Binding InventoryMotherboards}"
-                                    SelectedValue="{Binding Computer.Fk_inventory_number_motherboard, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Computer.Fk_inventory_number_motherboard, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_inventory_number_motherboard"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding Computer.ErrorCollection[Fk_inventory_number_motherboard], UpdateSourceTrigger=PropertyChanged}">
+                                    Style="{StaticResource BaseComboBox}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>
@@ -142,10 +141,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     ItemsSource="{Binding InventoryPowerSupplies}"
-                                    SelectedValue="{Binding Computer.Fk_inventory_number_power_supplies, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Computer.Fk_inventory_number_power_supplies, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_inventory_number_power_supplie"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding Computer.ErrorCollection[Fk_inventory_number_power_supplies], UpdateSourceTrigger=PropertyChanged}">
+                                    Style="{StaticResource BaseComboBox}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>
@@ -174,10 +173,10 @@
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
                                     ItemsSource="{Binding StatusesComputers}"
-                                    SelectedValue="{Binding Computer.Fk_status_computer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Computer.Fk_status_computer, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_status_computer"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding Computer.ErrorCollection[Fk_status_computer], UpdateSourceTrigger=PropertyChanged}" />
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
 
                             <!--  Процессоры  -->
@@ -198,6 +197,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryProcessors, UpdateSourceTrigger=PropertyChanged}"
+                                                        SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_inventory_number_processor, UpdateSourceTrigger=PropertyChanged}"
                                                         SelectedValuePath="Id_inventory_number_processor"
                                                         Style="{StaticResource BaseComboBox}">
@@ -260,6 +260,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OperatingSystems}"
+                                                        SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_operating_system}"
                                                         SelectedValuePath="Id_operating_system"
                                                         Style="{StaticResource BaseComboBox}">
@@ -317,6 +318,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryHdds}"
+                                                        SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_inventory_number_hdd}"
                                                         SelectedValuePath="Id_inventory_number_hdd"
                                                         Style="{StaticResource BaseComboBox}">
@@ -378,6 +380,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryRams}"
+                                                        SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_inventory_number_ram}"
                                                         SelectedValuePath="Id_inventory_number_ram"
                                                         Style="{StaticResource BaseComboBox}">
@@ -440,6 +443,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventorySsds}"
+                                                        SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_inventory_number_ssd}"
                                                         SelectedValuePath="Id_inventory_number_ssd"
                                                         Style="{StaticResource BaseComboBox}">

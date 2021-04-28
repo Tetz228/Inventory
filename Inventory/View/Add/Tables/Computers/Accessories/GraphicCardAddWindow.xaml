@@ -58,10 +58,10 @@
                                 DisplayMemberPath="Name"
                                 IsDropDownOpen="True"
                                 ItemsSource="{Binding Manufacturers}"
-                                SelectedValue="{Binding GraphicCard.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding GraphicCard.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding GraphicCard.ErrorCollection[Fk_manufacturer], UpdateSourceTrigger=PropertyChanged}" />
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
 
                         <!--  Наименование видеокарты  -->
@@ -97,10 +97,10 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Full_name"
                                 ItemsSource="{Binding Units}"
-                                SelectedValue="{Binding GraphicCard.Fk_unit, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding GraphicCard.Fk_unit, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_unit"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding GraphicCard.ErrorCollection[Fk_unit], ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
                     </StackPanel>
                 </Border>

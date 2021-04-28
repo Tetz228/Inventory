@@ -16,13 +16,16 @@
 
             Posts = new ObservableCollection<Post>(db.Posts);
             Departments = new ObservableCollection<Department>(db.Departments);
+
+            Employee.Posts_employees.Add(new Posts_employees());
+            Employee.Employees_in_departments.Add(new Employees_in_departments());
         }
 
         public Employee Employee { get; } = new();
 
-        public ObservableCollection<Post> Posts { get; set; }
+        public ObservableCollection<Post> Posts { get; }
 
-        public ObservableCollection<Department> Departments { get; set; }
+        public ObservableCollection<Department> Departments { get; }
 
         #region Команды
         public ICommand AddEmployeeCommand => new DelegateCommand<Window>(empAddWindow =>

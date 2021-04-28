@@ -36,14 +36,6 @@ namespace Inventory.Model
                         else if (Name.Length < 2)
                             result = "Поле должно содержать минимум 2 символа";
                         break;
-                    case "Fk_manufacturer":
-                        if (Fk_manufacturer == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
-                    case "Fk_type_peripheral":
-                        if (Fk_type_peripheral == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
                 }
 
                 ErrorCollection[name] = result;

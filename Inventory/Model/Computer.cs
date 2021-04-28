@@ -57,18 +57,6 @@ namespace Inventory.Model
 
                 switch (name)
                 {
-                    case "Fk_inventory_number_motherboard":
-                        if (Fk_inventory_number_motherboard == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
-                    case "Fk_status_computer":
-                        if (Fk_status_computer == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
-                    case "Fk_inventory_number_power_supplies":
-                        if (Fk_inventory_number_power_supplies == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
                     case "Inventory_number":
                         if (Inventory_number <= 0)
                             result = "Число должно быть больше 0";

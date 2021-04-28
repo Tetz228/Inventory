@@ -58,10 +58,10 @@
                                     DisplayMemberPath="Name"
                                     IsDropDownOpen="True"
                                     ItemsSource="{Binding Manufacturers}"
-                                    SelectedValue="{Binding Ram.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Ram.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_manufacturer"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding Ram.ErrorCollection[Fk_manufacturer], UpdateSourceTrigger=PropertyChanged}" />
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
 
                             <!--  Наименование оперативной памяти  -->
@@ -86,10 +86,10 @@
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
                                     ItemsSource="{Binding TypesMemories}"
-                                    SelectedValue="{Binding Ram.Fk_type_memory, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Ram.Fk_type_memory, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_type_memory"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding Ram.ErrorCollection[Fk_type_memory], UpdateSourceTrigger=PropertyChanged}" />
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
 
                             <!--  Объём  -->
@@ -113,10 +113,10 @@
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Full_name"
                                     ItemsSource="{Binding Units}"
-                                    SelectedValue="{Binding Ram.Fk_unit, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Ram.Fk_unit, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_unit"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding Ram.ErrorCollection[Fk_unit], UpdateSourceTrigger=PropertyChanged}" />
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
 
                             <!--  Тактовая частота  -->

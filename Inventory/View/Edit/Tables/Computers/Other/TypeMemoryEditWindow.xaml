@@ -42,7 +42,7 @@
 
                             <TextBox
                                 Name="TextBoxName"
-                                MaxLength="20"
+                                MaxLength="10"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding TypeMemory.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding TypeMemory.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

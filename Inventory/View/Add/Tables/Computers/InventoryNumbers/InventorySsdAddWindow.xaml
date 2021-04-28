@@ -69,10 +69,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     ItemsSource="{Binding Ssds}"
-                                    SelectedValue="{Binding InventorySsd.Fk_ssd, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding InventorySsd.Fk_ssd, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_ssd"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding InventorySsd.ErrorCollection[Fk_ssd], UpdateSourceTrigger=PropertyChanged}">
+                                    Style="{StaticResource BaseComboBox}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>

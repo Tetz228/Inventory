@@ -66,23 +66,23 @@
 
         public Computer Computer { get; } = new();
 
-        public ObservableCollection<Inventory_numbers_motherboards> InventoryMotherboards { get; set; }
+        public ObservableCollection<Inventory_numbers_motherboards> InventoryMotherboards { get; }
 
-        public ObservableCollection<Inventory_numbers_graphics_cards> InventoryGraphicsCards { get; set; }
+        public ObservableCollection<Inventory_numbers_graphics_cards> InventoryGraphicsCards { get; }
 
-        public ObservableCollection<Inventory_numbers_power_supplies> InventoryPowerSupplies { get; set; }
+        public ObservableCollection<Inventory_numbers_power_supplies> InventoryPowerSupplies { get; }
 
-        public ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; set; }
+        public ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; }
 
-        public ObservableCollection<Inventory_numbers_ssd> InventorySsds { get; set; }
+        public ObservableCollection<Inventory_numbers_ssd> InventorySsds { get; }
 
-        public ObservableCollection<Inventory_numbers_ram> InventoryRams { get; set; }
+        public ObservableCollection<Inventory_numbers_ram> InventoryRams { get; }
 
-        public ObservableCollection<Statuses_computers> StatusesComputers { get; set; }
+        public ObservableCollection<Statuses_computers> StatusesComputers { get; }
 
-        public ObservableCollection<Operating_systems> OperatingSystems { get; set; }
+        public ObservableCollection<Operating_systems> OperatingSystems { get; }
 
-        public ObservableCollection<Inventory_numbers_hdd> InventoryHdds { get; set; }
+        public ObservableCollection<Inventory_numbers_hdd> InventoryHdds { get; }
 
         #endregion
 

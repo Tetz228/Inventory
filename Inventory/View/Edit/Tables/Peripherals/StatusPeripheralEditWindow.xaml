@@ -42,7 +42,7 @@
 
                             <TextBox
                                 Name="TextBoxName"
-                                MaxLength="200"
+                                MaxLength="100"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding StatusPeripheral.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding StatusPeripheral.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

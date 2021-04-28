@@ -5,6 +5,7 @@
     using Inventory.Services;
     using Inventory.ViewModels.Tables.Employees;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
@@ -26,6 +27,8 @@
         public ObservableCollection<Post> Posts { get; set; }
 
         public ObservableCollection<Department> Departments { get; set; }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e) => Employee.CancelEdit();
 
         #region Команды
         public ICommand EditEmployeeCommand => new DelegateCommand<Window>(empEditWindow =>

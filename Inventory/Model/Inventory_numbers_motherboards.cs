@@ -35,10 +35,6 @@ namespace Inventory.Model
                         else if (Services.CheckForUniqueness<Inventory_numbers_motherboards>(nameof(Inventory_number), Inventory_number, _selectInventoryMotherboard?.Inventory_number))
                             result = "Номер должен быть уникальным";
                         break;
-                    case "Fk_motherboard":
-                        if (Fk_motherboard == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
                 }
 
                 ErrorCollection[name] = result;

@@ -113,6 +113,7 @@
                                                         MaxWidth="156"
                                                         DisplayMemberPath="Name"
                                                         ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Posts}"
+                                                        SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_post}"
                                                         SelectedValuePath="Id_post"
                                                         Style="{StaticResource BaseComboBox}" />
@@ -158,6 +159,7 @@
                                                         MaxWidth="156"
                                                         DisplayMemberPath="Name"
                                                         ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Departments}"
+                                                        SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_department}"
                                                         SelectedValuePath="Id_department"
                                                         Style="{StaticResource BaseComboBox}" />

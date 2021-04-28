@@ -69,10 +69,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     ItemsSource="{Binding Peripherals}"
-                                    SelectedValue="{Binding InventoryPeripheral.Fk_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding InventoryPeripheral.Fk_peripheral, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_peripheral"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding InventoryPeripheral.ErrorCollection[Fk_peripheral], UpdateSourceTrigger=PropertyChanged}">
+                                    Style="{StaticResource BaseComboBox}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>
@@ -99,10 +99,10 @@
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
                                     ItemsSource="{Binding StatusesPeripherals}"
-                                    SelectedValue="{Binding InventoryPeripheral.Fk_status_peripheral, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding InventoryPeripheral.Fk_status_peripheral, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_status_peripheral"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding InventoryPeripheral.ErrorCollection[Fk_status_peripheral], UpdateSourceTrigger=PropertyChanged}" />
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
                         </StackPanel>
                     </Border>

@@ -1,6 +1,8 @@
 namespace Inventory.Model
 {
-    public partial class Employees_in_departments
+    using DevExpress.Mvvm;
+
+    public partial class Employees_in_departments:BindableBase
     {
         public int Id_employee_in_department { get; set; }
         public int Fk_department { get; set; }

@@ -35,10 +35,6 @@ namespace Inventory.Model
                         else if (Services.CheckForUniqueness<Inventory_numbers_power_supplies>(nameof(Inventory_number), Inventory_number, _selectInventoryPowerSupplies?.Inventory_number))
                             result = "Номер должен быть уникальным";
                         break;
-                    case "Fk_power_supplie":
-                        if (Fk_power_supplie == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
                 }
 
                 ErrorCollection[name] = result;

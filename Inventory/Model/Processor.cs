@@ -45,18 +45,6 @@ namespace Inventory.Model
                         if (Base_frequency <= 0)
                             result = "Число должно быть больше 0";
                         break;
-                    case "Fk_manufacturer":
-                        if (Fk_manufacturer == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
-                    case "Fk_unit":
-                        if (Fk_unit == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
-                    case "Fk_socket":
-                        if (Fk_socket == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
                     case "Amount_cores":
                         if (Amount_cores <= 0)
                             result = "Число должно быть больше 0";

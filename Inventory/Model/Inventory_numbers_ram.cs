@@ -35,10 +35,6 @@ namespace Inventory.Model
                         else if (Services.CheckForUniqueness<Inventory_numbers_ram>(nameof(Inventory_number), Inventory_number, _selectInventoryRam?.Inventory_number))
                             result = "Номер должен быть уникальным";
                         break;
-                    case "Fk_ram":
-                        if (Fk_ram == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
                 }
 
                 ErrorCollection[name] = result;

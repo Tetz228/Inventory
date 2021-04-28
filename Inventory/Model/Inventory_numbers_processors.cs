@@ -35,10 +35,6 @@ namespace Inventory.Model
                         else if (Services.CheckForUniqueness<Inventory_numbers_processors>(nameof(Inventory_number), Inventory_number, _selectInventoryProcessor?.Inventory_number))
                             result = "Номер должен быть уникальным";
                         break;
-                    case "Fk_processor":
-                        if (Fk_processor == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
                 }
 
                 ErrorCollection[name] = result;

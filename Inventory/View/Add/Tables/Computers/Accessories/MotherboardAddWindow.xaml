@@ -53,10 +53,10 @@
                                 DisplayMemberPath="Name"
                                 IsDropDownOpen="True"
                                 ItemsSource="{Binding Manufacturers}"
-                                SelectedValue="{Binding Motherboard.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding Motherboard.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding Motherboard.ErrorCollection[Fk_manufacturer], UpdateSourceTrigger=PropertyChanged}" />
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
 
                         <!--  Наименование материнской платы  -->
@@ -81,6 +81,7 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding Sockets}"
+                                SelectedIndex="0"
                                 SelectedValue="{Binding Motherboard.Fk_socket, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_socket"
                                 Style="{StaticResource BaseComboBox}"

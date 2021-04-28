@@ -57,10 +57,10 @@
                                 DisplayMemberPath="Name"
                                 IsDropDownOpen="True"
                                 ItemsSource="{Binding Manufacturers}"
-                                SelectedValue="{Binding Hdd.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding Hdd.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding Hdd.ErrorCollection[Fk_manufacturer], UpdateSourceTrigger=PropertyChanged}" />
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
 
                         <!--  Тип ЖД  -->
@@ -74,10 +74,10 @@
                                 VerticalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding TypesHdds}"
-                                SelectedValue="{Binding Hdd.Fk_type_hdd, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding Hdd.Fk_type_hdd, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_type_hdd"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding Hdd.ErrorCollection[Fk_type_hdd], UpdateSourceTrigger=PropertyChanged}" />
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
 
                         <!--  Наименование жесткого диска  -->
@@ -112,6 +112,7 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Full_name"
                                 ItemsSource="{Binding Units}"
+                                SelectedIndex="0"
                                 SelectedValue="{Binding Hdd.Fk_unit, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_unit"
                                 Style="{StaticResource BaseComboBox}"

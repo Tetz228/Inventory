@@ -100,10 +100,10 @@
                                     MaxWidth="208"
                                     HorizontalAlignment="Center"
                                     ItemsSource="{Binding Employees}"
-                                    SelectedValue="{Binding User.Fk_employee, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding User.Fk_employee, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_employee"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding User.ErrorCollection[Fk_employee], UpdateSourceTrigger=PropertyChanged}">
+                                    Style="{StaticResource BaseComboBox}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>
@@ -132,10 +132,10 @@
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
                                     ItemsSource="{Binding Roles}"
-                                    SelectedValue="{Binding User.Fk_role, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding User.Fk_role, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_role"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding User.ErrorCollection[Fk_role], UpdateSourceTrigger=PropertyChanged}" />
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
                         </StackPanel>
                     </Border>

@@ -1,21 +1,19 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
+    using Services;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using Services;
-    using DevExpress.Mvvm;
 
     public partial class Inventory_numbers_ssd : BindableBase, IDataErrorInfo, IEditableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inventory_numbers_ssd() => this.Ssd_in_computers = new HashSet<Ssd_in_computers>();
+        public Inventory_numbers_ssd() => Ssd_in_computers = new HashSet<Ssd_in_computers>();
 
         public int Id_inventory_number_ssd { get; set; }
         public int Fk_ssd { get; set; }
         public int Inventory_number { get; set; }
-    
+
         public virtual Ssd Ssd { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ssd_in_computers> Ssd_in_computers { get; set; }
@@ -36,10 +34,6 @@ namespace Inventory.Model
                             result = "Число должно быть больше 0";
                         else if (Services.CheckForUniqueness<Inventory_numbers_ssd>(nameof(Inventory_number), Inventory_number, _selectInventorySsd?.Inventory_number))
                             result = "Номер должен быть уникальным";
-                        break;
-                    case "Fk_ssd":
-                        if (Fk_ssd == 0)
-                            result = "Поле не должно быть пустым";
                         break;
                 }
 

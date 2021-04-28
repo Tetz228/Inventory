@@ -57,10 +57,10 @@
                                 DisplayMemberPath="Name"
                                 IsDropDownOpen="True"
                                 ItemsSource="{Binding Manufacturers}"
-                                SelectedValue="{Binding PowerSupply.Fk_manufacturer, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedIndex="0"
+                                SelectedValue="{Binding PowerSupply.Fk_manufacturer, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_manufacturer"
-                                Style="{StaticResource BaseComboBox}"
-                                ToolTip="{Binding PowerSupply.ErrorCollection[Fk_manufacturer], UpdateSourceTrigger=PropertyChanged}" />
+                                Style="{StaticResource BaseComboBox}" />
                         </UniformGrid>
 
                         <!--  Наименование блока питания  -->
@@ -68,7 +68,7 @@
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование БП: " />
 
                             <TextBox
-                                MaxLength="50"
+                                MaxLength="40"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding PowerSupply.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding PowerSupply.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />
@@ -95,6 +95,7 @@
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Full_name"
                                 ItemsSource="{Binding Units}"
+                                SelectedIndex="0"
                                 SelectedValue="{Binding PowerSupply.Fk_unit, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_unit"
                                 Style="{StaticResource BaseComboBox}"

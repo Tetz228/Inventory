@@ -77,7 +77,6 @@
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование SSD: " />
 
                             <TextBox
-                                MaxLength="50"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Ssd.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding Ssd.ErrorCollection[Name], UpdateSourceTrigger=PropertyChanged}" />

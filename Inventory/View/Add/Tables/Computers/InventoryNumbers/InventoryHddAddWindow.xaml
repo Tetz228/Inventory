@@ -69,10 +69,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     ItemsSource="{Binding Hdds}"
-                                    SelectedValue="{Binding InventoryHdd.Fk_hdd, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding InventoryHdd.Fk_hdd, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedValuePath="Id_hdd"
-                                    Style="{StaticResource BaseComboBox}"
-                                    ToolTip="{Binding InventoryHdd.ErrorCollection[Fk_hdd], UpdateSourceTrigger=PropertyChanged}">
+                                    Style="{StaticResource BaseComboBox}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>

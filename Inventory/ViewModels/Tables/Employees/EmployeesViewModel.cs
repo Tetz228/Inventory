@@ -111,13 +111,14 @@
             var editEmployeeViewModel = new EmployeeEditViewModel(employee);
             var editEmployeeWindow = new EmployeeEditWindow();
             editEmployeeWindow.DataContext = editEmployeeViewModel;
+            editEmployeeWindow.Closing += editEmployeeViewModel.OnWindowClosing;
             editEmployeeWindow.ShowDialog();
 
         }, employee => employee != null);
 
         public ICommand DeleteEmployeeCommand => new DelegateCommand<Employee>(selectEmployee =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить сотрудника:\nФИО - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name};\nпочта - {selectEmployee.Email};\nномер телефона - {selectEmployee.Phone_number}?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить сотрудника:\nФИО - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name};\nномер телефона - {selectEmployee.Phone_number};\nпочта - {selectEmployee.Email}?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

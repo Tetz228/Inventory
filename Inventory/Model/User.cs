@@ -50,14 +50,6 @@ namespace Inventory.Model
                         else if (Services.CheckForUniqueness<User>(nameof(Login), Login, null))
                             result = "Логин уже существует";
                         break;
-                    case "Fk_employee":
-                        if (Fk_employee == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
-                    case "Fk_role":
-                        if (Fk_role == 0)
-                            result = "Поле не должно быть пустым";
-                        break;
                 }
 
                 ErrorCollection[name] = result;
