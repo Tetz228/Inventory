@@ -113,7 +113,9 @@ namespace Inventory.Model
                 F_name = F_name,
                 M_name = M_name,
                 Phone_number = Phone_number,
-                Email = Email
+                Email = Email,
+                Posts_employees = Posts_employees.CopyingElements(),
+                Employees_in_departments = Employees_in_departments.CopyingElements()
             };
         }
 
@@ -130,6 +132,8 @@ namespace Inventory.Model
             M_name = _selectEmployee.M_name;
             Phone_number = _selectEmployee.Phone_number;
             Email = _selectEmployee.Email;
+            Posts_employees = _selectEmployee.Posts_employees;
+            Employees_in_departments = _selectEmployee.Employees_in_departments;
         }
         #endregion
     }

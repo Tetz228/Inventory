@@ -40,6 +40,16 @@
             return observableCollection;
         }
 
+        public static ObservableCollection<TClass> CopyingElements<TClass>(this ObservableCollection<TClass> observableCollection)
+        {
+            var newCollection = new ObservableCollection<TClass>();
+
+            foreach (var item in observableCollection)
+                newCollection.Add(item);
+
+            return newCollection;
+        }
+
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 
