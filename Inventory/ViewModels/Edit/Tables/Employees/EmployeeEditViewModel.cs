@@ -35,8 +35,8 @@
         {
             Employee.EndEdit();
             Services.Edit(Employee.Id_employee, Employee);
-            EditPostEmployee(Employee.Id_employee);
-            EditEmployeeInDepartment(Employee.Id_employee);
+            EditPostsEmployee(Employee.Id_employee);
+            EditEmployeeInDepartments(Employee.Id_employee);
 
             EmployeesViewModel.RefreshCollection();
             empEditWindow.Close();
@@ -78,52 +78,46 @@
 
         #endregion
 
-        public void EditEmployeeInDepartment(int idEmployee)
+        private void EditEmployeeInDepartments(int idEmployee)
         {
             using var db = new InventoryEntities();
 
-            foreach (var department in Employee.Employees_in_departments)
+            foreach (var item in Employee.Employees_in_departments)
             {
-                if (department.Id_employee_in_department == 0)
+                if (item.Id_employee_in_department == 0)
                 {
-                    department.Fk_employee = idEmployee;
-                    db.Employees_in_departments.Add(department);
-                    db.SaveChanges();
+                    item.Fk_employee = idEmployee;
+                    db.Employees_in_departments.Add(item);
                 }
                 else
                 {
-                    var employeesInDepartments = db.Employees_in_departments.Where(empDepart => empDepart.Id_employee_in_department == department.Id_employee_in_department).ToList();
-                    foreach (var item in employeesInDepartments)
-                    {
-                        item.Fk_department = department.Fk_department;
-                        db.SaveChanges();
-                    }
+                    var employeeInDepartment = db.Employees_in_departments.FirstOrDefault(employeesInDepartments => employeesInDepartments.Id_employee_in_department == item.Id_employee_in_department);
+                    if (employeeInDepartment != null)
+                        employeeInDepartment.Fk_department = item.Fk_department;
                 }
             }
+            db.SaveChanges();
         }
 
-        public void EditPostEmployee(int idEmployee)
+        private void EditPostsEmployee(int idEmployee)
         {
             using var db = new InventoryEntities();
 
-            foreach (var post in Employee.Posts_employees)
+            foreach (var item in Employee.Posts_employees)
             {
-                if (post.Id_post_employee == 0)
+                if (item.Id_post_employee == 0)
                 {
-                    post.Fk_employee = idEmployee;
-                    db.Posts_employees.Add(post);
-                    db.SaveChanges();
+                    item.Fk_employee = idEmployee;
+                    db.Posts_employees.Add(item);
                 }
                 else
                 {
-                    var postEmployee = db.Posts_employees.Where(postEmp => postEmp.Id_post_employee == post.Id_post_employee).ToList();
-                    foreach (var item in postEmployee)
-                    {
-                        item.Fk_post = post.Fk_post;
-                        db.SaveChanges();
-                    }
+                    var postInEmployee = db.Posts_employees.FirstOrDefault(postsEmployees => postsEmployees.Id_post_employee == item.Id_post_employee);
+                    if (postInEmployee != null)
+                        postInEmployee.Fk_post = item.Fk_post;
                 }
             }
+            db.SaveChanges();
         }
     }
 }
