@@ -56,7 +56,7 @@
                     Header="Блоки питания"
                     Style="{StaticResource BaseMenuItem}" />
             </MenuItem>
-            <MenuItem Command="{Binding SelectComputersCommand}" Header="Компьютеры"/>
+            <MenuItem Command="{Binding SelectComputersCommand}" Header="Компьютеры" />
             <MenuItem Header="Комплектующие">
                 <MenuItem
                     Command="{Binding SelectProcessorsPageCommand}"
@@ -105,7 +105,6 @@
                     Header="Типы жестких дисков"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
-                    
                     Command="{Binding SelectSoketsPageCommand}"
                     Header="Сокеты"
                     Style="{StaticResource BaseMenuItem}" />
