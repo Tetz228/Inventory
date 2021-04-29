@@ -108,7 +108,7 @@
             editWindow.DataContext = viewModel;
             editWindow.Closing += viewModel.OnWindowClosing;
             editWindow.ShowDialog();
-        });
+        }, selectUser => selectUser != null);
 
         public ICommand DeleteUserCommand => new DelegateCommand<User>(selectUser =>
         {
