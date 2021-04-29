@@ -28,72 +28,59 @@
 
             <MenuItem Header="Инвентаризация комплектующих">
                 <MenuItem
-                    Command="{Binding SelectInventoryMotherboardsPageCommand}"
-                    Header="Материнские платы"
-                    Style="{StaticResource BaseMenuItem}" />
-                <MenuItem
                     Command="{Binding SelectInventoryProcessorsPageCommand}"
                     Header="Процессоры"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
-                    Command="{Binding SelectInventoryRamPageCommand}"
-                    Header="Оперативная память"
-                    Style="{StaticResource BaseMenuItem}" />
-                <MenuItem
-                    Command="{Binding SelectInventorySsdsPageCommand}"
-                    Header="SSD-накопители"
+                    Command="{Binding SelectInventoryMotherboardsPageCommand}"
+                    Header="Материнские платы"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
                     Command="{Binding SelectInventoryGraphicsCardsPageCommand}"
                     Header="Видеокарты"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
+                    Command="{Binding SelectInventoryRamPageCommand}"
+                    Header="Оперативная память"
+                    Style="{StaticResource BaseMenuItem}" />
+                <MenuItem
                     Command="{Binding SelectInventoryHddsPageCommand}"
                     Header="Жесткие диски"
+                    Style="{StaticResource BaseMenuItem}" />
+                <MenuItem
+                    Command="{Binding SelectInventorySsdsPageCommand}"
+                    Header="SSD-накопители"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
                     Command="{Binding SelectInventoryPowerSuppliesPageCommand}"
                     Header="Блоки питания"
                     Style="{StaticResource BaseMenuItem}" />
             </MenuItem>
-            <MenuItem Header="Компьютеры">
-                <MenuItem
-                    Command="{Binding SelectComputersCommand}"
-                    Header="Компьютеры"
-                    Style="{StaticResource BaseMenuItem}" />
-                <MenuItem
-                    Command="{Binding SelectStatusesComputersPageCommand}"
-                    Header="Статусы компьютеров"
-                    Style="{StaticResource BaseMenuItem}" />
-                <MenuItem
-                    Command="{Binding SelectOperatingSystemsPageCommand}"
-                    Header="Операционные системы"
-                    Style="{StaticResource BaseMenuItem}" />
-            </MenuItem>
+            <MenuItem Command="{Binding SelectComputersCommand}" Header="Компьютеры"/>
             <MenuItem Header="Комплектующие">
-                <MenuItem
-                    Command="{Binding SelectMotherboardsPageCommand}"
-                    Header="Материнские платы"
-                    Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
                     Command="{Binding SelectProcessorsPageCommand}"
                     Header="Процессоры"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
-                    Command="{Binding SelectRamPageCommand}"
-                    Header="Оперативная память"
-                    Style="{StaticResource BaseMenuItem}" />
-                <MenuItem
-                    Command="{Binding SelectSsdPageCommand}"
-                    Header="SSD-накопители"
+                    Command="{Binding SelectMotherboardsPageCommand}"
+                    Header="Материнские платы"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
                     Command="{Binding SelectGraphicsCardsPageCommand}"
                     Header="Видеокарты"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
+                    Command="{Binding SelectRamPageCommand}"
+                    Header="Оперативная память"
+                    Style="{StaticResource BaseMenuItem}" />
+                <MenuItem
                     Command="{Binding SelectHddsPageCommand}"
                     Header="Жесткие диски"
+                    Style="{StaticResource BaseMenuItem}" />
+                <MenuItem
+                    Command="{Binding SelectSsdPageCommand}"
+                    Header="SSD-накопители"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
                     Command="{Binding SelectPowerSuppliesPageCommand}"
@@ -118,12 +105,21 @@
                     Header="Типы жестких дисков"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
+                    
                     Command="{Binding SelectSoketsPageCommand}"
                     Header="Сокеты"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
                     Command="{Binding SelectUnitsPageCommand}"
                     Header="Единицы измерения"
+                    Style="{StaticResource BaseMenuItem}" />
+                <MenuItem
+                    Command="{Binding SelectStatusesComputersPageCommand}"
+                    Header="Статусы компьютеров"
+                    Style="{StaticResource BaseMenuItem}" />
+                <MenuItem
+                    Command="{Binding SelectOperatingSystemsPageCommand}"
+                    Header="Операционные системы"
                     Style="{StaticResource BaseMenuItem}" />
             </MenuItem>
         </Menu>
