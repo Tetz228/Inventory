@@ -69,116 +69,6 @@
                                     ToolTip="{Binding Computer.ErrorCollection[Ip_address], UpdateSourceTrigger=PropertyChanged}" />
                             </UniformGrid>
 
-                            <!--  Мат. плата  -->
-                            <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Материнская плата: " />
-
-                                <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    ItemsSource="{Binding InventoryMotherboards}"
-                                    SelectedIndex="0"
-                                    SelectedValue="{Binding Computer.Fk_inventory_number_motherboard, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedValuePath="Id_inventory_number_motherboard"
-                                    Style="{StaticResource BaseComboBox}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock>
-                                                <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Название: {2};&#x0d;&#x0a;Сокет: {3}.">
-                                                        <Binding Path="Inventory_number" />
-                                                        <Binding Path="Motherboard.Manufacturer.Name" />
-                                                        <Binding Path="Motherboard.Name" />
-                                                        <Binding Path="Motherboard.Socket.Name" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </UniformGrid>
-
-                            <!--  Видеокарта  -->
-                            <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Видеокарта: " />
-
-                                <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    ItemsSource="{Binding InventoryGraphicsCards}"
-                                    SelectedValue="{Binding Computer.Fk_inventory_number_graphics_card, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedValuePath="Id_inventory_number_graphics_card"
-                                    Style="{StaticResource BaseComboBox}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock>
-                                                <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Название: {2};&#x0d;&#x0a;Объём: {3} {4}.">
-                                                        <Binding Path="Inventory_number" />
-                                                        <Binding Path="Graphics_cards.Manufacturer.Name" />
-                                                        <Binding Path="Graphics_cards.Name" />
-                                                        <Binding Path="Graphics_cards.Memory_size" />
-                                                        <Binding Path="Graphics_cards.Unit.Short_name" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </UniformGrid>
-
-                            <!--  Блок питания  -->
-                            <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Блок питания: " />
-
-                                <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    ItemsSource="{Binding InventoryPowerSupplies}"
-                                    SelectedIndex="0"
-                                    SelectedValue="{Binding Computer.Fk_inventory_number_power_supplies, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedValuePath="Id_inventory_number_power_supplie"
-                                    Style="{StaticResource BaseComboBox}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock>
-                                                <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Название: {2};&#x0d;&#x0a;Мощность: {3} {4}.">
-                                                        <Binding Path="Inventory_number" />
-                                                        <Binding Path="Power_supplies.Manufacturer.Name" />
-                                                        <Binding Path="Power_supplies.Name" />
-                                                        <Binding Path="Power_supplies.Power" />
-                                                        <Binding Path="Power_supplies.Unit.Short_name" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </UniformGrid>
-
-                            <!--  Статус  -->
-                            <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Статус: " />
-
-                                <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
-                                    HorizontalAlignment="Center"
-                                    DisplayMemberPath="Name"
-                                    ItemsSource="{Binding StatusesComputers}"
-                                    SelectedIndex="0"
-                                    SelectedValue="{Binding Computer.Fk_status_computer, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedValuePath="Id_status_computer"
-                                    Style="{StaticResource BaseComboBox}" />
-                            </UniformGrid>
-
                             <!--  Процессоры  -->
                             <UniformGrid Columns="2">
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Процессоры: " />
@@ -242,124 +132,66 @@
                                 </StackPanel>
                             </UniformGrid>
 
-                            <!--  Операционные системы  -->
+                            <!--  Мат. плата  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Операционные системы: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Материнская плата: " />
 
-                                <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding Computer.Operating_systems_in_computers}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid Background="#98c9e3">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="4*" />
-                                                        <ColumnDefinition Width="1*" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <ComboBox
-                                                        Width="156"
-                                                        MaxWidth="156"
-                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OperatingSystems}"
-                                                        SelectedIndex="0"
-                                                        SelectedValue="{Binding Fk_operating_system}"
-                                                        SelectedValuePath="Id_operating_system"
-                                                        Style="{StaticResource BaseComboBox}">
-                                                        <ComboBox.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <TextBlock>
-                                                                    <TextBlock.Text>
-                                                                        <MultiBinding StringFormat="{}Название: {0};&#x0d;&#x0a;Версия: {1}.">
-                                                                            <Binding Path="Name" />
-                                                                            <Binding Path="System_version" />
-                                                                        </MultiBinding>
-                                                                    </TextBlock.Text>
-                                                                </TextBlock>
-                                                            </DataTemplate>
-                                                        </ComboBox.ItemTemplate>
-                                                    </ComboBox>
-
-                                                    <!--  Удалить операционную систему  -->
-                                                    <Button
-                                                        Grid.Column="1"
-                                                        Margin="3"
-                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteOperatingSystemsFromCollectionCommand}"
-                                                        CommandParameter="{Binding}"
-                                                        Content="Х"
-                                                        Style="{StaticResource BaseButton}" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-
-                                    <!--  Добавить операционную систему  -->
-                                    <Button
-                                        Margin="3"
-                                        Command="{Binding AddOperatingSystemsInCollectionCommand}"
-                                        Content="Добавить"
-                                        Style="{StaticResource BaseButton}" />
-                                </StackPanel>
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ItemsSource="{Binding InventoryMotherboards}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Computer.Fk_inventory_number_motherboard, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_inventory_number_motherboard"
+                                    Style="{StaticResource BaseComboBox}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Название: {2};&#x0d;&#x0a;Сокет: {3}.">
+                                                        <Binding Path="Inventory_number" />
+                                                        <Binding Path="Motherboard.Manufacturer.Name" />
+                                                        <Binding Path="Motherboard.Name" />
+                                                        <Binding Path="Motherboard.Socket.Name" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </UniformGrid>
 
-                            <!--  Жесткий диск  -->
+                            <!--  Видеокарта  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Жесткий диск: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Видеокарта: " />
 
-                                <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding Computer.Hdd_in_computers}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid Background="#98c9e3">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="4*" />
-                                                        <ColumnDefinition Width="1*" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <ComboBox
-                                                        Width="156"
-                                                        MaxWidth="156"
-                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryHdds}"
-                                                        SelectedIndex="0"
-                                                        SelectedValue="{Binding Fk_inventory_number_hdd}"
-                                                        SelectedValuePath="Id_inventory_number_hdd"
-                                                        Style="{StaticResource BaseComboBox}">
-                                                        <ComboBox.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <TextBlock>
-                                                                    <TextBlock.Text>
-                                                                        <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Тип ЖД: {2};&#x0d;&#x0a;Название: {3};&#x0d;&#x0a;Объём: {4} {5}.">
-                                                                            <Binding Path="Inventory_number" />
-                                                                            <Binding Path="Hdd.Manufacturer.Name" />
-                                                                            <Binding Path="Hdd.Types_hdd.Name" />
-                                                                            <Binding Path="Hdd.Name" />
-                                                                            <Binding Path="Hdd.Memory_size" />
-                                                                            <Binding Path="Hdd.Unit.Short_name" />
-                                                                        </MultiBinding>
-                                                                    </TextBlock.Text>
-                                                                </TextBlock>
-                                                            </DataTemplate>
-                                                        </ComboBox.ItemTemplate>
-                                                    </ComboBox>
-
-                                                    <!--  Удалить жесткий диск  -->
-                                                    <Button
-                                                        Grid.Column="1"
-                                                        Margin="3"
-                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteHddFromCollectionCommand}"
-                                                        CommandParameter="{Binding}"
-                                                        Content="Х"
-                                                        Style="{StaticResource BaseButton}" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-
-                                    <!--  Добавить жесткий диск  -->
-                                    <Button
-                                        Margin="3"
-                                        Command="{Binding AddHddInCollectionCommand}"
-                                        Content="Добавить"
-                                        Style="{StaticResource BaseButton}" />
-                                </StackPanel>
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ItemsSource="{Binding InventoryGraphicsCards}"
+                                    SelectedValue="{Binding Computer.Fk_inventory_number_graphics_card, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_inventory_number_graphics_card"
+                                    Style="{StaticResource BaseComboBox}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Название: {2};&#x0d;&#x0a;Объём: {3} {4}.">
+                                                        <Binding Path="Inventory_number" />
+                                                        <Binding Path="Graphics_cards.Manufacturer.Name" />
+                                                        <Binding Path="Graphics_cards.Name" />
+                                                        <Binding Path="Graphics_cards.Memory_size" />
+                                                        <Binding Path="Graphics_cards.Unit.Short_name" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </UniformGrid>
 
                             <!--  Оперативная память  -->
@@ -425,9 +257,71 @@
                                 </StackPanel>
                             </UniformGrid>
 
-                            <!--  SSD-накопитель  -->
+                            <!--  Жесткие диски  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="SSD-накопитель: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Жесткие диски: " />
+
+                                <StackPanel Margin="10">
+                                    <ItemsControl ItemsSource="{Binding Computer.Hdd_in_computers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Background="#98c9e3">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="1*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ComboBox
+                                                        Width="156"
+                                                        MaxWidth="156"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryHdds}"
+                                                        SelectedIndex="0"
+                                                        SelectedValue="{Binding Fk_inventory_number_hdd}"
+                                                        SelectedValuePath="Id_inventory_number_hdd"
+                                                        Style="{StaticResource BaseComboBox}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock>
+                                                                    <TextBlock.Text>
+                                                                        <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Тип ЖД: {2};&#x0d;&#x0a;Название: {3};&#x0d;&#x0a;Объём: {4} {5}.">
+                                                                            <Binding Path="Inventory_number" />
+                                                                            <Binding Path="Hdd.Manufacturer.Name" />
+                                                                            <Binding Path="Hdd.Types_hdd.Name" />
+                                                                            <Binding Path="Hdd.Name" />
+                                                                            <Binding Path="Hdd.Memory_size" />
+                                                                            <Binding Path="Hdd.Unit.Short_name" />
+                                                                        </MultiBinding>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+
+                                                    <!--  Удалить жесткий диск  -->
+                                                    <Button
+                                                        Grid.Column="1"
+                                                        Margin="3"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteHddFromCollectionCommand}"
+                                                        CommandParameter="{Binding}"
+                                                        Content="Х"
+                                                        Style="{StaticResource BaseButton}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <!--  Добавить жесткий диск  -->
+                                    <Button
+                                        Margin="3"
+                                        Command="{Binding AddHddInCollectionCommand}"
+                                        Content="Добавить"
+                                        Style="{StaticResource BaseButton}" />
+                                </StackPanel>
+                            </UniformGrid>
+
+                            <!--  SSD-накопители  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="SSD-накопители: " />
 
                                 <StackPanel Margin="10">
                                     <ItemsControl ItemsSource="{Binding Computer.Ssd_in_computers}">
@@ -485,6 +379,112 @@
                                         Content="Добавить"
                                         Style="{StaticResource BaseButton}" />
                                 </StackPanel>
+                            </UniformGrid>
+
+                            <!--  Блок питания  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Блок питания: " />
+
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ItemsSource="{Binding InventoryPowerSupplies}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Computer.Fk_inventory_number_power_supplies, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_inventory_number_power_supplie"
+                                    Style="{StaticResource BaseComboBox}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;Производитель: {1};&#x0d;&#x0a;Название: {2};&#x0d;&#x0a;Мощность: {3} {4}.">
+                                                        <Binding Path="Inventory_number" />
+                                                        <Binding Path="Power_supplies.Manufacturer.Name" />
+                                                        <Binding Path="Power_supplies.Name" />
+                                                        <Binding Path="Power_supplies.Power" />
+                                                        <Binding Path="Power_supplies.Unit.Short_name" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </UniformGrid>
+
+                            <!--  Операционные системы  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Операционные системы: " />
+
+                                <StackPanel Margin="10">
+                                    <ItemsControl ItemsSource="{Binding Computer.Operating_systems_in_computers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Background="#98c9e3">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="1*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ComboBox
+                                                        Width="156"
+                                                        MaxWidth="156"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OperatingSystems}"
+                                                        SelectedIndex="0"
+                                                        SelectedValue="{Binding Fk_operating_system}"
+                                                        SelectedValuePath="Id_operating_system"
+                                                        Style="{StaticResource BaseComboBox}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock>
+                                                                    <TextBlock.Text>
+                                                                        <MultiBinding StringFormat="{}Название: {0};&#x0d;&#x0a;Версия: {1}.">
+                                                                            <Binding Path="Name" />
+                                                                            <Binding Path="System_version" />
+                                                                        </MultiBinding>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+
+                                                    <!--  Удалить операционную систему  -->
+                                                    <Button
+                                                        Grid.Column="1"
+                                                        Margin="3"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteOperatingSystemsFromCollectionCommand}"
+                                                        CommandParameter="{Binding}"
+                                                        Content="Х"
+                                                        Style="{StaticResource BaseButton}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <!--  Добавить операционную систему  -->
+                                    <Button
+                                        Margin="3"
+                                        Command="{Binding AddOperatingSystemsInCollectionCommand}"
+                                        Content="Добавить"
+                                        Style="{StaticResource BaseButton}" />
+                                </StackPanel>
+                            </UniformGrid>
+
+                            <!--  Статус  -->
+                            <UniformGrid Columns="2">
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Статус: " />
+
+                                <ComboBox
+                                    Width="208"
+                                    MaxWidth="208"
+                                    HorizontalAlignment="Center"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding StatusesComputers}"
+                                    SelectedIndex="0"
+                                    SelectedValue="{Binding Computer.Fk_status_computer, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Id_status_computer"
+                                    Style="{StaticResource BaseComboBox}" />
                             </UniformGrid>
                         </StackPanel>
                     </Border>

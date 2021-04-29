@@ -51,7 +51,6 @@
                     .Include(manufact => manufact.Ssd.Manufacturer)
                     .Include(socket => socket.Ssd.Types_ssd))
                 .Sort(number => number.Inventory_number);
-
             StatusesComputers = new ObservableCollection<Statuses_computers>(db.Statuses_computers).Sort(status => status.Name);
             OperatingSystems = new ObservableCollection<Operating_systems>(db.Operating_systems).Sort(operatingSystems => operatingSystems.Name);
 
