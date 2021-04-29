@@ -64,7 +64,7 @@
                     <DataTemplate>
                         <TextBlock>
                             <TextBlock.Text>
-                                <MultiBinding StringFormat="{} {0} {1}.">
+                                <MultiBinding StringFormat="{}Система: {0};&#x0d;&#x0a;Версия: {1}.">
                                     <Binding Path="Operating_systems.Name" />
                                     <Binding Path="Operating_systems.System_version" />
                                 </MultiBinding>
