@@ -196,7 +196,21 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Grid x:Name="Bd" Background="{TemplateBinding Background}">
+                        <MenuItem BorderThickness="1" Command="{TemplateBinding Command}" Header="{TemplateBinding Header}" />
+                    </Grid>
 
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter Property="Background" TargetName="Bd" Value="#FF98DDFB"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="BaseLabel" TargetType="Label">
