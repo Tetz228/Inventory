@@ -8,8 +8,8 @@
 
     using Inventory.Model;
     using Inventory.View;
-    using Inventory.View.Pages.Recovery_password;
-    using Inventory.ViewModels.Recovery__password;
+    using Inventory.View.Pages.RecoveryPassword;
+    using Inventory.ViewModels.RecoveryPassword;
 
     public static class UsersInteraction
     {

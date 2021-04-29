@@ -1,10 +1,12 @@
-﻿namespace Inventory.ViewModels.Recovery__password
+﻿namespace Inventory.ViewModels.RecoveryPassword
 {
-    using DevExpress.Mvvm;
-    using Inventory.Model;
-    using Inventory.Services;
     using System.Windows.Controls;
     using System.Windows.Input;
+
+    using DevExpress.Mvvm;
+
+    using Inventory.Model;
+    using Inventory.Services;
 
     public class NewPasswordViewModel : BindableBase
     {

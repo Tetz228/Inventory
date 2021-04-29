@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
-
-namespace Inventory.View.Pages.Recovery_password
+﻿namespace Inventory.View.Pages.RecoveryPassword
 {
+    using System.Windows.Controls;
+
     public partial class NewPasswordPage : Page
     {
         public NewPasswordPage()

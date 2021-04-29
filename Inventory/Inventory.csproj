@@ -345,10 +345,10 @@
     <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeMemoryEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeSsdEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\UserEditViewModel.cs" />
-    <Compile Include="ViewModels\Recovery__password\EmailViewModel.cs" />
-    <Compile Include="ViewModels\Recovery__password\NewPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Recovery__password\PasswordRecoveryViewModel.cs" />
-    <Compile Include="ViewModels\Recovery__password\SecurityСodeViewModel.cs" />
+    <Compile Include="ViewModels\RecoveryPassword\EmailViewModel.cs" />
+    <Compile Include="ViewModels\RecoveryPassword\NewPasswordViewModel.cs" />
+    <Compile Include="ViewModels\RecoveryPassword\PasswordRecoveryViewModel.cs" />
+    <Compile Include="ViewModels\RecoveryPassword\SecurityСodeViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Accessories\GraphicsCardsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Accessories\MotherboardsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Accessories\PowerSuppliesViewModel.cs" />
@@ -485,13 +485,13 @@
     <Compile Include="View\Edit\Tables\Employees\UserEditWindow.xaml.cs">
       <DependentUpon>UserEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Recovery_password\EmailPage.xaml.cs">
+    <Compile Include="View\Pages\RecoveryPassword\EmailPage.xaml.cs">
       <DependentUpon>EmailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Recovery_password\NewPasswordPage.xaml.cs">
+    <Compile Include="View\Pages\RecoveryPassword\NewPasswordPage.xaml.cs">
       <DependentUpon>NewPasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Recovery_password\SecurityСodePage.xaml.cs">
+    <Compile Include="View\Pages\RecoveryPassword\SecurityСodePage.xaml.cs">
       <DependentUpon>SecurityСodePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\Accessories\GraphicsCardsPage.xaml.cs">
@@ -830,15 +830,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Recovery_password\EmailPage.xaml">
+    <Page Include="View\Pages\RecoveryPassword\EmailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Recovery_password\NewPasswordPage.xaml">
+    <Page Include="View\Pages\RecoveryPassword\NewPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Recovery_password\SecurityСodePage.xaml">
+    <Page Include="View\Pages\RecoveryPassword\SecurityСodePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1217,7 +1217,14 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Add\Tables\DispensingPeripherals\" />
+    <Folder Include="ViewModels\Edit\Tables\DispensingPeripherals\" />
+    <Folder Include="ViewModels\Tables\DispensingPeripherals\" />
+    <Folder Include="View\Add\Tables\DispensingPeripherals\" />
+    <Folder Include="View\Edit\Tables\DispensingPeripherals\" />
+    <Folder Include="View\Pages\Tables\DispensingPeripherals\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

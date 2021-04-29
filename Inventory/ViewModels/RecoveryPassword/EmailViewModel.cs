@@ -1,13 +1,13 @@
-﻿namespace Inventory.ViewModels.Recovery__password
+﻿namespace Inventory.ViewModels.RecoveryPassword
 {
-    using DevExpress.Mvvm;
-    using Inventory.Model;
-    using Inventory.View.Pages.Recovery_password;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows.Input;
 
+    using DevExpress.Mvvm;
+
     using Inventory.Services;
+    using Inventory.View.Pages.RecoveryPassword;
 
     public class EmailViewModel : BindableBase, IDataErrorInfo
     {
