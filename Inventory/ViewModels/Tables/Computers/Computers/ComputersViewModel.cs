@@ -24,6 +24,8 @@
 
             Computers = new ObservableCollection<Computer>(db.Computers.AsNoTracking()
                 .Include(status => status.Statuses_computers)
+                .Include(graphicsCards => graphicsCards.Inventory_numbers_graphics_cards.Graphics_cards.Manufacturer)
+                .Include(graphicsCards => graphicsCards.Inventory_numbers_graphics_cards.Graphics_cards.Unit)
                 .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Manufacturer))
                 .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Types_hdd))
                 .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Unit))
@@ -142,6 +144,8 @@
 
             foreach (var item in db.Computers.AsNoTracking()
                 .Include(status => status.Statuses_computers)
+                .Include(graphicsCards => graphicsCards.Inventory_numbers_graphics_cards.Graphics_cards.Manufacturer)
+                .Include(graphicsCards => graphicsCards.Inventory_numbers_graphics_cards.Graphics_cards.Unit)
                 .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Manufacturer))
                 .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Types_hdd))
                 .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Unit))

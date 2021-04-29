@@ -16,6 +16,108 @@
         <computers:ComputersViewModel />
     </Page.DataContext>
 
+    <Page.Resources>
+        <!--  Шаблон для отображения нескольких процессоров  -->
+        <DataTemplate x:Key="ProcessorsInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2}.">
+                                    <Binding Path="Inventory_numbers_processors.Inventory_number" />
+                                    <Binding Path="Inventory_numbers_processors.Processor.Manufacturer.Name" />
+                                    <Binding Path="Inventory_numbers_processors.Processor.Name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <!--  Шаблон для отображения нескольких RAM  -->
+        <DataTemplate x:Key="RamInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                    <Binding Path="Inventory_numbers_ram.Inventory_number" />
+                                    <Binding Path="Inventory_numbers_ram.Ram.Manufacturer.Name" />
+                                    <Binding Path="Inventory_numbers_ram.Ram.Memory_size" />
+                                    <Binding Path="Inventory_numbers_ram.Ram.Unit.Short_name" />
+                                    <Binding Path="Inventory_numbers_ram.Ram.Types_memory.Name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <!--  Шаблон для отображения нескольких операционных систем  -->
+        <DataTemplate x:Key="OperatingSystemsInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{} {0} {1}.">
+                                    <Binding Path="Operating_systems.Name" />
+                                    <Binding Path="Operating_systems.System_version" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <!--  Шаблон для отображения нескольких ЖД  -->
+        <DataTemplate x:Key="HddInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                    <Binding Path="Inventory_numbers_hdd.Inventory_number" />
+                                    <Binding Path="Inventory_numbers_hdd.Hdd.Types_hdd.Name" />
+                                    <Binding Path="Inventory_numbers_hdd.Hdd.Manufacturer.Name" />
+                                    <Binding Path="Inventory_numbers_hdd.Hdd.Memory_size" />
+                                    <Binding Path="Inventory_numbers_hdd.Hdd.Unit.Short_name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <!--  Шаблон для отображения нескольких SSD  -->
+        <DataTemplate x:Key="SsdInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                    <Binding Path="Inventory_numbers_ssd.Inventory_number" />
+                                    <Binding Path="Inventory_numbers_ssd.Ssd.Types_ssd.Name" />
+                                    <Binding Path="Inventory_numbers_ssd.Ssd.Manufacturer.Name" />
+                                    <Binding Path="Inventory_numbers_ssd.Ssd.Memory_size" />
+                                    <Binding Path="Inventory_numbers_ssd.Ssd.Unit.Short_name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid Background="#FF2BA8E2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="121*" />
@@ -43,6 +145,72 @@
                         DisplayMemberBinding="{Binding Ip_address, UpdateSourceTrigger=PropertyChanged}"
                         Header="IP-адрес"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn Header="Процессоры">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Processors_in_computers}" ContentTemplate="{StaticResource ResourceKey=ProcessorsInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Материнская плата" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_motherboards.Motherboard.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_motherboards.Motherboard.Name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Видеокарта" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Name" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Memory_size" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Оперативная память">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Ram_in_computers}" ContentTemplate="{StaticResource ResourceKey=RamInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Жесткие диски">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Hdd_in_computers}" ContentTemplate="{StaticResource ResourceKey=HddInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="SSD-накопители">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Ssd_in_computers}" ContentTemplate="{StaticResource ResourceKey=SsdInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Блок питания" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Name" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Power" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Операционные системы">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Operating_systems_in_computers}" ContentTemplate="{StaticResource ResourceKey=OperatingSystemsInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Statuses_computers.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Статус"
