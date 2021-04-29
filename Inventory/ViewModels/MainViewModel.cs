@@ -39,7 +39,7 @@
         public ICommand OpenPagePeripherals => new DelegateCommand(() =>
         {
             CurrentPage = new TablesPeripheralsPage();
-            TitleWindow = "Главное окно -> Периферия";
+            TitleWindow = "Главное окно -> Периферии";
         });
 
         public ICommand ChangePasswordCommand => new DelegateCommand(() =>
