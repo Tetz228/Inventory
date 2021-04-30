@@ -17,9 +17,7 @@
     {
         public StatusesComputersViewModel()
         {
-            using var db = new InventoryEntities();
-
-            StatusesComputers = new ObservableCollection<Statuses_computers>(db.Statuses_computers.AsNoTracking()).Sort(statusComputer => statusComputer.Name);
+            RefreshCollection();
             StatusesComputersCollection = CollectionViewSource.GetDefaultView(StatusesComputers);
         }
 
@@ -29,7 +27,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Statuses_computers> StatusesComputers { get; set; }
+        public static ObservableCollection<Statuses_computers> StatusesComputers { get; set; } = new();
 
         public Statuses_computers SelectStatusComputer { get; set; }
 

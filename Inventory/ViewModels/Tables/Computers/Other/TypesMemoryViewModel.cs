@@ -17,9 +17,7 @@
     {
         public TypesMemoryViewModel()
         {
-            using var db = new InventoryEntities();
-
-            TypesMemory = new ObservableCollection<Types_memory>(db.Types_memory.AsNoTracking()).Sort(typeMemory => typeMemory.Name);
+            RefreshCollection();
             TypesMemoryCollection = CollectionViewSource.GetDefaultView(TypesMemory);
         }
 
@@ -29,7 +27,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Types_memory> TypesMemory { get; set; }
+        public static ObservableCollection<Types_memory> TypesMemory { get; set; } = new();
 
         public Types_memory SelectTypeMemory { get; set; }
 

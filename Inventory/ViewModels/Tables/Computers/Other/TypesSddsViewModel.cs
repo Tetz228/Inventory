@@ -18,9 +18,7 @@
     {
         public TypesSddsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            TypesSsds = new ObservableCollection<Types_ssd>(db.Types_ssd.AsNoTracking()).Sort(typeSsd => typeSsd.Name);
+            RefreshCollection();
             TypesSsdsCollection = CollectionViewSource.GetDefaultView(TypesSsds);
         }
 
@@ -30,7 +28,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Types_ssd> TypesSsds { get; set; }
+        public static ObservableCollection<Types_ssd> TypesSsds { get; set; } = new();
 
         public Types_ssd SelectTypeSsd { get; set; }
 

@@ -17,9 +17,7 @@
     {
         public UnitsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
+            RefreshCollection();
             UnitsCollection = CollectionViewSource.GetDefaultView(Units);
         }
 
@@ -29,7 +27,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Unit> Units { get; set; }
+        public static ObservableCollection<Unit> Units { get; set; } = new();
 
         public Unit SelectUnit { get; set; }
 

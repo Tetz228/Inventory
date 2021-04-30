@@ -17,9 +17,7 @@
     {
         public DepartmentsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            Departments = new ObservableCollection<Department>(db.Departments.AsNoTracking()).Sort(department => department.Name);
+            RefreshCollection();
             DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
         }
 
@@ -28,7 +26,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Department> Departments { get; set; }
+        public static ObservableCollection<Department> Departments { get; set; } = new();
 
         public Department SelectDepartment { get; set; }
 

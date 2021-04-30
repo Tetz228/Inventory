@@ -18,12 +18,7 @@
     {
         public InventoryMotherboardViewModel()
         {
-            using var db = new InventoryEntities();
-
-            InventoryMotherboards = new ObservableCollection<Inventory_numbers_motherboards>(db.Inventory_numbers_motherboards.AsNoTracking()
-                .Include(manufacturer => manufacturer.Motherboard.Manufacturer)
-                .Include(socket => socket.Motherboard.Socket))
-                .Sort(inventoryMotherboards => inventoryMotherboards.Inventory_number);
+            RefreshCollection();
             InventoryMotherboardsCollection = CollectionViewSource.GetDefaultView(InventoryMotherboards);
         }
 
@@ -33,7 +28,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Inventory_numbers_motherboards> InventoryMotherboards { get; set; }
+        public static ObservableCollection<Inventory_numbers_motherboards> InventoryMotherboards { get; set; } = new();
 
         public Inventory_numbers_motherboards SelectInventoryMotherboard { get; set; }
 

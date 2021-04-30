@@ -17,9 +17,7 @@
     {
         public SocketsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking()).Sort(socket => socket.Name);
+            RefreshCollection();
             SocketsCollection = CollectionViewSource.GetDefaultView(Sockets);
         }
 
@@ -28,7 +26,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Socket> Sockets { get; set; }
+        public static ObservableCollection<Socket> Sockets { get; set; } = new();
 
         public Socket SelectSocket { get; set; }
 

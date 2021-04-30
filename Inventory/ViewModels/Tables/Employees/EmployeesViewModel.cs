@@ -19,12 +19,7 @@
     {
         public EmployeesViewModel()
         {
-            using var db = new InventoryEntities();
-            Employees = new ObservableCollection<Employee>(db.Employees.AsNoTracking().Include(employeePost => employeePost.Posts_employees
-                                                                       .Select(post => post.Post))
-                                                                       .Include(empDepart => empDepart.Employees_in_departments
-                                                                       .Select(depart => depart.Department)))
-                                                                       .Sort(employee => employee.L_name);
+            RefreshCollection();
             EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
         }
 
@@ -34,7 +29,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Employee> Employees { get; set; }
+        public static ObservableCollection<Employee> Employees { get; set; } = new();
 
         public Employee SelectEmployee { get; set; }
 

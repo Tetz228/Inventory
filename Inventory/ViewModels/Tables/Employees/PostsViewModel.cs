@@ -18,9 +18,7 @@
     {
         public PostsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            Posts = new ObservableCollection<Post>(db.Posts.AsNoTracking()).Sort(post => post.Name);
+            RefreshCollection();
             PostsCollection = CollectionViewSource.GetDefaultView(Posts);
         }
 
@@ -29,7 +27,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Post> Posts { get; set; }
+        public static ObservableCollection<Post> Posts { get; set; } = new();
 
         public Post SelectPost { get; set; }
 

@@ -18,14 +18,7 @@
     {
         public InventoryHddViewModel()
         {
-            using var db = new InventoryEntities();
-
-            InventoryHdds = new ObservableCollection<Inventory_numbers_hdd>(db.Inventory_numbers_hdd.AsNoTracking()
-                .Include(hdd => hdd.Hdd)
-                .Include(manufacturer => manufacturer.Hdd.Manufacturer)
-                .Include(type => type.Hdd.Types_hdd)
-                .Include(unit => unit.Hdd.Unit))
-                .Sort(numberHdd => numberHdd.Inventory_number);
+            RefreshCollection();
             InventoryHddsCollection = CollectionViewSource.GetDefaultView(InventoryHdds);
         }
 
@@ -38,7 +31,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Inventory_numbers_hdd> InventoryHdds { get; set; }
+        public static ObservableCollection<Inventory_numbers_hdd> InventoryHdds { get; set; } = new();
 
         public Inventory_numbers_hdd SelectInventoryHdd { get; set; }
 

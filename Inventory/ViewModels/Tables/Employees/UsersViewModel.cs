@@ -19,12 +19,7 @@
     {
         public UsersViewModel()
         {
-            using var db = new InventoryEntities();
-
-            Users = new ObservableCollection<User>(db.Users.AsNoTracking()
-                .Include(employee => employee.Employee)
-                .Include(role => role.Role))
-                .Sort(user => user.Login);
+            RefreshCollection();
             UsersCollection = CollectionViewSource.GetDefaultView(Users);
         }
 
@@ -34,7 +29,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<User> Users { get; set; }
+        public static ObservableCollection<User> Users { get; set; } = new();
 
         public User SelectUser { get; set; }
 
@@ -101,7 +96,7 @@
             addUserWindow.ShowDialog();
         });
 
-        public ICommand EditUserCommand => new DelegateCommand<User>((user) =>
+        public ICommand EditUserCommand => new DelegateCommand<User>(user =>
         {
             var editWindow = new UserEditWindow();
             var viewModel = new UserEditViewModel(user);

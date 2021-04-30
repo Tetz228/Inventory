@@ -18,12 +18,7 @@
     {
         public PowerSuppliesViewModel()
         {
-            using var db = new InventoryEntities();
-
-            PowerSupplies = new ObservableCollection<Power_supplies>(db.Power_supplies.AsNoTracking()
-                .Include(manufacturer => manufacturer.Manufacturer)
-                .Include(unit => unit.Unit))
-                .Sort(manufacturer => manufacturer.Manufacturer.Name);
+            RefreshCollection();
             PowerSuppliesCollection = CollectionViewSource.GetDefaultView(PowerSupplies);
         }
 
@@ -34,7 +29,7 @@
 
         public Power_supplies SelectPowerSupply { get; set; }
 
-        public static ObservableCollection<Power_supplies> PowerSupplies { get; set; }
+        public static ObservableCollection<Power_supplies> PowerSupplies { get; set; } = new();
 
         private string _powerSuppliesFilter = string.Empty;
 

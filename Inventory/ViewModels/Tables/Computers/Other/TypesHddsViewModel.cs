@@ -17,9 +17,7 @@
     {
         public TypesHddsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking()).Sort(typeHdd => typeHdd.Name);
+            RefreshCollection();
             TypesHddsCollection = CollectionViewSource.GetDefaultView(TypesHdds);
         }
 
@@ -29,7 +27,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Types_hdd> TypesHdds { get; set; }
+        public static ObservableCollection<Types_hdd> TypesHdds { get; set; } = new();
 
         public Types_hdd SelectTypeHdd { get; set; }
 

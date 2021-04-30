@@ -18,14 +18,7 @@
     {
         public InventoryProcessorViewModel()
         {
-            using var db = new InventoryEntities();
-
-            InventoryProcessors = new ObservableCollection<Inventory_numbers_processors>(db.Inventory_numbers_processors.AsNoTracking()
-                .Include(processor => processor.Processor)
-                .Include(manufacturer => manufacturer.Processor.Manufacturer)
-                .Include(unit => unit.Processor.Unit)
-                .Include(socket => socket.Processor.Socket))
-                .Sort(inventoryProcessor => inventoryProcessor.Inventory_number);
+            RefreshCollection();
             InventoryProcessorsCollection = CollectionViewSource.GetDefaultView(InventoryProcessors);
         }
 
@@ -36,7 +29,7 @@
 
         public Inventory_numbers_processors SelectInventoryProcessor { get; set; }
 
-        public static ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; set; }
+        public static ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; set; } = new();
 
         private string _inventoryProcessorsFilter = string.Empty;
 

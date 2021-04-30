@@ -19,14 +19,7 @@
     {
         public InventoryPeripheralViewModel()
         {
-            using var db = new InventoryEntities();
-
-            InventoryPeripherals = new ObservableCollection<Inventory_numbers_peripherals>(db.Inventory_numbers_peripherals.AsNoTracking()
-                .Include(status => status.Statuses_peripherals)
-                .Include(peripheral => peripheral.Peripheral)
-                .Include(manufacturer => manufacturer.Peripheral.Manufacturer)
-                .Include(typePeripheral => typePeripheral.Peripheral.Types_peripherals))
-                .Sort(numberPeripheral => numberPeripheral.Inventory_number);
+            RefreshCollection();
             InventoryPeripheralsCollection = CollectionViewSource.GetDefaultView(InventoryPeripherals);
         }
 
@@ -36,7 +29,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Inventory_numbers_peripherals> InventoryPeripherals { get; set; }
+        public static ObservableCollection<Inventory_numbers_peripherals> InventoryPeripherals { get; set; } = new();
 
         public Inventory_numbers_peripherals SelectInventoryPeripheral { get; set; }
 

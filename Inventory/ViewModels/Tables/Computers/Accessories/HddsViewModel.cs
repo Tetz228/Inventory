@@ -18,12 +18,7 @@
     {
         public HddsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            Hdds = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking()
-                .Include(manufacturer => manufacturer.Manufacturer)
-                .Include(unit => unit.Unit).Include(type => type.Types_hdd))
-                .Sort(manufacturer => manufacturer.Manufacturer.Name);
+            RefreshCollection();
             HddsCollection = CollectionViewSource.GetDefaultView(Hdds);
         }
 
@@ -34,7 +29,7 @@
 
         public Hdd SelectHdd { get; set; }
 
-        public static ObservableCollection<Hdd> Hdds { get; set; }
+        public static ObservableCollection<Hdd> Hdds { get; set; } = new();
 
         private string _hddsFilter = string.Empty;
 

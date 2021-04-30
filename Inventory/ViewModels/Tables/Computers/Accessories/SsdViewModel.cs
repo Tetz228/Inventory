@@ -18,13 +18,7 @@
     {
         public SsdViewModel()
         {
-            using var db = new InventoryEntities();
-
-            Ssds = new ObservableCollection<Ssd>(db.Ssds.AsNoTracking()
-                .Include(manufacturer => manufacturer.Manufacturer)
-                .Include(unit => unit.Unit)
-                .Include(type => type.Types_ssd))
-                .Sort(manufacturer => manufacturer.Manufacturer.Name);
+            RefreshCollection();
             SsdsCollection = CollectionViewSource.GetDefaultView(Ssds);
         }
 
@@ -35,7 +29,7 @@
 
         public Ssd SelectSsd { get; set; }
 
-        public static ObservableCollection<Ssd> Ssds { get; set; }
+        public static ObservableCollection<Ssd> Ssds { get; set; } = new();
 
         private string _ssdsFilter = string.Empty;
 

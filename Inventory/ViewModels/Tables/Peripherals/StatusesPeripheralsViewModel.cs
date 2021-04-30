@@ -17,9 +17,7 @@
     {
         public StatusesPeripheralsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking()).Sort(statusPeripheral => statusPeripheral.Name);
+            RefreshCollection();
             StatusesPeripheralsCollection = CollectionViewSource.GetDefaultView(StatusesPeripherals);
         }
 
@@ -29,7 +27,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; set; }
+        public static ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; set; } = new();
 
         public Statuses_peripherals SelectStatusPeripheral { get; set; }
 

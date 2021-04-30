@@ -17,9 +17,7 @@
     {
         public OperatingSystemsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            OperatingSystems = new ObservableCollection<Operating_systems>(db.Operating_systems.AsNoTracking()).Sort(system => system.Name);
+            RefreshCollection();
             OperatingSystemsCollection = CollectionViewSource.GetDefaultView(OperatingSystems);
         }
 
@@ -29,7 +27,7 @@
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Operating_systems> OperatingSystems { get; set; }
+        public static ObservableCollection<Operating_systems> OperatingSystems { get; set; } = new();
 
         public Operating_systems SelectOperatingSystem { get; set; }
 

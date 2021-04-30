@@ -18,13 +18,7 @@
     {
         public InventoryRamViewModel()
         {
-            using var db = new InventoryEntities();
-
-            InventoryRams = new ObservableCollection<Inventory_numbers_ram>(db.Inventory_numbers_ram.AsNoTracking()
-                .Include(manufacturer => manufacturer.Ram.Manufacturer)
-                .Include(unit => unit.Ram.Unit)
-                .Include(type => type.Ram.Types_memory))
-                .Sort(ram => ram.Inventory_number);
+            RefreshCollection();
             InventoryRamsCollection = CollectionViewSource.GetDefaultView(InventoryRams);
         }
 
@@ -35,7 +29,7 @@
 
         public Inventory_numbers_ram SelectInventoryRam { get; set; }
 
-        public static ObservableCollection<Inventory_numbers_ram> InventoryRams { get; set; }
+        public static ObservableCollection<Inventory_numbers_ram> InventoryRams { get; set; } = new();
 
         private string _inventoryRamsFilter = string.Empty;
 

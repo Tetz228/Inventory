@@ -18,12 +18,7 @@
     {
         public InventoryGraphicCardViewModel()
         {
-            using var db = new InventoryEntities();
-
-            InventoryGraphicsCards = new ObservableCollection<Inventory_numbers_graphics_cards>(db.Inventory_numbers_graphics_cards.AsNoTracking()
-                .Include(manufacturer => manufacturer.Graphics_cards.Manufacturer)
-                .Include(unit => unit.Graphics_cards.Unit))
-                .Sort(manufacturer => manufacturer.Inventory_number);
+            RefreshCollection();
             InventoryGraphicsCardsCollection = CollectionViewSource.GetDefaultView(InventoryGraphicsCards);
         }
 
@@ -37,7 +32,7 @@
 
         public Inventory_numbers_graphics_cards SelectInventoryGraphicCard { get; set; }
 
-        public static ObservableCollection<Inventory_numbers_graphics_cards> InventoryGraphicsCards { get; set; }
+        public static ObservableCollection<Inventory_numbers_graphics_cards> InventoryGraphicsCards { get; set; } = new();
 
         private string _inventoryGraphicsCardsFilter = string.Empty;
 

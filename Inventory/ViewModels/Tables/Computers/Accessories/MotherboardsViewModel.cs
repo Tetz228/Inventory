@@ -18,12 +18,7 @@
     {
         public MotherboardsViewModel()
         {
-            using var db = new InventoryEntities();
-
-            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.AsNoTracking()
-                .Include(manufacturer => manufacturer.Manufacturer)
-                .Include(socket => socket.Socket))
-                .Sort(manufacturer => manufacturer.Manufacturer.Name);
+            RefreshCollection();
             MotherboardsCollection = CollectionViewSource.GetDefaultView(Motherboards);
         }
 
@@ -34,7 +29,7 @@
 
         public Motherboard SelectMotherboard { get; set; }
 
-        public static ObservableCollection<Motherboard> Motherboards { get; set; }
+        public static ObservableCollection<Motherboard> Motherboards { get; set; } = new();
 
         private string _motherboardsFilter = string.Empty;
 
