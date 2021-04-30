@@ -49,7 +49,7 @@
                     Style="{StaticResource BaseMenuItem}" />
             </MenuItem>
             <MenuItem Header="Выдачи компьютеров" />
-            <MenuItem Header="Выдачи периферии" />
+            <MenuItem Command="{Binding OpenDispensingPeripherals}" Header="Выдачи периферии" />
             <MenuItem Command="{Binding OpenPageEmployees}" Header="Сотрудники" />
             <MenuItem Command="{Binding OpenPageComputers}" Header="Компьютеры" />
             <MenuItem Command="{Binding OpenPagePeripherals}" Header="Периферии" />
