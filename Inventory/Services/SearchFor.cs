@@ -106,7 +106,26 @@
 
         public static bool Search(this Computer computer, string computerFilter) => computer.Inventory_number.ToString().ToLower().Contains(computerFilter.ToLower())
                                                                                  || computer.Ip_address.ToLower().Contains(computerFilter.ToLower())
-                                                                                 || computer.Statuses_computers.Name.ToLower().Contains(computerFilter.ToLower());
+                                                                                 || computer.Statuses_computers.Name.ToLower().Contains(computerFilter.ToLower())
+                                                                                 || computer.Hdd_in_computers.Select(inventory => inventory.Inventory_numbers_hdd.Inventory_number.ToString().ToLower().Contains(computerFilter.ToLower())).FirstOrDefault()
+                                                                                 || computer.Hdd_in_computers.Select(type => type.Inventory_numbers_hdd.Hdd.Types_hdd.Name.ToLower().Contains(computerFilter.ToLower())).FirstOrDefault()
+                                                                                 || computer.Hdd_in_computers.Select(manufacturer => manufacturer.Inventory_numbers_hdd.Hdd.Manufacturer.Name.ToLower().Contains(computerFilter.ToLower())).FirstOrDefault()
+                                                                                 || computer.Hdd_in_computers.Select(size => size.Inventory_numbers_hdd.Hdd.Memory_size.ToString(CultureInfo.InvariantCulture).ToLower().Contains(computerFilter.ToLower())).FirstOrDefault()
+                                                                                 || computer.Hdd_in_computers.Select(unit => unit.Inventory_numbers_hdd.Hdd.Unit.Short_name.ToLower().Contains(computerFilter.ToLower())).FirstOrDefault();
+
+        //    || computer.Operating_systems_in_computers.Select(system => system.Operating_systems.Name.ToLower().Contains(computerFilter.ToLower())).FirstOrDefault()
+        //|| computer.Operating_systems_in_computers.Select(system => system.Operating_systems.System_version.ToLower().Contains(computerFilter.ToLower())).FirstOrDefault()
+
+        //|| computer.Inventory_numbers_power_supplies.Inventory_number.ToString().ToLower().Contains(computerFilter.ToLower())
+        //|| computer.Inventory_numbers_power_supplies.Power_supplies.Name.ToLower().Contains(computerFilter.ToLower())
+        //|| (computer.Inventory_numbers_power_supplies.Power_supplies.Power + " " + computer.Inventory_numbers_power_supplies.Power_supplies.Unit.Short_name).ToLower().Contains(computerFilter.ToLower())
+        //|| computer.Inventory_numbers_power_supplies.Power_supplies.Manufacturer.Name.ToLower().Contains(computerFilter.ToLower())
+
+        //|| computer.Ssd_in_computers.Select(system => system.Inventory_numbers_ssd.Ssd.Manufacturer.Name.ToLower().Contains(computerFilter.ToLower())).FirstOrDefault()
+        ////|| computer.Ssd_in_computers.Select(system => system.Inventory_numbers_ssd.Ssd.ToLower().Contains(computerFilter.ToLower())).FirstOrDefault()
+        //|| computer.Inventory_numbers_power_supplies.Power_supplies.Manufacturer.Name.ToLower().Contains(computerFilter.ToLower())
+        //|| computer.Inventory_numbers_power_supplies.Power_supplies.Unit.Short_name.ToLower().Contains(computerFilter.ToLower())
+        //|| computer.Operating_systems_in_computers.Select(system => system.Operating_systems.System_version.ToLower().Contains(computerFilter.ToLower())).FirstOrDefault();
 
         #endregion
 
