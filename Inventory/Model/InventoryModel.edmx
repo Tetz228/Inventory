@@ -32,7 +32,6 @@
           <Property Name="Date_dispensing" Type="date" Nullable="false" />
           <Property Name="Fk_user" Type="int" Nullable="false" />
           <Property Name="Fk_employee" Type="int" Nullable="false" />
-          <Property Name="Note" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="Dispensing_peripherals">
           <Key>
@@ -42,7 +41,6 @@
           <Property Name="Date_dispensing" Type="date" Nullable="false" />
           <Property Name="Fk_user" Type="int" Nullable="false" />
           <Property Name="Fk_employee" Type="int" Nullable="false" />
-          <Property Name="Note" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -337,14 +335,14 @@
             <PropertyRef Name="Id_status_computer" />
           </Key>
           <Property Name="Id_status_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Statuses_peripherals">
           <Key>
             <PropertyRef Name="Id_status_peripheral" />
           </Key>
           <Property Name="Id_status_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Types_hdd">
           <Key>
@@ -722,7 +720,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_List_dispensed_computers_Dispensing_computers">
-          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="1" />
+          <End Role="Dispensing_computers" Type="Self.Dispensing_computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="List_dispensed_computers" Type="Self.List_dispensed_computers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dispensing_computers">
@@ -734,7 +734,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_List_dispensed_peripherals_Dispensing_peripherals">
-          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="1" />
+          <End Role="Dispensing_peripherals" Type="Self.Dispensing_peripherals" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="List_dispensed_peripherals" Type="Self.List_dispensed_peripherals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dispensing_peripherals">
@@ -1408,7 +1410,6 @@
           <Property Name="Date_dispensing" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Fk_user" Type="Int32" Nullable="false" />
           <Property Name="Fk_employee" Type="Int32" Nullable="false" />
-          <Property Name="Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Dispensing_computers_Employees" FromRole="Dispensing_computers" ToRole="Employees" />
           <NavigationProperty Name="User" Relationship="Self.FK_Dispensing_computers_Users" FromRole="Dispensing_computers" ToRole="Users" />
           <NavigationProperty Name="List_dispensed_computers" Relationship="Self.FK_List_dispensed_computers_Dispensing_computers" FromRole="Dispensing_computers" ToRole="List_dispensed_computers" />
@@ -1421,7 +1422,6 @@
           <Property Name="Date_dispensing" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Fk_user" Type="Int32" Nullable="false" />
           <Property Name="Fk_employee" Type="Int32" Nullable="false" />
-          <Property Name="Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Dispensing_peripherals_Employees" FromRole="Dispensing_peripherals" ToRole="Employees" />
           <NavigationProperty Name="User" Relationship="Self.FK_Dispensing_peripherals_Users" FromRole="Dispensing_peripherals" ToRole="Users" />
           <NavigationProperty Name="List_dispensed_peripherals" Relationship="Self.FK_List_dispensed_peripherals_Dispensing_peripherals" FromRole="Dispensing_peripherals" ToRole="List_dispensed_peripherals" />
@@ -1792,7 +1792,7 @@
             <PropertyRef Name="Id_status_computer" />
           </Key>
           <Property Name="Id_status_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Computers" Relationship="Self.FK_Computers_Statuses_computers" FromRole="Statuses_computers" ToRole="Computers" />
         </EntityType>
         <EntityType Name="Statuses_peripherals">
@@ -1800,7 +1800,7 @@
             <PropertyRef Name="Id_status_peripheral" />
           </Key>
           <Property Name="Id_status_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inventory_numbers_peripherals" Relationship="Self.FK_Inventory_numbers_peripherals_Statuses_peripherals" FromRole="Statuses_peripherals" ToRole="Inventory_numbers_peripherals" />
         </EntityType>
         <EntityType Name="Types_hdd">
@@ -2871,7 +2871,6 @@
                 <ScalarProperty Name="Date_dispensing" ColumnName="Date_dispensing" />
                 <ScalarProperty Name="Fk_user" ColumnName="Fk_user" />
                 <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2882,7 +2881,6 @@
                 <ScalarProperty Name="Date_dispensing" ColumnName="Date_dispensing" />
                 <ScalarProperty Name="Fk_user" ColumnName="Fk_user" />
                 <ScalarProperty Name="Fk_employee" ColumnName="Fk_employee" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
