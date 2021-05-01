@@ -15,6 +15,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using Inventory.View.Add.Tables.DispensingPeripherals;
+
     public class DispensingPeripheralsViewModel : BindableBase
     {
         public DispensingPeripheralsViewModel()
@@ -92,8 +94,8 @@
         #region Команды
         public ICommand AddDispensingPeripheralCommand => new DelegateCommand(() =>
         {
-            var addUserWindow = new UserAddWindow();
-            addUserWindow.ShowDialog();
+            var addWindow = new DispensingPeripheralAddWindow();
+            addWindow.ShowDialog();
         });
 
         public ICommand EditDispensingPeripheralCommand => new DelegateCommand<Dispensing_peripherals>(selectDispensing =>
