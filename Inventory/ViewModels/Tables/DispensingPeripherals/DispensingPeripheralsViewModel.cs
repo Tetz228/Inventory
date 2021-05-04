@@ -2,9 +2,9 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.View.Add.Tables.Employees;
-    using Inventory.View.Edit.Tables.Employees;
-    using Inventory.ViewModels.Edit.Tables.Employees;
+    using Inventory.View.Add.Tables.DispensingPeripherals;
+    using Inventory.View.Edit.Tables.DispensingPeripherals;
+    using Inventory.ViewModels.Edit.Tables.DispensingPeripherals;
     using Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -14,8 +14,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-
-    using Inventory.View.Add.Tables.DispensingPeripherals;
 
     public class DispensingPeripheralsViewModel : BindableBase
     {
@@ -100,19 +98,19 @@
 
         public ICommand EditDispensingPeripheralCommand => new DelegateCommand<Dispensing_peripherals>(selectDispensing =>
         {
-            //var editWindow = new UserEditWindow();
-            //var viewModel = new UserEditViewModel(user);
-            //editWindow.DataContext = viewModel;
-            //editWindow.Closing += viewModel.OnWindowClosing;
-            //editWindow.ShowDialog();
+            var editWindow = new DispensingPeripheralEditWindow();
+            var viewModel = new DispensingPeripheralEditViewModel(selectDispensing);
+            editWindow.DataContext = viewModel;
+            editWindow.ShowDialog();
+            RefreshCollection();
         }, selectDispensing => selectDispensing != null);
 
         public ICommand DeleteDispensingPeripheralCommand => new DelegateCommand<Dispensing_peripherals>(selectDispensing =>
         {
-            //var messageResult = MessageBox.Show($"Вы действительно хотите удалить выдачу:\nВыдал - {selectDispensing.Login};\nПолучил - {selectDispensing.Role.Name}?", "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить выдачу:\nВыдал - {selectDispensing.User.Employee.L_name} {selectDispensing.User.Employee.F_name} {selectDispensing.User.Employee.M_name};\nПолучил - {selectDispensing.Employee.L_name} {selectDispensing.Employee.F_name} {selectDispensing.Employee.M_name};\nДата выдачи - {selectDispensing.Date_dispensing.Date:dd.MM.yyyy}?", "Удаление выдачи периферии", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            //if (messageResult != MessageBoxResult.Yes)
-            //    return;
+            if (messageResult != MessageBoxResult.Yes)
+                return;
 
             Services.Delete<Dispensing_peripherals>(selectDispensing.Id_dispensing_peripheral);
             RefreshCollection();
@@ -126,11 +124,15 @@
             DispensingPeripherals.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Dispensing_peripherals.AsNoTracking()
+            foreach (var item in db.Dispensing_peripherals
+                .Include(list => list.List_dispensed_peripherals.Select(dispensed => dispensed.Dispensing_peripherals))
+                .Include(list => list.List_dispensed_peripherals.Select(manufacturer => manufacturer.Inventory_numbers_peripherals.Peripheral.Manufacturer))
+                .Include(list => list.List_dispensed_peripherals.Select(type => type.Inventory_numbers_peripherals.Peripheral.Types_peripherals))
+                .Include(list => list.List_dispensed_peripherals.Select(type => type.Inventory_numbers_peripherals.Statuses_peripherals))
                     .Include(employee => employee.Employee.Posts_employees.Select(post => post.Post))
                     .Include(employee => employee.Employee.Employees_in_departments.Select(department => department.Department))
-                    .Include(employee => employee.User.Employee.Posts_employees.Select(post => post.Post))
-                    .Include(employee => employee.User.Employee.Employees_in_departments.Select(department => department.Department)))
+                    .Include(user => user.User.Employee.Posts_employees.Select(post => post.Post))
+                    .Include(user => user.User.Employee.Employees_in_departments.Select(department => department.Department)))
             {
                 DispensingPeripherals.Add(item);
             }

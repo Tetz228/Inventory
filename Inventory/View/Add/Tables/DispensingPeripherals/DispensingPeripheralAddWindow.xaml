@@ -39,7 +39,7 @@
         <StackPanel
             Grid.Row="0"
             Grid.Column="0"
-            Margin="5 0 0 0"
+            Margin="5,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Orientation="Horizontal">
@@ -92,7 +92,7 @@
             Grid.Row="2"
             Grid.ColumnSpan="1"
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
-            ItemsSource="{Binding ListDispensing, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding ListDispensedPeripherals, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDownListDispensing(@sender, @args)'}"
             SelectedItem="{Binding SelectListPeripheral}"
             Style="{StaticResource BaseListView}">
@@ -240,7 +240,7 @@
             Margin="0,0,0,5"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Orientation="Horizontal">
+            Orientation="Vertical">
             <!--  Добавить новую выдачу  -->
             <Button
                 Height="27"
