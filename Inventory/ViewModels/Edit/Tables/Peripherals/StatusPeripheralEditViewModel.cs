@@ -7,7 +7,6 @@
     using System.Windows.Input;
 
     using Inventory.Services;
-    using Inventory.ViewModels.Tables.Peripherals;
 
     public class StatusPeripheralEditViewModel : BindableBase, IEditableObject
     {
@@ -25,7 +24,6 @@
         {
             EndEdit();
             Services.Edit(StatusPeripheral.Id_status_peripheral, StatusPeripheral);
-            StatusesPeripheralsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(StatusPeripheral.ErrorCollection));
 

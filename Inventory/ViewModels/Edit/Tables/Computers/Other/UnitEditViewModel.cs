@@ -1,16 +1,13 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Other
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Services;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.Services;
-    using Inventory.ViewModels.Tables.Computers.Other;
-
-    public class UnitEditViewModel :  BindableBase, IEditableObject
+    public class UnitEditViewModel : BindableBase, IEditableObject
     {
         public UnitEditViewModel(Unit unit)
         {
@@ -26,7 +23,6 @@
         {
             EndEdit();
             Services.Edit(Unit.Id_unit, Unit);
-            UnitsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(Unit.ErrorCollection));
 

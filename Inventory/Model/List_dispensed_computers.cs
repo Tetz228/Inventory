@@ -1,8 +1,5 @@
 namespace Inventory.Model
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class List_dispensed_computers
     {
         public int Id_list_dispensed_computer { get; set; }

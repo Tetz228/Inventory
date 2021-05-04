@@ -1,8 +1,5 @@
 namespace Inventory.Model
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Ram_in_computers
     {
         public int Id_ram_in_computer { get; set; }

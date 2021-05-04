@@ -2,13 +2,11 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
 
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Services;
-    using Inventory.ViewModels.Tables.Computers.Other;
 
     public class TypeSsdEditViewModel : BindableBase, IEditableObject
     {
@@ -24,9 +22,8 @@
 
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
-         EndEdit();
+            EndEdit();
             Services.Edit(TypeSsd.Id_type_ssd, TypeSsd);
-            TypesSddsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(TypeSsd.ErrorCollection));
 

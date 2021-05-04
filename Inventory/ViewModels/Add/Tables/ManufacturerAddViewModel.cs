@@ -14,7 +14,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Manufacturer);
-            ManufacturersViewModel.RefreshCollection();
+            ManufacturersViewModel.Manufacturers.Add(Manufacturer);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Manufacturer.ErrorCollection));
     }

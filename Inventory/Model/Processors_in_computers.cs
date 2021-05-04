@@ -1,14 +1,6 @@
 namespace Inventory.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Data.Entity;
-
     using DevExpress.Mvvm;
-
-    using Inventory.Services;
 
     public partial class Processors_in_computers: BindableBase
     {

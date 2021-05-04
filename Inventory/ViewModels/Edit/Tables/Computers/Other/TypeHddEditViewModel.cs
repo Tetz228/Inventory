@@ -1,14 +1,11 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Other
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Services;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.Services;
-    using Inventory.ViewModels.Tables.Computers.Other;
 
     public class TypeHddEditViewModel : BindableBase, IEditableObject
     {
@@ -26,7 +23,6 @@
         {
             EndEdit();
             Services.Edit(TypeHdd.Id_type_hdd, TypeHdd);
-            TypesHddsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(TypeHdd.ErrorCollection));
 

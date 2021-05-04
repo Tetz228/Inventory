@@ -1,8 +1,5 @@
 namespace Inventory.Model
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Operating_systems_in_computers
     {
         public int Id_operating_systems_in_computers { get; set; }

@@ -7,7 +7,6 @@
     using System.Windows.Input;
 
     using Inventory.Services;
-    using Inventory.ViewModels.Tables.Employees;
 
     public class DepartmentEditViewModel : BindableBase, IEditableObject
     {
@@ -25,7 +24,6 @@
         {
             EndEdit();
             Services.Edit(Department.Id_department, Department);
-            DepartmentsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(Department.ErrorCollection));
 

@@ -2,7 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.ViewModels.Tables.Computers.Computers;
+
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
@@ -25,7 +25,6 @@
         {
             EndEdit();
             Services.Edit(OperatingSystem.Id_operating_system, OperatingSystem);
-            OperatingSystemsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(OperatingSystem.ErrorCollection));
 

@@ -14,7 +14,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Socket);
-            SocketsViewModel.RefreshCollection();
+            SocketsViewModel.Sockets.Add(Socket);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Socket.ErrorCollection));
     }

@@ -7,7 +7,6 @@
     using System.Windows.Input;
 
     using Inventory.Services;
-    using Inventory.ViewModels.Tables;
 
     public class ManufacturerEditViewModel : BindableBase, IEditableObject
     {
@@ -25,7 +24,6 @@
         {
             EndEdit();
             Services.Edit(Manufacturer.Id_manufacturer, Manufacturer);
-            ManufacturersViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(Manufacturer.ErrorCollection));
 

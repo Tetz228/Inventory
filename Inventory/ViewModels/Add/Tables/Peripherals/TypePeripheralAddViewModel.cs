@@ -14,7 +14,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(TypePeripheral);
-            TypesPeripheralsViewModel.RefreshCollection();
+            TypesPeripheralsViewModel.TypesPeripherals.Add(TypePeripheral);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(TypePeripheral.ErrorCollection));
     }

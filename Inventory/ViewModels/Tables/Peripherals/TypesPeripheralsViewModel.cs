@@ -103,7 +103,7 @@
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
 
-        public static void RefreshCollection()
+        private static void RefreshCollection()
         {
             TypesPeripherals.Clear();
             using var db = new InventoryEntities();

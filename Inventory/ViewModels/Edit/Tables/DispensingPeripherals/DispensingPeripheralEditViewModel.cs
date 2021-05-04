@@ -1,9 +1,9 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.DispensingPeripherals
 {
     using DevExpress.Mvvm;
-    using DevExpress.Mvvm.Native;
+
     using Inventory.Model;
-    using Inventory.ViewModels.Tables.DispensingPeripherals;
+
     using Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;

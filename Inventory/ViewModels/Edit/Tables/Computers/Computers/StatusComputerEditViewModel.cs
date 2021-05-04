@@ -2,7 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.ViewModels.Tables.Computers.Computers;
+
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
@@ -25,7 +25,6 @@
         {
             EndEdit();
             Services.Edit(StatusComputer.Id_status_computer, StatusComputer);
-            StatusesComputersViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(StatusComputer.ErrorCollection));
 
@@ -41,10 +40,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectStatusComputer = null;
-        }
+        public void EndEdit() => _selectStatusComputer = null;
 
         public void CancelEdit()
         {

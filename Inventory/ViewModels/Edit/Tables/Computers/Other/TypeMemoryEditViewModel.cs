@@ -2,12 +2,10 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.ViewModels.Tables.Computers.Other;
+    using Inventory.Services;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Services;
 
     public class TypeMemoryEditViewModel : BindableBase, IEditableObject
     {
@@ -25,7 +23,6 @@
         {
             EndEdit();
             Services.Edit(TypeMemory.Id_type_memory, TypeMemory);
-            TypesMemoryViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(TypeMemory.ErrorCollection));
 

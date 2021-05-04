@@ -1,14 +1,12 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Other
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Services;
+
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.Services;
-    using Inventory.ViewModels.Tables.Computers.Other;
 
     public class SocketEditViewModel : BindableBase, IEditableObject
     {
@@ -24,9 +22,8 @@
 
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
-           EndEdit();
+            EndEdit();
             Services.Edit(Socket.Id_socket, Socket);
-            SocketsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(Socket.ErrorCollection));
 
@@ -42,10 +39,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectSocket = null;
-        }
+        public void EndEdit() => _selectSocket = null;
 
         public void CancelEdit()
         {
