@@ -106,7 +106,7 @@
                 return;
 
             Services.Delete<Power_supplies>(selectPowerSupply.Id_power_supplie);
-            RefreshCollection();
+            PowerSupplies.Remove(selectPowerSupply);
         }, selectPowerSupply => selectPowerSupply != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

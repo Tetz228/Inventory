@@ -96,7 +96,7 @@
                 return;
 
             Services.Delete<Manufacturer>(selectManufacturer.Id_manufacturer);
-            RefreshCollection();
+            Manufacturers.Remove(selectManufacturer);
         }, selectManufacturer => selectManufacturer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

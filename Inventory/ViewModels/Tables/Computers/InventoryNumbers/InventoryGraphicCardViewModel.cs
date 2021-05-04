@@ -114,7 +114,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_graphics_cards>(selectInventoryGraphicCard.Id_inventory_number_graphics_card);
-            RefreshCollection();
+            InventoryGraphicsCards.Remove(selectInventoryGraphicCard);
         }, selectInventoryGraphicCard => selectInventoryGraphicCard != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ListView>(listView => listView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

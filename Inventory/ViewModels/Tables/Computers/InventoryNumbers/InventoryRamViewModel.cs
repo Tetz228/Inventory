@@ -121,7 +121,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_ram>(selectInventoryRam.Id_inventory_number_ram);
-            RefreshCollection();
+            InventoryRams.Remove(selectInventoryRam);
         }, selectRam => selectRam != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

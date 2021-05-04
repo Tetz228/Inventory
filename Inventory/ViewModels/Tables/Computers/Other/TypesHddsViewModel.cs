@@ -96,7 +96,7 @@
                 return;
 
             Services.Delete<Types_hdd>(selectTypeHdd.Id_type_hdd);
-            RefreshCollection();
+            TypesHdds.Remove(selectTypeHdd);
         }, selectTypeHdd => selectTypeHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

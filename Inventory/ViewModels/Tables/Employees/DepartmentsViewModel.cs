@@ -95,7 +95,7 @@
                 return;
 
             Services.Delete<Department>(selectDepartment.Id_department);
-            RefreshCollection();
+            Departments.Remove(selectDepartment);
         }, selectDepartment => selectDepartment != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

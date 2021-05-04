@@ -117,7 +117,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_motherboards>(selectInventoryMotherboard.Id_inventory_number_motherboard);
-            RefreshCollection();
+            InventoryMotherboards.Remove(selectInventoryMotherboard);
         }, selectInventoryMotherboard => selectInventoryMotherboard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

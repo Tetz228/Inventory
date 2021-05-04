@@ -116,7 +116,7 @@
                 return;
 
             Services.Delete<Ram>(selectRam.Id_ram);
-            RefreshCollection();
+            Rams.Remove(selectRam);
         }, selectRam => selectRam != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

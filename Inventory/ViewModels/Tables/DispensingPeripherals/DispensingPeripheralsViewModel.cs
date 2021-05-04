@@ -113,7 +113,7 @@
                 return;
 
             Services.Delete<Dispensing_peripherals>(selectDispensing.Id_dispensing_peripheral);
-            RefreshCollection();
+            DispensingPeripherals.Remove(selectDispensing);
         }, selectDispensing => selectDispensing != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

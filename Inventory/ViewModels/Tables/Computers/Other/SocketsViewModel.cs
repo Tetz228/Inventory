@@ -95,7 +95,7 @@
                 return;
 
             Services.Delete<Socket>(selectSocket.Id_socket);
-            RefreshCollection();
+            Sockets.Remove(selectSocket);
         }, selectSocket => selectSocket != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

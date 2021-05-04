@@ -116,7 +116,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_ssd>(selectInventorySsd.Id_inventory_number_ssd);
-            RefreshCollection();
+            InventorySsds.Remove(selectInventorySsd);
         }, selectInventorySsd => selectInventorySsd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -101,7 +101,7 @@
                 return;
 
             Services.Delete<Operating_systems>(selectOperatingSystem.Id_operating_system);
-            RefreshCollection();
+            OperatingSystems.Remove(selectOperatingSystem);
         }, selectOperatingSystem => selectOperatingSystem != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

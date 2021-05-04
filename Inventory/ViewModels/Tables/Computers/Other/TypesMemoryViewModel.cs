@@ -96,7 +96,7 @@
                 return;
 
             Services.Delete<Types_memory>(selectTypeMemory.Id_type_memory);
-            RefreshCollection();
+            TypesMemory.Remove(selectTypeMemory);
         }, selectTypeMemory => selectTypeMemory != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

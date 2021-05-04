@@ -106,7 +106,7 @@
                 return;
 
             Services.Delete<Graphics_cards>(selectGraphicCard.Id_graphics_card);
-            RefreshCollection();
+            GraphicsCards.Remove(selectGraphicCard);
         }, selectGraphicCard => selectGraphicCard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

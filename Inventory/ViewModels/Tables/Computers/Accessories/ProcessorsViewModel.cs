@@ -116,7 +116,7 @@
                 return;
 
             Services.Delete<Processor>(selectProcessor.Id_processor);
-            RefreshCollection();
+            Processors.Remove(selectProcessor);
         }, selectProcessor => selectProcessor != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

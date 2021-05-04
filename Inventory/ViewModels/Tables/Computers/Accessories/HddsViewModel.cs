@@ -111,7 +111,7 @@
                 return;
 
             Services.Delete<Hdd>(selectHdd.Id_hdd);
-            RefreshCollection();
+            Hdds.Remove(selectHdd);
         }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

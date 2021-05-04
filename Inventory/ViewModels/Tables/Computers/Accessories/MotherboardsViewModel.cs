@@ -106,7 +106,7 @@
                 return;
 
             Services.Delete<Motherboard>(selectMotherboard.Id_motherboard);
-            RefreshCollection();
+            Motherboards.Remove(selectMotherboard);
         }, selectMotherboard => selectMotherboard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

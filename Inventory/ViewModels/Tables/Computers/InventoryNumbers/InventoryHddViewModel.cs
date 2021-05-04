@@ -120,7 +120,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_hdd>(selectInventoryHdd.Id_inventory_number_hdd);
-            RefreshCollection();
+            InventoryHdds.Remove(selectInventoryHdd);
         }, selectInventoryHdd => selectInventoryHdd != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ListView>(listView => listView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

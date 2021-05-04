@@ -98,7 +98,7 @@
                 return;
 
             Services.Delete<Statuses_computers>(selectStatusComputer.Id_status_computer);
-            RefreshCollection();
+            StatusesComputers.Remove(selectStatusComputer);
         }, selectStatusComputer => selectStatusComputer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

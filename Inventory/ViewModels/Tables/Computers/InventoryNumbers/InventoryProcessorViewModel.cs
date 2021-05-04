@@ -121,7 +121,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_processors>(selectInventoryProcessor.Id_inventory_number_processor);
-            RefreshCollection();
+            InventoryProcessors.Remove(selectInventoryProcessor);
         }, selectInventoryProcessor => selectInventoryProcessor != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

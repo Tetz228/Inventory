@@ -97,7 +97,7 @@
                 return;
 
             Services.Delete<Post>(selectPost.Id_post);
-            RefreshCollection();
+            Posts.Remove(selectPost);
         }, selectPost => selectPost != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

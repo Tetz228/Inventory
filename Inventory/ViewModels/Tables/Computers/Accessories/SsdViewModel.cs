@@ -111,7 +111,7 @@
                 return;
 
             Services.Delete<Ssd>(selectSsd.Id_ssd);
-            RefreshCollection();
+            Ssds.Remove(selectSsd);
         }, selectSsd => selectSsd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -111,7 +111,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_power_supplies>(selectInventoryPowerSupplies.Id_inventory_number_power_supplie);
-            RefreshCollection();
+            InventoryPowerSupplies.Remove(selectInventoryPowerSupplies);
         }, selectInventoryPowerSupply => selectInventoryPowerSupply != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

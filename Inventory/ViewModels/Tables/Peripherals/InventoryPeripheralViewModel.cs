@@ -131,7 +131,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_peripherals>(selectInventoryPeripheral.Id_inventory_number_peripheral);
-            RefreshCollection();
+            InventoryPeripherals.Remove(selectInventoryPeripheral);
         }, selectInventoryPeripheral => selectInventoryPeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -113,7 +113,7 @@
                 return;
 
             Services.Delete<User>(selectUser.Id_user);
-            RefreshCollection();
+            Users.Remove(selectUser);
         }, selectUser => selectUser != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -98,7 +98,7 @@
                 return;
 
             Services.Delete<Statuses_peripherals>(selectStatusPeripheral.Id_status_peripheral);
-            RefreshCollection();
+            StatusesPeripherals.Remove(selectStatusPeripheral);
         }, selectStatusPeripheral => selectStatusPeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

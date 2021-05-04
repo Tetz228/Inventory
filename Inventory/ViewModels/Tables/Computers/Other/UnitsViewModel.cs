@@ -101,7 +101,7 @@
                 return;
 
             Services.Delete<Unit>(selectUnit.Id_unit);
-            RefreshCollection();
+            Units.Remove(selectUnit);
         }, selectUnit => selectUnit != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

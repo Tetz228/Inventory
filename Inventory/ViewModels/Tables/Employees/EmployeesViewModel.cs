@@ -119,8 +119,7 @@
                 return;
 
             Services.Delete<Employee>(selectEmployee.Id_employee);
-
-            RefreshCollection();
+            Employees.Remove(selectEmployee);
         }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
