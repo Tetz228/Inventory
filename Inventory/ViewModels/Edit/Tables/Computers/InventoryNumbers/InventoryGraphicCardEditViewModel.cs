@@ -32,7 +32,6 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryGraphicCard.CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventoryGraphicCard.EndEdit();
@@ -40,12 +39,5 @@
             InventoryGraphicCardViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryGraphicCard.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            InventoryGraphicCard.CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
     }
 }

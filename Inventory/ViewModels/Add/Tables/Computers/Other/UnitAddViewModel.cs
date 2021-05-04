@@ -12,16 +12,12 @@
     public class UnitAddViewModel : BindableBase
     {
         public Unit Unit { get; } = new();
-
-        #region Команды
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Unit);
             UnitsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Unit.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

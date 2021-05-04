@@ -21,7 +21,7 @@
                 .Include(type => type.Types_hdd)
                 .Include(unit => unit.Unit))
                 .Sort(manufact => manufact.Manufacturer.Name);
-            
+
             try
             {
                 InventoryHdd.Inventory_number = db.Inventory_numbers_hdd.Select(hdd => hdd.Inventory_number).Max() + 1;
@@ -36,15 +36,11 @@
 
         public ObservableCollection<Hdd> Hdds { get; }
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryHdd);
             InventoryHddViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryHdd.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

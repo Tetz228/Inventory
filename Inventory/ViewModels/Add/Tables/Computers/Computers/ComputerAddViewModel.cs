@@ -93,9 +93,7 @@
             ComputersViewModel.RefreshCollection();
             empAddWindow.Close();
         }, _ => Services.IsValidationProperties(Computer.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow => empAddWindow.Close());
-
+        
         public ICommand AddProccesorInCollectionCommand => new DelegateCommand(() => Computer.Processors_in_computers.Add(new Processors_in_computers()));
 
         public ICommand DeleteProccesorFromCollectionCommand => new DelegateCommand<Processors_in_computers>(procInComp => Computer.Processors_in_computers.Remove(procInComp));

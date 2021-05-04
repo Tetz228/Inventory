@@ -36,15 +36,11 @@
 
         public ObservableCollection<Processor> Processors { get; }
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryProcessor);
             InventoryProcessorViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryProcessor.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

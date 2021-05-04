@@ -32,8 +32,7 @@
         public ObservableCollection<Power_supplies> PowerSupplies { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryPowerSupply.CancelEdit();
-
-        #region Команды
+        
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventoryPowerSupply.EndEdit();
@@ -41,12 +40,5 @@
             InventoryPowerSupplyViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryPowerSupply.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            InventoryPowerSupply.CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
     }
 }

@@ -21,7 +21,6 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
@@ -29,13 +28,6 @@
             TypesMemoryViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(TypeMemory.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
 
         #region Откат изменений
         private Types_memory _selectTypeMemory;

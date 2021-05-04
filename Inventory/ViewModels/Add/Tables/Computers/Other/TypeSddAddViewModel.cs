@@ -13,15 +13,11 @@
     {
         public Types_ssd TypeSsd { get; } = new();
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(TypeSsd);
             TypesSddsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(TypeSsd.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

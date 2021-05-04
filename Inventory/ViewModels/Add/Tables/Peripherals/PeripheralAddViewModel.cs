@@ -24,15 +24,11 @@
 
         public ObservableCollection<Types_peripherals> TypesPeripherals { get; }
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Peripheral);
             PeripheralsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Peripheral.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

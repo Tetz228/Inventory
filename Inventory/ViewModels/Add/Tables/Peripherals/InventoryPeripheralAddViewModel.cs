@@ -37,16 +37,12 @@
         public ObservableCollection<Peripheral> Peripherals { get; }
 
         public ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; }
-
-        #region Команды
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryPeripheral);
             InventoryPeripheralViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryPeripheral.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

@@ -11,15 +11,11 @@
     {
         public Manufacturer Manufacturer { get; } = new();
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Manufacturer);
             ManufacturersViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Manufacturer.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

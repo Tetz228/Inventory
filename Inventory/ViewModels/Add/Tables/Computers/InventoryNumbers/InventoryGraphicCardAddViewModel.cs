@@ -34,16 +34,12 @@
         public Inventory_numbers_graphics_cards InventoryGraphicCard { get; } = new();
 
         public ObservableCollection<Graphics_cards> GraphicsCards { get; }
-
-        #region Команды
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryGraphicCard);
             InventoryGraphicCardViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryGraphicCard.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

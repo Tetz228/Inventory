@@ -32,7 +32,6 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryRam.CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventoryRam.EndEdit();
@@ -40,12 +39,5 @@
             InventoryRamViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryRam.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            InventoryRam.CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
     }
 }

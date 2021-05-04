@@ -27,16 +27,11 @@
 
         public ObservableCollection<Socket> Sockets { get; }
 
-        #region Команды
-
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Processor);
             ProcessorsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Processor.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

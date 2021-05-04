@@ -49,11 +49,6 @@
             editWindow.Close();
         }, _ => true);
 
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
         #endregion
 
         #region Откат изменений

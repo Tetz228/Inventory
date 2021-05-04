@@ -35,16 +35,12 @@
         public Inventory_numbers_ssd InventorySsd { get; } = new();
 
         public ObservableCollection<Ssd> Ssds { get; }
-
-        #region Команды
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventorySsd);
             InventorySsdViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventorySsd.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

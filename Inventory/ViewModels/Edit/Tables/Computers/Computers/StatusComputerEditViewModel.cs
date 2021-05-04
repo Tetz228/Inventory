@@ -20,8 +20,7 @@
         public Statuses_computers StatusComputer { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
-
-        #region Команды
+        
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
@@ -29,13 +28,6 @@
             StatusesComputersViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(StatusComputer.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
 
         #region Откат изменений
         private Statuses_computers _selectStatusComputer;

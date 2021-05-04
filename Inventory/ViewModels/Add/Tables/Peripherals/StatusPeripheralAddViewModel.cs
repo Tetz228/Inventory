@@ -12,15 +12,11 @@
     {
         public Statuses_peripherals StatusPeripheral { get; } = new();
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(StatusPeripheral);
             StatusesPeripheralsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(StatusPeripheral.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

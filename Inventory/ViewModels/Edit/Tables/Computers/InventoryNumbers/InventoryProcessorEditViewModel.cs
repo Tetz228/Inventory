@@ -31,8 +31,7 @@
         public ObservableCollection<Processor> Processors { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryProcessor.CancelEdit();
-
-        #region Команды
+        
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventoryProcessor.EndEdit();
@@ -40,12 +39,5 @@
             InventoryProcessorViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryProcessor.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            InventoryProcessor.CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
     }
 }

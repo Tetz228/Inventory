@@ -42,12 +42,6 @@
             empEditWindow.Close();
         }, _ => Services.IsValidationProperties(Employee.ErrorCollection));
 
-        public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow =>
-        {
-            Employee.CancelEdit();
-            empAddWindow.Close();
-        });
-
         public ICommand AddPostInCollectionCommand => new DelegateCommand(() => Employee.Posts_employees.Add(new Posts_employees()));
 
         public ICommand DeletePostFromCollectionCommand => new DelegateCommand<Posts_employees>(selectPostEmp =>

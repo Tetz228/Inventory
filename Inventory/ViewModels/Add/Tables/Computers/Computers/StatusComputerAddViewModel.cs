@@ -11,16 +11,12 @@
     public class StatusComputerAddViewModel : BindableBase
     {
         public Statuses_computers StatusComputer { get; } = new();
-
-        #region Команды
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(StatusComputer);
             StatusesComputersViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(StatusComputer.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

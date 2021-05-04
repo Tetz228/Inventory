@@ -2,7 +2,6 @@
     x:Class="Inventory.View.Edit.Tables.Computers.Computers.ComputerEditWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:computers="clr-namespace:Inventory.ViewModels.Edit.Tables.Computers.Computers"
     xmlns:converters="clr-namespace:Inventory.Services.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -493,8 +492,6 @@
                     <Button
                         Margin="5,10,5,5"
                         HorizontalAlignment="Right"
-                        Command="{Binding CancelCommand}"
-                        CommandParameter="{Binding ElementName=EditWindow}"
                         IsCancel="True"
                         Style="{StaticResource BaseButton}" />
                 </StackPanel>

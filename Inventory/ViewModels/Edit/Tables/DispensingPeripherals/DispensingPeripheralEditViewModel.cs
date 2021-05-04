@@ -14,11 +14,6 @@
 
     public class DispensingPeripheralEditViewModel : BindableBase
     {
-        public DispensingPeripheralEditViewModel()
-        {
-
-        }
-
         public DispensingPeripheralEditViewModel(Dispensing_peripherals dispensingPeripherals)
         {
             using var db = new InventoryEntities();

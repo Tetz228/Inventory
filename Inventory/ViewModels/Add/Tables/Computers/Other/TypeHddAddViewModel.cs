@@ -12,16 +12,12 @@
     public class TypeHddAddViewModel : BindableBase
     {
         public Types_hdd TypeHdd { get; } = new();
-
-        #region Команды
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(TypeHdd);
             TypesHddsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(TypeHdd.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

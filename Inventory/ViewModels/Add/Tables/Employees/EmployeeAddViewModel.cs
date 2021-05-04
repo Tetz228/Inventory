@@ -35,8 +35,6 @@
             empAddWindow.Close();
         }, _ => Services.IsValidationProperties(Employee.ErrorCollection));
 
-        public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow => empAddWindow.Close());
-
         public ICommand AddPostInCollectionCommand => new DelegateCommand(() => Employee.Posts_employees.Add(new Posts_employees()));
 
         public ICommand DeletePostFromCollectionCommand => new DelegateCommand<Posts_employees>(postEmp => Employee.Posts_employees.Remove(postEmp));

@@ -54,8 +54,7 @@
             if (passwordBox != null)
                 User.PasswordRepeated = passwordBox.Password;
         }, _ => true);
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
+        
         #endregion
     }
 }

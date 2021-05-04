@@ -22,7 +22,6 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
          EndEdit();
@@ -30,13 +29,6 @@
             TypesSddsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(TypeSsd.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
 
         #region Откат изменений
         private Types_ssd _selectTypeSsd;

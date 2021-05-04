@@ -27,16 +27,11 @@
 
         public ObservableCollection<Types_memory> TypesMemories { get; }
 
-        #region Команды
-
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Ram);
             RamViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Ram.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

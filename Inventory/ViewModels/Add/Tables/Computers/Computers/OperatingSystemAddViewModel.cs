@@ -11,15 +11,11 @@
     {
         public Operating_systems OperatingSystem { get; } = new();
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(OperatingSystem);
             OperatingSystemsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(OperatingSystem.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

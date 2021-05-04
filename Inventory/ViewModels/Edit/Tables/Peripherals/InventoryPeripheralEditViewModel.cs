@@ -35,7 +35,6 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryPeripheral.CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventoryPeripheral.EndEdit();
@@ -43,12 +42,5 @@
             InventoryPeripheralViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryPeripheral.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            InventoryPeripheral.CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
     }
 }

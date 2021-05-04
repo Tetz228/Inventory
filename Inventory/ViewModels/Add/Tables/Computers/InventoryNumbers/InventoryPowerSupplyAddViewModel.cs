@@ -34,16 +34,12 @@
         public Inventory_numbers_power_supplies InventoryPowerSupply { get; } = new();
 
         public ObservableCollection<Power_supplies> PowerSupplies { get; }
-
-        #region Команды
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryPowerSupply);
             InventoryPowerSupplyViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryPowerSupply.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

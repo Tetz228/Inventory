@@ -15,7 +15,7 @@
 
         public Page CurrentPage { get; private set; }
 
-        public bool OnAdmin { get; set; } = User.AuthorizedUser.Role.Name != USER_S;
+        public bool OnAdmin { get; set; } = true/*User.AuthorizedUser.Role.Name != USER_S*/;
 
         #region Команды
         public ICommand SelectTablesDepartmentsCommand => new DelegateCommand(() => CurrentPage = new DepartmentsPage());

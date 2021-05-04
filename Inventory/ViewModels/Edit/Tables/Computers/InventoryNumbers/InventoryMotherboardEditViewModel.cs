@@ -31,7 +31,6 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryMotherboard.CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventoryMotherboard.EndEdit();
@@ -39,12 +38,5 @@
             InventoryMotherboardViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryMotherboard.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            InventoryMotherboard.CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
     }
 }

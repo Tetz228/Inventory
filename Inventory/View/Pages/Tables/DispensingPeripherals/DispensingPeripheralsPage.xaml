@@ -6,7 +6,6 @@
     xmlns:converters="clr-namespace:Inventory.Services.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dispensingPeripherals="clr-namespace:Inventory.ViewModels.Tables.DispensingPeripherals"
-    xmlns:local="clr-namespace:Inventory.View.Pages.Tables.DispensingPeripherals"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="DispensingPeripheralsPage"

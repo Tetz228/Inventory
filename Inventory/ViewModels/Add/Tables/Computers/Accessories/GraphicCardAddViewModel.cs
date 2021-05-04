@@ -24,16 +24,11 @@
 
         public ObservableCollection<Unit> Units { get; }
 
-        #region Команды
-
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(GraphicCard);
             GraphicsCardsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(GraphicCard.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
     }
 }

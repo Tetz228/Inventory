@@ -31,8 +31,6 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
-
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
@@ -40,13 +38,6 @@
             PowerSuppliesViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(PowerSupply.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
 
         #region Откат изменений
         private Power_supplies _selectPowerSupply;

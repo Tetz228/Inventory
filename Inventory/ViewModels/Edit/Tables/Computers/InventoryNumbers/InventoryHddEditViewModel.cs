@@ -32,7 +32,6 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryHdd.CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventoryHdd.EndEdit();
@@ -40,12 +39,5 @@
             InventoryHddViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryHdd.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            InventoryHdd.CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
     }
 }

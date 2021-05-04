@@ -30,8 +30,7 @@
         public ObservableCollection<Ssd> Ssds { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventorySsd.CancelEdit();
-
-        #region Команды
+        
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             InventorySsd.EndEdit();
@@ -39,12 +38,5 @@
             InventorySsdViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventorySsd.ErrorCollection));
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            InventorySsd.CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
     }
 }
