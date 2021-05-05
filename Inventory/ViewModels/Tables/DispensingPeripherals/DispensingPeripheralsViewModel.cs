@@ -43,7 +43,7 @@
                 _dispensingFilter = value;
                 DispensingCollection.Filter = obj =>
                 {
-                    if (obj is User dispensing)
+                    if (obj is Dispensing_peripherals dispensing)
                         return dispensing.Search(DispensingFilter);
 
                     return false;
@@ -62,26 +62,21 @@
 
                 switch (columnHeader.Content.ToString())
                 {
-                    //case "Логин":
-                    //    {
-                    //        DispensingPeripherals.Sort(user => user.Login, SortDirection);
-                    //        break;
-                    //    }
-                    //case "ФИО":
-                    //    {
-                    //        DispensingPeripherals.Sort(user => user.Employee.L_name, SortDirection);
-                    //        break;
-                    //    }
-                    //case "Почта":
-                    //    {
-                    //        DispensingPeripherals.Sort(user => user.Employee.Email, SortDirection);
-                    //        break;
-                    //    }
-                    //case "Роль":
-                    //    {
-                    //        DispensingPeripherals.Sort(role => role.Role.Name, SortDirection);
-                    //        break;
-                    //    }
+                    case "Дата выдачи":
+                        {
+                            DispensingPeripherals.Sort(data => data.Date_dispensing, SortDirection);
+                            break;
+                        }
+                    case "Выдал":
+                        {
+                            DispensingPeripherals.Sort(user => user.Employee.L_name, SortDirection);
+                            break;
+                        }
+                    case "Получил":
+                        {
+                            DispensingPeripherals.Sort(employee => employee.Employee.L_name, SortDirection);
+                            break;
+                        }
                 }
             }
         }

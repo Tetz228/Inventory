@@ -202,6 +202,19 @@
 
         #endregion
 
+        #region DispensingPeripherals
+
+        public static bool Search(this Dispensing_peripherals dispensingPeripherals, string dispensingPeripheralsFilter) =>
+            (dispensingPeripherals.Employee.L_name + " " + dispensingPeripherals.Employee.F_name + " " + dispensingPeripherals.Employee.M_name).ToLower().Contains(dispensingPeripheralsFilter.ToLower())
+            || dispensingPeripherals.Employee.Email.ToLower().Contains(dispensingPeripheralsFilter.ToLower())
+            || dispensingPeripherals.Employee.Phone_number.ToLower().Contains(dispensingPeripheralsFilter.ToLower())
+            || (dispensingPeripherals.User.Employee.L_name + " " + dispensingPeripherals.User.Employee.F_name + " " + dispensingPeripherals.User.Employee.M_name).ToLower().Contains(dispensingPeripheralsFilter.ToLower())
+            || dispensingPeripherals.User.Employee.Email.ToLower().Contains(dispensingPeripheralsFilter.ToLower())
+            || dispensingPeripherals.User.Employee.Phone_number.ToLower().Contains(dispensingPeripheralsFilter.ToLower())
+            || dispensingPeripherals.Date_dispensing.ToString("dd.MM.yyyy").ToLower().Contains(dispensingPeripheralsFilter.ToLower());
+
+        #endregion
+
         public static bool Search(this Manufacturer manufacturer, string manufacturerFilter) => manufacturer.Name.ToLower().Contains(manufacturerFilter.ToLower());
     }
 }

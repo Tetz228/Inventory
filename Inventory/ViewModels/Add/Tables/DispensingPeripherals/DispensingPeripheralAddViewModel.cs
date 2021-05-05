@@ -5,8 +5,10 @@
     using Inventory.Services;
     using Inventory.ViewModels.Tables.DispensingPeripherals;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Data.Entity;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
 
     public class DispensingPeripheralAddViewModel : BindableBase
@@ -15,7 +17,7 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryPeripherals = new ObservableCollection<Inventory_numbers_peripherals>(db.Inventory_numbers_peripherals.AsNoTracking()
+            Peripherals = new ObservableCollection<Inventory_numbers_peripherals>(db.Inventory_numbers_peripherals.AsNoTracking()
                     .Include(status => status.Statuses_peripherals)
                     .Include(peripheral => peripheral.Peripheral)
                     .Include(manufacturer => manufacturer.Peripheral.Manufacturer)
@@ -23,13 +25,13 @@
                 .Sort(numberPeripheral => numberPeripheral.Inventory_number);
             Employees = new ObservableCollection<Employee>(db.Employees.AsNoTracking()).Sort(emp => emp.L_name);
 
-            for (int i = InventoryPeripherals.Count - 1; i >= 0; i--)
+            for (int i = Peripherals.Count - 1; i >= 0; i--)
             {
                 foreach (var peripherals in db.List_dispensed_peripherals.AsNoTracking())
                 {
-                    if (InventoryPeripherals[i].Id_inventory_number_peripheral == peripherals.Fk_inventory_number_peripheral)
+                    if (Peripherals[i].Id_inventory_number_peripheral == peripherals.Fk_inventory_number_peripheral)
                     {
-                        InventoryPeripherals.Remove(InventoryPeripherals[i]);
+                        Peripherals.Remove(Peripherals[i]);
                         break;
                     }
                 }
@@ -37,6 +39,8 @@
         }
 
         #region Свойства
+
+        private ListSortDirection SortDirection { get; set; }
 
         public Inventory_numbers_peripherals SelectInventoryPeripheral { get; set; }
 
@@ -46,27 +50,81 @@
 
         public ObservableCollection<Employee> Employees { get; }
 
-        public ObservableCollection<Inventory_numbers_peripherals> InventoryPeripherals { get; set; }
+        public ObservableCollection<Inventory_numbers_peripherals> Peripherals { get; set; }
 
         public ObservableCollection<Inventory_numbers_peripherals> ListDispensedPeripherals { get; set; } = new();
 
         #endregion
 
+        #region События
+
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        {
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
+            {
+                switch (columnHeader.Content.ToString())
+                {
+                    case "Инвентарный номер":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(numberPeripheral => numberPeripheral.Inventory_number, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(numberPeripheral => numberPeripheral.Inventory_number, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Производитель":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(manufacturer => manufacturer.Peripheral.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(manufacturer => manufacturer.Peripheral.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Тип":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(type => type.Peripheral.Types_peripherals.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(type => type.Peripheral.Types_peripherals.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Наименование":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(peripheral => peripheral.Peripheral.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(peripheral => peripheral.Peripheral.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Статус":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(peripheral => peripheral.Statuses_peripherals.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(peripheral => peripheral.Statuses_peripherals.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                }
+            }
+        }
+
         public void OnMouseLeftButtonDownListPeripherals(object sender, RoutedEventArgs args) => SelectInventoryPeripheral = null;
 
         public void OnMouseLeftButtonDownListDispensing(object sender, RoutedEventArgs args) => SelectListPeripheral = null;
+
+        #endregion
 
         #region Команды
 
         public ICommand TransferInListDispensingCommand => new DelegateCommand<Inventory_numbers_peripherals>(selectPeripheral =>
         {
             ListDispensedPeripherals.Add(selectPeripheral);
-            InventoryPeripherals.Remove(selectPeripheral);
+            Peripherals.Remove(selectPeripheral);
         }, selectPeripheral => selectPeripheral != null);
 
         public ICommand TransferInListInventoryPeripheralCommand => new DelegateCommand<Inventory_numbers_peripherals>(selectPeripheral =>
         {
-            InventoryPeripherals.Add(selectPeripheral);
+            Peripherals.Add(selectPeripheral);
             ListDispensedPeripherals.Remove(selectPeripheral);
         }, selectPeripheral => selectPeripheral != null);
 

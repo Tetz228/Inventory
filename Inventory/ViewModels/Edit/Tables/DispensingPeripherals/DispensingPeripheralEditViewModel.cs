@@ -10,6 +10,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
 
     public class DispensingPeripheralEditViewModel : BindableBase
@@ -44,6 +45,8 @@
 
         #region Свойства
 
+        private ListSortDirection SortDirection { get; set; }
+
         public Inventory_numbers_peripherals SelectInventoryPeripheral { get; set; }
 
         public Inventory_numbers_peripherals SelectListPeripheral { get; set; }
@@ -57,6 +60,57 @@
         public ObservableCollection<Inventory_numbers_peripherals> ListDispensedPeripherals { get; set; }
 
         #endregion
+
+        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        {
+            if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
+            {
+                switch (columnHeader.Content.ToString())
+                {
+                    case "Инвентарный номер":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(numberPeripheral => numberPeripheral.Inventory_number, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(numberPeripheral => numberPeripheral.Inventory_number, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Производитель":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(manufacturer => manufacturer.Peripheral.Manufacturer.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(manufacturer => manufacturer.Peripheral.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Тип":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(type => type.Peripheral.Types_peripherals.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(type => type.Peripheral.Types_peripherals.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Наименование":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(peripheral => peripheral.Peripheral.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(peripheral => peripheral.Peripheral.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                    case "Статус":
+                        {
+                            if (SortDirection == ListSortDirection.Ascending)
+                                Peripherals.Sort(peripheral => peripheral.Statuses_peripherals.Name, SortDirection = ListSortDirection.Descending);
+                            else
+                                Peripherals.Sort(peripheral => peripheral.Statuses_peripherals.Name, SortDirection = ListSortDirection.Ascending);
+                            break;
+                        }
+                }
+            }
+        }
+
 
         public void OnMouseLeftButtonDownListPeripherals(object sender, RoutedEventArgs args) => SelectInventoryPeripheral = null;
 
