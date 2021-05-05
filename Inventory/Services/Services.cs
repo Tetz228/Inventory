@@ -10,9 +10,10 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Linq.Dynamic.Core;
     using System.Reflection;
     using System.Windows;
-    using System.Windows.Controls;
+    using LinqExtensions = System.Linq.Expressions;
 
     public static class Services
     {
@@ -53,14 +54,14 @@
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 
-        public static void ExportExcel(this ListView listView, string nameTemplate, string namedAreaName)
+        public static void ExportExcel(this ICollectionView collectionView, string nameTemplate, string namedAreaName)
         {
             string fileName = IsSavingDocumentExcel();
 
             if (fileName != null)
             {
                 var template = new XLTemplate(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Templates\\" + nameTemplate);
-                template.AddVariable(namedAreaName, listView.ItemsSource);
+                template.AddVariable(namedAreaName, collectionView.ToDynamicList());
                 template.Generate();
                 template.SaveAs(fileName);
 
@@ -95,11 +96,11 @@
 
             var type = typeof(TClass);
 
-            var parameterExpression = System.Linq.Expressions.Expression.Parameter(type, "tClass");
-            var constant = System.Linq.Expressions.Expression.Constant(obj);
-            var property = System.Linq.Expressions.Expression.Property(parameterExpression, propertyName);
-            var expression = System.Linq.Expressions.Expression.Equal(property, constant);
-            var lambda = System.Linq.Expressions.Expression.Lambda<Func<TClass, bool>>(expression, parameterExpression);
+            var parameterExpression = LinqExtensions.Expression.Parameter(type, "tClass");
+            var constant = LinqExtensions.Expression.Constant(obj);
+            var property = LinqExtensions.Expression.Property(parameterExpression, propertyName);
+            var expression = LinqExtensions.Expression.Equal(property, constant);
+            var lambda = LinqExtensions.Expression.Lambda<Func<TClass, bool>>(expression, parameterExpression);
             var compiledLambda = lambda.Compile();
             var result = dbSet.FirstOrDefault(compiledLambda);
 
