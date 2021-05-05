@@ -16,6 +16,9 @@
 
     public class InventoryRamViewModel : BindableBase
     {
+        private const string NAME_TEMPLATE = "TemplateInventoryRam.xlsx";
+        private const string NAMED_AREA_NAME = "InventoryRam";
+
         public InventoryRamViewModel()
         {
             RefreshCollection();
@@ -23,7 +26,7 @@
         }
 
         #region Свойства
-        private ICollectionView InventoryRamsCollection { get; }
+        public ICollectionView InventoryRamsCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
@@ -123,6 +126,8 @@
             Services.Delete<Inventory_numbers_ram>(selectInventoryRam.Id_inventory_number_ram);
             InventoryRams.Remove(selectInventoryRam);
         }, selectRam => selectRam != null);
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion

@@ -18,11 +18,11 @@
         #region Команды
         public ICommand SelectSoketsPageCommand => new DelegateCommand(() => CurrentPage = new SoketsPage());
 
-        public ICommand SelectHddsPageCommand => new DelegateCommand(() => CurrentPage = new HddsPage());
+        public ICommand SelectHddPageCommand => new DelegateCommand(() => CurrentPage = new HddPage());
 
         public ICommand SelectUnitsPageCommand => new DelegateCommand(() => CurrentPage = new UnitsPage());
 
-        public ICommand SelectTypesHddPageCommand => new DelegateCommand(() => CurrentPage = new TypesHddsPage());
+        public ICommand SelectTypesHddPageCommand => new DelegateCommand(() => CurrentPage = new TypesHddPage());
 
         public ICommand SelectTablesManufacturersCommand => new DelegateCommand(() => CurrentPage = new ManufacturersPage());
 
@@ -42,7 +42,7 @@
 
         public ICommand SelectInventoryRamPageCommand => new DelegateCommand(() => CurrentPage = new InventoryRamPage());
 
-        public ICommand SelectInventoryHddsPageCommand => new DelegateCommand(() => CurrentPage = new InventoryHddsPage());
+        public ICommand SelectInventoryHddPageCommand => new DelegateCommand(() => CurrentPage = new InventoryHddPage());
 
         public ICommand SelectInventorySsdsPageCommand => new DelegateCommand(() => CurrentPage = new InventorySsdsPage());
 

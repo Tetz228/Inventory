@@ -2,9 +2,9 @@
 {
     using System.Windows.Controls;
 
-    public partial class TypesHddsPage : Page
+    public partial class TypesHddPage : Page
     {
-        public TypesHddsPage()
+        public TypesHddPage()
         {
             InitializeComponent();
         }

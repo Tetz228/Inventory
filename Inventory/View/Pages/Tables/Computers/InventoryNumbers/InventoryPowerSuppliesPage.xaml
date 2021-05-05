@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <inventoryNumbers:InventoryPowerSupplyViewModel />
+        <inventoryNumbers:InventoryPowerSuppliesViewModel />
     </Page.DataContext>
 
     <Grid Background="#FF2BA8E2">
@@ -149,6 +149,19 @@
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
                 Text="{Binding InventoryPowerSuppliesFilter, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                Command="{Binding ExportExcelCommand}"
+                CommandParameter="{Binding InventoryPowerSuppliesCollection}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="White"
+                        Kind="FileExcel" />
+                </ContentControl>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

@@ -14,39 +14,39 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    public class HddsViewModel : BindableBase
+    public class HddViewModel : BindableBase
     {
-        public HddsViewModel()
+        public HddViewModel()
         {
             RefreshCollection();
-            HddsCollection = CollectionViewSource.GetDefaultView(Hdds);
+            HddCollection = CollectionViewSource.GetDefaultView(Hdd);
         }
 
         #region Свойства
-        private ICollectionView HddsCollection { get; }
+        private ICollectionView HddCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
         public Hdd SelectHdd { get; set; }
 
-        public static ObservableCollection<Hdd> Hdds { get; set; } = new();
+        public static ObservableCollection<Hdd> Hdd { get; set; } = new();
 
-        private string _hddsFilter = string.Empty;
+        private string _hddFilter = string.Empty;
 
-        public string HddsFilter
+        public string HddFilter
         {
-            get => _hddsFilter;
+            get => _hddFilter;
             set
             {
-                _hddsFilter = value;
-                HddsCollection.Filter = obj =>
+                _hddFilter = value;
+                HddCollection.Filter = obj =>
                 {
                     if (obj is Hdd hdd)
-                        return hdd.Search(HddsFilter);
+                        return hdd.Search(HddFilter);
 
                     return false;
                 };
-                HddsCollection.Refresh();
+                HddCollection.Refresh();
             }
         }
         #endregion
@@ -62,22 +62,22 @@
                 {
                     case "Производитель":
                         {
-                            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
+                            Hdd.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Тип":
                         {
-                            Hdds.Sort(type => type.Types_hdd.Name, SortDirection);
+                            Hdd.Sort(type => type.Types_hdd.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            Hdds.Sort(hdd => hdd.Name, SortDirection);
+                            Hdd.Sort(hdd => hdd.Name, SortDirection);
                             break;
                         }
                     case "Объём":
                         {
-                            Hdds.Sort(hdd => hdd.Memory_size + " " + hdd.Unit.Short_name, SortDirection);
+                            Hdd.Sort(hdd => hdd.Memory_size + " " + hdd.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -111,7 +111,7 @@
                 return;
 
             Services.Delete<Hdd>(selectHdd.Id_hdd);
-            Hdds.Remove(selectHdd);
+            Hdd.Remove(selectHdd);
         }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
@@ -119,13 +119,13 @@
 
         public static void RefreshCollection()
         {
-            Hdds.Clear();
+            Hdd.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Hdds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd))
-                Hdds.Add(item);
+                Hdd.Add(item);
 
-            Hdds.Sort(manufacturer => manufacturer.Manufacturer.Name);
+            Hdd.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

@@ -33,7 +33,7 @@
                     .Include(manufact => manufact.Processor.Manufacturer)
                     .Include(socket => socket.Processor.Socket))
                 .Sort(number => number.Inventory_number);
-            InventoryHdds = new ObservableCollection<Inventory_numbers_hdd>(db.Inventory_numbers_hdd
+            InventoryHdd = new ObservableCollection<Inventory_numbers_hdd>(db.Inventory_numbers_hdd
                     .Include(unit => unit.Hdd.Unit)
                     .Include(manufact => manufact.Hdd.Manufacturer)
                     .Include(socket => socket.Hdd.Types_hdd))
@@ -82,7 +82,7 @@
 
         public ObservableCollection<Operating_systems> OperatingSystems { get; }
 
-        public ObservableCollection<Inventory_numbers_hdd> InventoryHdds { get; }
+        public ObservableCollection<Inventory_numbers_hdd> InventoryHdd { get; }
 
         #endregion
 

@@ -36,7 +36,7 @@
         {
             InventoryGraphicCard.EndEdit();
             Services.Edit(InventoryGraphicCard.Id_inventory_number_graphics_card, InventoryGraphicCard);
-            InventoryGraphicCardViewModel.RefreshCollection();
+            InventoryGraphicsCardsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryGraphicCard.ErrorCollection));
     }

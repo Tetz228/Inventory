@@ -185,7 +185,7 @@
             Grid.Column="2"
             Grid.ColumnSpan="1"
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
-            ItemsSource="{Binding InventoryPeripherals, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Peripherals, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDownListPeripherals(@sender, @args)'}"
             SelectedItem="{Binding SelectInventoryPeripheral}"
             Style="{StaticResource BaseListView}">

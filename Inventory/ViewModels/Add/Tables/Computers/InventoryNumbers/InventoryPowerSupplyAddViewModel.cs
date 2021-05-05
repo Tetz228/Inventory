@@ -38,7 +38,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryPowerSupply);
-            InventoryPowerSupplyViewModel.RefreshCollection();
+            InventoryPowerSuppliesViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryPowerSupply.ErrorCollection));
     }

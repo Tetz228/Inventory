@@ -153,6 +153,19 @@
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
                 Text="{Binding InventorySsdsFilter, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                Command="{Binding ExportExcelCommand}"
+                CommandParameter="{Binding InventorySsdsCollection}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="White"
+                        Kind="FileExcel" />
+                </ContentControl>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

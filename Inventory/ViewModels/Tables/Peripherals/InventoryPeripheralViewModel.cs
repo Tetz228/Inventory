@@ -15,8 +15,11 @@
 
     using Inventory.Services;
 
-    internal class InventoryPeripheralViewModel : BindableBase
+    public class InventoryPeripheralViewModel : BindableBase
     {
+        private const string NAME_TEMPLATE = "TemplateInventoryPeripherals.xlsx";
+        private const string NAMED_AREA_NAME = "InventoryPeripherals";
+
         public InventoryPeripheralViewModel()
         {
             RefreshCollection();
@@ -25,7 +28,7 @@
 
         #region Свойства
 
-        private ICollectionView InventoryPeripheralsCollection { get; }
+        public ICollectionView InventoryPeripheralsCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
@@ -133,6 +136,8 @@
             Services.Delete<Inventory_numbers_peripherals>(selectInventoryPeripheral.Id_inventory_number_peripheral);
             InventoryPeripherals.Remove(selectInventoryPeripheral);
         }, selectInventoryPeripheral => selectInventoryPeripheral != null);
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion

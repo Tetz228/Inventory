@@ -16,6 +16,9 @@
 
     public class InventorySsdViewModel : BindableBase
     {
+        private const string NAME_TEMPLATE = "TemplateInventorySsd.xlsx";
+        private const string NAMED_AREA_NAME = "InventorySsd";
+
         public InventorySsdViewModel()
         {
             RefreshCollection();
@@ -23,7 +26,7 @@
         }
 
         #region Свойства
-        private ICollectionView InventorySsdsCollection { get; }
+        public ICollectionView InventorySsdsCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
@@ -118,6 +121,8 @@
             Services.Delete<Inventory_numbers_ssd>(selectInventorySsd.Id_inventory_number_ssd);
             InventorySsds.Remove(selectInventorySsd);
         }, selectInventorySsd => selectInventorySsd != null);
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion

@@ -16,41 +16,41 @@
 
     public class InventoryHddViewModel : BindableBase
     {
-        public InventoryHddViewModel()
-        {
-            RefreshCollection();
-            InventoryHddsCollection = CollectionViewSource.GetDefaultView(InventoryHdds);
-        }
-
         private const string NAME_TEMPLATE = "TemplateInventoryHdd.xlsx";
         private const string NAMED_AREA_NAME = "InventoryHdd";
 
+        public InventoryHddViewModel()
+        {
+            RefreshCollection();
+            InventoryHddCollection = CollectionViewSource.GetDefaultView(InventoryHdd);
+        }
+
         #region Свойства
 
-        private ICollectionView InventoryHddsCollection { get; }
+        public ICollectionView InventoryHddCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Inventory_numbers_hdd> InventoryHdds { get; set; } = new();
+        public static ObservableCollection<Inventory_numbers_hdd> InventoryHdd { get; set; } = new();
 
         public Inventory_numbers_hdd SelectInventoryHdd { get; set; }
 
-        private string _inventoryHddsFilter = string.Empty;
+        private string _inventoryHddFilter = string.Empty;
 
-        public string InventoryHddsFilter
+        public string InventoryHddFilter
         {
-            get => _inventoryHddsFilter;
+            get => _inventoryHddFilter;
             set
             {
-                _inventoryHddsFilter = value;
-                InventoryHddsCollection.Filter = obj =>
+                _inventoryHddFilter = value;
+                InventoryHddCollection.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_hdd inventoryHdd)
-                        return inventoryHdd.Search(InventoryHddsFilter);
+                        return inventoryHdd.Search(InventoryHddFilter);
 
                     return false;
                 };
-                InventoryHddsCollection.Refresh();
+                InventoryHddCollection.Refresh();
             }
         }
         #endregion
@@ -66,27 +66,27 @@
                 {
                     case "Инвентарный номер":
                         {
-                            InventoryHdds.Sort(numberHdd => numberHdd.Inventory_number, SortDirection);
+                            InventoryHdd.Sort(numberHdd => numberHdd.Inventory_number, SortDirection);
                             break;
                         }
                     case "Производитель":
                         {
-                            InventoryHdds.Sort(manufacturer => manufacturer.Hdd.Manufacturer.Name, SortDirection);
+                            InventoryHdd.Sort(manufacturer => manufacturer.Hdd.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Тип":
                         {
-                            InventoryHdds.Sort(type => type.Hdd.Types_hdd.Name, SortDirection);
+                            InventoryHdd.Sort(type => type.Hdd.Types_hdd.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            InventoryHdds.Sort(hdd => hdd.Hdd.Name, SortDirection);
+                            InventoryHdd.Sort(hdd => hdd.Hdd.Name, SortDirection);
                             break;
                         }
                     case "Объем":
                         {
-                            InventoryHdds.Sort(memorySize => memorySize.Hdd.Memory_size + " " + memorySize.Hdd.Unit.Short_name, SortDirection);
+                            InventoryHdd.Sort(memorySize => memorySize.Hdd.Memory_size + " " + memorySize.Hdd.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -120,17 +120,17 @@
                 return;
 
             Services.Delete<Inventory_numbers_hdd>(selectInventoryHdd.Id_inventory_number_hdd);
-            InventoryHdds.Remove(selectInventoryHdd);
+            InventoryHdd.Remove(selectInventoryHdd);
         }, selectInventoryHdd => selectInventoryHdd != null);
 
-        public ICommand ExportExcelCommand => new DelegateCommand<ListView>(listView => listView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
 
         public static void RefreshCollection()
         {
-            InventoryHdds.Clear();
+            InventoryHdd.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Inventory_numbers_hdd.AsNoTracking()
@@ -139,10 +139,10 @@
                 .Include(type => type.Hdd.Types_hdd)
                 .Include(unit => unit.Hdd.Unit))
             {
-                InventoryHdds.Add(item);
+                InventoryHdd.Add(item);
             }
 
-            InventoryHdds.Sort(numberHdd => numberHdd.Inventory_number);
+            InventoryHdd.Sort(numberHdd => numberHdd.Inventory_number);
         }
     }
 }

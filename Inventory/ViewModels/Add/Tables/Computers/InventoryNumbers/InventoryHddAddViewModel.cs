@@ -16,7 +16,7 @@
         {
             using var db = new InventoryEntities();
 
-            Hdds = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking()
+            Hdd = new ObservableCollection<Hdd>(db.Hdds.AsNoTracking()
                 .Include(manufacturer => manufacturer.Manufacturer)
                 .Include(type => type.Types_hdd)
                 .Include(unit => unit.Unit))
@@ -34,7 +34,7 @@
 
         public Inventory_numbers_hdd InventoryHdd { get; } = new();
 
-        public ObservableCollection<Hdd> Hdds { get; }
+        public ObservableCollection<Hdd> Hdd { get; }
 
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {

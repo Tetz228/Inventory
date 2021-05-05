@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <inventoryNumbers:InventoryGraphicCardViewModel />
+        <inventoryNumbers:InventoryGraphicsCardsViewModel />
     </Page.DataContext>
 
     <Grid Background="#FF2BA8E2">
@@ -28,7 +28,6 @@
         </Grid.RowDefinitions>
 
         <ListView
-            Name="ListView"
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding InventoryGraphicsCards, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
@@ -153,7 +152,7 @@
 
             <Button
                 Command="{Binding ExportExcelCommand}"
-                CommandParameter="{Binding ElementName=ListView}"
+                CommandParameter="{Binding InventoryGraphicsCardsCollection}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

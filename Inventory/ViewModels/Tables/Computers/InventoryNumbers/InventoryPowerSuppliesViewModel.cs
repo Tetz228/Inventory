@@ -14,16 +14,19 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryPowerSupplyViewModel : BindableBase
+    public class InventoryPowerSuppliesViewModel : BindableBase
     {
-        public InventoryPowerSupplyViewModel()
+        private const string NAME_TEMPLATE = "TemplateInventoryPowerSupplies.xlsx";
+        private const string NAMED_AREA_NAME = "InventoryPowerSupplies";
+
+        public InventoryPowerSuppliesViewModel()
         {
             RefreshCollection();
             InventoryPowerSuppliesCollection = CollectionViewSource.GetDefaultView(InventoryPowerSupplies);
         }
 
         #region Свойства
-        private ICollectionView InventoryPowerSuppliesCollection { get; }
+        public ICollectionView InventoryPowerSuppliesCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
@@ -113,6 +116,8 @@
             Services.Delete<Inventory_numbers_power_supplies>(selectInventoryPowerSupplies.Id_inventory_number_power_supplie);
             InventoryPowerSupplies.Remove(selectInventoryPowerSupplies);
         }, selectInventoryPowerSupply => selectInventoryPowerSupply != null);
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion

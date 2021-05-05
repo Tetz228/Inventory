@@ -14,19 +14,19 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryGraphicCardViewModel : BindableBase
+    public class InventoryGraphicsCardsViewModel : BindableBase
     {
-        public InventoryGraphicCardViewModel()
+        private const string NAME_TEMPLATE = "TemplateInventoryGraphicsCards.xlsx";
+        private const string NAMED_AREA_NAME = "InventoryGraphicsCards";
+
+        public InventoryGraphicsCardsViewModel()
         {
             RefreshCollection();
             InventoryGraphicsCardsCollection = CollectionViewSource.GetDefaultView(InventoryGraphicsCards);
         }
 
-        private const string NAME_TEMPLATE = "TemplateInventoryGraphicsCards.xlsx";
-        private const string NAMED_AREA_NAME = "InventoryGraphicsCards";
-
         #region Свойства
-        private ICollectionView InventoryGraphicsCardsCollection { get; }
+        public ICollectionView InventoryGraphicsCardsCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
@@ -117,7 +117,7 @@
             InventoryGraphicsCards.Remove(selectInventoryGraphicCard);
         }, selectInventoryGraphicCard => selectInventoryGraphicCard != null);
 
-        public ICommand ExportExcelCommand => new DelegateCommand<ListView>(listView => listView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion

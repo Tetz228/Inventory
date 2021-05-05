@@ -38,7 +38,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryGraphicCard);
-            InventoryGraphicCardViewModel.RefreshCollection();
+            InventoryGraphicsCardsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryGraphicCard.ErrorCollection));
     }

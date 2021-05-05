@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <inventoryNumbers:InventoryProcessorViewModel />
+        <inventoryNumbers:InventoryProcessorsViewModel />
     </Page.DataContext>
 
     <Grid Background="#FF2BA8E2">
@@ -157,6 +157,19 @@
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
                 Text="{Binding InventoryProcessorsFilter, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                Command="{Binding ExportExcelCommand}"
+                CommandParameter="{Binding InventoryProcessorsCollection}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="White"
+                        Kind="FileExcel" />
+                </ContentControl>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

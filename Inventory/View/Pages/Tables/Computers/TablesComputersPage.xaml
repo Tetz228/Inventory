@@ -44,7 +44,7 @@
                     Header="Оперативная память"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
-                    Command="{Binding SelectInventoryHddsPageCommand}"
+                    Command="{Binding SelectInventoryHddPageCommand}"
                     Header="Жесткие диски"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
@@ -75,7 +75,7 @@
                     Header="Оперативная память"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
-                    Command="{Binding SelectHddsPageCommand}"
+                    Command="{Binding SelectHddPageCommand}"
                     Header="Жесткие диски"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem

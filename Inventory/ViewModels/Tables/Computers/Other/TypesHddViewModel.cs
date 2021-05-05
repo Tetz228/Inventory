@@ -13,40 +13,40 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    public class TypesHddsViewModel : BindableBase
+    public class TypesHddViewModel : BindableBase
     {
-        public TypesHddsViewModel()
+        public TypesHddViewModel()
         {
             RefreshCollection();
-            TypesHddsCollection = CollectionViewSource.GetDefaultView(TypesHdds);
+            TypesHddCollection = CollectionViewSource.GetDefaultView(TypesHdd);
         }
 
         #region Свойства
 
-        private ICollectionView TypesHddsCollection { get; }
+        private ICollectionView TypesHddCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Types_hdd> TypesHdds { get; set; } = new();
+        public static ObservableCollection<Types_hdd> TypesHdd { get; set; } = new();
 
         public Types_hdd SelectTypeHdd { get; set; }
 
-        private string _typesHddsFilter = string.Empty;
+        private string _typesHddFilter = string.Empty;
 
-        public string TypesHddsFilter
+        public string TypesHddFilter
         {
-            get => _typesHddsFilter;
+            get => _typesHddFilter;
             set
             {
-                _typesHddsFilter = value;
-                TypesHddsCollection.Filter = obj =>
+                _typesHddFilter = value;
+                TypesHddCollection.Filter = obj =>
                 {
                     if (obj is Types_hdd typesHdd)
-                        return typesHdd.Search(TypesHddsFilter);
+                        return typesHdd.Search(TypesHddFilter);
 
                     return false;
                 };
-                TypesHddsCollection.Refresh();
+                TypesHddCollection.Refresh();
             }
         }
         #endregion
@@ -62,7 +62,7 @@
                 {
                     case "Наименование":
                         {
-                            TypesHdds.Sort(typeHdd => typeHdd.Name, SortDirection);
+                            TypesHdd.Sort(typeHdd => typeHdd.Name, SortDirection);
                             break;
                         }
                 }
@@ -96,7 +96,7 @@
                 return;
 
             Services.Delete<Types_hdd>(selectTypeHdd.Id_type_hdd);
-            TypesHdds.Remove(selectTypeHdd);
+            TypesHdd.Remove(selectTypeHdd);
         }, selectTypeHdd => selectTypeHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
@@ -104,14 +104,14 @@
 
         private static void RefreshCollection()
         {
-            TypesHdds.Clear();
+            TypesHdd.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Types_hdd.AsNoTracking())
             {
-                TypesHdds.Add(item);
+                TypesHdd.Add(item);
             }
-            TypesHdds.Sort(typeHdd => typeHdd.Name);
+            TypesHdd.Sort(typeHdd => typeHdd.Name);
         }
     }
 }

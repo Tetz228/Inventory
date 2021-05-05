@@ -16,6 +16,9 @@
 
     public class InventoryMotherboardViewModel : BindableBase
     {
+        private const string NAME_TEMPLATE = "TemplateInventoryMotherboard.xlsx";
+        private const string NAMED_AREA_NAME = "InventoryMotherboard";
+
         public InventoryMotherboardViewModel()
         {
             RefreshCollection();
@@ -24,7 +27,7 @@
 
         #region Свойства
 
-        private ICollectionView InventoryMotherboardsCollection { get; }
+        public ICollectionView InventoryMotherboardsCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
@@ -119,6 +122,8 @@
             Services.Delete<Inventory_numbers_motherboards>(selectInventoryMotherboard.Id_inventory_number_motherboard);
             InventoryMotherboards.Remove(selectInventoryMotherboard);
         }, selectInventoryMotherboard => selectInventoryMotherboard != null);
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 

@@ -274,7 +274,7 @@
                                                     <ComboBox
                                                         Width="156"
                                                         MaxWidth="156"
-                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryHdds}"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryHdd}"
                                                         SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_inventory_number_hdd}"
                                                         SelectedValuePath="Id_inventory_number_hdd"

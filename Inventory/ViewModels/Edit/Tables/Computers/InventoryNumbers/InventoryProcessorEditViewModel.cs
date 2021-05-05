@@ -36,7 +36,7 @@
         {
             InventoryProcessor.EndEdit();
             Services.Edit(InventoryProcessor.Id_inventory_number_processor, InventoryProcessor);
-            InventoryProcessorViewModel.RefreshCollection();
+            InventoryProcessorsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryProcessor.ErrorCollection));
     }

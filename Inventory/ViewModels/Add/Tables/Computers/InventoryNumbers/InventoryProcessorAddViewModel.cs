@@ -39,7 +39,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryProcessor);
-            InventoryProcessorViewModel.RefreshCollection();
+            InventoryProcessorsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryProcessor.ErrorCollection));
     }

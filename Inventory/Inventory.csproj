@@ -361,11 +361,11 @@
     <Compile Include="ViewModels\Tables\Computers\Computers\ComputersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Computers\OperatingSystemsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Computers\StatusesComputersViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryGraphicCardViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryGraphicsCardsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryHddViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryMotherboardViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryPowerSupplyViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryProcessorViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryPowerSuppliesViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryProcessorsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryRamViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventorySsdViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\TypesMemoryViewModel.cs" />
@@ -507,8 +507,8 @@
     <Compile Include="View\Pages\Tables\Computers\Accessories\GraphicsCardsPage.xaml.cs">
       <DependentUpon>GraphicsCardsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Computers\Accessories\HddsPage.xaml.cs">
-      <DependentUpon>HddsPage.xaml</DependentUpon>
+    <Compile Include="View\Pages\Tables\Computers\Accessories\HddPage.xaml.cs">
+      <DependentUpon>HddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\Accessories\MotherboardsPage.xaml.cs">
       <DependentUpon>MotherboardsPage.xaml</DependentUpon>
@@ -531,8 +531,8 @@
     <Compile Include="View\Pages\Tables\Computers\InventoryNumbers\InventoryGraphicsCardsPage.xaml.cs">
       <DependentUpon>InventoryGraphicsCardsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Computers\InventoryNumbers\InventoryHddsPage.xaml.cs">
-      <DependentUpon>InventoryHddsPage.xaml</DependentUpon>
+    <Compile Include="View\Pages\Tables\Computers\InventoryNumbers\InventoryHddPage.xaml.cs">
+      <DependentUpon>InventoryHddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\InventoryNumbers\InventoryMotherboardsPage.xaml.cs">
       <DependentUpon>InventoryMotherboardsPage.xaml</DependentUpon>
@@ -561,8 +561,8 @@
     <Compile Include="View\Pages\Tables\Computers\TablesComputersPage.xaml.cs">
       <DependentUpon>TablesComputersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Computers\Other\TypesHddsPage.xaml.cs">
-      <DependentUpon>TypesHddsPage.xaml</DependentUpon>
+    <Compile Include="View\Pages\Tables\Computers\Other\TypesHddPage.xaml.cs">
+      <DependentUpon>TypesHddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\Other\TypesMemoryPage.xaml.cs">
       <DependentUpon>TypesMemoryPage.xaml</DependentUpon>
@@ -633,9 +633,9 @@
     <Compile Include="ViewModels\Edit\Tables\Peripherals\PeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\Accessories\HddsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Accessories\HddViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TablesComputesViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\Other\TypesHddsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Other\TypesHddViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\UnitsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Employees\EmployeesViewModel.cs" />
@@ -867,7 +867,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Computers\Accessories\HddsPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\Accessories\HddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -899,7 +899,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Computers\InventoryNumbers\InventoryHddsPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\InventoryNumbers\InventoryHddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -939,7 +939,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Computers\Other\TypesHddsPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\Other\TypesHddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1199,6 +1199,12 @@
     <Compile Include="ViewModels\Add\Tables\ManufacturerAddViewModel.cs" />
     <None Include="Templates\TemplateInventoryGraphicsCards.xlsx" />
     <None Include="Templates\TemplateInventoryHdd.xlsx" />
+    <None Include="Templates\TemplateInventoryMotherboard.xlsx" />
+    <None Include="Templates\TemplateInventoryPeripherals.xlsx" />
+    <None Include="Templates\TemplateInventoryPowerSupplies.xlsx" />
+    <None Include="Templates\TemplateInventoryProcessors.xlsx" />
+    <None Include="Templates\TemplateInventoryRam.xlsx" />
+    <None Include="Templates\TemplateInventorySsd.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

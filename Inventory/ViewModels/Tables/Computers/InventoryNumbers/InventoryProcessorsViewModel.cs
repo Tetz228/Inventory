@@ -14,16 +14,19 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryProcessorViewModel : BindableBase
+    public class InventoryProcessorsViewModel : BindableBase
     {
-        public InventoryProcessorViewModel()
+        private const string NAME_TEMPLATE = "TemplateInventoryProcessors.xlsx";
+        private const string NAMED_AREA_NAME = "InventoryProcessors";
+
+        public InventoryProcessorsViewModel()
         {
             RefreshCollection();
             InventoryProcessorsCollection = CollectionViewSource.GetDefaultView(InventoryProcessors);
         }
 
         #region Свойства
-        private ICollectionView InventoryProcessorsCollection { get; }
+        public ICollectionView InventoryProcessorsCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
@@ -123,6 +126,8 @@
             Services.Delete<Inventory_numbers_processors>(selectInventoryProcessor.Id_inventory_number_processor);
             InventoryProcessors.Remove(selectInventoryProcessor);
         }, selectInventoryProcessor => selectInventoryProcessor != null);
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion

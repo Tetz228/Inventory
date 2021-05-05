@@ -66,7 +66,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 DisplayMemberPath="Name"
-                                ItemsSource="{Binding TypesHdds}"
+                                ItemsSource="{Binding TypesHdd}"
                                 SelectedValue="{Binding Hdd.Fk_type_hdd, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_type_hdd"
                                 Style="{StaticResource BaseComboBox}" />

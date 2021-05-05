@@ -37,7 +37,7 @@
         {
             InventoryPowerSupply.EndEdit();
             Services.Edit(InventoryPowerSupply.Id_inventory_number_power_supplie, InventoryPowerSupply);
-            InventoryPowerSupplyViewModel.RefreshCollection();
+            InventoryPowerSuppliesViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryPowerSupply.ErrorCollection));
     }
