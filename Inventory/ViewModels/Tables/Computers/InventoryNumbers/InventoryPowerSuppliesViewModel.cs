@@ -16,7 +16,7 @@
 
     public class InventoryPowerSuppliesViewModel : BindableBase
     {
-        private const string NAME_TEMPLATE = "TemplateInventoryPowerSupplies.xlsx";
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации блоков питания.xlsx";
         private const string NAMED_AREA_NAME = "InventoryPowerSupplies";
 
         public InventoryPowerSuppliesViewModel()

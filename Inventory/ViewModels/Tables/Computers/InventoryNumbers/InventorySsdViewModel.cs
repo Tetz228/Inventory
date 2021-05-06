@@ -16,7 +16,7 @@
 
     public class InventorySsdViewModel : BindableBase
     {
-        private const string NAME_TEMPLATE = "TemplateInventorySsd.xlsx";
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации SSD-накопителей.xlsx";
         private const string NAMED_AREA_NAME = "InventorySsd";
 
         public InventorySsdViewModel()

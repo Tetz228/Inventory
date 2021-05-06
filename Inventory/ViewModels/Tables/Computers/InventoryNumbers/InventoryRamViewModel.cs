@@ -16,7 +16,7 @@
 
     public class InventoryRamViewModel : BindableBase
     {
-        private const string NAME_TEMPLATE = "TemplateInventoryRam.xlsx";
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации оперативной памяти.xlsx";
         private const string NAMED_AREA_NAME = "InventoryRam";
 
         public InventoryRamViewModel()

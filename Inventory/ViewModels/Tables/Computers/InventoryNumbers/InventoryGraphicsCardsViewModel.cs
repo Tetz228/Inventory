@@ -16,7 +16,7 @@
 
     public class InventoryGraphicsCardsViewModel : BindableBase
     {
-        private const string NAME_TEMPLATE = "TemplateInventoryGraphicsCards.xlsx";
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации видеокарт.xlsx";
         private const string NAMED_AREA_NAME = "InventoryGraphicsCards";
 
         public InventoryGraphicsCardsViewModel()

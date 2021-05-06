@@ -16,7 +16,7 @@
 
     public class InventoryMotherboardsViewModel : BindableBase
     {
-        private const string NAME_TEMPLATE = "TemplateInventoryMotherboard.xlsx";
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации материнских плат.xlsx";
         private const string NAMED_AREA_NAME = "InventoryMotherboard";
 
         public InventoryMotherboardsViewModel()

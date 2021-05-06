@@ -17,7 +17,7 @@
 
     public class InventoryPeripheralViewModel : BindableBase
     {
-        private const string NAME_TEMPLATE = "TemplateInventoryPeripherals.xlsx";
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации периферии.xlsx";
         private const string NAMED_AREA_NAME = "InventoryPeripherals";
 
         public InventoryPeripheralViewModel()

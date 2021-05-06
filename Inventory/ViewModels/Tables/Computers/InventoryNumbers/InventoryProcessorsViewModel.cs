@@ -16,7 +16,7 @@
 
     public class InventoryProcessorsViewModel : BindableBase
     {
-        private const string NAME_TEMPLATE = "TemplateInventoryProcessors.xlsx";
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации процессоров.xlsx";
         private const string NAMED_AREA_NAME = "InventoryProcessors";
 
         public InventoryProcessorsViewModel()

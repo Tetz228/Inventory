@@ -16,7 +16,7 @@
 
     public class InventoryHddViewModel : BindableBase
     {
-        private const string NAME_TEMPLATE = "TemplateInventoryHdd.xlsx";
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации жестких дисков.xlsx";
         private const string NAMED_AREA_NAME = "InventoryHdd";
 
         public InventoryHddViewModel()

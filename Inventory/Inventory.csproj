@@ -1197,14 +1197,14 @@
     </None>
     <Compile Include="ViewModels\Tables\ManufacturersViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\ManufacturerAddViewModel.cs" />
-    <None Include="Templates\TemplateInventoryGraphicsCards.xlsx" />
-    <None Include="Templates\TemplateInventoryHdd.xlsx" />
-    <None Include="Templates\TemplateInventoryMotherboard.xlsx" />
-    <None Include="Templates\TemplateInventoryPeripherals.xlsx" />
-    <None Include="Templates\TemplateInventoryPowerSupplies.xlsx" />
-    <None Include="Templates\TemplateInventoryProcessors.xlsx" />
-    <None Include="Templates\TemplateInventoryRam.xlsx" />
-    <None Include="Templates\TemplateInventorySsd.xlsx" />
+    <None Include="Templates\Шаблон для инвентаризации видеокарт.xlsx" />
+    <None Include="Templates\Шаблон для инвентаризации жестких дисков.xlsx" />
+    <None Include="Templates\Шаблон для инвентаризации материнских плат.xlsx" />
+    <None Include="Templates\Шаблон для инвентаризации периферии.xlsx" />
+    <None Include="Templates\Шаблон для инвентаризации блоков питания.xlsx" />
+    <None Include="Templates\Шаблон для инвентаризации процессоров.xlsx" />
+    <None Include="Templates\Шаблон для инвентаризации оперативной памяти.xlsx" />
+    <None Include="Templates\Шаблон для инвентаризации SSD-накопителей.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
