@@ -69,7 +69,7 @@
                         }
                     case "Выдал":
                         {
-                            DispensingPeripherals.Sort(user => user.Employee.L_name, SortDirection);
+                            DispensingPeripherals.Sort(user => user.User.Employee.L_name, SortDirection);
                             break;
                         }
                     case "Получил":
@@ -117,6 +117,7 @@
         public static void RefreshCollection()
         {
             DispensingPeripherals.Clear();
+
             using var db = new InventoryEntities();
 
             foreach (var item in db.Dispensing_peripherals
