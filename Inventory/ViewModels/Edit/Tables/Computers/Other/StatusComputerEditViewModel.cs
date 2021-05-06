@@ -1,12 +1,12 @@
-﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Computers
+﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Other
 {
-    using DevExpress.Mvvm;
-    using Inventory.Model;
-
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 
+    using DevExpress.Mvvm;
+
+    using Inventory.Model;
     using Inventory.Services;
 
     public class StatusComputerEditViewModel : BindableBase, IEditableObject

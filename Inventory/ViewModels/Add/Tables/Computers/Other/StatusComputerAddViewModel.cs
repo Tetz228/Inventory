@@ -1,12 +1,13 @@
-﻿namespace Inventory.ViewModels.Add.Tables.Computers.Computers
+﻿namespace Inventory.ViewModels.Add.Tables.Computers.Other
 {
-    using DevExpress.Mvvm;
-    using Inventory.Model;
     using System.Windows;
     using System.Windows.Input;
 
+    using DevExpress.Mvvm;
+
+    using Inventory.Model;
     using Inventory.Services;
-    using Inventory.ViewModels.Tables.Computers.Computers;
+    using Inventory.ViewModels.Tables.Computers.Other;
 
     public class StatusComputerAddViewModel : BindableBase
     {

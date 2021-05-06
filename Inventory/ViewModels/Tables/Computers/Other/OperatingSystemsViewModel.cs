@@ -1,17 +1,19 @@
-﻿namespace Inventory.ViewModels.Tables.Computers.Computers
+﻿namespace Inventory.ViewModels.Tables.Computers.Other
 {
-    using DevExpress.Mvvm;
-    using Inventory.Model;
-    using Inventory.Services;
-    using Inventory.View.Add.Tables.Computers.Computers;
-    using Inventory.View.Edit.Tables.Computers.Computers;
-    using Inventory.ViewModels.Edit.Tables.Computers.Computers;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
+
+    using DevExpress.Mvvm;
+
+    using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.View.Add.Tables.Computers.Other;
+    using Inventory.View.Edit.Tables.Computers.Other;
+    using Inventory.ViewModels.Edit.Tables.Computers.Other;
 
     public class OperatingSystemsViewModel : BindableBase
     {

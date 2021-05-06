@@ -1,4 +1,4 @@
-﻿namespace Inventory.View.Pages.Tables.Computers.Computers
+﻿namespace Inventory.View.Pages.Tables.Computers.Other
 {
     using System.Windows.Controls;
 
