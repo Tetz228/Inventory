@@ -38,10 +38,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectTypeMemory = null;
-        }
+        public void EndEdit() => _selectTypeMemory = null;
 
         public void CancelEdit()
         {

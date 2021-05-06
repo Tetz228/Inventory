@@ -16,7 +16,7 @@
         {
             using var db = new InventoryEntities();
 
-            Ssds = new ObservableCollection<Ssd>(db.Ssds.AsNoTracking()
+            Ssd = new ObservableCollection<Ssd>(db.Ssds.AsNoTracking()
                     .Include(manufacturer => manufacturer.Manufacturer)
                     .Include(type => type.Types_ssd)
                     .Include(unit => unit.Unit))
@@ -27,7 +27,7 @@
 
         public Inventory_numbers_ssd InventorySsd { get; }
 
-        public ObservableCollection<Ssd> Ssds { get; }
+        public ObservableCollection<Ssd> Ssd { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventorySsd.CancelEdit();
         

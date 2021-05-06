@@ -17,7 +17,7 @@
         {
             using var db = new InventoryEntities();
 
-            Rams = new ObservableCollection<Ram>(db.Rams.AsNoTracking()
+            Ram = new ObservableCollection<Ram>(db.Rams.AsNoTracking()
                     .Include(manufacturer => manufacturer.Manufacturer)
                     .Include(unit => unit.Unit)
                     .Include(type => type.Types_memory))
@@ -28,7 +28,7 @@
 
         public Inventory_numbers_ram InventoryRam { get; }
 
-        public ObservableCollection<Ram> Rams { get; }
+        public ObservableCollection<Ram> Ram { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryRam.CancelEdit();
 

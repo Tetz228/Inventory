@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <inventoryNumbers:InventoryMotherboardViewModel />
+        <inventoryNumbers:InventoryMotherboardsViewModel />
     </Page.DataContext>
 
     <Grid Background="#FF2BA8E2">

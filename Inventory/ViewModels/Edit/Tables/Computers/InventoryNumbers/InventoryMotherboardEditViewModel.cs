@@ -35,7 +35,7 @@
         {
             InventoryMotherboard.EndEdit();
             Services.Edit(InventoryMotherboard.Id_inventory_number_motherboard, InventoryMotherboard);
-            InventoryMotherboardViewModel.RefreshCollection();
+            InventoryMotherboardsViewModel.RefreshCollection();
             editWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryMotherboard.ErrorCollection));
     }

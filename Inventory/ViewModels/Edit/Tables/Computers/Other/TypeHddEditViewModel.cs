@@ -38,10 +38,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectTypeHdd = null;
-        }
+        public void EndEdit() => _selectTypeHdd = null;
 
         public void CancelEdit()
         {

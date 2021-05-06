@@ -41,10 +41,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectOperatingSystem = null;
-        }
+        public void EndEdit() => _selectOperatingSystem = null;
 
         public void CancelEdit()
         {

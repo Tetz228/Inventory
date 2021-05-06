@@ -29,7 +29,7 @@
 
         <ListView
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
-            ItemsSource="{Binding InventorySsds, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding InventorySsd, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectInventorySsd}"
             Style="{StaticResource BaseListView}">
@@ -152,11 +152,11 @@
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding InventorySsdsFilter, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding InventorySsdFilter, UpdateSourceTrigger=PropertyChanged}" />
 
             <Button
                 Command="{Binding ExportExcelCommand}"
-                CommandParameter="{Binding InventorySsdsCollection}"
+                CommandParameter="{Binding InventorySsdCollection}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <other:TypesSddsViewModel />
+        <other:TypesSddViewModel />
     </Page.DataContext>
 
     <Grid Background="#FF2BA8E2">
@@ -29,7 +29,7 @@
 
         <ListView
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
-            ItemsSource="{Binding TypesSsds, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding TypesSsd, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectTypeSsd}"
             Style="{StaticResource BaseListView}">
@@ -132,7 +132,7 @@
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding TypesSsdsFilter, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding TypesSsdFilter, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </Page>

@@ -22,34 +22,34 @@
         public InventorySsdViewModel()
         {
             RefreshCollection();
-            InventorySsdsCollection = CollectionViewSource.GetDefaultView(InventorySsds);
+            InventorySsdCollection = CollectionViewSource.GetDefaultView(InventorySsd);
         }
 
         #region Свойства
-        public ICollectionView InventorySsdsCollection { get; }
+        public ICollectionView InventorySsdCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
         public Inventory_numbers_ssd SelectInventorySsd { get; set; }
 
-        public static ObservableCollection<Inventory_numbers_ssd> InventorySsds { get; set; } = new();
+        public static ObservableCollection<Inventory_numbers_ssd> InventorySsd { get; set; } = new();
 
-        private string _ssdsFilter = string.Empty;
+        private string _ssdFilter = string.Empty;
 
-        public string InventorySsdsFilter
+        public string InventorySsdFilter
         {
-            get => _ssdsFilter;
+            get => _ssdFilter;
             set
             {
-                _ssdsFilter = value;
-                InventorySsdsCollection.Filter = obj =>
+                _ssdFilter = value;
+                InventorySsdCollection.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_ssd ssd)
-                        return ssd.Search(InventorySsdsFilter);
+                        return ssd.Search(InventorySsdFilter);
 
                     return false;
                 };
-                InventorySsdsCollection.Refresh();
+                InventorySsdCollection.Refresh();
             }
         }
         #endregion
@@ -65,27 +65,27 @@
                 {
                     case "Инвентарный номер":
                         {
-                            InventorySsds.Sort(inventorySsd => inventorySsd.Inventory_number, SortDirection);
+                            InventorySsd.Sort(inventorySsd => inventorySsd.Inventory_number, SortDirection);
                             break;
                         }
                     case "Производитель":
                         {
-                            InventorySsds.Sort(manufacturer => manufacturer.Ssd.Manufacturer.Name, SortDirection);
+                            InventorySsd.Sort(manufacturer => manufacturer.Ssd.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Тип":
                         {
-                            InventorySsds.Sort(type => type.Ssd.Types_ssd.Name, SortDirection);
+                            InventorySsd.Sort(type => type.Ssd.Types_ssd.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            InventorySsds.Sort(ssd => ssd.Ssd.Name, SortDirection);
+                            InventorySsd.Sort(ssd => ssd.Ssd.Name, SortDirection);
                             break;
                         }
                     case "Объём":
                         {
-                            InventorySsds.Sort(ssd => ssd.Ssd.Memory_size + " " + ssd.Ssd.Unit.Short_name, SortDirection);
+                            InventorySsd.Sort(ssd => ssd.Ssd.Memory_size + " " + ssd.Ssd.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -119,7 +119,7 @@
                 return;
 
             Services.Delete<Inventory_numbers_ssd>(selectInventorySsd.Id_inventory_number_ssd);
-            InventorySsds.Remove(selectInventorySsd);
+            InventorySsd.Remove(selectInventorySsd);
         }, selectInventorySsd => selectInventorySsd != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
@@ -129,7 +129,7 @@
 
         public static void RefreshCollection()
         {
-            InventorySsds.Clear();
+            InventorySsd.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Inventory_numbers_ssd.AsNoTracking()
@@ -137,9 +137,9 @@
                 .Include(unit => unit.Ssd.Unit)
                 .Include(type => type.Ssd.Types_ssd))
             {
-                InventorySsds.Add(item);
+                InventorySsd.Add(item);
             }
-            InventorySsds.Sort(ssd => ssd.Inventory_number);
+            InventorySsd.Sort(ssd => ssd.Inventory_number);
         }
     }
 }

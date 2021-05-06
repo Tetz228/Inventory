@@ -39,10 +39,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectTypePeripheral = null;
-        }
+        public void EndEdit() => _selectTypePeripheral = null;
 
         public void CancelEdit()
         {

@@ -363,13 +363,13 @@
     <Compile Include="ViewModels\Tables\Computers\Computers\StatusesComputersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryGraphicsCardsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryHddViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryMotherboardViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryMotherboardsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryPowerSuppliesViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryProcessorsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryRamViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventorySsdViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\TypesMemoryViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\Other\TypesSddsViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Computers\Other\TypesSddViewModel.cs" />
     <Compile Include="ViewModels\Tables\DispensingPeripherals\DispensingPeripheralsViewModel.cs" />
     <Compile Include="View\Add\Tables\Computers\Accessories\GraphicCardAddWindow.xaml.cs">
       <DependentUpon>GraphicCardAddWindow.xaml</DependentUpon>

@@ -57,11 +57,11 @@
             Computer = computer;
             Computer.BeginEdit();
 
-            _editCollections = EditProccesorsInComputer;
+            _editCollections = EditProcessorsInComputer;
             _editCollections += EditOperatingSystemsInComputer;
             _editCollections += EditHddInComputer;
-            _editCollections += EditRamsInComputer;
-            _editCollections += EditSsdsInComputer;
+            _editCollections += EditRamInComputer;
+            _editCollections += EditSsdInComputer;
         }
 
         private readonly EditCollections _editCollections;
@@ -176,7 +176,7 @@
 
         #region Методы редактирования коллекций
 
-        private void EditProccesorsInComputer(int idComputer)
+        private void EditProcessorsInComputer(int idComputer)
         {
             using var db = new InventoryEntities();
 
@@ -239,7 +239,7 @@
             db.SaveChanges();
         }
 
-        private void EditRamsInComputer(int idComputer)
+        private void EditRamInComputer(int idComputer)
         {
             using var db = new InventoryEntities();
 
@@ -260,7 +260,7 @@
             db.SaveChanges();
         }
 
-        private void EditSsdsInComputer(int idComputer)
+        private void EditSsdInComputer(int idComputer)
         {
             using var db = new InventoryEntities();
 

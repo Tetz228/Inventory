@@ -39,10 +39,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectTypeSsd = null;
-        }
+        public void EndEdit() => _selectTypeSsd = null;
 
         public void CancelEdit()
         {

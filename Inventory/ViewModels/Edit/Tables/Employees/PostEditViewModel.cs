@@ -40,10 +40,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectPost = null;
-        }
+        public void EndEdit() => _selectPost = null;
 
         public void CancelEdit()
         {

@@ -14,12 +14,12 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryMotherboardViewModel : BindableBase
+    public class InventoryMotherboardsViewModel : BindableBase
     {
         private const string NAME_TEMPLATE = "TemplateInventoryMotherboard.xlsx";
         private const string NAMED_AREA_NAME = "InventoryMotherboard";
 
-        public InventoryMotherboardViewModel()
+        public InventoryMotherboardsViewModel()
         {
             RefreshCollection();
             InventoryMotherboardsCollection = CollectionViewSource.GetDefaultView(InventoryMotherboards);

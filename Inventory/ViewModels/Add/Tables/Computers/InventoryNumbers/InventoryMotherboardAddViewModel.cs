@@ -38,7 +38,7 @@
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(InventoryMotherboard);
-            InventoryMotherboardViewModel.RefreshCollection();
+            InventoryMotherboardsViewModel.RefreshCollection();
             addWindow.Close();
         }, _ => Services.IsValidationProperties(InventoryMotherboard.ErrorCollection));
     }

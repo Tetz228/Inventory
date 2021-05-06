@@ -39,10 +39,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectUnit = null;
-        }
+        public void EndEdit() => _selectUnit = null;
 
         public void CancelEdit()
         {

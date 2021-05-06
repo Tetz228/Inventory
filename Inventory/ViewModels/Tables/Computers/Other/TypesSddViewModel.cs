@@ -14,40 +14,40 @@
 
     using Inventory.Services;
 
-    public class TypesSddsViewModel : BindableBase
+    public class TypesSddViewModel : BindableBase
     {
-        public TypesSddsViewModel()
+        public TypesSddViewModel()
         {
             RefreshCollection();
-            TypesSsdsCollection = CollectionViewSource.GetDefaultView(TypesSsds);
+            TypesSsdCollection = CollectionViewSource.GetDefaultView(TypesSsd);
         }
 
         #region Свойства
 
-        private ICollectionView TypesSsdsCollection { get; }
+        private ICollectionView TypesSsdCollection { get; }
 
         private ListSortDirection SortDirection { get; set; }
 
-        public static ObservableCollection<Types_ssd> TypesSsds { get; set; } = new();
+        public static ObservableCollection<Types_ssd> TypesSsd { get; set; } = new();
 
         public Types_ssd SelectTypeSsd { get; set; }
 
-        private string _typesSsdsFilter = string.Empty;
+        private string _typesSsdFilter = string.Empty;
 
-        public string TypesSsdsFilter
+        public string TypesSsdFilter
         {
-            get => _typesSsdsFilter;
+            get => _typesSsdFilter;
             set
             {
-                _typesSsdsFilter = value;
-                TypesSsdsCollection.Filter = obj =>
+                _typesSsdFilter = value;
+                TypesSsdCollection.Filter = obj =>
                 {
                     if (obj is Types_ssd typeSsd)
-                        return typeSsd.Search(TypesSsdsFilter);
+                        return typeSsd.Search(TypesSsdFilter);
 
                     return false;
                 };
-                TypesSsdsCollection.Refresh();
+                TypesSsdCollection.Refresh();
             }
         }
         #endregion
@@ -63,7 +63,7 @@
                 {
                     case "Наименование":
                         {
-                            TypesSsds.Sort(typeSsd => typeSsd.Name, SortDirection);
+                            TypesSsd.Sort(typeSsd => typeSsd.Name, SortDirection);
                             break;
                         }
                 }
@@ -97,7 +97,7 @@
                 return;
 
             Services.Delete<Types_ssd>(selectTypeSsd.Id_type_ssd);
-            TypesSsds.Remove(selectTypeSsd);
+            TypesSsd.Remove(selectTypeSsd);
         }, selectTypeSsd => selectTypeSsd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
@@ -105,14 +105,14 @@
 
         private static void RefreshCollection()
         {
-            TypesSsds.Clear();
+            TypesSsd.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Types_ssd.AsNoTracking())
             {
-                TypesSsds.Add(item);
+                TypesSsd.Add(item);
             }
-            TypesSsds.Sort(typeSsd => typeSsd.Name);
+            TypesSsd.Sort(typeSsd => typeSsd.Name);
         }
     }
 }
