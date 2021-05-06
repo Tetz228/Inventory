@@ -574,6 +574,9 @@
     <Compile Include="View\Pages\Tables\Computers\Other\UnitsPage.xaml.cs">
       <DependentUpon>UnitsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\Tables\DispensingComputers\DispensingComputersPage.xaml.cs">
+      <DependentUpon>DispensingComputersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Tables\DispensingPeripherals\DispensingPeripheralsPage.xaml.cs">
       <DependentUpon>DispensingPeripheralsPage.xaml</DependentUpon>
     </Compile>
@@ -956,6 +959,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\Tables\DispensingComputers\DispensingComputersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\Tables\DispensingPeripherals\DispensingPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1252,7 +1259,6 @@
   <ItemGroup>
     <Folder Include="View\Add\Tables\DispensingComputers\" />
     <Folder Include="View\Edit\Tables\DispensingComputers\" />
-    <Folder Include="View\Pages\Tables\DispensingComputers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

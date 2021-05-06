@@ -11,6 +11,7 @@
     using Inventory.Model;
     using Inventory.Services;
     using Inventory.View;
+    using Inventory.View.Pages.Tables.DispensingComputers;
     using Inventory.View.Pages.Tables.DispensingPeripherals;
 
     public class MainViewModel : BindableBase
@@ -41,6 +42,12 @@
         {
             CurrentPage = new DispensingPeripheralsPage();
             TitleWindow = "Главное окно -> Выдачи периферии";
+        });
+
+        public ICommand OpenDispensingComputers => new DelegateCommand(() =>
+        {
+            CurrentPage = new DispensingComputersPage();
+            TitleWindow = "Главное окно -> Выдачи компьютеров";
         });
 
         public ICommand OpenPagePeripherals => new DelegateCommand(() =>

@@ -215,6 +215,19 @@
 
         #endregion
 
+        #region DispensingComputers
+
+        public static bool Search(this Dispensing_computers dispensingComputers, string dispensingComputersFilter) =>
+            (dispensingComputers.Employee.L_name + " " + dispensingComputers.Employee.F_name + " " + dispensingComputers.Employee.M_name).ToLower().Contains(dispensingComputersFilter.ToLower())
+            || dispensingComputers.Employee.Email.ToLower().Contains(dispensingComputersFilter.ToLower())
+            || dispensingComputers.Employee.Phone_number.ToLower().Contains(dispensingComputersFilter.ToLower())
+            || (dispensingComputers.User.Employee.L_name + " " + dispensingComputers.User.Employee.F_name + " " + dispensingComputers.User.Employee.M_name).ToLower().Contains(dispensingComputersFilter.ToLower())
+            || dispensingComputers.User.Employee.Email.ToLower().Contains(dispensingComputersFilter.ToLower())
+            || dispensingComputers.User.Employee.Phone_number.ToLower().Contains(dispensingComputersFilter.ToLower())
+            || dispensingComputers.Date_dispensing.ToString("dd.MM.yyyy").ToLower().Contains(dispensingComputersFilter.ToLower());
+
+        #endregion
+
         public static bool Search(this Manufacturer manufacturer, string manufacturerFilter) => manufacturer.Name.ToLower().Contains(manufacturerFilter.ToLower());
     }
 }
