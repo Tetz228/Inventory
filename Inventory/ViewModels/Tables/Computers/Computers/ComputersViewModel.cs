@@ -102,7 +102,7 @@
 
         public ICommand DeleteComputerCommand => new DelegateCommand<Computer>(selectComputer =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить компьютер:\nИнверт. номер - {selectComputer.Inventory_number};\nIP-адрес - {selectComputer.Ip_address};\nСтатус - {selectComputer.Statuses_computers.Name}?", "Удаление компьютера", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить компьютер:\nинверт. номер - {selectComputer.Inventory_number};\nIP-адрес - {selectComputer.Ip_address};\nСтатус - {selectComputer.Statuses_computers.Name}?", "Удаление компьютера", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;

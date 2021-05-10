@@ -1,0 +1,491 @@
+﻿<Window
+    x:Class="Inventory.View.Add.Tables.DispensingComputers.DispensingComputerAddWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dispensingComputers="clr-namespace:Inventory.ViewModels.Add.Tables.DispensingComputers"
+    xmlns:local="clr-namespace:Inventory.View.Add.Tables.DispensingComputers"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="AddWindow"
+    Title="Добавление новой выдачи компьютера"
+    Width="850"
+    Height="500"
+    MinWidth="850"
+    MinHeight="500"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ThreeDBorderWindow"
+    mc:Ignorable="d">
+
+    <Window.DataContext>
+        <dispensingComputers:DispensingComputerAddViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <!--  Шаблон для отображения нескольких процессоров  -->
+        <DataTemplate x:Key="ProcessorsInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2}.">
+                                    <Binding Path="Inventory_numbers_processors.Inventory_number" />
+                                    <Binding Path="Inventory_numbers_processors.Processor.Manufacturer.Name" />
+                                    <Binding Path="Inventory_numbers_processors.Processor.Name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <!--  Шаблон для отображения нескольких RAM  -->
+        <DataTemplate x:Key="RamInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                    <Binding Path="Inventory_numbers_ram.Inventory_number" />
+                                    <Binding Path="Inventory_numbers_ram.Ram.Manufacturer.Name" />
+                                    <Binding Path="Inventory_numbers_ram.Ram.Memory_size" />
+                                    <Binding Path="Inventory_numbers_ram.Ram.Unit.Short_name" />
+                                    <Binding Path="Inventory_numbers_ram.Ram.Types_memory.Name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <!--  Шаблон для отображения нескольких операционных систем  -->
+        <DataTemplate x:Key="OperatingSystemsInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Система: {0};&#x0d;&#x0a;Версия: {1}.">
+                                    <Binding Path="Operating_systems.Name" />
+                                    <Binding Path="Operating_systems.System_version" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <!--  Шаблон для отображения нескольких ЖД  -->
+        <DataTemplate x:Key="HddInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                    <Binding Path="Inventory_numbers_hdd.Inventory_number" />
+                                    <Binding Path="Inventory_numbers_hdd.Hdd.Types_hdd.Name" />
+                                    <Binding Path="Inventory_numbers_hdd.Hdd.Manufacturer.Name" />
+                                    <Binding Path="Inventory_numbers_hdd.Hdd.Memory_size" />
+                                    <Binding Path="Inventory_numbers_hdd.Hdd.Unit.Short_name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <!--  Шаблон для отображения нескольких SSD  -->
+        <DataTemplate x:Key="SsdInComputersTemplate">
+            <ItemsControl ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                    <Binding Path="Inventory_numbers_ssd.Inventory_number" />
+                                    <Binding Path="Inventory_numbers_ssd.Ssd.Types_ssd.Name" />
+                                    <Binding Path="Inventory_numbers_ssd.Ssd.Manufacturer.Name" />
+                                    <Binding Path="Inventory_numbers_ssd.Ssd.Memory_size" />
+                                    <Binding Path="Inventory_numbers_ssd.Ssd.Unit.Short_name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Background="#FF2BA8E2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="203*" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="203*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37" />
+            <RowDefinition Height="38" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="5,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <TextBlock
+                Width="68"
+                Height="22"
+                Margin="0"
+                Style="{StaticResource BaseTextBlock}"
+                Text="Выдать:" />
+
+            <ComboBox
+                Width="208"
+                Height="22"
+                MaxWidth="208"
+                ItemsSource="{Binding Employees}"
+                SelectedIndex="0"
+                SelectedValue="{Binding DispensingComputers.Fk_employee, UpdateSourceTrigger=PropertyChanged}"
+                SelectedValuePath="Id_employee"
+                Style="{StaticResource BaseComboBox}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="ФИО: {0} {1} {2};&#xA;Телефон: {3};&#xA;Почта: {4}.">
+                                    <Binding Path="L_name" />
+                                    <Binding Path="F_name" />
+                                    <Binding Path="M_name" />
+                                    <Binding Path="Phone_number" />
+                                    <Binding Path="Email" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="271"
+            Height="18"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Style="{StaticResource BaseTextBlock}"
+            Text="Список выдаваемых компьютеров" />
+
+        <ListView
+            Grid.Row="2"
+            Grid.ColumnSpan="1"
+            GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
+            ItemsSource="{Binding ListDispensedComputers, UpdateSourceTrigger=PropertyChanged}"
+            MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDownListDispensing(@sender, @args)'}"
+            SelectedItem="{Binding SelectListComputer}"
+            Style="{StaticResource BaseListView}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Inventory_number, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Инвентарный номер"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Ip_address, UpdateSourceTrigger=PropertyChanged}"
+                        Header="IP-адрес"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn Header="Процессоры">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Processors_in_computers}" ContentTemplate="{StaticResource ResourceKey=ProcessorsInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Материнская плата" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_motherboards.Motherboard.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_motherboards.Motherboard.Name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Видеокарта" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Name" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Memory_size" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Оперативная память">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Ram_in_computers}" ContentTemplate="{StaticResource ResourceKey=RamInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Жесткие диски">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Hdd_in_computers}" ContentTemplate="{StaticResource ResourceKey=HddInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="SSD-накопители">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Ssd_in_computers}" ContentTemplate="{StaticResource ResourceKey=SsdInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Блок питания" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Name" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Power" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Операционные системы">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Operating_systems_in_computers}" ContentTemplate="{StaticResource ResourceKey=OperatingSystemsInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Statuses_computers.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Статус"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <StaticResource ResourceKey="BaseListViewItem" />
+            </ListView.ItemContainerStyle>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Command="{Binding TransferInListInventoryPeripheralCommand}"
+                        CommandParameter="{Binding SelectListComputer}"
+                        Header="Удалить" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding TransferInListInventoryPeripheralCommand}" CommandParameter="{Binding SelectListComputer}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </ListView>
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            Height="84"
+            Margin="0,136,0,135"
+            VerticalAlignment="Center">
+            <Button
+                Command="{Binding TransferInListDispensingCommand}"
+                CommandParameter="{Binding SelectComputer}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="Lime"
+                        Kind="ArrowBack" />
+                </ContentControl>
+            </Button>
+            <Button
+                Command="{Binding TransferInListInventoryPeripheralCommand}"
+                CommandParameter="{Binding SelectListComputer}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="Red"
+                        Kind="ArrowRight" />
+                </ContentControl>
+            </Button>
+        </StackPanel>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="275"
+            Height="18"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Style="{StaticResource BaseTextBlock}"
+            Text="Список имеющихся компьютеров" />
+
+        <ListView
+            Grid.Row="2"
+            Grid.Column="2"
+            Grid.ColumnSpan="1"
+            GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
+            ItemsSource="{Binding Computers, UpdateSourceTrigger=PropertyChanged}"
+            MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDownListComputers(@sender, @args)'}"
+            SelectedItem="{Binding SelectComputer}"
+            Style="{StaticResource BaseListView}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Inventory_number, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Инвентарный номер"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Ip_address, UpdateSourceTrigger=PropertyChanged}"
+                        Header="IP-адрес"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn Header="Процессоры">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Processors_in_computers}" ContentTemplate="{StaticResource ResourceKey=ProcessorsInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Материнская плата" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_motherboards.Motherboard.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_motherboards.Motherboard.Name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Видеокарта" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Name" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Memory_size" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Оперативная память">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Ram_in_computers}" ContentTemplate="{StaticResource ResourceKey=RamInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Жесткие диски">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Hdd_in_computers}" ContentTemplate="{StaticResource ResourceKey=HddInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="SSD-накопители">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Ssd_in_computers}" ContentTemplate="{StaticResource ResourceKey=SsdInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Блок питания" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <GridViewColumn.DisplayMemberBinding>
+                            <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
+                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Manufacturer.Name" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Name" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Power" />
+                                <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Unit.Short_name" />
+                            </MultiBinding>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Операционные системы">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Operating_systems_in_computers}" ContentTemplate="{StaticResource ResourceKey=OperatingSystemsInComputersTemplate}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Statuses_computers.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Статус"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <StaticResource ResourceKey="BaseListViewItem" />
+            </ListView.ItemContainerStyle>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Command="{Binding TransferInListDispensingCommand}"
+                        CommandParameter="{Binding SelectComputer}"
+                        Header="Добавить" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding TransferInListDispensingCommand}" CommandParameter="{Binding SelectComputer}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </ListView>
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Width="207"
+            Height="33"
+            Margin="0,0,0,5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Orientation="Vertical">
+            <!--  Добавить новую выдачу  -->
+            <Button
+                Height="27"
+                Margin="6,6,6,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Command="{Binding AddCommand}"
+                CommandParameter="{Binding ElementName=AddWindow}"
+                Content="Добавить новую выдачу"
+                IsDefault="True"
+                Style="{StaticResource BaseButton}" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="2"
+            Width="94"
+            Height="33"
+            Margin="0,0,0,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <!--  Отменить  -->
+            <Button
+                Height="27"
+                Margin="6,6,6,0"
+                VerticalAlignment="Top"
+                IsCancel="True"
+                Style="{StaticResource BaseButton}" />
+        </StackPanel>
+    </Grid>
+</Window>

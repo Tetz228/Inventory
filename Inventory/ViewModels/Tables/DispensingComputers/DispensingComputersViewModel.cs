@@ -2,9 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.View.Add.Tables.DispensingPeripherals;
-    using Inventory.View.Edit.Tables.DispensingPeripherals;
-    using Inventory.ViewModels.Edit.Tables.DispensingPeripherals;
+
     using Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -14,6 +12,10 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
+
+    using Inventory.View.Add.Tables.DispensingComputers;
+    using Inventory.View.Edit.Tables.DispensingComputers;
+    using Inventory.ViewModels.Edit.Tables.DispensingComputers;
 
     public class DispensingComputersViewModel : BindableBase
     {
@@ -91,16 +93,17 @@
 
         public ICommand AddDispensingComputerCommand => new DelegateCommand(() =>
         {
-            var addWindow = new DispensingPeripheralAddWindow();
+            var addWindow = new DispensingComputerAddWindow();
             addWindow.ShowDialog();
         });
 
         public ICommand EditDispensingComputerCommand => new DelegateCommand<Dispensing_computers>(selectDispensing =>
         {
-            //var editWindow = new DispensingPeripheralEditWindow();
-            //var viewModel = new DispensingPeripheralEditViewModel(selectDispensing);
-            //editWindow.DataContext = viewModel;
-            //editWindow.ShowDialog();
+            var editWindow = new DispensingComputerEditWindow();
+            var viewModel = new DispensingComputerEditViewModel(selectDispensing);
+            editWindow.DataContext = viewModel;
+            editWindow.Closing += viewModel.OnWindowClosing;
+            editWindow.ShowDialog();
             RefreshCollection();
         }, selectDispensing => selectDispensing != null);
 

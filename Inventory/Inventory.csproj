@@ -326,6 +326,7 @@
     <Compile Include="ViewModels\Add\Tables\Computers\Other\StatusComputerAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeMemoryAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeSddAddViewModel.cs" />
+    <Compile Include="ViewModels\Add\Tables\DispensingComputers\DispensingComputerAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\DispensingPeripherals\DispensingPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\GraphicCardEditViewModel.cs" />
@@ -346,6 +347,7 @@
     <Compile Include="ViewModels\Edit\Tables\Computers\InventoryNumbers\InventorySsdEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeMemoryEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Other\TypeSsdEditViewModel.cs" />
+    <Compile Include="ViewModels\Edit\Tables\DispensingComputers\DispensingComputerEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\DispensingPeripherals\DispensingPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Employees\UserEditViewModel.cs" />
     <Compile Include="ViewModels\RecoveryPassword\EmailViewModel.cs" />
@@ -426,6 +428,9 @@
     <Compile Include="View\Add\Tables\Computers\Other\TypeSsdAddWindow.xaml.cs">
       <DependentUpon>TypeSsdAddWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Add\Tables\DispensingComputers\DispensingComputerAddWindow.xaml.cs">
+      <DependentUpon>DispensingComputerAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Add\Tables\DispensingPeripherals\DispensingPeripheralAddWindow.xaml.cs">
       <DependentUpon>DispensingPeripheralAddWindow.xaml</DependentUpon>
     </Compile>
@@ -489,6 +494,9 @@
     </Compile>
     <Compile Include="View\Edit\Tables\Computers\Other\TypeSsdEditWindow.xaml.cs">
       <DependentUpon>TypeSsdEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Edit\Tables\DispensingComputers\DispensingComputerEditWindow.xaml.cs">
+      <DependentUpon>DispensingComputerEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\DispensingPeripherals\DispensingPeripheralEditWindow.xaml.cs">
       <DependentUpon>DispensingPeripheralEditWindow.xaml</DependentUpon>
@@ -771,6 +779,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Add\Tables\DispensingComputers\DispensingComputerAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Add\Tables\DispensingPeripherals\DispensingPeripheralAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -844,6 +856,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Computers\Other\TypeSsdEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Edit\Tables\DispensingComputers\DispensingComputerEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1256,10 +1272,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Add\Tables\DispensingComputers\" />
-    <Folder Include="View\Edit\Tables\DispensingComputers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
