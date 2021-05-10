@@ -27,6 +27,7 @@
                 .Sort(numberPeripheral => numberPeripheral.Inventory_number);
             Employees = new ObservableCollection<Employee>(db.Employees.AsNoTracking()).Sort(emp => emp.L_name);
             ListDispensedPeripherals = new ObservableCollection<Inventory_numbers_peripherals>(dispensingPeripherals.List_dispensed_peripherals.Select(peripheral => peripheral.Inventory_numbers_peripherals)).Sort(inventoryNumbers => inventoryNumbers.Inventory_number);
+            
             DispensingPeripherals = dispensingPeripherals;
             DispensingPeripherals.BeginEdit();
 
@@ -60,6 +61,8 @@
         public ObservableCollection<Inventory_numbers_peripherals> ListDispensedPeripherals { get; set; }
 
         #endregion
+
+        #region События
 
         public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -118,7 +121,9 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => DispensingPeripherals.CancelEdit();
 
-        public List_dispensed_peripherals GetListDispensedPeripherals(int id)
+        #endregion
+
+        private List_dispensed_peripherals GetDispensedPeripheral(int id)
         {
             using var db = new InventoryEntities();
 
@@ -135,7 +140,7 @@
 
         public ICommand TransferInListInventoryPeripheralCommand => new DelegateCommand<Inventory_numbers_peripherals>(selectPeripheral =>
         {
-            var listDispensedPeripherals = GetListDispensedPeripherals(selectPeripheral.Id_inventory_number_peripheral);
+            var listDispensedPeripherals = GetDispensedPeripheral(selectPeripheral.Id_inventory_number_peripheral);
 
             if (listDispensedPeripherals != null)
             {
@@ -151,7 +156,7 @@
             ListDispensedPeripherals.Remove(selectPeripheral);
         }, selectPeripheral => selectPeripheral != null);
 
-        public ICommand EditCommand => new DelegateCommand<Window>(addWindow =>
+        public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             DispensingPeripherals.EndEdit();
 
@@ -159,7 +164,7 @@
 
             foreach (var item in ListDispensedPeripherals)
             {
-                if (GetListDispensedPeripherals(item.Id_inventory_number_peripheral) == null)
+                if (GetDispensedPeripheral(item.Id_inventory_number_peripheral) == null)
                 {
                     var newListDispensed = new List_dispensed_peripherals
                     {
@@ -169,7 +174,7 @@
                     Services.Add(newListDispensed);
                 }
             }
-            addWindow.Close();
+            editWindow.Close();
         }, _ => ListDispensedPeripherals?.Count > 0);
 
         #endregion

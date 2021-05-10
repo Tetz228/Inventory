@@ -96,6 +96,7 @@
             var editWindow = new DispensingPeripheralEditWindow();
             var viewModel = new DispensingPeripheralEditViewModel(selectDispensing);
             editWindow.DataContext = viewModel;
+            editWindow.Closing += viewModel.OnWindowClosing;
             editWindow.ShowDialog();
             RefreshCollection();
         }, selectDispensing => selectDispensing != null);

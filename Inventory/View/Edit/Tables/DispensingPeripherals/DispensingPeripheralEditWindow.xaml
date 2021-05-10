@@ -12,7 +12,6 @@
     Height="500"
     MinWidth="850"
     MinHeight="500"
-    
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">

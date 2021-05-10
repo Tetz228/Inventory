@@ -8,7 +8,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="AddWindow"
-    Title="Добавление новой выдачи"
+    Title="Добавление новой выдачи периферии"
     Width="850"
     Height="500"
     MinWidth="850"
