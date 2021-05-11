@@ -83,7 +83,7 @@
         /// <typeparam name="TClass">Класс, который содержит свойство</typeparam>
         /// <param name="propertyName">Имя свойства</param>
         /// <param name="obj">Cвойство</param>
-        /// <param name="selectObj"></param>
+        /// <param name="selectObj">Необязательный аргумент, которое нужно, если открыты окна с изменением информации</param>
         /// <returns>Возвращает true, если свойство не уникально, иначе false</returns>
         public static bool CheckForUniqueness<TClass>(string propertyName, object obj, object selectObj) where TClass : class
         {
