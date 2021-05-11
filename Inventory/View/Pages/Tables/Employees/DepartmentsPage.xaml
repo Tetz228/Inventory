@@ -31,7 +31,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Departments, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectDepartment}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -49,17 +49,17 @@
                     <MenuItem Command="{Binding AddDepartmentCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditDepartmentCommand}"
-                        CommandParameter="{Binding SelectDepartment}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeleteDepartmentCommand}"
-                        CommandParameter="{Binding SelectDepartment}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding EditDepartmentCommand}" CommandParameter="{Binding SelectDepartment}" />
+                    <i:InvokeCommandAction Command="{Binding EditDepartmentCommand}" CommandParameter="{Binding SelectObject}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
@@ -79,7 +79,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditDepartmentCommand}"
-                CommandParameter="{Binding SelectDepartment}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -93,7 +93,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeleteDepartmentCommand}"
-                CommandParameter="{Binding SelectDepartment}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

@@ -11,29 +11,20 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryHddViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class InventoryHddViewModel : BaseViewModel<Inventory_numbers_hdd>
     {
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации жестких дисков.xlsx";
         private const string NAMED_AREA_NAME = "InventoryHdd";
 
-        public InventoryHddViewModel()
-        {
-            RefreshCollection();
-            InventoryHddCollection = CollectionViewSource.GetDefaultView(InventoryHdd);
-        }
+        public InventoryHddViewModel() : base(InventoryHdd) => RefreshCollection();
 
         #region Свойства
 
-        public ICollectionView InventoryHddCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Inventory_numbers_hdd> InventoryHdd { get; set; } = new();
-
-        public Inventory_numbers_hdd SelectInventoryHdd { get; set; }
 
         private string _inventoryHddFilter = string.Empty;
 
@@ -43,20 +34,19 @@
             set
             {
                 _inventoryHddFilter = value;
-                InventoryHddCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_hdd inventoryHdd)
                         return inventoryHdd.Search(InventoryHddFilter);
 
                     return false;
                 };
-                InventoryHddCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -93,9 +83,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryHdd = null;
-        #endregion
-
         #region Команды
         public ICommand AddInventoryHddCommand => new DelegateCommand(() =>
         {
@@ -119,8 +106,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Inventory_numbers_hdd>(selectInventoryHdd.Id_inventory_number_hdd);
-            InventoryHdd.Remove(selectInventoryHdd);
+            if(Services.Delete<Inventory_numbers_hdd>(selectInventoryHdd.Id_inventory_number_hdd))
+                InventoryHdd.Remove(selectInventoryHdd);
         }, selectInventoryHdd => selectInventoryHdd != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

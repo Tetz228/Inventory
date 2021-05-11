@@ -2,34 +2,24 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables;
     using Inventory.View.Edit.Tables;
     using Inventory.ViewModels.Edit;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Services;
-
-    public class ManufacturersViewModel : BindableBase
+    public class ManufacturersViewModel : BaseViewModel<Manufacturer>
     {
-        public ManufacturersViewModel()
-        {
-            RefreshCollection();
-            ManufacturersCollection = CollectionViewSource.GetDefaultView(Manufacturers);
-        }
+        public ManufacturersViewModel() : base(Manufacturers) => RefreshCollection();
 
         #region Свойства
-        public ICollectionView ManufacturersCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
 
         public static ObservableCollection<Manufacturer> Manufacturers { get; set; } = new();
-
-        public Manufacturer SelectManufacturer { get; set; }
 
         private string _manufacturersFilter = string.Empty;
 
@@ -39,20 +29,19 @@
             set
             {
                 _manufacturersFilter = value;
-                ManufacturersCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Manufacturer manufacturer)
                         return manufacturer.Search(ManufacturersFilter);
 
                     return false;
                 };
-                ManufacturersCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -69,8 +58,6 @@
                 }
             }
         }
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectManufacturer = null;
-        #endregion
 
         #region Команды
         public ICommand AddManufacturerCommand => new DelegateCommand(() =>
@@ -95,8 +82,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Manufacturer>(selectManufacturer.Id_manufacturer);
-            Manufacturers.Remove(selectManufacturer);
+            if (Services.Delete<Manufacturer>(selectManufacturer.Id_manufacturer))
+                Manufacturers.Remove(selectManufacturer);
         }, selectManufacturer => selectManufacturer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

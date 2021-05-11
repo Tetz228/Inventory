@@ -11,26 +11,18 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryGraphicsCardsViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class InventoryGraphicsCardsViewModel : BaseViewModel<Inventory_numbers_graphics_cards>
     {
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации видеокарт.xlsx";
         private const string NAMED_AREA_NAME = "InventoryGraphicsCards";
 
-        public InventoryGraphicsCardsViewModel()
-        {
-            RefreshCollection();
-            InventoryGraphicsCardsCollection = CollectionViewSource.GetDefaultView(InventoryGraphicsCards);
-        }
+        public InventoryGraphicsCardsViewModel() : base(InventoryGraphicsCards) => RefreshCollection();
 
         #region Свойства
-        public ICollectionView InventoryGraphicsCardsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Inventory_numbers_graphics_cards SelectInventoryGraphicCard { get; set; }
 
         public static ObservableCollection<Inventory_numbers_graphics_cards> InventoryGraphicsCards { get; set; } = new();
 
@@ -42,20 +34,19 @@
             set
             {
                 _inventoryGraphicsCardsFilter = value;
-                InventoryGraphicsCardsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_graphics_cards inventoryGraphicsCards)
                         return inventoryGraphicsCards.Search(InventoryGraphicsCardsFilter);
 
                     return false;
                 };
-                InventoryGraphicsCardsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -87,9 +78,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryGraphicCard = null;
-        #endregion
-
         #region Команды
         public ICommand AddInventoryGraphicCardCommand => new DelegateCommand(() =>
         {
@@ -113,8 +101,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Inventory_numbers_graphics_cards>(selectInventoryGraphicCard.Id_inventory_number_graphics_card);
-            InventoryGraphicsCards.Remove(selectInventoryGraphicCard);
+            if(Services.Delete<Inventory_numbers_graphics_cards>(selectInventoryGraphicCard.Id_inventory_number_graphics_card))
+                InventoryGraphicsCards.Remove(selectInventoryGraphicCard);
         }, selectInventoryGraphicCard => selectInventoryGraphicCard != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

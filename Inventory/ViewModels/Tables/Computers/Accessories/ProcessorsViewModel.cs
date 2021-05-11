@@ -11,24 +11,16 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class ProcessorsViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class ProcessorsViewModel : BaseViewModel<Processor>
     {
-        public ProcessorsViewModel()
-        {
-            RefreshCollection();
-            ProcessorsCollection = CollectionViewSource.GetDefaultView(Processors);
-        }
-
+        public ProcessorsViewModel() : base(Processors) => RefreshCollection();
+        
         #region Свойства
-        private ICollectionView ProcessorsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Processor SelectProcessor { get; set; }
-
+        
         public static ObservableCollection<Processor> Processors { get; set; } = new();
 
         private string _processorsFilter = string.Empty;
@@ -39,20 +31,19 @@
             set
             {
                 _processorsFilter = value;
-                ProcessorsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Processor processor)
                         return processor.Search(ProcessorsFilter);
 
                     return false;
                 };
-                ProcessorsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -89,10 +80,8 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectProcessor = null;
-        #endregion
-
         #region Команды
+
         public ICommand AddProcessorCommand => new DelegateCommand(() =>
         {
             var addWindow = new ProcessorAddWindow();
@@ -115,8 +104,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Processor>(selectProcessor.Id_processor);
-            Processors.Remove(selectProcessor);
+            if(Services.Delete<Processor>(selectProcessor.Id_processor))
+                Processors.Remove(selectProcessor);
         }, selectProcessor => selectProcessor != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

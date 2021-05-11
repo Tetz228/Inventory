@@ -11,29 +11,20 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryMotherboardsViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class InventoryMotherboardsViewModel : BaseViewModel<Inventory_numbers_motherboards>
     {
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации материнских плат.xlsx";
         private const string NAMED_AREA_NAME = "InventoryMotherboard";
 
-        public InventoryMotherboardsViewModel()
-        {
-            RefreshCollection();
-            InventoryMotherboardsCollection = CollectionViewSource.GetDefaultView(InventoryMotherboards);
-        }
+        public InventoryMotherboardsViewModel() : base(InventoryMotherboards) => RefreshCollection();
 
         #region Свойства
 
-        public ICollectionView InventoryMotherboardsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Inventory_numbers_motherboards> InventoryMotherboards { get; set; } = new();
-
-        public Inventory_numbers_motherboards SelectInventoryMotherboard { get; set; }
 
         private string _inventoryMotherboardsFilter = string.Empty;
 
@@ -43,22 +34,20 @@
             set
             {
                 _inventoryMotherboardsFilter = value;
-                InventoryMotherboardsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_motherboards inventoryMotherboard)
                         return inventoryMotherboard.Search(InventoryMotherboardsFilter);
 
                     return false;
                 };
-                InventoryMotherboardsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
 
         #endregion
 
-        #region События
-
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -90,10 +79,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryMotherboard = null;
-
-        #endregion
-
         #region Команды
 
         public ICommand AddInventoryMotherboardCommand => new DelegateCommand(() =>
@@ -119,8 +104,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Inventory_numbers_motherboards>(selectInventoryMotherboard.Id_inventory_number_motherboard);
-            InventoryMotherboards.Remove(selectInventoryMotherboard);
+            if(Services.Delete<Inventory_numbers_motherboards>(selectInventoryMotherboard.Id_inventory_number_motherboard))
+                InventoryMotherboards.Remove(selectInventoryMotherboard);
         }, selectInventoryMotherboard => selectInventoryMotherboard != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

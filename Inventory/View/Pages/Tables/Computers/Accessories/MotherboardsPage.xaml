@@ -31,7 +31,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Motherboards, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectMotherboard}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -57,17 +57,17 @@
                     <MenuItem Command="{Binding AddMotherboardCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditMotherboardCommand}"
-                        CommandParameter="{Binding SelectMotherboard}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeleteMotherboardCommand}"
-                        CommandParameter="{Binding SelectMotherboard}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditMotherboardCommand}" CommandParameter="{Binding SelectMotherboard}" />
+                    <b:InvokeCommandAction Command="{Binding EditMotherboardCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -87,7 +87,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditMotherboardCommand}"
-                CommandParameter="{Binding SelectMotherboard}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -101,7 +101,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeleteMotherboardCommand}"
-                CommandParameter="{Binding SelectMotherboard}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

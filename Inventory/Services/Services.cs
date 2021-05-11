@@ -107,7 +107,9 @@
             return result != null;
         }
 
-        public static void Add<TClass>(TClass value) where TClass : class
+        public static bool IsSaveDatabase { get; set; }
+
+        public static bool Add<TClass>(TClass value) where TClass : class
         {
             using var db = new InventoryEntities();
 
@@ -116,14 +118,16 @@
             try
             {
                 db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Ошибка при добавлении данных в базу данных.\n{e.Message}", "Ошибка при добавлении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
 
-        public static void Edit<TClass>(int idObject, TClass updatedObject) where TClass : class
+        public static bool Edit<TClass>(int idObject, TClass updatedObject) where TClass : class
         {
             using var db = new InventoryEntities();
 
@@ -132,7 +136,7 @@
             if (existingObject == null)
             {
                 MessageBox.Show("Ошибка при изменении данных в базе данных. Изменяемый объект не найден в базе данных.", "Ошибка при изменении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return false;
             }
 
             db.Entry(existingObject).CurrentValues.SetValues(updatedObject);
@@ -140,14 +144,16 @@
             try
             {
                 db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Ошибка при изменении данных в базе данных.\n{e.Message}", "Ошибка при изменении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
 
-        public static void Delete<TClass>(int idObject) where TClass : class
+        public static bool Delete<TClass>(int idObject) where TClass : class
         {
             using var db = new InventoryEntities();
 
@@ -157,7 +163,7 @@
             if (foundObject == null)
             {
                 MessageBox.Show("Ошибка при удалении данных в базе данных. Удаляемый объект не найден в базе данных.", "Ошибка при удалении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return false;
             }
 
             dbSet.Remove(foundObject);
@@ -165,10 +171,12 @@
             try
             {
                 db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Ошибка при удалении данных в базе данных.\n{e.Message}", "Ошибка при удалении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
     }

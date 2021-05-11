@@ -1,37 +1,25 @@
 ﻿namespace Inventory.ViewModels.Tables.Computers.Other
 {
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Input;
-
     using DevExpress.Mvvm;
-
     using Inventory.Model;
     using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
+    using Inventory.ViewModels.Tables.Base;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
 
-    public class StatusesComputersViewModel : BindableBase
+    public class StatusesComputersViewModel : BaseViewModel<Statuses_computers>
     {
-        public StatusesComputersViewModel()
-        {
-            RefreshCollection();
-            StatusesComputersCollection = CollectionViewSource.GetDefaultView(StatusesComputers);
-        }
+        public StatusesComputersViewModel() : base(StatusesComputers) => RefreshCollection();
 
         #region Свойства
 
-        private ICollectionView StatusesComputersCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Statuses_computers> StatusesComputers { get; set; } = new();
-
-        public Statuses_computers SelectStatusComputer { get; set; }
 
         private string _statusesComputersFilter = string.Empty;
 
@@ -41,21 +29,19 @@
             set
             {
                 _statusesComputersFilter = value;
-                StatusesComputersCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Statuses_computers statusComputer)
                         return statusComputer.Search(StatusesComputersFilter);
 
                     return false;
                 };
-                StatusesComputersCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -71,10 +57,6 @@
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectStatusComputer = null;
-
-        #endregion
 
         #region Команды
         public ICommand AddStatusComputerCommand => new DelegateCommand(() =>
@@ -99,8 +81,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Statuses_computers>(selectStatusComputer.Id_status_computer);
-            StatusesComputers.Remove(selectStatusComputer);
+            if (Services.Delete<Statuses_computers>(selectStatusComputer.Id_status_computer))
+                StatusesComputers.Remove(selectStatusComputer);
         }, selectStatusComputer => selectStatusComputer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -11,26 +11,18 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryProcessorsViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class InventoryProcessorsViewModel : BaseViewModel<Inventory_numbers_processors>
     {
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации процессоров.xlsx";
         private const string NAMED_AREA_NAME = "InventoryProcessors";
 
-        public InventoryProcessorsViewModel()
-        {
-            RefreshCollection();
-            InventoryProcessorsCollection = CollectionViewSource.GetDefaultView(InventoryProcessors);
-        }
+        public InventoryProcessorsViewModel() : base(InventoryProcessors) => RefreshCollection();
 
         #region Свойства
-        public ICollectionView InventoryProcessorsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Inventory_numbers_processors SelectInventoryProcessor { get; set; }
 
         public static ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; set; } = new();
 
@@ -42,20 +34,20 @@
             set
             {
                 _inventoryProcessorsFilter = value;
-                InventoryProcessorsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_processors inventoryProcessor)
                         return inventoryProcessor.Search(InventoryProcessorsFilter);
 
                     return false;
                 };
-                InventoryProcessorsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
+
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -97,10 +89,8 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryProcessor = null;
-        #endregion
-
         #region Команды
+
         public ICommand AddInventoryProcessorCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryProcessorAddWindow();
@@ -123,8 +113,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Inventory_numbers_processors>(selectInventoryProcessor.Id_inventory_number_processor);
-            InventoryProcessors.Remove(selectInventoryProcessor);
+            if(Services.Delete<Inventory_numbers_processors>(selectInventoryProcessor.Id_inventory_number_processor))
+                InventoryProcessors.Remove(selectInventoryProcessor);
         }, selectInventoryProcessor => selectInventoryProcessor != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

@@ -2,7 +2,10 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-
+    using Inventory.View.Add.Tables.DispensingComputers;
+    using Inventory.View.Edit.Tables.DispensingComputers;
+    using Inventory.ViewModels.Edit.Tables.DispensingComputers;
+    using Inventory.ViewModels.Tables.Base;
     using Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -10,30 +13,15 @@
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.View.Add.Tables.DispensingComputers;
-    using Inventory.View.Edit.Tables.DispensingComputers;
-    using Inventory.ViewModels.Edit.Tables.DispensingComputers;
-
-    public class DispensingComputersViewModel : BindableBase
+    public class DispensingComputersViewModel : BaseViewModel<Dispensing_computers>
     {
-        public DispensingComputersViewModel()
-        {
-            RefreshCollection();
-            DispensingCollection = CollectionViewSource.GetDefaultView(DispensingComputers);
-        }
+        public DispensingComputersViewModel() : base(DispensingComputers) => RefreshCollection();
 
         #region Свойства
 
-        private ICollectionView DispensingCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Dispensing_computers> DispensingComputers { get; set; } = new();
-
-        public Dispensing_computers SelectDispensing { get; set; }
 
         private string _dispensingFilter = string.Empty;
 
@@ -43,22 +31,20 @@
             set
             {
                 _dispensingFilter = value;
-                DispensingCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Dispensing_computers dispensing)
                         return dispensing.Search(DispensingFilter);
 
                     return false;
                 };
-                DispensingCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
 
         #endregion
 
-        #region События
-
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -84,10 +70,6 @@
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectDispensing = null;
-
-        #endregion
 
         #region Команды
 
@@ -116,8 +98,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Dispensing_computers>(selectDispensing.Id_dispensing_computer);
-            DispensingComputers.Remove(selectDispensing);
+            if (Services.Delete<Dispensing_computers>(selectDispensing.Id_dispensing_computer))
+                DispensingComputers.Remove(selectDispensing);
         }, selectDispensing => selectDispensing != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -13,8 +13,8 @@
 
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Manufacturer);
-            ManufacturersViewModel.Manufacturers.Add(Manufacturer);
+            if(Services.Add(Manufacturer))
+                ManufacturersViewModel.Manufacturers.Add(Manufacturer);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Manufacturer.ErrorCollection));
     }

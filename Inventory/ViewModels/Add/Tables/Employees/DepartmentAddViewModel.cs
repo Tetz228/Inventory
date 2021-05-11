@@ -14,8 +14,8 @@
         
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Department);
-            DepartmentsViewModel.Departments.Add(Department);
+            if(Services.Add(Department))
+                DepartmentsViewModel.Departments.Add(Department);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Department.ErrorCollection));
     }

@@ -6,29 +6,20 @@
     using Inventory.View.Add.Tables.Employees;
     using Inventory.View.Edit.Tables.Employees;
     using Inventory.ViewModels.Edit.Tables.Employees;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class DepartmentsViewModel : BindableBase
+    public class DepartmentsViewModel : BaseViewModel<Department>
     {
-        public DepartmentsViewModel()
-        {
-            RefreshCollection();
-            DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
-        }
+        public DepartmentsViewModel() : base(Departments) => RefreshCollection();
 
         #region Свойства
-        private ICollectionView DepartmentsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
 
         public static ObservableCollection<Department> Departments { get; set; } = new();
-
-        public Department SelectDepartment { get; set; }
 
         private string _departmentsFilter;
 
@@ -38,20 +29,19 @@
             set
             {
                 _departmentsFilter = value;
-                DepartmentsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Department department)
                         return department.Search(DepartmentsFilter);
 
                     return false;
                 };
-                DepartmentsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -67,9 +57,6 @@
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectDepartment = null;
-        #endregion
 
         #region Команды
         public ICommand AddDepartmentCommand => new DelegateCommand(() =>
@@ -94,8 +81,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Department>(selectDepartment.Id_department);
-            Departments.Remove(selectDepartment);
+            if (Services.Delete<Department>(selectDepartment.Id_department))
+                Departments.Remove(selectDepartment);
         }, selectDepartment => selectDepartment != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

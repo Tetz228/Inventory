@@ -11,26 +11,18 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryPowerSuppliesViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class InventoryPowerSuppliesViewModel : BaseViewModel<Inventory_numbers_power_supplies>
     {
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации блоков питания.xlsx";
         private const string NAMED_AREA_NAME = "InventoryPowerSupplies";
 
-        public InventoryPowerSuppliesViewModel()
-        {
-            RefreshCollection();
-            InventoryPowerSuppliesCollection = CollectionViewSource.GetDefaultView(InventoryPowerSupplies);
-        }
+        public InventoryPowerSuppliesViewModel() : base(InventoryPowerSupplies) => RefreshCollection();
 
         #region Свойства
-        public ICollectionView InventoryPowerSuppliesCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Inventory_numbers_power_supplies SelectInventoryPowerSupply { get; set; }
 
         public static ObservableCollection<Inventory_numbers_power_supplies> InventoryPowerSupplies { get; set; } = new();
 
@@ -42,20 +34,19 @@
             set
             {
                 _inventoryPowerSuppliesFilter = value;
-                InventoryPowerSuppliesCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_power_supplies inventoryPowerSupply)
                         return inventoryPowerSupply.Search(InventoryPowerSuppliesFilter);
 
                     return false;
                 };
-                InventoryPowerSuppliesCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -87,9 +78,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryPowerSupply = null;
-        #endregion
-
         #region Команды
         public ICommand AddInventoryPowerSupplyCommand => new DelegateCommand(() =>
         {
@@ -113,8 +101,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Inventory_numbers_power_supplies>(selectInventoryPowerSupplies.Id_inventory_number_power_supplie);
-            InventoryPowerSupplies.Remove(selectInventoryPowerSupplies);
+            if(Services.Delete<Inventory_numbers_power_supplies>(selectInventoryPowerSupplies.Id_inventory_number_power_supplie))
+                InventoryPowerSupplies.Remove(selectInventoryPowerSupplies);
         }, selectInventoryPowerSupply => selectInventoryPowerSupply != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

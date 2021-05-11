@@ -31,7 +31,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Sockets, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectSocket}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -49,17 +49,17 @@
                     <MenuItem Command="{Binding AddSocketCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditSocketCommand}"
-                        CommandParameter="{Binding SelectSocket}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeleteSocketCommand}"
-                        CommandParameter="{Binding SelectSocket}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditSocketCommand}" CommandParameter="{Binding SelectSocket}" />
+                    <b:InvokeCommandAction Command="{Binding EditSocketCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -79,7 +79,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditSocketCommand}"
-                CommandParameter="{Binding SelectSocket}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -93,7 +93,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeleteSocketCommand}"
-                CommandParameter="{Binding SelectSocket}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

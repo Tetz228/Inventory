@@ -31,7 +31,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding InventoryMotherboards, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectInventoryMotherboard}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -61,17 +61,17 @@
                     <MenuItem Command="{Binding AddInventoryMotherboardCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditInventoryMotherboardCommand}"
-                        CommandParameter="{Binding SelectInventoryMotherboard}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeleteInventoryMotherboardCommand}"
-                        CommandParameter="{Binding SelectInventoryMotherboard}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditInventoryMotherboardCommand}" CommandParameter="{Binding SelectInventoryMotherboard}" />
+                    <b:InvokeCommandAction Command="{Binding EditInventoryMotherboardCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -91,7 +91,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditInventoryMotherboardCommand}"
-                CommandParameter="{Binding SelectInventoryMotherboard}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -105,7 +105,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeleteInventoryMotherboardCommand}"
-                CommandParameter="{Binding SelectInventoryMotherboard}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

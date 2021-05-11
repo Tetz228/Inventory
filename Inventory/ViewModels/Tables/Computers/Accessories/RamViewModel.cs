@@ -11,24 +11,16 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class RamViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class RamViewModel : BaseViewModel<Ram>
     {
-        public RamViewModel()
-        {
-            RefreshCollection();
-            RamsCollection = CollectionViewSource.GetDefaultView(Rams);
-        }
-
+        public RamViewModel() : base(Rams) => RefreshCollection();
+        
         #region Свойства
-        private ICollectionView RamsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Ram SelectRam { get; set; }
-
+     
         public static ObservableCollection<Ram> Rams { get; set; } = new();
 
         private string _ramsFilter = string.Empty;
@@ -39,20 +31,19 @@
             set
             {
                 _ramsFilter = value;
-                RamsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Ram ram)
                         return ram.Search(RamsFilter);
 
                     return false;
                 };
-                RamsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -89,9 +80,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectRam = null;
-        #endregion
-
         #region Команды
         public ICommand AddRamCommand => new DelegateCommand(() =>
         {
@@ -115,8 +103,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Ram>(selectRam.Id_ram);
-            Rams.Remove(selectRam);
+            if(Services.Delete<Ram>(selectRam.Id_ram))
+                Rams.Remove(selectRam);
         }, selectRam => selectRam != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

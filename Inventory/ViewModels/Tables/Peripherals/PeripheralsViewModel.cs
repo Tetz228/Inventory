@@ -2,35 +2,25 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Peripherals;
     using Inventory.View.Edit.Tables.Peripherals;
     using Inventory.ViewModels.Edit.Tables.Peripherals;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Services;
-
-    public class PeripheralsViewModel : BindableBase
+    public class PeripheralsViewModel : BaseViewModel<Peripheral>
     {
-        public PeripheralsViewModel()
-        {
-            RefreshCollection();
-            PeripheralsCollection = CollectionViewSource.GetDefaultView(Peripherals);
-        }
+        public PeripheralsViewModel() : base(Peripherals) => RefreshCollection();
 
         #region Свойства
-        private ICollectionView PeripheralsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
 
         public static ObservableCollection<Peripheral> Peripherals { get; set; } = new();
-
-        public Peripheral SelectPeripheral { get; set; }
 
         private string _peripheralsFilter = string.Empty;
 
@@ -40,20 +30,19 @@
             set
             {
                 _peripheralsFilter = value;
-                PeripheralsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Peripheral peripheral)
                         return peripheral.Search(PeripheralsFilter);
 
                     return false;
                 };
-                PeripheralsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -80,9 +69,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectPeripheral = null;
-        #endregion
-
         #region Команды
         public ICommand AddPeripheralCommand => new DelegateCommand(() =>
         {
@@ -106,8 +92,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Peripheral>(selectPeripheral.Id_peripheral);
-            Peripherals.Remove(selectPeripheral);
+            if (Services.Delete<Peripheral>(selectPeripheral.Id_peripheral))
+                Peripherals.Remove(selectPeripheral);
         }, selectPeripheral => selectPeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

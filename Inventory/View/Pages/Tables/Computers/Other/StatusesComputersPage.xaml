@@ -32,7 +32,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding StatusesComputers, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectStatusComputer}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -50,17 +50,17 @@
                     <MenuItem Command="{Binding AddStatusComputerCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditStatusComputerCommand}"
-                        CommandParameter="{Binding SelectStatusComputer}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeleteStatusComputerCommand}"
-                        CommandParameter="{Binding SelectStatusComputer}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditStatusComputerCommand}" CommandParameter="{Binding SelectStatusComputer}" />
+                    <b:InvokeCommandAction Command="{Binding EditStatusComputerCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -80,7 +80,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditStatusComputerCommand}"
-                CommandParameter="{Binding SelectStatusComputer}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -94,7 +94,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeleteStatusComputerCommand}"
-                CommandParameter="{Binding SelectStatusComputer}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

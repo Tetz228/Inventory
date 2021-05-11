@@ -11,23 +11,15 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class HddViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class HddViewModel : BaseViewModel<Hdd>
     {
-        public HddViewModel()
-        {
-            RefreshCollection();
-            HddCollection = CollectionViewSource.GetDefaultView(Hdd);
-        }
-
+        public HddViewModel() : base(Hdd) => RefreshCollection();
+        
         #region Свойства
-        private ICollectionView HddCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Hdd SelectHdd { get; set; }
 
         public static ObservableCollection<Hdd> Hdd { get; set; } = new();
 
@@ -39,20 +31,19 @@
             set
             {
                 _hddFilter = value;
-                HddCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Hdd hdd)
                         return hdd.Search(HddFilter);
 
                     return false;
                 };
-                HddCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -84,10 +75,8 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectHdd = null;
-        #endregion
-
         #region Команды
+
         public ICommand AddHddCommand => new DelegateCommand(() =>
         {
             var addHddWindow = new HddAddWindow();
@@ -110,11 +99,12 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Hdd>(selectHdd.Id_hdd);
-            Hdd.Remove(selectHdd);
+            if(Services.Delete<Hdd>(selectHdd.Id_hdd))
+                Hdd.Remove(selectHdd);
         }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
+       
         #endregion
 
         public static void RefreshCollection()
@@ -123,7 +113,9 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Hdds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_hdd))
+            {
                 Hdd.Add(item);
+            }
 
             Hdd.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }

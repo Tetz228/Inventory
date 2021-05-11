@@ -14,8 +14,8 @@ namespace Inventory.ViewModels.Add.Tables.Employees
         
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Post);
-            PostsViewModel.Posts.Add(Post);
+            if(Services.Add(Post))
+                PostsViewModel.Posts.Add(Post);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Post.ErrorCollection));
     }

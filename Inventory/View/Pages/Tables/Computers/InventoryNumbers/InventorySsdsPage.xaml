@@ -31,7 +31,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding InventorySsd, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectInventorySsd}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -69,17 +69,17 @@
                     <MenuItem Command="{Binding AddInventorySsdCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditInventorySsdCommand}"
-                        CommandParameter="{Binding SelectInventorySsd}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeleteSsdCommand}"
-                        CommandParameter="{Binding SelectInventorySsd}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditInventorySsdCommand}" CommandParameter="{Binding SelectInventorySsd}" />
+                    <b:InvokeCommandAction Command="{Binding EditInventorySsdCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -99,7 +99,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditInventorySsdCommand}"
-                CommandParameter="{Binding SelectInventorySsd}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -113,7 +113,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeleteSsdCommand}"
-                CommandParameter="{Binding SelectInventorySsd}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

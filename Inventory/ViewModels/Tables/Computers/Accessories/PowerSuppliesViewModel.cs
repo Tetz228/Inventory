@@ -11,24 +11,16 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class PowerSuppliesViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class PowerSuppliesViewModel : BaseViewModel<Power_supplies>
     {
-        public PowerSuppliesViewModel()
-        {
-            RefreshCollection();
-            PowerSuppliesCollection = CollectionViewSource.GetDefaultView(PowerSupplies);
-        }
-
+        public PowerSuppliesViewModel() : base(PowerSupplies) => RefreshCollection();
+        
         #region Свойства
-        private ICollectionView PowerSuppliesCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Power_supplies SelectPowerSupply { get; set; }
-
+        
         public static ObservableCollection<Power_supplies> PowerSupplies { get; set; } = new();
 
         private string _powerSuppliesFilter = string.Empty;
@@ -39,20 +31,19 @@
             set
             {
                 _powerSuppliesFilter = value;
-                PowerSuppliesCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Power_supplies powerSupply)
                         return powerSupply.Search(PowerSuppliesFilter);
 
                     return false;
                 };
-                PowerSuppliesCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -79,10 +70,8 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectPowerSupply = null;
-        #endregion
-
         #region Команды
+
         public ICommand AddPowerSupplyCommand => new DelegateCommand(() =>
         {
             var addWindow = new PowerSupplyAddWindow();
@@ -105,8 +94,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Power_supplies>(selectPowerSupply.Id_power_supplie);
-            PowerSupplies.Remove(selectPowerSupply);
+            if(Services.Delete<Power_supplies>(selectPowerSupply.Id_power_supplie))
+                PowerSupplies.Remove(selectPowerSupply);
         }, selectPowerSupply => selectPowerSupply != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

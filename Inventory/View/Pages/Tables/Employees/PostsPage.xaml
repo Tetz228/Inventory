@@ -30,7 +30,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Posts, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectPost}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -48,17 +48,17 @@
                     <MenuItem Command="{Binding AddPostCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditPostCommand}"
-                        CommandParameter="{Binding SelectPost}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeletePostCommand}"
-                        CommandParameter="{Binding SelectPost}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditPostCommand}" CommandParameter="{Binding SelectPost}" />
+                    <b:InvokeCommandAction Command="{Binding EditPostCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -78,7 +78,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditPostCommand}"
-                CommandParameter="{Binding SelectPost}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -92,7 +92,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeletePostCommand}"
-                CommandParameter="{Binding SelectPost}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

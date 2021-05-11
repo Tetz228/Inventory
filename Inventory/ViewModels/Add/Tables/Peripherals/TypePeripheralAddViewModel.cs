@@ -13,8 +13,8 @@
 
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(TypePeripheral);
-            TypesPeripheralsViewModel.TypesPeripherals.Add(TypePeripheral);
+            if(Services.Add(TypePeripheral))
+                TypesPeripheralsViewModel.TypesPeripherals.Add(TypePeripheral);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(TypePeripheral.ErrorCollection));
     }

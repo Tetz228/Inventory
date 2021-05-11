@@ -11,26 +11,18 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventoryRamViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class InventoryRamViewModel : BaseViewModel<Inventory_numbers_ram>
     {
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации оперативной памяти.xlsx";
         private const string NAMED_AREA_NAME = "InventoryRam";
 
-        public InventoryRamViewModel()
-        {
-            RefreshCollection();
-            InventoryRamsCollection = CollectionViewSource.GetDefaultView(InventoryRams);
-        }
+        public InventoryRamViewModel() : base(InventoryRams) => RefreshCollection();
 
         #region Свойства
-        public ICollectionView InventoryRamsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Inventory_numbers_ram SelectInventoryRam { get; set; }
 
         public static ObservableCollection<Inventory_numbers_ram> InventoryRams { get; set; } = new();
 
@@ -42,20 +34,19 @@
             set
             {
                 _inventoryRamsFilter = value;
-                InventoryRamsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_ram inventoryRam)
                         return inventoryRam.Search(InventoryRamsFilter);
 
                     return false;
                 };
-                InventoryRamsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -97,10 +88,8 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryRam = null;
-        #endregion
-
         #region Команды
+
         public ICommand AddInventoryRamCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryRamAddWindow();
@@ -123,8 +112,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Inventory_numbers_ram>(selectInventoryRam.Id_inventory_number_ram);
-            InventoryRams.Remove(selectInventoryRam);
+            if(Services.Delete<Inventory_numbers_ram>(selectInventoryRam.Id_inventory_number_ram))
+                InventoryRams.Remove(selectInventoryRam);
         }, selectRam => selectRam != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

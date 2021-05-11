@@ -31,7 +31,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding InventoryGraphicsCards, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectInventoryGraphicCard}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -65,17 +65,17 @@
                     <MenuItem Command="{Binding AddInventoryGraphicCardCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditInventoryGraphicCardCommand}"
-                        CommandParameter="{Binding SelectInventoryGraphicCard}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeleteInventoryGraphicCardCommand}"
-                        CommandParameter="{Binding SelectInventoryGraphicCard}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditInventoryGraphicCardCommand}" CommandParameter="{Binding SelectInventoryGraphicCard}" />
+                    <b:InvokeCommandAction Command="{Binding EditInventoryGraphicCardCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -95,7 +95,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditInventoryGraphicCardCommand}"
-                CommandParameter="{Binding SelectInventoryGraphicCard}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -109,7 +109,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeleteInventoryGraphicCardCommand}"
-                CommandParameter="{Binding SelectInventoryGraphicCard}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

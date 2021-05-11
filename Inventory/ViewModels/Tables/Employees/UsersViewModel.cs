@@ -4,34 +4,23 @@
     using Inventory.Model;
     using Inventory.Services;
     using Inventory.View.Add.Tables.Employees;
+    using Inventory.View.Edit.Tables.Employees;
+    using Inventory.ViewModels.Edit.Tables.Employees;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.View.Edit.Tables.Employees;
-    using Inventory.ViewModels.Edit.Tables.Employees;
-
-    public class UsersViewModel : BindableBase
+    public class UsersViewModel : BaseViewModel<User>
     {
-        public UsersViewModel()
-        {
-            RefreshCollection();
-            UsersCollection = CollectionViewSource.GetDefaultView(Users);
-        }
+        public UsersViewModel() : base(Users) => RefreshCollection();
 
         #region Свойства
 
-        private ICollectionView UsersCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<User> Users { get; set; } = new();
-
-        public User SelectUser { get; set; }
 
         private string _usersFilter = string.Empty;
 
@@ -41,20 +30,19 @@
             set
             {
                 _usersFilter = value;
-                UsersCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is User user)
                         return user.Search(UsersFilter);
 
                     return false;
                 };
-                UsersCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -86,9 +74,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectUser = null;
-        #endregion
-
         #region Команды
         public ICommand AddUserCommand => new DelegateCommand(() =>
         {
@@ -112,8 +97,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<User>(selectUser.Id_user);
-            Users.Remove(selectUser);
+            if(Services.Delete<User>(selectUser.Id_user))
+                Users.Remove(selectUser);
         }, selectUser => selectUser != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

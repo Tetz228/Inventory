@@ -2,39 +2,27 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Peripherals;
     using Inventory.View.Edit.Tables.Peripherals;
     using Inventory.ViewModels.Edit.Tables.Peripherals;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Services;
-
-    public class InventoryPeripheralViewModel : BindableBase
+    public class InventoryPeripheralViewModel : BaseViewModel<Inventory_numbers_peripherals>
     {
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации периферии.xlsx";
         private const string NAMED_AREA_NAME = "InventoryPeripherals";
 
-        public InventoryPeripheralViewModel()
-        {
-            RefreshCollection();
-            InventoryPeripheralsCollection = CollectionViewSource.GetDefaultView(InventoryPeripherals);
-        }
-
+        public InventoryPeripheralViewModel() : base(InventoryPeripherals) => RefreshCollection();
         #region Свойства
 
-        public ICollectionView InventoryPeripheralsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Inventory_numbers_peripherals> InventoryPeripherals { get; set; } = new();
-
-        public Inventory_numbers_peripherals SelectInventoryPeripheral { get; set; }
 
         private string _inventoryPeripheralsFilter = string.Empty;
 
@@ -44,20 +32,19 @@
             set
             {
                 _inventoryPeripheralsFilter = value;
-                InventoryPeripheralsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_peripherals inventoryPeripheral)
                         return inventoryPeripheral.Search(InventoryPeripheralsFilter);
 
                     return false;
                 };
-                InventoryPeripheralsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -107,9 +94,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventoryPeripheral = null;
-        #endregion
-
         #region Команды
         public ICommand AddInventoryPeripheralCommand => new DelegateCommand(() =>
         {
@@ -133,8 +117,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Inventory_numbers_peripherals>(selectInventoryPeripheral.Id_inventory_number_peripheral);
-            InventoryPeripherals.Remove(selectInventoryPeripheral);
+            if(Services.Delete<Inventory_numbers_peripherals>(selectInventoryPeripheral.Id_inventory_number_peripheral))
+               InventoryPeripherals.Remove(selectInventoryPeripheral);
         }, selectInventoryPeripheral => selectInventoryPeripheral != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));

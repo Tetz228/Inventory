@@ -354,6 +354,7 @@
     <Compile Include="ViewModels\RecoveryPassword\NewPasswordViewModel.cs" />
     <Compile Include="ViewModels\RecoveryPassword\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModels\RecoveryPassword\SecurityСodeViewModel.cs" />
+    <Compile Include="ViewModels\Tables\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Accessories\GraphicsCardsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Accessories\MotherboardsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Accessories\PowerSuppliesViewModel.cs" />

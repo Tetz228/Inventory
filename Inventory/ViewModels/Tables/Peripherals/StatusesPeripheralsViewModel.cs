@@ -6,30 +6,20 @@
     using Inventory.View.Add.Tables.Peripherals;
     using Inventory.View.Edit.Tables.Peripherals;
     using Inventory.ViewModels.Edit.Tables.Peripherals;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class StatusesPeripheralsViewModel : BindableBase
+    public class StatusesPeripheralsViewModel : BaseViewModel<Statuses_peripherals>
     {
-        public StatusesPeripheralsViewModel()
-        {
-            RefreshCollection();
-            StatusesPeripheralsCollection = CollectionViewSource.GetDefaultView(StatusesPeripherals);
-        }
+        public StatusesPeripheralsViewModel() : base(StatusesPeripherals) => RefreshCollection();
 
         #region Свойства
 
-        private ICollectionView StatusesPeripheralsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; set; } = new();
-
-        public Statuses_peripherals SelectStatusPeripheral { get; set; }
 
         private string _statusesPeripheralsFilter = string.Empty;
 
@@ -39,21 +29,19 @@
             set
             {
                 _statusesPeripheralsFilter = value;
-                StatusesPeripheralsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Statuses_peripherals statusPeripheral)
                         return statusPeripheral.Search(StatusesPeripheralsFilter);
 
                     return false;
                 };
-                StatusesPeripheralsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -69,10 +57,6 @@
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectStatusPeripheral = null;
-
-        #endregion
 
         #region Команды
         public ICommand AddStatusPeripheralCommand => new DelegateCommand(() =>
@@ -97,8 +81,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Statuses_peripherals>(selectStatusPeripheral.Id_status_peripheral);
-            StatusesPeripherals.Remove(selectStatusPeripheral);
+            if (Services.Delete<Statuses_peripherals>(selectStatusPeripheral.Id_status_peripheral))
+                StatusesPeripherals.Remove(selectStatusPeripheral);
         }, selectStatusPeripheral => selectStatusPeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

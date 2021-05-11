@@ -6,29 +6,19 @@
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class SocketsViewModel : BindableBase
+    public class SocketsViewModel : BaseViewModel<Socket>
     {
-        public SocketsViewModel()
-        {
-            RefreshCollection();
-            SocketsCollection = CollectionViewSource.GetDefaultView(Sockets);
-        }
+        public SocketsViewModel() : base(Sockets) => RefreshCollection();
 
         #region Свойства
-        private ICollectionView SocketsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Socket> Sockets { get; set; } = new();
-
-        public Socket SelectSocket { get; set; }
 
         private string _socketsFilter = string.Empty;
 
@@ -38,20 +28,19 @@
             set
             {
                 _socketsFilter = value;
-                SocketsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Socket socket)
                         return socket.Search(SocketsFilter);
 
                     return false;
                 };
-                SocketsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -67,9 +56,6 @@
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectSocket = null;
-        #endregion
 
         #region Команды
         public ICommand AddSocketCommand => new DelegateCommand(() =>
@@ -94,8 +80,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Socket>(selectSocket.Id_socket);
-            Sockets.Remove(selectSocket);
+            if (Services.Delete<Socket>(selectSocket.Id_socket))
+                Sockets.Remove(selectSocket);
         }, selectSocket => selectSocket != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -55,7 +55,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Employees}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectEmployee}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -100,17 +100,17 @@
                     <MenuItem Command="{Binding AddEmployeeCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditEmployeeCommand}"
-                        CommandParameter="{Binding SelectEmployee}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeleteEmployeeCommand}"
-                        CommandParameter="{Binding SelectEmployee}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditEmployeeCommand}" CommandParameter="{Binding SelectEmployee}" />
+                    <b:InvokeCommandAction Command="{Binding EditEmployeeCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -131,7 +131,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditEmployeeCommand}"
-                CommandParameter="{Binding SelectEmployee}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -145,7 +145,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeleteEmployeeCommand}"
-                CommandParameter="{Binding SelectEmployee}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -164,7 +164,7 @@
             <!--  Обновление  -->
             <Button
                 Command="{Binding RefreshCollectionCommand}"
-                CommandParameter="{Binding SelectEmployee}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

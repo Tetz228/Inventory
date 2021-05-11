@@ -11,24 +11,16 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class MotherboardsViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class MotherboardsViewModel : BaseViewModel<Motherboard>
     {
-        public MotherboardsViewModel()
-        {
-            RefreshCollection();
-            MotherboardsCollection = CollectionViewSource.GetDefaultView(Motherboards);
-        }
-
+        public MotherboardsViewModel() : base(Motherboards) => RefreshCollection();
+        
         #region Свойства
-        private ICollectionView MotherboardsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Motherboard SelectMotherboard { get; set; }
-
+        
         public static ObservableCollection<Motherboard> Motherboards { get; set; } = new();
 
         private string _motherboardsFilter = string.Empty;
@@ -39,20 +31,19 @@
             set
             {
                 _motherboardsFilter = value;
-                MotherboardsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Motherboard motherboard)
                         return motherboard.Search(MotherboardsFilter);
 
                     return false;
                 };
-                MotherboardsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -78,11 +69,10 @@
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectMotherboard = null;
-        #endregion
+        
 
         #region Команды
+
         public ICommand AddMotherboardCommand => new DelegateCommand(() =>
         {
             var addHddWindow = new MotherboardAddWindow();
@@ -105,11 +95,12 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Motherboard>(selectMotherboard.Id_motherboard);
-            Motherboards.Remove(selectMotherboard);
+            if(Services.Delete<Motherboard>(selectMotherboard.Id_motherboard))
+                Motherboards.Remove(selectMotherboard);
         }, selectMotherboard => selectMotherboard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
+        
         #endregion
 
         public static void RefreshCollection()

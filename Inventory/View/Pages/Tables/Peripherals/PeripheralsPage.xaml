@@ -16,7 +16,6 @@
         <peripherals:PeripheralsViewModel />
     </Page.DataContext>
 
-
     <Grid Background="#FF2BA8E2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="121*" />
@@ -32,7 +31,7 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Peripherals, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectPeripheral}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
             <ListView.View>
                 <GridView>
@@ -58,17 +57,17 @@
                     <MenuItem Command="{Binding AddPeripheralCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditPeripheralCommand}"
-                        CommandParameter="{Binding SelectPeripheral}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeletePeripheralCommand}"
-                        CommandParameter="{Binding SelectPeripheral}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditPeripheralCommand}" CommandParameter="{Binding SelectPeripheral}" />
+                    <b:InvokeCommandAction Command="{Binding EditPeripheralCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -88,7 +87,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditPeripheralCommand}"
-                CommandParameter="{Binding SelectPeripheral}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -102,7 +101,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeletePeripheralCommand}"
-                CommandParameter="{Binding SelectPeripheral}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

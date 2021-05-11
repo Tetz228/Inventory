@@ -11,26 +11,17 @@
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
     using Inventory.ViewModels.Edit.Tables.Computers.Computers;
+    using Inventory.ViewModels.Tables.Base;
 
-    public class ComputersViewModel : BindableBase
+    public class ComputersViewModel : BaseViewModel<Computer>
     {
-        public ComputersViewModel()
-        {
-            RefreshCollection();
-            ComputersCollection = CollectionViewSource.GetDefaultView(Computers);
-        }
-
+        public ComputersViewModel() : base(Computers) => RefreshCollection();
+        
         #region Свойства
-        private ICollectionView ComputersCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Computer SelectComputer { get; set; }
-
+        
         public static ObservableCollection<Computer> Computers { get; set; } = new();
 
         private string _computersFilter = string.Empty;
@@ -41,20 +32,19 @@
             set
             {
                 _computersFilter = value;
-                ComputersCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Computer computer)
                         return computer.Search(ComputersFilter);
 
                     return false;
                 };
-                ComputersCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
-
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -81,10 +71,8 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectComputer = null;
-        #endregion
-
         #region Команды
+
         public ICommand AddComputerCommand => new DelegateCommand(() =>
         {
             var addWindow = new ComputerAddWindow();
@@ -107,11 +95,12 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Computer>(selectComputer.Id_computer);
-            Computers.Remove(selectComputer);
+            if(Services.Delete<Computer>(selectComputer.Id_computer))
+                Computers.Remove(selectComputer);
         }, selectComputer => selectComputer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
+
         #endregion
 
         public static void RefreshCollection()

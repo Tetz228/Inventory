@@ -6,30 +6,20 @@
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class TypesHddViewModel : BindableBase
+    public class TypesHddViewModel : BaseViewModel<Types_hdd>
     {
-        public TypesHddViewModel()
-        {
-            RefreshCollection();
-            TypesHddCollection = CollectionViewSource.GetDefaultView(TypesHdd);
-        }
+        public TypesHddViewModel() : base(TypesHdd) => RefreshCollection();
 
         #region Свойства
 
-        private ICollectionView TypesHddCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Types_hdd> TypesHdd { get; set; } = new();
-
-        public Types_hdd SelectTypeHdd { get; set; }
 
         private string _typesHddFilter = string.Empty;
 
@@ -39,20 +29,19 @@
             set
             {
                 _typesHddFilter = value;
-                TypesHddCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Types_hdd typesHdd)
                         return typesHdd.Search(TypesHddFilter);
 
                     return false;
                 };
-                TypesHddCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -68,8 +57,6 @@
                 }
             }
         }
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeHdd = null;
-        #endregion
 
         #region Команды
         public ICommand AddTypeHddCommand => new DelegateCommand(() =>
@@ -85,8 +72,7 @@
             editWindow.DataContext = editViewModel;
             editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();
-        },
-            typeHdd => typeHdd != null);
+        }, typeHdd => typeHdd != null);
 
         public ICommand DeleteTypeHddCommand => new DelegateCommand<Types_hdd>(selectTypeHdd =>
         {
@@ -95,8 +81,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Types_hdd>(selectTypeHdd.Id_type_hdd);
-            TypesHdd.Remove(selectTypeHdd);
+            if (Services.Delete<Types_hdd>(selectTypeHdd.Id_type_hdd))
+                TypesHdd.Remove(selectTypeHdd);
         }, selectTypeHdd => selectTypeHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

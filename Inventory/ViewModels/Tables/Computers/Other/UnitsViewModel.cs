@@ -6,30 +6,20 @@
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class UnitsViewModel : BindableBase
+    public class UnitsViewModel : BaseViewModel<Unit>
     {
-        public UnitsViewModel()
-        {
-            RefreshCollection();
-            UnitsCollection = CollectionViewSource.GetDefaultView(Units);
-        }
+        public UnitsViewModel() : base(Units) => RefreshCollection();
 
         #region Свойства
 
-        private ICollectionView UnitsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Unit> Units { get; set; } = new();
-
-        public Unit SelectUnit { get; set; }
 
         private string _unitsFilter = string.Empty;
 
@@ -39,20 +29,19 @@
             set
             {
                 _unitsFilter = value;
-                UnitsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Unit unit)
                         return unit.Search(UnitsFilter);
 
                     return false;
                 };
-                UnitsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -73,9 +62,6 @@
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectUnit = null;
-        #endregion
 
         #region Команды
         public ICommand AddUnitCommand => new DelegateCommand(() =>
@@ -100,8 +86,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Unit>(selectUnit.Id_unit);
-            Units.Remove(selectUnit);
+            if(Services.Delete<Unit>(selectUnit.Id_unit))
+                Units.Remove(selectUnit);
         }, selectUnit => selectUnit != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

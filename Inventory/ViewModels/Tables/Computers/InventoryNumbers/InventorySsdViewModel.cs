@@ -11,27 +11,19 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class InventorySsdViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class InventorySsdViewModel : BaseViewModel<Inventory_numbers_ssd>
     {
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации SSD-накопителей.xlsx";
         private const string NAMED_AREA_NAME = "InventorySsd";
 
-        public InventorySsdViewModel()
-        {
-            RefreshCollection();
-            InventorySsdCollection = CollectionViewSource.GetDefaultView(InventorySsd);
-        }
+        public InventorySsdViewModel() : base(InventorySsd) => RefreshCollection();
 
         #region Свойства
-        public ICollectionView InventorySsdCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Inventory_numbers_ssd SelectInventorySsd { get; set; }
-
+        
         public static ObservableCollection<Inventory_numbers_ssd> InventorySsd { get; set; } = new();
 
         private string _ssdFilter = string.Empty;
@@ -42,20 +34,20 @@
             set
             {
                 _ssdFilter = value;
-                InventorySsdCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Inventory_numbers_ssd ssd)
                         return ssd.Search(InventorySsdFilter);
 
                     return false;
                 };
-                InventorySsdCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
+
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -92,10 +84,8 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectInventorySsd = null;
-        #endregion
-
         #region Команды
+
         public ICommand AddInventorySsdCommand => new DelegateCommand(() =>
         {
             var addSsdWindow = new InventorySsdAddWindow();
@@ -118,13 +108,14 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Inventory_numbers_ssd>(selectInventorySsd.Id_inventory_number_ssd);
-            InventorySsd.Remove(selectInventorySsd);
+            if(Services.Delete<Inventory_numbers_ssd>(selectInventorySsd.Id_inventory_number_ssd))
+                InventorySsd.Remove(selectInventorySsd);
         }, selectInventorySsd => selectInventorySsd != null);
 
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
+
         #endregion
 
         public static void RefreshCollection()

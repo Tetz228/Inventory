@@ -11,24 +11,16 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class SsdViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class SsdViewModel : BaseViewModel<Ssd>
     {
-        public SsdViewModel()
-        {
-            RefreshCollection();
-            SsdsCollection = CollectionViewSource.GetDefaultView(Ssds);
-        }
-
+        public SsdViewModel() : base(Ssds) => RefreshCollection();
+        
         #region Свойства
-        private ICollectionView SsdsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Ssd SelectSsd { get; set; }
-
+        
         public static ObservableCollection<Ssd> Ssds { get; set; } = new();
 
         private string _ssdsFilter = string.Empty;
@@ -39,20 +31,19 @@
             set
             {
                 _ssdsFilter = value;
-                SsdsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Ssd ssd)
                         return ssd.Search(SsdsFilter);
 
                     return false;
                 };
-                SsdsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -83,11 +74,9 @@
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectSsd = null;
-        #endregion
-
+        
         #region Команды
+
         public ICommand AddSsdCommand => new DelegateCommand(() =>
         {
             var addSsdWindow = new SsdAddWindow();
@@ -110,8 +99,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Ssd>(selectSsd.Id_ssd);
-            Ssds.Remove(selectSsd);
+            if(Services.Delete<Ssd>(selectSsd.Id_ssd))
+                Ssds.Remove(selectSsd);
         }, selectSsd => selectSsd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

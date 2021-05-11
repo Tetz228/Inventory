@@ -2,35 +2,24 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Other;
     using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Services;
-
-    public class TypesSddViewModel : BindableBase
+    public class TypesSddViewModel : BaseViewModel<Types_ssd>
     {
-        public TypesSddViewModel()
-        {
-            RefreshCollection();
-            TypesSsdCollection = CollectionViewSource.GetDefaultView(TypesSsd);
-        }
+        public TypesSddViewModel() : base(TypesSsd) => RefreshCollection();
 
         #region Свойства
 
-        private ICollectionView TypesSsdCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Types_ssd> TypesSsd { get; set; } = new();
-
-        public Types_ssd SelectTypeSsd { get; set; }
 
         private string _typesSsdFilter = string.Empty;
 
@@ -40,20 +29,19 @@
             set
             {
                 _typesSsdFilter = value;
-                TypesSsdCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Types_ssd typeSsd)
                         return typeSsd.Search(TypesSsdFilter);
 
                     return false;
                 };
-                TypesSsdCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -69,8 +57,6 @@
                 }
             }
         }
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectTypeSsd = null;
-        #endregion
 
         #region Команды
         public ICommand AddTypeSsdCommand => new DelegateCommand(() =>
@@ -86,7 +72,6 @@
             editWindow.DataContext = editViewModel;
             editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();
-
         }, typeSsd => typeSsd != null);
 
         public ICommand DeleteTypeSsdCommand => new DelegateCommand<Types_ssd>(selectTypeSsd =>
@@ -96,8 +81,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Types_ssd>(selectTypeSsd.Id_type_ssd);
-            TypesSsd.Remove(selectTypeSsd);
+            if (Services.Delete<Types_ssd>(selectTypeSsd.Id_type_ssd))
+                TypesSsd.Remove(selectTypeSsd);
         }, selectTypeSsd => selectTypeSsd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -6,32 +6,22 @@
     using Inventory.View.Add.Tables.Employees;
     using Inventory.View.Edit.Tables.Employees;
     using Inventory.ViewModels.Edit.Tables.Employees;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class EmployeesViewModel : BindableBase
+    public class EmployeesViewModel : BaseViewModel<Employee>
     {
-        public EmployeesViewModel()
-        {
-            RefreshCollection();
-            EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
-        }
+        public EmployeesViewModel() : base(Employees) => RefreshCollection();
 
         #region Свойства
 
-        private ICollectionView EmployeesCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
         public static ObservableCollection<Employee> Employees { get; set; } = new();
-
-        public Employee SelectEmployee { get; set; }
 
         private string _employeesFilter = string.Empty;
 
@@ -41,20 +31,20 @@
             set
             {
                 _employeesFilter = value;
-                EmployeesCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Employee employee)
                         return employee.Search(EmployeesFilter);
 
                     return false;
                 };
-                EmployeesCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
+
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -91,9 +81,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectEmployee = null;
-        #endregion
-
         #region Команды
         public ICommand AddEmployeeCommand => new DelegateCommand(() =>
         {
@@ -108,7 +95,6 @@
             editEmployeeWindow.DataContext = editEmployeeViewModel;
             editEmployeeWindow.Closing += editEmployeeViewModel.OnWindowClosing;
             editEmployeeWindow.ShowDialog();
-
         }, employee => employee != null);
 
         public ICommand DeleteEmployeeCommand => new DelegateCommand<Employee>(selectEmployee =>
@@ -118,8 +104,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Employee>(selectEmployee.Id_employee);
-            Employees.Remove(selectEmployee);
+            if (Services.Delete<Employee>(selectEmployee.Id_employee))
+                Employees.Remove(selectEmployee);
         }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);

@@ -11,23 +11,15 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class GraphicsCardsViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class GraphicsCardsViewModel : BaseViewModel<Graphics_cards>
     {
-        public GraphicsCardsViewModel()
-        {
-            RefreshCollection();
-            GraphicsCardsCollection = CollectionViewSource.GetDefaultView(GraphicsCards);
-        }
+        public GraphicsCardsViewModel() : base(GraphicsCards) => RefreshCollection();
 
         #region Свойства
-        private ICollectionView GraphicsCardsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Graphics_cards SelectGraphicCard { get; set; }
 
         public static ObservableCollection<Graphics_cards> GraphicsCards { get; set; } = new();
 
@@ -39,20 +31,19 @@
             set
             {
                 _graphicsCardsFilter = value;
-                GraphicsCardsCollection.Filter = obj =>
+                CollectionView.Filter = obj =>
                 {
                     if (obj is Graphics_cards graphicCard)
                         return graphicCard.Search(GraphicsCardsFilter);
 
                     return false;
                 };
-                GraphicsCardsCollection.Refresh();
+                CollectionView.Refresh();
             }
         }
         #endregion
 
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
@@ -79,9 +70,6 @@
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectGraphicCard = null;
-        #endregion
-
         #region Команды
         public ICommand AddGraphicCardCommand => new DelegateCommand(() =>
         {
@@ -105,8 +93,8 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Graphics_cards>(selectGraphicCard.Id_graphics_card);
-            GraphicsCards.Remove(selectGraphicCard);
+            if(Services.Delete<Graphics_cards>(selectGraphicCard.Id_graphics_card))
+                GraphicsCards.Remove(selectGraphicCard);
         }, selectGraphicCard => selectGraphicCard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
