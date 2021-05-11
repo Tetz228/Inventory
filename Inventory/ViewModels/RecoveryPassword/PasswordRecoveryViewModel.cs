@@ -13,7 +13,7 @@
         public PasswordRecoveryViewModel()
         {
             PageNavigation = new PageNavigation();
-            PageNavigation.OnPangeChanged += page => CurrentPage = page;
+            PageNavigation.OnPageChanged += page => CurrentPage = page;
             PageNavigation.Navigate(new EmailPage());
         }
 

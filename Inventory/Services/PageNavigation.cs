@@ -5,11 +5,8 @@
 
     public class PageNavigation
     {
-        public event Action<Page> OnPangeChanged;
+        public event Action<Page> OnPageChanged;
 
-        public void Navigate(Page obj)
-        {
-            OnPangeChanged?.Invoke(obj);
-        }
+        public void Navigate(Page obj) => OnPageChanged?.Invoke(obj);
     }
 }
