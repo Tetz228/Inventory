@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации материнских плат.xlsx";
         private const string NAMED_AREA_NAME = "InventoryMotherboard";
 
-        public InventoryMotherboardsViewModel() : base(InventoryMotherboards) => RefreshCollection();
+        public InventoryMotherboardsViewModel() : base(InventoryMotherboards, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_motherboards> InventoryMotherboards { get; set; } = new();
 
@@ -82,8 +82,6 @@
             if(Services.Delete<Inventory_numbers_motherboards>(selectInventoryMotherboard.Id_inventory_number_motherboard))
                 InventoryMotherboards.Remove(selectInventoryMotherboard);
         }, selectInventoryMotherboard => selectInventoryMotherboard != null);
-
-        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 

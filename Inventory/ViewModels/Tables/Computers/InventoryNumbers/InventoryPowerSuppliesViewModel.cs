@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации блоков питания.xlsx";
         private const string NAMED_AREA_NAME = "InventoryPowerSupplies";
 
-        public InventoryPowerSuppliesViewModel() : base(InventoryPowerSupplies) => RefreshCollection();
+        public InventoryPowerSuppliesViewModel() : base(InventoryPowerSupplies, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_power_supplies> InventoryPowerSupplies { get; set; } = new();
 
@@ -81,8 +81,6 @@
             if(Services.Delete<Inventory_numbers_power_supplies>(selectInventoryPowerSupplies.Id_inventory_number_power_supplie))
                 InventoryPowerSupplies.Remove(selectInventoryPowerSupplies);
         }, selectInventoryPowerSupply => selectInventoryPowerSupply != null);
-
-        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         

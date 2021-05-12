@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации видеокарт.xlsx";
         private const string NAMED_AREA_NAME = "InventoryGraphicsCards";
 
-        public InventoryGraphicsCardsViewModel() : base(InventoryGraphicsCards) => RefreshCollection();
+        public InventoryGraphicsCardsViewModel() : base(InventoryGraphicsCards, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_graphics_cards> InventoryGraphicsCards { get; set; } = new();
         
@@ -81,8 +81,6 @@
             if(Services.Delete<Inventory_numbers_graphics_cards>(selectInventoryGraphicCard.Id_inventory_number_graphics_card))
                 InventoryGraphicsCards.Remove(selectInventoryGraphicCard);
         }, selectInventoryGraphicCard => selectInventoryGraphicCard != null);
-
-        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         

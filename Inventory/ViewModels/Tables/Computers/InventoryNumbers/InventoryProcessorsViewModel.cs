@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации процессоров.xlsx";
         private const string NAMED_AREA_NAME = "InventoryProcessors";
 
-        public InventoryProcessorsViewModel() : base(InventoryProcessors) => RefreshCollection();
+        public InventoryProcessorsViewModel() : base(InventoryProcessors, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; set; } = new();
 
@@ -91,8 +91,6 @@
             if(Services.Delete<Inventory_numbers_processors>(selectInventoryProcessor.Id_inventory_number_processor))
                 InventoryProcessors.Remove(selectInventoryProcessor);
         }, selectInventoryProcessor => selectInventoryProcessor != null);
-
-        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         

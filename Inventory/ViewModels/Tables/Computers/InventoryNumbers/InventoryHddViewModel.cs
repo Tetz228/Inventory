@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации жестких дисков.xlsx";
         private const string NAMED_AREA_NAME = "InventoryHdd";
 
-        public InventoryHddViewModel() : base(InventoryHdd) => RefreshCollection();
+        public InventoryHddViewModel() : base(InventoryHdd, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_hdd> InventoryHdd { get; set; } = new();
      
@@ -86,8 +86,6 @@
             if(Services.Delete<Inventory_numbers_hdd>(selectInventoryHdd.Id_inventory_number_hdd))
                 InventoryHdd.Remove(selectInventoryHdd);
         }, selectInventoryHdd => selectInventoryHdd != null);
-
-        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
       

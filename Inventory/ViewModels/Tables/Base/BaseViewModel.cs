@@ -5,11 +5,23 @@
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Data;
+    using System.Windows.Input;
+
     using Inventory.Services;
 
     public abstract class BaseViewModel<TClass> : BindableBase
     {
+        private readonly string _nameTemplate;
+        private readonly string _namedAreaName;
+
         protected BaseViewModel(ObservableCollection<TClass> observableCollection) => CollectionView = CollectionViewSource.GetDefaultView(observableCollection);
+
+        protected BaseViewModel(ObservableCollection<TClass> observableCollection, string nameTemplate, string namedAreaName)
+        {
+            CollectionView = CollectionViewSource.GetDefaultView(observableCollection);
+            _nameTemplate = nameTemplate;
+            _namedAreaName = namedAreaName;
+        }
 
         #region Свойства
 
@@ -42,6 +54,8 @@
         }
 
         #endregion
+
+        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(_nameTemplate, _namedAreaName));
 
         #region События
 

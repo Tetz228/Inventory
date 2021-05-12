@@ -19,7 +19,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации периферии.xlsx";
         private const string NAMED_AREA_NAME = "InventoryPeripherals";
 
-        public InventoryPeripheralViewModel() : base(InventoryPeripherals) => RefreshCollection();
+        public InventoryPeripheralViewModel() : base(InventoryPeripherals, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
         
         public static ObservableCollection<Inventory_numbers_peripherals> InventoryPeripherals { get; set; } = new();
 
@@ -99,8 +99,6 @@
             if(Services.Delete<Inventory_numbers_peripherals>(selectInventoryPeripheral.Id_inventory_number_peripheral))
                InventoryPeripherals.Remove(selectInventoryPeripheral);
         }, selectInventoryPeripheral => selectInventoryPeripheral != null);
-
-        public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         #endregion
