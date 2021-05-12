@@ -15,8 +15,8 @@
         
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(StatusComputer);
-            StatusesComputersViewModel.StatusesComputers.Add(StatusComputer);
+            if (Services.Add(StatusComputer))
+                StatusesComputersViewModel.StatusesComputers.Add(StatusComputer);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(StatusComputer.ErrorCollection));
     }

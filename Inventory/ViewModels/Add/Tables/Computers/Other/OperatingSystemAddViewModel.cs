@@ -15,8 +15,8 @@
 
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(OperatingSystem);
-            OperatingSystemsViewModel.OperatingSystems.Add(OperatingSystem);
+            if (Services.Add(OperatingSystem))
+                OperatingSystemsViewModel.OperatingSystems.Add(OperatingSystem);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(OperatingSystem.ErrorCollection));
     }

@@ -13,8 +13,8 @@
         
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Socket);
-            SocketsViewModel.Sockets.Add(Socket);
+            if (Services.Add(Socket))
+                SocketsViewModel.Sockets.Add(Socket);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(Socket.ErrorCollection));
     }

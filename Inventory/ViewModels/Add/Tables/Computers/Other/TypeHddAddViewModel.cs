@@ -15,8 +15,8 @@
         
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(TypeHdd);
-            TypesHddViewModel.TypesHdd.Add(TypeHdd);
+            if (Services.Add(TypeHdd))
+                TypesHddViewModel.TypesHdd.Add(TypeHdd);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(TypeHdd.ErrorCollection));
     }

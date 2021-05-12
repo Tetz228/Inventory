@@ -15,8 +15,8 @@
 
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(TypeSsd);
-            TypesSddViewModel.TypesSsd.Add(TypeSsd);
+            if(Services.Add(TypeSsd))
+                TypesSddViewModel.TypesSsd.Add(TypeSsd);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(TypeSsd.ErrorCollection));
     }

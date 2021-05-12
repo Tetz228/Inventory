@@ -13,8 +13,8 @@
 
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(TypeMemory);
-            TypesMemoryViewModel.TypesMemory.Add(TypeMemory);
+            if (Services.Add(TypeMemory))
+                TypesMemoryViewModel.TypesMemory.Add(TypeMemory);
             addWindow.Close();
         }, _ => Services.IsValidationProperties(TypeMemory.ErrorCollection));
     }
