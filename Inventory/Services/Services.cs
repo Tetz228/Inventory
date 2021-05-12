@@ -83,7 +83,7 @@
         /// <typeparam name="TClass">Класс, который содержит свойство</typeparam>
         /// <param name="propertyName">Имя свойства</param>
         /// <param name="obj">Cвойство</param>
-        /// <param name="selectObj">Необязательный аргумент, которое нужно, если открыты окна с изменением информации</param>
+        /// <param name="selectObj">Необязательный аргумент, которое нужен, когда открыто окно с изменением информации</param>
         /// <returns>Возвращает true, если свойство не уникально, иначе false</returns>
         public static bool CheckForUniqueness<TClass>(string propertyName, object obj, object selectObj) where TClass : class
         {
@@ -107,8 +107,6 @@
             return result != null;
         }
 
-        public static bool IsSaveDatabase { get; set; }
-
         public static bool Add<TClass>(TClass value) where TClass : class
         {
             using var db = new InventoryEntities();
@@ -127,7 +125,7 @@
             }
         }
 
-        public static bool Edit<TClass>(int idObject, TClass updatedObject) where TClass : class
+        public static void Edit<TClass>(int idObject, TClass updatedObject) where TClass : class
         {
             using var db = new InventoryEntities();
 
@@ -136,7 +134,7 @@
             if (existingObject == null)
             {
                 MessageBox.Show("Ошибка при изменении данных в базе данных. Изменяемый объект не найден в базе данных.", "Ошибка при изменении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
+                return;
             }
 
             db.Entry(existingObject).CurrentValues.SetValues(updatedObject);
@@ -144,12 +142,10 @@
             try
             {
                 db.SaveChanges();
-                return true;
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Ошибка при изменении данных в базе данных.\n{e.Message}", "Ошибка при изменении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
             }
         }
 
