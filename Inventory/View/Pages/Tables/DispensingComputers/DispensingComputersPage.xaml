@@ -39,6 +39,7 @@
             ItemsSource="{Binding DispensingComputers}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectObject}"
+            SelectionMode="Single"
             Style="{StaticResource BaseListView}">
 
             <ListView.View>
