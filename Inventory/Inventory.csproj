@@ -556,8 +556,8 @@
     <Compile Include="View\Pages\Tables\Computers\InventoryNumbers\InventoryRamPage.xaml.cs">
       <DependentUpon>InventoryRamPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Computers\InventoryNumbers\InventorySsdsPage.xaml.cs">
-      <DependentUpon>InventorySsdsPage.xaml</DependentUpon>
+    <Compile Include="View\Pages\Tables\Computers\InventoryNumbers\InventorySsdPage.xaml.cs">
+      <DependentUpon>InventorySsdPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Tables\Computers\Other\SoketsPage.xaml.cs">
       <DependentUpon>SoketsPage.xaml</DependentUpon>
@@ -940,7 +940,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Computers\InventoryNumbers\InventorySsdsPage.xaml">
+    <Page Include="View\Pages\Tables\Computers\InventoryNumbers\InventorySsdPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

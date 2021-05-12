@@ -5,9 +5,9 @@ namespace Inventory.View.Pages.Tables.Computers.InventoryNumbers
     /// <summary>
     /// Логика взаимодействия для InventoryNumbersSsdsPage.xaml
     /// </summary>
-    public partial class InventorySsdsPage : Page
+    public partial class InventorySsdPage : Page
     {
-        public InventorySsdsPage()
+        public InventorySsdPage()
         {
             InitializeComponent();
         }

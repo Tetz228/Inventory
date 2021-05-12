@@ -44,7 +44,7 @@
 
         public ICommand SelectInventoryHddPageCommand => new DelegateCommand(() => CurrentPage = new InventoryHddPage());
 
-        public ICommand SelectInventorySsdsPageCommand => new DelegateCommand(() => CurrentPage = new InventorySsdsPage());
+        public ICommand SelectInventorySsdsPageCommand => new DelegateCommand(() => CurrentPage = new InventorySsdPage());
 
         public ICommand SelectInventoryMotherboardsPageCommand => new DelegateCommand(() => CurrentPage = new InventoryMotherboardsPage());
 
