@@ -7,6 +7,8 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Validation;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -109,25 +111,16 @@
 
         public static bool Add<TClass>(TClass value) where TClass : class
         {
-            using var db = new InventoryEntities();
+            var db = new InventoryEntities();
 
             db.Set<TClass>().Add(value);
 
-            try
-            {
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"Ошибка при добавлении данных в базу данных.\n{e.Message}", "Ошибка при добавлении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            return DbSaveChanges(ref db);
         }
 
         public static void Edit<TClass>(int idObject, TClass updatedObject) where TClass : class
         {
-            using var db = new InventoryEntities();
+            var db = new InventoryEntities();
 
             var existingObject = db.Set<TClass>().Find(idObject);
 
@@ -139,19 +132,12 @@
 
             db.Entry(existingObject).CurrentValues.SetValues(updatedObject);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"Ошибка при изменении данных в базе данных.\n{e.Message}", "Ошибка при изменении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            DbSaveChanges(ref db);
         }
 
         public static bool Delete<TClass>(int idObject) where TClass : class
         {
-            using var db = new InventoryEntities();
+            var db = new InventoryEntities();
 
             var dbSet = db.Set<TClass>();
             var foundObject = dbSet.Find(idObject);
@@ -164,15 +150,31 @@
 
             dbSet.Remove(foundObject);
 
+            return DbSaveChanges(ref db);
+        }
+
+        private static bool DbSaveChanges(ref InventoryEntities db)
+        {
             try
             {
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception e)
+            catch (DbUpdateException)
             {
-                MessageBox.Show($"Ошибка при удалении данных в базе данных.\n{e.Message}", "Ошибка при удалении данных.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Сбой при сохранении изменений в базе данных.", "Сбой при сохранении в базу данных.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
+            }
+            catch (DbEntityValidationException)
+            {
+                MessageBox.Show("Сбой при проверке сущностей.", "Сбой при сохранении данных в базу данных.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            finally
+            {
+                db.Dispose();
             }
         }
     }
