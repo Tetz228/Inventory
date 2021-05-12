@@ -17,8 +17,6 @@
         private readonly string _namedAreaName;
         private readonly Action _refreshCollectionAction;
 
-        protected BaseViewModel(ObservableCollection<TClass> observableCollection) => CollectionView = CollectionViewSource.GetDefaultView(observableCollection);
-
         protected BaseViewModel(ObservableCollection<TClass> observableCollection, Action refreshCollectionAction)
         {
             CollectionView = CollectionViewSource.GetDefaultView(observableCollection);
@@ -65,9 +63,13 @@
 
         #endregion
 
+        #region Команды
+
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(_nameTemplate, _namedAreaName));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(_refreshCollectionAction);
+
+        #endregion
 
         #region События
 

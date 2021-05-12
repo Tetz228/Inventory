@@ -72,8 +72,7 @@
                 }
             }
         }
-
-        #region Команды
+        
         public ICommand AddInventoryPeripheralCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryPeripheralAddWindow();
@@ -99,9 +98,6 @@
             if(Services.Delete<Inventory_numbers_peripherals>(selectInventoryPeripheral.Id_inventory_number_peripheral))
                InventoryPeripherals.Remove(selectInventoryPeripheral);
         }, selectInventoryPeripheral => selectInventoryPeripheral != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
         public static void RefreshCollection()
         {
