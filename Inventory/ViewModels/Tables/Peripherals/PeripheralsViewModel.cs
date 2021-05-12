@@ -18,29 +18,7 @@
     {
         public PeripheralsViewModel() : base(Peripherals) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Peripheral> Peripherals { get; set; } = new();
-
-        private string _peripheralsFilter = string.Empty;
-
-        public string PeripheralsFilter
-        {
-            get => _peripheralsFilter;
-            set
-            {
-                _peripheralsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Peripheral peripheral)
-                        return peripheral.Search(PeripheralsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -69,7 +47,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddPeripheralCommand => new DelegateCommand(() =>
         {
             var addWindow = new PeripheralAddWindow();
@@ -97,8 +74,7 @@
         }, selectPeripheral => selectPeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             Peripherals.Clear();

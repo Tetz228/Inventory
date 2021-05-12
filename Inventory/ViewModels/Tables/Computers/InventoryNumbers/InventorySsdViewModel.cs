@@ -22,30 +22,7 @@
 
         public InventorySsdViewModel() : base(InventorySsd) => RefreshCollection();
 
-        #region Свойства
-        
         public static ObservableCollection<Inventory_numbers_ssd> InventorySsd { get; set; } = new();
-
-        private string _ssdFilter = string.Empty;
-
-        public string InventorySsdFilter
-        {
-            get => _ssdFilter;
-            set
-            {
-                _ssdFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Inventory_numbers_ssd ssd)
-                        return ssd.Search(InventorySsdFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -84,8 +61,6 @@
             }
         }
 
-        #region Команды
-
         public ICommand AddInventorySsdCommand => new DelegateCommand(() =>
         {
             var addSsdWindow = new InventorySsdAddWindow();
@@ -115,8 +90,6 @@
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        #endregion
 
         public static void RefreshCollection()
         {

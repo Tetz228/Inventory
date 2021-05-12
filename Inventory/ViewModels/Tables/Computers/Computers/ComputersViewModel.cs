@@ -20,30 +20,8 @@
     {
         public ComputersViewModel() : base(Computers) => RefreshCollection();
         
-        #region Свойства
-        
         public static ObservableCollection<Computer> Computers { get; set; } = new();
 
-        private string _computersFilter = string.Empty;
-
-        public string ComputersFilter
-        {
-            get => _computersFilter;
-            set
-            {
-                _computersFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Computer computer)
-                        return computer.Search(ComputersFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
-        
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -70,8 +48,6 @@
                 }
             }
         }
-
-        #region Команды
 
         public ICommand AddComputerCommand => new DelegateCommand(() =>
         {
@@ -100,8 +76,6 @@
         }, selectComputer => selectComputer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        #endregion
 
         public static void RefreshCollection()
         {

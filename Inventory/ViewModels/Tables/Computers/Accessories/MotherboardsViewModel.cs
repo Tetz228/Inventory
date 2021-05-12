@@ -19,30 +19,8 @@
     {
         public MotherboardsViewModel() : base(Motherboards) => RefreshCollection();
         
-        #region Свойства
-        
         public static ObservableCollection<Motherboard> Motherboards { get; set; } = new();
-
-        private string _motherboardsFilter = string.Empty;
-
-        public string MotherboardsFilter
-        {
-            get => _motherboardsFilter;
-            set
-            {
-                _motherboardsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Motherboard motherboard)
-                        return motherboard.Search(MotherboardsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
-
+       
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -70,9 +48,6 @@
             }
         }
         
-
-        #region Команды
-
         public ICommand AddMotherboardCommand => new DelegateCommand(() =>
         {
             var addHddWindow = new MotherboardAddWindow();
@@ -101,8 +76,6 @@
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         
-        #endregion
-
         public static void RefreshCollection()
         {
             Motherboards.Clear();

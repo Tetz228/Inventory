@@ -17,29 +17,7 @@
     {
         public TypesSddViewModel() : base(TypesSsd) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Types_ssd> TypesSsd { get; set; } = new();
-
-        private string _typesSsdFilter = string.Empty;
-
-        public string TypesSsdFilter
-        {
-            get => _typesSsdFilter;
-            set
-            {
-                _typesSsdFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Types_ssd typeSsd)
-                        return typeSsd.Search(TypesSsdFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -58,7 +36,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddTypeSsdCommand => new DelegateCommand(() =>
         {
             var addWindow = new TypeSsdAddWindow();
@@ -86,7 +63,6 @@
         }, selectTypeSsd => selectTypeSsd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
         private static void RefreshCollection()
         {

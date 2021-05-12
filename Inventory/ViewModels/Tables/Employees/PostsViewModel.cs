@@ -17,29 +17,7 @@
     {
         public PostsViewModel() : base(Posts) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Post> Posts { get; set; } = new();
-
-        private string _postsFilter = string.Empty;
-
-        public string PostsFilter
-        {
-            get => _postsFilter;
-            set
-            {
-                _postsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Post post)
-                        return post.Search(PostsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -58,7 +36,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddPostCommand => new DelegateCommand(() =>
         {
             var addPostWindow = new PostAddWindow();
@@ -86,8 +63,7 @@
         }, selectPost => selectPost != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+   
         private static void RefreshCollection()
         {
             Posts.Clear();

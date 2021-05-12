@@ -18,30 +18,8 @@
     {
         public UsersViewModel() : base(Users) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<User> Users { get; set; } = new();
-
-        private string _usersFilter = string.Empty;
-
-        public string UsersFilter
-        {
-            get => _usersFilter;
-            set
-            {
-                _usersFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is User user)
-                        return user.Search(UsersFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
-
+        
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -74,7 +52,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddUserCommand => new DelegateCommand(() =>
         {
             var addUserWindow = new UserAddWindow();
@@ -102,8 +79,6 @@
         }, selectUser => selectUser != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
         public static void RefreshCollection()
         {
             Users.Clear();

@@ -17,29 +17,7 @@
     {
         public TypesMemoryViewModel() : base(TypesMemory) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Types_memory> TypesMemory { get; set; } = new();
-
-        private string _typesMemoryFilter = string.Empty;
-
-        public string TypesMemoryFilter
-        {
-            get => _typesMemoryFilter;
-            set
-            {
-                _typesMemoryFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Types_memory typeMemory)
-                        return typeMemory.Search(TypesMemoryFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -58,8 +36,6 @@
             }
         }
 
-        #region Команды
-
         public ICommand AddTypeMemoryCommand => new DelegateCommand(() =>
         {
             var addWindow = new TypeMemoryAddWindow();
@@ -73,7 +49,6 @@
             editWindow.DataContext = editViewModel;
             editWindow.Closing += editViewModel.OnWindowClosing;
             editWindow.ShowDialog();
-
         }, typeSsd => typeSsd != null);
 
         public ICommand DeleteTypeMemoryCommand => new DelegateCommand<Types_memory>(selectTypeMemory =>
@@ -88,8 +63,6 @@
         }, selectTypeMemory => selectTypeMemory != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        #endregion
 
         private static void RefreshCollection()
         {

@@ -22,30 +22,7 @@
 
         public InventoryMotherboardsViewModel() : base(InventoryMotherboards) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Inventory_numbers_motherboards> InventoryMotherboards { get; set; } = new();
-
-        private string _inventoryMotherboardsFilter = string.Empty;
-
-        public string InventoryMotherboardsFilter
-        {
-            get => _inventoryMotherboardsFilter;
-            set
-            {
-                _inventoryMotherboardsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Inventory_numbers_motherboards inventoryMotherboard)
-                        return inventoryMotherboard.Search(InventoryMotherboardsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -79,8 +56,6 @@
             }
         }
 
-        #region Команды
-
         public ICommand AddInventoryMotherboardCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryMotherboardAddWindow();
@@ -111,8 +86,6 @@
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        #endregion
 
         public static void RefreshCollection()
         {

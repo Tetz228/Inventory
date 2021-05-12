@@ -17,29 +17,7 @@
     {
         public TypesPeripheralsViewModel() : base(TypesPeripherals) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Types_peripherals> TypesPeripherals { get; set; } = new();
-
-        private string _typesPeripheralsFilter = string.Empty;
-
-        public string TypesPeripheralsFilter
-        {
-            get => _typesPeripheralsFilter;
-            set
-            {
-                _typesPeripheralsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Types_peripherals typePeripheral)
-                        return typePeripheral.Search(TypesPeripheralsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -57,8 +35,6 @@
                 }
             }
         }
-
-        #region Команды
 
         public ICommand AddTypePeripheralCommand => new DelegateCommand(() =>
         {
@@ -87,8 +63,6 @@
         }, selectTypePeripheral => selectTypePeripheral != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        #endregion
 
         private static void RefreshCollection()
         {

@@ -22,29 +22,7 @@
 
         public InventoryRamViewModel() : base(InventoryRams) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Inventory_numbers_ram> InventoryRams { get; set; } = new();
-
-        private string _inventoryRamsFilter = string.Empty;
-
-        public string InventoryRamsFilter
-        {
-            get => _inventoryRamsFilter;
-            set
-            {
-                _inventoryRamsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Inventory_numbers_ram inventoryRam)
-                        return inventoryRam.Search(InventoryRamsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -88,8 +66,6 @@
             }
         }
 
-        #region Команды
-
         public ICommand AddInventoryRamCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryRamAddWindow();
@@ -119,8 +95,7 @@
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             InventoryRams.Clear();

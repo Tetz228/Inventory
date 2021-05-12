@@ -19,29 +19,7 @@
     {
         public GraphicsCardsViewModel() : base(GraphicsCards) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Graphics_cards> GraphicsCards { get; set; } = new();
-
-        private string _graphicsCardsFilter = string.Empty;
-
-        public string GraphicsCardsFilter
-        {
-            get => _graphicsCardsFilter;
-            set
-            {
-                _graphicsCardsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Graphics_cards graphicCard)
-                        return graphicCard.Search(GraphicsCardsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -70,7 +48,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddGraphicCardCommand => new DelegateCommand(() =>
         {
             var addHddWindow = new GraphicCardAddWindow();
@@ -98,7 +75,6 @@
         }, selectGraphicCard => selectGraphicCard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
         public static void RefreshCollection()
         {

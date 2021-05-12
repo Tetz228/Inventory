@@ -19,29 +19,7 @@
     {
         public SsdViewModel() : base(Ssds) => RefreshCollection();
         
-        #region Свойства
-        
         public static ObservableCollection<Ssd> Ssds { get; set; } = new();
-
-        private string _ssdsFilter = string.Empty;
-
-        public string SsdsFilter
-        {
-            get => _ssdsFilter;
-            set
-            {
-                _ssdsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Ssd ssd)
-                        return ssd.Search(SsdsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -75,8 +53,6 @@
             }
         }
         
-        #region Команды
-
         public ICommand AddSsdCommand => new DelegateCommand(() =>
         {
             var addSsdWindow = new SsdAddWindow();
@@ -104,8 +80,7 @@
         }, selectSsd => selectSsd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+     
         public static void RefreshCollection()
         {
             Ssds.Clear();

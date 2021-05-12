@@ -19,29 +19,7 @@
     {
         public DispensingPeripheralsViewModel() : base(DispensingPeripherals) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Dispensing_peripherals> DispensingPeripherals { get; set; } = new();
-
-        private string _dispensingFilter = string.Empty;
-
-        public string DispensingFilter
-        {
-            get => _dispensingFilter;
-            set
-            {
-                _dispensingFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Dispensing_peripherals dispensing)
-                        return dispensing.Search(DispensingFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -70,7 +48,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddDispensingPeripheralCommand => new DelegateCommand(() =>
         {
             var addWindow = new DispensingPeripheralAddWindow();
@@ -99,7 +76,6 @@
         }, selectDispensing => selectDispensing != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
         public static void RefreshCollection()
         {

@@ -19,29 +19,7 @@
     {
         public HddViewModel() : base(Hdd) => RefreshCollection();
         
-        #region Свойства
-
         public static ObservableCollection<Hdd> Hdd { get; set; } = new();
-
-        private string _hddFilter = string.Empty;
-
-        public string HddFilter
-        {
-            get => _hddFilter;
-            set
-            {
-                _hddFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Hdd hdd)
-                        return hdd.Search(HddFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -75,8 +53,6 @@
             }
         }
 
-        #region Команды
-
         public ICommand AddHddCommand => new DelegateCommand(() =>
         {
             var addHddWindow = new HddAddWindow();
@@ -104,9 +80,7 @@
         }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-       
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             Hdd.Clear();

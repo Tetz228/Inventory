@@ -22,29 +22,7 @@
 
         public InventoryPowerSuppliesViewModel() : base(InventoryPowerSupplies) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Inventory_numbers_power_supplies> InventoryPowerSupplies { get; set; } = new();
-
-        private string _inventoryPowerSuppliesFilter = string.Empty;
-
-        public string InventoryPowerSuppliesFilter
-        {
-            get => _inventoryPowerSuppliesFilter;
-            set
-            {
-                _inventoryPowerSuppliesFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Inventory_numbers_power_supplies inventoryPowerSupply)
-                        return inventoryPowerSupply.Search(InventoryPowerSuppliesFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -78,7 +56,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddInventoryPowerSupplyCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryPowerSupplyAddWindow();
@@ -108,8 +85,7 @@
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             InventoryPowerSupplies.Clear();

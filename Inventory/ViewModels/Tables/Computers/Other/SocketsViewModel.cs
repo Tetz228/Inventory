@@ -17,28 +17,7 @@
     {
         public SocketsViewModel() : base(Sockets) => RefreshCollection();
 
-        #region Свойства
         public static ObservableCollection<Socket> Sockets { get; set; } = new();
-
-        private string _socketsFilter = string.Empty;
-
-        public string SocketsFilter
-        {
-            get => _socketsFilter;
-            set
-            {
-                _socketsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Socket socket)
-                        return socket.Search(SocketsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -57,7 +36,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddSocketCommand => new DelegateCommand(() =>
         {
             var addPostWindow = new SocketAddWindow();
@@ -85,8 +63,7 @@
         }, selectSocket => selectSocket != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         private static void RefreshCollection()
         {
             Sockets.Clear();

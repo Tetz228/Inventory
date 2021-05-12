@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Data;
+    using Inventory.Services;
 
     public abstract class BaseViewModel<TClass> : BindableBase
     {
@@ -12,11 +13,33 @@
 
         #region Свойства
 
-        protected ICollectionView CollectionView { get; }
+        public ICollectionView CollectionView { get; }
 
         protected ListSortDirection SortDirection { get; set; }
 
         public TClass SelectObject { get; set; }
+
+        private string _filter = string.Empty;
+
+        public string Filter
+        {
+            get => _filter;
+            set
+            {
+                _filter = value;
+                CollectionView.Filter = obj =>
+                {
+                    if (obj is TClass @class)
+                    {
+                        dynamic o = @class;
+                        return SearchFor.Search(o, Filter);
+                    }
+
+                    return false;
+                };
+                CollectionView.Refresh();
+            }
+        }
 
         #endregion
 

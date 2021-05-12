@@ -22,30 +22,8 @@
 
         public InventoryGraphicsCardsViewModel() : base(InventoryGraphicsCards) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Inventory_numbers_graphics_cards> InventoryGraphicsCards { get; set; } = new();
-
-        private string _inventoryGraphicsCardsFilter = string.Empty;
-
-        public string InventoryGraphicsCardsFilter
-        {
-            get => _inventoryGraphicsCardsFilter;
-            set
-            {
-                _inventoryGraphicsCardsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Inventory_numbers_graphics_cards inventoryGraphicsCards)
-                        return inventoryGraphicsCards.Search(InventoryGraphicsCardsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
-
+        
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -78,7 +56,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddInventoryGraphicCardCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryGraphicCardAddWindow();
@@ -108,8 +85,7 @@
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             InventoryGraphicsCards.Clear();

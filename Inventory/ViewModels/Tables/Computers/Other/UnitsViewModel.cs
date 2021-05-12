@@ -17,29 +17,7 @@
     {
         public UnitsViewModel() : base(Units) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Unit> Units { get; set; } = new();
-
-        private string _unitsFilter = string.Empty;
-
-        public string UnitsFilter
-        {
-            get => _unitsFilter;
-            set
-            {
-                _unitsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Unit unit)
-                        return unit.Search(UnitsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -63,7 +41,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddUnitCommand => new DelegateCommand(() =>
         {
             var addWindow = new UnitAddWindow();
@@ -86,12 +63,11 @@
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            if(Services.Delete<Unit>(selectUnit.Id_unit))
+            if (Services.Delete<Unit>(selectUnit.Id_unit))
                 Units.Remove(selectUnit);
         }, selectUnit => selectUnit != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
         private static void RefreshCollection()
         {

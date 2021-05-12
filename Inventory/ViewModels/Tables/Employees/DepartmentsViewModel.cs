@@ -17,29 +17,7 @@
     {
         public DepartmentsViewModel() : base(Departments) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Department> Departments { get; set; } = new();
-
-        private string _departmentsFilter;
-
-        public string DepartmentsFilter
-        {
-            get => _departmentsFilter;
-            set
-            {
-                _departmentsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Department department)
-                        return department.Search(DepartmentsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -58,7 +36,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddDepartmentCommand => new DelegateCommand(() =>
         {
             var addDepartmentWindow = new DepartmentAddWindow();
@@ -86,7 +63,6 @@
         }, selectDepartment => selectDepartment != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
         private static void RefreshCollection()
         {

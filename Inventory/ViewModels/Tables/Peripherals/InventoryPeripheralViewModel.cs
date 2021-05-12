@@ -20,29 +20,8 @@
         private const string NAMED_AREA_NAME = "InventoryPeripherals";
 
         public InventoryPeripheralViewModel() : base(InventoryPeripherals) => RefreshCollection();
-        #region Свойства
-
+        
         public static ObservableCollection<Inventory_numbers_peripherals> InventoryPeripherals { get; set; } = new();
-
-        private string _inventoryPeripheralsFilter = string.Empty;
-
-        public string InventoryPeripheralsFilter
-        {
-            get => _inventoryPeripheralsFilter;
-            set
-            {
-                _inventoryPeripheralsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Inventory_numbers_peripherals inventoryPeripheral)
-                        return inventoryPeripheral.Search(InventoryPeripheralsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {

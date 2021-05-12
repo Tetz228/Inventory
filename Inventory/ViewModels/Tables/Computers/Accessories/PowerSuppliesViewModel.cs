@@ -19,29 +19,7 @@
     {
         public PowerSuppliesViewModel() : base(PowerSupplies) => RefreshCollection();
         
-        #region Свойства
-        
         public static ObservableCollection<Power_supplies> PowerSupplies { get; set; } = new();
-
-        private string _powerSuppliesFilter = string.Empty;
-
-        public string PowerSuppliesFilter
-        {
-            get => _powerSuppliesFilter;
-            set
-            {
-                _powerSuppliesFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Power_supplies powerSupply)
-                        return powerSupply.Search(PowerSuppliesFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -70,8 +48,6 @@
             }
         }
 
-        #region Команды
-
         public ICommand AddPowerSupplyCommand => new DelegateCommand(() =>
         {
             var addWindow = new PowerSupplyAddWindow();
@@ -99,8 +75,7 @@
         }, selectPowerSupply => selectPowerSupply != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             PowerSupplies.Clear();

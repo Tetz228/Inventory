@@ -19,30 +19,7 @@
     {
         public DispensingComputersViewModel() : base(DispensingComputers) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Dispensing_computers> DispensingComputers { get; set; } = new();
-
-        private string _dispensingFilter = string.Empty;
-
-        public string DispensingFilter
-        {
-            get => _dispensingFilter;
-            set
-            {
-                _dispensingFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Dispensing_computers dispensing)
-                        return dispensing.Search(DispensingFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -70,8 +47,6 @@
                 }
             }
         }
-
-        #region Команды
 
         public ICommand AddDispensingComputerCommand => new DelegateCommand(() =>
         {
@@ -103,8 +78,6 @@
         }, selectDispensing => selectDispensing != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        #endregion
 
         public static void RefreshCollection()
         {

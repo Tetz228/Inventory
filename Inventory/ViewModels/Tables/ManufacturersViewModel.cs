@@ -17,29 +17,7 @@
     {
         public ManufacturersViewModel() : base(Manufacturers) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Manufacturer> Manufacturers { get; set; } = new();
-
-        private string _manufacturersFilter = string.Empty;
-
-        public string ManufacturersFilter
-        {
-            get => _manufacturersFilter;
-            set
-            {
-                _manufacturersFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Manufacturer manufacturer)
-                        return manufacturer.Search(ManufacturersFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -59,7 +37,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddManufacturerCommand => new DelegateCommand(() =>
         {
             var addManufacturerWindow = new ManufacturerAddWindow();
@@ -87,8 +64,7 @@
         }, selectManufacturer => selectManufacturer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         private static void RefreshCollection()
         {
             Manufacturers.Clear();

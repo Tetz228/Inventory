@@ -136,7 +136,7 @@
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding UnitsFilter, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </Page>

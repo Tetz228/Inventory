@@ -22,30 +22,8 @@
 
         public InventoryHddViewModel() : base(InventoryHdd) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Inventory_numbers_hdd> InventoryHdd { get; set; } = new();
-
-        private string _inventoryHddFilter = string.Empty;
-
-        public string InventoryHddFilter
-        {
-            get => _inventoryHddFilter;
-            set
-            {
-                _inventoryHddFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Inventory_numbers_hdd inventoryHdd)
-                        return inventoryHdd.Search(InventoryHddFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
-
+     
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -83,7 +61,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddInventoryHddCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryHddAddWindow();
@@ -113,8 +90,7 @@
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+      
         public static void RefreshCollection()
         {
             InventoryHdd.Clear();

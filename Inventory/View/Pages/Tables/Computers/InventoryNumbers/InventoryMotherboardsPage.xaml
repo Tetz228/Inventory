@@ -33,6 +33,7 @@
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
+            
             <ListView.View>
                 <GridView>
                     <GridViewColumn
@@ -53,9 +54,11 @@
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                 </GridView>
             </ListView.View>
+           
             <ListView.ItemContainerStyle>
                 <StaticResource ResourceKey="BaseListViewItem" />
             </ListView.ItemContainerStyle>
+            
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="{Binding AddInventoryMotherboardCommand}" Header="Добавить" />
@@ -69,6 +72,7 @@
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
+            
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
                     <b:InvokeCommandAction Command="{Binding EditInventoryMotherboardCommand}" CommandParameter="{Binding SelectObject}" />
@@ -144,11 +148,11 @@
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding InventoryMotherboardsFilter, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
 
             <Button
                 Command="{Binding ExportExcelCommand}"
-                CommandParameter="{Binding InventoryMotherboardsCollection}"
+                CommandParameter="{Binding CollectionView}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon

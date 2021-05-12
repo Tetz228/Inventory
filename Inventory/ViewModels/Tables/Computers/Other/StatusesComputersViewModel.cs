@@ -17,30 +17,8 @@
     {
         public StatusesComputersViewModel() : base(StatusesComputers) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Statuses_computers> StatusesComputers { get; set; } = new();
-
-        private string _statusesComputersFilter = string.Empty;
-
-        public string StatusesComputersFilter
-        {
-            get => _statusesComputersFilter;
-            set
-            {
-                _statusesComputersFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Statuses_computers statusComputer)
-                        return statusComputer.Search(StatusesComputersFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
-
+        
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -58,7 +36,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddStatusComputerCommand => new DelegateCommand(() =>
         {
             var addWindow = new StatusComputerAddWindow();
@@ -86,8 +63,7 @@
         }, selectStatusComputer => selectStatusComputer != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+       
         private static void RefreshCollection()
         {
             StatusesComputers.Clear();

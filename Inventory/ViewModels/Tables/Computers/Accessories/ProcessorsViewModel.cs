@@ -19,30 +19,8 @@
     {
         public ProcessorsViewModel() : base(Processors) => RefreshCollection();
         
-        #region Свойства
-        
         public static ObservableCollection<Processor> Processors { get; set; } = new();
-
-        private string _processorsFilter = string.Empty;
-
-        public string ProcessorsFilter
-        {
-            get => _processorsFilter;
-            set
-            {
-                _processorsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Processor processor)
-                        return processor.Search(ProcessorsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
-
+        
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
@@ -80,8 +58,6 @@
             }
         }
 
-        #region Команды
-
         public ICommand AddProcessorCommand => new DelegateCommand(() =>
         {
             var addWindow = new ProcessorAddWindow();
@@ -109,8 +85,7 @@
         }, selectProcessor => selectProcessor != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             Processors.Clear();

@@ -22,30 +22,7 @@
 
         public InventoryProcessorsViewModel() : base(InventoryProcessors) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; set; } = new();
-
-        private string _inventoryProcessorsFilter = string.Empty;
-
-        public string InventoryProcessorsFilter
-        {
-            get => _inventoryProcessorsFilter;
-            set
-            {
-                _inventoryProcessorsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Inventory_numbers_processors inventoryProcessor)
-                        return inventoryProcessor.Search(InventoryProcessorsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -89,8 +66,6 @@
             }
         }
 
-        #region Команды
-
         public ICommand AddInventoryProcessorCommand => new DelegateCommand(() =>
         {
             var addWindow = new InventoryProcessorAddWindow();
@@ -120,8 +95,7 @@
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(NAME_TEMPLATE, NAMED_AREA_NAME));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             InventoryProcessors.Clear();

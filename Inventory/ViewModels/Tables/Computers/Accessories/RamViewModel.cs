@@ -18,30 +18,8 @@
     public class RamViewModel : BaseViewModel<Ram>
     {
         public RamViewModel() : base(Rams) => RefreshCollection();
-        
-        #region Свойства
-     
+
         public static ObservableCollection<Ram> Rams { get; set; } = new();
-
-        private string _ramsFilter = string.Empty;
-
-        public string RamsFilter
-        {
-            get => _ramsFilter;
-            set
-            {
-                _ramsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Ram ram)
-                        return ram.Search(RamsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -80,7 +58,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddRamCommand => new DelegateCommand(() =>
         {
             var addWindow = new RamAddWindow();
@@ -108,8 +85,7 @@
         }, selectRam => selectRam != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             Rams.Clear();

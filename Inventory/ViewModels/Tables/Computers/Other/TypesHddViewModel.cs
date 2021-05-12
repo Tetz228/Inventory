@@ -17,29 +17,7 @@
     {
         public TypesHddViewModel() : base(TypesHdd) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Types_hdd> TypesHdd { get; set; } = new();
-
-        private string _typesHddFilter = string.Empty;
-
-        public string TypesHddFilter
-        {
-            get => _typesHddFilter;
-            set
-            {
-                _typesHddFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Types_hdd typesHdd)
-                        return typesHdd.Search(TypesHddFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -58,7 +36,6 @@
             }
         }
 
-        #region Команды
         public ICommand AddTypeHddCommand => new DelegateCommand(() =>
         {
             var addWindow = new TypeHddAddWindow();
@@ -86,7 +63,6 @@
         }, selectTypeHdd => selectTypeHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
         private static void RefreshCollection()
         {

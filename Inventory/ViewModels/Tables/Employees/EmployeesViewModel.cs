@@ -19,30 +19,7 @@
     {
         public EmployeesViewModel() : base(Employees) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Employee> Employees { get; set; } = new();
-
-        private string _employeesFilter = string.Empty;
-
-        public string EmployeesFilter
-        {
-            get => _employeesFilter;
-            set
-            {
-                _employeesFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Employee employee)
-                        return employee.Search(EmployeesFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -80,8 +57,7 @@
                 }
             }
         }
-
-        #region Команды
+        
         public ICommand AddEmployeeCommand => new DelegateCommand(() =>
         {
             var addEmployeeWindow = new EmployeeAddWindow();
@@ -109,8 +85,7 @@
         }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             Employees.Clear();

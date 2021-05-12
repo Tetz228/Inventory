@@ -57,6 +57,7 @@
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ФИО" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
@@ -92,9 +93,11 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+
             <ListView.ItemContainerStyle>
                 <StaticResource ResourceKey="BaseListViewItem" />
             </ListView.ItemContainerStyle>
+
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="{Binding AddEmployeeCommand}" Header="Добавить" />
@@ -108,6 +111,7 @@
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
+
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
                     <b:InvokeCommandAction Command="{Binding EditEmployeeCommand}" CommandParameter="{Binding SelectObject}" />
@@ -187,7 +191,7 @@
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding EmployeesFilter, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </Page>

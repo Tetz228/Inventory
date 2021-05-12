@@ -17,29 +17,7 @@
     {
         public OperatingSystemsViewModel() : base(OperatingSystems) => RefreshCollection();
 
-        #region Свойства
-
         public static ObservableCollection<Operating_systems> OperatingSystems { get; set; } = new();
-
-        private string _operatingSystemsFilter = string.Empty;
-
-        public string OperatingSystemsFilter
-        {
-            get => _operatingSystemsFilter;
-            set
-            {
-                _operatingSystemsFilter = value;
-                CollectionView.Filter = obj =>
-                {
-                    if (obj is Operating_systems operatingSystem)
-                        return operatingSystem.Search(OperatingSystemsFilter);
-
-                    return false;
-                };
-                CollectionView.Refresh();
-            }
-        }
-        #endregion
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -62,8 +40,6 @@
                 }
             }
         }
-
-        #region Команды
 
         public ICommand AddOperatingSystemCommand => new DelegateCommand(() =>
         {
@@ -92,8 +68,6 @@
         }, selectOperatingSystem => selectOperatingSystem != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-
-        #endregion
 
         private static void RefreshCollection()
         {
