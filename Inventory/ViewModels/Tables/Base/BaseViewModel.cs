@@ -31,8 +31,8 @@
                 {
                     if (obj is TClass @class)
                     {
-                        dynamic o = @class;
-                        return SearchFor.Search(o, Filter);
+                        dynamic dynamicClass = @class;
+                        return SearchFor.Search(dynamicClass, Filter);
                     }
 
                     return false;
