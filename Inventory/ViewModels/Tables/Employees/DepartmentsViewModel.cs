@@ -15,7 +15,7 @@
 
     public class DepartmentsViewModel : BaseViewModel<Department>
     {
-        public DepartmentsViewModel() : base(Departments) => RefreshCollection();
+        public DepartmentsViewModel() : base(Departments, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Department> Departments { get; set; } = new();
 
@@ -61,8 +61,6 @@
             if (Services.Delete<Department>(selectDepartment.Id_department))
                 Departments.Remove(selectDepartment);
         }, selectDepartment => selectDepartment != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         private static void RefreshCollection()
         {

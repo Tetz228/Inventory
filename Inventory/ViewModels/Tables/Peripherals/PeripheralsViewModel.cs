@@ -16,7 +16,7 @@
 
     public class PeripheralsViewModel : BaseViewModel<Peripheral>
     {
-        public PeripheralsViewModel() : base(Peripherals) => RefreshCollection();
+        public PeripheralsViewModel() : base(Peripherals, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Peripheral> Peripherals { get; set; } = new();
 
@@ -73,8 +73,7 @@
                 Peripherals.Remove(selectPeripheral);
         }, selectPeripheral => selectPeripheral != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
+   
         public static void RefreshCollection()
         {
             Peripherals.Clear();

@@ -15,7 +15,7 @@
 
     public class TypesHddViewModel : BaseViewModel<Types_hdd>
     {
-        public TypesHddViewModel() : base(TypesHdd) => RefreshCollection();
+        public TypesHddViewModel() : base(TypesHdd, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Types_hdd> TypesHdd { get; set; } = new();
 
@@ -61,8 +61,6 @@
             if (Services.Delete<Types_hdd>(selectTypeHdd.Id_type_hdd))
                 TypesHdd.Remove(selectTypeHdd);
         }, selectTypeHdd => selectTypeHdd != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         private static void RefreshCollection()
         {

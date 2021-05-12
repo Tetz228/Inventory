@@ -17,7 +17,7 @@
 
     public class MotherboardsViewModel : BaseViewModel<Motherboard>
     {
-        public MotherboardsViewModel() : base(Motherboards) => RefreshCollection();
+        public MotherboardsViewModel() : base(Motherboards, RefreshCollection) => RefreshCollection();
         
         public static ObservableCollection<Motherboard> Motherboards { get; set; } = new();
        
@@ -74,8 +74,6 @@
                 Motherboards.Remove(selectMotherboard);
         }, selectMotherboard => selectMotherboard != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         public static void RefreshCollection()
         {
             Motherboards.Clear();

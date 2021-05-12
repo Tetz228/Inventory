@@ -15,7 +15,7 @@
 
     public class StatusesPeripheralsViewModel : BaseViewModel<Statuses_peripherals>
     {
-        public StatusesPeripheralsViewModel() : base(StatusesPeripherals) => RefreshCollection();
+        public StatusesPeripheralsViewModel() : base(StatusesPeripherals, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; set; } = new();
 
@@ -62,8 +62,6 @@
                 StatusesPeripherals.Remove(selectStatusPeripheral);
         }, selectStatusPeripheral => selectStatusPeripheral != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         private static void RefreshCollection()
         {
             StatusesPeripherals.Clear();

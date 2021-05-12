@@ -15,7 +15,7 @@
 
     public class TypesSddViewModel : BaseViewModel<Types_ssd>
     {
-        public TypesSddViewModel() : base(TypesSsd) => RefreshCollection();
+        public TypesSddViewModel() : base(TypesSsd, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Types_ssd> TypesSsd { get; set; } = new();
 
@@ -61,8 +61,6 @@
             if (Services.Delete<Types_ssd>(selectTypeSsd.Id_type_ssd))
                 TypesSsd.Remove(selectTypeSsd);
         }, selectTypeSsd => selectTypeSsd != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         private static void RefreshCollection()
         {

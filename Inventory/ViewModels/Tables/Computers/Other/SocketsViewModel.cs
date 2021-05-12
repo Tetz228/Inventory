@@ -15,7 +15,7 @@
 
     public class SocketsViewModel : BaseViewModel<Socket>
     {
-        public SocketsViewModel() : base(Sockets) => RefreshCollection();
+        public SocketsViewModel() : base(Sockets, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Socket> Sockets { get; set; } = new();
 
@@ -62,8 +62,6 @@
                 Sockets.Remove(selectSocket);
         }, selectSocket => selectSocket != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         private static void RefreshCollection()
         {
             Sockets.Clear();

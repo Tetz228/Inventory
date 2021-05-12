@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации оперативной памяти.xlsx";
         private const string NAMED_AREA_NAME = "InventoryRam";
       
-        public InventoryRamViewModel() : base(InventoryRams, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
+        public InventoryRamViewModel() : base(InventoryRams, RefreshCollection, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_ram> InventoryRams { get; set; } = new();
 
@@ -92,8 +92,6 @@
                 InventoryRams.Remove(selectInventoryRam);
         }, selectRam => selectRam != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         public static void RefreshCollection()
         {
             InventoryRams.Clear();

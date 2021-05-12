@@ -17,9 +17,9 @@
 
     public class SsdViewModel : BaseViewModel<Ssd>
     {
-        public SsdViewModel() : base(Ssds) => RefreshCollection();
+        public SsdViewModel() : base(Ssd, RefreshCollection) => RefreshCollection();
         
-        public static ObservableCollection<Ssd> Ssds { get; set; } = new();
+        public static ObservableCollection<Ssd> Ssd { get; set; } = new();
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -31,22 +31,22 @@
                 {
                     case "Производитель":
                         {
-                            Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
+                            Ssd.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Тип":
                         {
-                            Ssds.Sort(type => type.Types_ssd.Name, SortDirection);
+                            Ssd.Sort(type => type.Types_ssd.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            Ssds.Sort(ssd => ssd.Name, SortDirection);
+                            Ssd.Sort(ssd => ssd.Name, SortDirection);
                             break;
                         }
                     case "Объём":
                         {
-                            Ssds.Sort(ssd => ssd.Memory_size + " " + ssd.Unit.Short_name, SortDirection);
+                            Ssd.Sort(ssd => ssd.Memory_size + " " + ssd.Unit.Short_name, SortDirection);
                             break;
                         }
                 }
@@ -76,20 +76,18 @@
                 return;
 
             if(Services.Delete<Ssd>(selectSsd.Id_ssd))
-                Ssds.Remove(selectSsd);
+                Ssd.Remove(selectSsd);
         }, selectSsd => selectSsd != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-     
         public static void RefreshCollection()
         {
-            Ssds.Clear();
+            Ssd.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Ssds.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_ssd))
-                Ssds.Add(item);
+                Ssd.Add(item);
 
-            Ssds.Sort(manufacturer => manufacturer.Manufacturer.Name);
+            Ssd.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

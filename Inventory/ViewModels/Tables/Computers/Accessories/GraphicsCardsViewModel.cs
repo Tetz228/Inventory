@@ -17,7 +17,7 @@
 
     public class GraphicsCardsViewModel : BaseViewModel<Graphics_cards>
     {
-        public GraphicsCardsViewModel() : base(GraphicsCards) => RefreshCollection();
+        public GraphicsCardsViewModel() : base(GraphicsCards, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Graphics_cards> GraphicsCards { get; set; } = new();
 
@@ -73,8 +73,6 @@
             if(Services.Delete<Graphics_cards>(selectGraphicCard.Id_graphics_card))
                 GraphicsCards.Remove(selectGraphicCard);
         }, selectGraphicCard => selectGraphicCard != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         public static void RefreshCollection()
         {

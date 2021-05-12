@@ -15,7 +15,7 @@
 
     public class TypesPeripheralsViewModel : BaseViewModel<Types_peripherals>
     {
-        public TypesPeripheralsViewModel() : base(TypesPeripherals) => RefreshCollection();
+        public TypesPeripheralsViewModel() : base(TypesPeripherals, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Types_peripherals> TypesPeripherals { get; set; } = new();
 
@@ -61,8 +61,6 @@
             if(Services.Delete<Types_peripherals>(selectTypePeripheral.Id_type_peripheral))
                 TypesPeripherals.Remove(selectTypePeripheral);
         }, selectTypePeripheral => selectTypePeripheral != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         private static void RefreshCollection()
         {

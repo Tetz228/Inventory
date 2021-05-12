@@ -15,7 +15,7 @@
 
     public class ManufacturersViewModel : BaseViewModel<Manufacturer>
     {
-        public ManufacturersViewModel() : base(Manufacturers) => RefreshCollection();
+        public ManufacturersViewModel() : base(Manufacturers, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Manufacturer> Manufacturers { get; set; } = new();
 
@@ -63,8 +63,6 @@
                 Manufacturers.Remove(selectManufacturer);
         }, selectManufacturer => selectManufacturer != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         private static void RefreshCollection()
         {
             Manufacturers.Clear();

@@ -17,7 +17,7 @@
 
     public class PowerSuppliesViewModel : BaseViewModel<Power_supplies>
     {
-        public PowerSuppliesViewModel() : base(PowerSupplies) => RefreshCollection();
+        public PowerSuppliesViewModel() : base(PowerSupplies, RefreshCollection) => RefreshCollection();
         
         public static ObservableCollection<Power_supplies> PowerSupplies { get; set; } = new();
 
@@ -74,8 +74,6 @@
                 PowerSupplies.Remove(selectPowerSupply);
         }, selectPowerSupply => selectPowerSupply != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         public static void RefreshCollection()
         {
             PowerSupplies.Clear();

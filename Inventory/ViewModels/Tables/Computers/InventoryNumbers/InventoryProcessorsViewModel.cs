@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации процессоров.xlsx";
         private const string NAMED_AREA_NAME = "InventoryProcessors";
 
-        public InventoryProcessorsViewModel() : base(InventoryProcessors, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
+        public InventoryProcessorsViewModel() : base(InventoryProcessors, RefreshCollection, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; set; } = new();
 
@@ -92,8 +92,6 @@
                 InventoryProcessors.Remove(selectInventoryProcessor);
         }, selectInventoryProcessor => selectInventoryProcessor != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         public static void RefreshCollection()
         {
             InventoryProcessors.Clear();

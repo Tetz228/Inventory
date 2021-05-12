@@ -29,7 +29,7 @@
 
         <ListView
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
-            ItemsSource="{Binding Ssds, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Ssd, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
             SelectedItem="{Binding SelectObject}"
             SelectionMode="Single"

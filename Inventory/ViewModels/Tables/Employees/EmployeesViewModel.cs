@@ -17,7 +17,7 @@
 
     public class EmployeesViewModel : BaseViewModel<Employee>
     {
-        public EmployeesViewModel() : base(Employees) => RefreshCollection();
+        public EmployeesViewModel() : base(Employees, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Employee> Employees { get; set; } = new();
 
@@ -84,8 +84,6 @@
                 Employees.Remove(selectEmployee);
         }, selectHdd => selectHdd != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         public static void RefreshCollection()
         {
             Employees.Clear();

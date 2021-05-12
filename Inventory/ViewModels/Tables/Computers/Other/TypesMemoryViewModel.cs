@@ -15,7 +15,7 @@
 
     public class TypesMemoryViewModel : BaseViewModel<Types_memory>
     {
-        public TypesMemoryViewModel() : base(TypesMemory) => RefreshCollection();
+        public TypesMemoryViewModel() : base(TypesMemory, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Types_memory> TypesMemory { get; set; } = new();
 
@@ -61,8 +61,6 @@
             if (Services.Delete<Types_memory>(selectTypeMemory.Id_type_memory))
                 TypesMemory.Remove(selectTypeMemory);
         }, selectTypeMemory => selectTypeMemory != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         private static void RefreshCollection()
         {

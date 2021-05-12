@@ -17,7 +17,7 @@
 
     public class DispensingComputersViewModel : BaseViewModel<Dispensing_computers>
     {
-        public DispensingComputersViewModel() : base(DispensingComputers) => RefreshCollection();
+        public DispensingComputersViewModel() : base(DispensingComputers, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Dispensing_computers> DispensingComputers { get; set; } = new();
 
@@ -76,8 +76,6 @@
             if (Services.Delete<Dispensing_computers>(selectDispensing.Id_dispensing_computer))
                 DispensingComputers.Remove(selectDispensing);
         }, selectDispensing => selectDispensing != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         public static void RefreshCollection()
         {

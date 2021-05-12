@@ -19,7 +19,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации периферии.xlsx";
         private const string NAMED_AREA_NAME = "InventoryPeripherals";
 
-        public InventoryPeripheralViewModel() : base(InventoryPeripherals, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
+        public InventoryPeripheralViewModel() : base(InventoryPeripherals, RefreshCollection, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
         
         public static ObservableCollection<Inventory_numbers_peripherals> InventoryPeripherals { get; set; } = new();
 

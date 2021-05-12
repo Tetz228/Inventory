@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации жестких дисков.xlsx";
         private const string NAMED_AREA_NAME = "InventoryHdd";
 
-        public InventoryHddViewModel() : base(InventoryHdd, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
+        public InventoryHddViewModel() : base(InventoryHdd, RefreshCollection, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_hdd> InventoryHdd { get; set; } = new();
      
@@ -87,8 +87,6 @@
                 InventoryHdd.Remove(selectInventoryHdd);
         }, selectInventoryHdd => selectInventoryHdd != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-      
         public static void RefreshCollection()
         {
             InventoryHdd.Clear();

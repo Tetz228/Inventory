@@ -17,7 +17,7 @@
 
     public class ProcessorsViewModel : BaseViewModel<Processor>
     {
-        public ProcessorsViewModel() : base(Processors) => RefreshCollection();
+        public ProcessorsViewModel() : base(Processors, RefreshCollection) => RefreshCollection();
         
         public static ObservableCollection<Processor> Processors { get; set; } = new();
         
@@ -84,8 +84,6 @@
                 Processors.Remove(selectProcessor);
         }, selectProcessor => selectProcessor != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         public static void RefreshCollection()
         {
             Processors.Clear();

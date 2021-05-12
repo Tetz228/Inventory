@@ -15,7 +15,7 @@
 
     public class PostsViewModel : BaseViewModel<Post>
     {
-        public PostsViewModel() : base(Posts) => RefreshCollection();
+        public PostsViewModel() : base(Posts, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Post> Posts { get; set; } = new();
 
@@ -62,8 +62,6 @@
                 Posts.Remove(selectPost);
         }, selectPost => selectPost != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-   
         private static void RefreshCollection()
         {
             Posts.Clear();

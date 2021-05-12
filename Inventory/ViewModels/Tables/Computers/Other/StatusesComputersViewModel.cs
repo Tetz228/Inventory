@@ -15,7 +15,7 @@
 
     public class StatusesComputersViewModel : BaseViewModel<Statuses_computers>
     {
-        public StatusesComputersViewModel() : base(StatusesComputers) => RefreshCollection();
+        public StatusesComputersViewModel() : base(StatusesComputers, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Statuses_computers> StatusesComputers { get; set; } = new();
         
@@ -62,8 +62,6 @@
                 StatusesComputers.Remove(selectStatusComputer);
         }, selectStatusComputer => selectStatusComputer != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-       
         private static void RefreshCollection()
         {
             StatusesComputers.Clear();

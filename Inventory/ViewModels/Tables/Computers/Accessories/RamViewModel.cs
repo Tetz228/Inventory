@@ -17,9 +17,9 @@
 
     public class RamViewModel : BaseViewModel<Ram>
     {
-        public RamViewModel() : base(Rams) => RefreshCollection();
+        public RamViewModel() : base(Ram, RefreshCollection) => RefreshCollection();
 
-        public static ObservableCollection<Ram> Rams { get; set; } = new();
+        public static ObservableCollection<Ram> Ram { get; set; } = new();
 
         public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
@@ -31,27 +31,27 @@
                 {
                     case "Производитель":
                         {
-                            Rams.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
+                            Ram.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            Rams.Sort(ram => ram.Name, SortDirection);
+                            Ram.Sort(ram => ram.Name, SortDirection);
                             break;
                         }
                     case "Объём":
                         {
-                            Rams.Sort(memory => memory.Memory_size + " " + memory.Unit.Short_name, SortDirection);
+                            Ram.Sort(memory => memory.Memory_size + " " + memory.Unit.Short_name, SortDirection);
                             break;
                         }
                     case "Тактовая частота":
                         {
-                            Rams.Sort(clock => clock.Clock_frequency, SortDirection);
+                            Ram.Sort(clock => clock.Clock_frequency, SortDirection);
                             break;
                         }
                     case "Тип памяти":
                         {
-                            Rams.Sort(type => type.Types_memory.Name, SortDirection);
+                            Ram.Sort(type => type.Types_memory.Name, SortDirection);
                             break;
                         }
                 }
@@ -81,20 +81,18 @@
                 return;
 
             if(Services.Delete<Ram>(selectRam.Id_ram))
-                Rams.Remove(selectRam);
+                Ram.Remove(selectRam);
         }, selectRam => selectRam != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         public static void RefreshCollection()
         {
-            Rams.Clear();
+            Ram.Clear();
             using var db = new InventoryEntities();
 
             foreach (var item in db.Rams.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(unit => unit.Unit).Include(type => type.Types_memory))
-                Rams.Add(item);
+                Ram.Add(item);
 
-            Rams.Sort(manufacturer => manufacturer.Manufacturer.Name);
+            Ram.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

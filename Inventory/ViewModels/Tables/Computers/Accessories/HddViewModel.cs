@@ -17,7 +17,7 @@
 
     public class HddViewModel : BaseViewModel<Hdd>
     {
-        public HddViewModel() : base(Hdd) => RefreshCollection();
+        public HddViewModel() : base(Hdd, RefreshCollection) => RefreshCollection();
         
         public static ObservableCollection<Hdd> Hdd { get; set; } = new();
 
@@ -79,8 +79,6 @@
                 Hdd.Remove(selectHdd);
         }, selectHdd => selectHdd != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        
         public static void RefreshCollection()
         {
             Hdd.Clear();

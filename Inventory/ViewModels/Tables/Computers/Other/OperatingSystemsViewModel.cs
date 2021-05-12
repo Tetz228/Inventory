@@ -15,7 +15,7 @@
 
     public class OperatingSystemsViewModel : BaseViewModel<Operating_systems>
     {
-        public OperatingSystemsViewModel() : base(OperatingSystems) => RefreshCollection();
+        public OperatingSystemsViewModel() : base(OperatingSystems, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Operating_systems> OperatingSystems { get; set; } = new();
 
@@ -66,8 +66,6 @@
             Services.Delete<Operating_systems>(selectOperatingSystem.Id_operating_system);
             OperatingSystems.Remove(selectOperatingSystem);
         }, selectOperatingSystem => selectOperatingSystem != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         private static void RefreshCollection()
         {

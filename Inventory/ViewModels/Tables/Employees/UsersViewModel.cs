@@ -16,7 +16,7 @@
 
     public class UsersViewModel : BaseViewModel<User>
     {
-        public UsersViewModel() : base(Users) => RefreshCollection();
+        public UsersViewModel() : base(Users, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<User> Users { get; set; } = new();
         
@@ -78,7 +78,6 @@
                 Users.Remove(selectUser);
         }, selectUser => selectUser != null);
 
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
         public static void RefreshCollection()
         {
             Users.Clear();

@@ -20,7 +20,7 @@
         private const string NAME_TEMPLATE = "Шаблон для инвентаризации SSD-накопителей.xlsx";
         private const string NAMED_AREA_NAME = "InventorySsd";
 
-        public InventorySsdViewModel() : base(InventorySsd, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
+        public InventorySsdViewModel() : base(InventorySsd, RefreshCollection, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
 
         public static ObservableCollection<Inventory_numbers_ssd> InventorySsd { get; set; } = new();
 
@@ -86,8 +86,6 @@
             if(Services.Delete<Inventory_numbers_ssd>(selectInventorySsd.Id_inventory_number_ssd))
                 InventorySsd.Remove(selectInventorySsd);
         }, selectInventorySsd => selectInventorySsd != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         public static void RefreshCollection()
         {

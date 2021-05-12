@@ -15,7 +15,7 @@
 
     public class UnitsViewModel : BaseViewModel<Unit>
     {
-        public UnitsViewModel() : base(Units) => RefreshCollection();
+        public UnitsViewModel() : base(Units, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Unit> Units { get; set; } = new();
 
@@ -66,8 +66,6 @@
             if (Services.Delete<Unit>(selectUnit.Id_unit))
                 Units.Remove(selectUnit);
         }, selectUnit => selectUnit != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         private static void RefreshCollection()
         {

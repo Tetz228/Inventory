@@ -17,7 +17,7 @@
 
     public class DispensingPeripheralsViewModel : BaseViewModel<Dispensing_peripherals>
     {
-        public DispensingPeripheralsViewModel() : base(DispensingPeripherals) => RefreshCollection();
+        public DispensingPeripheralsViewModel() : base(DispensingPeripherals, RefreshCollection) => RefreshCollection();
 
         public static ObservableCollection<Dispensing_peripherals> DispensingPeripherals { get; set; } = new();
 
@@ -74,8 +74,6 @@
             if (Services.Delete<Dispensing_peripherals>(selectDispensing.Id_dispensing_peripheral))
                 DispensingPeripherals.Remove(selectDispensing);
         }, selectDispensing => selectDispensing != null);
-
-        public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
 
         public static void RefreshCollection()
         {
