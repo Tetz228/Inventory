@@ -2,12 +2,13 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables.Peripherals;
     using System.Collections.ObjectModel;
+    using System.Data.Entity;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Peripherals;
 
     public class InventoryPeripheralAddViewModel : BindableBase
     {
@@ -15,27 +16,33 @@
         {
             using var db = new InventoryEntities();
 
-            InventoryNumberPeripheral = new Inventory_numbers_peripherals();
-            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals);
-            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals);
-            InventoryNumberPeripheral.Inventory_number = Inventory_numbers_peripherals.MaxInventoryNumber();
+            Peripherals = new ObservableCollection<Peripheral>(db.Peripherals.AsNoTracking()
+                .Include(manufacturer => manufacturer.Manufacturer)
+                .Include(type => type.Types_peripherals))
+                .Sort(manufact => manufact.Manufacturer.Name);
+            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking()).Sort(status => status.Name);
+
+            try
+            {
+                InventoryPeripheral.Inventory_number = db.Inventory_numbers_peripherals.Select(peripherals => peripherals.Inventory_number).Max() + 1;
+            }
+            catch
+            {
+                InventoryPeripheral.Inventory_number = 1;
+            }
         }
 
-        public Inventory_numbers_peripherals InventoryNumberPeripheral { get; }
+        public Inventory_numbers_peripherals InventoryPeripheral { get; } = new();
 
         public ObservableCollection<Peripheral> Peripherals { get; }
 
         public ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; }
-
-        #region Команды
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(InventoryNumberPeripheral);
-            InventoryPeripheralsViewModel.RefreshCollection();
+            Services.Add(InventoryPeripheral);
+            InventoryPeripheralViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => InventoryNumberPeripheral.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(InventoryPeripheral.ErrorCollection));
     }
 }

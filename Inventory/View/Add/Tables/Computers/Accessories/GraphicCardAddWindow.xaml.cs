@@ -4,10 +4,6 @@
 
     public partial class GraphicCardAddWindow : Window
     {
-        public GraphicCardAddWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public GraphicCardAddWindow() => InitializeComponent();
     }
 }

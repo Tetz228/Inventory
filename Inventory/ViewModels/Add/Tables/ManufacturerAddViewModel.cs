@@ -2,30 +2,20 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables;
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables;
-
     public class ManufacturerAddViewModel : BindableBase
     {
-        public ManufacturerAddViewModel()
-        {
-            Manufacturer = new Manufacturer();
-        }
+        public Manufacturer Manufacturer { get; } = new();
 
-        public Manufacturer Manufacturer { get; }
-
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Manufacturer);
-            ManufacturersViewModel.RefreshCollection();
+            if(Services.Add(Manufacturer))
+                ManufacturersViewModel.Manufacturers.Add(Manufacturer);
             addWindow.Close();
-        }, _ => Manufacturer.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(Manufacturer.ErrorCollection));
     }
 }

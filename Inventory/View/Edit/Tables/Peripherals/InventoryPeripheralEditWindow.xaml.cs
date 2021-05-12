@@ -4,10 +4,6 @@
 
     public partial class InventoryPeripheralEditWindow : Window
     {
-        public InventoryPeripheralEditWindow()
-        {
-            InitializeComponent();
-            TextBoxInventoryNumber.Focus();
-        }
+        public InventoryPeripheralEditWindow() => InitializeComponent();
     }
 }

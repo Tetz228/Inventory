@@ -7,21 +7,21 @@
     Name="EditEmployeeWindow"
     Title="Изменить сотрудника"
     Width="500"
-    Height="465"
+    Height="530"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <ScrollViewer>
             <StackPanel Margin="10">
                 <TextBlock
-                    Style="{StaticResource BaseText}"
+                    Style="{StaticResource BaseTextBlock}"
                     Text="Изменить сотрудника"
                     TextAlignment="Center" />
-                <Grid>
-                    <Border Background="#FFAEAEAE" CornerRadius="5">
+                <Grid Background="#FF2BA8E2">
+                    <Border Style="{StaticResource BaseBorder}">
                         <Border.OpacityMask>
                             <VisualBrush>
                                 <VisualBrush.Visual>
@@ -38,10 +38,9 @@
                         <StackPanel Width="455" HorizontalAlignment="Center">
                             <!--  Фамилия  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Фамилия: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Фамилия: " />
 
                                 <TextBox
-                                    Name="TextBoxName"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding Employee.L_name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{Binding Employee.ErrorCollection[L_name], UpdateSourceTrigger=PropertyChanged}" />
@@ -49,7 +48,7 @@
 
                             <!--  Имя  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Имя: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Имя: " />
 
                                 <TextBox
                                     Style="{StaticResource BaseTextBox}"
@@ -59,7 +58,7 @@
 
                             <!--  Отчество  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Отчество: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Отчество: " />
 
                                 <TextBox
                                     Style="{StaticResource BaseTextBox}"
@@ -69,7 +68,7 @@
 
                             <!--  Номер телефона  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Номер телефона: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Номер телефона: " />
 
                                 <TextBox
                                     MaxLength="20"
@@ -80,7 +79,7 @@
 
                             <!--  Email  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Email: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Email: " />
 
                                 <TextBox
                                     MaxLength="70"
@@ -91,13 +90,13 @@
 
                             <!--  Должности  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Должности: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Должности: " />
 
                                 <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding Employee.PostsEmployees}">
+                                    <ItemsControl ItemsSource="{Binding Employee.Posts_employees}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid>
+                                                <Grid Background="#98c9e3">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4*" />
                                                         <ColumnDefinition Width="1*" />
@@ -107,7 +106,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         DisplayMemberPath="Name"
-                                                        ItemsSource="{Binding CollectionPosts}"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Posts}"
                                                         SelectedValue="{Binding Fk_post}"
                                                         SelectedValuePath="Id_post"
                                                         Style="{StaticResource BaseComboBox}" />
@@ -136,13 +135,13 @@
 
                             <!--  Отделы  -->
                             <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseText}" Text="Отделы: " />
+                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Отделы: " />
 
                                 <StackPanel Margin="10">
-                                    <ItemsControl ItemsSource="{Binding Employee.EmployeesInDepartments}">
+                                    <ItemsControl ItemsSource="{Binding Employee.Employees_in_departments}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid>
+                                                <Grid Background="#98c9e3">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4*" />
                                                         <ColumnDefinition Width="1*" />
@@ -152,7 +151,7 @@
                                                         Width="156"
                                                         MaxWidth="156"
                                                         DisplayMemberPath="Name"
-                                                        ItemsSource="{Binding CollectionDepartments}"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Departments}"
                                                         SelectedValue="{Binding Fk_department}"
                                                         SelectedValuePath="Id_department"
                                                         Style="{StaticResource BaseComboBox}" />
@@ -197,8 +196,6 @@
                     <Button
                         Margin="5,10,5,5"
                         HorizontalAlignment="Right"
-                        Command="{Binding CancelCommand}"
-                        CommandParameter="{Binding ElementName=EditEmployeeWindow}"
                         IsCancel="True"
                         Style="{StaticResource BaseButton}" />
                 </StackPanel>

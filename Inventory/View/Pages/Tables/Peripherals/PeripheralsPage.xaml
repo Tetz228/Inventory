@@ -16,14 +16,7 @@
         <peripherals:PeripheralsViewModel />
     </Page.DataContext>
 
-    <Page.Resources>
-        <Style BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="FontFamily" Value="Verdana" />
-            <Setter Property="FontSize" Value="15" />
-        </Style>
-    </Page.Resources>
-
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="121*" />
             <ColumnDefinition Width="279*" />
@@ -38,17 +31,18 @@
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding Peripherals, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
-            SelectedItem="{Binding SelectPeripheral}"
+            SelectedItem="{Binding SelectObject}"
             Style="{StaticResource BaseListView}">
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        DisplayMemberBinding="{Binding Types_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Тип"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
                         DisplayMemberBinding="{Binding Manufacturer.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Производитель"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Types_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Тип"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
@@ -56,29 +50,28 @@
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                 </GridView>
             </ListView.View>
+
             <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="FontFamily" Value="Verdana" />
-                    <Setter Property="FontSize" Value="14" />
-                    <Setter Property="Foreground" Value="Black" />
-                </Style>
+                <StaticResource ResourceKey="BaseListViewItem" />
             </ListView.ItemContainerStyle>
+
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="{Binding AddPeripheralCommand}" Header="Добавить" />
                     <MenuItem
                         Command="{Binding EditPeripheralCommand}"
-                        CommandParameter="{Binding SelectPeripheral}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Изменить" />
                     <MenuItem
                         Command="{Binding DeletePeripheralCommand}"
-                        CommandParameter="{Binding SelectPeripheral}"
+                        CommandParameter="{Binding SelectObject}"
                         Header="Удалить" />
                 </ContextMenu>
             </ListView.ContextMenu>
+
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseDoubleClick">
-                    <b:InvokeCommandAction Command="{Binding EditPeripheralCommand}" CommandParameter="{Binding SelectPeripheral}" />
+                    <b:InvokeCommandAction Command="{Binding EditPeripheralCommand}" CommandParameter="{Binding SelectObject}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </ListView>
@@ -98,7 +91,7 @@
             <!--  Изменить  -->
             <Button
                 Command="{Binding EditPeripheralCommand}"
-                CommandParameter="{Binding SelectPeripheral}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -112,7 +105,7 @@
             <!--  Удалить  -->
             <Button
                 Command="{Binding DeletePeripheralCommand}"
-                CommandParameter="{Binding SelectPeripheral}"
+                CommandParameter="{Binding SelectObject}"
                 Style="{StaticResource BaseButton}">
                 <ContentControl>
                     <materialDesign:PackIcon
@@ -143,16 +136,15 @@
             <TextBlock
                 Margin="5"
                 HorizontalAlignment="Right"
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Поиск:" />
 
             <TextBox
                 Width="300"
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
-                BorderThickness="1"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding PeripheralsFilter, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </Page>

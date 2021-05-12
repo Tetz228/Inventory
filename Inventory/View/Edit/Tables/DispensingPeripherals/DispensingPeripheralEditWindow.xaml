@@ -1,0 +1,268 @@
+﻿<Window
+    x:Class="Inventory.View.Edit.Tables.DispensingPeripherals.DispensingPeripheralEditWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="EditWindow"
+    Title="Изменение выдачи периферии"
+    Width="850"
+    Height="500"
+    MinWidth="850"
+    MinHeight="500"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ThreeDBorderWindow"
+    mc:Ignorable="d">
+
+    <Grid Background="#FF2BA8E2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="203*" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="203*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37" />
+            <RowDefinition Height="38" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="5,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <TextBlock
+                Width="68"
+                Height="22"
+                Margin="0"
+                Style="{StaticResource BaseTextBlock}"
+                Text="Выдать:" />
+
+            <ComboBox
+                Width="208"
+                Height="22"
+                MaxWidth="208"
+                ItemsSource="{Binding Employees}"
+                SelectedValue="{Binding DispensingPeripherals.Fk_employee, UpdateSourceTrigger=PropertyChanged}"
+                SelectedValuePath="Id_employee"
+                Style="{StaticResource BaseComboBox}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="ФИО: {0} {1} {2};&#xA;Телефон: {3};&#xA;Почта: {4}.">
+                                    <Binding Path="L_name" />
+                                    <Binding Path="F_name" />
+                                    <Binding Path="M_name" />
+                                    <Binding Path="Phone_number" />
+                                    <Binding Path="Email" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="254"
+            Height="18"
+            Margin="74,0,58,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Style="{StaticResource BaseTextBlock}"
+            Text="Список выдаваемой периферии" />
+
+        <ListView
+            Grid.Row="2"
+            Grid.ColumnSpan="1"
+            GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
+            ItemsSource="{Binding ListDispensedPeripherals, UpdateSourceTrigger=PropertyChanged}"
+            MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDownListDispensing(@sender, @args)'}"
+            SelectedItem="{Binding SelectListPeripheral}"
+            Style="{StaticResource BaseListView}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Inventory_number, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Инвентарный номер"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Peripheral.Manufacturer.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Производитель"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Peripheral.Types_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Тип"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Peripheral.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Наименование"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Statuses_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Статус"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <StaticResource ResourceKey="BaseListViewItem" />
+            </ListView.ItemContainerStyle>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Command="{Binding TransferInListInventoryPeripheralCommand}"
+                        CommandParameter="{Binding SelectListPeripheral}"
+                        Header="Удалить" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding TransferInListInventoryPeripheralCommand}" CommandParameter="{Binding SelectListPeripheral}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </ListView>
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            Height="84"
+            Margin="0,136,0,135"
+            VerticalAlignment="Center">
+            <Button
+                Command="{Binding TransferInListDispensingCommand}"
+                CommandParameter="{Binding SelectInventoryPeripheral}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="Lime"
+                        Kind="ArrowBack" />
+                </ContentControl>
+            </Button>
+            <Button
+                Command="{Binding TransferInListInventoryPeripheralCommand}"
+                CommandParameter="{Binding SelectListPeripheral}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="Red"
+                        Kind="ArrowRight" />
+                </ContentControl>
+            </Button>
+        </StackPanel>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="254"
+            Height="18"
+            Margin="76,0,60,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Style="{StaticResource BaseTextBlock}"
+            Text="Список имеющейся периферии" />
+
+        <ListView
+            Grid.Row="2"
+            Grid.Column="2"
+            Grid.ColumnSpan="1"
+            GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
+            ItemsSource="{Binding Peripherals, UpdateSourceTrigger=PropertyChanged}"
+            MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDownListPeripherals(@sender, @args)'}"
+            SelectedItem="{Binding SelectInventoryPeripheral}"
+            Style="{StaticResource BaseListView}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Inventory_number, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Инвентарный номер"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Peripheral.Manufacturer.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Производитель"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Peripheral.Types_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Тип"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Peripheral.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Наименование"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Statuses_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
+                        Header="Статус"
+                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <StaticResource ResourceKey="BaseListViewItem" />
+            </ListView.ItemContainerStyle>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Command="{Binding TransferInListDispensingCommand}"
+                        CommandParameter="{Binding SelectInventoryPeripheral}"
+                        Header="Добавить" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding TransferInListDispensingCommand}" CommandParameter="{Binding SelectInventoryPeripheral}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </ListView>
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Width="207"
+            Height="33"
+            Margin="0,0,0,5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Orientation="Vertical">
+            <!--  Изменить выдачу  -->
+            <Button
+                Height="27"
+                Margin="6,6,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Command="{Binding EditCommand}"
+                CommandParameter="{Binding ElementName=EditWindow}"
+                Content="Изменить выдачу"
+                IsDefault="True"
+                Style="{StaticResource BaseButton}" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="2"
+            Width="94"
+            Height="33"
+            Margin="0,0,0,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <!--  Отменить  -->
+            <Button
+                Height="27"
+                Margin="6,6,6,0"
+                VerticalAlignment="Top"
+                IsCancel="True"
+                Style="{StaticResource BaseButton}" />
+        </StackPanel>
+    </Grid>
+</Window>

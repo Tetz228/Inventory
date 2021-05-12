@@ -1,27 +1,21 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-
-    using DevExpress.Mvvm;
 
     public partial class Hdd : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Hdd()
-        {
-            Inventory_numbers_hdd = new HashSet<Inventory_numbers_hdd>();
-        }
-    
+        public Hdd() => Inventory_numbers_hdd = new HashSet<Inventory_numbers_hdd>();
+
         public int Id_hdd { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
         public double Memory_size { get; set; }
         public int Fk_unit { get; set; }
         public int Fk_type_hdd { get; set; }
-    
+
         public virtual Manufacturer Manufacturer { get; set; }
         public virtual Types_hdd Types_hdd { get; set; }
         public virtual Unit Unit { get; set; }
@@ -48,7 +42,7 @@ namespace Inventory.Model
                         break;
                     case "Memory_size":
                         if (Memory_size <= 0)
-                            result = "Поле должно быть больше 0";
+                            result = "Число должно быть больше 0";
                         break;
                 }
 
@@ -61,13 +55,6 @@ namespace Inventory.Model
         }
 
         public string Error { get => null; }
-
-        public bool IsValidationProperties() => ErrorCollection.Count == 0
-                                                || ErrorCollection.Any(item => item.Value == null)
-                                                && Fk_manufacturer != 0
-                                                && Fk_unit != 0
-                                                && Fk_type_hdd != 0;
-
         #endregion
     }
 }

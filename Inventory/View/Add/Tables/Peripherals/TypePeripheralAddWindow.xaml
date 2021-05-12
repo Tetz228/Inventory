@@ -18,15 +18,15 @@
         <peripherals:TypePeripheralAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="010">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новый тип периферии"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -43,7 +43,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Наименование типа  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование типа: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование типа: " />
 
                             <TextBox
                                 Name="TextBoxName"
@@ -71,8 +71,6 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=AddTypePeripheralWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>

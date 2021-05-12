@@ -2,11 +2,8 @@
     x:Class="Inventory.View.Add.Tables.Computers.Other.SocketAddWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:computers="clr-namespace:Inventory.ViewModels.Add.Tables.Computers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Inventory.View.Add.Tables.Peripherals"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:peripherals="clr-namespace:Inventory.ViewModels.Add.Tables.Peripherals"
     xmlns:other="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Other"
     x:Name="AddSocketWindow"
     Title="Добавить новый сокет"
@@ -21,15 +18,15 @@
         <other:SocketAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новый сокет"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -46,7 +43,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Наименование сокета  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование сокета: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование сокета: " />
 
                             <TextBox
                                 Name="TextBoxName"
@@ -74,8 +71,6 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=AddSocketWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>

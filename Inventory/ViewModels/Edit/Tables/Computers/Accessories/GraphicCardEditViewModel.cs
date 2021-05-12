@@ -2,7 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -15,8 +15,8 @@
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
 
             GraphicCard = graphicCard;
             BeginEdit();
@@ -29,29 +29,21 @@
         public ObservableCollection<Unit> Units { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
-
-        #region Команды
+        
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(GraphicCard.Id_graphics_card, GraphicCard);
             GraphicsCardsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => GraphicCard.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
+        }, _ => Services.IsValidationProperties(GraphicCard.ErrorCollection));
 
         #region Откат изменений
         private Graphics_cards _selectGraphicCard;
 
         public void BeginEdit()
         {
-            _selectGraphicCard = new Graphics_cards()
+            _selectGraphicCard = new Graphics_cards
             {
                 Id_graphics_card = GraphicCard.Id_graphics_card,
                 Memory_size = GraphicCard.Memory_size,
@@ -61,10 +53,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectGraphicCard = null;
-        }
+        public void EndEdit() => _selectGraphicCard = null;
 
         public void CancelEdit()
         {

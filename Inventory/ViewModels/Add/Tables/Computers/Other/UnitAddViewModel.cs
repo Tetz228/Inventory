@@ -6,27 +6,18 @@
     using DevExpress.Mvvm;
 
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Other;
 
     public class UnitAddViewModel : BindableBase
     {
-        public UnitAddViewModel()
-        {
-            Unit = new Unit();
-        }
-
-        public Unit Unit { get; }
-
-        #region Команды
+        public Unit Unit { get; } = new();
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Unit);
-            UnitsViewModel.RefreshCollection();
+            if(Services.Add(Unit)) 
+                UnitsViewModel.Units.Add(Unit);
             addWindow.Close();
-        }, _ => Unit.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(Unit.ErrorCollection));
     }
 }

@@ -2,12 +2,11 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Computers.Accessories;
 
     public class GraphicCardAddViewModel : BindableBase
     {
@@ -15,26 +14,21 @@
         {
             using var db = new InventoryEntities();
 
-            GraphicCard = new Graphics_cards();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
         }
 
-        public Graphics_cards GraphicCard { get; }
+        public Graphics_cards GraphicCard { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 
         public ObservableCollection<Unit> Units { get; }
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(GraphicCard);
             GraphicsCardsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => GraphicCard.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(GraphicCard.ErrorCollection));
     }
 }

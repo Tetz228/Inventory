@@ -2,8 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Computers.Other;
+    using Inventory.Services;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
@@ -20,21 +19,12 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(TypeMemory.Id_type_memory, TypeMemory);
-            TypesMemoryViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => TypeMemory.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
+        }, _ => Services.IsValidationProperties(TypeMemory.ErrorCollection));
 
         #region Откат изменений
         private Types_memory _selectTypeMemory;
@@ -48,10 +38,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectTypeMemory = null;
-        }
+        public void EndEdit() => _selectTypeMemory = null;
 
         public void CancelEdit()
         {

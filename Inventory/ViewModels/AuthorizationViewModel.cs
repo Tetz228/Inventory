@@ -2,10 +2,10 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -40,32 +40,32 @@
 
         public string Error { get => null; }
 
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.All(item => item.Value == null);
-
         #endregion
 
         public string Login { get; set; }
 
-        public string Password { get; set; }
+        private string Password { get; set; }
 
         public ICommand ComeInCommand => new DelegateCommand<Window>(authWindow =>
         {
-            var (userId, userExist) = User.OnUserExist(Login, Password);
+            var authorizedUser = UsersInteraction.OnUserExist(Login, Password);
 
-            if (userExist)
+            if (authorizedUser != null)
             {
-                User.AuthorizedUser = userId;
+                User.AuthorizedUser = authorizedUser;
 
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
 
                 authWindow.Close();
             }
-        }, _ => IsValidationProperties() && Password?.Length > 2);
+        }, _ => Services.IsValidationProperties(ErrorCollection) && string.IsNullOrEmpty(Password) == false);
+
 
         public ICommand PasswordRecoveryCommand => new DelegateCommand(() =>
         {
             var passwordRecoveryWindow = new PasswordRecoveryWindow();
+            passwordRecoveryWindow.Title = "Новый пароль";
             passwordRecoveryWindow.ShowDialog();
         });
 

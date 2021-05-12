@@ -4,10 +4,6 @@
 
     public partial class PeripheralAddWindow : Window
     {
-        public PeripheralAddWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public PeripheralAddWindow() => InitializeComponent();
     }
 }

@@ -2,7 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.Windows;
@@ -14,26 +14,21 @@
         {
             using var db = new InventoryEntities();
 
-            Motherboard = new Motherboard();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Sockets = new ObservableCollection<Socket>(db.Sockets);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking()).Sort(socket => socket.Name);
         }
 
-        public Motherboard Motherboard { get; }
+        public Motherboard Motherboard { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 
         public ObservableCollection<Socket> Sockets { get; }
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Motherboard);
             MotherboardsViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Motherboard.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(Motherboard.ErrorCollection));
     }
 }

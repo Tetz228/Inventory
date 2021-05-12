@@ -7,7 +7,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Peripherals;
 
     public class PeripheralEditViewModel : BindableBase, IEditableObject
@@ -18,8 +18,8 @@
 
             Peripheral = peripheral;
             BeginEdit();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            TypesPeripherals = new ObservableCollection<Types_peripherals>(db.Types_peripherals);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            TypesPeripherals = new ObservableCollection<Types_peripherals>(db.Types_peripherals.AsNoTracking()).Sort(type => type.Name);
         }
 
         #region Свойства
@@ -32,28 +32,20 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(Peripheral.Id_peripheral, Peripheral);
             PeripheralsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Peripheral.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
+        }, _ => Services.IsValidationProperties(Peripheral.ErrorCollection));
 
         #region Откат изменений
         private Peripheral _selectPeripheral;
 
         public void BeginEdit()
         {
-            _selectPeripheral = new Peripheral()
+            _selectPeripheral = new Peripheral
             {
                 Id_peripheral = Peripheral.Id_peripheral,
                 Fk_manufacturer = Peripheral.Fk_manufacturer,
@@ -62,10 +54,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectPeripheral = null;
-        }
+        public void EndEdit() => _selectPeripheral = null;
 
         public void CancelEdit()
         {

@@ -2,15 +2,8 @@
 {
     using System.Windows;
 
-    /// <summary>
-    /// Логика взаимодействия для HddAddWindow.xaml
-    /// </summary>
     public partial class HddAddWindow : Window
     {
-        public HddAddWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public HddAddWindow() => InitializeComponent();
     }
 }

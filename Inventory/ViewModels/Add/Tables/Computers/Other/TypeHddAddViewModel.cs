@@ -6,27 +6,18 @@
     using DevExpress.Mvvm;
 
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Other;
 
     public class TypeHddAddViewModel : BindableBase
     {
-        public TypeHddAddViewModel()
-        {
-            TypeHdd = new Types_hdd();
-        }
-
-        public Types_hdd TypeHdd { get; }
-
-        #region Команды
+        public Types_hdd TypeHdd { get; } = new();
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(TypeHdd);
-            TypesHddsViewModel.RefreshCollection();
+            if (Services.Add(TypeHdd))
+                TypesHddViewModel.TypesHdd.Add(TypeHdd);
             addWindow.Close();
-        }, _ => TypeHdd.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(TypeHdd.ErrorCollection));
     }
 }

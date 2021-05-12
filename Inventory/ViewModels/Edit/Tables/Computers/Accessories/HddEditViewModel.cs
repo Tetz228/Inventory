@@ -2,22 +2,22 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 
-    public class HddEditViewModel : BindableBase
+    public class HddEditViewModel : BindableBase, IEditableObject
     {
         public HddEditViewModel(Hdd hdd)
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            TypesHdd = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking()).Sort(type => type.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
 
             Hdd = hdd;
             BeginEdit();
@@ -27,34 +27,26 @@
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 
-        public ObservableCollection<Types_hdd> TypesHdds { get; }
+        public ObservableCollection<Types_hdd> TypesHdd { get; }
 
         public ObservableCollection<Unit> Units { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(Hdd.Id_hdd, Hdd);
-            HddsViewModel.RefreshCollection();
+            HddViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Hdd.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
-
+        }, _ => Services.IsValidationProperties(Hdd.ErrorCollection));
+        
         #region Откат изменений
         private Hdd _selectHdd;
 
         public void BeginEdit()
         {
-            _selectHdd = new Hdd()
+            _selectHdd = new Hdd
             {
                 Id_hdd = Hdd.Id_hdd,
                 Memory_size = Hdd.Memory_size,
@@ -65,10 +57,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectHdd = null;
-        }
+        public void EndEdit() => _selectHdd = null;
 
         public void CancelEdit()
         {

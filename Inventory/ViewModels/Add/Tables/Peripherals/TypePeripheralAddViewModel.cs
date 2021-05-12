@@ -2,30 +2,20 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables.Peripherals;
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Peripherals;
-
     public class TypePeripheralAddViewModel : BindableBase
     {
-        public TypePeripheralAddViewModel()
-        {
-            TypePeripheral = new Types_peripherals();
-        }
+        public Types_peripherals TypePeripheral { get; } = new();
 
-        public Types_peripherals TypePeripheral { get; }
-
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(TypePeripheral);
-            TypesPeripheralsViewModel.RefreshCollection();
+            if(Services.Add(TypePeripheral))
+                TypesPeripheralsViewModel.TypesPeripherals.Add(TypePeripheral);
             addWindow.Close();
-        }, _ => TypePeripheral.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(TypePeripheral.ErrorCollection));
     }
 }

@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Inventory.ViewModels"
-    Title="Главное окно"
+    Name="WindowMain"
+    Title="{Binding TitleWindow, UpdateSourceTrigger=PropertyChanged}"
     Width="880"
     Height="450"
     MinWidth="880"
@@ -17,21 +18,38 @@
         <viewModels:MainViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" Style="{StaticResource BaseMenu}">
-            <MenuItem Header="Файл">
-                <MenuItem Header="Заглушка" />
-                <MenuItem Header="Заглушка" />
-                <MenuItem Header="Сменить пользователя" />
-                <MenuItem Command="{Binding Exit}" Header="Выход" />
+        <Menu
+            Grid.Row="0"
+            Height="30"
+            Style="{StaticResource BaseMenu}">
+            <MenuItem
+                Background="#0074B7"
+                BorderBrush="#0074B7"
+                Foreground="White"
+                Header="Файл">
+                <MenuItem
+                    Command="{Binding ChangePasswordCommand}"
+                    Header="Изменить пароль"
+                    Style="{StaticResource BaseMenuItem}" />
+                <MenuItem
+                    Command="{Binding ChangeUserCommand}"
+                    CommandParameter="{Binding ElementName=WindowMain}"
+                    Header="Сменить пользователя"
+                    Style="{StaticResource BaseMenuItem}" />
+                <MenuItem
+                    Height="21"
+                    Command="{Binding ExitCommand}"
+                    Header="Выход"
+                    Style="{StaticResource BaseMenuItem}" />
             </MenuItem>
-            <MenuItem Header="Выдачи компьютеров" />
-            <MenuItem Header="Выдачи периферии" />
+            <MenuItem Command="{Binding OpenDispensingComputers}" Header="Выдачи компьютеров" />
+            <MenuItem Command="{Binding OpenDispensingPeripherals}" Header="Выдачи периферии" />
             <MenuItem Command="{Binding OpenPageEmployees}" Header="Сотрудники" />
             <MenuItem Command="{Binding OpenPageComputers}" Header="Компьютеры" />
             <MenuItem Command="{Binding OpenPagePeripherals}" Header="Периферии" />

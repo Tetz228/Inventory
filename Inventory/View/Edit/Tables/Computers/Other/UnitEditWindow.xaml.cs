@@ -4,10 +4,6 @@
 
     public partial class UnitEditWindow : Window
     {
-        public UnitEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public UnitEditWindow() => InitializeComponent();
     }
 }

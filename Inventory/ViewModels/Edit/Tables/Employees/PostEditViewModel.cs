@@ -6,8 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Employees;
+    using Inventory.Services;
 
     public class PostEditViewModel : BindableBase, IEditableObject
     {
@@ -21,21 +20,13 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(Post.Id_post, Post);
-            PostsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Post.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Post.ErrorCollection));
 
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
 
         #region Откат изменений
         private Post _selectPost;
@@ -49,10 +40,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectPost = null;
-        }
+        public void EndEdit() => _selectPost = null;
 
         public void CancelEdit()
         {

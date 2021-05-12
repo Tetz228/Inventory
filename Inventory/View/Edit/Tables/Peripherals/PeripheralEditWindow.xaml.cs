@@ -4,10 +4,6 @@
 
     public partial class PeripheralEditWindow : Window
     {
-        public PeripheralEditWindow()
-        {
-            InitializeComponent();
-            TextBoxName.Focus();
-        }
+        public PeripheralEditWindow() => InitializeComponent();
     }
 }

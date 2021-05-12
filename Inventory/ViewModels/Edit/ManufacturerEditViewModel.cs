@@ -6,8 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables;
+    using Inventory.Services;
 
     public class ManufacturerEditViewModel : BindableBase, IEditableObject
     {
@@ -21,21 +20,12 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(Manufacturer.Id_manufacturer, Manufacturer);
-            ManufacturersViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Manufacturer.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
+        }, _ => Services.IsValidationProperties(Manufacturer.ErrorCollection));
 
         #region Откат изменений
         private Manufacturer _selectManufacturer;

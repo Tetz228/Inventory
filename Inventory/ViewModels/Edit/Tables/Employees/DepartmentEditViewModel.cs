@@ -6,8 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Employees;
+    using Inventory.Services;
 
     public class DepartmentEditViewModel : BindableBase, IEditableObject
     {
@@ -21,38 +20,26 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(Department.Id_department, Department);
-            DepartmentsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Department.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
+        }, _ => Services.IsValidationProperties(Department.ErrorCollection));
 
         #region Откат изменений
         private Department _selectDepartment;
 
         public void BeginEdit()
         {
-            _selectDepartment = new Department()
+            _selectDepartment = new Department
             {
                 Id_department = Department.Id_department,
                 Name = Department.Name,
             };
         }
 
-        public void EndEdit()
-        {
-            _selectDepartment = null;
-        }
+        public void EndEdit() => _selectDepartment = null;
 
         public void CancelEdit()
         {

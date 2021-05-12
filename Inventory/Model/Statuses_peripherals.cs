@@ -1,23 +1,17 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-
-    using DevExpress.Mvvm;
 
     public partial class Statuses_peripherals : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Statuses_peripherals()
-        {
-            Inventory_numbers_peripherals = new HashSet<Inventory_numbers_peripherals>();
-        }
-    
+        public Statuses_peripherals() => Inventory_numbers_peripherals = new HashSet<Inventory_numbers_peripherals>();
+
         public int Id_status_peripheral { get; set; }
         public string Name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory_numbers_peripherals> Inventory_numbers_peripherals { get; set; }
 
@@ -49,8 +43,6 @@ namespace Inventory.Model
         }
 
         public string Error { get => null; }
-
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
     }
 }

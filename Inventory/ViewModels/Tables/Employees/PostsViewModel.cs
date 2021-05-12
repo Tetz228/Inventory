@@ -2,81 +2,40 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Employees;
     using Inventory.View.Edit.Tables.Employees;
     using Inventory.ViewModels.Edit.Tables.Employees;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-
-    public class PostsViewModel : BindableBase
+    public class PostsViewModel : BaseViewModel<Post>
     {
-        public PostsViewModel()
-        {
-            using var db = new InventoryEntities();
+        public PostsViewModel() : base(Posts) => RefreshCollection();
 
-            Posts = new ObservableCollection<Post>(db.Posts);
-            Posts.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
-            PostsCollection = CollectionViewSource.GetDefaultView(Posts);
-        }
+        public static ObservableCollection<Post> Posts { get; set; } = new();
 
-        #region Свойства
-        private ICollectionView PostsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public static ObservableCollection<Post> Posts { get; set; }
-
-        public Post SelectPost { get; set; }
-
-        private string _postsFilter = string.Empty;
-
-        public string PostsFilter
-        {
-            get => _postsFilter;
-            set
-            {
-                _postsFilter = value;
-                PostsCollection.Filter = obj =>
-                {
-                    if (obj is Post post)
-                        return post.Search(PostsFilter);
-
-                    return false;
-                };
-                PostsCollection.Refresh();
-            }
-        }
-        #endregion
-
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Posts.Sort(post => post.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Posts.Sort(post => post.Name, SortDirection = ListSortDirection.Ascending);
+                            Posts.Sort(post => post.Name, SortDirection);
                             break;
                         }
                 }
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectPost = null;
-        #endregion
-
-        #region Команды
         public ICommand AddPostCommand => new DelegateCommand(() =>
         {
             var addPostWindow = new PostAddWindow();
@@ -90,30 +49,31 @@
             editPostWindow.DataContext = editPostViewModel;
             editPostWindow.Closing += editPostViewModel.OnWindowClosing;
             editPostWindow.ShowDialog();
-
         }, post => post != null);
 
         public ICommand DeletePostCommand => new DelegateCommand<Post>(selectPost =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectPost.Name}?", "Удаление должности", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить должность:\nнаименование - {selectPost.Name}?", "Удаление должности", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Post>(selectPost.Id_post);
-            RefreshCollection();
+            if (Services.Delete<Post>(selectPost.Id_post))
+                Posts.Remove(selectPost);
         }, selectPost => selectPost != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
-        public static void RefreshCollection()
+   
+        private static void RefreshCollection()
         {
             Posts.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Posts)
+            foreach (var item in db.Posts.AsNoTracking())
+            {
                 Posts.Add(item);
+            }
+            Posts.Sort(post => post.Name);
         }
     }
 }

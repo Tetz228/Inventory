@@ -2,118 +2,62 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Employees;
     using Inventory.View.Edit.Tables.Employees;
     using Inventory.ViewModels.Edit.Tables.Employees;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-
-    public class EmployeesViewModel : BindableBase
+    public class EmployeesViewModel : BaseViewModel<Employee>
     {
-        public EmployeesViewModel()
-        {
-            using var db = new InventoryEntities();
-            Employees = new ObservableCollection<Employee>(db.Employees.Include(employeePost => employeePost.Posts_employees
-                                                                       .Select(post => post.Post))
-                                                                       .Include(empDepart => empDepart.Employees_in_departments
-                                                                       .Select(depart => depart.Department)));
-            Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Ascending);
-            EmployeesCollection = CollectionViewSource.GetDefaultView(Employees);
-        }
+        public EmployeesViewModel() : base(Employees) => RefreshCollection();
 
-        #region Свойства
+        public static ObservableCollection<Employee> Employees { get; set; } = new();
 
-        private ICollectionView EmployeesCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public static ObservableCollection<Employee> Employees { get; set; }
-
-        public Employee SelectEmployee { get; set; }
-
-        private string _employeesFilter = string.Empty;
-
-        public string EmployeesFilter
-        {
-            get => _employeesFilter;
-            set
-            {
-                _employeesFilter = value;
-                EmployeesCollection.Filter = obj =>
-                {
-                    if (obj is Employee employee)
-                        return employee.Search(EmployeesFilter);
-
-                    return false;
-                };
-                EmployeesCollection.Refresh();
-            }
-        }
-        #endregion
-
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "ФИО":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Employees.Sort(employee => employee.L_name, SortDirection = ListSortDirection.Ascending);
+                            Employees.Sort(employee => employee.L_name, SortDirection);
                             break;
                         }
                     case "Почта":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Descending);
-                            else
-                                Employees.Sort(employee => employee.Email, SortDirection = ListSortDirection.Ascending);
+                            Employees.Sort(employee => employee.Email, SortDirection);
                             break;
                         }
                     case "Номер телефона":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Descending);
-                            else
-                                Employees.Sort(employee => employee.Phone_number, SortDirection = ListSortDirection.Ascending);
+                            Employees.Sort(employee => employee.Phone_number, SortDirection);
                             break;
                         }
                         //case "Должности":
                         //    {
-                        //        if (SortDirection == ListSortDirection.Ascending)
-                        //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Descending);
-                        //        else
-                        //            Employees.Sort(employee => employee.Posts_employees, SortDirection = ListSortDirection.Ascending);
+                        //        Employees.Sort(employee => employee.Posts_employees, SortDirection);
                         //        break;
                         //    }
                         //case "Отделы":
                         //    {
-                        //        if (SortDirection == ListSortDirection.Ascending)
-                        //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Descending);
-                        //        else
-                        //            Employees.Sort(employee => employee.Employees_in_departments, SortDirection = ListSortDirection.Ascending);
+                        //        Employees.Sort(employee => employee.Employees_in_departments, SortDirection);
                         //        break;
                         //    }
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectEmployee = null;
-        #endregion
-
-        #region Команды
+        
         public ICommand AddEmployeeCommand => new DelegateCommand(() =>
         {
             var addEmployeeWindow = new EmployeeAddWindow();
@@ -122,48 +66,39 @@
 
         public ICommand EditEmployeeCommand => new DelegateCommand<Employee>(employee =>
         {
-            using var db = new InventoryEntities();
-
             var editEmployeeViewModel = new EmployeeEditViewModel(employee);
-            Employee.EmployeesInDepartments = new ObservableCollection<Employees_in_departments>(employee.Employees_in_departments);
-            Employee.PostsEmployees = new ObservableCollection<Posts_employees>(employee.Posts_employees);
-
             var editEmployeeWindow = new EmployeeEditWindow();
             editEmployeeWindow.DataContext = editEmployeeViewModel;
             editEmployeeWindow.Closing += editEmployeeViewModel.OnWindowClosing;
             editEmployeeWindow.ShowDialog();
-
         }, employee => employee != null);
 
         public ICommand DeleteEmployeeCommand => new DelegateCommand<Employee>(selectEmployee =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name} {selectEmployee.Email}?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить сотрудника:\nФИО - {selectEmployee.L_name} {selectEmployee.F_name} {selectEmployee.M_name};\nномер телефона - {selectEmployee.Phone_number};\nпочта - {selectEmployee.Email}?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Employees_in_departments.DeleteEmployeeDepartment(selectEmployee.Id_employee);
-            Posts_employees.DeletePostEmployee(selectEmployee.Id_employee);
-            Services.Delete<Employee>(selectEmployee.Id_employee);
-            
-            RefreshCollection();
+            if (Services.Delete<Employee>(selectEmployee.Id_employee))
+                Employees.Remove(selectEmployee);
         }, selectHdd => selectHdd != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             Employees.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Employees.Include(employeePost => employeePost.Posts_employees
+            foreach (var item in db.Employees.AsNoTracking().Include(employeePost => employeePost.Posts_employees
                     .Select(post => post.Post))
                 .Include(empDepart => empDepart.Employees_in_departments
                     .Select(depart => depart.Department)))
             {
                 Employees.Add(item);
             }
+            Employees.Sort(employee => employee.L_name);
         }
     }
 }

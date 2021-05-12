@@ -5,27 +5,18 @@ namespace Inventory.ViewModels.Add.Tables.Employees
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Employees;
 
     public class PostAddViewModel : BindableBase
     {
-        public PostAddViewModel()
-        {
-            Post = new Post();
-        }
-
-        public Post Post { get; }
-
-        #region Команды
+        public Post Post { get; } = new();
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Post);
-            PostsViewModel.RefreshCollection();
+            if(Services.Add(Post))
+                PostsViewModel.Posts.Add(Post);
             addWindow.Close();
-        }, _ => Post.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(Post.ErrorCollection));
     }
 }

@@ -1,11 +1,8 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-
-    using DevExpress.Mvvm;
 
     public partial class Unit : BindableBase, IDataErrorInfo
     {
@@ -19,11 +16,11 @@ namespace Inventory.Model
             Rams = new HashSet<Ram>();
             Ssds = new HashSet<Ssd>();
         }
-    
+
         public int Id_unit { get; set; }
         public string Full_name { get; set; }
         public string Short_name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Graphics_cards> Graphics_cards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -71,8 +68,6 @@ namespace Inventory.Model
         }
 
         public string Error { get => null; }
-
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
     }
 }

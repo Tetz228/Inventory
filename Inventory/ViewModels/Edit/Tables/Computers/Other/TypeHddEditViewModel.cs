@@ -1,14 +1,11 @@
 ﻿namespace Inventory.ViewModels.Edit.Tables.Computers.Other
 {
+    using DevExpress.Mvvm;
+    using Inventory.Model;
+    using Inventory.Services;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
-    using DevExpress.Mvvm;
-
-    using Inventory.Model;
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Computers.Other;
 
     public class TypeHddEditViewModel : BindableBase, IEditableObject
     {
@@ -22,21 +19,12 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(TypeHdd.Id_type_hdd, TypeHdd);
-            TypesHddsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => TypeHdd.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
+        }, _ => Services.IsValidationProperties(TypeHdd.ErrorCollection));
 
         #region Откат изменений
         private Types_hdd _selectTypeHdd;
@@ -50,10 +38,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectTypeHdd = null;
-        }
+        public void EndEdit() => _selectTypeHdd = null;
 
         public void CancelEdit()
         {

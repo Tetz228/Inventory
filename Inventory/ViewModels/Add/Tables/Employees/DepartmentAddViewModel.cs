@@ -5,27 +5,18 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Employees;
 
     public class DepartmentAddViewModel : BindableBase
     {
-        public DepartmentAddViewModel()
-        {
-            Department = new Department();
-        }
-
-        public Department Department { get; }
-
-        #region Команды
+        public Department Department { get; } = new();
+        
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(Department);
-            DepartmentsViewModel.RefreshCollection();
+            if(Services.Add(Department))
+                DepartmentsViewModel.Departments.Add(Department);
             addWindow.Close();
-        }, _ => Department.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(Department.ErrorCollection));
     }
 }

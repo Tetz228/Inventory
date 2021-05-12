@@ -2,7 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.Windows;
@@ -14,29 +14,24 @@
         {
             using var db = new InventoryEntities();
 
-            Hdd = new Hdd();
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            TypesHdds = new ObservableCollection<Types_hdd>(db.Types_hdd);
-            Units = new ObservableCollection<Unit>(db.Units);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            TypesHdd = new ObservableCollection<Types_hdd>(db.Types_hdd.AsNoTracking()).Sort(type => type.Name);
+            Units = new ObservableCollection<Unit>(db.Units.AsNoTracking()).Sort(unit => unit.Full_name);
         }
 
-        public Hdd Hdd { get; }
+        public Hdd Hdd { get; } = new();
 
         public ObservableCollection<Manufacturer> Manufacturers { get; }
 
-        public ObservableCollection<Types_hdd> TypesHdds { get; }
+        public ObservableCollection<Types_hdd> TypesHdd { get; }
 
         public ObservableCollection<Unit> Units { get; }
 
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
             Services.Add(Hdd);
-            HddsViewModel.RefreshCollection();
+            HddViewModel.RefreshCollection();
             addWindow.Close();
-        }, _ => Hdd.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(Hdd.ErrorCollection));
     }
 }

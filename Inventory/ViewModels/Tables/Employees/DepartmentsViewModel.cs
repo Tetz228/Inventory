@@ -2,81 +2,40 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Employees;
     using Inventory.View.Edit.Tables.Employees;
     using Inventory.ViewModels.Edit.Tables.Employees;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-
-    public class DepartmentsViewModel : BindableBase
+    public class DepartmentsViewModel : BaseViewModel<Department>
     {
-        public DepartmentsViewModel()
-        {
-            using var db = new InventoryEntities();
+        public DepartmentsViewModel() : base(Departments) => RefreshCollection();
 
-            Departments = new ObservableCollection<Department>(db.Departments);
-            Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
-            DepartmentsCollection = CollectionViewSource.GetDefaultView(Departments);
-        }
+        public static ObservableCollection<Department> Departments { get; set; } = new();
 
-        #region Свойства
-        private ICollectionView DepartmentsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public static ObservableCollection<Department> Departments { get; set; }
-
-        public Department SelectDepartment { get; set; }
-
-        private string _departmentsFilter;
-
-        public string DepartmentsFilter
-        {
-            get => _departmentsFilter;
-            set
-            {
-                _departmentsFilter = value;
-                DepartmentsCollection.Filter = obj =>
-                {
-                    if (obj is Department department)
-                        return department.Search(DepartmentsFilter);
-
-                    return false;
-                };
-                DepartmentsCollection.Refresh();
-            }
-        }
-        #endregion
-
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Наименование":
-                    {
-                        if (SortDirection == ListSortDirection.Ascending)
-                            Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Descending);
-                        else
-                            Departments.Sort(department => department.Name, SortDirection = ListSortDirection.Ascending);
-                        break;
-                    }
+                        {
+                            Departments.Sort(department => department.Name, SortDirection);
+                            break;
+                        }
                 }
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectDepartment = null;
-        #endregion
-
-        #region Команды
         public ICommand AddDepartmentCommand => new DelegateCommand(() =>
         {
             var addDepartmentWindow = new DepartmentAddWindow();
@@ -94,25 +53,27 @@
 
         public ICommand DeleteDepartmentCommand => new DelegateCommand<Department>(selectDepartment =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectDepartment.Name}?", "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить отдел:\nнаименование - {selectDepartment.Name}?", "Удаление отдела", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Department>(selectDepartment.Id_department);
-            RefreshCollection();
+            if (Services.Delete<Department>(selectDepartment.Id_department))
+                Departments.Remove(selectDepartment);
         }, selectDepartment => selectDepartment != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
-        public static void RefreshCollection()
+        private static void RefreshCollection()
         {
             Departments.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Departments)
+            foreach (var item in db.Departments.AsNoTracking())
+            {
                 Departments.Add(item);
+            }
+            Departments.Sort(department => department.Name);
         }
     }
 }

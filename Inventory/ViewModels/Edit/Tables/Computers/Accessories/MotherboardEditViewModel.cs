@@ -2,21 +2,22 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
     using Inventory.ViewModels.Tables.Computers.Accessories;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 
-    public class MotherboardEditViewModel : BindableBase
+    using Inventory.Services;
+
+    public class MotherboardEditViewModel : BindableBase, IEditableObject
     {
         public MotherboardEditViewModel(Motherboard motherboard)
         {
             using var db = new InventoryEntities();
 
-            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers);
-            Sockets = new ObservableCollection<Socket>(db.Sockets);
+            Manufacturers = new ObservableCollection<Manufacturer>(db.Manufacturers.AsNoTracking()).Sort(manufact => manufact.Name);
+            Sockets = new ObservableCollection<Socket>(db.Sockets.AsNoTracking()).Sort(socket => socket.Name);
 
             Motherboard = motherboard;
             BeginEdit();
@@ -30,28 +31,20 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(Motherboard.Id_motherboard, Motherboard);
             MotherboardsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => Motherboard.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
+        }, _ => Services.IsValidationProperties(Motherboard.ErrorCollection));
 
         #region Откат изменений
         private Motherboard _selectMotherboard;
 
         public void BeginEdit()
         {
-            _selectMotherboard = new Motherboard()
+            _selectMotherboard = new Motherboard
             {
                 Id_motherboard = Motherboard.Id_motherboard,
                 Name = Motherboard.Name,
@@ -60,10 +53,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectMotherboard = null;
-        }
+        public void EndEdit() => _selectMotherboard = null;
 
         public void CancelEdit()
         {

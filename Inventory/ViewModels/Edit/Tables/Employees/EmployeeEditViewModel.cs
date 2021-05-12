@@ -2,108 +2,116 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using System.Collections.Generic;
+    using Inventory.Services;
+    using Inventory.ViewModels.Tables.Employees;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Employees;
-
-    public class EmployeeEditViewModel : BindableBase, IEditableObject
+    public class EmployeeEditViewModel : BindableBase
     {
         public EmployeeEditViewModel(Employee employee)
         {
             using var db = new InventoryEntities();
-            Posts_employees.CollectionPosts = new List<Post>(db.Posts);
-            Employees_in_departments.CollectionDepartments = new List<Department>(db.Departments);
+            Posts = new ObservableCollection<Post>(db.Posts);
+            Departments = new ObservableCollection<Department>(db.Departments);
 
             Employee = employee;
-            BeginEdit();
-        }
-
-        public void OnWindowClosing(object sender, CancelEventArgs e)
-        {
-            Employee.PostsEmployees.Clear();
-            Employee.EmployeesInDepartments.Clear();
-            CancelEdit();
+            Employee.BeginEdit();
         }
 
         public Employee Employee { get; }
 
+        public ObservableCollection<Post> Posts { get; set; }
+
+        public ObservableCollection<Department> Departments { get; set; }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e) => Employee.CancelEdit();
+
         #region Команды
         public ICommand EditEmployeeCommand => new DelegateCommand<Window>(empEditWindow =>
         {
-            EndEdit();
+            Employee.EndEdit();
             Services.Edit(Employee.Id_employee, Employee);
-            Posts_employees.EditPostEmployee(Employee.Id_employee);
-            Employees_in_departments.EditEmployeeInDepartment(Employee.Id_employee);
+            EditPostsEmployee(Employee.Id_employee);
+            EditEmployeeInDepartments(Employee.Id_employee);
+
             EmployeesViewModel.RefreshCollection();
             empEditWindow.Close();
-        }, _ => Employee.IsValidationCollections() && Employee.IsValidationProperties());
+        }, _ => Services.IsValidationProperties(Employee.ErrorCollection));
 
-        public ICommand CancelCommand => new DelegateCommand<Window>(empAddWindow =>
-        {
-            CancelEdit();
-            empAddWindow.Close();
-        });
-
-        public ICommand AddPostInCollectionCommand => new DelegateCommand(() => Employee.PostsEmployees.Add(new Posts_employees()));
-
-        public ICommand AddDepartmentInCollectionCommand => new DelegateCommand(() => Employee.EmployeesInDepartments.Add(new Employees_in_departments()));
+        public ICommand AddPostInCollectionCommand => new DelegateCommand(() => Employee.Posts_employees.Add(new Posts_employees()));
 
         public ICommand DeletePostFromCollectionCommand => new DelegateCommand<Posts_employees>(selectPostEmp =>
         {
             if (selectPostEmp.Id_post_employee != 0)
-                if (MessageBoxResult.Yes != MessageBox.Show("Вы действительно хотите удалить должность сотрудника? Удаленную должность будет невозможно восстановить.",
-                    "Удаление заданной должности", MessageBoxButton.YesNo, MessageBoxImage.Question))
+            {
+                if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить должность \"{selectPostEmp.Post.Name}\" у сотрудника? Это действие нельзя отменить.",
+                    "Удаление заданного отдела", MessageBoxButton.YesNo, MessageBoxImage.Question))
                     return;
-            Posts_employees.DeletePostEmployee(selectPostEmp);
+                Services.Delete<Posts_employees>(selectPostEmp.Id_post_employee);
+            }
+            Employee.Posts_employees.Remove(selectPostEmp);
         });
+
+        public ICommand AddDepartmentInCollectionCommand => new DelegateCommand(() => Employee.Employees_in_departments.Add(new Employees_in_departments()));
 
         public ICommand DeleteDepartmentFromCollectionCommand => new DelegateCommand<Employees_in_departments>(selectEmpInDepart =>
         {
             if (selectEmpInDepart.Id_employee_in_department != 0)
-                if (MessageBoxResult.Yes != MessageBox.Show("Вы действительно хотите удалить отдел сотрудника? Удаленный отдел будет невозможно восстановить.",
-                "Удаление заданного отдела", MessageBoxButton.YesNo, MessageBoxImage.Question))
-                    return;
-            Employees_in_departments.DeleteEmployeeDepartment(selectEmpInDepart);
-        });
-        #endregion
-
-        #region Откат изменений
-        private Employee _selectEmployee;
-
-        public void BeginEdit()
-        {
-            _selectEmployee = new Employee
             {
-                Id_employee = Employee.Id_employee,
-                L_name = Employee.L_name,
-                F_name = Employee.F_name,
-                M_name = Employee.M_name,
-                Phone_number = Employee.Phone_number,
-                Email = Employee.Email
-            };
-        }
+                if (MessageBoxResult.Yes != MessageBox.Show($"Вы действительно хотите удалить отдел \"{selectEmpInDepart.Department.Name}\" у сотрудника? Это действие нельзя отменить.",
+                    "Удаление заданного отдела", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                    return;
+                Services.Delete<Employees_in_departments>(selectEmpInDepart.Id_employee_in_department);
+            }
+            Employee.Employees_in_departments.Remove(selectEmpInDepart);
+        });
 
-        public void EndEdit()
-        {
-            _selectEmployee = null;
-        }
-
-        public void CancelEdit()
-        {
-            if (_selectEmployee == null)
-                return;
-
-            Employee.Id_employee = _selectEmployee.Id_employee;
-            Employee.L_name = _selectEmployee.L_name;
-            Employee.F_name = _selectEmployee.F_name;
-            Employee.M_name = _selectEmployee.M_name;
-            Employee.Phone_number = _selectEmployee.Phone_number;
-            Employee.Email = _selectEmployee.Email;
-        }
         #endregion
+
+        private void EditEmployeeInDepartments(int idEmployee)
+        {
+            using var db = new InventoryEntities();
+
+            foreach (var item in Employee.Employees_in_departments)
+            {
+                if (item.Id_employee_in_department == 0)
+                {
+                    item.Fk_employee = idEmployee;
+                    db.Employees_in_departments.Add(item);
+                }
+                else
+                {
+                    var employeeInDepartment = db.Employees_in_departments.FirstOrDefault(employeesInDepartments => employeesInDepartments.Id_employee_in_department == item.Id_employee_in_department);
+                    if (employeeInDepartment != null)
+                        employeeInDepartment.Fk_department = item.Fk_department;
+                }
+            }
+            db.SaveChanges();
+        }
+
+        private void EditPostsEmployee(int idEmployee)
+        {
+            using var db = new InventoryEntities();
+
+            foreach (var item in Employee.Posts_employees)
+            {
+                if (item.Id_post_employee == 0)
+                {
+                    item.Fk_employee = idEmployee;
+                    db.Posts_employees.Add(item);
+                }
+                else
+                {
+                    var postInEmployee = db.Posts_employees.FirstOrDefault(postsEmployees => postsEmployees.Id_post_employee == item.Id_post_employee);
+                    if (postInEmployee != null)
+                        postInEmployee.Fk_post = item.Fk_post;
+                }
+            }
+            db.SaveChanges();
+        }
     }
 }

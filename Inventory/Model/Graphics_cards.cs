@@ -1,25 +1,20 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using DevExpress.Mvvm;
 
     public partial class Graphics_cards : BindableBase, IDataErrorInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Graphics_cards()
-        {
-            Inventory_numbers_graphics_cards = new HashSet<Inventory_numbers_graphics_cards>();
-        }
-    
+        public Graphics_cards() => Inventory_numbers_graphics_cards = new HashSet<Inventory_numbers_graphics_cards>();
+
         public int Id_graphics_card { get; set; }
         public int Fk_manufacturer { get; set; }
         public string Name { get; set; }
         public double Memory_size { get; set; }
         public int Fk_unit { get; set; }
-    
+
         public virtual Manufacturer Manufacturer { get; set; }
         public virtual Unit Unit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,9 +39,9 @@ namespace Inventory.Model
                             result = "Поле должно содержать минимум 2 символа";
                         break;
                     case "Memory_size":
-                        if (Memory_size <= 0)
-                            result = "Поле должно быть больше 0";
-                        break;
+                         if (Memory_size <= 0)
+                            result = "Число должно быть больше 0";
+                         break;
                 }
 
                 ErrorCollection[name] = result;
@@ -58,12 +53,6 @@ namespace Inventory.Model
         }
 
         public string Error { get => null; }
-
-        public bool IsValidationProperties() => ErrorCollection.Count == 0
-                                                || ErrorCollection.Any(item => item.Value == null)
-                                                && Fk_manufacturer != 0
-                                                && Fk_unit != 0;
-
         #endregion
     }
 }

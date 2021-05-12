@@ -2,9 +2,10 @@
     x:Class="Inventory.View.Edit.Tables.Computers.Accessories.HddEditWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Inventory.Services.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="EditHddWindow"
+    x:Name="EditWindow"
     Title="Изменить жесткий диск"
     Width="500"
     Height="340"
@@ -13,15 +14,19 @@
     WindowStyle="ThreeDBorderWindow"
     mc:Ignorable="d">
 
-    <Grid>
+    <Window.Resources>
+        <converters:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+    </Window.Resources>
+
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Изменить жесткий диск"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -38,7 +43,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Производитель  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Производитель: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                             <ComboBox
                                 Width="208"
@@ -53,7 +58,7 @@
 
                         <!--  Тип ЖД  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Тип ЖД: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Тип ЖД: " />
 
                             <ComboBox
                                 Width="208"
@@ -61,7 +66,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 DisplayMemberPath="Name"
-                                ItemsSource="{Binding TypesHdds}"
+                                ItemsSource="{Binding TypesHdd}"
                                 SelectedValue="{Binding Hdd.Fk_type_hdd, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="Id_type_hdd"
                                 Style="{StaticResource BaseComboBox}" />
@@ -69,10 +74,9 @@
 
                         <!--  Наименование жесткого диска  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование ЖД: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование ЖД: " />
 
                             <TextBox
-                                Name="TextBoxName"
                                 MaxLength="50"
                                 Style="{StaticResource BaseTextBox}"
                                 Text="{Binding Hdd.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -81,18 +85,18 @@
 
                         <!--  Объём  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Объём: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Объём: " />
 
                             <TextBox
                                 MaxLength="20"
                                 Style="{StaticResource BaseTextBox}"
-                                Text="{Binding Hdd.Memory_size, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding Hdd.Memory_size, ValidatesOnDataErrors=True, Converter={StaticResource StringToDoubleConverter}, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{Binding Hdd.ErrorCollection[Memory_size], UpdateSourceTrigger=PropertyChanged}" />
                         </UniformGrid>
 
                         <!--  Единица измерения  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Единица измерения: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Единица измерения: " />
 
                             <ComboBox
                                 Width="208"
@@ -114,7 +118,7 @@
                     Margin="5,10,5,5"
                     HorizontalAlignment="Center"
                     Command="{Binding EditCommand}"
-                    CommandParameter="{Binding ElementName=EditHddWindow}"
+                    CommandParameter="{Binding ElementName=EditWindow}"
                     Content="Изменить информацию о жестком диске"
                     IsDefault="True"
                     Style="{StaticResource BaseButton}" />
@@ -123,8 +127,6 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=EditHddWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>

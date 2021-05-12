@@ -1,11 +1,8 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-
-    using DevExpress.Mvvm;
 
     public partial class Socket : BindableBase, IDataErrorInfo
     {
@@ -15,10 +12,10 @@ namespace Inventory.Model
             Motherboards = new HashSet<Motherboard>();
             Processors = new HashSet<Processor>();
         }
-    
+
         public int Id_socket { get; set; }
         public string Name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Motherboard> Motherboards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -52,8 +49,6 @@ namespace Inventory.Model
         }
 
         public string Error { get => null; }
-
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
     }
 }

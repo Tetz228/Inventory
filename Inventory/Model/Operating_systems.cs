@@ -1,11 +1,8 @@
 namespace Inventory.Model
 {
-    using System;
+    using DevExpress.Mvvm;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-
-    using DevExpress.Mvvm;
 
     public partial class Operating_systems : BindableBase, IDataErrorInfo
     {
@@ -14,11 +11,11 @@ namespace Inventory.Model
         {
             Operating_systems_in_computers = new HashSet<Operating_systems_in_computers>();
         }
-    
+
         public int Id_operating_system { get; set; }
         public string Name { get; set; }
         public string System_version { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Operating_systems_in_computers> Operating_systems_in_computers { get; set; }
 
@@ -56,8 +53,6 @@ namespace Inventory.Model
         }
 
         public string Error { get => null; }
-
-        public bool IsValidationProperties() => ErrorCollection.Count == 0 || ErrorCollection.Any(item => item.Value == null);
         #endregion
     }
 }

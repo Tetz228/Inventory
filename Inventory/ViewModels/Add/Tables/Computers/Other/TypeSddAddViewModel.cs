@@ -6,27 +6,18 @@
     using DevExpress.Mvvm;
 
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.ViewModels.Tables.Computers.Other;
 
     public class TypeSddAddViewModel : BindableBase
     {
-        public TypeSddAddViewModel()
-        {
-            TypeSsd = new Types_ssd();
-        }
+        public Types_ssd TypeSsd { get; } = new();
 
-        public Types_ssd TypeSsd { get; }
-
-        #region Команды
         public ICommand AddCommand => new DelegateCommand<Window>(addWindow =>
         {
-            Services.Add(TypeSsd);
-            TypesSddsViewModel.RefreshCollection();
+            if(Services.Add(TypeSsd))
+                TypesSddViewModel.TypesSsd.Add(TypeSsd);
             addWindow.Close();
-        }, _ => TypeSsd.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(addWindow => addWindow.Close());
-        #endregion
+        }, _ => Services.IsValidationProperties(TypeSsd.ErrorCollection));
     }
 }

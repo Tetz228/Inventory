@@ -2,92 +2,45 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.View.Add.Tables.Computers;
-    using Inventory.View.Edit.Tables.Computers;
+    using Inventory.Services;
+    using Inventory.View.Add.Tables.Computers.Other;
+    using Inventory.View.Edit.Tables.Computers.Other;
     using Inventory.ViewModels.Edit.Tables.Computers.Other;
+    using Inventory.ViewModels.Tables.Base;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-    using Inventory.View.Add.Tables.Computers.Other;
-    using Inventory.View.Edit.Tables.Computers.Other;
-
-    public class UnitsViewModel : BindableBase
+    public class UnitsViewModel : BaseViewModel<Unit>
     {
-        public UnitsViewModel()
-        {
-            using var db = new InventoryEntities();
+        public UnitsViewModel() : base(Units) => RefreshCollection();
 
-            Units = new ObservableCollection<Unit>(db.Units);
-            Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
-            UnitsCollection = CollectionViewSource.GetDefaultView(Units);
-        }
+        public static ObservableCollection<Unit> Units { get; set; } = new();
 
-        #region Свойства
-
-        private ICollectionView UnitsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public static ObservableCollection<Unit> Units { get; set; }
-
-        public Unit SelectUnit { get; set; }
-
-        private string _unitsFilter = string.Empty;
-
-        public string UnitsFilter
-        {
-            get => _unitsFilter;
-            set
-            {
-                _unitsFilter = value;
-                UnitsCollection.Filter = obj =>
-                {
-                    if (obj is Unit unit)
-                        return unit.Search(UnitsFilter);
-
-                    return false;
-                };
-                UnitsCollection.Refresh();
-            }
-        }
-        #endregion
-
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Полное наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Units.Sort(unit => unit.Full_name, SortDirection = ListSortDirection.Ascending);
+                            Units.Sort(unit => unit.Full_name, SortDirection);
                             break;
                         }
                     case "Краткое наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Units.Sort(unit => unit.Short_name, SortDirection = ListSortDirection.Ascending);
+                            Units.Sort(unit => unit.Short_name, SortDirection);
                             break;
                         }
                 }
             }
         }
 
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectUnit = null;
-        #endregion
-
-        #region Команды
         public ICommand AddUnitCommand => new DelegateCommand(() =>
         {
             var addWindow = new UnitAddWindow();
@@ -105,25 +58,27 @@
 
         public ICommand DeleteUnitCommand => new DelegateCommand<Unit>(selectUnit =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectUnit.Full_name}?", "Удаление жесткого диска", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить единицу измерения:\nполное наименование - {selectUnit.Full_name};\nкраткое наименование - {selectUnit.Short_name}?", "Удаление единицы измерения", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Unit>(selectUnit.Id_unit);
-            RefreshCollection();
+            if (Services.Delete<Unit>(selectUnit.Id_unit))
+                Units.Remove(selectUnit);
         }, selectUnit => selectUnit != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
 
-        public static void RefreshCollection()
+        private static void RefreshCollection()
         {
             Units.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Units)
+            foreach (var item in db.Units.AsNoTracking())
+            {
                 Units.Add(item);
+            }
+            Units.Sort(unit => unit.Full_name);
         }
     }
 }

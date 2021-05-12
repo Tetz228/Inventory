@@ -2,7 +2,7 @@
 {
     using DevExpress.Mvvm;
     using Inventory.Model;
-    using Inventory.Model.Classes;
+    using Inventory.Services;
     using Inventory.View.Add.Tables.Computers.Accessories;
     using Inventory.View.Edit.Tables.Computers.Accessories;
     using Inventory.ViewModels.Edit.Tables.Computers.Accessories;
@@ -11,90 +11,43 @@
     using System.Data.Entity;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Input;
 
-    public class MotherboardsViewModel : BindableBase
+    using Inventory.ViewModels.Tables.Base;
+
+    public class MotherboardsViewModel : BaseViewModel<Motherboard>
     {
-        public MotherboardsViewModel()
-        {
-            using var db = new InventoryEntities();
-
-            Motherboards = new ObservableCollection<Motherboard>(db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket));
-            Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection = ListSortDirection.Ascending);
-            MotherboardsCollection = CollectionViewSource.GetDefaultView(Motherboards);
-        }
-
-        #region Свойства
-        private ICollectionView MotherboardsCollection { get; }
-
-        private ListSortDirection SortDirection { get; set; }
-
-        public Motherboard SelectMotherboard { get; set; }
-
-        public static ObservableCollection<Motherboard> Motherboards { get; set; }
-
-        private string _motherboardsFilter = string.Empty;
-
-        public string MotherboardsFilter
-        {
-            get => _motherboardsFilter;
-            set
-            {
-                _motherboardsFilter = value;
-                MotherboardsCollection.Filter = obj =>
-                {
-                    if (obj is Motherboard motherboard)
-                        return motherboard.Search(MotherboardsFilter);
-
-                    return false;
-                };
-                MotherboardsCollection.Refresh();
-            }
-        }
-        #endregion
-
-        #region События
-        public void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
+        public MotherboardsViewModel() : base(Motherboards) => RefreshCollection();
+        
+        public static ObservableCollection<Motherboard> Motherboards { get; set; } = new();
+       
+        public override void GridViewColumnHeader_OnClick(object sender, RoutedEventArgs args)
         {
             if (args.OriginalSource is GridViewColumnHeader columnHeader && columnHeader.Content != null)
             {
+                SortDirection = SortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+
                 switch (columnHeader.Content.ToString())
                 {
                     case "Производитель":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Descending);
-                            else
-                                Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name,
-                                    SortDirection = ListSortDirection.Ascending);
+                            Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name, SortDirection);
                             break;
                         }
                     case "Наименование":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Motherboards.Sort(graphicCard => graphicCard.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Motherboards.Sort(graphicCard => graphicCard.Name, SortDirection = ListSortDirection.Ascending);
+                            Motherboards.Sort(graphicCard => graphicCard.Name, SortDirection);
                             break;
                         }
                     case "Сокет":
                         {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Motherboards.Sort(socket => socket.Socket.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Motherboards.Sort(socket => socket.Socket.Name, SortDirection = ListSortDirection.Ascending);
+                            Motherboards.Sort(socket => socket.Socket.Name, SortDirection);
                             break;
                         }
                 }
             }
         }
-
-        public void OnMouseLeftButtonDown(object sender, RoutedEventArgs args) => SelectMotherboard = null;
-        #endregion
-
-        #region Команды
+        
         public ICommand AddMotherboardCommand => new DelegateCommand(() =>
         {
             var addHddWindow = new MotherboardAddWindow();
@@ -112,25 +65,26 @@
 
         public ICommand DeleteMotherboardCommand => new DelegateCommand<Motherboard>(selectMotherboard =>
         {
-            var messageResult = MessageBox.Show($"Вы действительно хотите удалить - {selectMotherboard.Manufacturer.Name} {selectMotherboard.Name} {selectMotherboard.Socket.Name}?", "Удаление материнской платы", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageResult = MessageBox.Show($"Вы действительно хотите удалить мат. плату:\nпроизводитель - {selectMotherboard.Manufacturer.Name};\nнаименование - {selectMotherboard.Name};\nсокет - {selectMotherboard.Socket.Name}?", "Удаление материнской платы", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageResult != MessageBoxResult.Yes)
                 return;
 
-            Services.Delete<Motherboard>(selectMotherboard.Id_motherboard);
-            RefreshCollection();
+            if(Services.Delete<Motherboard>(selectMotherboard.Id_motherboard))
+                Motherboards.Remove(selectMotherboard);
         }, selectMotherboard => selectMotherboard != null);
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(RefreshCollection);
-        #endregion
-
+        
         public static void RefreshCollection()
         {
             Motherboards.Clear();
             using var db = new InventoryEntities();
 
-            foreach (var item in db.Motherboards.Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket))
+            foreach (var item in db.Motherboards.AsNoTracking().Include(manufacturer => manufacturer.Manufacturer).Include(socket => socket.Socket))
                 Motherboards.Add(item);
+
+            Motherboards.Sort(manufacturer => manufacturer.Manufacturer.Name);
         }
     }
 }

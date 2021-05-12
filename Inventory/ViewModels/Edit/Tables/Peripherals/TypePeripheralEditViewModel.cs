@@ -6,8 +6,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Inventory.Model.Classes;
-    using Inventory.ViewModels.Tables.Peripherals;
+    using Inventory.Services;
 
     public class TypePeripheralEditViewModel : BindableBase, IEditableObject
     {
@@ -21,21 +20,12 @@
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => CancelEdit();
 
-        #region Команды
         public ICommand EditCommand => new DelegateCommand<Window>(editWindow =>
         {
             EndEdit();
             Services.Edit(TypePeripheral.Id_type_peripheral, TypePeripheral);
-            TypesPeripheralsViewModel.RefreshCollection();
             editWindow.Close();
-        }, _ => TypePeripheral.IsValidationProperties());
-
-        public ICommand CancelCommand => new DelegateCommand<Window>(editWindow =>
-        {
-            CancelEdit();
-            editWindow.Close();
-        });
-        #endregion
+        }, _ => Services.IsValidationProperties(TypePeripheral.ErrorCollection));
 
         #region Откат изменений
         private Types_peripherals _selectTypePeripheral;
@@ -49,10 +39,7 @@
             };
         }
 
-        public void EndEdit()
-        {
-            _selectTypePeripheral = null;
-        }
+        public void EndEdit() => _selectTypePeripheral = null;
 
         public void CancelEdit()
         {

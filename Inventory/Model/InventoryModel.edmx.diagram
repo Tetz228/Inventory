@@ -105,6 +105,8 @@
         <AssociationConnector Association="InventoryModel.FK_Ram_Units" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Ssd_Types_ssd" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Ssd_Units" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InventoryModel.Role" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="InventoryModel.FK_Users_Roles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

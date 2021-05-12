@@ -2,9 +2,7 @@
     x:Class="Inventory.View.Add.Tables.Computers.Other.TypeHddAddWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:computers="clr-namespace:Inventory.ViewModels.Add.Tables.Computers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Inventory.View.Add.Tables.Computers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:other="clr-namespace:Inventory.ViewModels.Add.Tables.Computers.Other"
     x:Name="AddTypeHddWindow"
@@ -20,15 +18,15 @@
         <other:TypeHddAddViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#FF2BA8E2">
         <StackPanel Margin="10">
             <TextBlock
-                Style="{StaticResource BaseText}"
+                Style="{StaticResource BaseTextBlock}"
                 Text="Новый тип жесткого диска"
                 TextAlignment="Center" />
 
-            <Grid>
-                <Border Background="#FFAEAEAE" CornerRadius="5">
+            <Grid Background="#FF2BA8E2">
+                <Border Style="{StaticResource BaseBorder}">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
@@ -45,7 +43,7 @@
                     <StackPanel Width="455" HorizontalAlignment="Center">
                         <!--  Наименование типа  -->
                         <UniformGrid Columns="2">
-                            <TextBlock Style="{StaticResource BaseText}" Text="Наименование типа: " />
+                            <TextBlock Style="{StaticResource BaseTextBlock}" Text="Наименование типа: " />
 
                             <TextBox
                                 Name="TextBoxName"
@@ -73,8 +71,6 @@
                 <Button
                     Margin="5,10,5,5"
                     HorizontalAlignment="Right"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=AddTypeHddWindow}"
                     IsCancel="True"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>
