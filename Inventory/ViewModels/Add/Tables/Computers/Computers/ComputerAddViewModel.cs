@@ -38,12 +38,12 @@
                     .Include(manufact => manufact.Hdd.Manufacturer)
                     .Include(socket => socket.Hdd.Types_hdd))
                 .Sort(number => number.Inventory_number);
-            InventoryRams = new ObservableCollection<Inventory_numbers_ram>(db.Inventory_numbers_ram
+            InventoryRam = new ObservableCollection<Inventory_numbers_ram>(db.Inventory_numbers_ram
                     .Include(unit => unit.Ram.Unit)
                     .Include(manufact => manufact.Ram.Manufacturer)
                     .Include(type => type.Ram.Types_memory))
                 .Sort(number => number.Inventory_number);
-            InventorySsds = new ObservableCollection<Inventory_numbers_ssd>(db.Inventory_numbers_ssd
+            InventorySsd = new ObservableCollection<Inventory_numbers_ssd>(db.Inventory_numbers_ssd
                     .Include(unit => unit.Ssd.Unit)
                     .Include(manufact => manufact.Ssd.Manufacturer)
                     .Include(socket => socket.Ssd.Types_ssd))
@@ -60,6 +60,8 @@
             {
                 Computer.Inventory_number = 1;
             }
+
+            InventoryGraphicsCards.Insert(0,null);
         }
 
         #region Свойства
@@ -74,9 +76,9 @@
 
         public ObservableCollection<Inventory_numbers_processors> InventoryProcessors { get; }
 
-        public ObservableCollection<Inventory_numbers_ssd> InventorySsds { get; }
+        public ObservableCollection<Inventory_numbers_ssd> InventorySsd { get; }
 
-        public ObservableCollection<Inventory_numbers_ram> InventoryRams { get; }
+        public ObservableCollection<Inventory_numbers_ram> InventoryRam { get; }
 
         public ObservableCollection<Statuses_computers> StatusesComputers { get; }
 
@@ -94,9 +96,9 @@
             empAddWindow.Close();
         }, _ => Services.IsValidationProperties(Computer.ErrorCollection));
         
-        public ICommand AddProccesorInCollectionCommand => new DelegateCommand(() => Computer.Processors_in_computers.Add(new Processors_in_computers()));
+        public ICommand AddProcessorInCollectionCommand => new DelegateCommand(() => Computer.Processors_in_computers.Add(new Processors_in_computers()));
 
-        public ICommand DeleteProccesorFromCollectionCommand => new DelegateCommand<Processors_in_computers>(procInComp => Computer.Processors_in_computers.Remove(procInComp));
+        public ICommand DeleteProcessorFromCollectionCommand => new DelegateCommand<Processors_in_computers>(procInComp => Computer.Processors_in_computers.Remove(procInComp));
 
         public ICommand AddOperatingSystemsInCollectionCommand => new DelegateCommand(() => Computer.Operating_systems_in_computers.Add(new Operating_systems_in_computers()));
 

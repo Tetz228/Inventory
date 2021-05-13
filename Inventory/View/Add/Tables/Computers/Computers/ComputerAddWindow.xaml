@@ -114,7 +114,7 @@
                                                     <Button
                                                         Grid.Column="1"
                                                         Margin="3"
-                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteProccesorFromCollectionCommand}"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DeleteProcessorFromCollectionCommand}"
                                                         CommandParameter="{Binding}"
                                                         Content="Х"
                                                         Style="{StaticResource BaseButton}" />
@@ -126,7 +126,7 @@
                                     <!--  Добавить процессор  -->
                                     <Button
                                         Margin="3"
-                                        Command="{Binding AddProccesorInCollectionCommand}"
+                                        Command="{Binding AddProcessorInCollectionCommand}"
                                         Content="Добавить"
                                         Style="{StaticResource BaseButton}" />
                                 </StackPanel>
@@ -211,7 +211,7 @@
                                                     <ComboBox
                                                         Width="156"
                                                         MaxWidth="156"
-                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryRams}"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryRam}"
                                                         SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_inventory_number_ram}"
                                                         SelectedValuePath="Id_inventory_number_ram"
@@ -336,7 +336,7 @@
                                                     <ComboBox
                                                         Width="156"
                                                         MaxWidth="156"
-                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventorySsds}"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventorySsd}"
                                                         SelectedIndex="0"
                                                         SelectedValue="{Binding Fk_inventory_number_ssd}"
                                                         SelectedValuePath="Id_inventory_number_ssd"

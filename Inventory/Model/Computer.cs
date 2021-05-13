@@ -23,7 +23,7 @@ namespace Inventory.Model
 
         public int Id_computer { get; set; }
         public int Fk_inventory_number_motherboard { get; set; }
-        public Nullable<int> Fk_inventory_number_graphics_card { get; set; }
+        public int? Fk_inventory_number_graphics_card { get; set; }
         public int Fk_inventory_number_power_supplies { get; set; }
         public string Ip_address { get; set; }
         public int Inventory_number { get; set; }
