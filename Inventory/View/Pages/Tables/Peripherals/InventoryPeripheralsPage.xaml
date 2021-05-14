@@ -28,6 +28,7 @@
         </Grid.RowDefinitions>
 
         <ListView
+            Name="ListView"
             GridViewColumnHeader.Click="{DXEvent Handler='GridViewColumnHeader_OnClick(@sender, @args)'}"
             ItemsSource="{Binding InventoryPeripherals, UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonDown="{DXEvent Handler='OnMouseLeftButtonDown(@sender, @args)'}"
@@ -165,6 +166,19 @@
                         Height="20"
                         Foreground="White"
                         Kind="FileExcel" />
+                </ContentControl>
+            </Button>
+
+            <Button
+                Command="{Binding PrintCommand}"
+                CommandParameter="{Binding ElementName=ListView}"
+                Style="{StaticResource BaseButton}">
+                <ContentControl>
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="White"
+                        Kind="Printer" />
                 </ContentControl>
             </Button>
         </StackPanel>

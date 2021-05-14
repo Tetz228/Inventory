@@ -6,6 +6,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -68,6 +69,14 @@
         public ICommand ExportExcelCommand => new DelegateCommand<ICollectionView>(collectionView => collectionView.ExportExcel(_nameTemplate, _namedAreaName));
 
         public ICommand RefreshCollectionCommand => new DelegateCommand(_refreshCollectionAction);
+
+        public ICommand PrintCommand => new DelegateCommand<ListView>(list =>
+        {
+            PrintDialog printDialog = new();
+
+            if (printDialog.ShowDialog() == true)
+                printDialog.PrintVisual(list, "Печать");
+        });
 
         #endregion
 
