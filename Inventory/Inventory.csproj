@@ -249,12 +249,6 @@
     <Compile Include="Model\Ssd_in_computers.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Statuses_computers.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Statuses_peripherals.cs">
-      <DependentUpon>InventoryModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Types_hdd.cs">
       <DependentUpon>InventoryModel.tt</DependentUpon>
     </Compile>
@@ -305,7 +299,6 @@
     <Compile Include="ViewModels\Add\Tables\Computers\Accessories\SsdAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Computers\ComputerAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\OperatingSystemAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Computers\Other\StatusComputerAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeMemoryAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\TypeSddAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\DispensingComputers\DispensingComputerAddViewModel.cs" />
@@ -319,7 +312,6 @@
     <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\SsdEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Computers\ComputerEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Other\OperatingSystemEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Computers\Other\StatusComputerEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\InventoryNumbers\InventoryGraphicCardEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\InventoryNumbers\InventoryHddEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\InventoryNumbers\InventoryMotherboardEditViewModel.cs" />
@@ -345,7 +337,6 @@
     <Compile Include="ViewModels\Tables\Computers\Accessories\SsdViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Computers\ComputersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\OperatingSystemsViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Computers\Other\StatusesComputersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryGraphicsCardsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryHddViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\InventoryNumbers\InventoryMotherboardsViewModel.cs" />
@@ -380,9 +371,6 @@
     </Compile>
     <Compile Include="View\Add\Tables\Computers\Other\OperatingSystemAddWindow.xaml.cs">
       <DependentUpon>OperatingSystemAddWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Add\Tables\Computers\Other\StatusComputerAddWindow.xaml.cs">
-      <DependentUpon>StatusComputerAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\Computers\InventoryNumbers\InventoryGraphicCardAddWindow.xaml.cs">
       <DependentUpon>InventoryGraphicCardAddWindow.xaml</DependentUpon>
@@ -440,9 +428,6 @@
     </Compile>
     <Compile Include="View\Edit\Tables\Computers\Other\OperatingSystemEditWindow.xaml.cs">
       <DependentUpon>OperatingSystemEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Edit\Tables\Computers\Other\StatusComputerEditWindow.xaml.cs">
-      <DependentUpon>StatusComputerEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Add\Tables\Computers\InventoryNumbers\InventoryGraphicCardAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\InventoryNumbers\InventoryHddAddViewModel.cs" />
@@ -547,9 +532,6 @@
     <Compile Include="View\Pages\Tables\Computers\Accessories\SsdPage.xaml.cs">
       <DependentUpon>SsdPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Computers\Other\StatusesComputersPage.xaml.cs">
-      <DependentUpon>StatusesComputersPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\Tables\Computers\TablesComputersPage.xaml.cs">
       <DependentUpon>TablesComputersPage.xaml</DependentUpon>
     </Compile>
@@ -595,9 +577,6 @@
     <Compile Include="View\Pages\Tables\Peripherals\PeripheralsPage.xaml.cs">
       <DependentUpon>PeripheralsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml.cs">
-      <DependentUpon>StatusesPeripheralsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\Tables\Peripherals\TablesPeripheralsPage.xaml.cs">
       <DependentUpon>TablesPeripheralsPage.xaml</DependentUpon>
     </Compile>
@@ -614,7 +593,6 @@
     <Compile Include="ViewModels\Add\Tables\Peripherals\InventoryPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\PeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Computers\Other\SocketAddViewModel.cs" />
-    <Compile Include="ViewModels\Add\Tables\Peripherals\StatusPeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Add\Tables\Peripherals\TypePeripheralAddViewModel.cs" />
     <Compile Include="ViewModels\Edit\ManufacturerEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Computers\Accessories\HddEditViewModel.cs" />
@@ -626,7 +604,6 @@
     <Compile Include="ViewModels\Edit\Tables\Employees\PostEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\InventoryPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\PeripheralEditViewModel.cs" />
-    <Compile Include="ViewModels\Edit\Tables\Peripherals\StatusPeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Edit\Tables\Peripherals\TypePeripheralEditViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Accessories\HddViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\TablesComputesViewModel.cs" />
@@ -639,7 +616,6 @@
     <Compile Include="ViewModels\Tables\Employees\UsersViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\InventoryPeripheralViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\PeripheralsViewModel.cs" />
-    <Compile Include="ViewModels\Tables\Peripherals\StatusesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TablesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Peripherals\TypesPeripheralsViewModel.cs" />
     <Compile Include="ViewModels\Tables\Computers\Other\SocketsViewModel.cs" />
@@ -672,9 +648,6 @@
     </Compile>
     <Compile Include="View\Add\Tables\Computers\Other\SocketAddWindow.xaml.cs">
       <DependentUpon>SocketAddWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml.cs">
-      <DependentUpon>StatusPeripheralAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Add\Tables\Peripherals\TypePeripheralAddWindow.xaml.cs">
       <DependentUpon>TypePeripheralAddWindow.xaml</DependentUpon>
@@ -719,10 +692,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Add\Tables\Computers\Other\OperatingSystemAddWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Add\Tables\Computers\Other\StatusComputerAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -799,10 +768,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Edit\Tables\Computers\Other\OperatingSystemEditWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Edit\Tables\Computers\Other\StatusComputerEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -934,10 +899,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Computers\Other\StatusesComputersPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Pages\Tables\Computers\TablesComputersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -998,10 +959,6 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\Pages\Tables\Peripherals\StatusesPeripheralsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
     <Page Include="View\Pages\Tables\Peripherals\TablesPeripheralsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -1049,10 +1006,6 @@
     <Page Include="View\Add\Tables\Computers\Other\SocketAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Add\Tables\Peripherals\StatusPeripheralAddWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\Add\Tables\Peripherals\TypePeripheralAddWindow.xaml">
       <SubType>Designer</SubType>
@@ -1106,10 +1059,6 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\Edit\Tables\Peripherals\StatusPeripheralEditWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
     <Page Include="View\Edit\Tables\Peripherals\TypePeripheralEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -1155,9 +1104,6 @@
     </Compile>
     <Compile Include="View\Edit\Tables\Peripherals\PeripheralEditWindow.xaml.cs">
       <DependentUpon>PeripheralEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Edit\Tables\Peripherals\StatusPeripheralEditWindow.xaml.cs">
-      <DependentUpon>StatusPeripheralEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Edit\Tables\Peripherals\TypePeripheralEditWindow.xaml.cs">
       <DependentUpon>TypePeripheralEditWindow.xaml</DependentUpon>

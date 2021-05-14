@@ -21,7 +21,6 @@
                     .Include(manufacturer => manufacturer.Manufacturer)
                     .Include(type => type.Types_peripherals))
                     .Sort(manufact => manufact.Manufacturer.Name);
-            StatusesPeripherals = new ObservableCollection<Statuses_peripherals>(db.Statuses_peripherals.AsNoTracking()).Sort(status => status.Name);
 
             InventoryPeripheral = inventoryPeripheral;
             InventoryPeripheral.BeginEdit();
@@ -30,8 +29,6 @@
         public Inventory_numbers_peripherals InventoryPeripheral { get; }
 
         public ObservableCollection<Peripheral> Peripherals { get; }
-
-        public ObservableCollection<Statuses_peripherals> StatusesPeripherals { get; }
 
         public void OnWindowClosing(object sender, CancelEventArgs e) => InventoryPeripheral.CancelEdit();
 

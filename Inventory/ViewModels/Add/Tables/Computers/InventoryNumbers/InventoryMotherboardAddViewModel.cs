@@ -21,14 +21,7 @@
                 .Include(socket => socket.Socket))
                 .Sort(socket => socket.Socket.Name);
 
-            try
-            {
-                InventoryMotherboard.Inventory_number = db.Inventory_numbers_motherboards.Select(motherboards => motherboards.Inventory_number).Max() + 1;
-            }
-            catch
-            {
-                InventoryMotherboard.Inventory_number = 1;
-            }
+            InventoryMotherboard.Inventory_number = db.Inventory_numbers_motherboards.FirstOrDefault() == null ? InventoryMotherboard.Inventory_number = 1 : InventoryMotherboard.Inventory_number = db.Inventory_numbers_motherboards.Select(motherboards => motherboards.Inventory_number).Max() + 1;
         }
 
         public Inventory_numbers_motherboards InventoryMotherboard { get; } = new();

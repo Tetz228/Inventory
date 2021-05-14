@@ -1,5 +1,7 @@
 ﻿namespace Inventory.ViewModels.Add.Tables.Computers.Computers
 {
+    using System;
+
     using DevExpress.Mvvm;
     using Inventory.Model;
     using Inventory.ViewModels.Tables.Computers.Computers;
@@ -49,18 +51,9 @@
                     .Include(socket => socket.Ssd.Types_ssd))
                 .Sort(number => number.Inventory_number);
 
-            StatusesComputers = new ObservableCollection<Statuses_computers>(db.Statuses_computers).Sort(status => status.Name);
             OperatingSystems = new ObservableCollection<Operating_systems>(db.Operating_systems).Sort(operatingSystems => operatingSystems.Name);
 
-            try
-            {
-                Computer.Inventory_number = db.Computers.Select(computer => computer.Inventory_number).Max() + 1;
-            }
-            catch
-            {
-                Computer.Inventory_number = 1;
-            }
-
+            Computer.Inventory_number = db.Computers.FirstOrDefault() == null ? Computer.Inventory_number = 1 : Computer.Inventory_number = db.Computers.Select(computer => computer.Inventory_number).Max() + 1;
             InventoryGraphicsCards.Insert(0,null);
         }
 
@@ -79,8 +72,6 @@
         public ObservableCollection<Inventory_numbers_ssd> InventorySsd { get; }
 
         public ObservableCollection<Inventory_numbers_ram> InventoryRam { get; }
-
-        public ObservableCollection<Statuses_computers> StatusesComputers { get; }
 
         public ObservableCollection<Operating_systems> OperatingSystems { get; }
 

@@ -20,7 +20,6 @@
             using var db = new InventoryEntities();
 
             Peripherals = new ObservableCollection<Inventory_numbers_peripherals>(db.Inventory_numbers_peripherals.AsNoTracking()
-                    .Include(status => status.Statuses_peripherals)
                     .Include(peripheral => peripheral.Peripheral)
                     .Include(manufacturer => manufacturer.Peripheral.Manufacturer)
                     .Include(typePeripheral => typePeripheral.Peripheral.Types_peripherals))
@@ -100,14 +99,6 @@
                                 Peripherals.Sort(peripheral => peripheral.Peripheral.Name, SortDirection = ListSortDirection.Descending);
                             else
                                 Peripherals.Sort(peripheral => peripheral.Peripheral.Name, SortDirection = ListSortDirection.Ascending);
-                            break;
-                        }
-                    case "Статус":
-                        {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                Peripherals.Sort(peripheral => peripheral.Statuses_peripherals.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                Peripherals.Sort(peripheral => peripheral.Statuses_peripherals.Name, SortDirection = ListSortDirection.Ascending);
                             break;
                         }
                 }

@@ -22,14 +22,7 @@
                 .Include(unit => unit.Unit))
                 .Sort(manufact => manufact.Manufacturer.Name);
 
-            try
-            {
-                InventoryHdd.Inventory_number = db.Inventory_numbers_hdd.Select(hdd => hdd.Inventory_number).Max() + 1;
-            }
-            catch
-            {
-                InventoryHdd.Inventory_number = 1;
-            }
+            InventoryHdd.Inventory_number = db.Inventory_numbers_hdd.FirstOrDefault() == null ? InventoryHdd.Inventory_number = 1 : InventoryHdd.Inventory_number = db.Inventory_numbers_hdd.Select(hdd => hdd.Inventory_number).Max() + 1;
         }
 
         public Inventory_numbers_hdd InventoryHdd { get; } = new();

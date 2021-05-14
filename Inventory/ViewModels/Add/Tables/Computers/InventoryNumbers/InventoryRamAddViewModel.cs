@@ -22,14 +22,7 @@
                 .Include(type => type.Types_memory))
                 .Sort(manufact => manufact.Manufacturer.Name);
 
-            try
-            {
-                InventoryRam.Inventory_number = db.Inventory_numbers_ram.Select(ram => ram.Inventory_number).Max() + 1;
-            }
-            catch
-            {
-                InventoryRam.Inventory_number = 1;
-            }
+            InventoryRam.Inventory_number = db.Inventory_numbers_ram.FirstOrDefault() == null ? InventoryRam.Inventory_number = 1 : InventoryRam.Inventory_number = db.Inventory_numbers_ram.Select(ram => ram.Inventory_number).Max() + 1;
         }
 
         public Inventory_numbers_ram InventoryRam { get; } = new();

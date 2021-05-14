@@ -54,10 +54,6 @@
                         DisplayMemberBinding="{Binding Peripheral.Name, UpdateSourceTrigger=PropertyChanged}"
                         Header="Наименование"
                         HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Statuses_peripherals.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Статус"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                 </GridView>
             </ListView.View>
 

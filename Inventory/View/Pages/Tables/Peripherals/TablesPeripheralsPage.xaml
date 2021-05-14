@@ -36,10 +36,6 @@
                     Command="{Binding SelectTablesManufacturersCommand}"
                     Header="Производители"
                     Style="{StaticResource BaseMenuItem}" />
-                <MenuItem
-                    Command="{Binding SelectStatusesPeripheralsCommand}"
-                    Header="Статусы периферии"
-                    Style="{StaticResource BaseMenuItem}" />
             </MenuItem>
 
         </Menu>

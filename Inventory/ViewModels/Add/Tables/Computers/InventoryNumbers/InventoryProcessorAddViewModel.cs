@@ -22,14 +22,7 @@
                 .Include(socket => socket.Socket))
                 .Sort(socket => socket.Socket.Name);
 
-            try
-            {
-                InventoryProcessor.Inventory_number = db.Inventory_numbers_processors.Select(processors => processors.Inventory_number).Max() + 1;
-            }
-            catch
-            {
-                InventoryProcessor.Inventory_number = 1;
-            }
+            InventoryProcessor.Inventory_number = db.Inventory_numbers_processors.FirstOrDefault() == null ? InventoryProcessor.Inventory_number = 1 : InventoryProcessor.Inventory_number = db.Inventory_numbers_processors.Select(processors => processors.Inventory_number).Max() + 1;
         }
 
         public Inventory_numbers_processors InventoryProcessor { get; } = new();

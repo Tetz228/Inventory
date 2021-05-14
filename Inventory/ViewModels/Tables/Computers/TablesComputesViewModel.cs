@@ -32,8 +32,6 @@
 
         public ICommand SelectOperatingSystemsPageCommand => new DelegateCommand(() => CurrentPage = new OperatingSystemsPage());
 
-        public ICommand SelectStatusesComputersPageCommand => new DelegateCommand(() => CurrentPage = new StatusesComputersPage());
-
         public ICommand SelectTypesMemoryPageCommand => new DelegateCommand(() => CurrentPage = new TypesMemoryPage());
 
         public ICommand SelectInventoryPowerSuppliesPageCommand => new DelegateCommand(() => CurrentPage = new InventoryPowerSuppliesPage());

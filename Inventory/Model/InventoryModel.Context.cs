@@ -61,8 +61,6 @@ namespace Inventory.Model
         public virtual DbSet<Socket> Sockets { get; set; }
         public virtual DbSet<Ssd> Ssds { get; set; }
         public virtual DbSet<Ssd_in_computers> Ssd_in_computers { get; set; }
-        public virtual DbSet<Statuses_computers> Statuses_computers { get; set; }
-        public virtual DbSet<Statuses_peripherals> Statuses_peripherals { get; set; }
         public virtual DbSet<Types_hdd> Types_hdd { get; set; }
         public virtual DbSet<Types_memory> Types_memory { get; set; }
         public virtual DbSet<Types_peripherals> Types_peripherals { get; set; }

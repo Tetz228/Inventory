@@ -18,8 +18,7 @@
             using var db = new InventoryEntities();
 
             Computers = new ObservableCollection<Computer>(db.Computers.AsNoTracking()
-                .Include(status => status.Statuses_computers)
-                .Include(graphicsCards => graphicsCards.Inventory_numbers_graphics_cards.Graphics_cards.Manufacturer)
+                    .Include(graphicsCards => graphicsCards.Inventory_numbers_graphics_cards.Graphics_cards.Manufacturer)
                 .Include(graphicsCards => graphicsCards.Inventory_numbers_graphics_cards.Graphics_cards.Unit)
                 .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Manufacturer))
                 .Include(hddComp => hddComp.Hdd_in_computers.Select(inventoryHdd => inventoryHdd.Inventory_numbers_hdd.Hdd.Types_hdd))
@@ -125,7 +124,7 @@
 
             if (dispensedComputer != null)
             {
-                var messageResult = MessageBox.Show($"Вы действительно хотите удалить компьютер:\nинверт. номер - {selectComputer.Inventory_number};\nIP-адрес - {selectComputer.Ip_address};\nСтатус - {selectComputer.Statuses_computers.Name}?\nЭто действие невозможно отменить.", "Удаление компьютера", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var messageResult = MessageBox.Show($"Вы действительно хотите удалить компьютер:\nинверт. номер - {selectComputer.Inventory_number};\nIP-адрес - {selectComputer.Ip_address}?\nЭто действие невозможно отменить.", "Удаление компьютера", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (messageResult != MessageBoxResult.Yes)
                     return;

@@ -61,14 +61,6 @@
                                 InventoryPeripherals.Sort(peripheral => peripheral.Peripheral.Name, SortDirection = ListSortDirection.Ascending);
                             break;
                         }
-                    case "Статус":
-                        {
-                            if (SortDirection == ListSortDirection.Ascending)
-                                InventoryPeripherals.Sort(peripheral => peripheral.Statuses_peripherals.Name, SortDirection = ListSortDirection.Descending);
-                            else
-                                InventoryPeripherals.Sort(peripheral => peripheral.Statuses_peripherals.Name, SortDirection = ListSortDirection.Ascending);
-                            break;
-                        }
                 }
             }
         }
@@ -105,7 +97,6 @@
             using var db = new InventoryEntities();
 
             foreach (var item in db.Inventory_numbers_peripherals.AsNoTracking()
-                .Include(status => status.Statuses_peripherals)
                 .Include(peripheral => peripheral.Peripheral)
                 .Include(manufacturer => manufacturer.Peripheral.Manufacturer)
                 .Include(typePeripheral => typePeripheral.Peripheral.Types_peripherals))

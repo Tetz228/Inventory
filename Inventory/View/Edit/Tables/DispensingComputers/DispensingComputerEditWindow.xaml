@@ -269,10 +269,6 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Statuses_computers.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Статус"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
@@ -420,10 +416,6 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding Statuses_computers.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Header="Статус"
-                        HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}" />
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>

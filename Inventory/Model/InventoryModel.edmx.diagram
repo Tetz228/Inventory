@@ -41,8 +41,6 @@
         <EntityTypeShape EntityType="InventoryModel.Socket" Width="1.5" PointX="0.75" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Ssd" Width="1.5" PointX="9" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Ssd_in_computers" Width="1.5" PointX="18.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Statuses_computers" Width="1.5" PointX="11.25" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Statuses_peripherals" Width="1.5" PointX="9" PointY="32.25" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Types_hdd" Width="1.5" PointX="3.75" PointY="33.25" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Types_memory" Width="1.5" PointX="6.75" PointY="33.25" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Types_peripherals" Width="1.5" PointX="0.75" PointY="26.25" IsExpanded="true" />
@@ -52,7 +50,6 @@
         <AssociationConnector Association="InventoryModel.FK_Computers_Inventory_numbers_graphics_cards" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Computers_Inventory_numbers_motherboards" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Computers_Inventory_numbers_power_supplies" ManuallyRouted="false" />
-        <AssociationConnector Association="InventoryModel.FK_Computers_Statuses_computers" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Hdd_in_computers_Computers" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_List_dispensed_computers_Computers" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Operating_systems_in_computers_Computers" ManuallyRouted="false" />
@@ -79,7 +76,6 @@
         <AssociationConnector Association="InventoryModel.FK_Hdd_in_computers_Inventory_numbers_hdd" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_motherboards_Motherboards" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_peripherals_Peripherals" ManuallyRouted="false" />
-        <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_peripherals_Statuses_peripherals" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_List_dispensed_peripherals_Inventory_numbers_peripherals" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_power_supplies_Power_supplies" ManuallyRouted="false" />
         <AssociationConnector Association="InventoryModel.FK_Inventory_numbers_processors_Processors" ManuallyRouted="false" />

@@ -13,10 +13,8 @@ namespace Inventory.Model
         public int Id_inventory_number_peripheral { get; set; }
         public int Fk_peripheral { get; set; }
         public int Inventory_number { get; set; }
-        public int Fk_status_peripheral { get; set; }
-
+    
         public virtual Peripheral Peripheral { get; set; }
-        public virtual Statuses_peripherals Statuses_peripherals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<List_dispensed_peripherals> List_dispensed_peripherals { get; set; }
 
@@ -60,7 +58,6 @@ namespace Inventory.Model
             {
                 Id_inventory_number_peripheral = Id_inventory_number_peripheral,
                 Inventory_number = Inventory_number,
-                Fk_status_peripheral = Fk_status_peripheral,
                 Fk_peripheral = Fk_peripheral
             };
         }
@@ -74,7 +71,6 @@ namespace Inventory.Model
 
             Id_inventory_number_peripheral = _selectInventoryNumberPeripheral.Id_inventory_number_peripheral;
             Inventory_number = _selectInventoryNumberPeripheral.Inventory_number;
-            Fk_status_peripheral = _selectInventoryNumberPeripheral.Fk_status_peripheral;
             Fk_peripheral = _selectInventoryNumberPeripheral.Fk_peripheral;
         }
         #endregion

@@ -20,19 +20,17 @@ namespace Inventory.Model
             Ram_in_computers = new ObservableCollection<Ram_in_computers>();
             Ssd_in_computers = new ObservableCollection<Ssd_in_computers>();
         }
-
+    
         public int Id_computer { get; set; }
         public int Fk_inventory_number_motherboard { get; set; }
         public int? Fk_inventory_number_graphics_card { get; set; }
         public int Fk_inventory_number_power_supplies { get; set; }
         public string Ip_address { get; set; }
         public int Inventory_number { get; set; }
-        public int Fk_status_computer { get; set; }
-
+    
         public virtual Inventory_numbers_graphics_cards Inventory_numbers_graphics_cards { get; set; }
         public virtual Inventory_numbers_motherboards Inventory_numbers_motherboards { get; set; }
         public virtual Inventory_numbers_power_supplies Inventory_numbers_power_supplies { get; set; }
-        public virtual Statuses_computers Statuses_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<Hdd_in_computers> Hdd_in_computers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,7 +44,7 @@ namespace Inventory.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<Ssd_in_computers> Ssd_in_computers { get; set; }
 
-        #region Валидация
+        #region Р’Р°Р»РёРґР°С†РёСЏ
         public Dictionary<string, string> ErrorCollection { get; private set; } = new();
 
         public string this[string name]
@@ -59,17 +57,17 @@ namespace Inventory.Model
                 {
                     case "Inventory_number":
                         if (Inventory_number <= 0)
-                            result = "Число должно быть больше 0";
+                            result = "Р§РёСЃР»Рѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ 0";
                         else if (Services.CheckForUniqueness<Computer>(nameof(Inventory_number), Inventory_number, _selectComputer?.Inventory_number))
-                            result = "Номер должен быть уникальным";
+                            result = "РќРѕРјРµСЂ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹Рј";
                         break;
                     case "Ip_address":
                         if (string.IsNullOrWhiteSpace(Ip_address))
-                            result = "Поле не должно быть пустым";
+                            result = "РџРѕР»Рµ РЅРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј";
                         else if (IsValidationIpAddress(Ip_address) == false)
-                            result = "Некорректный IP-адрес";
+                            result = "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ IP-Р°РґСЂРµСЃ";
                         else if (Services.CheckForUniqueness<Computer>(nameof(Ip_address), Ip_address, _selectComputer?.Ip_address))
-                            result = "Адрес должен быть уникальным";
+                            result = "РђРґСЂРµСЃ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹Рј";
                         break;
                 }
 
@@ -86,7 +84,7 @@ namespace Inventory.Model
 
         private bool IsValidationIpAddress(string ipAddress) => Regex.IsMatch(ipAddress, @"([0-9]{1,3}[\.]){3}[0-9]{1,3}");
 
-        #region Откат изменений
+        #region РћС‚РєР°С‚ РёР·РјРµРЅРµРЅРёР№
 
         private Computer _selectComputer;
 
@@ -99,8 +97,7 @@ namespace Inventory.Model
                 Fk_inventory_number_graphics_card = Fk_inventory_number_graphics_card,
                 Fk_inventory_number_power_supplies = Fk_inventory_number_power_supplies,
                 Ip_address = Ip_address,
-                Inventory_number = Inventory_number,
-                Fk_status_computer = Fk_status_computer
+                Inventory_number = Inventory_number
             };
         }
 
@@ -117,7 +114,6 @@ namespace Inventory.Model
             Fk_inventory_number_power_supplies = _selectComputer.Fk_inventory_number_power_supplies;
             Ip_address = _selectComputer.Ip_address;
             Inventory_number = _selectComputer.Inventory_number;
-            Fk_status_computer = _selectComputer.Fk_status_computer;
         }
 
         #endregion

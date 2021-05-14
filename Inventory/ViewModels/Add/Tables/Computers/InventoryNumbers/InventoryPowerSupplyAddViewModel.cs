@@ -21,14 +21,7 @@
                 .Include(unit => unit.Unit))
                 .Sort(manufact => manufact.Manufacturer.Name);
 
-            try
-            {
-                InventoryPowerSupply.Inventory_number = db.Inventory_numbers_power_supplies.Select(powerSupplies => powerSupplies.Inventory_number).Max() + 1;
-            }
-            catch
-            {
-                InventoryPowerSupply.Inventory_number = 1;
-            }
+            InventoryPowerSupply.Inventory_number = db.Inventory_numbers_power_supplies.FirstOrDefault() == null ? InventoryPowerSupply.Inventory_number = 1 : InventoryPowerSupply.Inventory_number = db.Inventory_numbers_power_supplies.Select(computer => computer.Inventory_number).Max() + 1;
         }
 
         public Inventory_numbers_power_supplies InventoryPowerSupply { get; } = new();

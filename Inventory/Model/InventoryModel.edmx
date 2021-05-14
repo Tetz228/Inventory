@@ -15,7 +15,6 @@
           <Property Name="Fk_inventory_number_power_supplies" Type="int" Nullable="false" />
           <Property Name="Ip_address" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Inventory_number" Type="int" Nullable="false" />
-          <Property Name="Fk_status_computer" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -141,7 +140,6 @@
           <Property Name="Id_inventory_number_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fk_peripheral" Type="int" Nullable="false" />
           <Property Name="Inventory_number" Type="int" Nullable="false" />
-          <Property Name="Fk_status_peripheral" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inventory_numbers_power_supplies">
           <Key>
@@ -330,20 +328,6 @@
           <Property Name="Fk_inventory_number_ssd" Type="int" Nullable="false" />
           <Property Name="Fk_computer" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Statuses_computers">
-          <Key>
-            <PropertyRef Name="Id_status_computer" />
-          </Key>
-          <Property Name="Id_status_computer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Statuses_peripherals">
-          <Key>
-            <PropertyRef Name="Id_status_peripheral" />
-          </Key>
-          <Property Name="Id_status_peripheral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
         <EntityType Name="Types_hdd">
           <Key>
             <PropertyRef Name="Id_type_hdd" />
@@ -424,18 +408,6 @@
             </Principal>
             <Dependent Role="Computers">
               <PropertyRef Name="Fk_inventory_number_power_supplies" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Computers_Statuses_computers">
-          <End Role="Statuses_computers" Type="Self.Statuses_computers" Multiplicity="1" />
-          <End Role="Computers" Type="Self.Computers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Statuses_computers">
-              <PropertyRef Name="Id_status_computer" />
-            </Principal>
-            <Dependent Role="Computers">
-              <PropertyRef Name="Fk_status_computer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -644,18 +616,6 @@
             </Principal>
             <Dependent Role="Inventory_numbers_peripherals">
               <PropertyRef Name="Fk_peripheral" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Inventory_numbers_peripherals_Statuses_peripherals">
-          <End Role="Statuses_peripherals" Type="Self.Statuses_peripherals" Multiplicity="1" />
-          <End Role="Inventory_numbers_peripherals" Type="Self.Inventory_numbers_peripherals" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Statuses_peripherals">
-              <PropertyRef Name="Id_status_peripheral" />
-            </Principal>
-            <Dependent Role="Inventory_numbers_peripherals">
-              <PropertyRef Name="Fk_status_peripheral" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1131,8 +1091,6 @@
           <EntitySet Name="Sockets" EntityType="Self.Sockets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ssd" EntityType="Self.Ssd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Statuses_computers" EntityType="Self.Statuses_computers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Statuses_peripherals" EntityType="Self.Statuses_peripherals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_hdd" EntityType="Self.Types_hdd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_memory" EntityType="Self.Types_memory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types_peripherals" EntityType="Self.Types_peripherals" Schema="dbo" store:Type="Tables" />
@@ -1149,10 +1107,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Computers_Inventory_numbers_power_supplies" Association="Self.FK_Computers_Inventory_numbers_power_supplies">
             <End Role="Inventory_numbers_power_supplies" EntitySet="Inventory_numbers_power_supplies" />
-            <End Role="Computers" EntitySet="Computers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Computers_Statuses_computers" Association="Self.FK_Computers_Statuses_computers">
-            <End Role="Statuses_computers" EntitySet="Statuses_computers" />
             <End Role="Computers" EntitySet="Computers" />
           </AssociationSet>
           <AssociationSet Name="FK_Dispensing_computers_Employees" Association="Self.FK_Dispensing_computers_Employees">
@@ -1221,10 +1175,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Inventory_numbers_peripherals_Peripherals" Association="Self.FK_Inventory_numbers_peripherals_Peripherals">
             <End Role="Peripherals" EntitySet="Peripherals" />
-            <End Role="Inventory_numbers_peripherals" EntitySet="Inventory_numbers_peripherals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inventory_numbers_peripherals_Statuses_peripherals" Association="Self.FK_Inventory_numbers_peripherals_Statuses_peripherals">
-            <End Role="Statuses_peripherals" EntitySet="Statuses_peripherals" />
             <End Role="Inventory_numbers_peripherals" EntitySet="Inventory_numbers_peripherals" />
           </AssociationSet>
           <AssociationSet Name="FK_Inventory_numbers_power_supplies_Power_supplies" Association="Self.FK_Inventory_numbers_power_supplies_Power_supplies">
@@ -1382,11 +1332,9 @@
           <Property Name="Fk_inventory_number_power_supplies" Type="Int32" Nullable="false" />
           <Property Name="Ip_address" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Inventory_number" Type="Int32" Nullable="false" />
-          <Property Name="Fk_status_computer" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inventory_numbers_graphics_cards" Relationship="Self.FK_Computers_Inventory_numbers_graphics_cards" FromRole="Computers" ToRole="Inventory_numbers_graphics_cards" />
           <NavigationProperty Name="Inventory_numbers_motherboards" Relationship="Self.FK_Computers_Inventory_numbers_motherboards" FromRole="Computers" ToRole="Inventory_numbers_motherboards" />
           <NavigationProperty Name="Inventory_numbers_power_supplies" Relationship="Self.FK_Computers_Inventory_numbers_power_supplies" FromRole="Computers" ToRole="Inventory_numbers_power_supplies" />
-          <NavigationProperty Name="Statuses_computers" Relationship="Self.FK_Computers_Statuses_computers" FromRole="Computers" ToRole="Statuses_computers" />
           <NavigationProperty Name="Hdd_in_computers" Relationship="Self.FK_Hdd_in_computers_Computers" FromRole="Computers" ToRole="Hdd_in_computers" />
           <NavigationProperty Name="List_dispensed_computers" Relationship="Self.FK_List_dispensed_computers_Computers" FromRole="Computers" ToRole="List_dispensed_computers" />
           <NavigationProperty Name="Operating_systems_in_computers" Relationship="Self.FK_Operating_systems_in_computers_Computers" FromRole="Computers" ToRole="Operating_systems_in_computers" />
@@ -1547,9 +1495,7 @@
           <Property Name="Id_inventory_number_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Fk_peripheral" Type="Int32" Nullable="false" />
           <Property Name="Inventory_number" Type="Int32" Nullable="false" />
-          <Property Name="Fk_status_peripheral" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Peripheral" Relationship="Self.FK_Inventory_numbers_peripherals_Peripherals" FromRole="Inventory_numbers_peripherals" ToRole="Peripherals" />
-          <NavigationProperty Name="Statuses_peripherals" Relationship="Self.FK_Inventory_numbers_peripherals_Statuses_peripherals" FromRole="Inventory_numbers_peripherals" ToRole="Statuses_peripherals" />
           <NavigationProperty Name="List_dispensed_peripherals" Relationship="Self.FK_List_dispensed_peripherals_Inventory_numbers_peripherals" FromRole="Inventory_numbers_peripherals" ToRole="List_dispensed_peripherals" />
         </EntityType>
         <EntityType Name="Inventory_numbers_power_supplies">
@@ -1787,22 +1733,6 @@
           <NavigationProperty Name="Computer" Relationship="Self.FK_Ssd_in_computers_Computers" FromRole="Ssd_in_computers" ToRole="Computers" />
           <NavigationProperty Name="Inventory_numbers_ssd" Relationship="Self.FK_Ssd_in_computers_Inventory_numbers_ssd" FromRole="Ssd_in_computers" ToRole="Inventory_numbers_ssd" />
         </EntityType>
-        <EntityType Name="Statuses_computers">
-          <Key>
-            <PropertyRef Name="Id_status_computer" />
-          </Key>
-          <Property Name="Id_status_computer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Computers" Relationship="Self.FK_Computers_Statuses_computers" FromRole="Statuses_computers" ToRole="Computers" />
-        </EntityType>
-        <EntityType Name="Statuses_peripherals">
-          <Key>
-            <PropertyRef Name="Id_status_peripheral" />
-          </Key>
-          <Property Name="Id_status_peripheral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Inventory_numbers_peripherals" Relationship="Self.FK_Inventory_numbers_peripherals_Statuses_peripherals" FromRole="Statuses_peripherals" ToRole="Inventory_numbers_peripherals" />
-        </EntityType>
         <EntityType Name="Types_hdd">
           <Key>
             <PropertyRef Name="Id_type_hdd" />
@@ -1897,18 +1827,6 @@
             </Principal>
             <Dependent Role="Computers">
               <PropertyRef Name="Fk_inventory_number_power_supplies" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Computers_Statuses_computers">
-          <End Role="Statuses_computers" Type="Self.Statuses_computers" Multiplicity="1" />
-          <End Role="Computers" Type="Self.Computer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Statuses_computers">
-              <PropertyRef Name="Id_status_computer" />
-            </Principal>
-            <Dependent Role="Computers">
-              <PropertyRef Name="Fk_status_computer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2227,18 +2145,6 @@
             </Principal>
             <Dependent Role="Inventory_numbers_peripherals">
               <PropertyRef Name="Fk_peripheral" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Inventory_numbers_peripherals_Statuses_peripherals">
-          <End Role="Statuses_peripherals" Type="Self.Statuses_peripherals" Multiplicity="1" />
-          <End Role="Inventory_numbers_peripherals" Type="Self.Inventory_numbers_peripherals" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Statuses_peripherals">
-              <PropertyRef Name="Id_status_peripheral" />
-            </Principal>
-            <Dependent Role="Inventory_numbers_peripherals">
-              <PropertyRef Name="Fk_status_peripheral" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2579,8 +2485,6 @@
           <EntitySet Name="Sockets" EntityType="Self.Socket" />
           <EntitySet Name="Ssds" EntityType="Self.Ssd" />
           <EntitySet Name="Ssd_in_computers" EntityType="Self.Ssd_in_computers" />
-          <EntitySet Name="Statuses_computers" EntityType="Self.Statuses_computers" />
-          <EntitySet Name="Statuses_peripherals" EntityType="Self.Statuses_peripherals" />
           <EntitySet Name="Types_hdd" EntityType="Self.Types_hdd" />
           <EntitySet Name="Types_memory" EntityType="Self.Types_memory" />
           <EntitySet Name="Types_peripherals" EntityType="Self.Types_peripherals" />
@@ -2597,10 +2501,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Computers_Inventory_numbers_power_supplies" Association="Self.FK_Computers_Inventory_numbers_power_supplies">
             <End Role="Inventory_numbers_power_supplies" EntitySet="Inventory_numbers_power_supplies" />
-            <End Role="Computers" EntitySet="Computers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Computers_Statuses_computers" Association="Self.FK_Computers_Statuses_computers">
-            <End Role="Statuses_computers" EntitySet="Statuses_computers" />
             <End Role="Computers" EntitySet="Computers" />
           </AssociationSet>
           <AssociationSet Name="FK_Hdd_in_computers_Computers" Association="Self.FK_Hdd_in_computers_Computers">
@@ -2705,10 +2605,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Inventory_numbers_peripherals_Peripherals" Association="Self.FK_Inventory_numbers_peripherals_Peripherals">
             <End Role="Peripherals" EntitySet="Peripherals" />
-            <End Role="Inventory_numbers_peripherals" EntitySet="Inventory_numbers_peripherals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inventory_numbers_peripherals_Statuses_peripherals" Association="Self.FK_Inventory_numbers_peripherals_Statuses_peripherals">
-            <End Role="Statuses_peripherals" EntitySet="Statuses_peripherals" />
             <End Role="Inventory_numbers_peripherals" EntitySet="Inventory_numbers_peripherals" />
           </AssociationSet>
           <AssociationSet Name="FK_List_dispensed_peripherals_Inventory_numbers_peripherals" Association="Self.FK_List_dispensed_peripherals_Inventory_numbers_peripherals">
@@ -2852,7 +2748,6 @@
                 <ScalarProperty Name="Fk_inventory_number_power_supplies" ColumnName="Fk_inventory_number_power_supplies" />
                 <ScalarProperty Name="Ip_address" ColumnName="Ip_address" />
                 <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
-                <ScalarProperty Name="Fk_status_computer" ColumnName="Fk_status_computer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2992,7 +2887,6 @@
                 <ScalarProperty Name="Id_inventory_number_peripheral" ColumnName="Id_inventory_number_peripheral" />
                 <ScalarProperty Name="Fk_peripheral" ColumnName="Fk_peripheral" />
                 <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
-                <ScalarProperty Name="Fk_status_peripheral" ColumnName="Fk_status_peripheral" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3194,22 +3088,6 @@
                 <ScalarProperty Name="Id_ssd_in_computer" ColumnName="Id_ssd_in_computer" />
                 <ScalarProperty Name="Fk_inventory_number_ssd" ColumnName="Fk_inventory_number_ssd" />
                 <ScalarProperty Name="Fk_computer" ColumnName="Fk_computer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Statuses_computers">
-            <EntityTypeMapping TypeName="InventoryModel.Statuses_computers">
-              <MappingFragment StoreEntitySet="Statuses_computers">
-                <ScalarProperty Name="Id_status_computer" ColumnName="Id_status_computer" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Statuses_peripherals">
-            <EntityTypeMapping TypeName="InventoryModel.Statuses_peripherals">
-              <MappingFragment StoreEntitySet="Statuses_peripherals">
-                <ScalarProperty Name="Id_status_peripheral" ColumnName="Id_status_peripheral" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

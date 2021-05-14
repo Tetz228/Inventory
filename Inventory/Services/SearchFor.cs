@@ -11,16 +11,13 @@
         public static bool Search(Inventory_numbers_peripherals inventoryPeripheral, string inventoryPeripheralFilter) => inventoryPeripheral.Inventory_number.ToString().ToLower().Contains(inventoryPeripheralFilter.ToLower())
             || inventoryPeripheral.Peripheral.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower())
             || inventoryPeripheral.Peripheral.Types_peripherals.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower())
-            || inventoryPeripheral.Peripheral.Manufacturer.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower())
-            || inventoryPeripheral.Statuses_peripherals.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower());
+            || inventoryPeripheral.Peripheral.Manufacturer.Name.ToLower().Contains(inventoryPeripheralFilter.ToLower());
 
         public static bool Search(Peripheral peripheral, string peripheralFilter) => peripheral.Name.ToLower().Contains(peripheralFilter.ToLower())
             || peripheral.Types_peripherals.Name.ToLower().Contains(peripheralFilter.ToLower())
             || peripheral.Manufacturer.Name.ToLower().Contains(peripheralFilter.ToLower());
 
         public static bool Search(Types_peripherals typePeripheral, string typePeripheralFilter) => typePeripheral.Name.ToLower().Contains(typePeripheralFilter.ToLower());
-
-        public static bool Search(Statuses_peripherals statusPeripheral, string statusPeripheralFilter) => statusPeripheral.Name.ToLower().Contains(statusPeripheralFilter.ToLower());
 
         #endregion
 
@@ -102,12 +99,9 @@
         public static bool Search(Operating_systems operatingSystem, string operatingSystemsFilter) => operatingSystem.Name.ToLower().Contains(operatingSystemsFilter.ToLower())
             || operatingSystem.System_version.ToLower().Contains(operatingSystemsFilter.ToLower());
 
-        public static bool Search(Statuses_computers statusComputer, string statusComputerFilter) => statusComputer.Name.ToLower().Contains(statusComputerFilter.ToLower());
-
         public static bool Search(Computer computer, string computerFilter) =>
             computer.Inventory_number.ToString().ToLower().Contains(computerFilter.ToLower())
             || computer.Ip_address.ToLower().Contains(computerFilter.ToLower())
-            || computer.Statuses_computers.Name.ToLower().Contains(computerFilter.ToLower())
             || ("Инвент. номер: " + computer.Inventory_numbers_motherboards.Inventory_number).ToLower().Contains(computerFilter.ToLower())
             || (computer.Inventory_numbers_motherboards.Motherboard.Manufacturer.Name + " "
                 + computer.Inventory_numbers_motherboards.Motherboard.Name + " "

@@ -113,10 +113,6 @@
                     Header="Единицы измерения"
                     Style="{StaticResource BaseMenuItem}" />
                 <MenuItem
-                    Command="{Binding SelectStatusesComputersPageCommand}"
-                    Header="Статусы компьютеров"
-                    Style="{StaticResource BaseMenuItem}" />
-                <MenuItem
                     Command="{Binding SelectOperatingSystemsPageCommand}"
                     Header="Операционные системы"
                     Style="{StaticResource BaseMenuItem}" />

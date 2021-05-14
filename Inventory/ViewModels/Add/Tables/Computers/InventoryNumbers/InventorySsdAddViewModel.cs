@@ -22,14 +22,7 @@
                 .Include(unit => unit.Unit))
                 .Sort(manufact => manufact.Name);
 
-            try
-            {
-                InventorySsd.Inventory_number = db.Inventory_numbers_ssd.Select(ssd => ssd.Inventory_number).Max() + 1;
-            }
-            catch
-            {
-                InventorySsd.Inventory_number = 1;
-            }
+            InventorySsd.Inventory_number = db.Inventory_numbers_ssd.FirstOrDefault() == null ? InventorySsd.Inventory_number = 1 : InventorySsd.Inventory_number = db.Inventory_numbers_ssd.Select(computer => computer.Inventory_number).Max() + 1;
         }
 
         public Inventory_numbers_ssd InventorySsd { get; } = new();

@@ -17,8 +17,6 @@
 
         public ICommand SelectTablesPeripheralsCommand => new DelegateCommand(() => CurrentPage = new PeripheralsPage());
 
-        public ICommand SelectStatusesPeripheralsCommand => new DelegateCommand(() => CurrentPage = new StatusesPeripheralsPage());
-
         public ICommand SelectTablesTypesPeripheralsCommand => new DelegateCommand(() => CurrentPage = new TypesPeripheralsPage());
 
         public ICommand SelectTablesManufacturersCommand => new DelegateCommand(() => CurrentPage = new ManufacturersPage());

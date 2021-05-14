@@ -470,22 +470,6 @@
                                         Style="{StaticResource BaseButton}" />
                                 </StackPanel>
                             </UniformGrid>
-
-                            <!--  Статус  -->
-                            <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Статус: " />
-
-                                <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
-                                    HorizontalAlignment="Center"
-                                    DisplayMemberPath="Name"
-                                    ItemsSource="{Binding StatusesComputers}"
-                                    SelectedIndex="0"
-                                    SelectedValue="{Binding Computer.Fk_status_computer, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedValuePath="Id_status_computer"
-                                    Style="{StaticResource BaseComboBox}" />
-                            </UniformGrid>
                         </StackPanel>
                     </Border>
                 </Grid>

@@ -21,14 +21,7 @@
                 .Include(unit => unit.Unit))
                 .Sort(manufact => manufact.Manufacturer.Name);
 
-            try
-            {
-                InventoryGraphicCard.Inventory_number = db.Inventory_numbers_graphics_cards.Select(graphicsCards => graphicsCards.Inventory_number).Max() + 1;
-            }
-            catch
-            {
-                InventoryGraphicCard.Inventory_number = 1;
-            }
+            InventoryGraphicCard.Inventory_number = db.Inventory_numbers_graphics_cards.FirstOrDefault() == null ? InventoryGraphicCard.Inventory_number = 1 : InventoryGraphicCard.Inventory_number = db.Inventory_numbers_graphics_cards.Select(graphicsCards => graphicsCards.Inventory_number).Max() + 1;
         }
 
         public Inventory_numbers_graphics_cards InventoryGraphicCard { get; } = new();

@@ -88,22 +88,6 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                             </UniformGrid>
-
-                            <!--  Статус  -->
-                            <UniformGrid Columns="2">
-                                <TextBlock Style="{StaticResource BaseTextBlock}" Text="Статус: " />
-
-                                <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
-                                    HorizontalAlignment="Center"
-                                    DisplayMemberPath="Name"
-                                    ItemsSource="{Binding StatusesPeripherals}"
-                                    SelectedIndex="0"
-                                    SelectedValue="{Binding InventoryPeripheral.Fk_status_peripheral, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedValuePath="Id_status_peripheral"
-                                    Style="{StaticResource BaseComboBox}" />
-                            </UniformGrid>
                         </StackPanel>
                     </Border>
                 </Grid>
