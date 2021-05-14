@@ -18,7 +18,10 @@
 
     public class ComputersViewModel : BaseViewModel<Computer>
     {
-        public ComputersViewModel() : base(Computers, RefreshCollection) => RefreshCollection();
+        private const string NAME_TEMPLATE = "Шаблон для инвентаризации компьютеров.xlsx";
+        private const string NAMED_AREA_NAME = "Computes";
+
+        public ComputersViewModel() : base(Computers, RefreshCollection, NAME_TEMPLATE, NAMED_AREA_NAME) => RefreshCollection();
         
         public static ObservableCollection<Computer> Computers { get; set; } = new();
 
