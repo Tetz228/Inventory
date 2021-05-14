@@ -43,16 +43,6 @@
             return observableCollection;
         }
 
-        public static ObservableCollection<TClass> CopyingElements<TClass>(this ObservableCollection<TClass> observableCollection)
-        {
-            var newCollection = new ObservableCollection<TClass>();
-
-            foreach (var item in observableCollection)
-                newCollection.Add(item);
-
-            return newCollection;
-        }
-
         public static bool IsValidationProperties<TClass>(TClass dictionary) where TClass : Dictionary<string, string> => dictionary.Count == 0
                                                                              || dictionary.All(item => item.Value == null);
 
@@ -79,14 +69,6 @@
             return saveExcelDoc.FileName != "" ? saveExcelDoc.FileName : null;
         }
 
-        /// <summary>
-        /// Проверка на уникальность определенного свойства
-        /// </summary>
-        /// <typeparam name="TClass">Класс, который содержит свойство</typeparam>
-        /// <param name="propertyName">Имя свойства</param>
-        /// <param name="obj">Cвойство</param>
-        /// <param name="selectObj">Необязательный аргумент, которое нужен, когда открыто окно с изменением информации</param>
-        /// <returns>Возвращает true, если свойство не уникально, иначе false</returns>
         public static bool CheckForUniqueness<TClass>(string propertyName, object obj, object selectObj) where TClass : class
         {
             if (selectObj != null)

@@ -157,7 +157,7 @@
                     <GridViewColumn Header="Материнская плата" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
                         <GridViewColumn.DisplayMemberBinding>
                             <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2}.">
-                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_motherboards.Inventory_number" />
                                 <Binding Path="Inventory_numbers_motherboards.Motherboard.Manufacturer.Name" />
                                 <Binding Path="Inventory_numbers_motherboards.Motherboard.Name" />
                             </MultiBinding>
@@ -166,7 +166,7 @@
                     <GridViewColumn Header="Видеокарта" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
                         <GridViewColumn.DisplayMemberBinding>
                             <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
-                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_graphics_cards.Inventory_number" />
                                 <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Manufacturer.Name" />
                                 <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Name" />
                                 <Binding Path="Inventory_numbers_graphics_cards.Graphics_cards.Memory_size" />
@@ -198,7 +198,7 @@
                     <GridViewColumn Header="Блок питания" HeaderContainerStyle="{StaticResource {x:Type GridViewColumnHeader}}">
                         <GridViewColumn.DisplayMemberBinding>
                             <MultiBinding StringFormat="{}Инвент. номер: {0};&#x0d;&#x0a;{1} {2} {3} {4}.">
-                                <Binding Path="Inventory_number" />
+                                <Binding Path="Inventory_numbers_power_supplies.Inventory_number" />
                                 <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Manufacturer.Name" />
                                 <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Name" />
                                 <Binding Path="Inventory_numbers_power_supplies.Power_supplies.Power" />

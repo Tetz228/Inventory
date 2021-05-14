@@ -2,7 +2,7 @@ namespace Inventory.Model
 {
     using DevExpress.Mvvm;
     using Inventory.Services;
-    using System;
+
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -87,6 +87,7 @@ namespace Inventory.Model
         private bool IsValidationIpAddress(string ipAddress) => Regex.IsMatch(ipAddress, @"([0-9]{1,3}[\.]){3}[0-9]{1,3}");
 
         #region Откат изменений
+
         private Computer _selectComputer;
 
         public void BeginEdit()
@@ -99,12 +100,7 @@ namespace Inventory.Model
                 Fk_inventory_number_power_supplies = Fk_inventory_number_power_supplies,
                 Ip_address = Ip_address,
                 Inventory_number = Inventory_number,
-                Fk_status_computer = Fk_status_computer,
-                Hdd_in_computers = Hdd_in_computers.CopyingElements(),
-                Operating_systems_in_computers = Operating_systems_in_computers.CopyingElements(),
-                Processors_in_computers = Processors_in_computers.CopyingElements(),
-                Ram_in_computers = Ram_in_computers.CopyingElements(),
-                Ssd_in_computers = Ssd_in_computers.CopyingElements()
+                Fk_status_computer = Fk_status_computer
             };
         }
 
@@ -122,12 +118,8 @@ namespace Inventory.Model
             Ip_address = _selectComputer.Ip_address;
             Inventory_number = _selectComputer.Inventory_number;
             Fk_status_computer = _selectComputer.Fk_status_computer;
-            Hdd_in_computers = _selectComputer.Hdd_in_computers;
-            Operating_systems_in_computers = _selectComputer.Operating_systems_in_computers;
-            Processors_in_computers = _selectComputer.Processors_in_computers;
-            Ram_in_computers = _selectComputer.Ram_in_computers;
-            Ssd_in_computers = _selectComputer.Ssd_in_computers;
         }
+
         #endregion
     }
 }
