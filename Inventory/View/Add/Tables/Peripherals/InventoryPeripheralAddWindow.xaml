@@ -9,7 +9,7 @@
     x:Name="AddInventoryPeripheralWindow"
     Title="Добавить новый инвентарный номер для периферии"
     Width="500"
-    Height="288"
+    Height="250"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"

@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="EditWindow"
     Title="Изменить процессор"
-    Width="510"
-    Height="310"
+    Width="530"
+    Height="390"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -48,8 +48,8 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                                 <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
+                                    Width="219"
+                                    MaxWidth="219"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
                                     ItemsSource="{Binding Manufacturers}"
@@ -114,8 +114,8 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Единица измерения: " />
 
                                 <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
+                                    Width="219"
+                                    MaxWidth="219"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Full_name"
                                     ItemsSource="{Binding Units}"

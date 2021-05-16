@@ -7,7 +7,7 @@
     xmlns:tables="clr-namespace:Inventory.ViewModels.Add.Tables"
     x:Name="AddManufacturerWindow"
     Title="Добавить нового производителя"
-    Width="550"
+    Width="565"
     Height="180"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"

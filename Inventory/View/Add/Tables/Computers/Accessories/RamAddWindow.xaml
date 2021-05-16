@@ -52,8 +52,8 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                                 <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
+                                    Width="219"
+                                    MaxWidth="219"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
                                     IsDropDownOpen="True"
@@ -108,8 +108,8 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Единица измерения: " />
 
                                 <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
+                                    Width="219"
+                                    MaxWidth="219"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Full_name"
                                     ItemsSource="{Binding Units}"

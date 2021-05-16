@@ -97,7 +97,6 @@
         {
             var passwordRecoveryWindow = new PasswordRecoveryWindow();
             var newPassword = new NewPasswordPage();
-
             var newPasswordViewModel = new NewPasswordViewModel(idUser);
             newPassword.DataContext = newPasswordViewModel;
 

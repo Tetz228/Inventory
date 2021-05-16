@@ -10,10 +10,7 @@
 
     public class NewPasswordViewModel : BindableBase
     {
-        public NewPasswordViewModel(int idUser)
-        {
-            User = new User { Id_user = idUser };
-        }
+        public NewPasswordViewModel(int idUser) => User = new User { Id_user = idUser };
 
         private User User { get; }
 

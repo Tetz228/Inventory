@@ -16,7 +16,11 @@
 
     public class MainViewModel : BindableBase
     {
-        public MainViewModel() => CurrentPage = new TablesComputersPage();
+        public MainViewModel()
+        {
+            CurrentPage = new TablesComputersPage();
+            TitleWindow = "Главное окно -> Компьютеры";
+        }
 
         #region Свойства
 

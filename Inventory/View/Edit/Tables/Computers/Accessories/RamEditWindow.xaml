@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="EditWindow"
-    Title="Изменить процессор"
+    Title="Изменить оперативную память"
     Width="530"
     Height="310"
     ResizeMode="CanMinimize"
@@ -23,7 +23,7 @@
             <StackPanel Margin="10">
                 <TextBlock
                     Style="{StaticResource BaseTextBlock}"
-                    Text="Изменить процессор"
+                    Text="Изменить оперативную память"
                     TextAlignment="Center" />
 
                 <Grid Background="#FF2BA8E2">
@@ -47,8 +47,8 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                                 <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
+                                    Width="219"
+                                    MaxWidth="219"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
                                     ItemsSource="{Binding Manufacturers}"
@@ -100,8 +100,8 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Единица измерения: " />
 
                                 <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
+                                    Width="219"
+                                    MaxWidth="219"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Full_name"
                                     ItemsSource="{Binding Units}"

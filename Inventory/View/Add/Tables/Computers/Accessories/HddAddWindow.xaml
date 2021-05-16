@@ -136,6 +136,7 @@
                 <!--  Отменить  -->
                 <Button
                     Margin="5,10,5,5"
+                    IsCancel="True"
                     HorizontalAlignment="Right"
                     Style="{StaticResource BaseButton}" />
             </StackPanel>

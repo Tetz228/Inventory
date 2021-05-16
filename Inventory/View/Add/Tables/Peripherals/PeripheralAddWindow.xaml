@@ -7,7 +7,7 @@
     xmlns:peripherals="clr-namespace:Inventory.ViewModels.Add.Tables.Peripherals"
     x:Name="AddPeripheralWindow"
     Title="Добавить новую периферию"
-    Width="500"
+    Width="510"
     Height="260"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
@@ -40,14 +40,14 @@
                         </VisualBrush>
                     </Border.OpacityMask>
 
-                    <StackPanel Width="455" HorizontalAlignment="Center">
+                    <StackPanel Width="470" HorizontalAlignment="Center">
                         <!--  Производитель  -->
                         <UniformGrid Columns="2">
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                             <ComboBox
-                                Width="208"
-                                MaxWidth="208"
+                                Width="215"
+                                MaxWidth="215"
                                 HorizontalAlignment="Center"
                                 DisplayMemberPath="Name"
                                 IsDropDownOpen="True"
@@ -63,8 +63,8 @@
                             <TextBlock Style="{StaticResource BaseTextBlock}" Text="Тип периферии: " />
 
                             <ComboBox
-                                Width="208"
-                                MaxWidth="208"
+                                Width="215"
+                                MaxWidth="215"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 DisplayMemberPath="Name"

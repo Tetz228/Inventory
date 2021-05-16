@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="EditManufacturerWindow"
     Title="Изменить производителя"
-    Width="550"
+    Width="565"
     Height="180"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"

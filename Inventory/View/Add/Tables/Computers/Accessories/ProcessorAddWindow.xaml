@@ -9,7 +9,7 @@
     x:Name="AddWindow"
     Title="Добавить новый процессор"
     Width="530"
-    Height="310"
+    Height="390"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ThreeDBorderWindow"
@@ -53,8 +53,8 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Производитель: " />
 
                                 <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
+                                    Width="219"
+                                    MaxWidth="219"
                                     Margin="0,9,0,0"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Name"
@@ -122,8 +122,8 @@
                                 <TextBlock Style="{StaticResource BaseTextBlock}" Text="Единица измерения: " />
 
                                 <ComboBox
-                                    Width="208"
-                                    MaxWidth="208"
+                                    Width="219"
+                                    MaxWidth="219"
                                     HorizontalAlignment="Center"
                                     DisplayMemberPath="Full_name"
                                     ItemsSource="{Binding Units}"

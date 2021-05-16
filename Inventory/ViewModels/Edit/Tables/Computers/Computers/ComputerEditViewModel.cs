@@ -61,6 +61,8 @@
             _editCollections += EditHddInComputer;
             _editCollections += EditRamInComputer;
             _editCollections += EditSsdInComputer;
+
+            InventoryGraphicsCards.Insert(0, null);
         }
 
         private readonly EditCollections _editCollections;
